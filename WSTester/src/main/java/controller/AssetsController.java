@@ -9,10 +9,13 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafxapplication.MainApp;
 
@@ -26,9 +29,24 @@ public class AssetsController implements Initializable {
     /**
      * Initializes the controller class.
      */
+	
+	@FXML
+	private Button addAsset;
+	
+	@FXML
+	private Button saveAsset;
+	
+	
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    	addAsset.setOnAction((event) -> {
+			System.out.println("Clicked on add asset");
+		});
+    	
+    	saveAsset.setOnAction((event) -> {
+			System.out.println("Clicked on save asset");
+		});
+        
     }    
     
      public void createView() throws IOException {
@@ -39,10 +57,7 @@ public class AssetsController implements Initializable {
             Stage stage = new Stage();
 
             Scene scene = new Scene(root);
-
             
-
-
             stage.setScene(scene);
             
             stage.show();
@@ -58,7 +73,8 @@ public class AssetsController implements Initializable {
            
             dialogStage.showAndWait();
             */
-      
+            
      }
+
     
 }
