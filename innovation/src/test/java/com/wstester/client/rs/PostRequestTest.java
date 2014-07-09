@@ -38,7 +38,7 @@ public class PostRequestTest {
     	String name = "Crix";
     	((PostRequest)request).setRequestEntity(name);
     	
-		ClientResponse response = client.sendRequest(request);
+		ClientResponse response = client.sendRestRequest(request);
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 		assertEquals(name, response.getEntity(String.class));
     }
@@ -52,7 +52,7 @@ public class PostRequestTest {
     	name.put("name", "Crix");
     	((PostRequest)request).setRequestEntity(name);
     	
-    	ClientResponse response = client.sendRequest(request);
+    	ClientResponse response = client.sendRestRequest(request);
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 		assertEquals(name.get("name"), response.getEntity(JSONObject.class).get("name"));
     }

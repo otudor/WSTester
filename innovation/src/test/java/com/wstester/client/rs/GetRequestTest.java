@@ -43,7 +43,7 @@ public class GetRequestTest {
     	Request request = new GetRequest();
     	request.setPath("customer","getCustomers");
     	
-		ClientResponse response = client.sendRequest(request);
+		ClientResponse response = client.sendRestRequest(request);
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
         assertEquals("All customers", response.getEntity(String.class));
     }
@@ -58,7 +58,7 @@ public class GetRequestTest {
     	params.add("name", name);
 		request.setParams(params);
 		
-		ClientResponse response = client.sendRequest(request);
+		ClientResponse response = client.sendRestRequest(request);
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 		assertEquals(name, response.getEntity(String.class));
     }
@@ -74,7 +74,7 @@ public class GetRequestTest {
     	cookies.add(cookie);
 		request.setCookies(cookies);
 		
-		ClientResponse response = client.sendRequest(request);
+		ClientResponse response = client.sendRestRequest(request);
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 		assertEquals(name, response.getEntity(String.class));
     }
@@ -91,7 +91,7 @@ public class GetRequestTest {
     	header.add("name", anotherName);
 		request.setHeader(header);
 		
-		ClientResponse response = client.sendRequest(request);
+		ClientResponse response = client.sendRestRequest(request);
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 		assertEquals(name + "," + anotherName, response.getEntity(String.class));
     }
@@ -118,7 +118,7 @@ public class GetRequestTest {
     	header.add("headerName", headerName);
     	request.setHeader(header);
     	
-    	ClientResponse response = client.sendRequest(request);
+    	ClientResponse response = client.sendRestRequest(request);
     	assertEquals(Status.OK.getStatusCode(), response.getStatus());
     	assertEquals(paramName + "," + cookieName + "," + headerName, response.getEntity(String.class));
     }

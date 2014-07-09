@@ -2,6 +2,7 @@ package com.wstester;
 
 import javax.xml.soap.SOAPConnection;
 import javax.xml.soap.SOAPConnectionFactory;
+import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
 import com.sun.jersey.api.client.ClientResponse;
@@ -28,7 +29,12 @@ public class Client {
 		
 	}
 	
-	public ClientResponse sendRequest(Request request){
+	/**
+	 * Use this method when a REST request is made
+	 * @param request - any HHTP request from the API
+	 * @return the {@link com.sun.jersey.api.client.ClientResponse response} from the server 
+	 */
+	public ClientResponse sendRestRequest(Request request){
 		
 		client = com.sun.jersey.api.client.Client.create();
 		resource = client.resource(endpoint);
@@ -45,22 +51,45 @@ public class Client {
 	}
 	
 	/**
-	 * Use this method when a SOAP request is made
+	 * <p> Use this method when a SOAP request is made
+	 * <p> In order to create a SOAPMessage, use the {@link com.wstester.util.SOAPUtils#toSOAP() toSOAP()} method from the SOAPUtils class
+	 * @param Object representation of the SOAP request
+	 * @return String representation of the SOAP response
+	 * @throws Exception 
+	 */
+	public String sendSOAPRequest(Object soapRequest) throws Exception{
+		
+		SOAPMessage req = SOAPUtils.toSOAP(soapRequest);
+        
+        return callSOAPServer(req);
+	}
+	
+	/**
+	 * <p> Use this method when a SOAP request is made
+	 * <p> In order to create a SOAPMessage, use the {@link com.wstester.util.SOAPUtils#toSOAP() toSOAP()} method from the SOAPUtils class
 	 * @param String representation of the SOAP request
 	 * @return String representation of the SOAP response
 	 * @throws Exception 
 	 */
-	public String sendRequest(String request) throws Exception{
+	public String sendSOAPRequest(String soapRequest) throws Exception{
+		
+		SOAPMessage req = SOAPUtils.toSOAP(soapRequest);
+        
+        return callSOAPServer(req);
+	}
+	
+	private String callSOAPServer(SOAPMessage req) throws Exception{
 		
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
         SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 
         // Send SOAP Message to SOAP Server
-        SOAPMessage soapResponse = soapConnection.call(SOAPUtils.createSOAPRequest(request), endpoint);
+        SOAPMessage soapResponse = soapConnection.call(req, endpoint);
 
         soapConnection.close();
         
-        String stringResponse = SOAPUtils.createSOAPResponse(soapResponse);
+        String stringResponse = SOAPUtils.fromSOAP(soapResponse);
+        
         return stringResponse;
 	}
 }
