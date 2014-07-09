@@ -29,7 +29,6 @@ public class GetRequestTest {
     public static void setUp() throws Exception {
         server = Main.startRestServer();
         client = new Client("http://localhost:9998");
-        while(true);
     }
  
     @AfterClass
