@@ -1,36 +1,21 @@
 package com.wstester.client.soap;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import org.junit.Test;
-import org.springframework.context.ConfigurableApplicationContext;
-import com.cdyne.ws.weatherws.GetCityForecastByZIPResponse;
-import com.wstester.server.Main;
-import com.wstester.server.WeatherClient;
+import com.wstester.Client;
 
 public class SoapTest {
 
-	static ConfigurableApplicationContext ctx;
-
-	@BeforeClass
-	public static void setUp() throws Exception {
-		ctx = Main.startSOAPServer();
-	}
-
-	@AfterClass
-	public static void tearDown() throws Exception {
-		ctx.stop();
-	}
-	
 	@Test
-	public void test(){
+	public void test() throws Exception {
+
+		 Client client = new Client("http://footballpool.dataaccess.eu/data/info.wso");
+
+		String content = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		
-
-		WeatherClient weatherClient = ctx.getBean(WeatherClient.class);
-
-		String zipCode = "94304";
-
-		GetCityForecastByZIPResponse response = weatherClient.getCityForecastByZip(zipCode);
-		weatherClient.printResponse(response);
+		String soapResponse = client.sendRequest(content);
+		System.out.println("\nResponse SOAP Message:");
+		System.out.println(soapResponse);
 	}
 }
