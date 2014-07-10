@@ -1,4 +1,4 @@
-package com.wstester.util;
+package com.wstester.soap;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

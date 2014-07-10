@@ -1,4 +1,4 @@
-package com.wstester.api;
+package com.wstester.rest;
 
 import javax.ws.rs.core.Cookie;
 import com.sun.jersey.api.client.ClientResponse;
