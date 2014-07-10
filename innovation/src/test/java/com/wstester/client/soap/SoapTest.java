@@ -3,7 +3,7 @@ package com.wstester.client.soap;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.junit.Test;
-import com.wstester.Client;
+import com.wstester.soap.SOAPClient;
 import eu.dataaccess.footballpool.AllForwards;
 
 public class SoapTest {
@@ -11,7 +11,7 @@ public class SoapTest {
 	@Test
 	public void getRequestFromFile() throws Exception {
 
-		Client client = new Client("http://footballpool.dataaccess.eu/data/info.wso");
+		SOAPClient client = new SOAPClient("http://footballpool.dataaccess.eu/data/info.wso");
 
 		String content = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		
@@ -23,7 +23,7 @@ public class SoapTest {
 	@Test
 	public void getRequestFromObject() throws Exception{
 		
-		Client client = new Client("http://footballpool.dataaccess.eu/data/info.wso");
+		SOAPClient client = new SOAPClient("http://footballpool.dataaccess.eu/data/info.wso");
 		
 		AllForwards fromBrazil = new AllForwards();
 		fromBrazil.setSCountryName("Brazil");
