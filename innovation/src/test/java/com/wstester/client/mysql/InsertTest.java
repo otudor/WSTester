@@ -4,17 +4,18 @@ import static org.junit.Assert.assertEquals;
 
 import java.sql.SQLException;
 
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.wstester.mysql.MySQLClient;
 
 public class InsertTest {
 
-	MySQLClient client;
+	static MySQLClient client;
 	
-	@Before
-	public void setUp() throws ClassNotFoundException, SQLException{
+	@BeforeClass
+	public static void setUp() throws ClassNotFoundException, SQLException{
 	
 		client = new MySQLClient("localhost", "3306", "test", "appuser", "apppass");
 	}
@@ -25,5 +26,11 @@ public class InsertTest {
 		String insertStatement = "INSERT INTO CUSTOMER(NAME) VALUES('AnotherPan')";
 		int rowsInserted = client.insert(insertStatement);
 		assertEquals(1,rowsInserted);
+	}
+	
+	@AfterClass
+	public static void tear() throws SQLException{
+		
+		client.close();
 	}
 }

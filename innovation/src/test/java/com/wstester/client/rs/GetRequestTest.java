@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MultivaluedMap;
 
-import org.glassfish.grizzly.http.server.HttpServer;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.sun.jersey.api.client.ClientResponse;
@@ -17,25 +14,8 @@ import com.sun.jersey.api.client.ClientResponse.Status;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import com.wstester.rest.GetRequest;
 import com.wstester.rest.Request;
-import com.wstester.rest.RestClient;
-import com.wstester.server.Main;
 
-public class GetRequestTest {
-
-	private static HttpServer server;
-	private static RestClient client;
- 
-    @BeforeClass
-    public static void setUp() throws Exception {
-        server = Main.startRestServer();
-        client = new RestClient("http://localhost:9998");
-    }
- 
-    @AfterClass
-    public static void tearDown() throws Exception {
-        server.stop();
-    }
- 
+public class GetRequestTest extends TestBaseClass{
 
     @Test
     public void multiplePath() {

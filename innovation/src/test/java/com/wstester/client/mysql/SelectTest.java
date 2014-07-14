@@ -3,7 +3,8 @@ package com.wstester.client.mysql;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.wstester.mysql.MySQLClient;
@@ -11,16 +12,16 @@ import com.wstester.mysql.Result;
 
 public class SelectTest {
 
-	MySQLClient client;
+	static MySQLClient client;
 	
-	@Before
-	public void setUp() throws ClassNotFoundException, SQLException{
+	@BeforeClass
+	public static void setUp() throws ClassNotFoundException, SQLException{
 	
 		client = new MySQLClient("localhost", "3306", "test", "appuser", "apppass");
 	}
 	
 	@Test
-	public void insertOneRow() throws SQLException, InstantiationException, IllegalAccessException{
+	public void selectAll() throws SQLException, InstantiationException, IllegalAccessException{
 		
 		String selectStatement = "SELECT * FROM CUSTOMER";
 		Result result = client.select(selectStatement);
@@ -31,5 +32,13 @@ public class SelectTest {
 			for (Object val : result.getValues(column))
 				System.out.println(val);
 		}
+		
+		result.close();
+	}
+	
+	@AfterClass
+	public static void tear() throws SQLException{
+		
+		client.close();
 	}
 }

@@ -41,4 +41,8 @@ public class RestClient {
 		return response;
 	}
 	
+	public void close(){
+
+		client.destroy();
+	}
 }

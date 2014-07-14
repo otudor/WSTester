@@ -10,8 +10,10 @@ import org.glassfish.grizzly.http.server.HttpServer;
 
 public class Main {
 
+	private static HttpServer server;
+	
     private static URI getRestBaseURI() {
-        return UriBuilder.fromUri("http://localhost/").port(9998).build();
+        return UriBuilder.fromUri("http://localhost/").port(9997).build();
     }
 
     public static final URI BASE_URI = getRestBaseURI();
@@ -19,6 +21,10 @@ public class Main {
     public static HttpServer startRestServer() throws IOException {
         System.out.println("Starting Rest with grizzly...");
         ResourceConfig rc = new PackagesResourceConfig("com.wstester.server");
-        return GrizzlyServerFactory.createHttpServer(BASE_URI, rc);
+        
+        if(server == null || !server.isStarted())
+        	server = GrizzlyServerFactory.createHttpServer(BASE_URI, rc);
+        
+        return server;
     }
 }

@@ -33,4 +33,9 @@ public class MySQLClient {
 		
 		return rowsInserted;
 	}
+	
+	public void close() throws SQLException{
+		
+		this.conn.close();
+	}
 }

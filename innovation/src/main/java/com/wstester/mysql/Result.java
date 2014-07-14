@@ -37,4 +37,9 @@ public class Result {
 	public List<String> getColumnsName() {
 		return columnsName;
 	}
+	
+	public void close() throws SQLException{
+		
+		this.rs.close();
+	}
 }
