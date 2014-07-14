@@ -10,6 +10,10 @@
 
 	<name>WSTester</name>
 
+	<modules>
+		<module>innovation</module>
+	</modules>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<mainClass>com.wstester.MainApp</mainClass>
