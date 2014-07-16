@@ -1,4 +1,4 @@
-package com.wstester.mongo;
+package com.wstester.client.mongo;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;

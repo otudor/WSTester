@@ -1,13 +1,24 @@
-package com.wstester.rest;
+package com.wstester.client.rest;
 
 import javax.ws.rs.core.Cookie;
+
 import com.sun.jersey.api.client.ClientResponse;
 
-public class GetRequest extends Request {
+public class PostRequest extends Request {
 
+	private Object requestEntity;
+	
+	public void setRequestEntity(Object request){
+		this.requestEntity = request;
+	}
+	
+	public Object getRequestEntity(){
+		return this.requestEntity;
+	}
+	
 	@Override
 	public ClientResponse sendRequest() {
-
+		
 		// set path
 		if (getPath().size() > 0)
 			for (String path : getPath()) {
@@ -17,7 +28,7 @@ public class GetRequest extends Request {
 		// set query parameters
 		if (getParams() != null)
 			resource = resource.queryParams(getParams());
-		
+
 		// set header
 		if (getHeader() != null && !getHeader().isEmpty()){
 			for(String key : getHeader().keySet())
@@ -35,12 +46,11 @@ public class GetRequest extends Request {
 					builder = builder.cookie(cookie);
 				else
 					builder = resource.cookie(cookie);
-		
-		// send get request
-		if (builder != null)
-			return builder.get(ClientResponse.class);
-		else
-			return resource.get(ClientResponse.class);
-	}
 
+		// send post request
+		if (builder != null)
+			return builder.post(ClientResponse.class, requestEntity);
+		else
+			return resource.post(ClientResponse.class, requestEntity);
+	}
 }

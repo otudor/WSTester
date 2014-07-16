@@ -1,4 +1,4 @@
-package com.wstester.rest;
+package com.wstester.client.rest;
 
 import java.util.ArrayList;
 

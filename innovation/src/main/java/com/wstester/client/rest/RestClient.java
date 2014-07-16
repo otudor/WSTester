@@ -1,4 +1,4 @@
-package com.wstester.rest;
+package com.wstester.client.rest;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;

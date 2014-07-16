@@ -1,4 +1,4 @@
-package com.wstester.mysql;
+package com.wstester.client.mysql;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
