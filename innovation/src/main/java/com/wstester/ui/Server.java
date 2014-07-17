@@ -2,6 +2,9 @@ package com.wstester.ui;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Server {
 	private List<Service> services;
 	private String name;

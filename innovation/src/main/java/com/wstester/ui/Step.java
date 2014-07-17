@@ -5,10 +5,14 @@ package com.wstester.ui;
 
 import java.util.List;
 
+
 /**
  * @author malexe
  * 
  */
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public abstract class Step {
 	private Server server;
 	private List<Assert> asserts;
