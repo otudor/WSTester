@@ -12,8 +12,8 @@ import org.junit.Test;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.ClientResponse.Status;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
-import com.wstester.client.rest.GetRequest;
-import com.wstester.client.rest.Request;
+import com.wstester.rest.GetRequest;
+import com.wstester.rest.Request;
 
 public class GetRequestTest extends TestBaseClass{
 

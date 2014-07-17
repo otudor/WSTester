@@ -11,7 +11,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.wstester.client.mongo.MongoDBClient;
+import com.wstester.mongo.MongoDBClient;
 
 public class SelectTest {
 

@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.wstester.client.soap.SOAPClient;
+import com.wstester.soap.SOAPClient;
 
 import eu.dataaccess.footballpool.AllForwards;
 
