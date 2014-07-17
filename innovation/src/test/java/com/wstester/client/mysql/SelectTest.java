@@ -7,8 +7,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.wstester.mysql.MySQLClient;
-import com.wstester.mysql.Result;
+import com.wstester.client.mysql.MySQLClient;
+import com.wstester.client.mysql.Result;
 
 public class SelectTest {
 

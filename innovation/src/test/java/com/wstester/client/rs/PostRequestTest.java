@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.ClientResponse.Status;
-import com.wstester.rest.PostRequest;
-import com.wstester.rest.Request;
+import com.wstester.client.rest.PostRequest;
+import com.wstester.client.rest.Request;
 
 public class PostRequestTest extends TestBaseClass{
 

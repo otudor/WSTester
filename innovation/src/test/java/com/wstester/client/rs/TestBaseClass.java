@@ -4,7 +4,7 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
-import com.wstester.rest.RestClient;
+import com.wstester.client.rest.RestClient;
 import com.wstester.server.Main;
 
 public class TestBaseClass {
