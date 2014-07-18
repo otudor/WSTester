@@ -2,10 +2,14 @@ package com.wstester.ui;
 
 import java.util.List;
 
+
 /**
  * @author malexe
  * @review astoica
  */
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public abstract class Step {
 	
 	private String name;

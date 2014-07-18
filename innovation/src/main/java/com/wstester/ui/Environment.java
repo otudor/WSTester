@@ -2,6 +2,8 @@ package com.wstester.ui;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+@XmlRootElement
 public class Environment {
 	
 	private List<Server> serverList;
