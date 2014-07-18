@@ -1,8 +1,8 @@
-package com.wstester.ui;
+package com.wstester.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Asset {
+public class RestStep extends Step {
 
 }

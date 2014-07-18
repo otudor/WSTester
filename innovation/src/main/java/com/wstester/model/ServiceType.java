@@ -1,4 +1,4 @@
-package com.wstester.ui;
+package com.wstester.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
