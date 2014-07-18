@@ -5,7 +5,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class TestPlan {
+public class TestProject {
 	
 	private String name;
 	private List<TestSuite> testSuiteList;
@@ -52,7 +52,7 @@ public class TestPlan {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TestPlan other = (TestPlan) obj;
+		TestProject other = (TestProject) obj;
 		if (assetList == null) {
 			if (other.assetList != null)
 				return false;

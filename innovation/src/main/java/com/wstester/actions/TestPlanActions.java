@@ -8,15 +8,15 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import com.wstester.model.TestPlan;
+import com.wstester.model.TestProject;
 
 public class TestPlanActions {
 
-	public void save(String path, TestPlan testPlan) throws IOException {
+	public void save(String path, TestProject testPlan) throws IOException {
 
 		try {
 
-			JAXBContext context = JAXBContext.newInstance(TestPlan.class);
+			JAXBContext context = JAXBContext.newInstance(TestProject.class);
 			Marshaller m = context.createMarshaller();
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
@@ -29,16 +29,16 @@ public class TestPlanActions {
 		}
 	}
 
-	public TestPlan open(String path) throws IOException {
+	public TestProject open(String path) throws IOException {
 
-		TestPlan testPlan = null;
+		TestProject testPlan = null;
 		
 		try {
-			JAXBContext jc = JAXBContext.newInstance(TestPlan.class);
+			JAXBContext jc = JAXBContext.newInstance(TestProject.class);
 			Unmarshaller u = jc.createUnmarshaller();
 
 			File file = new File(path);
-			testPlan = (TestPlan) u.unmarshal(file);
+			testPlan = (TestProject) u.unmarshal(file);
 		} catch (JAXBException e) {
 			
 			e.printStackTrace();

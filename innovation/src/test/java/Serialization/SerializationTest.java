@@ -25,7 +25,7 @@ import com.wstester.model.ServiceType;
 import com.wstester.model.SoapStep;
 import com.wstester.model.Step;
 import com.wstester.model.TestCase;
-import com.wstester.model.TestPlan;
+import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -33,14 +33,14 @@ public class SerializationTest {
 
 	private static String filePath = "src/test/resources/Output.xml";
 	private static File file = new File(filePath);
-	private static TestPlan testPlanBefore;
-	private static TestPlan testPlanAfter;
+	private static TestProject testPlanBefore;
+	private static TestProject testPlanAfter;
 	
 	@Test
 	public void firstTestToXML() throws IOException{
 		
 		// construct test plan
-		testPlanBefore = new TestPlan();
+		testPlanBefore = new TestProject();
 		testPlanBefore.setName("Test Plan");
 		
 		// construct asset list
