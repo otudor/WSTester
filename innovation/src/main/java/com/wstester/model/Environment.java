@@ -1,15 +1,25 @@
 package com.wstester.model;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Environment {
-	
+
 	private List<Server> serverList;
 	private String name;
-	
+	private String uuid;
+
+	public Environment() {
+		uuid = UUID.randomUUID().toString();
+	}
+
+	public String getID() {
+		return this.uuid;
+	}
+
 	public String getName() {
 		return name;
 	}

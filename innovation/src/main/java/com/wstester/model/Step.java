@@ -6,6 +6,8 @@ import java.util.List;
 
 
 
+import java.util.UUID;
+
 import javax.xml.bind.annotation.XmlSeeAlso;
 /**
  * @author malexe
@@ -23,6 +25,15 @@ public abstract class Step {
 	private List<Assert> assertList;
 	private List<Asset> assetList;
 
+	private String uuid;
+
+	public Step() {
+		uuid = UUID.randomUUID().toString();
+	}
+
+	public String getID() {
+		return this.uuid;
+	}
 	public Server getServer() {
 		return server;
 	}

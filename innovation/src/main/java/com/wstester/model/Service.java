@@ -1,5 +1,7 @@
 package com.wstester.model;
 
+import java.util.UUID;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -9,6 +11,15 @@ public class Service {
 	private ServiceType type;
 	private String name;
 
+	private String uuid;
+
+	public Service() {
+		uuid = UUID.randomUUID().toString();
+	}
+
+	public String getID() {
+		return this.uuid;
+	}
 	public ServiceType getType() {
 		return type;
 	}

@@ -1,16 +1,27 @@
 package com.wstester.model;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class TestSuite {
-	
+
 	private Environment environment;
 	private List<TestCase> testCaseList;
 	private String name;
-	
+
+	private String uuid;
+
+	public TestSuite() {
+		uuid = UUID.randomUUID().toString();
+	}
+
+	public String getID() {
+		return this.uuid;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -22,15 +33,15 @@ public class TestSuite {
 	public Environment getEnvironment() {
 		return environment;
 	}
-	
+
 	public void setEnvironment(Environment environment) {
 		this.environment = environment;
 	}
-	
+
 	public List<TestCase> getTestCaseList() {
 		return testCaseList;
 	}
-	
+
 	public void setTestCaseList(List<TestCase> testCaseList) {
 		this.testCaseList = testCaseList;
 	}
@@ -61,5 +72,5 @@ public class TestSuite {
 			return false;
 		return true;
 	}
-	
+
 }

@@ -1,14 +1,25 @@
 package com.wstester.model;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class TestCase {
-	
+
 	private String name;
 	private List<Step> stepList;
+
+	private String uuid;
+
+	public TestCase() {
+		uuid = UUID.randomUUID().toString();
+	}
+
+	public String getID() {
+		return this.uuid;
+	}
 
 	public List<Step> getStep() {
 		return stepList;
