@@ -3,19 +3,16 @@ package Serialization;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 
 import org.junit.AfterClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.wstester.actions.TestPlanActions;
 import com.wstester.model.Assert;
 import com.wstester.model.Asset;
 import com.wstester.model.Environment;
@@ -40,11 +37,7 @@ public class SerializationTest {
 	private static TestPlan testPlanAfter;
 	
 	@Test
-	public void firstTestToXML() throws JAXBException{
-
-		JAXBContext context = JAXBContext.newInstance(TestPlan.class);
-		Marshaller m = context.createMarshaller();
-		m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+	public void firstTestToXML() throws IOException{
 		
 		// construct test plan
 		testPlanBefore = new TestPlan();
@@ -233,17 +226,15 @@ public class SerializationTest {
 		testPlanBefore.setTestSuiteList(testSuiteList);
 		testPlanBefore.setTestSuiteList(testSuiteList);
 
-
-		m.marshal(testPlanBefore, file);
+		TestPlanActions actions = new TestPlanActions();
+		actions.save(filePath, testPlanBefore);
 	}
 	
 	@Test()
-	public void secondTestFromXML() throws JAXBException{
-		
-		JAXBContext jc = JAXBContext.newInstance(TestPlan.class);
-        Unmarshaller u = jc.createUnmarshaller();
+	public void secondTestFromXML() throws IOException {
 
-        testPlanAfter = (TestPlan) u.unmarshal(file);
+        TestPlanActions actions = new TestPlanActions();
+        testPlanAfter = actions.open(filePath);
         
         assertEquals(testPlanBefore, testPlanAfter);
 	}
