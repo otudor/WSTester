@@ -3,23 +3,41 @@ package com.wstester.ui;
 import java.util.List;
 
 public class TestPlan {
-	private List<TestSuite> testSuite;
-
-	public List<TestSuite> getTestSuite() {
-		return testSuite;
+	
+	private List<TestSuite> testSuiteList;
+	private List<Asset> assetList;
+	private List<Environment> environmentList;
+	private String name;
+	
+	public List<TestSuite> getTestSuiteList() {
+		return testSuiteList;
 	}
-
-	public void setTestSuite(List<TestSuite> testSuite) {
-		this.testSuite = testSuite;
+	
+	public void setTestSuiteList(List<TestSuite> testSuiteList) {
+		this.testSuiteList = testSuiteList;
 	}
-
-	public List<Asset> getAssets() {
-		return assets;
+	
+	public List<Asset> getAssetList() {
+		return assetList;
 	}
-
-	public void setAssets(List<Asset> assets) {
-		this.assets = assets;
+	
+	public void setAssetList(List<Asset> assetList) {
+		this.assetList = assetList;
 	}
-
-	private List<Asset> assets;
+	
+	public List<Environment> getEnvironmentList() {
+		return environmentList;
+	}
+	
+	public void setEnvironmentList(List<Environment> environmentList) {
+		this.environmentList = environmentList;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
 }

@@ -1,8 +1,10 @@
 package com.wstester.ui;
 
 public class Service {
+	
 	private String port;
 	private ServiceType type;
+	private String name;
 
 	public ServiceType getType() {
 		return type;
@@ -20,4 +22,11 @@ public class Service {
 		this.port = port;
 	}
 
+	public String getName(){
+		return this.name;
+	}
+	
+	public void setName(String name){
+		this.name = name;
+	}
 }

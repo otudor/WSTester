@@ -3,13 +3,23 @@ package com.wstester.ui;
 import java.util.List;
 
 public class TestCase {
-	private List<Step> step;
+	
+	private String name;
+	private List<Step> stepList;
 
 	public List<Step> getStep() {
-		return step;
+		return stepList;
 	}
 
 	public void setStep(List<Step> step) {
-		this.step = step;
+		this.stepList = step;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

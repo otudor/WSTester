@@ -3,22 +3,32 @@ package com.wstester.ui;
 import java.util.List;
 
 public class TestSuite {
-	private Environment env;
-	private List<TestCase> tc;
-
-	public Environment getEnv() {
-		return env;
+	
+	private Environment environment;
+	private List<TestCase> testCaseList;
+	private String name;
+	
+	public String getName() {
+		return name;
 	}
 
-	public void setEnv(Environment env) {
-		this.env = env;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public List<TestCase> getTc() {
-		return tc;
+	public Environment getEnvironment() {
+		return environment;
 	}
-
-	public void setTc(List<TestCase> tc) {
-		this.tc = tc;
+	
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
+	}
+	
+	public List<TestCase> getTestCaseList() {
+		return testCaseList;
+	}
+	
+	public void setTestCaseList(List<TestCase> testCaseList) {
+		this.testCaseList = testCaseList;
 	}
 }

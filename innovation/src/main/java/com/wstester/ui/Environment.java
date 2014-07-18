@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Environment {
 	
-	private List<Server> servers;
+	private List<Server> serverList;
 	private String name;
 	
 	public String getName() {
@@ -16,11 +16,11 @@ public class Environment {
 	}
 
 	public List<Server> getServers() {
-		return servers;
+		return serverList;
 	}
 
 	public void setServers(List<Server> servers) {
-		this.servers = servers;
+		this.serverList = servers;
 	}
 	
 

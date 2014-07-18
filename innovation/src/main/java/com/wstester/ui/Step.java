@@ -1,19 +1,18 @@
-/**
- * 
- */
 package com.wstester.ui;
 
 import java.util.List;
 
 /**
  * @author malexe
- * 
+ * @review astoica
  */
 public abstract class Step {
+	
+	private String name;
 	private Server server;
-	private List<Assert> asserts;
 	private Service services;
-	private Asset assets;
+	private List<Assert> assertList;
+	private List<Asset> assetList;
 
 	public Server getServer() {
 		return server;
@@ -24,11 +23,11 @@ public abstract class Step {
 	}
 
 	public List<Assert> getAsserts() {
-		return asserts;
+		return assertList;
 	}
 
 	public void setAsserts(List<Assert> asserts) {
-		this.asserts = asserts;
+		this.assertList = asserts;
 	}
 
 	public Service getServices() {
@@ -39,12 +38,20 @@ public abstract class Step {
 		this.services = services;
 	}
 
-	public Asset getAssets() {
-		return assets;
+	public List<Asset> getAssets() {
+		return assetList;
 	}
 
-	public void setAssets(Asset assets) {
-		this.assets = assets;
+	public void setAssets(List<Asset> assets) {
+		this.assetList = assets;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
