@@ -19,6 +19,7 @@
 		<mysql.version>5.1.31</mysql.version>
 		<mongo.version>2.12.2</mongo.version>
 		<wsdl.name>info.wsdl</wsdl.name>
+		<spring.version>4.0.6.RELEASE</spring.version>
 		<maven.compiler.version>3.1</maven.compiler.version>
 	</properties>
 
@@ -53,6 +54,47 @@
 			<artifactId>camel-core</artifactId>
 			<version>2.13.2</version>
 		</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-core</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+	<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-beans</artifactId>
+	<version>${spring.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-aop</artifactId>
+	<version>${spring.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-context-support</artifactId>
+	<version>${spring.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-aspects</artifactId>
+	<version>${spring.version}</version>
+</dependency>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-web</artifactId>
+  <version>1.1.4.RELEASE</version>
+</dependency>
+
+
+
+	
+	
+		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
