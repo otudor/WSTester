@@ -21,7 +21,23 @@
 		<wsdl.name>info.wsdl</wsdl.name>
 		<spring.version>4.0.6.RELEASE</spring.version>
 		<maven.compiler.version>3.1</maven.compiler.version>
+		<start-class>hello.Application</start-class>
+        <tomcat.version>8.0.8</tomcat.version>
+        <springboot.version>1.1.4.RELEASE</springboot.version>
 	</properties>
+
+
+<dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-dependencies</artifactId>
+			<version>${springboot.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+	</dependencies>
+</dependencyManagement>
 
 	<dependencies>
 		<dependency>
@@ -87,14 +103,16 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<version>1.1.4.RELEASE</version>
+	
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
-			<version>1.1.4.RELEASE</version>
+		
+			
 		</dependency>
+		
 
 
 
@@ -114,6 +132,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 
 	<build>
 		<plugins>
@@ -135,6 +154,26 @@
 						</configuration>
 						<goals>
 							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>hello.Application</mainClass>
+					<layout>JAR</layout>
+					<!-- <classifier>exec</classifier> -->
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
 						</goals>
 					</execution>
 				</executions>
