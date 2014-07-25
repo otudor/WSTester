@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.assets.EventHandlerDemoController">
+   <children>
+      <SplitPane dividerPositions="0.29797979797979796" layoutX="246.0" layoutY="141.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <VBox layoutY="1.0" prefHeight="398.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ListView fx:id="listView" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <SplitPane dividerPositions="0.13131313131313133" layoutX="101.0" layoutY="157.0" orientation="VERTICAL" prefHeight="398.0" prefWidth="417.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <Button fx:id="addButton" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="25.0">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@button_add.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button layoutX="70.0" layoutY="8.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="31.0">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@DeleteButton.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button layoutX="124.0" layoutY="8.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="23.0">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@rename.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <TableView fx:id="tableView" layoutX="14.0" layoutY="14.0" prefHeight="341.0" prefWidth="415.0" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="-14.0" AnchorPane.topAnchor="14.0">
+                                <columns>
+                                  <TableColumn fx:id="tableName" prefWidth="107.0" text="Name">
+ 								  </TableColumn>
+                                  <TableColumn fx:id="tableDate" prefWidth="94.0" text="Date">
+ 								  </TableColumn>
+                                  <TableColumn fx:id="tablePath" prefWidth="93.0" text="Path">
+ 								  </TableColumn>
+                                  <TableColumn fx:id="tableSize" prefWidth="105.0" text="Size">
+ 								  </TableColumn>
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
