@@ -8,10 +8,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class TestSuite {
 
+	private String name;
 	private Environment environment;
 	private List<TestCase> testCaseList;
-	private String name;
-
+	private List<Variable> variableList;
 	private String uuid;
 
 	public TestSuite() {
@@ -46,6 +46,14 @@ public class TestSuite {
 		this.testCaseList = testCaseList;
 	}
 
+	public List<Variable> getVariableList() {
+		return variableList;
+	}
+
+	public void setVariableList(List<Variable> variableList) {
+		this.variableList = variableList;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -70,7 +78,11 @@ public class TestSuite {
 				return false;
 		} else if (!testCaseList.equals(other.testCaseList))
 			return false;
+		if (variableList == null) {
+			if (other.variableList != null)
+				return false;
+		} else if (!variableList.equals(other.variableList))
+			return false;
 		return true;
 	}
-
 }

@@ -1,5 +1,6 @@
 package com.wstester.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,7 +11,7 @@ public class TestCase {
 
 	private String name;
 	private List<Step> stepList;
-
+	private List<Variable> variableList;
 	private String uuid;
 
 	public TestCase() {
@@ -21,12 +22,20 @@ public class TestCase {
 		return this.uuid;
 	}
 
-	public List<Step> getStep() {
+	public List<Step> getStepList() {
 		return stepList;
 	}
 
-	public void setStep(List<Step> step) {
-		this.stepList = step;
+	public void setStepList(List<Step> stepList) {
+		this.stepList = stepList;
+	}
+	
+	public void addStep(Step step){
+		if(this.stepList == null){
+			this.stepList = new ArrayList<Step>();
+		}
+		
+		this.stepList.add(step);
 	}
 
 	public String getName() {
@@ -35,6 +44,22 @@ public class TestCase {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<Variable> getVariableList() {
+		return variableList;
+	}
+
+	public void setVariableList(List<Variable> variableList) {
+		this.variableList = variableList;
+	}
+
+	public void addVariable(Variable variable){
+		if(this.variableList == null){
+			this.variableList = new ArrayList<Variable>();
+		}
+		
+		variableList.add(variable);
 	}
 
 	@Override
@@ -55,6 +80,11 @@ public class TestCase {
 			if (other.stepList != null)
 				return false;
 		} else if (!stepList.equals(other.stepList))
+			return false;
+		if (variableList == null) {
+			if (other.variableList != null)
+				return false;
+		} else if (!variableList.equals(other.variableList))
 			return false;
 		return true;
 	}

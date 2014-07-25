@@ -1,13 +1,12 @@
 package com.wstester.model;
 
+import java.util.UUID;
 import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author malexe
- *
- */
 
 @XmlRootElement
 public class MongoStep extends Step{
 
+	public MongoStep() {
+		uuid = UUID.randomUUID().toString();
+	}
 }

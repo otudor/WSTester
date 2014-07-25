@@ -10,7 +10,7 @@ import javax.xml.bind.Unmarshaller;
 
 import com.wstester.model.TestProject;
 
-public class TestPlanActions {
+public class TestProjectActions {
 
 	public void save(String path, TestProject testPlan) throws IOException {
 

@@ -1,14 +1,13 @@
 package com.wstester.model;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import java.util.UUID;
 
-/**
- * @author malexe
- *
- */
+import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class SoapStep extends Step{
 
-	
+	public SoapStep() {
+		uuid = UUID.randomUUID().toString();
+	}
 }

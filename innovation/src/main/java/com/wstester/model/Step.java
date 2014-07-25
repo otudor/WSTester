@@ -1,35 +1,22 @@
 package com.wstester.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-
-import java.util.UUID;
-
 import javax.xml.bind.annotation.XmlSeeAlso;
-/**
- * @author malexe
- * @review astoica
- */
 import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 @XmlSeeAlso({RestStep.class, MongoStep.class, MySQLStep.class, SoapStep.class})
 public abstract class Step {
 	
+	protected String uuid;
 	private String name;
 	private Server server;
 	private Service service;
 	private List<Assert> assertList;
 	private List<Asset> assetList;
-
-	private String uuid;
-
-	public Step() {
-		uuid = UUID.randomUUID().toString();
-	}
+	private List<Variable> variableList;
 
 	public String getID() {
 		return this.uuid;
@@ -42,27 +29,27 @@ public abstract class Step {
 		this.server = server;
 	}
 
-	public List<Assert> getAsserts() {
+	public List<Assert> getAssertList() {
 		return assertList;
 	}
 
-	public void setAsserts(List<Assert> asserts) {
+	public void setAssertList(List<Assert> asserts) {
 		this.assertList = asserts;
 	}
 
-	public Service getServices() {
+	public Service getService() {
 		return service;
 	}
 
-	public void setServices(Service services) {
-		this.service = services;
+	public void setService(Service service) {
+		this.service = service;
 	}
 
-	public List<Asset> getAssets() {
+	public List<Asset> getAssetList() {
 		return assetList;
 	}
 
-	public void setAssets(List<Asset> assets) {
+	public void setAssetList(List<Asset> assets) {
 		this.assetList = assets;
 	}
 
@@ -74,6 +61,26 @@ public abstract class Step {
 		this.name = name;
 	}
 
+	public List<Variable> getVariableList() {
+		return variableList;
+	}
+
+	public void addVariableList(List<Variable> variableList){
+		if(this.variableList == null){
+			this.variableList = new ArrayList<Variable>();
+		}
+		
+		this.variableList.addAll(variableList);
+	}
+	
+	public void addVariable(Variable variable){
+		if(this.variableList == null){
+			this.variableList = new ArrayList<Variable>();
+		}
+		
+		this.variableList.add(variable);
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -108,6 +115,12 @@ public abstract class Step {
 				return false;
 		} else if (!service.equals(other.service))
 			return false;
+		if (variableList == null) {
+			if (other.variableList != null)
+				return false;
+		} else if (!variableList.equals(other.variableList))
+			return false;
 		return true;
 	}
+	
 }

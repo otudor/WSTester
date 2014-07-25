@@ -12,6 +12,7 @@ public class TestProject {
 	private List<TestSuite> testSuiteList;
 	private List<Asset> assetList;
 	private List<Environment> environmentList;
+	private List<Variable> variableList;
 
 	private String uuid;
 
@@ -55,6 +56,14 @@ public class TestProject {
 		this.name = name;
 	}
 
+	public List<Variable> getVariableList() {
+		return variableList;
+	}
+
+	public void setVariableList(List<Variable> variableList) {
+		this.variableList = variableList;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -83,6 +92,11 @@ public class TestProject {
 			if (other.testSuiteList != null)
 				return false;
 		} else if (!testSuiteList.equals(other.testSuiteList))
+			return false;
+		if (variableList == null) {
+			if (other.variableList != null)
+				return false;
+		} else if (!variableList.equals(other.variableList))
 			return false;
 		return true;
 	}

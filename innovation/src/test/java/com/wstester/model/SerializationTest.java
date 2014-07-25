@@ -1,4 +1,4 @@
-package Serialization;
+package com.wstester.model;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,7 +12,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.wstester.actions.TestPlanActions;
+import com.wstester.actions.TestProjectActions;
 import com.wstester.model.Assert;
 import com.wstester.model.Asset;
 import com.wstester.model.Environment;
@@ -141,29 +141,29 @@ public class SerializationTest {
 		RestStep step1 = new RestStep();
 		step1.setName("Step 1");
 		step1.setServer(server11);
-		step1.setServices(service1);
+		step1.setService(service1);
 		List<Asset> assetList1 = new ArrayList<Asset>();
 		assetList1.add(asset1);
-		step1.setAssets(assetList1);
+		step1.setAssetList(assetList1);
 		List<Assert> assertList = new ArrayList<Assert>();
 		Assert oneAssert = new Assert();
 		oneAssert.setAsserts("First assert");
 		assertList.add(oneAssert);
-		step1.setAsserts(assertList);
+		step1.setAssertList(assertList);
 		stepList1.add(step1);
 		// test 2
 		MongoStep step2 = new MongoStep();
 		step2.setName("Step 2");
 		step2.setServer(server12);
-		step2.setServices(service2);
+		step2.setService(service2);
 		List<Asset> assetList2 = new ArrayList<Asset>();
 		assetList2.add(asset2);
-		step2.setAssets(assetList2);
+		step2.setAssetList(assetList2);
 		List<Assert> assertList2 = new ArrayList<Assert>();
 		Assert oneAssert2 = new Assert();
 		oneAssert2.setAsserts("Second assert");
 		assertList2.add(oneAssert2);
-		step2.setAsserts(assertList2);
+		step2.setAssertList(assertList2);
 		stepList1.add(step2);
 		
 		// test 3
@@ -171,29 +171,29 @@ public class SerializationTest {
 		MySQLStep step3 = new MySQLStep();
 		step3.setName("Step 3");
 		step3.setServer(server21);
-		step3.setServices(service3);
+		step3.setService(service3);
 		List<Asset> assetList3 = new ArrayList<Asset>();
 		assetList3.add(asset3);
-		step3.setAssets(assetList3);
+		step3.setAssetList(assetList3);
 		List<Assert> assertList3 = new ArrayList<Assert>();
 		Assert oneAssert3 = new Assert();
 		oneAssert3.setAsserts("Third assert");
 		assertList3.add(oneAssert3);
-		step3.setAsserts(assertList3);
+		step3.setAssertList(assertList3);
 		stepList2.add(step3);
 		// test 4
 		SoapStep step4 = new SoapStep();
 		step4.setName("Step 4");
 		step4.setServer(server22);
-		step4.setServices(service4);
+		step4.setService(service4);
 		List<Asset> assetList4 = new ArrayList<Asset>();
 		assetList4.add(asset4);
-		step4.setAssets(assetList4);
+		step4.setAssetList(assetList4);
 		List<Assert> assertList4 = new ArrayList<Assert>();
 		Assert oneAssert4 = new Assert();
 		oneAssert4.setAsserts("Forth assert");
 		assertList4.add(oneAssert4);
-		step4.setAsserts(assertList4);
+		step4.setAssertList(assertList4);
 		stepList2.add(step4);
 		
 		// construct test case list
@@ -201,14 +201,14 @@ public class SerializationTest {
 		List<TestCase> testCaseList1 = new ArrayList<TestCase>();
 		TestCase testCase = new TestCase();
 		testCase.setName("TC 1");
-		testCase.setStep(stepList1);
+		testCase.setStepList(stepList1);
 		testCaseList1.add(testCase);
 		
 		// test case 2		
 		List<TestCase> testCaseList2 = new ArrayList<TestCase>();
 		TestCase testCase2 = new TestCase();
 		testCase2.setName("TC 1");
-		testCase2.setStep(stepList2);
+		testCase2.setStepList(stepList2);
 		testCaseList2.add(testCase2);
 		
 		// construct test suite list
@@ -226,14 +226,14 @@ public class SerializationTest {
 		testPlanBefore.setTestSuiteList(testSuiteList);
 		testPlanBefore.setTestSuiteList(testSuiteList);
 
-		TestPlanActions actions = new TestPlanActions();
+		TestProjectActions actions = new TestProjectActions();
 		actions.save(filePath, testPlanBefore);
 	}
 	
 	@Test()
 	public void secondTestFromXML() throws IOException {
 
-        TestPlanActions actions = new TestPlanActions();
+		TestProjectActions actions = new TestProjectActions();
         testPlanAfter = actions.open(filePath);
         
         assertEquals(testPlanBefore, testPlanAfter);
