@@ -20,7 +20,7 @@ import javafx.scene.control.Label;
  */
 public class MainWindowController implements Initializable {
     
-    private AssetsController assetsC;
+    private EventHandlerDemoController assetsC;
     private RestController restC;
 
 
@@ -34,8 +34,8 @@ public class MainWindowController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
         label.setText("Button 1 clicked!");
-        assetsC = new AssetsController();
-        assetsC.createView();
+        assetsC = new EventHandlerDemoController();
+       // assetsC.createView();
     }
     
     @FXML

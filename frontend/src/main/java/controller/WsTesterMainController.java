@@ -94,7 +94,7 @@ public class WsTesterMainController implements Initializable {
 	}
 	//method to create+add the icons
 	private void createIcons(){		
-		newIco = (VBox) CreateIcon("/images/document-open-remote.png","Library Manager");
+		newIco = (VBox) CreateIcon("/images/document-open-remote.png","Assets");
 		newIco.setLayoutX(10);
 		newIco2 = (VBox) CreateIcon("/images/document-open-remote.png","Environments Definition");
 		newIco2.setLayoutX(10);
