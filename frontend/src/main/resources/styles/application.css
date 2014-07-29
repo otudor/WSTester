@@ -1,0 +1,23 @@
+.mainWindow{
+    -fx-background-image: url("../images/wallpaper23.jpg");
+    -fx-background-repeat: stretch;  
+    -fx-background-size: stretch;  
+}
+.img {
+  -fx-background-image: url("wallpaper23.jpg");
+  -fx-background-size: cover;
+}
+.bar
+{
+  -fx-background-color: #81BEF7;
+  -fx-background-repeat: stretch;  
+  -fx-background-size: stretch;
+
+}
+#TestingHooverCss:hover {
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+        #9d4024,
+        #d86e3a,
+        radial-gradient(center 50% 50%, radius 100%, #ea7f4b, #c54e2c);
+}
