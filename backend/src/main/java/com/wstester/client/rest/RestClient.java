@@ -2,8 +2,9 @@ package com.wstester.client.rest;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import com.wstester.client.Client;
 
-public class RestClient {
+public class RestClient extends Client{
 
 	private ClientResponse response;
 	private com.sun.jersey.api.client.Client client;
@@ -43,6 +44,7 @@ public class RestClient {
 	
 	public void close(){
 
-		client.destroy();
+		if(client != null)
+			client.destroy();
 	}
 }

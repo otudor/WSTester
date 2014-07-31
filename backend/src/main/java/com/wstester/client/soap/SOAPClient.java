@@ -2,15 +2,22 @@ package com.wstester.client.soap;
 
 import javax.xml.soap.SOAPConnection;
 import javax.xml.soap.SOAPConnectionFactory;
+import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
-public class SOAPClient {
+import com.wstester.client.Client;
+
+
+public class SOAPClient extends Client{
 
 	private String endpoint;
+	private SOAPConnection soapConnection;
 	
-	public SOAPClient(String serverURL){
+	public SOAPClient(String serverURL) throws UnsupportedOperationException, SOAPException{
 		
 		this.endpoint = serverURL;
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+        soapConnection = soapConnectionFactory.createConnection();
 	}
 	
 	/**
@@ -43,16 +50,17 @@ public class SOAPClient {
 	
 	private String callSOAPServer(SOAPMessage req) throws Exception{
 		
-		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
-        SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-
         // Send SOAP Message to SOAP Server
         SOAPMessage soapResponse = soapConnection.call(req, endpoint);
 
-        soapConnection.close();
-        
         String stringResponse = SOAPUtils.fromSOAP(soapResponse);
         
         return stringResponse;
+	}
+
+	@Override
+	public void close() throws SOAPException {
+		
+		soapConnection.close();
 	}
 }

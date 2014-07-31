@@ -1,47 +1,34 @@
 package com.wstester.model;
 
-import java.util.UUID;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
-public class Service {
+@XmlTransient
+@XmlSeeAlso({MongoService.class, MySQLService.class, RestService.class, SoapService.class})
+public abstract class Service {
 	
-	private String port;
-	private ServiceType type;
-	private String name;
-
-	private String uuid;
-
-	public Service() {
-		uuid = UUID.randomUUID().toString();
-	}
-
+	protected String uuid;
+	protected String name;
+	protected ServiceType type;
+	
 	public String getID() {
 		return this.uuid;
 	}
-	public ServiceType getType() {
-		return type;
-	}
-
-	public void setType(ServiceType type) {
-		this.type = type;
-	}
-
-	public String getPort() {
-		return port;
-	}
-
-	public void setPort(String port) {
-		this.port = port;
-	}
-
+	
 	public String getName(){
 		return this.name;
 	}
 	
 	public void setName(String name){
 		this.name = name;
+	}
+	
+	public ServiceType getType() {
+		return type;
+	}
+
+	protected void setType(ServiceType type) {
+		this.type = type;
 	}
 
 	@Override
@@ -57,11 +44,6 @@ public class Service {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
-			return false;
-		if (port == null) {
-			if (other.port != null)
-				return false;
-		} else if (!port.equals(other.port))
 			return false;
 		if (type != other.type)
 			return false;

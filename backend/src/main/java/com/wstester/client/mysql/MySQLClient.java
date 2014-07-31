@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class MySQLClient {
+import com.wstester.client.Client;
+
+public class MySQLClient extends Client{
 
 	private Connection conn;
 	
@@ -19,7 +21,7 @@ public class MySQLClient {
 	public Result select(String selectStatement) throws SQLException{
 	
 		Statement statemenet = conn.createStatement();
-		ResultSet resultset = statemenet.executeQuery("SELECT * FROM CUSTOMER");
+		ResultSet resultset = statemenet.executeQuery(selectStatement);
 		
 		Result result = new Result(resultset);
 		

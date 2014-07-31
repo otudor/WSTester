@@ -15,8 +15,9 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
+import com.wstester.client.Client;
 
-public class MongoDBClient {
+public class MongoDBClient extends Client{
 
 	private MongoClient mongoClient;
 	private DB db;
@@ -38,7 +39,7 @@ public class MongoDBClient {
 	
 	public JSONArray select(String collection, HashMap<String, String> query){
 		
-		DBCollection table = db.getCollection("customer");
+		DBCollection table = db.getCollection(collection);
 		
 		DBObject object = new BasicDBObject();
 		object.putAll(query);

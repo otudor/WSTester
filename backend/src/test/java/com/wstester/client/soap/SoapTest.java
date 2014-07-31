@@ -3,6 +3,8 @@ package com.wstester.client.soap;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import javax.xml.soap.SOAPException;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -15,9 +17,9 @@ public class SoapTest {
 	private static SOAPClient client;
 	
 	@BeforeClass
-	public static void setUp(){
+	public static void setUp() throws UnsupportedOperationException, SOAPException{
 		
-		client = new SOAPClient("http://footballpool.dataaccess.eu/data/info.wso");
+		client = new SOAPClient("http://footballpool.dataaccess.eu:80/data/info.wso");
 	}
 	
 	@Test
