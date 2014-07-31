@@ -7,7 +7,12 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
 
 	 @Bean(name="dispatcher")
-	    public Dispatcher getDispacher() {
+	 public Dispatcher getDispacher() {
 	        return new DispatcherImpl();
-	    }
+	 }
+	 
+	 @Bean(name="stepResult")
+	 public StepResult getStepResult(){
+		 return new StepResult();
+	 }
 }

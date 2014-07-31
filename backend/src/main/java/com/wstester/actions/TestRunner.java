@@ -15,11 +15,13 @@ import com.wstester.client.rest.RestClient;
 import com.wstester.client.soap.SOAPClient;
 import com.wstester.dispatcher.AppConfig;
 import com.wstester.dispatcher.Dispatcher;
+import com.wstester.dispatcher.StepResult;
 import com.wstester.exceptions.WsErrorCode;
 import com.wstester.exceptions.WsException;
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
+import com.wstester.model.Response;
 import com.wstester.model.RestService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
@@ -46,6 +48,30 @@ public class TestRunner {
 	
 		Thread run = new Thread(new RunThread());
 		run.start();
+	}
+	
+	public Response getResponse(String stepId, Long timeout){
+	
+		System.out.println("Gettting response for: " + stepId);
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+		StepResult stepResult = (StepResult) context.getBean(StepResult.class);
+		
+		Response response = stepResult.getResponse(stepId);
+		
+		while (response == null || timeout > 0){
+			try {
+				Thread.sleep(1000L);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response = stepResult.getResponse(stepId);
+			timeout-=1000;
+		} 
+		
+		context.close();
+		
+		return response;
 	}
 	
 	private void instantiateClients() throws UnknownHostException, ClassNotFoundException, SQLException, UnsupportedOperationException, SOAPException {
