@@ -17,6 +17,13 @@ public class Server {
 	public Server() {
 		uuid = UUID.randomUUID().toString();
 	}
+	
+	public Server( String name, String ip, String description) {
+		uuid = UUID.randomUUID().toString();
+		this.name = name;
+		this.ip = ip;
+		this.description = description;
+	}
 
 	public String getID() {
 		return this.uuid;
@@ -54,6 +61,11 @@ public class Server {
 		this.description = description;
 	}
 
+    public String toString() 
+    { 
+    	return this.name; 
+    }
+    
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

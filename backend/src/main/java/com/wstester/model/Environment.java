@@ -14,6 +14,14 @@ public class Environment {
 
 	public Environment() {
 		uuid = UUID.randomUUID().toString();
+		name = "";
+		serverList = null;
+	}
+	
+	public Environment( String name) {
+		uuid = UUID.randomUUID().toString();
+		this.name = name;
+		serverList = null;
 	}
 
 	public String getID() {
@@ -28,6 +36,11 @@ public class Environment {
 		this.name = name;
 	}
 
+    public String toString() 
+    { 
+    	return this.name; 
+    }
+    
 	public List<Server> getServers() {
 		return serverList;
 	}

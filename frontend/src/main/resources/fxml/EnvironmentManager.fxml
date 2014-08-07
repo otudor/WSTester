@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="root"
+            fx:controller="com.wstester.MainPresenter"
+            xmlns:fx="http://javafx.com/fxml">
+
+    <!-- Header -->
+    <top>
+        <VBox spacing="5">
+            <styleClass><String fx:value="header"/></styleClass>
+            <children>
+                <Label text="Environment Management">
+                    <styleClass>
+                        <String fx:value="label"/>
+                        <String fx:value="tag-line"/>
+                    </styleClass>
+                </Label>
+            </children>
+        </VBox>
+    </top>
+
+    <!-- Content Area -->
+    <center>
+        <BorderPane fx:id="contentArea">
+            <styleClass><String fx:value="body"/></styleClass>
+        </BorderPane>
+    </center>
+
+</BorderPane>

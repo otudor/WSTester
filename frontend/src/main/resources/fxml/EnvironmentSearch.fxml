@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="root"
+      fx:controller="com.wstester.EnvironmentSearchPresenter"
+      spacing="10"
+      xmlns:fx="http://javafx.com/fxml">
+
+    <children>
+        <!-- Search Bar -->
+        <HBox spacing="10">
+            <children>
+                <!-- <TextField fx:id="searchField" prefColumnCount="20" onAction="#search"/> -->
+                <!--  <Button text="Remove" onAction="#remove"/> -->
+            </children>
+        </HBox>
+
+        <!-- Search Results -->
+        <!--  ListView fx:id="resultsList" VBox.vgrow="ALWAYS"/ -->
+        <TreeView fx:id="treeView" layoutX="12.0" layoutY="158.0" prefHeight="193.0" prefWidth="471.0" />
+    </children>
+</VBox>
