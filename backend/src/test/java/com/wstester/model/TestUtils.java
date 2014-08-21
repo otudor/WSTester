@@ -8,8 +8,8 @@ public class TestUtils {
 
 	public static TestProject getTestPlan(){
 		
-		TestProject testPlan = new TestProject();
-		testPlan.setName("Test Plan");
+		TestProject testProject = new TestProject();
+		testProject.setName("Test Project");
 		
 		// construct asset list
 		List<Asset> assetList = new ArrayList<Asset>();
@@ -21,7 +21,7 @@ public class TestUtils {
 		assetList.add(asset2);
 		assetList.add(asset3);
 		assetList.add(asset4);
-		testPlan.setAssetList(assetList);
+		testProject.setAssetList(assetList);
 
 		// construct service list
 		// Service 1
@@ -103,7 +103,7 @@ public class TestUtils {
 		env2.setServers(serverList2);
 		environmentList.add(env1);
 		environmentList.add(env2);
-		testPlan.setEnvironmentList(environmentList);
+		testProject.setEnvironmentList(environmentList);
 
 		// construct test steps
 		// test 1
@@ -137,7 +137,9 @@ public class TestUtils {
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		query.put("name", "HAC");
-		step2.select(collection, query);
+		step2.setAction(Action.SELECT);
+		step2.setCollection(collection);
+		step2.setQuery(query);
 		stepList1.add(step2);
 		
 		// test 3
@@ -197,7 +199,89 @@ public class TestUtils {
 		testSuite2.setEnvironment(env2);
 		testSuite2.setTestCaseList(testCaseList2);
 		testSuiteList.add(testSuite2);
-		testPlan.setTestSuiteList(testSuiteList);
+		
+		testProject.setTestSuiteList(testSuiteList);
+		
+		return testProject;
+	}
+	
+	public static TestProject getRestTestPlan(){
+		
+		TestProject testPlan = new TestProject();
+		testPlan.setName("Rest Test Plan");
+		
+		// construct asset list
+		List<Asset> assetList = new ArrayList<Asset>();
+		Asset asset1 = new Asset();
+		Asset asset2 = new Asset();
+		Asset asset3 = new Asset();
+		Asset asset4 = new Asset();
+		assetList.add(asset1);
+		assetList.add(asset2);
+		assetList.add(asset3);
+		assetList.add(asset4);
+		testPlan.setAssetList(assetList);
+
+		// construct service list
+		// Service 1
+		List<Service> serviceList1 = new ArrayList<Service>();
+		RestService restService = new RestService();
+		restService.setName("Service Rest");
+		restService.setPort("9997");
+		serviceList1.add(restService);
+		
+		// construct server list
+		List<Server> serverList1 = new ArrayList<Server>();
+		// Server 1
+		Server server11 = new Server();
+		server11.setDescription("This is the first server of the first env");
+		server11.setIp("localhost");
+		server11.setName("Server 11");
+		server11.setServices(serviceList1);
+		serverList1.add(server11);
+		
+		// construct environment list
+		List<Environment> environmentList = new ArrayList<Environment>();
+		// Environment 1
+		Environment env1 = new Environment();
+		env1.setName("Env 1");
+		env1.setServers(serverList1);
+		environmentList.add(env1);
+		testPlan.setEnvironmentList(environmentList);
+
+		// construct test steps
+		// test 1
+		List<Step> stepList1 = new ArrayList<Step>();
+		RestStep step1 = new RestStep();
+		step1.setName("Step 1");
+		step1.setServer(server11);
+		step1.setService(restService);
+		List<Asset> assetList1 = new ArrayList<Asset>();
+		assetList1.add(asset1);
+		step1.setAssetList(assetList1);
+		List<Assert> assertList = new ArrayList<Assert>();
+		Assert oneAssert = new Assert();
+		oneAssert.setAsserts("First assert");
+		assertList.add(oneAssert);
+		step1.setAssertList(assertList);
+		stepList1.add(step1);
+		
+		// construct test case list
+		// test case 1
+		List<TestCase> testCaseList1 = new ArrayList<TestCase>();
+		TestCase testCase = new TestCase();
+		testCase.setName("TC 1");
+		testCase.setStepList(stepList1);
+		testCaseList1.add(testCase);
+		
+		// construct test suite list
+		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
+		TestSuite testSuite1 = new TestSuite();
+		testSuite1.setName("Test Suite 1");
+		testSuite1.setEnvironment(env1);
+		testSuite1.setTestCaseList(testCaseList1);
+		testSuiteList.add(testSuite1);
+	
 		testPlan.setTestSuiteList(testSuiteList);
 		
 		return testPlan;

@@ -4,6 +4,7 @@ import java.util.UUID;
 
 public class MySQLService extends Service {
 
+	private static final long serialVersionUID = 1L;
 	private String port;
 	private String dbName;
 	private String user;

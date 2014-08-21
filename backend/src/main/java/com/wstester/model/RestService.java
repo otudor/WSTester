@@ -4,6 +4,7 @@ import java.util.UUID;
 
 public class RestService extends Service {
 
+	private static final long serialVersionUID = 1L;
 	private String port;
 	
 	public RestService() {

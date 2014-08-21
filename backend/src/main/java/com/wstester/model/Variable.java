@@ -1,12 +1,14 @@
 package com.wstester.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Variable {
+public class Variable implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String uuid;
 	private String name;
 	private VariableType type;

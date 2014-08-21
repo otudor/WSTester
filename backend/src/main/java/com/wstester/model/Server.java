@@ -1,13 +1,15 @@
 package com.wstester.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Server {
+public class Server implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private List<Service> serviceList;
 	private String name;
 	private String ip;

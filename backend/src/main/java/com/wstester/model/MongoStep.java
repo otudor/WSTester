@@ -5,27 +5,42 @@ import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.wstester.model.Action;
+
 @XmlRootElement
 public class MongoStep extends Step{
 
+	private static final long serialVersionUID = 1L;
+	private Action action;
 	private String collection;
 	private HashMap<String, String> query;
 	
 	public MongoStep() {
 		uuid = UUID.randomUUID().toString();
 	}
-	
+
 	public String getCollection() {
 		return collection;
+	}
+
+	public void setCollection(String collection) {
+		this.collection = collection;
 	}
 
 	public HashMap<String, String> getQuery() {
 		return query;
 	}
 
-	public void select(String collection, HashMap<String, String> query){
-		this.collection = collection;
+	public void setQuery(HashMap<String, String> query) {
 		this.query = query;
+	}
+
+	public Action getAction() {
+		return action;
+	}
+
+	public void setAction(Action action) {
+		this.action = action;
 	}
 
 	@Override
@@ -37,6 +52,8 @@ public class MongoStep extends Step{
 		if (getClass() != obj.getClass())
 			return false;
 		MongoStep other = (MongoStep) obj;
+		if (action != other.action)
+			return false;
 		if (collection == null) {
 			if (other.collection != null)
 				return false;

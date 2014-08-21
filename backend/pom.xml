@@ -20,8 +20,11 @@
 		<wsdl.name>info.wsdl</wsdl.name>
 		<spring.version>4.0.6.RELEASE</spring.version>
 		<maven.compiler.version>3.1</maven.compiler.version>
-		<start-class>hello.Application</start-class>
-		<tomcat.version>8.0.8</tomcat.version>
+		<camel-core.version>2.12.2</camel-core.version>
+		<activemq.version>5.9.0</activemq.version>
+		<xbean-spring.version>3.14</xbean-spring.version>
+		<swagger4j.version>1.0-beta4</swagger4j.version>
+		<javax.json.version>1.0-b06</javax.json.version>
 	</properties>
 
 	<dependencies>
@@ -40,18 +43,61 @@
 			<artifactId>jersey-json</artifactId>
 			<version>${jersey.version}</version>
 		</dependency>
-<!-- 	dependencies for swagger4j -->
+		<!-- dependencies for camel -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
+			<version>${camel-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-http</artifactId>
+			<version>${camel-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test-spring</artifactId>
+			<version>${camel-core.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jms</artifactId>
+			<version>${camel-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>${activemq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xbean</groupId>
+			<artifactId>xbean-spring</artifactId>
+			<version>${xbean-spring.version}</version>
+		</dependency>
+		<!-- end of dependencies for camel -->
+		<!-- dependencies for swagger4j -->
 		<dependency>
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.json</artifactId>
-			<version>1.0-b06</version>
+			<version>${javax.json.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.smartbear</groupId>
 			<artifactId>swagger4j</artifactId>
-			<version>1.0-beta4</version>
+			<version>${swagger4j.version}</version>
 		</dependency>
-<!-- 	end of dependencies for swagger4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- end of dependencies for swagger4j -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>

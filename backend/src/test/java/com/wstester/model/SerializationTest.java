@@ -1,12 +1,14 @@
 package com.wstester.model;
 
 import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
 import org.junit.AfterClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+
 import com.wstester.actions.TestProjectActions;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -33,6 +35,8 @@ public class SerializationTest {
 		TestProjectActions actions = new TestProjectActions();
         testPlanAfter = actions.open(filePath);
         
+        System.out.println(testPlanBefore.getID());
+        System.out.println(testPlanAfter.getID());
         assertEquals(testPlanBefore, testPlanAfter);
 	}
 	

@@ -2,6 +2,7 @@ package com.wstester.model;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+
 import com.wstester.exceptions.WsException;
 
 public class AddVariableToStepTest {

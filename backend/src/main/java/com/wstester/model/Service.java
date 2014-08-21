@@ -1,12 +1,15 @@
 package com.wstester.model;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 @XmlSeeAlso({MongoService.class, MySQLService.class, RestService.class, SoapService.class})
-public abstract class Service {
-	
+public abstract class Service implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	protected String uuid;
 	protected String name;
 	protected ServiceType type;

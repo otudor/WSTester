@@ -1,11 +1,14 @@
 package com.wstester.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Asset {
+public class Asset implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private String uuid;
 	private long lastmodified;
 	private String name;
@@ -14,10 +17,6 @@ public class Asset {
 
 	public Asset() {
 		uuid = UUID.randomUUID().toString();
-	}
-
-	public String getUuid() {
-		return uuid;
 	}
 
 	public String getID() {
@@ -56,4 +55,32 @@ public class Asset {
 		this.type = type;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Asset other = (Asset) obj;
+		if (lastmodified != other.lastmodified)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (path == null) {
+			if (other.path != null)
+				return false;
+		} else if (!path.equals(other.path))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		return true;
+	}
 }

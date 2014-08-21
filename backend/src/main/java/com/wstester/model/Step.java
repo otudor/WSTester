@@ -1,5 +1,6 @@
 package com.wstester.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,9 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 @XmlSeeAlso({RestStep.class, MongoStep.class, MySQLStep.class, SoapStep.class})
-public abstract class Step {
+public abstract class Step implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	protected String uuid;
 	private String name;
 	private Server server;

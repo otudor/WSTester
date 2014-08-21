@@ -1,5 +1,6 @@
 package com.wstester.actions;
 
+
 import java.io.File;
 import java.io.IOException;
 
@@ -12,7 +13,7 @@ import com.wstester.model.TestProject;
 
 public class TestProjectActions {
 
-	public void save(String path, TestProject testPlan) throws IOException {
+	public void save(String path, TestProject testProject) throws IOException {
 
 		try {
 
@@ -21,7 +22,7 @@ public class TestProjectActions {
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
 			File file = new File(path);
-			m.marshal(testPlan, file);
+			m.marshal(testProject, file);
 		} catch (JAXBException e) {
 
 			e.printStackTrace();
@@ -31,20 +32,20 @@ public class TestProjectActions {
 
 	public TestProject open(String path) throws IOException {
 
-		TestProject testPlan = null;
+		TestProject testProject = null;
 		
 		try {
 			JAXBContext jc = JAXBContext.newInstance(TestProject.class);
 			Unmarshaller u = jc.createUnmarshaller();
 
 			File file = new File(path);
-			testPlan = (TestProject) u.unmarshal(file);
+			testProject = (TestProject) u.unmarshal(file);
 		} catch (JAXBException e) {
 			
 			e.printStackTrace();
 			throw new IOException("Test Plan couldn't be opened! " + e.getMessage());
 		}
 		
-		return testPlan;
+		return testProject;
 	}
 }
