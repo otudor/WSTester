@@ -67,7 +67,7 @@ public class TestRunner {
 		@Override
 		public void run() {
 
-			AbstractXmlApplicationContext camelContext = new ClassPathXmlApplicationContext("camel/SpringContext.xml");
+			AbstractXmlApplicationContext camelContext = new ClassPathXmlApplicationContext("camel/CamelContext.xml");
 			camelContext.start();
 			
 			try {
