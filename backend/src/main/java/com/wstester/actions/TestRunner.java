@@ -8,11 +8,9 @@ import javax.jms.ObjectMessage;
 import javax.jms.Session;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.wstester.dispatcher.AppConfig;
 import com.wstester.dispatcher.ResponseCallback;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
@@ -23,7 +21,12 @@ import com.wstester.model.TestSuite;
 public class TestRunner {
 
 	private TestProject testProject;
+	private AbstractXmlApplicationContext camelContext;
 
+	public TestRunner(){
+		
+		camelContext = new ClassPathXmlApplicationContext("camel/CamelContext.xml");
+	}
 	
 	public TestProject getTestProject() {
 		return testProject;
@@ -42,8 +45,7 @@ public class TestRunner {
 	public Response getResponse(String stepId, Long timeout){
 	
 		System.out.println("Gettting response for: " + stepId);
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-		ResponseCallback stepResult = (ResponseCallback) context.getBean(ResponseCallback.class);
+		ResponseCallback stepResult = (ResponseCallback) camelContext.getBean(ResponseCallback.class);
 		
 		Response response = stepResult.getResponse(stepId);
 		
@@ -57,8 +59,6 @@ public class TestRunner {
 			timeout-=1000;
 		} 
 		
-		context.close();
-		
 		return response;
 	}
 	
@@ -67,7 +67,7 @@ public class TestRunner {
 		@Override
 		public void run() {
 
-			AbstractXmlApplicationContext camelContext = new ClassPathXmlApplicationContext("camel/CamelContext.xml");
+			
 			camelContext.start();
 			
 			try {
@@ -103,6 +103,7 @@ public class TestRunner {
 				}
 
 				Thread.sleep(500);
+				
 				// Clean up
 				session.close();
 				connection.close();

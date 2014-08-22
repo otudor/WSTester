@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:broker="http://activemq.apache.org/schema/core"
 	xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
@@ -26,11 +27,9 @@
 			</bean>
 		</property>
 	</bean>
-
-	<bean id="route" class="com.wstester.dispatcher.RouteDispatcher" />
-
+   
 	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
-		<routeBuilder ref="route" />
+		<package>com.wstester.dispatcher</package>
 	</camelContext>
 
 </beans>

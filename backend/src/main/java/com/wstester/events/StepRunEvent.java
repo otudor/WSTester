@@ -1,4 +1,4 @@
-package com.wstester.dispatcher;
+package com.wstester.events;
 
 import org.springframework.context.ApplicationEvent;
 

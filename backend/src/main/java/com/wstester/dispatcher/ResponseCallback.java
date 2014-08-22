@@ -1,14 +1,11 @@
 package com.wstester.dispatcher;
 
 import java.util.ArrayList;
-
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.stereotype.Component;
-
+import com.wstester.events.StepRunEvent;
 import com.wstester.model.Response;
 
-@Component
 public class ResponseCallback implements ApplicationListener<ApplicationEvent>{
 
 	private static ArrayList<Response> responseList = new ArrayList<Response>();
@@ -17,7 +14,6 @@ public class ResponseCallback implements ApplicationListener<ApplicationEvent>{
 	public void onApplicationEvent(ApplicationEvent event) {
 		
 		if(event instanceof StepRunEvent){
-			System.out.println("EVENT");
 			responseList.add(((StepRunEvent) event).getResponse());
 		}
 	}
