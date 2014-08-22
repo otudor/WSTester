@@ -24,6 +24,7 @@
 		<xbean-spring.version>3.14</xbean-spring.version>
 		<swagger4j.version>1.0-beta4</swagger4j.version>
 		<javax.json.version>1.0-b06</javax.json.version>
+		<slf4j-log4j12.version>1.7.7</slf4j-log4j12.version>
 	</properties>
 
 	<dependencies>
@@ -71,13 +72,9 @@
 			<version>${swagger4j.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j-log4j12.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- end of dependencies for swagger4j -->
