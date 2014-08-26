@@ -1,8 +1,9 @@
 package com.wstester.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class MySQLService extends Service {
+public class MySQLService extends Service implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private String port;

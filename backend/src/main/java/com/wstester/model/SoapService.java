@@ -1,8 +1,9 @@
 package com.wstester.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class SoapService extends Service {
+public class SoapService extends Service implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private String endpoint;
