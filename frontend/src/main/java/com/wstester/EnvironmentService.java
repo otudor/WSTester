@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.wstester.model.Environment;
+import com.wstester.model.MongoService;
+import com.wstester.model.MySQLService;
 import com.wstester.model.Server;
+import com.wstester.model.Service;
 
 public class EnvironmentService
 {
@@ -18,17 +21,37 @@ public class EnvironmentService
         //createContact("Cathy", "Freeman");
         Environment e1 = createEnvironment("CT");
         List<Server> list1 = new ArrayList<Server>();
-        list1.add( new Server("FTP1", "44.44.44.44", "description ftp server"));
+        Server srv1 = new Server("Server1", "44.44.44.44", "description ftp server");
+        
+        List<Service> lstService = new ArrayList<Service>();
+        // MySQL service
+        MySQLService mysqlsrv = new MySQLService();
+        mysqlsrv.setName("Serviciul de MySQL");
+        mysqlsrv.setUser("user"); 
+        mysqlsrv.setDbName("DB Name");
+        mysqlsrv.setPort("80");
+        mysqlsrv.setPassword("pass");
+        lstService.add( mysqlsrv);
+        //Mongo service
+        MongoService mongosrv = new MongoService();
+        mongosrv.setName("Serviciul de Mongo");
+        mongosrv.setUser("user"); 
+        mongosrv.setDbName("DB Name");
+        mongosrv.setPort("80");
+        mongosrv.setPassword("pass");
+        lstService.add( mongosrv);
+        srv1.setServices(lstService);
+        list1.add( srv1);
         e1.setServers( list1);
         
         Environment e2 = createEnvironment("CHINA Env");
         List<Server> list2 = new ArrayList<Server>();
-        list2.add( new Server("FTP2", "55.55.55.55", "description China server"));
+        list2.add( new Server("Server2", "55.55.55.55", "description China server"));
         e2.setServers( list2);
         
         Environment e3 = createEnvironment("UK Env");
         List<Server> list3 = new ArrayList<Server>();
-        list3.add( new Server("FTP3", "55.99.80.71", "description UK server"));
+        list3.add( new Server("Server3", "55.99.80.71", "description UK server"));
         e3.setServers( list3);
     }
 

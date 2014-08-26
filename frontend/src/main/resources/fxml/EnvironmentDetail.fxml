@@ -13,7 +13,7 @@
         <Label text="Environment name" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
         <TextField fx:id="envNameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-        <Label text="Environment IP" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <TextField fx:id="envIPField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <!-- <Label text="Environment IP" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="envIPField" GridPane.rowIndex="1" GridPane.columnIndex="1"/> -->
     </children>
 </GridPane>

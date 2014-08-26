@@ -1,11 +1,20 @@
+#mainWindow{
+    -fx-background-image: url("../images/wallpaper23.jpg");
+    -fx-background-repeat: stretch;  
+    -fx-background-size: stretch;  
+}
+
 .mainWindow{
     -fx-background-image: url("../images/wallpaper23.jpg");
     -fx-background-repeat: stretch;  
     -fx-background-size: stretch;  
 }
+
+
 .img {
   -fx-background-image: url("wallpaper23.jpg");
   -fx-background-size: cover;
+  
 }
 .bar
 {
