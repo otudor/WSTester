@@ -61,6 +61,11 @@ public class WsTesterMainController implements Initializable {
 	private Stage stageAssets = new Stage();
 	private Stage stageEnv = new Stage();
 	boolean isDisplayed =false;
+	boolean isDisplayed1 =false;
+	boolean isDisplayed2 =false;
+	boolean isDisplayed3 =false;
+	boolean isDisplayed4 =false;
+	boolean isDisplayed5 =false;
 	MenuBar menuBar ;
 	Menu menu;
 	private Menu menuRnd = new Menu("CreateRnd");
@@ -79,8 +84,10 @@ public class WsTesterMainController implements Initializable {
 		this.createTaskbar();
 		this.createRESTWindow();
 		this.createRndWindow();
-		stage.initOwner(WsTesterMain.stage);		
-		stageRnd.setOnHidden(new EventHandler<WindowEvent>() {
+		stage.initOwner(WsTesterMain.stage);
+		//stage.initModality(Modality.
+		//stage.initModality(Modality.WINDOW_MODAL);
+		/*stageRnd.setOnHidden(new EventHandler<WindowEvent>() {
 			@Override public void handle(WindowEvent onClosing) {
 				System.out.println("hidden");
 				stageRnd.hide();
@@ -92,7 +99,7 @@ public class WsTesterMainController implements Initializable {
 				menuBar.getMenus().remove(menu);
 				
 			}
-		});
+		});*/
 
 	}
 	//method to create+add the icons
@@ -131,13 +138,45 @@ public class WsTesterMainController implements Initializable {
 		bar.getChildren().add(menuBar);
 		
 	}
+	
+	public void moveIcons(VBox icon){
+		  icon.setOnMousePressed(new EventHandler<MouseEvent>() {
+		   @Override
+		   public void handle(MouseEvent event) {
+		    dragDelta2.x = icon.getLayoutX() - event.getSceneX();
+		    dragDelta2.y = icon.getLayoutY() - event.getSceneY();
+		    icon.setCursor(Cursor.MOVE); 
+		    AnchorPane.setTopAnchor(menuBar, 15.0);
+		    System.out.println("aici");
+		   }
+		  });
+		  icon.setOnMouseReleased(new EventHandler<MouseEvent>() {
+		   @Override public void handle(MouseEvent mouseEvent) {
+		    icon.setCursor(Cursor.HAND);
+		   }
+		  });
+		  icon.setOnMouseDragged(new EventHandler<MouseEvent>() {
+		   @Override public void handle(MouseEvent mouseEvent) {
+		    icon.setLayoutX(mouseEvent.getSceneX() + dragDelta2.x);
+		    icon.setLayoutY(mouseEvent.getSceneY() + dragDelta2.y);
+		   }
+		  });
+		  icon.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		   @Override public void handle(MouseEvent mouseEvent) {
+		    icon.setCursor(Cursor.HAND);
+		   }
+		  });
+		 }
 	private void createSOAPWindow(){
-		newIco3.setOnMouseClicked(new EventHandler<MouseEvent>() {			
+		newIco3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			
 			@Override
 			public void handle(MouseEvent event) {
+				
 				// TODO Auto-generated method stub	
-				if(event.getClickCount() == 2) {
-					isDisplayed = true;
+				if(event.getClickCount() == 2 && isDisplayed3 == false) {
+					stageSoap = new Stage();
+					isDisplayed3 = true;
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/SOAPDefinition.fxml"));
 
@@ -146,9 +185,12 @@ public class WsTesterMainController implements Initializable {
 						root.getStyleClass().add("mainWindow");	
 						Menu menu2 = new Menu("CreateSOAP");
 						menuBar.getMenus().add(menu2);
+						stageSoap.initOwner(pane.getScene().getWindow());
 						stageSoap.setScene(second);
+						
 						stageSoap.setTitle("SOAP Window");
-						stageSoap.initOwner(WsTesterMain.stage);
+						//stageSoap.initOwner(WsTesterMain.stage);
+						//stageSoap.initModality(Modality.APPLICATION_MODAL);
 						
 						stageSoap.show();
 						
@@ -158,11 +200,12 @@ public class WsTesterMainController implements Initializable {
 					          public void handle(WindowEvent we) {
 					        	  
 					              System.out.println("Inchid stage'ul");
-					              menuBar.getMenus().remove(menu2);
 					              
+					              menuBar.getMenus().remove(menu2);
+					              isDisplayed3 = false;
+					              stageSoap=null;
 					          }
 					      }); 
-						
 						
 						
 					        
@@ -173,37 +216,19 @@ public class WsTesterMainController implements Initializable {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					
 				}
+				
+				 if (isDisplayed3 == true && event.getClickCount() == 2)
+				{
+					stageSoap.toFront();
+					
+				}
+				
 			}
 		});
+		moveIcons(newIco3);
 	
-	// modificare laur 
-	
-		newIco3.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				dragDelta2.x = newIco3.getLayoutX() - event.getSceneX();
-				dragDelta2.y = newIco3.getLayoutY() - event.getSceneY();
-				newIco3.setCursor(Cursor.MOVE);	
-				System.out.println("aici3");
-			}
-		});
-		newIco3.setOnMouseReleased(new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent mouseEvent) {
-				newIco3.setCursor(Cursor.HAND);
-			}
-		});
-		newIco3.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent mouseEvent) {
-				newIco3.setLayoutX(mouseEvent.getSceneX() + dragDelta2.x);
-				newIco3.setLayoutY(mouseEvent.getSceneY() + dragDelta2.y);
-			}
-		});
-		newIco3.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent mouseEvent) {
-				newIco3.setCursor(Cursor.HAND);
-			}
-		});
 	}
 		
 		
@@ -213,10 +238,12 @@ public class WsTesterMainController implements Initializable {
 		newIco4.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 			@Override
 			public void handle(MouseEvent event) {
+				stageRest = new Stage();
+				
 				// TODO Auto-generated method stub	
-				if(event.getClickCount() == 2) {
+				if(event.getClickCount() == 2 && isDisplayed4 == false) {
 
-					isDisplayed = true;
+					isDisplayed4 = true;
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/Rest.fxml"));
 						Scene second = new Scene(root);
@@ -224,10 +251,11 @@ public class WsTesterMainController implements Initializable {
 						root.getStyleClass().add("mainWindow");	
 						Menu menu2 = new Menu("CreateREST");
 						menuBar.getMenus().add(menu2);
+						stageRest.initOwner(pane.getScene().getWindow());
 						//stage.initModality(Modality.WINDOW_MODAL);
 						stageRest.setScene(second);
 						stageRest.setTitle("REST Window");
-						stageRest.initOwner(WsTesterMain.stage);
+						//stageRest.initOwner(WsTesterMain.stage);
 						stageRest.show();
 						
 						// modificare laur
@@ -236,10 +264,13 @@ public class WsTesterMainController implements Initializable {
 					        	  
 					              System.out.println("Inchid stage'ul rest");
 					              menuBar.getMenus().remove(menu2);
-					              stageRest.setScene(null);
+					              //stageRest.setScene(null);
+					              isDisplayed4 = false;
+					              stageRest=null;
 					          }
 					      });        
-						
+					    
+					
 						
 						//pana aici 
 						
@@ -248,53 +279,35 @@ public class WsTesterMainController implements Initializable {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					
+					if (isDisplayed4 == true && event.getClickCount() == 2)
+					{
+						stageRest.toFront();
+						
+					}
 				}
 			}
 		});
 	
 	
-	// modificare laur
 	
-	newIco4.setOnMousePressed(new EventHandler<MouseEvent>() {
-		@Override
-		public void handle(MouseEvent event) {
-			dragDelta2.x = newIco4.getLayoutX() - event.getSceneX();
-			dragDelta2.y = newIco4.getLayoutY() - event.getSceneY();
-			newIco4.setCursor(Cursor.MOVE);	
-			System.out.println("aici4");
-		}
-	});
-	newIco4.setOnMouseReleased(new EventHandler<MouseEvent>() {
-		@Override public void handle(MouseEvent mouseEvent) {
-			newIco4.setCursor(Cursor.HAND);
-		}
-	});
-	newIco4.setOnMouseDragged(new EventHandler<MouseEvent>() {
-		@Override public void handle(MouseEvent mouseEvent) {
-			newIco4.setLayoutX(mouseEvent.getSceneX() + dragDelta2.x);
-			newIco4.setLayoutY(mouseEvent.getSceneY() + dragDelta2.y);
-		}
-	});
-	newIco4.setOnMouseEntered(new EventHandler<MouseEvent>() {
-		@Override public void handle(MouseEvent mouseEvent) {
-			newIco4.setCursor(Cursor.HAND);
-		}
-	});
+	
+		moveIcons(newIco4);
 }
 	
 	
-	//pana aici
-
+	
 	private void createRndWindow(){
 		newIco5.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 
 
 			@Override
 			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub	
-				if(event.getClickCount() == 2) {
+				// TODO Auto-generated method stub
+				stageRnd = new Stage();
+				if(event.getClickCount() == 2 && isDisplayed5 == false) {
 
-					isDisplayed = true;
+					isDisplayed5 = true;
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
 						Scene second = new Scene(root);
@@ -302,9 +315,10 @@ public class WsTesterMainController implements Initializable {
 						root.getStyleClass().add("mainWindow");	
 
 						menuBar.getMenus().add(menuRnd);
+						stageRnd.initOwner(pane.getScene().getWindow());
 						//stage.initModality(Modality.WINDOW_MODAL);
 						stageRnd.setScene(second);
-						stageRnd.initOwner(WsTesterMain.stage);
+						//stageRnd.initOwner(WsTesterMain.stage);
 						stageRnd.show();
 						
 						//modificare laur
@@ -313,7 +327,9 @@ public class WsTesterMainController implements Initializable {
 					          public void handle(WindowEvent we) {
 					        	  
 					              System.out.println("Inchid stage'ul");
-					              menuBar.getMenus().remove(menu2);
+					              menuBar.getMenus().remove(menuRnd);
+					              isDisplayed5 = false;
+					              stageRnd=null;
 					          }
 					      });        
 						
@@ -327,33 +343,7 @@ public class WsTesterMainController implements Initializable {
 			}
 		});
 		
-		// modificare laur 
-		
-			newIco5.setOnMousePressed(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent event) {
-					dragDelta2.x = newIco5.getLayoutX() - event.getSceneX();
-					dragDelta2.y = newIco5.getLayoutY() - event.getSceneY();
-					newIco5.setCursor(Cursor.MOVE);	
-					System.out.println("aici5");
-				}
-			});
-			newIco5.setOnMouseReleased(new EventHandler<MouseEvent>() {
-				@Override public void handle(MouseEvent mouseEvent) {
-					newIco5.setCursor(Cursor.HAND);
-				}
-			});
-			newIco5.setOnMouseDragged(new EventHandler<MouseEvent>() {
-				@Override public void handle(MouseEvent mouseEvent) {
-					newIco5.setLayoutX(mouseEvent.getSceneX() + dragDelta2.x);
-					newIco5.setLayoutY(mouseEvent.getSceneY() + dragDelta2.y);
-				}
-			});
-			newIco5.setOnMouseEntered(new EventHandler<MouseEvent>() {
-				@Override public void handle(MouseEvent mouseEvent) {
-					newIco5.setCursor(Cursor.HAND);
-				}
-			});
+		moveIcons(newIco5);
 		}
 			
 		// pana aici
@@ -362,7 +352,8 @@ public class WsTesterMainController implements Initializable {
 		newIco.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 			@Override
 			public void handle(MouseEvent event) {
-				if(event.getClickCount() == 2) {
+				stageAssets = new Stage();
+				if(event.getClickCount() == 2 && isDisplayed == false) {
 					isDisplayed = true;
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/Assets.fxml"));
@@ -372,8 +363,9 @@ public class WsTesterMainController implements Initializable {
 						//stage.initModality(Modality.WINDOW_MODAL);
 						menu = new Menu("Assets");
 						menuBar.getMenus().add(menu);
+						stageAssets.initOwner(pane.getScene().getWindow());
 						stageAssets.setScene(second);
-						stageAssets.initOwner(WsTesterMain.stage);
+						//stageAssets.initOwner(WsTesterMain.stage);
 						stageAssets.show();
 						
 						// modificare laur
@@ -382,6 +374,8 @@ public class WsTesterMainController implements Initializable {
 					        	  
 					              System.out.println("Inchid stage'ul");
 					              menuBar.getMenus().remove(menu);
+					              isDisplayed = false;
+					              stageAssets=null;
 					             
 					          }
 					      });        
@@ -394,32 +388,7 @@ public class WsTesterMainController implements Initializable {
 				}
 			}
 		});
-		newIco.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				dragDelta2.x = newIco.getLayoutX() - event.getSceneX();
-				dragDelta2.y = newIco.getLayoutY() - event.getSceneY();
-				newIco.setCursor(Cursor.MOVE);	
-				AnchorPane.setTopAnchor(menuBar, 15.0);
-				System.out.println("aici");
-			}
-		});
-		newIco.setOnMouseReleased(new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent mouseEvent) {
-				newIco.setCursor(Cursor.HAND);
-			}
-		});
-		newIco.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent mouseEvent) {
-				newIco.setLayoutX(mouseEvent.getSceneX() + dragDelta2.x);
-				newIco.setLayoutY(mouseEvent.getSceneY() + dragDelta2.y);
-			}
-		});
-		newIco.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent mouseEvent) {
-				newIco.setCursor(Cursor.HAND);
-			}
-		});
+		moveIcons(newIco);
 		
 		
 	
@@ -430,75 +399,48 @@ public class WsTesterMainController implements Initializable {
 		newIco2.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 			@Override
 			public void handle(MouseEvent event) {
+				stageEnv = new Stage();
 				// TODO Auto-generated method stub	
-				if(event.getClickCount() == 2) {
-					isDisplayed = true;
-					//try {
-						//root = FXMLLoader.load(getClass().getResource("/fxml/EnvironmentManager.fxml"));
-					
+				if(event.getClickCount() == 2 && isDisplayed2 == false) {
+					isDisplayed2 = true;
+					try {
+						root = FXMLLoader.load(getClass().getResource("/fxml/EnvironmentManager.fxml"));
 						EnvironmentsAppFactory factory = new EnvironmentsAppFactory();
-				        MainPresenter mainPresenter = factory.getMainPresenter();
-				        mainPresenter.loadEnvironments();
-		                root = mainPresenter.getView();
-		                
-						Scene second = new Scene(root, 600, 480);
+	                    MainPresenter mainPresenter = factory.getMainPresenter();
+                        mainPresenter.loadEnvironments();
+                        root = mainPresenter.getView();
+						Scene second = new Scene(root);
 						stage.setTitle("Environments window");
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
 						root.getStyleClass().add("mainWindow");	
 
 						menuBar.getMenus().add(menu2);
+						stageEnv.initOwner(pane.getScene().getWindow());
 						stageEnv.setScene(second);
-						stageEnv.initOwner(WsTesterMain.stage);
+						//stageEnv.initOwner(WsTesterMain.stage);
 						stageEnv.show();
 						
-						// modificare laur
+						// stergere din taskbar upon closure
 						stageEnv.setOnCloseRequest(new EventHandler<WindowEvent>() {
 					          public void handle(WindowEvent we) {
 					        	  
 					              System.out.println("Inchid stage'ul");
 					              menuBar.getMenus().remove(menu2);
+					              isDisplayed2 = false;
+					              stageEnv=null;
 					          }
 					      });        
 						
 						//stageEnv.setOnHidden(value);
 						
 						//pana aici
-					/*} catch (IOException e) {
+					} catch (IOException e) {
 						e.printStackTrace();
-					}*/
+					}
 				}
 			}
 		});
-		menu2.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				System.out.println("environment menu");
-			}
-		});
-		newIco2.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				dragDelta2.x = newIco2.getLayoutX() - event.getSceneX();
-				dragDelta2.y = newIco2.getLayoutY() - event.getSceneY();
-				newIco2.setCursor(Cursor.MOVE);	
-				System.out.println("aici2");
-			}
-		});
-		newIco2.setOnMouseReleased(new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent mouseEvent) {
-				newIco2.setCursor(Cursor.HAND);
-			}
-		});
-		newIco2.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent mouseEvent) {
-				newIco2.setLayoutX(mouseEvent.getSceneX() + dragDelta2.x);
-				newIco2.setLayoutY(mouseEvent.getSceneY() + dragDelta2.y);
-			}
-		});
-		newIco2.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent mouseEvent) {
-				newIco2.setCursor(Cursor.HAND);
-			}
-		});
+		moveIcons(newIco2);
 	}
 	// create elements utils functions
 	static Node CreateIcon(String iconPath, String text) {
