@@ -88,6 +88,7 @@ public class WsTesterMainController implements Initializable {
 			@Override
 			public void handle(WindowEvent event) {
 				menuBar.getMenus().remove(menu);
+				
 			}
 		});
 
@@ -108,7 +109,7 @@ public class WsTesterMainController implements Initializable {
 		newIco5 = (VBox) CreateIcon("/images/document-open-remote.png","Generate random JSON");
 		newIco5.setLayoutX(10);
 		newIco5.setLayoutY(400);
-		pane.getChildren().addAll(newIco,newIco2,newIco3,newIco4,newIco5);
+		topPane.getChildren().addAll(newIco,newIco2,newIco3,newIco4,newIco5);
 	}
 	private void createTaskbar(){
 		Label menuLabel = new Label("Start");
@@ -126,6 +127,7 @@ public class WsTesterMainController implements Initializable {
 		AnchorPane.setTopAnchor(menuBar, 15.0);
 		bar.getStylesheets().add(WsTesterMainController.class.getResource("/styles/application.css").toExternalForm());
 		bar.getChildren().add(menuBar);
+		
 	}
 	private void createSOAPWindow(){
 		newIco3.setOnMouseClicked(new EventHandler<MouseEvent>() {			
@@ -145,7 +147,26 @@ public class WsTesterMainController implements Initializable {
 						stageSoap.setScene(second);
 						stageSoap.setTitle("SOAP Window");
 						stageSoap.initOwner(WsTesterMain.stage);
+						
 						stageSoap.show();
+						
+						// modificare laur: inchidere stage din taskbar
+						
+						stageSoap.setOnCloseRequest(new EventHandler<WindowEvent>() {
+					          public void handle(WindowEvent we) {
+					        	  
+					              System.out.println("Inchid stage'ul");
+					              menuBar.getMenus().remove(menu2);
+					              
+					          }
+					      }); 
+						
+						
+						
+					        
+					   //pana aici 
+							
+							
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -153,7 +174,39 @@ public class WsTesterMainController implements Initializable {
 				}
 			}
 		});
+	
+	// modificare laur 
+	
+		newIco3.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				dragDelta2.x = newIco3.getLayoutX() - event.getSceneX();
+				dragDelta2.y = newIco3.getLayoutY() - event.getSceneY();
+				newIco3.setCursor(Cursor.MOVE);	
+				System.out.println("aici3");
+			}
+		});
+		newIco3.setOnMouseReleased(new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent mouseEvent) {
+				newIco3.setCursor(Cursor.HAND);
+			}
+		});
+		newIco3.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent mouseEvent) {
+				newIco3.setLayoutX(mouseEvent.getSceneX() + dragDelta2.x);
+				newIco3.setLayoutY(mouseEvent.getSceneY() + dragDelta2.y);
+			}
+		});
+		newIco3.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent mouseEvent) {
+				newIco3.setCursor(Cursor.HAND);
+			}
+		});
 	}
+		
+		
+		//pana aici
+	
 	private void createRESTWindow(){
 		newIco4.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 			@Override
@@ -174,6 +227,21 @@ public class WsTesterMainController implements Initializable {
 						stageRest.setTitle("REST Window");
 						stageRest.initOwner(WsTesterMain.stage);
 						stageRest.show();
+						
+						// modificare laur
+						stageRest.setOnCloseRequest(new EventHandler<WindowEvent>() {
+					          public void handle(WindowEvent we) {
+					        	  
+					              System.out.println("Inchid stage'ul rest");
+					              menuBar.getMenus().remove(menu2);
+					              stageRest.setScene(null);
+					          }
+					      });        
+						
+						
+						//pana aici 
+						
+						
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -181,7 +249,39 @@ public class WsTesterMainController implements Initializable {
 				}
 			}
 		});
-	}
+	
+	
+	// modificare laur
+	
+	newIco4.setOnMousePressed(new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent event) {
+			dragDelta2.x = newIco4.getLayoutX() - event.getSceneX();
+			dragDelta2.y = newIco4.getLayoutY() - event.getSceneY();
+			newIco4.setCursor(Cursor.MOVE);	
+			System.out.println("aici4");
+		}
+	});
+	newIco4.setOnMouseReleased(new EventHandler<MouseEvent>() {
+		@Override public void handle(MouseEvent mouseEvent) {
+			newIco4.setCursor(Cursor.HAND);
+		}
+	});
+	newIco4.setOnMouseDragged(new EventHandler<MouseEvent>() {
+		@Override public void handle(MouseEvent mouseEvent) {
+			newIco4.setLayoutX(mouseEvent.getSceneX() + dragDelta2.x);
+			newIco4.setLayoutY(mouseEvent.getSceneY() + dragDelta2.y);
+		}
+	});
+	newIco4.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		@Override public void handle(MouseEvent mouseEvent) {
+			newIco4.setCursor(Cursor.HAND);
+		}
+	});
+}
+	
+	
+	//pana aici
 
 	private void createRndWindow(){
 		newIco5.setOnMouseClicked(new EventHandler<MouseEvent>() {			
@@ -204,6 +304,19 @@ public class WsTesterMainController implements Initializable {
 						stageRnd.setScene(second);
 						stageRnd.initOwner(WsTesterMain.stage);
 						stageRnd.show();
+						
+						//modificare laur
+						
+						stageRnd.setOnCloseRequest(new EventHandler<WindowEvent>() {
+					          public void handle(WindowEvent we) {
+					        	  
+					              System.out.println("Inchid stage'ul");
+					              menuBar.getMenus().remove(menu2);
+					          }
+					      });        
+						
+						
+						//pana aici
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -211,8 +324,38 @@ public class WsTesterMainController implements Initializable {
 				}
 			}
 		});
-
-	}
+		
+		// modificare laur 
+		
+			newIco5.setOnMousePressed(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					dragDelta2.x = newIco5.getLayoutX() - event.getSceneX();
+					dragDelta2.y = newIco5.getLayoutY() - event.getSceneY();
+					newIco5.setCursor(Cursor.MOVE);	
+					System.out.println("aici5");
+				}
+			});
+			newIco5.setOnMouseReleased(new EventHandler<MouseEvent>() {
+				@Override public void handle(MouseEvent mouseEvent) {
+					newIco5.setCursor(Cursor.HAND);
+				}
+			});
+			newIco5.setOnMouseDragged(new EventHandler<MouseEvent>() {
+				@Override public void handle(MouseEvent mouseEvent) {
+					newIco5.setLayoutX(mouseEvent.getSceneX() + dragDelta2.x);
+					newIco5.setLayoutY(mouseEvent.getSceneY() + dragDelta2.y);
+				}
+			});
+			newIco5.setOnMouseEntered(new EventHandler<MouseEvent>() {
+				@Override public void handle(MouseEvent mouseEvent) {
+					newIco5.setCursor(Cursor.HAND);
+				}
+			});
+		}
+			
+		// pana aici
+	
 	private void createAssetsWindow(){
 		newIco.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 			@Override
@@ -230,6 +373,19 @@ public class WsTesterMainController implements Initializable {
 						stageAssets.setScene(second);
 						stageAssets.initOwner(WsTesterMain.stage);
 						stageAssets.show();
+						
+						// modificare laur
+						stageAssets.setOnCloseRequest(new EventHandler<WindowEvent>() {
+					          public void handle(WindowEvent we) {
+					        	  
+					              System.out.println("Inchid stage'ul");
+					              menuBar.getMenus().remove(menu);
+					             
+					          }
+					      });        
+						
+						
+						//pana aici
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -262,6 +418,11 @@ public class WsTesterMainController implements Initializable {
 				newIco.setCursor(Cursor.HAND);
 			}
 		});
+		
+		
+	
+		
+		
 	}
 	private void createEnvWindow(){
 		newIco2.setOnMouseClicked(new EventHandler<MouseEvent>() {			
@@ -281,6 +442,19 @@ public class WsTesterMainController implements Initializable {
 						stageEnv.setScene(second);
 						stageEnv.initOwner(WsTesterMain.stage);
 						stageEnv.show();
+						
+						// modificare laur
+						stageEnv.setOnCloseRequest(new EventHandler<WindowEvent>() {
+					          public void handle(WindowEvent we) {
+					        	  
+					              System.out.println("Inchid stage'ul");
+					              menuBar.getMenus().remove(menu2);
+					          }
+					      });        
+						
+						//stageEnv.setOnHidden(value);
+						
+						//pana aici
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
