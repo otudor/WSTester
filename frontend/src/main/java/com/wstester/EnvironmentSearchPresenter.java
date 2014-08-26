@@ -14,6 +14,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -35,6 +36,7 @@ import javax.swing.tree.TreeNode;
 
 import com.wstester.model.Environment;
 import com.wstester.model.Server;
+import com.wstester.model.Service;
 
 public class EnvironmentSearchPresenter implements Initializable
 {
@@ -49,92 +51,6 @@ public class EnvironmentSearchPresenter implements Initializable
     
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-    	//this.setSelectedEnv( new Long(-1));
-    	
-        // unfortunately FXML does not currently have a clean way to set a custom CellFactory
-        // like we need so we have to manually add this here in code
-        /*resultsList.setCellFactory(new Callback<ListView<Old>, ListCell<Old>>()
-        {
-            public ListCell<Old> call(ListView<Old> contactListView)
-            {
-                final ListCell<Old> cell = new ListCell<Old>()
-                {
-                    protected void updateItem(Old contact, boolean empty)
-                    {
-                        super.updateItem(contact, empty);
-                        if ( contact == null || empty)
-                        	setText( null);
-                        else
-                            setText(String.format("%s %s", contact.getName(), contact.getIp()));
-                    }
-                };
-                
-                cell.setOnMouseClicked(new EventHandler<Event>()
-                {
-                    public void handle(Event event)
-                    {
-                        Old env = cell.getItem();
-                        if (env != null)
-                        {
-                        	//setSelectedEnv( new Long(env.getId()));
-                            contactSelected( getSelectedEnv());
-                        }
-                    }
-                });
-                
-                
-                return cell;
-            }
-        });*/
-        
-        /*
-        treeView.setOnMouseClicked(new EventHandler<MouseEvent>()
-		{
-		    @Override
-		    public void handle(MouseEvent mouseEvent)
-		    {            
-		        //if(mouseEvent.getClickCount() == 2)
-		        {
-		            TreeItem<Object> item = treeView.getSelectionModel().getSelectedItem();
-		            
-		            //System.out.println("Selected Text : " + item.getValue());
-		            //System.out.println("Selected class : " + item.getClass().toString());
-		            
-		            String className = item.getValue().getClass().getSimpleName();
-		            	
-		            if( className.equals("Old"))
-		            {
-		            	Old e = (Old)item.getValue();
-		            	
-                        if (e != null)
-                        {
-                        	if( mouseEvent.getClickCount() == 2)
-                        	{
-                        		System.out.println("Dublu click pe un: " + className + ";" + e.getId() + "; " + e.getIp());
-                        		contactSelected( e.getId());
-                        	}
-                        	if( mouseEvent.getButton() == MouseButton.SECONDARY)
-                        	{
-                        		System.out.println("Click dreapta pe un: " + className + ";" + e.getId() + "; " + e.getIp());
-                        	}
-                        }
-		            }
-		            else if ( className.equals("FTPServer"))
-		            {
-		            	FTPServer f = (FTPServer)item.getValue();
-		            	
-                        if (f != null)
-                        {
-                        	if(mouseEvent.getClickCount() == 2)
-                        	{
-                        		System.out.println("Dublu click pe un: " + className + ";" + f.getId() + "; " + f.getIp());
-                        		ftpServerSelected( f.getId());
-                        	}
-                        }
-		            }
-		        }
-		    }
-		});*/
     }
 
     public Node getView()
@@ -186,13 +102,24 @@ public class EnvironmentSearchPresenter implements Initializable
     	for (Environment env : envs)
     	{
     		TreeItem<Object> envNode = new TreeItem<>(env);    		
-    		List<Server> list = env.getServers();
+    		List<Server> serverlist = env.getServers();
     		
-    		if ( list!= null && !list.isEmpty())
+    		if ( serverlist!= null && !serverlist.isEmpty())
     		{
-    			for (Server ftp: list)
+    			for (Server server: serverlist)
     			{
-    				envNode.getChildren().add( new TreeItem<>(ftp));
+    				TreeItem<Object> serverNode = new TreeItem<>(server);
+    				
+    				List<Service> services = server.getServices();    				
+    				if ( services!= null && !services.isEmpty())
+	    				for (Service service: services)
+	        			{
+	    					TreeItem<Object> serviceNode = new TreeItem<>(service);
+	    					
+	    					serverNode.getChildren().add( serviceNode);
+	        			}
+    				
+    				envNode.getChildren().add( serverNode);
     			}
     		}
     		
@@ -202,37 +129,52 @@ public class EnvironmentSearchPresenter implements Initializable
     	treeView.setShowRoot(false);
     	treeView.setRoot(root);
     	treeView.setEditable(true);
+    	treeView.getSelectionModel().setSelectionMode( SelectionMode.SINGLE);
     	treeView.setCellFactory(new Callback<TreeView<Object>,TreeCell<Object>>(){
             @Override
             public TreeCell<Object> call(TreeView<Object> p) {
-                return new TreeCellImplemenation();
+                return new TreeCellImplementation();
             }
         });
     }
 
 
-	private final class TreeCellImplemenation extends TreeCell<Object> 
+	private final class TreeCellImplementation extends TreeCell<Object> 
     {    	
-    	public TreeCellImplemenation()
+		private TextField textField;
+		
+    	public TreeCellImplementation()
     	{
             this.setOnMouseClicked(new EventHandler<MouseEvent>()
             {
                 public void handle(MouseEvent event)
                 {
+                	TreeItem<Object> t = getTreeItem();
+                	if( t == null) return;
+                	
+                	//treeView.getSelectionModel().select( t);
+                	//int idx = treeView.getSelectionModel().getSelectedIndex();
+                	//System.out.println( "selectia este: " + t.getValue().toString() + "; focusIdx: " + idx);
+                	
                 	if( (event.getClickCount() == 1) && (event.getButton() == MouseButton.PRIMARY))
                 	{
 	                	if ( getItem() != null)
+	                	{
 		                	if (getItem().getClass() == Environment.class)
 		                    	selectEnvironment( ((Environment) getItem()).getID());
 		                    else if ( getItem().getClass() == Server.class)
 		                    	selectFTPServer(  ((Server) getItem()).getID());
+	                	}
                 	}
-                	else 
+                	/*else 
                 	if ( (event.getButton() == MouseButton.SECONDARY) && (event.getClickCount() == 1) ) //single right click
                 	{
-                		getTreeView().getSelectionModel().select(getTreeItem());
+                		//if( getTreeItem() != null)
+                		//	getTreeView().getSelectionModel().select(getTreeItem());
+                		//else
+                		//	System.out.println("TreeItem e NULL la click dreapta");
                 		//System.out.println("Click dreapta");
-                	}
+                	}*/
                 }
             });
     	}
@@ -242,40 +184,100 @@ public class EnvironmentSearchPresenter implements Initializable
         {
             super.updateItem(item, empty);
             
-            if (empty) 
+            if (empty)
             {
                 setText(null);
                 setGraphic(null);
+                setContextMenu(null);
             }
             else 
             {
-                setText(getItem() == null ? "" : getItem().toString());
-                setGraphic(getTreeItem().getGraphic());
+            	/*if( isEditing())
+            	{
+            		if (textField != null) 
+                        textField.setText( getItem().toString());
+            		setText(null);
+            		setGraphic(textField);
+            		System.out.println("updateItem -" + getItem().toString() + "- e editing ");
+            	}
+            	else */
+            	{
+            		//System.out.println("updateItem (" + getItem().toString() + ") nu e editing ");
+            		setText(getItem() == null ? "" : getItem().toString());
+                    setGraphic(getTreeItem().getGraphic());
+            	}
                 
-                
-                //setContextMenu(((AbstractTreeItem) getTreeItem()).getMenu());
-                if ( getItem().getClass() == Environment.class)
-                {
-                	Environment e = (Environment) getItem();
-                	this.setContextMenu(createEnvironmentContextMenu(e));
-                }
-                else if ( getItem().getClass() == Server.class)
-                {
-                	Environment env = (Environment)getTreeItem().getParent().getValue();
-                	Server ftp = (Server) getItem();
-                	this.setContextMenu( createFTPServerContextMenu(env, ftp));
-                	//System.out.println("Env: " + env.getId() + "; ftp: " + ftp.getId());
-                }
+                if( getItem() != null)
+	                if ( getItem().getClass() == Environment.class)
+	                {
+	                	Environment e = (Environment) getItem();
+	                	this.setContextMenu(createEnvironmentContextMenu(e));
+	                	
+	                }
+	                else if ( getItem().getClass() == Server.class)
+	                {
+	                	Environment env = (Environment)getTreeItem().getParent().getValue();
+	                	Server ftp = (Server) getItem();
+	                	this.setContextMenu( createFTPServerContextMenu(env, ftp));
+	                }
             }
         }
-    	//((AbstractTreeItem) getTreeItem()).
+    	
+    	@Override
+        public void startEdit()
+    	{
+    		System.out.println(" function: startEdit");
+            super.startEdit();
+ 
+            if (textField == null)
+                createTextField();
+                
+            setText(null);
+            setGraphic(textField);
+            textField.selectAll();
+        }
+ 
+        @Override
+        public void cancelEdit()
+        {
+        	System.out.println(" function: cancelEdit");
+            super.cancelEdit();
+            
+            setText( ((Environment) getItem()).getName());
+            if( getTreeItem() != null )
+            	setGraphic(getTreeItem().getGraphic());
+            
+            //textField = null;
+            treeView.setEditable( false);
+        }
+ 
+        private void createTextField() 
+        {
+            textField = new TextField( ((Environment) getItem()).getName());
+            textField.setOnKeyReleased(new EventHandler<KeyEvent>() 
+            { 
+                @Override
+                public void handle(KeyEvent t) {
+                    if (t.getCode() == KeyCode.ENTER) 
+                    {
+                    	Environment e = (Environment) getItem();
+                    	e.setName( textField.getText());
+                        commitEdit( e);
+                    } else if (t.getCode() == KeyCode.ESCAPE) {
+                        cancelEdit();
+                    }
+                }
+            });
+        }
     }
     
     public ContextMenu createEnvironmentContextMenu( Environment e)
     {
     	final ContextMenu contextMenu = new ContextMenu();
-    	MenuItem rem = new MenuItem("Remove env" + e.getID());
-    	contextMenu.getItems().addAll( rem);
+    	MenuItem rem = new MenuItem("Remove (env)");
+    	MenuItem rename = new MenuItem("Rename");
+    	contextMenu.getItems().addAll(rem);
+    	contextMenu.getItems().addAll(rename);
     	
     	// Remove
     	rem.setOnAction(new EventHandler<ActionEvent>() 
@@ -283,52 +285,54 @@ public class EnvironmentSearchPresenter implements Initializable
     	    @Override
     	    public void handle(ActionEvent event) 
     	    {
-    	        //System.out.println("Remove ...");
+    	    	TreeItem<Object> c = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
+    	    	int idx = treeView.getSelectionModel().getSelectedIndex();
+    	    	if( c == null ) return;
+    	    	
+    	        Environment e = (Environment)(c.getValue());
     	        removeEnvironment(e);
-    	        TreeItem<Object> c = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
-                boolean remove = c.getParent().getChildren().remove(c);
+                c.getParent().getChildren().remove(c);
+
+                treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
     	    }
     	});
     	
-    	// Add ...
+    	// Remove
+    	rename.setOnAction(new EventHandler<ActionEvent>() 
+    	{
+    	    @Override
+    	    public void handle(ActionEvent event) 
+    	    {
+    	    	treeView.setEditable( true);
+    	    	treeView.edit( (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem());
+    	    }
+    	});
+    	
     	return contextMenu;
     }
     
     public ContextMenu createFTPServerContextMenu( Environment e, Server ftp)
     {
     	final ContextMenu contextMenu = new ContextMenu();
-    	MenuItem rem = new MenuItem("Remove ftp: " + ftp.getID());
+    	MenuItem rem = new MenuItem("Remove (server)" /*+ ftp.getID()*/);
     	contextMenu.getItems().addAll( rem);
     	
-    	// Remove
     	rem.setOnAction(new EventHandler<ActionEvent>() 
     	{
     	    @Override
     	    public void handle( ActionEvent event) 
     	    {
-    	        //System.out.println("Remove ftp server: " + ftp.getId() + " from env: " + e.getId());
     	    	TreeItem<Object> c = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
-    	        Server f = (Server)(c.getValue());
-    	        System.out.println("selected ftpServer inainte de remove: " + f.getID());
-
-    	        removeServer(e, ftp);
-                boolean remove = c.getParent().getChildren().remove(c);
-                
-                TreeItem<Object> c2 = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
-                if( c2 == null )
-                	System.out.println("selected ftpServer dupa remove e NULL ");
-                else
-                {
-	    	        Server f2 = (Server)(c2.getValue());
-	    	        System.out.println("selected ftpServer dupa remove: " + f2.getID());
-    	        
-                //if(remove) System.out.println("Remove cu succes."); 
-                //else System.out.println("Eroare la remove.");
-                }
+    	    	int idx = treeView.getSelectionModel().getSelectedIndex();
+    	    	if( c == null ) return;    	    	
+    	    	
+    	    	removeServer(e, ftp);
+                c.getParent().getChildren().remove(c);
+                               
+                treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
     	    }
     	});
     	
-    	// Add ...
     	return contextMenu;
     }
     
@@ -340,5 +344,16 @@ public class EnvironmentSearchPresenter implements Initializable
     public void removeEnvironment( Environment e)
     {
     	environmentService.removeEnvironmentById( e.getID());
+    }
+    
+    public void addEnvAction( ActionEvent event)
+    {
+        //to do
+    	TreeItem<Object> newEmployee = new TreeItem<>( new Environment("New Environment"));
+        treeView.getRoot().getChildren().add(newEmployee);
+        //root.getChildren().add(envNode);
+        treeView.getSelectionModel().select( newEmployee);
+        treeView.getFocusModel().focusNext();
+        treeView.edit( newEmployee);
     }
 }

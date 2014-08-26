@@ -11,7 +11,7 @@
     <!-- Header -->
     <top>
         <VBox spacing="5">
-            <styleClass><String fx:value="header"/></styleClass>
+            <!--  <styleClass><String fx:value="header"/></styleClass> -->
             <children>
                 <Label text="Environment Management">
                     <styleClass>
@@ -26,7 +26,7 @@
     <!-- Content Area -->
     <center>
         <BorderPane fx:id="contentArea">
-            <styleClass><String fx:value="body"/></styleClass>
+            <!-- <styleClass><String fx:value="body"/></styleClass> -->
         </BorderPane>
     </center>
 

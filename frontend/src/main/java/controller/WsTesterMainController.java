@@ -36,6 +36,8 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import com.wstester.Delta;
+import com.wstester.EnvironmentsAppFactory;
+import com.wstester.MainPresenter;
 import com.wstester.WsTesterMain;
 
 public class WsTesterMainController implements Initializable {
@@ -431,9 +433,15 @@ public class WsTesterMainController implements Initializable {
 				// TODO Auto-generated method stub	
 				if(event.getClickCount() == 2) {
 					isDisplayed = true;
-					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/Rest.fxml"));
-						Scene second = new Scene(root);
+					//try {
+						//root = FXMLLoader.load(getClass().getResource("/fxml/EnvironmentManager.fxml"));
+					
+						EnvironmentsAppFactory factory = new EnvironmentsAppFactory();
+				        MainPresenter mainPresenter = factory.getMainPresenter();
+				        mainPresenter.loadEnvironments();
+		                root = mainPresenter.getView();
+		                
+						Scene second = new Scene(root, 600, 480);
 						stage.setTitle("Environments window");
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
 						root.getStyleClass().add("mainWindow");	
@@ -455,9 +463,9 @@ public class WsTesterMainController implements Initializable {
 						//stageEnv.setOnHidden(value);
 						
 						//pana aici
-					} catch (IOException e) {
+					/*} catch (IOException e) {
 						e.printStackTrace();
-					}
+					}*/
 				}
 			}
 		});
