@@ -96,7 +96,7 @@ public class TestRunner {
 					         ObjectMessage message = session.createObjectMessage(testStep);
 					        
 					         // Tell the producer to send the message
-					         System.out.println("Sent message: "+ message.hashCode() + " : " + Thread.currentThread().getName());	
+					         System.out.println("Sent message: "+  testStep.getID() + " : " + Thread.currentThread().getName());	
 					         producer.send(message);
 						}
 					}

@@ -28,13 +28,7 @@
 		</property>
 	</bean>
    
-   	<bean id="myDb" class="com.mongodb.Mongo"> 
-    	<constructor-arg index="0"> 
-        <bean class="com.mongodb.MongoURI"> 
-            <constructor-arg index="0" value="mongodb://appuser:apppass@localhost:27017/test" /> 
-        </bean> 
-    	</constructor-arg> 
-	</bean>
+   	<bean id="myDb" class="com.mongodb.Mongo" /> 
 
 	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
 		<package>com.wstester.dispatcher</package>

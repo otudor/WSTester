@@ -379,4 +379,128 @@ public class TestUtils {
 		
 		return testProject;
 	}
+	
+	public static TestProject getMongoTestPlanInsert(){
+		
+		TestProject testProject = new TestProject();
+		testProject.setName("Test Project");
+		
+		// construct asset list
+		List<Asset> assetList = new ArrayList<Asset>();
+		Asset asset1 = new Asset();
+		Asset asset2 = new Asset();
+		Asset asset3 = new Asset();
+		Asset asset4 = new Asset();
+		assetList.add(asset1);
+		assetList.add(asset2);
+		assetList.add(asset3);
+		assetList.add(asset4);
+		testProject.setAssetList(assetList);
+
+		// construct service list		
+		// Service 2
+		List<Service> serviceList2 = new ArrayList<Service>();
+		MongoService service2 = new MongoService();
+		service2.setName("Service Mongo");
+		service2.setPort("27017");
+		service2.setDbName("test");
+		service2.setUser("appuser");
+		service2.setPassword("apppass");
+		serviceList2.add(service2);
+		
+		// construct server list
+		List<Server> serverList1 = new ArrayList<Server>();
+		// Server 2
+		Server server12 = new Server();
+		server12.setDescription("This is the second server of the first env");
+		server12.setIp("localhost");
+		server12.setName("Server 12");
+		server12.setServices(serviceList2);
+		serverList1.add(server12);
+		
+		// construct environment list
+		List<Environment> environmentList = new ArrayList<Environment>();
+		// Environment 1
+		Environment env1 = new Environment();
+		env1.setName("Env 1");
+		env1.setServers(serverList1);
+		environmentList.add(env1);
+
+		testProject.setEnvironmentList(environmentList);
+
+		// construct test steps
+
+		ArrayList<Step> stepList1 = new ArrayList<Step>();
+		// select before
+		MongoStep step1 = new MongoStep();
+		step1.setName("Step 1");
+		step1.setServer(server12);
+		step1.setService(service2);
+		List<Asset> assetList2 = new ArrayList<Asset>();
+		assetList2.add(asset2);
+		step1.setAssetList(assetList2);
+		List<Assert> assertList2 = new ArrayList<Assert>();
+		Assert oneAssert2 = new Assert();
+		oneAssert2.setAsserts("Second assert");
+		assertList2.add(oneAssert2);
+		step1.setAssertList(assertList2);
+		String collection = "customer";
+		HashMap<String, String> query = new HashMap<String, String>();
+		String name = "Ana";
+		String keyName = "name";
+		query.put(keyName, name);
+		step1.setAction(Action.SELECT);
+		step1.setCollection(collection);
+		step1.setQuery(query);
+		stepList1.add(step1);
+
+		// insert
+		MongoStep step2 = new MongoStep();
+		step2.setName("Step 2");
+		step2.setServer(server12);
+		step2.setService(service2);
+		step2.setAssetList(assetList2);
+		step2.setAssertList(assertList2);
+		HashMap<String, String> insertQuery = new HashMap<String, String>();
+		String id = "100";
+		String keyId = "id";
+		insertQuery.put(keyName, name);
+		insertQuery.put(keyId, id);
+		step2.setAction(Action.INSERT);
+		step2.setCollection(collection);
+		step2.setQuery(insertQuery);
+		stepList1.add(step2);
+		
+		// select after
+		MongoStep step3 = new MongoStep();
+		step3.setName("Step 3");
+		step3.setServer(server12);
+		step3.setService(service2);
+		step3.setAssetList(assetList2);
+		step3.setAssertList(assertList2);
+		step3.setAction(Action.SELECT);
+		step3.setCollection(collection);
+		step3.setQuery(query);
+		stepList1.add(step3);
+		
+		// construct test case list
+		// test case 1
+		List<TestCase> testCaseList1 = new ArrayList<TestCase>();
+		TestCase testCase = new TestCase();
+		testCase.setName("TC 1");
+		testCase.setStepList(stepList1);
+		testCaseList1.add(testCase);
+		
+		// construct test suite list
+		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
+		TestSuite testSuite1 = new TestSuite();
+		testSuite1.setName("Test Suite 1");
+		testSuite1.setEnvironment(env1);
+		testSuite1.setTestCaseList(testCaseList1);
+		testSuiteList.add(testSuite1);
+		
+		testProject.setTestSuiteList(testSuiteList);
+		
+		return testProject;
+	}
 }

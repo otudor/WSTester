@@ -11,9 +11,10 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.wstester.camel.mongo.TestBaseClass;
 import com.wstester.client.mongo.MongoDBClient;
 
-public class SelectTest {
+public class SelectTest extends TestBaseClass{
 
 	static MongoDBClient client;
 	
