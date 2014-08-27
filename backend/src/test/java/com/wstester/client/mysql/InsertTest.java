@@ -17,13 +17,13 @@ public class InsertTest {
 	@BeforeClass
 	public static void setUp() throws ClassNotFoundException, SQLException{
 	
-		client = new MySQLClient("localhost", "3306", "test", "appuser", "apppass");
+		client = new MySQLClient("localhost", "1521", "Oracle", "system", "!Chelseafc123");
 	}
 	
 	@Test
 	public void insertOneRow() throws SQLException{
 		
-		String insertStatement = "INSERT INTO CUSTOMER(NAME) VALUES('AnotherPan')";
+		String insertStatement = "INSERT INTO ANGAJATI(NUME) VALUES('AnotherPan')";
 		int rowsInserted = client.insert(insertStatement);
 		assertEquals(1,rowsInserted);
 	}

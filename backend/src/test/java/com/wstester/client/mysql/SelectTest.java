@@ -17,13 +17,13 @@ public class SelectTest {
 	@BeforeClass
 	public static void setUp() throws ClassNotFoundException, SQLException{
 	
-		client = new MySQLClient("localhost", "3306", "test", "appuser", "apppass");
+		client = new MySQLClient("localhost", "1521", "Oracle", "system", "!Chelseafc123");
 	}
 	
 	@Test
 	public void selectAll() throws SQLException, InstantiationException, IllegalAccessException{
 		
-		String selectStatement = "SELECT * FROM CUSTOMER";
+		String selectStatement = "SELECT * FROM ANGAJATI";
 		Result result = client.select(selectStatement);
 		
 		List<String> columns = result.getColumnsName();

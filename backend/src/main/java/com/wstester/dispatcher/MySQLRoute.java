@@ -1,4 +1,5 @@
 package com.wstester.dispatcher;
+import java.util.HashMap;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
@@ -9,40 +10,42 @@ import org.springframework.context.ApplicationEventPublisherAware;
 
 import com.wstester.events.StepRunEvent;
 import com.wstester.model.Response;
-import com.wstester.model.RestService;
-import com.wstester.model.RestStep;
-import com.wstester.model.Server;
+import com.wstester.model.Step;
 
-public class RestRoute extends RouteBuilder implements ApplicationEventPublisherAware{
+
+public class MySQLRoute extends RouteBuilder implements ApplicationEventPublisherAware {
 
 	private ApplicationEventPublisher publisher;
-	private RestStep step = null;
+	private Step step = null;
+	
 	
 	@Override
 	public void configure() throws Exception {
-		
-		from("jms:restQueue")
+		// TODO Auto-generated method stub
+		from("jms:MySQlQueue")
 		.process(new Processor() {
 			
 			@Override
 			public void process(Exchange exchange) throws Exception {
-				step = exchange.getIn().getBody(RestStep.class);
-				// TODO: set the body from the rest step
-				exchange.getIn().setBody(null);
+				step = exchange.getIn().getBody(Step.class);
+
+				HashMap<String, String> query = new HashMap<String, String>();
+				String name = "popescua";
+				String key = "nume";
+				query.put(key, name);
 				
-				exchange.getIn().setHeader(Exchange.HTTP_URI, getURI(step));
-				exchange.getIn().setHeader(Exchange.HTTP_PATH, "/customer/getCustomers");
+				exchange.getIn().setBody(query);
+				exchange.getIn().setHeader("CamelMySQLDatabase", "test");
+				exchange.getIn().setHeader("CamelMySQLCollection", "angajati");
 			}
 		})
-		.setHeader(Exchange.HTTP_METHOD, constant("GET"))
-		.recipientList(simple("http://none.none"))
+		.to("MySql://mysql?database=none&collection=none&operation=findOneByQuery&dynamicity=true")
 		.process(new Processor() {
 
 			@Override
 			public void process(Exchange exchange) throws Exception {
 
 				Message in = exchange.getIn();
-				System.out.println(in.getHeader(Exchange.HTTP_RESPONSE_CODE, Integer.class));
 				
 				StepRunEvent event = new StepRunEvent(this);
 				Response response = new Response();
@@ -55,17 +58,9 @@ public class RestRoute extends RouteBuilder implements ApplicationEventPublisher
 			}
 		});
 	}
-	
 	@Override
-	public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
-		this.publisher = applicationEventPublisher;
-	}
-	
-	private Object getURI(RestStep step) {
+	public void setApplicationEventPublisher(ApplicationEventPublisher arg0) {
+		// TODO Auto-generated method stub
 		
-		Server server = step.getServer();
-		RestService service = (RestService) step.getService();
-		
-		return"http://" + server.getIp() + ":" + service.getPort();
 	}
 }
