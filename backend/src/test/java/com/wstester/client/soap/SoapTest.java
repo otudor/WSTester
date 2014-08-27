@@ -37,10 +37,10 @@ public class SoapTest {
 		
 		
 		AllForwards fromBrazil = new AllForwards();
-		fromBrazil.setSCountryName("Brazil");
+		fromBrazil.setSCountryName("Argentina");
 		
 		String soapResponse = client.sendSOAPRequest(fromBrazil);
-		System.out.println("\nResponse SOAP Message:");
+		System.out.println("\nResponse SOAP Message:"  + fromBrazil.getSCountryName());
 		System.out.println(soapResponse);
 	}
 }
