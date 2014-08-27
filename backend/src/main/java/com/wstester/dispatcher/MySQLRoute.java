@@ -30,7 +30,7 @@ public class MySQLRoute extends RouteBuilder implements ApplicationEventPublishe
 				step = exchange.getIn().getBody(Step.class);
 
 				HashMap<String, String> query = new HashMap<String, String>();
-				String name = "popescu";
+				String name = "popescua";
 				String key = "nume";
 				query.put(key, name);
 				
