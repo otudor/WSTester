@@ -36,6 +36,7 @@ import javax.swing.tree.TreeNode;
 
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
+import com.wstester.model.MySQLService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 
@@ -94,6 +95,10 @@ public class EnvironmentSearchPresenter implements Initializable
         mainPresenter.showMongoDb( mongoUId);
     }
     
+    public void selectMySQLService( String mysqlUId)
+    {
+        mainPresenter.showMySQLDb( mysqlUId);
+    }
     public String getFirstEnv()
     {
     	return environmentService.getFirstEnv().getID();
@@ -171,10 +176,12 @@ public class EnvironmentSearchPresenter implements Initializable
 		                    else if ( getItem().getClass() == Server.class)
 		                    	selectFTPServer(  ((Server) getItem()).getID());
 		                    else if ( getItem().getClass() == MongoService.class)
-		                    	{
-		                    		
-		                    		selectMongoService(  ((MongoService) getItem()).getID());
-		                    	}
+		                    	
+		                    	selectMongoService(  ((MongoService) getItem()).getID());
+		                     else if ( getItem().getClass() == MySQLService.class)
+	                    	
+	                    		selectMySQLService(  ((MySQLService) getItem()).getID());
+	                    	
 	                	}
                 	}
                 	/*else 
