@@ -10,12 +10,12 @@ import com.wstester.model.Response;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
 
-public class RestTest extends TestBaseClass{
+public class SoapTest{
 
 	@Test
 	public void test() throws Exception{
 		TestRunner testRunner = new TestRunner();
-		TestProject testProject = TestUtils.getRestTestPlan();
+		TestProject testProject = TestUtils.getSOAPTestPlan();
 		testRunner.setTestProject(testProject);
 		
 		testRunner.run();
@@ -24,6 +24,6 @@ public class RestTest extends TestBaseClass{
 		String entry =  response.getContent();
 		
 		assertTrue(response.isPass());
-		assertEquals("All customers", entry);
+		assertEquals("Brazilia", entry);
 	}
 }

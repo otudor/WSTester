@@ -1,48 +1,57 @@
 package com.wstester.dispatcher;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.cxf.CxfEndpoint;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 
 import com.wstester.events.StepRunEvent;
 import com.wstester.model.Response;
-import com.wstester.model.RestService;
-import com.wstester.model.RestStep;
-import com.wstester.model.Server;
+import com.wstester.model.Step;
 
-public class RestRoute extends RouteBuilder implements ApplicationEventPublisherAware{
+public class SoapRoute extends RouteBuilder implements ApplicationEventPublisherAware{
 
 	private ApplicationEventPublisher publisher;
-	private RestStep step = null;
+	private Step step = null;
+	
+//	@Autowired
+//	CxfEndpoint endpoint;
 	
 	@Override
 	public void configure() throws Exception {
 		
-		from("jms:restQueue")
+		from("jms:soapQueue")
 		.process(new Processor() {
 			
 			@Override
 			public void process(Exchange exchange) throws Exception {
-				step = exchange.getIn().getBody(RestStep.class);
+				step = exchange.getIn().getBody(Step.class);
+
+				String content = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
+
+				exchange.getIn().setBody(content);
 				
-				exchange.getIn().setBody(step.getBody());
-				exchange.getIn().setHeader(Exchange.HTTP_URI, getURI(step));
-				exchange.getIn().setHeader(Exchange.HTTP_PATH, step.getPath());
-				exchange.getIn().setHeader(Exchange.HTTP_METHOD, step.getMethod());
+//				endpoint = new CxfEndpoint();
+//				endpoint.setAddress("http://footballpool.dataaccess.eu:80/data/info.wso");
+//				endpoint.set
 			}
 		})
-		.recipientList(simple("http://none.none"))
+		.recipientList(constant("cxf:bean:cxfEndpoint?dataFormat=MESSAGE"))
 		.process(new Processor() {
 
 			@Override
 			public void process(Exchange exchange) throws Exception {
 
 				Message in = exchange.getIn();
-				System.out.println(in.getHeader(Exchange.HTTP_RESPONSE_CODE, Integer.class));
-				
+				System.out.println(in.getBody(String.class));
 				StepRunEvent event = new StepRunEvent(this);
 				Response response = new Response();
 				response.setStepID(step.getID());
@@ -58,13 +67,5 @@ public class RestRoute extends RouteBuilder implements ApplicationEventPublisher
 	@Override
 	public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
 		this.publisher = applicationEventPublisher;
-	}
-	
-	private Object getURI(RestStep step) {
-		
-		Server server = step.getServer();
-		RestService service = (RestService) step.getService();
-		
-		return"http://" + server.getIp() + ":" + service.getPort();
 	}
 }
