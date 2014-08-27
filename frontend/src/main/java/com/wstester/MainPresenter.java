@@ -1,6 +1,7 @@
 package com.wstester;
 import java.io.IOException;
 
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,13 +18,14 @@ public class MainPresenter
     private EnvironmentSearchPresenter envSearchPresenter;
     private EnvironmentDetailPresenter envDetailPresenter;
     private ServerDetailsPresenter ftpDetailPresenter;
+    private MongoDBPresenter mngDBPresenter;
 
-    public void setContactSearchPresenter(EnvironmentSearchPresenter envSearchPresenter)
+    public void setEnvironmentSearchPresenter(EnvironmentSearchPresenter envSearchPresenter)
     {
         this.envSearchPresenter = envSearchPresenter;
     }
 
-    public void setContactDetailPresenter(EnvironmentDetailPresenter envDetailPresenter)
+    public void setEnvironmentDetailPresenter(EnvironmentDetailPresenter envDetailPresenter)
     {
         this.envDetailPresenter = envDetailPresenter;
     }
@@ -36,6 +38,11 @@ public class MainPresenter
     public void setFTPServerDetailPresenter(ServerDetailsPresenter ftpDetailPresenter)
     {
         this.ftpDetailPresenter = ftpDetailPresenter;
+    }
+    
+    public void setMongoDBPresenter(MongoDBPresenter mngDBPresenter)
+    {
+        this.mngDBPresenter = mngDBPresenter;
     }
     
     public Parent getView()
@@ -62,6 +69,12 @@ public class MainPresenter
     {
     	ftpDetailPresenter.setFTP( serverUID);
         contentArea.setCenter( ftpDetailPresenter.getView());
+    }
+    
+    public void showMongoDb( String mongoUID)
+    {
+	  	mngDBPresenter.setMongoDB( mongoUID);
+        contentArea.setCenter( mngDBPresenter.getView());
     }
     
     public String getFirstEnvironment()

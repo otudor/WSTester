@@ -409,7 +409,7 @@ public class WsTesterMainController implements Initializable {
 	                    MainPresenter mainPresenter = factory.getMainPresenter();
                         mainPresenter.loadEnvironments();
                         root = mainPresenter.getView();
-						Scene second = new Scene(root);
+						Scene second = new Scene(root, 600, 480);
 						stage.setTitle("Environments window");
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
 						root.getStyleClass().add("mainWindow");	

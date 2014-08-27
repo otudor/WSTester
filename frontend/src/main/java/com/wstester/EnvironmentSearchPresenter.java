@@ -35,6 +35,7 @@ import java.util.ResourceBundle;
 import javax.swing.tree.TreeNode;
 
 import com.wstester.model.Environment;
+import com.wstester.model.MongoService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 
@@ -87,7 +88,12 @@ public class EnvironmentSearchPresenter implements Initializable
     {
         mainPresenter.showFTPDetail( serverUId);
     }
-
+    
+    public void selectMongoService( String mongoUId)
+    {
+        mainPresenter.showMongoDb( mongoUId);
+    }
+    
     public String getFirstEnv()
     {
     	return environmentService.getFirstEnv().getID();
@@ -164,6 +170,11 @@ public class EnvironmentSearchPresenter implements Initializable
 		                    	selectEnvironment( ((Environment) getItem()).getID());
 		                    else if ( getItem().getClass() == Server.class)
 		                    	selectFTPServer(  ((Server) getItem()).getID());
+		                    else if ( getItem().getClass() == MongoService.class)
+		                    	{
+		                    		
+		                    		selectMongoService(  ((MongoService) getItem()).getID());
+		                    	}
 	                	}
                 	}
                 	/*else 

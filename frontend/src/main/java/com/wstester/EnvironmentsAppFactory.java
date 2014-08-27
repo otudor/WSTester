@@ -11,7 +11,8 @@ public class EnvironmentsAppFactory
     private ServerDetailsPresenter ftpDetailPresenter;
     private EnvironmentService environmentService;
     private ServerService ftpService;
-
+    private MongoDBPresenter mngDBPresenter;
+    
     public MainPresenter getMainPresenter()
     {
         if (mainPresenter == null)
@@ -21,9 +22,10 @@ public class EnvironmentsAppFactory
                 FXMLLoader loader = new FXMLLoader();
                 loader.load(getClass().getResourceAsStream("/fxml/EnvironmentManager.fxml"));
                 mainPresenter = (MainPresenter) loader.getController();
-                mainPresenter.setContactDetailPresenter( getContactDetailPresenter());
-                mainPresenter.setContactSearchPresenter( getContactSearchPresenter());
+                mainPresenter.setEnvironmentDetailPresenter( getEnvironmentDetailPresenter());
+                mainPresenter.setEnvironmentSearchPresenter( getEnvironmentSearchPresenter());
                 mainPresenter.setFTPDetailPresenter( getFTPServerDetailPresenter());
+                mainPresenter.setMongoDBPresenter( getMongoDBPresenter());
             }
             catch (IOException e)
             {
@@ -33,7 +35,7 @@ public class EnvironmentsAppFactory
         return mainPresenter;
     }
 
-    public EnvironmentSearchPresenter getContactSearchPresenter()
+    public EnvironmentSearchPresenter getEnvironmentSearchPresenter()
     {
         if (envSearchPresenter == null)
         {
@@ -73,7 +75,7 @@ public class EnvironmentsAppFactory
         return ftpDetailPresenter;
     }
 
-    public EnvironmentDetailPresenter getContactDetailPresenter()
+    public EnvironmentDetailPresenter getEnvironmentDetailPresenter()
     {
         if (envDetailPresenter == null)
         {
@@ -91,6 +93,26 @@ public class EnvironmentsAppFactory
             }
         }
         return envDetailPresenter;
+    }
+    
+    public MongoDBPresenter getMongoDBPresenter()
+    {
+        if (mngDBPresenter == null)
+        {
+            try
+            {
+                FXMLLoader loader = new FXMLLoader();
+                loader.load(getClass().getResourceAsStream("/fxml/MongoDB.fxml"));
+                mngDBPresenter = (MongoDBPresenter) loader.getController();
+                mngDBPresenter.setEnvironmentService(getEnvironmentService());
+                mngDBPresenter.setMainPresenter(getMainPresenter());
+            }
+            catch (IOException e)
+            {
+                throw new RuntimeException("Unable to load MongoDB.fxml", e);
+            }
+        }
+        return mngDBPresenter;
     }
     
     public EnvironmentService getEnvironmentService()
