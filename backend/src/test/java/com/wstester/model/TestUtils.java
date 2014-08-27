@@ -253,19 +253,21 @@ public class TestUtils {
 		// construct test steps
 		// test 1
 		List<Step> stepList1 = new ArrayList<Step>();
-		RestStep step1 = new RestStep();
-		step1.setName("Step 1");
-		step1.setServer(server11);
-		step1.setService(restService);
+		RestStep restStep = new RestStep();
+		restStep.setName("Step 1");
+		restStep.setServer(server11);
+		restStep.setService(restService);
 		List<Asset> assetList1 = new ArrayList<Asset>();
 		assetList1.add(asset1);
-		step1.setAssetList(assetList1);
+		restStep.setAssetList(assetList1);
 		List<Assert> assertList = new ArrayList<Assert>();
 		Assert oneAssert = new Assert();
 		oneAssert.setAsserts("First assert");
 		assertList.add(oneAssert);
-		step1.setAssertList(assertList);
-		stepList1.add(step1);
+		restStep.setAssertList(assertList);
+		restStep.setPath("/customer/getCustomers");
+		restStep.setMethod("GET");
+		stepList1.add(restStep);
 		
 		// construct test case list
 		// test case 1

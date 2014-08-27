@@ -27,14 +27,13 @@ public class RestRoute extends RouteBuilder implements ApplicationEventPublisher
 			@Override
 			public void process(Exchange exchange) throws Exception {
 				step = exchange.getIn().getBody(RestStep.class);
-				// TODO: set the body from the rest step
-				exchange.getIn().setBody(null);
 				
+				exchange.getIn().setBody(step.getBody());
 				exchange.getIn().setHeader(Exchange.HTTP_URI, getURI(step));
-				exchange.getIn().setHeader(Exchange.HTTP_PATH, "/customer/getCustomers");
+				exchange.getIn().setHeader(Exchange.HTTP_PATH, step.getPath());
+				exchange.getIn().setHeader(Exchange.HTTP_METHOD, step.getMethod());
 			}
 		})
-		.setHeader(Exchange.HTTP_METHOD, constant("GET"))
 		.recipientList(simple("http://none.none"))
 		.process(new Processor() {
 
