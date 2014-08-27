@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:broker="http://activemq.apache.org/schema/core"
 	xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
@@ -10,16 +9,16 @@
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
     ">
 
-    	<context:annotation-config/>
-	<bean id="responseBean" class="com.wstester.dispatcher.ResponseCallback"/>
-    
+	<context:annotation-config />
+	<bean id="responseBean" class="com.wstester.dispatcher.ResponseCallback" />
+
 	<!-- set up ActiveMQ broker -->
 	<broker:broker useJmx="false" persistent="false" brokerName="localhost">
 		<broker:transportConnectors>
 			<broker:transportConnector name="tcp" uri="tcp://localhost:61616" />
 		</broker:transportConnectors>
 	</broker:broker>
-	
+
 	<bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
 		<property name="connectionFactory">
 			<bean class="org.apache.activemq.ActiveMQConnectionFactory">
@@ -30,6 +29,13 @@
    
    	<bean id="myDb" class="com.mongodb.Mongo" /> 
 
+	<bean id="mysql" class="com.mysql.jdbc.Driver">
+		<constructor-arg index="0">
+			<bean class="com.mysql.jdbc">
+				<constructor-arg index="0" value="jdbc://system:!Chelseafc123@localhost:27017/test" />
+			</bean>
+		</constructor-arg>
+	</bean>
 	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
 		<package>com.wstester.dispatcher</package>
 	</camelContext>

@@ -498,6 +498,104 @@ public class TestUtils {
 		testSuite1.setEnvironment(env1);
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
+
+		testProject.setTestSuiteList(testSuiteList);
+		
+		return testProject;
+	}
+	
+	public static TestProject getMySQLTestPlan(){
+		
+		TestProject testProject = new TestProject();
+		testProject.setName("Test Project");
+		
+		// construct asset list
+		List<Asset> assetList = new ArrayList<Asset>();
+		Asset asset1 = new Asset();
+		Asset asset2 = new Asset();
+		Asset asset3 = new Asset();
+		Asset asset4 = new Asset();
+		assetList.add(asset1);
+		assetList.add(asset2);
+		assetList.add(asset3);
+		assetList.add(asset4);
+		testProject.setAssetList(assetList);
+
+		// construct service list
+		
+		
+		// Service 4
+		List<Service> serviceList4 = new ArrayList<Service>();
+		MySQLService service4 = new MySQLService();
+		service4.setName("Service MYSQL");
+		service4.setPort("1521");
+		service4.setDbName("Oracle");
+		service4.setUser("system");
+		service4.setPassword("!Chelseafc123");
+		serviceList4.add(service4);
+		
+		// construct server list
+		
+
+		// Server 3
+		List<Server> serverList2 = new ArrayList<Server>();
+		Server server21 = new Server();
+		server21.setDescription("This is the first server of the second env");
+		server21.setIp("localhost");
+		server21.setName("Server 21");
+		server21.setServices(serviceList4);
+		serverList2.add(server21);
+		
+		
+		// construct environment list
+		List<Environment> environmentList = new ArrayList<Environment>();
+	
+		// Environment 2
+		Environment env2 = new Environment();
+		env2.setName("Env 2");
+		env2.setServers(serverList2);
+		environmentList.add(env2);
+		testProject.setEnvironmentList(environmentList);
+
+		// construct test steps
+		
+	
+		
+		// test 3
+		List<Step> stepList2 = new ArrayList<Step>();
+		MySQLStep step3 = new MySQLStep();
+		step3.setName("Step 3");
+		step3.setServer(server21);
+		step3.setService(service4);
+		List<Asset> assetList3 = new ArrayList<Asset>();
+		assetList3.add(asset3);
+		step3.setAssetList(assetList3);
+		List<Assert> assertList3 = new ArrayList<Assert>();
+		Assert oneAssert3 = new Assert();
+		oneAssert3.setAsserts("Third assert");
+		assertList3.add(oneAssert3);
+		step3.setAssertList(assertList3);
+		stepList2.add(step3);
+		
+		
+		// construct test case list
+		
+		
+		// test case 2		
+		List<TestCase> testCaseList2 = new ArrayList<TestCase>();
+		TestCase testCase2 = new TestCase();
+		testCase2.setName("TC 1");
+		testCase2.setStepList(stepList2);
+		testCaseList2.add(testCase2);
+		
+		// construct test suite list
+		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
+
+		TestSuite testSuite2 = new TestSuite();
+		testSuite2.setName("Test Suite 2");
+		testSuite2.setEnvironment(env2);
+		testSuite2.setTestCaseList(testCaseList2);
+		testSuiteList.add(testSuite2);
 		
 		testProject.setTestSuiteList(testSuiteList);
 		
