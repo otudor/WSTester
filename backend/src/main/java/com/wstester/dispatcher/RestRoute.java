@@ -9,12 +9,14 @@ import org.springframework.context.ApplicationEventPublisherAware;
 
 import com.wstester.events.StepRunEvent;
 import com.wstester.model.Response;
-import com.wstester.model.Step;
+import com.wstester.model.RestService;
+import com.wstester.model.RestStep;
+import com.wstester.model.Server;
 
 public class RestRoute extends RouteBuilder implements ApplicationEventPublisherAware{
 
 	private ApplicationEventPublisher publisher;
-	private Step step = null;
+	private RestStep step = null;
 	
 	@Override
 	public void configure() throws Exception {
@@ -24,13 +26,16 @@ public class RestRoute extends RouteBuilder implements ApplicationEventPublisher
 			
 			@Override
 			public void process(Exchange exchange) throws Exception {
-				step = exchange.getIn().getBody(Step.class);
+				step = exchange.getIn().getBody(RestStep.class);
 				// TODO: set the body from the rest step
 				exchange.getIn().setBody(null);
+				
+				exchange.getIn().setHeader(Exchange.HTTP_URI, getURI(step));
+				exchange.getIn().setHeader(Exchange.HTTP_PATH, "/customer/getCustomers");
 			}
 		})
 		.setHeader(Exchange.HTTP_METHOD, constant("GET"))
-		.to("http://localhost:9997/customer/getCustomers")
+		.recipientList(simple("http://none.none"))
 		.process(new Processor() {
 
 			@Override
@@ -54,5 +59,13 @@ public class RestRoute extends RouteBuilder implements ApplicationEventPublisher
 	@Override
 	public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
 		this.publisher = applicationEventPublisher;
+	}
+	
+	private Object getURI(RestStep step) {
+		
+		Server server = step.getServer();
+		RestService service = (RestService) step.getService();
+		
+		return"http://" + server.getIp() + ":" + service.getPort();
 	}
 }
