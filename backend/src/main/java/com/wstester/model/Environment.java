@@ -1,5 +1,6 @@
 package com.wstester.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,13 +16,11 @@ public class Environment {
 	public Environment() {
 		uuid = UUID.randomUUID().toString();
 		name = "";
-		serverList = null;
 	}
 	
 	public Environment( String name) {
 		uuid = UUID.randomUUID().toString();
 		this.name = name;
-		serverList = null;
 	}
 
 	public String getID() {
@@ -47,6 +46,14 @@ public class Environment {
 
 	public void setServers(List<Server> servers) {
 		this.serverList = servers;
+	}
+	
+	public void addServer( Server server)
+	{
+		if ( this.serverList == null)
+			this.serverList = new ArrayList<Server>();
+		
+		this.serverList.add( server);
 	}
 
 	@Override

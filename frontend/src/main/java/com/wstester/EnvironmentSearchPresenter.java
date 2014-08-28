@@ -45,7 +45,7 @@ public class EnvironmentSearchPresenter implements Initializable
     @FXML private Node root;
     //@FXML private TextField searchField;
    // @FXML private ListView<Old> resultsList;
-    private ObservableList<Environment> results;
+    private ObservableList<Environment> environmentsList;
     @FXML private TreeView<Object> treeView;
     
     private MainPresenter mainPresenter;
@@ -72,10 +72,7 @@ public class EnvironmentSearchPresenter implements Initializable
 
     public void search( ActionEvent event)
     {
-        //load the listView
-    	results = FXCollections.observableList(environmentService.loadEnvironments());
-        //resultsList.setItems(results);
-        
+    	environmentsList = FXCollections.observableList(environmentService.loadEnvironments());    
         //load the tree also
         loadTreeItems();
     }
@@ -85,7 +82,7 @@ public class EnvironmentSearchPresenter implements Initializable
         mainPresenter.showEnvDetail( envUID);
     }
 
-    public void selectFTPServer( String serverUId)
+    public void selectServer( String serverUId)
     {
         mainPresenter.showFTPDetail( serverUId);
     }
@@ -126,7 +123,6 @@ public class EnvironmentSearchPresenter implements Initializable
 	    				for (Service service: services)
 	        			{
 	    					TreeItem<Object> serviceNode = new TreeItem<>(service);
-	    					
 	    					serverNode.getChildren().add( serviceNode);
 	        			}
     				
@@ -139,7 +135,7 @@ public class EnvironmentSearchPresenter implements Initializable
     	
     	treeView.setShowRoot(false);
     	treeView.setRoot(root);
-    	treeView.setEditable(true);
+    	treeView.setEditable(false);
     	treeView.getSelectionModel().setSelectionMode( SelectionMode.SINGLE);
     	treeView.setCellFactory(new Callback<TreeView<Object>,TreeCell<Object>>(){
             @Override
@@ -174,7 +170,7 @@ public class EnvironmentSearchPresenter implements Initializable
 		                	if (getItem().getClass() == Environment.class)
 		                    	selectEnvironment( ((Environment) getItem()).getID());
 		                    else if ( getItem().getClass() == Server.class)
-		                    	selectFTPServer(  ((Server) getItem()).getID());
+		                    	selectServer(  ((Server) getItem()).getID());
 		                    else if ( getItem().getClass() == MongoService.class)
 		                    	
 		                    	selectMongoService(  ((MongoService) getItem()).getID());
@@ -184,15 +180,6 @@ public class EnvironmentSearchPresenter implements Initializable
 	                    	
 	                	}
                 	}
-                	/*else 
-                	if ( (event.getButton() == MouseButton.SECONDARY) && (event.getClickCount() == 1) ) //single right click
-                	{
-                		//if( getTreeItem() != null)
-                		//	getTreeView().getSelectionModel().select(getTreeItem());
-                		//else
-                		//	System.out.println("TreeItem e NULL la click dreapta");
-                		//System.out.println("Click dreapta");
-                	}*/
                 }
             });
     	}
@@ -244,7 +231,6 @@ public class EnvironmentSearchPresenter implements Initializable
     	@Override
         public void startEdit()
     	{
-    		System.out.println(" function: startEdit");
             super.startEdit();
  
             if (textField == null)
@@ -258,7 +244,6 @@ public class EnvironmentSearchPresenter implements Initializable
         @Override
         public void cancelEdit()
         {
-        	System.out.println(" function: cancelEdit");
             super.cancelEdit();
             
             setText( ((Environment) getItem()).getName());
@@ -292,21 +277,21 @@ public class EnvironmentSearchPresenter implements Initializable
     public ContextMenu createEnvironmentContextMenu( Environment e)
     {
     	final ContextMenu contextMenu = new ContextMenu();
-    	MenuItem rem = new MenuItem("Remove (env)");
-    	MenuItem rename = new MenuItem("Rename");
-    	contextMenu.getItems().addAll(rem);
-    	contextMenu.getItems().addAll(rename);
+    	MenuItem addServer = new MenuItem("Add server");
+    	MenuItem remove = new MenuItem("Remove");
+    	contextMenu.getItems().addAll(remove);
+    	contextMenu.getItems().addAll(addServer);
     	
     	// Remove
-    	rem.setOnAction(new EventHandler<ActionEvent>() 
+    	remove.setOnAction(new EventHandler<ActionEvent>() 
     	{
     	    @Override
     	    public void handle(ActionEvent event) 
     	    {
     	    	TreeItem<Object> c = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
-    	    	int idx = treeView.getSelectionModel().getSelectedIndex();
     	    	if( c == null ) return;
     	    	
+    	    	int idx = treeView.getSelectionModel().getSelectedIndex();
     	        Environment e = (Environment)(c.getValue());
     	        removeEnvironment(e);
                 c.getParent().getChildren().remove(c);
@@ -316,7 +301,30 @@ public class EnvironmentSearchPresenter implements Initializable
     	});
     	
     	// Remove
-    	rename.setOnAction(new EventHandler<ActionEvent>() 
+    	addServer.setOnAction(new EventHandler<ActionEvent>() 
+    	{
+    	    @Override
+    	    public void handle(ActionEvent event) 
+    	    {
+    	    	TreeItem<Object> item = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
+    	    	if( item == null ) return;
+
+    	    	Environment e = (Environment)(item.getValue());
+    	    	Server server = environmentService.addServerForEnv(e.getID());
+    	    	if (server != null)
+    	    	{
+    	    		TreeItem<Object> serverNode = new TreeItem<>(server);
+    	    		item.getChildren().add( serverNode);
+    	    		treeView.getSelectionModel().select( serverNode);
+    	    		//show details in right pane
+    	    		selectServer( server.getID());
+    	    	}
+                //treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
+    	    }
+    	});
+    	
+    	// rename
+    	/*rename.setOnAction(new EventHandler<ActionEvent>() 
     	{
     	    @Override
     	    public void handle(ActionEvent event) 
@@ -324,7 +332,7 @@ public class EnvironmentSearchPresenter implements Initializable
     	    	treeView.setEditable( true);
     	    	treeView.edit( (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem());
     	    }
-    	});
+    	});*/
     	
     	return contextMenu;
     }
@@ -367,11 +375,14 @@ public class EnvironmentSearchPresenter implements Initializable
     public void addEnvAction( ActionEvent event)
     {
         //to do
-    	TreeItem<Object> newEmployee = new TreeItem<>( new Environment("New Environment"));
-        treeView.getRoot().getChildren().add(newEmployee);
+    	Environment env = environmentService.createEnvironment("New Environment");
+    	TreeItem<Object> node = new TreeItem<>( env);
+        treeView.getRoot().getChildren().add(node);
         //root.getChildren().add(envNode);
-        treeView.getSelectionModel().select( newEmployee);
+        treeView.setEditable(true);
+        treeView.getSelectionModel().select( node);
         treeView.getFocusModel().focusNext();
-        treeView.edit( newEmployee);
+        treeView.edit( node);
+        selectEnvironment( env.getID());
     }
 }
