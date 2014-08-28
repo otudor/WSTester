@@ -182,14 +182,14 @@ public class WsTesterMainController implements Initializable {
 
 						Scene second = new Scene(root);
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
-						root.getStyleClass().add("mainWindow");	
+						root.getStyleClass().add("mainWind");	
 						Menu menu2 = new Menu("CreateSOAP");
 						menuBar.getMenus().add(menu2);
 						stageSoap.initOwner(pane.getScene().getWindow());
 						stageSoap.setScene(second);
 						
 						stageSoap.setTitle("SOAP Window");
-						//stageSoap.initOwner(WsTesterMain.stage);
+						stageSoap.initOwner(WsTesterMain.stage);
 						//stageSoap.initModality(Modality.APPLICATION_MODAL);
 						
 						stageSoap.show();
@@ -238,17 +238,17 @@ public class WsTesterMainController implements Initializable {
 		newIco4.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 			@Override
 			public void handle(MouseEvent event) {
-				stageRest = new Stage();
+				
 				
 				// TODO Auto-generated method stub	
 				if(event.getClickCount() == 2 && isDisplayed4 == false) {
-
+					stageRest = new Stage();
 					isDisplayed4 = true;
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/Rest.fxml"));
 						Scene second = new Scene(root);
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
-						root.getStyleClass().add("mainWindow");	
+						root.getStyleClass().add("mainWind");	
 						Menu menu2 = new Menu("CreateREST");
 						menuBar.getMenus().add(menu2);
 						stageRest.initOwner(pane.getScene().getWindow());
@@ -280,11 +280,12 @@ public class WsTesterMainController implements Initializable {
 						e.printStackTrace();
 					}
 					
-					if (isDisplayed4 == true && event.getClickCount() == 2)
-					{
-						stageRest.toFront();
-						
-					}
+					
+				}
+				if (isDisplayed4 == true && event.getClickCount() == 2)
+				{
+					stageRest.toFront();
+					
 				}
 			}
 		});
@@ -304,15 +305,15 @@ public class WsTesterMainController implements Initializable {
 			@Override
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
-				stageRnd = new Stage();
+				
 				if(event.getClickCount() == 2 && isDisplayed5 == false) {
-
+					stageRnd = new Stage();
 					isDisplayed5 = true;
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
 						Scene second = new Scene(root);
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
-						root.getStyleClass().add("mainWindow");	
+						root.getStyleClass().add("mainWind");	
 
 						menuBar.getMenus().add(menuRnd);
 						stageRnd.initOwner(pane.getScene().getWindow());
@@ -340,6 +341,11 @@ public class WsTesterMainController implements Initializable {
 						e.printStackTrace();
 					}
 				}
+				if (isDisplayed5 == true && event.getClickCount() == 2)
+				{
+					stageRnd.toFront();
+					
+				}
 			}
 		});
 		
@@ -352,14 +358,16 @@ public class WsTesterMainController implements Initializable {
 		newIco.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 			@Override
 			public void handle(MouseEvent event) {
-				stageAssets = new Stage();
+				
 				if(event.getClickCount() == 2 && isDisplayed == false) {
+					stageAssets = new Stage();
 					isDisplayed = true;
+					
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/Assets.fxml"));
 						Scene second = new Scene(root);
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
-						root.getStyleClass().add("mainWindow");									
+						root.getStyleClass().add("mainWind");									
 						//stage.initModality(Modality.WINDOW_MODAL);
 						menu = new Menu("Assets");
 						menuBar.getMenus().add(menu);
@@ -386,6 +394,11 @@ public class WsTesterMainController implements Initializable {
 						e.printStackTrace();
 					}
 				}
+				if (isDisplayed == true && event.getClickCount() == 2)
+				{
+					stageAssets.toFront();
+					
+				}
 			}
 		});
 		moveIcons(newIco);
@@ -399,9 +412,10 @@ public class WsTesterMainController implements Initializable {
 		newIco2.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 			@Override
 			public void handle(MouseEvent event) {
-				stageEnv = new Stage();
+				
 				// TODO Auto-generated method stub	
 				if(event.getClickCount() == 2 && isDisplayed2 == false) {
+					stageEnv = new Stage();
 					isDisplayed2 = true;
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/EnvironmentManager.fxml"));
@@ -412,7 +426,7 @@ public class WsTesterMainController implements Initializable {
 						Scene second = new Scene(root, 600, 480);
 						stage.setTitle("Environments window");
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
-						root.getStyleClass().add("mainWindow");	
+						root.getStyleClass().add("mainWind");	
 
 						menuBar.getMenus().add(menu2);
 						stageEnv.initOwner(pane.getScene().getWindow());
@@ -437,6 +451,11 @@ public class WsTesterMainController implements Initializable {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+				}
+				if (isDisplayed2 == true && event.getClickCount() == 2)
+				{
+					stageEnv.toFront();
+					
 				}
 			}
 		});
