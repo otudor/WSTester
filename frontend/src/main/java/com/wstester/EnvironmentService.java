@@ -100,6 +100,20 @@ public class EnvironmentService
     	}
     }
     
+    public Server addServerForEnv( String envUID)
+    {
+    	Server result = null;
+    	Environment env = environments.get( envUID);
+    	
+    	if( env != null)
+    	{
+    		result = new Server("Server nou", "44.44.44.44", "description noul server");
+    		env.addServer( result);
+    	}
+    	
+    	return result;
+    }
+    
     public void removeEnvironmentById( String uId)
     {
     	environments.remove( uId);
