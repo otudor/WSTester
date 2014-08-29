@@ -2,7 +2,7 @@ package com.wstester.camel;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import org.codehaus.jettison.json.JSONObject;
+import org.codehaus.jettison.json.JSONArray;
 import org.junit.Test;
 import com.wstester.actions.TestRunner;
 import com.wstester.model.Response;
@@ -21,10 +21,10 @@ public class MySQLTest {
 		testRunner.run();
 
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
-		JSONObject result = new JSONObject(response.getContent());
+		JSONArray result = new JSONArray(response.getContent());
 
 		assertTrue(response.isPass());
-		assertEquals("popescu", result.get("nume"));
+		assertEquals("popescu", result.getJSONObject(0).get("detalii"));
+		assertEquals("ion", result.getJSONObject(1).get("detalii"));
 	}
-
 }

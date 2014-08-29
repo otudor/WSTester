@@ -29,8 +29,7 @@
 	
    	<bean id="mongoConnection" class="com.mongodb.Mongo" />
 	<bean id="soapConnection" class="org.apache.camel.component.cxf.CxfEndpoint" />
-	
-<!-- 	<bean id="mysql" class="org.apache.commons.dbcp.BasicDataSource" /> -->
+	<bean id="dataSource" class="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" /> 
 
 	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
 		<package>com.wstester.dispatcher</package>
