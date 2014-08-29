@@ -340,7 +340,7 @@ public class EnvironmentSearchPresenter implements Initializable
     public ContextMenu createFTPServerContextMenu( Environment e, Server ftp)
     {
     	final ContextMenu contextMenu = new ContextMenu();
-    	MenuItem rem = new MenuItem("Remove (server)" /*+ ftp.getID()*/);
+    	MenuItem rem = new MenuItem("Remove" /*+ ftp.getID()*/);
     	contextMenu.getItems().addAll( rem);
     	
     	rem.setOnAction(new EventHandler<ActionEvent>() 

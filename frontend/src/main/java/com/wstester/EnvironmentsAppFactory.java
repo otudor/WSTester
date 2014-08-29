@@ -10,7 +10,6 @@ public class EnvironmentsAppFactory
     private EnvironmentDetailPresenter envDetailPresenter;
     private ServerDetailsPresenter ftpDetailPresenter;
     private EnvironmentService environmentService;
-    private ServerService ftpService;
     private MongoDBPresenter mngDBPresenter;
     private MySQLDBPresenter mysqlDBPresenter;
     
@@ -66,7 +65,7 @@ public class EnvironmentsAppFactory
                 FXMLLoader loader = new FXMLLoader();
                 loader.load(getClass().getResourceAsStream("/fxml/ServerDetails.fxml"));
                 ftpDetailPresenter = ( ServerDetailsPresenter) loader.getController();
-                ftpDetailPresenter.setService( getServerService());
+                ftpDetailPresenter.setEnvService( getEnvironmentService());
                 ftpDetailPresenter.setMainPresenter(getMainPresenter());
             }
             catch (IOException e)
@@ -144,14 +143,5 @@ public class EnvironmentsAppFactory
         	environmentService = new EnvironmentService();
         }
         return environmentService;
-    }
-    
-    public ServerService getServerService()
-    {
-        if (ftpService == null)
-        {
-        	ftpService = new ServerService();
-        }
-        return ftpService;
     }
 }

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.scene.control.TreeItem;
+
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
@@ -84,12 +86,20 @@ public class EnvironmentService
     	return result;
     }
     
-    public void removeServer( String uID, String ftpId)
+    public void removeServer( String envUID, String serverUID)
     {
-    	Environment env = environments.get( uID);
+    	Environment env = environments.get( envUID);
     	
     	if( env != null)
     	{
+    		List<Server> serverList = env.getServers();
+    		if ( serverList != null && !serverList.isEmpty())
+    			for (Server server: serverList)
+    				if (server.getID() == serverUID)
+    				{
+    					env.getServers().remove( server);
+    					break;
+    				}
     		//System.out.println("inainte de remove");
     		//env.printFTPServers();
     		
@@ -117,6 +127,29 @@ public class EnvironmentService
     public void removeEnvironmentById( String uId)
     {
     	environments.remove( uId);
+    }
+    
+    public Server getServerByUID( String serverUID)
+    {
+    	Server result = null;
+
+		for (Map.Entry<String, Environment> entry : environments.entrySet())
+		{
+		    //System.out.println(entry.getKey() + "/" + entry.getValue());
+    		List<Server> serverList = ((Environment)entry.getValue()).getServers();
+    		if ( serverList != null && !serverList.isEmpty())
+    		{
+    			for (Server server: serverList)
+    				if (server.getID() == serverUID)
+    				{
+    					result = server;
+    					break;
+    				}
+    		}
+    	}
+    	
+    	return result;
+    	//return new Server( "Server 3", "0909.05.05.05", "description server 3");
     }
 
 }

@@ -11,12 +11,12 @@ public class ServerDetailsPresenter
     @FXML private TextField ftpNameField;
     @FXML private TextField ftpIPField;
 
-    private ServerService srvService;
+    private EnvironmentService envService;
     private MainPresenter mainPresenter;
 
-    public void setService( ServerService srvService)
+    public void setEnvService( EnvironmentService envService)
     {
-        this.srvService = srvService;
+        this.envService = envService;
     }
 
     public void setMainPresenter(MainPresenter mainPresenter)
@@ -35,7 +35,7 @@ public class ServerDetailsPresenter
         ftpNameField.setText("");
         ftpIPField.setText("");
         
-        Server server = srvService.getServerByUID( serverUID);
+        Server server = envService.getServerByUID( serverUID);
         ftpNameField.setText( server.getName());
         ftpIPField.setText( server.getIp());
     }
