@@ -102,7 +102,7 @@ public class TestRunner {
 					}
 				}
 
-				Thread.sleep(500);
+				Thread.sleep(5000);
 				
 				// Clean up
 				session.close();

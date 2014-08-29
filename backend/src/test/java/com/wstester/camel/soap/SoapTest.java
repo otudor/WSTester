@@ -1,10 +1,7 @@
-package com.wstester.camel;
+package com.wstester.camel.soap;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
 import com.wstester.actions.TestRunner;
 import com.wstester.model.Response;
 import com.wstester.model.TestProject;
@@ -24,6 +21,6 @@ public class SoapTest{
 		String entry =  response.getContent();
 		
 		assertTrue(response.isPass());
-		assertEquals("Brazilia", entry);
+		assertTrue(entry.contains("AllDefendersResponse"));
 	}
 }
