@@ -36,6 +36,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 import com.wstester.Delta;
@@ -205,9 +206,27 @@ public class WsTesterMainController implements Initializable {
 		  icon.setOnMouseEntered(new EventHandler<MouseEvent>() {
 		   @Override public void handle(MouseEvent mouseEvent) {
 		    icon.setCursor(Cursor.HAND);
+		    
 		   }
 		  });
 		 }
+	
+	public void expandIcons(VBox icon){
+		icon.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		    @Override public void handle(MouseEvent e) {
+		    	icon.setScaleX(1.2);
+		    	icon.setScaleY(1.2);
+		    }
+		});
+		
+		icon.setOnMouseExited(new EventHandler<MouseEvent>() {
+		    @Override public void handle(MouseEvent e) {
+		    	icon.setScaleX(1);
+		    	icon.setScaleY(1);
+		    }
+		});
+		
+	};
 	private void createSOAPWindow(){
 		newIco3.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			
@@ -233,7 +252,7 @@ public class WsTesterMainController implements Initializable {
 						lista.add(newIcoM2);
 						bar.getChildren().add(newIcoM2);
 						poz=poz+100;										
-						
+						expandIcons(newIcoM2);
 						
 						
 						
@@ -334,6 +353,8 @@ public class WsTesterMainController implements Initializable {
 						lista.add(newIcoM3);
 						bar.getChildren().add(newIcoM3);
 						poz=poz+100;
+						expandIcons(newIcoM3);
+						
 						
 						newIcoM3.setOnMouseClicked(new EventHandler<MouseEvent>() {
 							
@@ -428,6 +449,9 @@ public class WsTesterMainController implements Initializable {
 						lista.add(newIcoM4);
 						bar.getChildren().add(newIcoM4);
 						poz=poz+100;
+						expandIcons(newIcoM4);
+						
+						
 						newIcoM4.setOnMouseClicked(new EventHandler<MouseEvent>() {
 							
 							@Override
@@ -509,8 +533,9 @@ public class WsTesterMainController implements Initializable {
 						lista.add(newIcoM5);
 						bar.getChildren().add(newIcoM5);
 						poz=poz+100;
+						expandIcons(newIcoM5);
 						newIcoM5.setOnMouseClicked(new EventHandler<MouseEvent>() {
-							
+								
 							@Override
 							public void handle(MouseEvent event2) {
 								
@@ -595,6 +620,7 @@ public class WsTesterMainController implements Initializable {
 						lista.add(newIcoM6);
 						bar.getChildren().addAll(newIcoM6);
 						poz=poz+100;
+						expandIcons(newIcoM6);
 						
 						newIcoM6.setOnMouseClicked(new EventHandler<MouseEvent>() {
 							
@@ -616,6 +642,7 @@ public class WsTesterMainController implements Initializable {
 						//menuBar.getMenus().add(menu2);
 						stageEnv.initOwner(pane.getScene().getWindow());
 						stageEnv.setScene(second);
+						//stageEnv.initStyle(StageStyle.TRANSPARENT);
 						//stageEnv.initOwner(WsTesterMain.stage);
 						stageEnv.show();
 						
