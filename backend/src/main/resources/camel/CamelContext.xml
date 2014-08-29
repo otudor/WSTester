@@ -27,8 +27,9 @@
 		</property>
 	</bean>
 	
-   	<bean id="myDb" class="com.mongodb.Mongo" /> 
-
+   	<bean id="mongoConnection" class="com.mongodb.Mongo" />
+	<bean id="soapConnection" class="org.apache.camel.component.cxf.CxfEndpoint" />
+	
 <!-- 	<bean id="mysql" class="org.apache.commons.dbcp.BasicDataSource" /> -->
 
 	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
