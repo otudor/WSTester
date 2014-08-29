@@ -1,14 +1,19 @@
 package com.wstester.dispatcher;
 import java.util.HashMap;
 
+import javax.sql.DataSource;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import com.wstester.events.StepRunEvent;
+import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 
@@ -16,35 +21,36 @@ import com.wstester.model.Step;
 public class MySQLRoute extends RouteBuilder implements ApplicationEventPublisherAware {
 
 	private ApplicationEventPublisher publisher;
-	private Step step = null;
+	private MySQLStep step = null;
 	
+	@Autowired
+	private MysqlDataSource dataSource;
 	
 	@Override
 	public void configure() throws Exception {
 		// TODO Auto-generated method stub
-		from("jms:MySQlQueue")
+		from("jms:MySQLQueue")
 		.process(new Processor() {
 			
 			@Override
 			public void process(Exchange exchange) throws Exception {
-				step = exchange.getIn().getBody(Step.class);
-
-				HashMap<String, String> query = new HashMap<String, String>();
-				String name = "popescua";
-				String key = "nume";
-				query.put(key, name);
 				
-				exchange.getIn().setBody(query);
-				exchange.getIn().setHeader("CamelMySQLDatabase", "test");
-				exchange.getIn().setHeader("CamelMySQLCollection", "angajati");
+				step = exchange.getIn().getBody(MySQLStep.class);
+				
+				dataSource.setServerName("localhost");
+				dataSource.setPortNumber(3306);
+				dataSource.setDatabaseName("angajati");
+				dataSource.setUser("appuser");
+				dataSource.setPassword("apppass");
+				exchange.getIn().setBody("SELECT * FROM nume");
 			}
 		})
-		.to("MySql://mysql?database=none&collection=none&operation=findOneByQuery&dynamicity=true")
+		.recipientList(simple("jdbc:dataSource"))
 		.process(new Processor() {
 
 			@Override
 			public void process(Exchange exchange) throws Exception {
-
+				
 				Message in = exchange.getIn();
 				
 				StepRunEvent event = new StepRunEvent(this);
@@ -59,8 +65,7 @@ public class MySQLRoute extends RouteBuilder implements ApplicationEventPublishe
 		});
 	}
 	@Override
-	public void setApplicationEventPublisher(ApplicationEventPublisher arg0) {
-		// TODO Auto-generated method stub
-		
+	public void setApplicationEventPublisher(ApplicationEventPublisher publisher) {
+		this.publisher = publisher;
 	}
 }

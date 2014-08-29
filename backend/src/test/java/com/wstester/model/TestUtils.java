@@ -1,5 +1,8 @@
 package com.wstester.model;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -605,7 +608,7 @@ public class TestUtils {
 		return testProject;
 	}
 	
-	public static TestProject getSOAPTestPlan(){
+	public static TestProject getSOAPTestPlan() throws IOException{
 		
 		TestProject testProject = new TestProject();
 		testProject.setName("Test Project");
@@ -630,6 +633,7 @@ public class TestUtils {
 		service3.setName("Service SOAP");
 		service3.setPort("80");
 		service3.setPath("/data/info.wso");
+		service3.setWsdlURL("http://footballpool.dataaccess.eu/data/info.wso?wsdl");
 		serviceList3.add(service3);
 		
 		// construct server list
@@ -638,7 +642,7 @@ public class TestUtils {
 		// Server 4
 		Server server22 = new Server();
 		server22.setDescription("This is the second server of the second env");
-		server22.setIp("footballpool.dataaccess.eu");
+		server22.setIp("http://footballpool.dataaccess.eu");
 		server22.setName("Server 22");
 		server22.setServices(serviceList3);
 		serverList2.add(server22);
@@ -669,6 +673,8 @@ public class TestUtils {
 		oneAssert4.setAsserts("Forth assert");
 		assertList4.add(oneAssert4);
 		step4.setAssertList(assertList4);
+		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
+		step4.setRequest(request);
 		stepList2.add(step4);
 		
 		// construct test case list

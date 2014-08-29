@@ -21,7 +21,7 @@ public class MongoConnection {
 	public String getConnection(String body, @Header(Exchange.SLIP_ENDPOINT) String previous) throws Exception{
 
 		if(previous == null)
-			return "mongodb://myDb?database=none&collection=none&dynamicity=true";
+			return "mongodb://mongoConnection?database=none&collection=none&dynamicity=true";
 		else
 			return null;
 	}
