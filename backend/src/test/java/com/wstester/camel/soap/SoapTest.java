@@ -1,4 +1,4 @@
-package com.wstester.camel;
+package com.wstester.camel.soap;
 
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
