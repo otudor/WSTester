@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -24,6 +26,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBoxBuilder;
 import javafx.scene.paint.Color;
@@ -39,6 +42,7 @@ import com.wstester.Delta;
 import com.wstester.EnvironmentsAppFactory;
 import com.wstester.MainPresenter;
 import com.wstester.WsTesterMain;
+import com.wstester.model.Server;
 
 public class WsTesterMainController implements Initializable {
 	@FXML
@@ -54,6 +58,12 @@ public class WsTesterMainController implements Initializable {
 	private VBox newIco3= new VBox();
 	private VBox newIco4= new VBox();
 	private VBox newIco5= new VBox();
+	private VBox newIcoM1= new VBox();
+	private VBox newIcoM2= new VBox();
+	private VBox newIcoM3= new VBox();
+	private VBox newIcoM4= new VBox();
+	private VBox newIcoM5= new VBox();
+	private VBox newIcoM6= new VBox();
 	private Stage stage = new Stage();
 	private Stage stageSoap = new Stage();
 	private Stage stageRest = new Stage();
@@ -66,12 +76,14 @@ public class WsTesterMainController implements Initializable {
 	boolean isDisplayed3 =false;
 	boolean isDisplayed4 =false;
 	boolean isDisplayed5 =false;
+	private int poz = 200;
 	MenuBar menuBar ;
 	Menu menu;
 	private Menu menuRnd = new Menu("CreateRnd");
 	Parent root;
 	final Delta dragDelta2 = new Delta();
-
+	List<VBox> lista = new ArrayList<VBox>();
+	private int ind=0;
 	Menu menu2 = new Menu("Environments definition");
 
 	//main functionality 
@@ -81,7 +93,7 @@ public class WsTesterMainController implements Initializable {
 		this.createAssetsWindow();
 		this.createEnvWindow();
 		this.createSOAPWindow();
-		this.createTaskbar();
+		//this.createTaskbar();
 		this.createRESTWindow();
 		this.createRndWindow();
 		stage.initOwner(WsTesterMain.stage);
@@ -118,10 +130,39 @@ public class WsTesterMainController implements Initializable {
 		newIco5 = (VBox) CreateIcon("/images/document-open-remote.png","Generate random JSON");
 		newIco5.setLayoutX(10);
 		newIco5.setLayoutY(400);
+		newIcoM1 = (VBox) CreateIcon("/images/start.png","Start");
+		newIcoM1.setLayoutX(1);
+		newIcoM1.setLayoutY(1);
+		//newIcoM2 = (VBox) CreateIcon("/images/task_img_open.png","Soap");	
+		//newIcoM2.setLayoutX(poz);
+		//newIcoM2.setLayoutY(1);
+		
+		//newIcoM3 = (VBox) CreateIcon("/images/task_img_open.png","Rest");	
+		//newIcoM3.setLayoutX(poz);
+		//newIcoM3.setLayoutY(1);
+		
+		
+		
+		
+		System.out.println(stage.getHeight());
+		//VBox.setVgrow(newIco6, Priority.ALWAYS);
+
 		topPane.getChildren().addAll(newIco,newIco2,newIco3,newIco4,newIco5);
+		bar.getChildren().addAll(newIcoM1);
 	}
-	private void createTaskbar(){
-		Label menuLabel = new Label("Start");
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//meniu vechi
+	/*private void createTaskbar(){
+		Label menuLabel = new Label("Startaa");
 		menuLabel.setStyle(" -fx-padding: 0px;");
 		menuLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
 	        @Override
@@ -137,7 +178,7 @@ public class WsTesterMainController implements Initializable {
 		bar.getStylesheets().add(WsTesterMainController.class.getResource("/styles/application.css").toExternalForm());
 		bar.getChildren().add(menuBar);
 		
-	}
+	}*/
 	
 	public void moveIcons(VBox icon){
 		  icon.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -146,7 +187,7 @@ public class WsTesterMainController implements Initializable {
 		    dragDelta2.x = icon.getLayoutX() - event.getSceneX();
 		    dragDelta2.y = icon.getLayoutY() - event.getSceneY();
 		    icon.setCursor(Cursor.MOVE); 
-		    AnchorPane.setTopAnchor(menuBar, 15.0);
+		    //AnchorPane.setTopAnchor(menuBar, 15.0);
 		    System.out.println("aici");
 		   }
 		  });
@@ -176,34 +217,71 @@ public class WsTesterMainController implements Initializable {
 				// TODO Auto-generated method stub	
 				if(event.getClickCount() == 2 && isDisplayed3 == false) {
 					stageSoap = new Stage();
+					
 					isDisplayed3 = true;
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/SOAPDefinition.fxml"));
 
 						Scene second = new Scene(root);
+						
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
-						root.getStyleClass().add("mainWindow");	
-						Menu menu2 = new Menu("CreateSOAP");
-						menuBar.getMenus().add(menu2);
-						stageSoap.initOwner(pane.getScene().getWindow());
+						root.getStyleClass().add("mainWind");
+						
+						newIcoM2 = (VBox) CreateIcon("/images/task_img_open.png","Soap");	
+						newIcoM2.setLayoutX(poz);
+						newIcoM2.setLayoutY(1);
+						lista.add(newIcoM2);
+						bar.getChildren().add(newIcoM2);
+						poz=poz+100;										
+						
+						
+						
+						
+						newIcoM2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+							
+							@Override
+							public void handle(MouseEvent event2) {
+								
+								// TODO Auto-generated method stub	
+								if(event2.getClickCount() == 1 ) {
+									
+									stageSoap.toFront();
+									
+								}
+								
+								 
+								
+							}
+						});
+						
+						
+						
+						
+					//Menu menu2 = new Menu("CreateSOAP");
+						//menuBar.getMenus().add(menu2);
+						
+						//stageSoap.initOwner(pane.getScene().getWindow());
 						stageSoap.setScene(second);
 						
 						stageSoap.setTitle("SOAP Window");
-						//stageSoap.initOwner(WsTesterMain.stage);
-						//stageSoap.initModality(Modality.APPLICATION_MODAL);
+						stageSoap.initOwner(WsTesterMain.stage);
+						//stageSoap.initModality(Modality.WINDOW_MODAL);
 						
 						stageSoap.show();
+						
 						
 						// modificare laur: inchidere stage din taskbar
 						
 						stageSoap.setOnCloseRequest(new EventHandler<WindowEvent>() {
 					          public void handle(WindowEvent we) {
-					        	  
+					        	  ind=lista.indexOf(newIcoM2);
+					        	  arrangeIcons(ind);
+					        	  lista.remove(lista.indexOf(newIcoM2));				        	 
 					              System.out.println("Inchid stage'ul");
-					              
-					              menuBar.getMenus().remove(menu2);
+					              bar.getChildren().remove(newIcoM2);
 					              isDisplayed3 = false;
 					              stageSoap=null;
+					              poz=poz-100;
 					          }
 					      }); 
 						
@@ -238,19 +316,44 @@ public class WsTesterMainController implements Initializable {
 		newIco4.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 			@Override
 			public void handle(MouseEvent event) {
-				stageRest = new Stage();
+				
 				
 				// TODO Auto-generated method stub	
 				if(event.getClickCount() == 2 && isDisplayed4 == false) {
-
+					stageRest = new Stage();
 					isDisplayed4 = true;
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/Rest.fxml"));
 						Scene second = new Scene(root);
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
-						root.getStyleClass().add("mainWindow");	
-						Menu menu2 = new Menu("CreateREST");
-						menuBar.getMenus().add(menu2);
+						root.getStyleClass().add("mainWind");
+						
+						newIcoM3 = (VBox) CreateIcon("/images/task_img_open.png","Rest");	
+						newIcoM3.setLayoutX(poz);
+						newIcoM3.setLayoutY(1);
+						lista.add(newIcoM3);
+						bar.getChildren().add(newIcoM3);
+						poz=poz+100;
+						
+						newIcoM3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+							
+							@Override
+							public void handle(MouseEvent event2) {
+								
+								// TODO Auto-generated method stub	
+								if(event2.getClickCount() == 1 ) {
+									
+									stageRest.toFront();
+									
+								}
+								
+								 
+								
+							}
+						});
+						
+						//Menu menu2 = new Menu("CreateREST");
+						//menuBar.getMenus().add(menu2);
 						stageRest.initOwner(pane.getScene().getWindow());
 						//stage.initModality(Modality.WINDOW_MODAL);
 						stageRest.setScene(second);
@@ -261,12 +364,16 @@ public class WsTesterMainController implements Initializable {
 						// modificare laur
 						stageRest.setOnCloseRequest(new EventHandler<WindowEvent>() {
 					          public void handle(WindowEvent we) {
+					        	  ind=lista.indexOf(newIcoM3);
+					        	  arrangeIcons(ind);
+					        	  lista.remove(lista.indexOf(newIcoM3));
 					        	  
 					              System.out.println("Inchid stage'ul rest");
-					              menuBar.getMenus().remove(menu2);
+					              bar.getChildren().remove(newIcoM3);;
 					              //stageRest.setScene(null);
 					              isDisplayed4 = false;
 					              stageRest=null;
+					              poz=poz-100;
 					          }
 					      });        
 					    
@@ -280,11 +387,12 @@ public class WsTesterMainController implements Initializable {
 						e.printStackTrace();
 					}
 					
-					if (isDisplayed4 == true && event.getClickCount() == 2)
-					{
-						stageRest.toFront();
-						
-					}
+					
+				}
+				if (isDisplayed4 == true && event.getClickCount() == 2)
+				{
+					stageRest.toFront();
+					
 				}
 			}
 		});
@@ -304,17 +412,40 @@ public class WsTesterMainController implements Initializable {
 			@Override
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
-				stageRnd = new Stage();
+				
 				if(event.getClickCount() == 2 && isDisplayed5 == false) {
-
+					stageRnd = new Stage();
 					isDisplayed5 = true;
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
 						Scene second = new Scene(root);
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
-						root.getStyleClass().add("mainWindow");	
-
-						menuBar.getMenus().add(menuRnd);
+						root.getStyleClass().add("mainWind");
+						
+						newIcoM4 = (VBox) CreateIcon("/images/task_img_open.png","RND");	
+						newIcoM4.setLayoutX(poz);
+						newIcoM4.setLayoutY(1);
+						lista.add(newIcoM4);
+						bar.getChildren().add(newIcoM4);
+						poz=poz+100;
+						newIcoM4.setOnMouseClicked(new EventHandler<MouseEvent>() {
+							
+							@Override
+							public void handle(MouseEvent event2) {
+								
+								// TODO Auto-generated method stub	
+								if(event2.getClickCount() == 1 ) {
+									
+									stageRnd.toFront();
+									
+								}
+								
+								 
+								
+							}
+						});
+						
+						//menuBar.getMenus().add(menuRnd);
 						stageRnd.initOwner(pane.getScene().getWindow());
 						//stage.initModality(Modality.WINDOW_MODAL);
 						stageRnd.setScene(second);
@@ -325,11 +456,15 @@ public class WsTesterMainController implements Initializable {
 						
 						stageRnd.setOnCloseRequest(new EventHandler<WindowEvent>() {
 					          public void handle(WindowEvent we) {
-					        	  
+					        	  ind=lista.indexOf(newIcoM4);
+					        	  arrangeIcons(ind);
+					        	  lista.remove(lista.indexOf(newIcoM4));
+					        	 
 					              System.out.println("Inchid stage'ul");
-					              menuBar.getMenus().remove(menuRnd);
+					              bar.getChildren().remove(newIcoM4);
 					              isDisplayed5 = false;
 					              stageRnd=null;
+					              poz=poz-100;
 					          }
 					      });        
 						
@@ -339,6 +474,11 @@ public class WsTesterMainController implements Initializable {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+				}
+				if (isDisplayed5 == true && event.getClickCount() == 2)
+				{
+					stageRnd.toFront();
+					
 				}
 			}
 		});
@@ -352,17 +492,43 @@ public class WsTesterMainController implements Initializable {
 		newIco.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 			@Override
 			public void handle(MouseEvent event) {
-				stageAssets = new Stage();
+				
 				if(event.getClickCount() == 2 && isDisplayed == false) {
+					stageAssets = new Stage();
 					isDisplayed = true;
+					
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/Assets.fxml"));
 						Scene second = new Scene(root);
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
-						root.getStyleClass().add("mainWindow");									
+						root.getStyleClass().add("mainWind");
+						
+						newIcoM5 = (VBox) CreateIcon("/images/task_img_open.png","Assest");	
+						newIcoM5.setLayoutX(poz);
+						newIcoM5.setLayoutY(1);
+						lista.add(newIcoM5);
+						bar.getChildren().add(newIcoM5);
+						poz=poz+100;
+						newIcoM5.setOnMouseClicked(new EventHandler<MouseEvent>() {
+							
+							@Override
+							public void handle(MouseEvent event2) {
+								
+								// TODO Auto-generated method stub	
+								if(event2.getClickCount() == 1 ) {
+									
+									stageAssets.toFront();
+									
+								}
+								
+								 
+								
+							}
+						});
+						
 						//stage.initModality(Modality.WINDOW_MODAL);
-						menu = new Menu("Assets");
-						menuBar.getMenus().add(menu);
+						//menu = new Menu("Assets");
+						//menuBar.getMenus().add(menu);
 						stageAssets.initOwner(pane.getScene().getWindow());
 						stageAssets.setScene(second);
 						//stageAssets.initOwner(WsTesterMain.stage);
@@ -371,12 +537,15 @@ public class WsTesterMainController implements Initializable {
 						// modificare laur
 						stageAssets.setOnCloseRequest(new EventHandler<WindowEvent>() {
 					          public void handle(WindowEvent we) {
+					        	  ind=lista.indexOf(newIcoM5);
+					        	  arrangeIcons(ind);
+					        	  lista.remove(lista.indexOf(newIcoM5));
 					        	  
 					              System.out.println("Inchid stage'ul");
-					              menuBar.getMenus().remove(menu);
+					              bar.getChildren().remove(newIcoM5);
 					              isDisplayed = false;
 					              stageAssets=null;
-					             
+					              poz=poz-100;
 					          }
 					      });        
 						
@@ -385,6 +554,11 @@ public class WsTesterMainController implements Initializable {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+				}
+				if (isDisplayed == true && event.getClickCount() == 2)
+				{
+					stageAssets.toFront();
+					
 				}
 			}
 		});
@@ -399,9 +573,10 @@ public class WsTesterMainController implements Initializable {
 		newIco2.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 			@Override
 			public void handle(MouseEvent event) {
-				stageEnv = new Stage();
+				
 				// TODO Auto-generated method stub	
 				if(event.getClickCount() == 2 && isDisplayed2 == false) {
+					stageEnv = new Stage();
 					isDisplayed2 = true;
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/EnvironmentManager.fxml"));
@@ -412,9 +587,33 @@ public class WsTesterMainController implements Initializable {
 						Scene second = new Scene(root, 600, 480);
 						stage.setTitle("Environments window");
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
-						root.getStyleClass().add("mainWindow");	
-
-						menuBar.getMenus().add(menu2);
+						root.getStyleClass().add("mainWind");	
+						
+						newIcoM6 = (VBox) CreateIcon("/images/task_img_open.png","Env");	
+						newIcoM6.setLayoutX(poz);
+						newIcoM6.setLayoutY(1);
+						lista.add(newIcoM6);
+						bar.getChildren().addAll(newIcoM6);
+						poz=poz+100;
+						
+						newIcoM6.setOnMouseClicked(new EventHandler<MouseEvent>() {
+							
+							@Override
+							public void handle(MouseEvent event2) {
+								
+								// TODO Auto-generated method stub	
+								if(event2.getClickCount() == 1 ) {
+									
+									stageEnv.toFront();
+									
+								}
+								
+								 
+								
+							}
+						});
+						
+						//menuBar.getMenus().add(menu2);
 						stageEnv.initOwner(pane.getScene().getWindow());
 						stageEnv.setScene(second);
 						//stageEnv.initOwner(WsTesterMain.stage);
@@ -423,11 +622,15 @@ public class WsTesterMainController implements Initializable {
 						// stergere din taskbar upon closure
 						stageEnv.setOnCloseRequest(new EventHandler<WindowEvent>() {
 					          public void handle(WindowEvent we) {
-					        	  
+					        	  ind=lista.indexOf(newIcoM6);
+					        	  arrangeIcons(ind);
+					        	  lista.remove(lista.indexOf(newIcoM6));
+					        	 
 					              System.out.println("Inchid stage'ul");
-					              menuBar.getMenus().remove(menu2);
+					              bar.getChildren().remove(newIcoM6);;
 					              isDisplayed2 = false;
 					              stageEnv=null;
+					              poz=poz-100;
 					          }
 					      });        
 						
@@ -437,6 +640,11 @@ public class WsTesterMainController implements Initializable {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+				}
+				if (isDisplayed2 == true && event.getClickCount() == 2)
+				{
+					stageEnv.toFront();
+					
 				}
 			}
 		});
@@ -504,4 +712,13 @@ public class WsTesterMainController implements Initializable {
 	 */
 	//maximize the assets window
 	//menuBar
+	
+	private void arrangeIcons(int i){
+		
+	
+	 for(i=ind;i<lista.size();i++)
+	  {
+		  lista.get(i).setLayoutX(lista.get(i).getLayoutX()-100);
+	  }
+	}
 }

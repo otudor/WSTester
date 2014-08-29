@@ -19,6 +19,7 @@ public class MainPresenter
     private EnvironmentDetailPresenter envDetailPresenter;
     private ServerDetailsPresenter ftpDetailPresenter;
     private MongoDBPresenter mngDBPresenter;
+    private MySQLDBPresenter mysqlDBPresenter;
 
     public void setEnvironmentSearchPresenter(EnvironmentSearchPresenter envSearchPresenter)
     {
@@ -43,6 +44,11 @@ public class MainPresenter
     public void setMongoDBPresenter(MongoDBPresenter mngDBPresenter)
     {
         this.mngDBPresenter = mngDBPresenter;
+    }
+    
+    public void setMySQLPresenter(MySQLDBPresenter mysqlDBPresenter)
+    {
+        this.mysqlDBPresenter = mysqlDBPresenter;
     }
     
     public Parent getView()
@@ -75,6 +81,12 @@ public class MainPresenter
     {
 	  	mngDBPresenter.setMongoDB( mongoUID);
         contentArea.setCenter( mngDBPresenter.getView());
+    }
+    
+    public void showMySQLDb( String mysqlUID)
+    {
+	  	mysqlDBPresenter.setMySQLDB( mysqlUID);
+        contentArea.setCenter( mysqlDBPresenter.getView());
     }
     
     public String getFirstEnvironment()

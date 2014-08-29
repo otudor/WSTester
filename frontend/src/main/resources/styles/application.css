@@ -1,14 +1,18 @@
 #mainWindow{
-    -fx-background-image: url("../images/wallpaper23.jpg");
+    -fx-background-image: url("../images/dice.jpg");
     -fx-background-repeat: stretch;  
     -fx-background-size: stretch;  
 }
 
-.mainWindow{
-    -fx-background-image: url("../images/wallpaper23.jpg");
+.mainWind
+{
+	-fx-background-image: url("../images/wallpaper23.jpg");
     -fx-background-repeat: stretch;  
-    -fx-background-size: stretch;  
+    -fx-background-size: stretch; 
+	
 }
+
+
 
 
 .img {
@@ -18,11 +22,22 @@
 }
 .bar
 {
-  -fx-background-color: #81BEF7;
-  -fx-background-repeat: stretch;  
-  -fx-background-size: stretch;
-
+  
+	-fx-background-radius: 10;
+	-fx-border-radius: 20;
+	-fx-border-width: 2;
+	-fx-background-color: linear-gradient(to top, black,derive(black,40%)); 
+				-fx-opacity: 0.8;
+	-fx-border-color: 
+			derive(black,70%),
+			derive(black,40%),
+			
+			derive(black, 30%);
+	-fx-background-repeat: stretch;  
+    -fx-background-size: stretch;
+			
 }
+ 
 #TestingHooverCss:hover {
     -fx-background-color: 
         linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),

@@ -1,7 +1,10 @@
 package com.wstester;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import com.wstester.model.Environment;
@@ -13,7 +16,8 @@ public class MongoDBPresenter {
     @FXML private TextField MongoPort;
     @FXML private TextField MongoUser;
     @FXML private TextField MongoPassfield;
-
+    
+    
     private EnvironmentService environmentService;
     private MainPresenter mainPresenter;
 
@@ -49,11 +53,39 @@ public class MongoDBPresenter {
         MongoUser.setText( "dfkajshdfkdsf");
         MongoPassfield.setText( "Adfsadf");
         
+        MongoName.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
+    	MongoPort.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
+    	MongoUser.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
+    	MongoPassfield.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
+        
        /* MongoService mng = mongoService (copie dupa ftpService) .getServiceByUID( serviceUID);
         MongoName.setText( mng.getPort());
         MongoPort.setText( mng.getDbName());
         MongoUser.setText( mng.getUser());
         MongoPassfield.setText( mng.getPassword());*/
     }
-
+    
+    public void seteditable(ActionEvent event)
+    {
+    	MongoName.setEditable(true);
+    	MongoPort.setEditable(true);
+    	MongoUser.setEditable(true);
+    	MongoPassfield.setEditable(true);
+    	MongoName.setStyle("-fx-background-color: rgba(255, 255, 255, 0.95);");
+    	MongoPort.setStyle("-fx-background-color: rgba(255, 255, 255, 0.95);");
+    	MongoUser.setStyle("-fx-background-color: rgba(255, 255, 255, 0.95);");
+    	MongoPassfield.setStyle("-fx-background-color: rgba(255, 255, 255, 0.95);");
+    	
+    }
+    public void setuneditable(ActionEvent event)
+    {
+    	MongoName.setEditable(false);
+    	MongoPort.setEditable(false);
+    	MongoUser.setEditable(false);
+    	MongoPassfield.setEditable(false);
+    	MongoName.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
+    	MongoPort.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
+    	MongoUser.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
+    	MongoPassfield.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
+    }
 }

@@ -12,6 +12,7 @@ public class EnvironmentsAppFactory
     private EnvironmentService environmentService;
     private ServerService ftpService;
     private MongoDBPresenter mngDBPresenter;
+    private MySQLDBPresenter mysqlDBPresenter;
     
     public MainPresenter getMainPresenter()
     {
@@ -26,6 +27,7 @@ public class EnvironmentsAppFactory
                 mainPresenter.setEnvironmentSearchPresenter( getEnvironmentSearchPresenter());
                 mainPresenter.setFTPDetailPresenter( getFTPServerDetailPresenter());
                 mainPresenter.setMongoDBPresenter( getMongoDBPresenter());
+                mainPresenter.setMySQLPresenter( getMySQLPresenter());
             }
             catch (IOException e)
             {
@@ -113,6 +115,26 @@ public class EnvironmentsAppFactory
             }
         }
         return mngDBPresenter;
+    }
+    
+    public MySQLDBPresenter getMySQLPresenter()
+    {
+        if (mysqlDBPresenter == null)
+        {
+            try
+            {
+                FXMLLoader loader = new FXMLLoader();
+                loader.load(getClass().getResourceAsStream("/fxml/MysqlWindow.fxml"));
+                mysqlDBPresenter = (MySQLDBPresenter) loader.getController();
+                mysqlDBPresenter.setEnvironmentService(getEnvironmentService());
+                mysqlDBPresenter.setMainPresenter(getMainPresenter());
+            }
+            catch (IOException e)
+            {
+                throw new RuntimeException("Unable to load MysqlDB.fxml", e);
+            }
+        }
+        return mysqlDBPresenter;
     }
     
     public EnvironmentService getEnvironmentService()
