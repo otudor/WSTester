@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import com.wstester.actions.TestRunner;
-import com.wstester.camel.TestBaseClass;
 import com.wstester.model.Response;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
