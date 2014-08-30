@@ -1,4 +1,4 @@
-package controller;
+package com.wstester.assets;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,10 +19,6 @@ import javafx.stage.FileChooser;
 
 import org.apache.commons.io.FileUtils;
 import org.controlsfx.dialog.Dialogs;
-
-import com.wstester.assets.AssetModel;
-import com.wstester.assets.Table;
-import com.wstester.assets.TypeInterface;
 
 
 public class EventHandlerDemoController{
