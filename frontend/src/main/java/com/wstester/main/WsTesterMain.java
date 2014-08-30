@@ -1,4 +1,4 @@
-package com.wstester.environment;
+package com.wstester.main;
 
 import javafx.application.Application;
 import javafx.fxml.FXML;
