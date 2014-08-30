@@ -39,10 +39,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
-import com.wstester.Delta;
-import com.wstester.EnvironmentsAppFactory;
-import com.wstester.MainPresenter;
-import com.wstester.WsTesterMain;
+import com.wstester.environment.Delta;
+import com.wstester.environment.EnvironmentsAppFactory;
+import com.wstester.environment.MainPresenter;
+import com.wstester.environment.WsTesterMain;
 import com.wstester.model.Server;
 
 public class WsTesterMainController implements Initializable {

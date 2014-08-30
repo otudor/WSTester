@@ -1,4 +1,4 @@
-package com.wstester;
+package com.wstester.environment;
 
 import java.net.URL;
 import java.util.ResourceBundle;

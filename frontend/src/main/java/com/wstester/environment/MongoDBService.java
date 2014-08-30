@@ -1,4 +1,4 @@
-package com.wstester;
+package com.wstester.environment;
 
 import com.wstester.model.MongoService;
 

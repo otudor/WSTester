@@ -1,4 +1,4 @@
-package com.wstester;
+package com.wstester.environment;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
