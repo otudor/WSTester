@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane fx:id="root"
-            fx:controller="com.wstester.MainPresenter"
+            fx:controller="com.wstester.environment.MainPresenter"
             xmlns:fx="http://javafx.com/fxml">
 
     <!-- Header -->

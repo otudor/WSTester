@@ -6,7 +6,7 @@
 
 <GridPane fx:id="rootFTPDetails"
           hgap="10" vgap="10"
-          fx:controller="com.wstester.ServerDetailsPresenter"
+          fx:controller="com.wstester.environment.ServerDetailsPresenter"
           xmlns:fx="http://javafx.com/fxml">
           
     <children>

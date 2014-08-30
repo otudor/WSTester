@@ -6,7 +6,7 @@
 
 <GridPane fx:id="rootEnvDetails"
           hgap="10" vgap="10"
-          fx:controller="com.wstester.EnvironmentDetailPresenter"
+          fx:controller="com.wstester.environment.EnvironmentDetailPresenter"
           xmlns:fx="http://javafx.com/fxml">
 
     <children>
