@@ -1,4 +1,4 @@
-package com.assets;
+package com.wstester.assets;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

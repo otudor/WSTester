@@ -20,9 +20,9 @@ import javafx.stage.FileChooser;
 import org.apache.commons.io.FileUtils;
 import org.controlsfx.dialog.Dialogs;
 
-import com.assets.AssetModel;
-import com.assets.Table;
-import com.assets.TypeInterface;
+import com.wstester.assets.AssetModel;
+import com.wstester.assets.Table;
+import com.wstester.assets.TypeInterface;
 
 
 public class EventHandlerDemoController{

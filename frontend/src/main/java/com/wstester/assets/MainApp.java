@@ -1,4 +1,4 @@
-package com.assets;
+package com.wstester.assets;
 
 
 import java.io.IOException;
