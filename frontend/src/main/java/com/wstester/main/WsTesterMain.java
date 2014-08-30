@@ -18,7 +18,7 @@ public class WsTesterMain extends Application {
 	public void start(Stage stage) throws Exception {
 		//stage = new Stage(StageStyle.UTILITY);
 		WsTesterMain.stage=stage;
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/WsTesterMain.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/main/WsTesterMain.fxml"));
         Scene scene = new Scene(root);
         
         scene.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());

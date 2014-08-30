@@ -238,7 +238,7 @@ public class WsTesterMainController implements Initializable {
 					
 					isDisplayed3 = true;
 					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/SOAPDefinition.fxml"));
+						root = FXMLLoader.load(getClass().getResource("/fxml/SOAP/SOAPDefinition.fxml"));
 
 						Scene second = new Scene(root);
 						
@@ -341,7 +341,7 @@ public class WsTesterMainController implements Initializable {
 					stageRest = new Stage();
 					isDisplayed4 = true;
 					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/Rest.fxml"));
+						root = FXMLLoader.load(getClass().getResource("/fxml/REST/Rest.fxml"));
 						Scene second = new Scene(root);
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
 						root.getStyleClass().add("mainWind");
@@ -437,7 +437,7 @@ public class WsTesterMainController implements Initializable {
 					stageRnd = new Stage();
 					isDisplayed5 = true;
 					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
+						root = FXMLLoader.load(getClass().getResource("/fxml/RndWindow/Scene.fxml"));
 						Scene second = new Scene(root);
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
 						root.getStyleClass().add("mainWind");
@@ -521,7 +521,7 @@ public class WsTesterMainController implements Initializable {
 					isDisplayed = true;
 					
 					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/Assets.fxml"));
+						root = FXMLLoader.load(getClass().getResource("/fxml/assets/Assets.fxml"));
 						Scene second = new Scene(root);
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
 						root.getStyleClass().add("mainWind");
@@ -603,7 +603,7 @@ public class WsTesterMainController implements Initializable {
 					stageEnv = new Stage();
 					isDisplayed2 = true;
 					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/EnvironmentManager.fxml"));
+						root = FXMLLoader.load(getClass().getResource("/fxml/environment/EnvironmentManager.fxml"));
 						EnvironmentsAppFactory factory = new EnvironmentsAppFactory();
 	                    MainPresenter mainPresenter = factory.getMainPresenter();
                         mainPresenter.loadEnvironments();

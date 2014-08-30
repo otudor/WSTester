@@ -20,7 +20,7 @@ public class EnvironmentsAppFactory
             try
             {
                 FXMLLoader loader = new FXMLLoader();
-                loader.load(getClass().getResourceAsStream("/fxml/EnvironmentManager.fxml"));
+                loader.load(getClass().getResourceAsStream("/fxml/environment/EnvironmentManager.fxml"));
                 mainPresenter = (MainPresenter) loader.getController();
                 mainPresenter.setEnvironmentDetailPresenter( getEnvironmentDetailPresenter());
                 mainPresenter.setEnvironmentSearchPresenter( getEnvironmentSearchPresenter());
@@ -43,7 +43,7 @@ public class EnvironmentsAppFactory
             try
             {
                 FXMLLoader loader = new FXMLLoader();
-                loader.load(getClass().getResourceAsStream("/fxml/EnvironmentSearch.fxml"));
+                loader.load(getClass().getResourceAsStream("/fxml/environment/EnvironmentSearch.fxml"));
                 envSearchPresenter = (EnvironmentSearchPresenter) loader.getController();
                 envSearchPresenter.setEnvService(getEnvironmentService());
                 envSearchPresenter.setMainPresenter(getMainPresenter());
@@ -63,7 +63,7 @@ public class EnvironmentsAppFactory
             try
             {
                 FXMLLoader loader = new FXMLLoader();
-                loader.load(getClass().getResourceAsStream("/fxml/ServerDetails.fxml"));
+                loader.load(getClass().getResourceAsStream("/fxml/environment/ServerDetails.fxml"));
                 ftpDetailPresenter = ( ServerDetailsPresenter) loader.getController();
                 ftpDetailPresenter.setEnvService( getEnvironmentService());
                 ftpDetailPresenter.setMainPresenter(getMainPresenter());
@@ -83,7 +83,7 @@ public class EnvironmentsAppFactory
             try
             {
                 FXMLLoader loader = new FXMLLoader();
-                loader.load(getClass().getResourceAsStream("/fxml/EnvironmentDetail.fxml"));
+                loader.load(getClass().getResourceAsStream("/fxml/environment/EnvironmentDetail.fxml"));
                 envDetailPresenter = (EnvironmentDetailPresenter) loader.getController();
                 envDetailPresenter.setEnvironmentService( getEnvironmentService());
                 envDetailPresenter.setMainPresenter(getMainPresenter());
@@ -103,7 +103,7 @@ public class EnvironmentsAppFactory
             try
             {
                 FXMLLoader loader = new FXMLLoader();
-                loader.load(getClass().getResourceAsStream("/fxml/MongoDB.fxml"));
+                loader.load(getClass().getResourceAsStream("/fxml/environment/MongoDB.fxml"));
                 mngDBPresenter = (MongoDBPresenter) loader.getController();
                 mngDBPresenter.setEnvironmentService(getEnvironmentService());
                 mngDBPresenter.setMainPresenter(getMainPresenter());
@@ -123,7 +123,7 @@ public class EnvironmentsAppFactory
             try
             {
                 FXMLLoader loader = new FXMLLoader();
-                loader.load(getClass().getResourceAsStream("/fxml/MysqlWindow.fxml"));
+                loader.load(getClass().getResourceAsStream("/fxml/environment/MysqlWindow.fxml"));
                 mysqlDBPresenter = (MySQLDBPresenter) loader.getController();
                 mysqlDBPresenter.setEnvironmentService(getEnvironmentService());
                 mysqlDBPresenter.setMainPresenter(getMainPresenter());
