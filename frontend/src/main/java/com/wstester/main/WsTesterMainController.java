@@ -1,4 +1,4 @@
-package controller;
+package com.wstester.main;
 
 import java.io.IOException;
 import java.net.URL;
