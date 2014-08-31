@@ -95,7 +95,7 @@ public class WsTesterMainController implements Initializable {
 		this.createSOAPWindow();
 		//this.createTaskbar();
 		this.createRESTWindow();
-		this.createRndWindow();
+		this.createTestFactoryWindow();
 		stage.initOwner(WsTesterMain.stage);
 		//stage.initModality(Modality.
 		//stage.initModality(Modality.WINDOW_MODAL);
@@ -425,7 +425,7 @@ public class WsTesterMainController implements Initializable {
 	
 	
 	
-	private void createRndWindow(){
+	private void createTestFactoryWindow(){
 		newIco5.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 
 
@@ -437,7 +437,7 @@ public class WsTesterMainController implements Initializable {
 					stageRnd = new Stage();
 					isDisplayed5 = true;
 					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/RndWindow/Scene.fxml"));
+						root = FXMLLoader.load(getClass().getResource("/fxml/TestFactory/TestFactoryManager.fxml"));
 						Scene second = new Scene(root);
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
 						root.getStyleClass().add("mainWind");
