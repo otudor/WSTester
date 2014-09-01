@@ -6,11 +6,12 @@ import static org.junit.Assert.assertTrue;
 import org.codehaus.jettison.json.JSONArray;
 import org.junit.Test;
 
+import com.wstester.camel.rest.RestTestBaseClass;
 import com.wstester.model.Response;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
 
-public class DependantStepsTest extends TestBaseClass{
+public class DependantStepsTest extends RestTestBaseClass{
 
 	@Test
 	public void twoDependantTests() throws Exception{

@@ -1,9 +1,13 @@
 package com.wstester.camel;
 
 import java.lang.reflect.Field;
+
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.springframework.context.support.AbstractXmlApplicationContext;
+
 import com.wstester.actions.TestRunner;
+
 import java.util.ArrayList;
 
 import com.wstester.dispatcher.ResponseCallback;
@@ -30,5 +34,14 @@ public class TestBaseClass {
 		Field responsField = ResponseCallback.class.getDeclaredField("responseList");
 		responsField.setAccessible(true);
 		responsField.set(ResponseCallback.class, new ArrayList<Response>());
+	}
+	
+	@AfterClass
+	public static void after() throws InterruptedException{
+		
+		if(context != null)
+			while(context.isActive()){
+				Thread.sleep(500);
+			}
 	}
 }
