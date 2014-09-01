@@ -17,9 +17,10 @@ public class ExchangeDelayer extends RouteBuilder{
 		
 		if(step.getDependsOn() != null){
 			while(!stepsFinished.contains(step.getDependsOn())){
-				System.out.println("Waiting for:" + step.getDependsOn());
+				System.out.println("Waiting for: " + step.getDependsOn());
 				Thread.sleep(1000);
 			}
+			stepsFinished.remove(step.getDependsOn());
 		}
 			
 	}
@@ -32,7 +33,7 @@ public class ExchangeDelayer extends RouteBuilder{
 			
 			@Override
 			public void process(Exchange exchange) throws Exception {
-				System.out.println("Added:" + exchange.getIn().getBody(Response.class).getStepID());
+				System.out.println("Received: " + exchange.getIn().getBody(Response.class).getStepID());
 				stepsFinished.add(exchange.getIn().getBody(Response.class).getStepID());
 			}
 		});

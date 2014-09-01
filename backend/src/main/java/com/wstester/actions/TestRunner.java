@@ -1,5 +1,8 @@
 package com.wstester.actions;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import javax.jms.Connection;
 import javax.jms.DeliveryMode;
 import javax.jms.Destination;
@@ -38,8 +41,10 @@ public class TestRunner {
 	
 	public void run() throws Exception{
 	
-		Thread run = new Thread(new RunThread());
-		run.start();
+		ExecutorService executor = Executors.newFixedThreadPool(1);
+		executor.execute(new RunThread());
+		
+		executor.shutdown();
 	}
 	
 	public Response getResponse(String stepId, Long timeout){
@@ -98,7 +103,7 @@ public class TestRunner {
 					         ObjectMessage message = session.createObjectMessage(testStep);
 					        
 					         // Tell the producer to send the message
-					         System.out.println("Sent message: "+  testStep.getID() + " : " + Thread.currentThread().getName());	
+					         System.out.println("Sent message: "+  testStep.getID());	
 					         producer.send(message);
 						}
 					}

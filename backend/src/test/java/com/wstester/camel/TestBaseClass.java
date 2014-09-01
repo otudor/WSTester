@@ -1,16 +1,17 @@
 package com.wstester.camel;
 
 import java.lang.reflect.Field;
-
-import org.junit.After;
 import org.junit.Before;
 import org.springframework.context.support.AbstractXmlApplicationContext;
-
 import com.wstester.actions.TestRunner;
+import java.util.ArrayList;
+
+import com.wstester.dispatcher.ResponseCallback;
+import com.wstester.model.Response;
 
 public class TestBaseClass {
 
-	static public TestRunner testRunner;
+	protected static TestRunner testRunner;
 	static AbstractXmlApplicationContext context;
 	
 	@Before
@@ -22,15 +23,12 @@ public class TestBaseClass {
 			}
 		
 		testRunner = new TestRunner();
-		Field field = testRunner.getClass().getDeclaredField("camelContext");
-		field.setAccessible(true);
-		context = (AbstractXmlApplicationContext) field.get(testRunner);
+		Field contextField = testRunner.getClass().getDeclaredField("camelContext");
+		contextField.setAccessible(true);
+		context = (AbstractXmlApplicationContext) contextField.get(testRunner);
 		
-	}
-	
-	@After
-	public void after(){
-		
-		context.close();
+		Field responsField = ResponseCallback.class.getDeclaredField("responseList");
+		responsField.setAccessible(true);
+		responsField.set(ResponseCallback.class, new ArrayList<Response>());
 	}
 }

@@ -23,7 +23,7 @@ public class ResponseCallback extends RouteBuilder implements ApplicationListene
 			
 			@Override
 			public void process(Exchange exchange) throws Exception {
-
+				System.out.println("ResponseCallback: received: " + exchange.getIn().getBody(Response.class).getStepID());
 				responseList.add(exchange.getIn().getBody(Response.class));
 			}
 		});
