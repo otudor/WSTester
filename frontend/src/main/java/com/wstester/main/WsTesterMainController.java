@@ -320,7 +320,7 @@ public class WsTesterMainController implements Initializable {
 									
 									stageSoap.centerOnScreen();
 									stageSoap.setIconified(false);
-									//stageSoap.toFront();
+									stageSoap.toFront();
 									
 								}
 								
@@ -374,7 +374,7 @@ public class WsTesterMainController implements Initializable {
 				
 				 if (isDisplayed3 == true && event.getClickCount() == 2)
 				{
-					//stageSoap.toFront();
+					stageSoap.toFront();
 					stageSoap.centerOnScreen();
 					stageSoap.setIconified(false);
 					
@@ -427,7 +427,7 @@ public class WsTesterMainController implements Initializable {
 									
 									stageRest.centerOnScreen();
 									stageRest.setIconified(false);
-									//stageRest.toFront();
+									stageRest.toFront();
 									
 								}
 								
@@ -484,7 +484,7 @@ public class WsTesterMainController implements Initializable {
 					
 					stageRest.centerOnScreen();
 					stageRest.setIconified(false);
-					//stageRest.toFront();
+					stageRest.toFront();
 					//stageRest.isShowing();
 					
 					
@@ -550,7 +550,7 @@ public class WsTesterMainController implements Initializable {
 								// TODO Auto-generated method stub	
 								if(event2.getClickCount() == 1 ) {
 									
-									//stageRnd.toFront();
+									stageRnd.toFront();
 									stageRnd.centerOnScreen();
 									stageRnd.setIconified(false);
 									
@@ -593,7 +593,7 @@ public class WsTesterMainController implements Initializable {
 				}
 				if (isDisplayed5 == true && event.getClickCount() == 2)
 				{
-					//stageRnd.toFront();
+					stageRnd.toFront();
 					stageRnd.centerOnScreen();
 					stageRnd.setIconified(false);
 				}
@@ -635,7 +635,7 @@ public class WsTesterMainController implements Initializable {
 								// TODO Auto-generated method stub	
 								if(event2.getClickCount() == 1 ) {
 									
-									//stageAssets.toFront();
+									stageAssets.toFront();
 									stageAssets.centerOnScreen();
 									stageAssets.setIconified(false);
 									
@@ -677,7 +677,7 @@ public class WsTesterMainController implements Initializable {
 				}
 				if (isDisplayed == true && event.getClickCount() == 2)
 				{
-					//stageAssets.toFront();
+					stageAssets.toFront();
 					stageAssets.centerOnScreen();
 					stageAssets.setIconified(false);
 					
@@ -727,7 +727,7 @@ public class WsTesterMainController implements Initializable {
 								// TODO Auto-generated method stub	
 								if(event2.getClickCount() == 1 ) {
 									
-									//stageEnv.toFront();
+									stageEnv.toFront();
 									stageEnv.centerOnScreen();
 									stageEnv.setIconified(false);
 									
@@ -769,7 +769,7 @@ public class WsTesterMainController implements Initializable {
 				}
 				if (isDisplayed2 == true && event.getClickCount() == 2)
 				{
-					//stageEnv.toFront();
+					stageEnv.toFront();
 					stageEnv.centerOnScreen();
 					stageEnv.setIconified(false);
 					
