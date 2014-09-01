@@ -10,17 +10,41 @@ public class MySQLStep extends Step {
 	private static final long serialVersionUID = 1L;
     private String operation;
 
+	public MySQLStep() {
+		uuid = UUID.randomUUID().toString();
+	}
+	
 	public String getOperation() {
 		return operation;
 	}
-
 
 	public void setOperation(String operation) {
 		this.operation = operation;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((operation == null) ? 0 : operation.hashCode());
+		return result;
+	}
 
-	public MySQLStep() {
-		uuid = UUID.randomUUID().toString();
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MySQLStep other = (MySQLStep) obj;
+		if (operation == null) {
+			if (other.operation != null)
+				return false;
+		} else if (!operation.equals(other.operation))
+			return false;
+		return true;
 	}
 }
