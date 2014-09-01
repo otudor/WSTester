@@ -19,6 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.TreeCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
@@ -39,6 +41,7 @@ import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
+import com.wstester.model.ServiceType;
 
 public class EnvironmentSearchPresenter implements Initializable
 {
@@ -103,26 +106,35 @@ public class EnvironmentSearchPresenter implements Initializable
     
     public void loadTreeItems() 
     {
+    	Node icon = null;
+    	
     	TreeItem<Object> root = new TreeItem<Object>("");
     	root.setExpanded(true);
     	
     	List<Environment> envs = (List<Environment>) environmentService.loadEnvironments();    	
     	for (Environment env : envs)
     	{
-    		TreeItem<Object> envNode = new TreeItem<>(env);    		
+    		icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_environment.png")));
+    		TreeItem<Object> envNode = new TreeItem<>(env, icon);    		
     		List<Server> serverlist = env.getServers();
     		
     		if ( serverlist!= null && !serverlist.isEmpty())
     		{
     			for (Server server: serverlist)
     			{
-    				TreeItem<Object> serverNode = new TreeItem<>(server);
+    				icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_server.png")));
+    				TreeItem<Object> serverNode = new TreeItem<>(server, icon);
     				
     				List<Service> services = server.getServices();    				
     				if ( services!= null && !services.isEmpty())
 	    				for (Service service: services)
 	        			{
-	    					TreeItem<Object> serviceNode = new TreeItem<>(service);
+	    					if ( service.getType() == ServiceType.MYSQL)
+	    						icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_MySQL_DB.png")));
+	    					else if ( service.getType() == ServiceType.MONGO)
+	    						icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_Mongo_DB.png")));
+	    					
+	    					TreeItem<Object> serviceNode = new TreeItem<>(service, icon);
 	    					serverNode.getChildren().add( serviceNode);
 	        			}
     				
@@ -325,7 +337,8 @@ public class EnvironmentSearchPresenter implements Initializable
     	    	Server server = environmentService.addServerForEnv(e.getID());
     	    	if (server != null)
     	    	{
-    	    		TreeItem<Object> serverNode = new TreeItem<>(server);
+    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_server.png")));
+    	    		TreeItem<Object> serverNode = new TreeItem<>(server, icon);
     	    		item.getChildren().add( serverNode);
     	    		treeView.getSelectionModel().select( serverNode);
     	    		//show details in right pane
@@ -436,9 +449,9 @@ public class EnvironmentSearchPresenter implements Initializable
     
     public void addEnvAction( ActionEvent event)
     {
-        //to do
     	Environment env = environmentService.createEnvironment("New Environment");
-    	TreeItem<Object> node = new TreeItem<>( env);
+    	Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_environment.png")));
+    	TreeItem<Object> node = new TreeItem<>( env, icon);
         treeView.getRoot().getChildren().add(node);
         //root.getChildren().add(envNode);
         treeView.setEditable(true);

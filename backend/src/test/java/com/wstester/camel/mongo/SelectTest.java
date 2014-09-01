@@ -2,9 +2,13 @@ package com.wstester.camel.mongo;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 import java.util.HashMap;
+
 import org.codehaus.jettison.json.JSONArray;
 import org.junit.Test;
+
+import com.wstester.camel.TestBaseClass;
 import com.wstester.model.MongoStep;
 import com.wstester.model.Response;
 import com.wstester.model.TestProject;

@@ -6,7 +6,6 @@ import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
-
 import com.wstester.events.StepRunEvent;
 import com.wstester.model.Response;
 import com.wstester.model.RestService;
@@ -18,6 +17,7 @@ public class RestRoute extends RouteBuilder implements ApplicationEventPublisher
 	private ApplicationEventPublisher publisher;
 	private RestStep step = null;
 	
+	
 	@Override
 	public void configure() throws Exception {
 		
@@ -26,12 +26,16 @@ public class RestRoute extends RouteBuilder implements ApplicationEventPublisher
 			
 			@Override
 			public void process(Exchange exchange) throws Exception {
-				step = exchange.getIn().getBody(RestStep.class);
 				
+				step = exchange.getIn().getBody(RestStep.class);
+		
 				exchange.getIn().setBody(step.getBody());
 				exchange.getIn().setHeader(Exchange.HTTP_URI, getURI(step));
+				exchange.getIn().setHeader(Exchange.HTTP_QUERY, step.getQuery());
 				exchange.getIn().setHeader(Exchange.HTTP_PATH, step.getPath());
 				exchange.getIn().setHeader(Exchange.HTTP_METHOD, step.getMethod());
+				exchange.getIn().setHeader("name", step.getHeader());
+				exchange.getIn().setHeader("Cookie", "name" + "=" + step.getCookie());
 			}
 		})
 		.recipientList(simple("http://none.none"))

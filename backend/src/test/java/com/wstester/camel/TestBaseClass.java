@@ -1,7 +1,8 @@
-package com.wstester.camel.mongo;
+package com.wstester.camel;
 
 import java.lang.reflect.Field;
 
+import org.junit.After;
 import org.junit.Before;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 
@@ -9,7 +10,7 @@ import com.wstester.actions.TestRunner;
 
 public class TestBaseClass {
 
-	static TestRunner testRunner;
+	static public TestRunner testRunner;
 	static AbstractXmlApplicationContext context;
 	
 	@Before
@@ -25,5 +26,11 @@ public class TestBaseClass {
 		field.setAccessible(true);
 		context = (AbstractXmlApplicationContext) field.get(testRunner);
 		
+	}
+	
+	@After
+	public void after(){
+		
+		context.close();
 	}
 }

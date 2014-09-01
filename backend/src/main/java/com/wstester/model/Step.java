@@ -19,6 +19,7 @@ public abstract class Step implements Serializable {
 	private List<Assert> assertList;
 	private List<Asset> assetList;
 	private List<Variable> variableList;
+	private String dependsOn;
 
 	public String getID() {
 		return this.uuid;
@@ -83,6 +84,31 @@ public abstract class Step implements Serializable {
 		this.variableList.add(variable);
 	}
 	
+	public String getDependsOn() {
+		return dependsOn;
+	}
+	public void setDependsOn(String dependsOn) {
+		this.dependsOn = dependsOn;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((assertList == null) ? 0 : assertList.hashCode());
+		result = prime * result
+				+ ((assetList == null) ? 0 : assetList.hashCode());
+		result = prime * result
+				+ ((dependsOn == null) ? 0 : dependsOn.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((server == null) ? 0 : server.hashCode());
+		result = prime * result + ((service == null) ? 0 : service.hashCode());
+		result = prime * result
+				+ ((variableList == null) ? 0 : variableList.hashCode());
+		return result;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -101,6 +127,11 @@ public abstract class Step implements Serializable {
 			if (other.assetList != null)
 				return false;
 		} else if (!assetList.equals(other.assetList))
+			return false;
+		if (dependsOn == null) {
+			if (other.dependsOn != null)
+				return false;
+		} else if (!dependsOn.equals(other.dependsOn))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -123,6 +154,5 @@ public abstract class Step implements Serializable {
 		} else if (!variableList.equals(other.variableList))
 			return false;
 		return true;
-	}
-	
+	}	
 }

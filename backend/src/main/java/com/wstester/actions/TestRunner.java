@@ -45,9 +45,8 @@ public class TestRunner {
 	public Response getResponse(String stepId, Long timeout){
 	
 		System.out.println("Gettting response for: " + stepId);
-		ResponseCallback stepResult = (ResponseCallback) camelContext.getBean(ResponseCallback.class);
 		
-		Response response = stepResult.getResponse(stepId);
+		Response response = ResponseCallback.getResponse(stepId);
 		
 		while (response == null && timeout > 0){
 			try {
@@ -55,7 +54,7 @@ public class TestRunner {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			response = stepResult.getResponse(stepId);
+			response = ResponseCallback.getResponse(stepId);
 			timeout-=1000;
 		} 
 		
@@ -88,9 +87,12 @@ public class TestRunner {
 				MessageProducer producer = session.createProducer(destination);
 				producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
+				int stepSize = 0;
 				for (TestSuite testSuite : testProject.getTestSuiteList()) {
 					for (TestCase testCase : testSuite.getTestCaseList()) {
 						for (Step testStep : testCase.getStepList()) {
+						
+							stepSize++;
 							
 							 // Create a messages
 					         ObjectMessage message = session.createObjectMessage(testStep);
@@ -102,7 +104,10 @@ public class TestRunner {
 					}
 				}
 
-				Thread.sleep(5000);
+				Long timeout = 10000L;
+				while(!ResponseCallback.allResponsesReceived(stepSize) && (timeout-=1000) > 0){
+					Thread.sleep(1000);
+				}
 				
 				// Clean up
 				session.close();
