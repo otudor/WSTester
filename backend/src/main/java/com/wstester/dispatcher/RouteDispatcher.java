@@ -19,7 +19,7 @@ public class RouteDispatcher extends RouteBuilder{
 			.when(body().isInstanceOf(MongoStep.class))
 				.to("jms:mongoQueue")
 			.when(body().isInstanceOf(MySQLStep.class))
-				.to("jms:MySQLQueue")
+				.to("jms:mySQLQueue")
 			.when(body().isInstanceOf(SoapStep.class))
 				.to("jms:soapQueue");
 		

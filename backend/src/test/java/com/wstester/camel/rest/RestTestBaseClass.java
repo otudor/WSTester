@@ -3,9 +3,11 @@ package com.wstester.camel.rest;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+
+import com.wstester.camel.TestBaseClass;
 import com.wstester.server.Main;
 
-public class TestBaseClass extends com.wstester.camel.TestBaseClass {
+public class RestTestBaseClass extends TestBaseClass {
 
 	private static HttpServer server;
 	
