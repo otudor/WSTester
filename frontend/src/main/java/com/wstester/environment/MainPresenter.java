@@ -78,9 +78,9 @@ public class MainPresenter
         contentArea.setCenter( ftpDetailPresenter.getView());
     }
     
-    public void showMongoDb( String mongoUID)
+    public void showMongoDb( String serverUID,String mongoUID)
     {
-	  	mngDBPresenter.setMongoDB( mongoUID);
+	  	mngDBPresenter.setMongoDB( serverUID,mongoUID);
         contentArea.setCenter( mngDBPresenter.getView());
     }
     

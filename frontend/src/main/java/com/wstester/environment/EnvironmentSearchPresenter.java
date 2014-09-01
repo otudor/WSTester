@@ -87,9 +87,9 @@ public class EnvironmentSearchPresenter implements Initializable
         mainPresenter.showFTPDetail( serverUId);
     }
     
-    public void selectMongoService( String mongoUId)
+    public void selectMongoService( String serverUID,String mongoUId)
     {
-        mainPresenter.showMongoDb( mongoUId);
+        mainPresenter.showMongoDb( serverUID,mongoUId);
     }
     
     public void selectMySQLService( String serverUID, String mysqlUId)
@@ -173,7 +173,7 @@ public class EnvironmentSearchPresenter implements Initializable
 		                    	selectServer(  ((Server) getItem()).getID());
 		                    else if ( getItem().getClass() == MongoService.class)
 		                    	
-		                    	selectMongoService(  ((MongoService) getItem()).getID());
+		                    	selectMongoService(  ((Server)getTreeItem().getParent().getValue()).getID(),((MongoService) getItem()).getID());
 		                     else if ( getItem().getClass() == MySQLService.class)
 		                     {      	 	            
 	                    		selectMySQLService(  ((Server)getTreeItem().getParent().getValue()).getID(),((MySQLService) getItem()).getID());

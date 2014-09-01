@@ -39,7 +39,7 @@ public class EnvironmentService
         mongosrv.setName("Serviciul de Mongo");
         mongosrv.setUser("user"); 
         mongosrv.setDbName("DB Name");
-        mongosrv.setPort("80");
+        mongosrv.setPort("70");
         mongosrv.setPassword("pass");
         lstService.add( mongosrv);
         srv1.setServices(lstService);
