@@ -1,5 +1,9 @@
 package com.wstester.environment;
 
+import com.wstester.model.MySQLService;
+import com.wstester.model.Server;
+import com.wstester.model.Service;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -53,11 +57,11 @@ public class MySQLDBPresenter {
 		dbPassField.setEditable(true);
 	}
 
-	private EnvironmentService environmentService;
+	private EnvironmentService envService;
 	private MainPresenter mainPresenter;
 
-	public void setEnvironmentService(EnvironmentService environmentService) {
-		this.environmentService = environmentService;
+	public void setEnvironmentService(EnvironmentService envService) {
+		this.envService = envService;
 	}
 
 	public void setMainPresenter(MainPresenter mainPresenter) {
@@ -68,13 +72,13 @@ public class MySQLDBPresenter {
 		return rootMysqlDB;
 	}
 
-	public void setMySQLDB(final String serviceUID) {
+	public void setMySQLDB( final String serverUID, final String serviceUID) {
 		save.setDisable(true);
 		save.setStyle("-fx-base: #b6e7c9;");
-	/*	portField.setText("");
+		portField.setText("");
 		dbNameField.setText("");
 		dbUsernameField.setText("");
-		dbPassField.setText("");*/
+		dbPassField.setText("");
 		
 
 		portField.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
@@ -92,11 +96,14 @@ public class MySQLDBPresenter {
 		dbPassField.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
 		dbPassField.setPromptText("Password username MySQL Database");
 		dbPassField.setEditable(false);
+		Server server = envService.getServerByUID( serverUID);
+		Service service = envService.getServiceByUID( server.getID(), serviceUID );
+		MySQLService srv = (MySQLService) service;
+		portField.setText(srv.getPort());
+		dbNameField.setText(srv.getDbName());
+		dbUsernameField.setText(srv.getUser());
+		dbPassField.setText(srv.getPassword());
 		
-		/*portField.setText("8802");
-		dbNameField.setText("TestDataBase");
-		dbUsernameField.setText("sudo");*/
-
 	}
 
 }

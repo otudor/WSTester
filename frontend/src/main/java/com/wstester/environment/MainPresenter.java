@@ -2,6 +2,7 @@ package com.wstester.environment;
 import java.io.IOException;
 
 
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -83,9 +84,9 @@ public class MainPresenter
         contentArea.setCenter( mngDBPresenter.getView());
     }
     
-    public void showMySQLDb( String mysqlUID)
+    public void showMySQLDb(String serverUID, String mysqlUID)
     {
-	  	mysqlDBPresenter.setMySQLDB( mysqlUID);
+	  	mysqlDBPresenter.setMySQLDB( serverUID, mysqlUID);
         contentArea.setCenter( mysqlDBPresenter.getView());
     }
     

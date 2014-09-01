@@ -92,9 +92,9 @@ public class EnvironmentSearchPresenter implements Initializable
         mainPresenter.showMongoDb( mongoUId);
     }
     
-    public void selectMySQLService( String mysqlUId)
+    public void selectMySQLService( String serverUID, String mysqlUId)
     {
-        mainPresenter.showMySQLDb( mysqlUId);
+        mainPresenter.showMySQLDb(serverUID, mysqlUId);
     }
     public String getFirstEnv()
     {
@@ -175,9 +175,9 @@ public class EnvironmentSearchPresenter implements Initializable
 		                    	
 		                    	selectMongoService(  ((MongoService) getItem()).getID());
 		                     else if ( getItem().getClass() == MySQLService.class)
-	                    	
-	                    		selectMySQLService(  ((MySQLService) getItem()).getID());
-	                    	
+		                     {      	 	            
+	                    		selectMySQLService(  ((Server)getTreeItem().getParent().getValue()).getID(),((MySQLService) getItem()).getID());
+		                     }
 	                	}
                 	}
                 }

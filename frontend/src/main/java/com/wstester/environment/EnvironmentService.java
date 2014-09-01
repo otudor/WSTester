@@ -151,5 +151,35 @@ public class EnvironmentService
     	return result;
     	//return new Server( "Server 3", "0909.05.05.05", "description server 3");
     }
-
+    
+    public Service getServiceByUID (String serverUID, String serviceUID)
+    {
+    	Service result = null;
+    	for (Map.Entry<String, Environment> entry : environments.entrySet())
+		{
+		    //System.out.println(entry.getKey() + "/" + entry.getValue());
+    		List<Server> serverList = ((Environment)entry.getValue()).getServers();
+    		if ( serverList != null && !serverList.isEmpty())
+    		{
+    			for (Server server: serverList)
+    				if (server.getID() == serverUID)
+    				{
+    					List<Service> serviceList = server.getServices();
+    					if ( serviceList != null && !serviceList.isEmpty())
+    					{
+    						for (Service service: serviceList)
+    						{
+    		    				if (service.getID() == serviceUID)
+    		    				{
+    		    					result = service;
+    		    					return result;
+    		    				}
+    						}
+    					}
+    			}
+    		}
+   		}
+    	
+    	return result;
+    }
 }
