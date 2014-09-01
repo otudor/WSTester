@@ -490,7 +490,7 @@ public class WsTesterMainController implements Initializable {
 					stageRnd = new Stage();
 					isDisplayed5 = true;
 					try {
-						Parent root = FXMLLoader.load(getClass().getResource("/fxml/TestFactory/fxml/Scene.fxml"));
+						Parent root = FXMLLoader.load(getClass().getResource("/fxml/TestFactory/TestFactoryManager.fxml"));
 						 Undecorator undecorator = new Undecorator(stageRnd, (Region) root);
 						 undecorator.getStylesheets().add("skin/undecorator.css");
 						 undecorator.setFadeInTransition();
