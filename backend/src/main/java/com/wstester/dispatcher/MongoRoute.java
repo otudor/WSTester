@@ -5,16 +5,12 @@ import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mongodb.MongoDbConstants;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.ApplicationEventPublisherAware;
-import com.wstester.events.StepRunEvent;
 import com.wstester.model.MongoService;
 import com.wstester.model.MongoStep;
 import com.wstester.model.Response;
 
-public class MongoRoute extends RouteBuilder implements ApplicationEventPublisherAware{
+public class MongoRoute extends RouteBuilder {
 
-	private ApplicationEventPublisher publisher;
 	private MongoStep step = null;
 	
 	@Override
@@ -22,6 +18,7 @@ public class MongoRoute extends RouteBuilder implements ApplicationEventPublishe
 		
 		from("jms:mongoQueue")
 		.bean(MongoConnection.class, "setConnectionBean")
+		.delay().method(ExchangeDelayer.class, "delay").asyncDelayed()
 		.process(new Processor() {
 			
 			@Override
@@ -46,6 +43,7 @@ public class MongoRoute extends RouteBuilder implements ApplicationEventPublishe
 				exchange.getIn().setHeader(MongoDbConstants.COLLECTION, step.getCollection());
 				exchange.getIn().setHeader(MongoDbConstants.OPERATION_HEADER, operation);
 				exchange.getIn().setBody(step.getQuery());
+				
 			}
 		})
 		.dynamicRouter(method(MongoConnection.class, "getConnection"))
@@ -56,20 +54,15 @@ public class MongoRoute extends RouteBuilder implements ApplicationEventPublishe
 
 				Message in = exchange.getIn();
 				
-				StepRunEvent event = new StepRunEvent(this);
 				Response response = new Response();
 				response.setStepID(step.getID());
 				response.setContent(in.getBody(String.class));
 				response.setPass(true);
-				event.setResponse(response);
 
-				publisher.publishEvent(event);
+				exchange.getIn().setBody(response);;
 			}
-		});
-	}
-	
-	@Override
-	public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
-		this.publisher = applicationEventPublisher;
+		})
+		.to("jms:topic:responseTopic");
+		
 	}
 }

@@ -697,4 +697,99 @@ public class TestUtils {
 		
 		return testProject;
 	}
+
+	public static TestProject getDependantStepsPlan() {
+		
+		TestProject testProject = new TestProject();
+		testProject.setName("Test Project");
+
+		// construct service list
+		// Service 1
+		List<Service> serviceList1 = new ArrayList<Service>();
+		RestService restService = new RestService();
+		restService.setName("Service Rest");
+		restService.setPort("9997");
+		serviceList1.add(restService);
+		
+		// Service 2
+		List<Service> serviceList2 = new ArrayList<Service>();
+		MongoService service2 = new MongoService();
+		service2.setName("Service Mongo");
+		service2.setPort("27017");
+		service2.setDbName("test");
+		service2.setUser("appuser");
+		service2.setPassword("apppass");
+		serviceList2.add(service2);
+		
+		// construct server list
+		List<Server> serverList1 = new ArrayList<Server>();
+		// Server 1
+		Server server11 = new Server();
+		server11.setDescription("This is the first server of the first env");
+		server11.setIp("localhost");
+		server11.setName("Server 11");
+		server11.setServices(serviceList1);
+		serverList1.add(server11);
+		// Server 2
+		Server server12 = new Server();
+		server12.setDescription("This is the second server of the first env");
+		server12.setIp("localhost");
+		server12.setName("Server 12");
+		server12.setServices(serviceList2);
+		serverList1.add(server12);
+		
+		// construct environment list
+		List<Environment> environmentList = new ArrayList<Environment>();
+		// Environment 1
+		Environment env1 = new Environment();
+		env1.setName("Env 1");
+		env1.setServers(serverList1);
+		
+		environmentList.add(env1);
+		testProject.setEnvironmentList(environmentList);
+
+		// construct test steps
+		// test 1
+		List<Step> stepList1 = new ArrayList<Step>();
+		RestStep restStep = new RestStep();
+		restStep.setName("Step 1");
+		restStep.setServer(server11);
+		restStep.setService(restService);
+		restStep.setPath("/customer/getCustomers");
+		restStep.setMethod("GET");
+		stepList1.add(restStep);
+		// test 2
+		MongoStep mongoStep = new MongoStep();
+		mongoStep.setName("Step 2");
+		mongoStep.setServer(server12);
+		mongoStep.setService(service2);
+		String collection = "customer";
+		HashMap<String, String> query = new HashMap<String, String>();
+		query.put("name", "HAC");
+		mongoStep.setAction(Action.SELECT);
+		mongoStep.setCollection(collection);
+		mongoStep.setQuery(query);
+		mongoStep.setDependsOn(restStep.getID());
+		stepList1.add(mongoStep);
+		
+		// construct test case list
+		// test case 1
+		List<TestCase> testCaseList1 = new ArrayList<TestCase>();
+		TestCase testCase = new TestCase();
+		testCase.setName("TC 1");
+		testCase.setStepList(stepList1);
+		testCaseList1.add(testCase);
+		
+		// construct test suite list
+		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
+		TestSuite testSuite1 = new TestSuite();
+		testSuite1.setName("Test Suite 1");
+		testSuite1.setEnvironment(env1);
+		testSuite1.setTestCaseList(testCaseList1);
+		testSuiteList.add(testSuite1);
+		
+		testProject.setTestSuiteList(testSuiteList);
+		
+		return testProject;
+	}
 }

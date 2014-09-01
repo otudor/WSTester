@@ -10,7 +10,6 @@
     ">
 
 	<context:annotation-config />
-	<bean id="responseBean" class="com.wstester.dispatcher.ResponseCallback" />
 
 	<!-- set up ActiveMQ broker -->
 	<broker:broker useJmx="false" persistent="false" brokerName="localhost">

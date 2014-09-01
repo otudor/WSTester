@@ -4,15 +4,11 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.ApplicationEventPublisherAware;
-import com.wstester.events.StepRunEvent;
 import com.wstester.model.Response;
 import com.wstester.model.SoapStep;
 
-public class SoapRoute extends RouteBuilder implements ApplicationEventPublisherAware{
+public class SoapRoute extends RouteBuilder {
 
-	private ApplicationEventPublisher publisher;
 	private SoapStep step = null;
 	
 	@Override
@@ -37,21 +33,15 @@ public class SoapRoute extends RouteBuilder implements ApplicationEventPublisher
 			public void process(Exchange exchange) throws Exception {
 
 				Message in = exchange.getIn();
-				
-				StepRunEvent event = new StepRunEvent(this);
+
 				Response response = new Response();
 				response.setStepID(step.getID());
 				response.setContent(in.getBody(String.class));
 				response.setPass(true);
-				event.setResponse(response);
-
-				publisher.publishEvent(event);
+				
+				exchange.getIn().setBody(response);
 			}
-		});
-	}
-
-	@Override
-	public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
-		this.publisher = applicationEventPublisher;
+		})
+		.to("jms:topic:responseTopic");
 	}
 }

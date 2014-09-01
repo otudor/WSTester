@@ -4,18 +4,13 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.ApplicationEventPublisherAware;
-
-import com.wstester.events.StepRunEvent;
 import com.wstester.model.Response;
 import com.wstester.model.RestService;
 import com.wstester.model.RestStep;
 import com.wstester.model.Server;
 
-public class RestRoute extends RouteBuilder implements ApplicationEventPublisherAware{
+public class RestRoute extends RouteBuilder{
 
-	private ApplicationEventPublisher publisher;
 	private RestStep step = null;
 	
 	@Override
@@ -43,21 +38,15 @@ public class RestRoute extends RouteBuilder implements ApplicationEventPublisher
 				Message in = exchange.getIn();
 				System.out.println(in.getHeader(Exchange.HTTP_RESPONSE_CODE, Integer.class));
 				
-				StepRunEvent event = new StepRunEvent(this);
 				Response response = new Response();
 				response.setStepID(step.getID());
 				response.setContent(in.getBody(String.class));
 				response.setPass(true);
-				event.setResponse(response);
-
-				publisher.publishEvent(event);
+				
+				exchange.getIn().setBody(response);;
 			}
-		});
-	}
-	
-	@Override
-	public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
-		this.publisher = applicationEventPublisher;
+		})
+		.to("jms:topic:responseTopic");
 	}
 	
 	private Object getURI(RestStep step) {
