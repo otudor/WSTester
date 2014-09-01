@@ -1,11 +1,17 @@
 package com.wstester.main;
 
+import insidefx.undecorator.Undecorator;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,12 +27,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBoxBuilder;
 import javafx.scene.paint.Color;
@@ -38,6 +46,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 
 import com.wstester.environment.Delta;
 import com.wstester.environment.EnvironmentsAppFactory;
@@ -202,14 +211,58 @@ public class WsTesterMainController implements Initializable {
 		    icon.setLayoutY(mouseEvent.getSceneY() + dragDelta2.y);
 		   }
 		  });
+		  
+		 // Timeline bouncer=new Timeline();
+		  
+		  
 		  icon.setOnMouseEntered(new EventHandler<MouseEvent>() {
 		   @Override public void handle(MouseEvent mouseEvent) {
-		    icon.setCursor(Cursor.HAND);
+			//icon.setScaleX(1.2);
+			//icon.setScaleY(1.2);
+		    icon.setCursor(Cursor.HAND);	
 		    
+		   /* bouncer.getKeyFrames().addAll(
+		    		  makeKeyFrame(0,0,1.2,1),
+		    		  makeKeyFrame(0,0,1,1.2),
+		    		  makeKeyFrame(300,-20,1,1),
+		    		  makeKeyFrame(0,0,1,1.2),
+		    		  makeKeyFrame(6000,0,1.2,1.0)
+		    		 );
+		    		  
+				//	  new KeyFrame(new Duration(0),new KeyValue(icon.translateYProperty(),0.0)),
+					//  new KeyFrame(new Duration(3000),new KeyValue(icon.translateYProperty(),-20.0)),
+					//  new KeyFrame(new Duration(6000),new KeyValue(icon.translateYProperty(),0.0))
+							
+					  
+					 
+			  bouncer.setCycleCount(Animation.INDEFINITE);			 		  		  
+			  bouncer.play();
+		    
+		   }		
+		   
+		   public KeyFrame makeKeyFrame(int d, double y, double sx, double sy){
+			   return new KeyFrame(
+					   new Duration(d),
+					   new KeyValue(icon.translateYProperty(),y),
+					   new KeyValue(icon.translateXProperty(), sx),
+					   new KeyValue(icon.translateYProperty(), sy)
+					   );*/
 		   }
+		   
+		   
 		  });
+		  /*icon.setOnMouseExited(new EventHandler<MouseEvent>() {
+			   @Override public void handle(MouseEvent mouseEvent) {
+				icon.setScaleX(1);
+				icon.setScaleY(1);
+			    icon.setCursor(Cursor.HAND);	
+			    
+			   }	  
+			  });*/	
+		 
+		  
 		 }
-	
+		
 	public void expandIcons(VBox icon){
 		icon.setOnMouseEntered(new EventHandler<MouseEvent>() {
 		    @Override public void handle(MouseEvent e) {
@@ -437,10 +490,23 @@ public class WsTesterMainController implements Initializable {
 					stageRnd = new Stage();
 					isDisplayed5 = true;
 					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/TestFactory/TestFactoryManager.fxml"));
-						Scene second = new Scene(root);
-						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
-						root.getStyleClass().add("mainWind");
+						Parent root = FXMLLoader.load(getClass().getResource("/fxml/TestFactory/fxml/Scene.fxml"));
+						 Undecorator undecorator = new Undecorator(stageRnd, (Region) root);
+						 undecorator.getStylesheets().add("skin/undecorator.css");
+						 undecorator.setFadeInTransition();
+						 Scene secound = new Scene(undecorator);
+						 secound.setFill(Color.TRANSPARENT);
+						 stageRnd.initStyle(StageStyle.TRANSPARENT);
+						 stageRnd.setMinWidth(500);
+						 stageRnd.setMinHeight(400);
+
+						 stageRnd.setHeight(600);
+						 stageRnd.setWidth(700);
+						 
+						//root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
+						//Scene second = new Scene(root);
+						//second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
+						//root.getStyleClass().add("mainWind");
 						
 						newIcoM4 = (VBox) CreateIcon("/images/task_img_open.png","RND");	
 						newIcoM4.setLayoutX(poz);
@@ -471,7 +537,7 @@ public class WsTesterMainController implements Initializable {
 						//menuBar.getMenus().add(menuRnd);
 						stageRnd.initOwner(pane.getScene().getWindow());
 						//stage.initModality(Modality.WINDOW_MODAL);
-						stageRnd.setScene(second);
+						stageRnd.setScene(secound);
 						//stageRnd.initOwner(WsTesterMain.stage);
 						stageRnd.show();
 						
@@ -685,6 +751,84 @@ public class WsTesterMainController implements Initializable {
 				WsTesterMainController.class.getResourceAsStream(iconPath)));
 		imageComp
 		.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
+		
+		
+		Reflection reflection = new Reflection();
+		reflection.setFraction(0.7);
+		imageComp.setEffect(reflection);
+		Timeline bouncer=new Timeline();
+		//boolean mouseIn = false;
+		 boolean mouseIn = false;  
+		  imageComp.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		   @Override public void handle(MouseEvent mouseEvent) {
+			  // mouseIn = true;
+			   
+			   imageComp.setCursor(Cursor.HAND);	
+		    
+		    bouncer.getKeyFrames().addAll(
+		    		  makeKeyFrame(0,0,1.2,1),
+		    		  makeKeyFrame(0,0,1,1.2),
+		    		  makeKeyFrame(300,-20,1,1),
+		    		  makeKeyFrame(0,0,1,1.2),
+		    		  makeKeyFrame(600,0,1.2,1.0)
+		    		  
+		    		   
+		    		 // makeKeyFrame(0,100,0.8,0.8)
+		    		  		    		  		    		  
+		    		 );
+		  
+		    
+		    				//	  new KeyFrame(new Duration(0),new KeyValue(icon.translateYProperty(),0.0)),
+					//  new KeyFrame(new Duration(3000),new KeyValue(icon.translateYProperty(),-20.0)),
+					//  new KeyFrame(new Duration(6000),new KeyValue(icon.translateYProperty(),0.0))
+							
+					  
+			  	 
+			  bouncer.setCycleCount(1);			 		  		  
+			 // bouncer.play();
+			  bouncer.setOnFinished(new EventHandler<ActionEvent>(){
+					  
+				  @Override
+				  public void handle (ActionEvent arg0){
+					  
+					  //new KeyValue(image.c)
+					 // imageComp.setX(1);
+					 // imageComp.setY(1);
+					  
+				  }
+					  
+					  });
+			  
+		    bouncer.play();  
+		    
+		   }		
+		   
+		   private KeyFrame makeKeyFrame(int d, double y, double sx, double sy){
+			   return new KeyFrame(
+					   new Duration(d),
+					   new KeyValue(imageComp.translateYProperty(),y),
+					   new KeyValue(imageComp.scaleXProperty(), sx),
+					   new KeyValue(imageComp.scaleYProperty(), sy)
+					   
+					   );
+		   }
+		   
+		   
+		  });
+
+		
+		  imageComp.setOnMouseExited(new EventHandler<MouseEvent>() {
+			   @Override public void handle(MouseEvent mouseEvent) {
+				   bouncer.play();
+				imageComp.setCursor(Cursor.HAND);	
+			    
+			   }	  
+			  });
+		
+		
+		
+		
+		
 		Text t2 = SetText(text);
 		vbox2.getChildren().addAll(imageComp, t2);
 		return vbox2;
@@ -694,8 +838,11 @@ public class WsTesterMainController implements Initializable {
 		t2.setText(text);
 		t2.setWrappingWidth(70);
 		t2.setTextAlignment(TextAlignment.CENTER);
+		//t2.setFill(Color.web("0x3b596d"));
+		t2.setFont(Font.font ("Verdana", 10));
+		//t2.setFont(Font.font(null, FontWeight.BOLD, 10));
 		t2.setFill(Color.WHITESMOKE);
-		t2.setFont(Font.font(null, FontWeight.BOLD, 10));
+		//t2.setFont(Font.font(null, FontWeight.BOLD, 10));
 		return t2;
 	}
 	/*
