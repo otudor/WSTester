@@ -12,6 +12,8 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -316,7 +318,9 @@ public class WsTesterMainController implements Initializable {
 								// TODO Auto-generated method stub	
 								if(event2.getClickCount() == 1 ) {
 									
-									stageSoap.toFront();
+									stageSoap.centerOnScreen();
+									stageSoap.setIconified(false);
+									//stageSoap.toFront();
 									
 								}
 								
@@ -370,7 +374,9 @@ public class WsTesterMainController implements Initializable {
 				
 				 if (isDisplayed3 == true && event.getClickCount() == 2)
 				{
-					stageSoap.toFront();
+					//stageSoap.toFront();
+					stageSoap.centerOnScreen();
+					stageSoap.setIconified(false);
 					
 				}
 				
@@ -396,7 +402,10 @@ public class WsTesterMainController implements Initializable {
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/REST/Rest.fxml"));
 						Scene second = new Scene(root);
-						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
+						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
+						//second.setFill(Color.TRANSPARENT);
+						//second.setFill(Color.TRANSPARENT);
+						//stageRest.initStyle(StageStyle.TRANSPARENT);
 						root.getStyleClass().add("mainWind");
 						
 						newIcoM3 = (VBox) CreateIcon("/images/task_img_open.png","Rest");	
@@ -416,7 +425,9 @@ public class WsTesterMainController implements Initializable {
 								// TODO Auto-generated method stub	
 								if(event2.getClickCount() == 1 ) {
 									
-									stageRest.toFront();
+									stageRest.centerOnScreen();
+									stageRest.setIconified(false);
+									//stageRest.toFront();
 									
 								}
 								
@@ -429,12 +440,17 @@ public class WsTesterMainController implements Initializable {
 						//menuBar.getMenus().add(menu2);
 						stageRest.initOwner(pane.getScene().getWindow());
 						//stage.initModality(Modality.WINDOW_MODAL);
+						//stageRest.initStyle(StageStyle.UTILITY);
 						stageRest.setScene(second);
 						stageRest.setTitle("REST Window");
 						//stageRest.initOwner(WsTesterMain.stage);
 						stageRest.show();
 						
+						
 						// modificare laur
+					    
+					    
+					   
 						stageRest.setOnCloseRequest(new EventHandler<WindowEvent>() {
 					          public void handle(WindowEvent we) {
 					        	  ind=lista.indexOf(newIcoM3);
@@ -449,7 +465,7 @@ public class WsTesterMainController implements Initializable {
 					              poz=poz-100;
 					          }
 					      });        
-					    
+
 					
 						
 						//pana aici 
@@ -464,9 +480,18 @@ public class WsTesterMainController implements Initializable {
 				}
 				if (isDisplayed4 == true && event.getClickCount() == 2)
 				{
-					stageRest.toFront();
+					
+					
+					stageRest.centerOnScreen();
+					stageRest.setIconified(false);
+					//stageRest.toFront();
+					//stageRest.isShowing();
+					
+					
+					
 					
 				}
+				
 			}
 		});
 	
@@ -525,7 +550,9 @@ public class WsTesterMainController implements Initializable {
 								// TODO Auto-generated method stub	
 								if(event2.getClickCount() == 1 ) {
 									
-									stageRnd.toFront();
+									//stageRnd.toFront();
+									stageRnd.centerOnScreen();
+									stageRnd.setIconified(false);
 									
 								}
 								
@@ -566,8 +593,9 @@ public class WsTesterMainController implements Initializable {
 				}
 				if (isDisplayed5 == true && event.getClickCount() == 2)
 				{
-					stageRnd.toFront();
-					
+					//stageRnd.toFront();
+					stageRnd.centerOnScreen();
+					stageRnd.setIconified(false);
 				}
 			}
 		});
@@ -607,7 +635,9 @@ public class WsTesterMainController implements Initializable {
 								// TODO Auto-generated method stub	
 								if(event2.getClickCount() == 1 ) {
 									
-									stageAssets.toFront();
+									//stageAssets.toFront();
+									stageAssets.centerOnScreen();
+									stageAssets.setIconified(false);
 									
 								}
 								
@@ -647,7 +677,9 @@ public class WsTesterMainController implements Initializable {
 				}
 				if (isDisplayed == true && event.getClickCount() == 2)
 				{
-					stageAssets.toFront();
+					//stageAssets.toFront();
+					stageAssets.centerOnScreen();
+					stageAssets.setIconified(false);
 					
 				}
 			}
@@ -695,7 +727,9 @@ public class WsTesterMainController implements Initializable {
 								// TODO Auto-generated method stub	
 								if(event2.getClickCount() == 1 ) {
 									
-									stageEnv.toFront();
+									//stageEnv.toFront();
+									stageEnv.centerOnScreen();
+									stageEnv.setIconified(false);
 									
 								}
 								
@@ -735,7 +769,9 @@ public class WsTesterMainController implements Initializable {
 				}
 				if (isDisplayed2 == true && event.getClickCount() == 2)
 				{
-					stageEnv.toFront();
+					//stageEnv.toFront();
+					stageEnv.centerOnScreen();
+					stageEnv.setIconified(false);
 					
 				}
 			}
