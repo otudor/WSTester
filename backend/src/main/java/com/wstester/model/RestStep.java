@@ -9,11 +9,30 @@ public class RestStep extends Step {
 
 	private static final long serialVersionUID = 1L;
 	private String path;
-	private String param;
 	private String header;
+	private String cookie;
+	private String query;
+	
+	public String getCookie() {
+		return cookie;
+	}
+
+	public void setCookie(String cookie) {
+		this.cookie = cookie;
+	}
+
 	private String method;
 	private Object body;
 	
+	
+	public String getQuery() {
+		return query;
+	}
+
+	public void setQuery(String query) {
+		this.query = query;
+	}
+
 	public Object getBody() {
 		return body;
 	}
@@ -42,14 +61,6 @@ public class RestStep extends Step {
 		this.path = path;
 	}
 
-	public String getParam() {
-		return param;
-	}
-
-	public void setParam(String param) {
-		this.param = param;
-	}
-
 	public String getHeader() {
 		return header;
 	}
@@ -65,7 +76,6 @@ public class RestStep extends Step {
 		result = prime * result + ((body == null) ? 0 : body.hashCode());
 		result = prime * result + ((header == null) ? 0 : header.hashCode());
 		result = prime * result + ((method == null) ? 0 : method.hashCode());
-		result = prime * result + ((param == null) ? 0 : param.hashCode());
 		result = prime * result + ((path == null) ? 0 : path.hashCode());
 		return result;
 	}
@@ -93,11 +103,6 @@ public class RestStep extends Step {
 			if (other.method != null)
 				return false;
 		} else if (!method.equals(other.method))
-			return false;
-		if (param == null) {
-			if (other.param != null)
-				return false;
-		} else if (!param.equals(other.param))
 			return false;
 		if (path == null) {
 			if (other.path != null)

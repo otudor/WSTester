@@ -5,7 +5,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import com.wstester.server.Main;
 
-public class TestBaseClass {
+public class TestBaseClass extends com.wstester.camel.TestBaseClass {
 
 	private static HttpServer server;
 	
