@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TestUtils {
 
-	public static TestProject getTestPlan(){
+	public static TestProject getTestPlan() throws IOException{
 		
 		TestProject testProject = new TestProject();
 		testProject.setName("Test Project");
@@ -50,6 +50,7 @@ public class TestUtils {
 		service3.setName("Service SOAP");
 		service3.setPort("80");
 		service3.setPath("/data/info.wso");
+		service3.setWsdlURL("http://footballpool.dataaccess.eu/data/info.wso?wsdl");
 		serviceList3.add(service3);
 		
 		// Service 4
@@ -90,7 +91,7 @@ public class TestUtils {
 		// Server 4
 		Server server22 = new Server();
 		server22.setDescription("This is the second server of the second env");
-		server22.setIp("localhost");
+		server22.setIp("http://footballpool.dataaccess.eu");
 		server22.setName("Server 22");
 		server22.setServices(serviceList3);
 		serverList2.add(server22);
@@ -112,19 +113,21 @@ public class TestUtils {
 		// construct test steps
 		// test 1
 		List<Step> stepList1 = new ArrayList<Step>();
-		RestStep step1 = new RestStep();
-		step1.setName("Step 1");
-		step1.setServer(server11);
-		step1.setService(restService);
+		RestStep restStep = new RestStep();
+		restStep.setName("Step 1");
+		restStep.setServer(server11);
+		restStep.setService(restService);
 		List<Asset> assetList1 = new ArrayList<Asset>();
 		assetList1.add(asset1);
-		step1.setAssetList(assetList1);
+		restStep.setAssetList(assetList1);
 		List<Assert> assertList = new ArrayList<Assert>();
 		Assert oneAssert = new Assert();
 		oneAssert.setAsserts("First assert");
 		assertList.add(oneAssert);
-		step1.setAssertList(assertList);
-		stepList1.add(step1);
+		restStep.setAssertList(assertList);
+		restStep.setPath("/customer/getCustomers");
+		restStep.setMethod("GET");
+		stepList1.add(restStep);
 		// test 2
 		MongoStep step2 = new MongoStep();
 		step2.setName("Step 2");
@@ -160,6 +163,7 @@ public class TestUtils {
 		oneAssert3.setAsserts("Third assert");
 		assertList3.add(oneAssert3);
 		step3.setAssertList(assertList3);
+		step3.setOperation("SELECT * FROM nume");
 		stepList2.add(step3);
 		// test 4
 		SoapStep step4 = new SoapStep();
@@ -174,6 +178,8 @@ public class TestUtils {
 		oneAssert4.setAsserts("Forth assert");
 		assertList4.add(oneAssert4);
 		step4.setAssertList(assertList4);
+		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
+		step4.setRequest(request);
 		stepList2.add(step4);
 		
 		// construct test case list
@@ -535,7 +541,7 @@ public class TestUtils {
 		MySQLService service4 = new MySQLService();
 		service4.setName("Service MYSQL");
 		service4.setPort("3306");
-		service4.setDbName("angajati");
+		service4.setDbName("test");
 		service4.setUser("appuser");
 		service4.setPassword("apppass");
 		serviceList4.add(service4);
