@@ -6,11 +6,12 @@ import static org.junit.Assert.assertTrue;
 import org.codehaus.jettison.json.JSONArray;
 import org.junit.Test;
 
+import com.wstester.camel.TestBaseClass;
 import com.wstester.model.Response;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
 
-public class TestRunnerTest {
+public class TestRunnerTest extends TestBaseClass{
 
 	@Test
 	public void runTestProject() throws Exception{

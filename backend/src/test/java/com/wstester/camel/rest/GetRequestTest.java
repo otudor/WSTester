@@ -8,7 +8,7 @@ import com.wstester.model.RestStep;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
 
-public class GetRequestTest extends TestBaseClass{
+public class GetRequestTest extends RestTestBaseClass{
 
 	
 	@Test

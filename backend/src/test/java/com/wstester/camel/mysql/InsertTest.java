@@ -2,18 +2,17 @@ package com.wstester.camel.mysql;
 
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import com.wstester.actions.TestRunner;
+import com.wstester.camel.TestBaseClass;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
 
-public class InsertTest {
+public class InsertTest extends TestBaseClass{
 
 	@Test
 	public void test() throws Exception {
 
-		TestRunner testRunner = new TestRunner();
 		TestProject testProject = TestUtils.getMySQLTestPlan();
 		MySQLStep step = (MySQLStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
 		step.setOperation("INSERT INTO nume(detalii) VALUES('Another gicu')");
