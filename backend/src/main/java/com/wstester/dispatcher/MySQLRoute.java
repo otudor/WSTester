@@ -1,18 +1,10 @@
 package com.wstester.dispatcher;
 
 
-import javax.sql.DataSource;
-
-import org.apache.activemq.store.jdbc.JDBCMessageIdScanListener;
-import org.apache.activemq.store.jdbc.JDBCMessageRecoveryListener;
-import org.apache.activemq.store.jdbc.JDBCMessageStore;
-import org.apache.activemq.store.jdbc.JdbcMemoryTransactionStore;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.jdbc.JdbcComponent;
-import org.apache.camel.component.jdbc.JdbcConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
@@ -35,7 +27,7 @@ public class MySQLRoute extends RouteBuilder implements ApplicationEventPublishe
 	
 	@Override
 	public void configure() throws Exception {
-		// TODO Auto-generated method stub
+
 		from("jms:MySQLQueue")
 		.process(new Processor() {
 			
