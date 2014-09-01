@@ -534,10 +534,10 @@ public class TestUtils {
 		List<Service> serviceList4 = new ArrayList<Service>();
 		MySQLService service4 = new MySQLService();
 		service4.setName("Service MYSQL");
-		service4.setPort("1521");
-		service4.setDbName("Oracle");
-		service4.setUser("system");
-		service4.setPassword("!Chelseafc123");
+		service4.setPort("3306");
+		service4.setDbName("angajati");
+		service4.setUser("appuser");
+		service4.setPassword("apppass");
 		serviceList4.add(service4);
 		
 		// construct server list
@@ -694,7 +694,7 @@ public class TestUtils {
 		testSuiteList.add(testSuite2);
 		
 		testProject.setTestSuiteList(testSuiteList);
-		
+	
 		return testProject;
 	}
 
