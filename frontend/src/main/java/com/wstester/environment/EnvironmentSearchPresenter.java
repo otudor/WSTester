@@ -325,7 +325,8 @@ public class EnvironmentSearchPresenter implements Initializable
     	    	Server server = environmentService.addServerForEnv(e.getID());
     	    	if (server != null)
     	    	{
-    	    		TreeItem<Object> serverNode = new TreeItem<>(server);
+    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_server.png")));
+    	    		TreeItem<Object> serverNode = new TreeItem<>(server, icon);
     	    		item.getChildren().add( serverNode);
     	    		treeView.getSelectionModel().select( serverNode);
     	    		//show details in right pane
