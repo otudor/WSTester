@@ -390,6 +390,7 @@ public class EnvironmentSearchPresenter implements Initializable
     	    	    @Override
     	    	    public void handle(ActionEvent event) 
     	    	    {
+    	    	    	
     	    	    	TreeItem<Object> item = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
     	    	    	if( item == null ) return;
 
@@ -398,7 +399,8 @@ public class EnvironmentSearchPresenter implements Initializable
     	    	    	
     	    	    	if (service != null)
     	    	    	{
-    	    	    		TreeItem<Object> serviceNode = new TreeItem<>(service);
+    	    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_MySQL_DB.png")));
+    	    	    		TreeItem<Object> serviceNode = new TreeItem<>(service,icon);
     	    	    		item.getChildren().add( serviceNode);
     	    	    		treeView.getSelectionModel().select( serviceNode);
     	    	    		//show details in right pane
@@ -420,7 +422,8 @@ public class EnvironmentSearchPresenter implements Initializable
     	    	    	
     	    	    	if (service != null)
     	    	    	{
-    	    	    		TreeItem<Object> serviceNode = new TreeItem<>(service);
+    	    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_Mongo_DB.png")));
+    	    	    		TreeItem<Object> serviceNode = new TreeItem<>(service,icon);
     	    	    		item.getChildren().add( serviceNode);
     	    	    		treeView.getSelectionModel().select( serviceNode);
     	    	    		//show details in right pane
