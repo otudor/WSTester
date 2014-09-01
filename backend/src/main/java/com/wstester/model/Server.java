@@ -1,6 +1,7 @@
 package com.wstester.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -68,6 +69,13 @@ public class Server implements Serializable {
     	return this.name; 
     }
     
+    public void addService( Service service)
+	{
+		if ( this.serviceList == null)
+			this.serviceList = new ArrayList<Service>();
+		
+		this.serviceList.add( service);
+	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -225,6 +225,18 @@ public class EnvironmentSearchPresenter implements Initializable
 	                	Server ftp = (Server) getItem();
 	                	this.setContextMenu( createFTPServerContextMenu(env, ftp));
 	                }
+	                else if( getItem().getClass() == MySQLService.class)
+	                {
+	                	Server srv=(Server)getTreeItem().getParent().getValue();
+	                	Service src=(Service) getItem();
+	                	this.setContextMenu(createServiceContextMenu(srv,src));
+	                }
+	                else if( getItem().getClass() == MongoService.class)
+	                {
+	                	Server srv=(Server)getTreeItem().getParent().getValue();
+	                	Service src=(Service) getItem();
+	                	this.setContextMenu(createServiceContextMenu(srv,src));
+	                }
             }
         }
     	
@@ -341,7 +353,9 @@ public class EnvironmentSearchPresenter implements Initializable
     {
     	final ContextMenu contextMenu = new ContextMenu();
     	MenuItem rem = new MenuItem("Remove" /*+ ftp.getID()*/);
-    	contextMenu.getItems().addAll( rem);
+    	MenuItem add1 = new MenuItem("Add MySQLService" /*+ ftp.getID()*/);
+    	MenuItem add2 = new MenuItem("Add MongoDBService" /*+ ftp.getID()*/);
+    	contextMenu.getItems().addAll( rem,add1,add2);
     	
     	rem.setOnAction(new EventHandler<ActionEvent>() 
     	{
@@ -358,6 +372,50 @@ public class EnvironmentSearchPresenter implements Initializable
                 treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
     	    }
     	});
+    	add1.setOnAction(new EventHandler<ActionEvent>() 
+    	    	{
+    	    	    @Override
+    	    	    public void handle(ActionEvent event) 
+    	    	    {
+    	    	    	TreeItem<Object> item = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
+    	    	    	if( item == null ) return;
+
+    	    	    	Server s = (Server)(item.getValue());
+    	    	    	Service service = environmentService.addMySQLServiceforServ(s.getID());
+    	    	    	
+    	    	    	if (service != null)
+    	    	    	{
+    	    	    		TreeItem<Object> serviceNode = new TreeItem<>(service);
+    	    	    		item.getChildren().add( serviceNode);
+    	    	    		treeView.getSelectionModel().select( serviceNode);
+    	    	    		//show details in right pane
+    	    	    		selectMySQLService( s.getID(),service.getID());
+    	    	    	}
+    	                //treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
+    	    	    }
+    	    	});
+    	add2.setOnAction(new EventHandler<ActionEvent>() 
+    	    	{
+    	    	    @Override
+    	    	    public void handle(ActionEvent event) 
+    	    	    {
+    	    	    	TreeItem<Object> item = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
+    	    	    	if( item == null ) return;
+
+    	    	    	Server s = (Server)(item.getValue());
+    	    	    	Service service = environmentService.addMongoServiceforServ(s.getID());
+    	    	    	
+    	    	    	if (service != null)
+    	    	    	{
+    	    	    		TreeItem<Object> serviceNode = new TreeItem<>(service);
+    	    	    		item.getChildren().add( serviceNode);
+    	    	    		treeView.getSelectionModel().select( serviceNode);
+    	    	    		//show details in right pane
+    	    	    		selectMongoService( s.getID(),service.getID());
+    	    	    	}
+    	                //treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
+    	    	    }
+    	    	});
     	
     	return contextMenu;
     }
@@ -370,6 +428,10 @@ public class EnvironmentSearchPresenter implements Initializable
     public void removeEnvironment( Environment e)
     {
     	environmentService.removeEnvironmentById( e.getID());
+    }
+    public void removeService(Server srv, Service src)
+    {
+    	environmentService.removeService( srv.getID(), src.getID());
     }
     
     public void addEnvAction( ActionEvent event)
@@ -385,4 +447,34 @@ public class EnvironmentSearchPresenter implements Initializable
         treeView.edit( node);
         selectEnvironment( env.getID());
     }
+
+    public ContextMenu createServiceContextMenu( Server srv, Service src)
+    {
+    	final ContextMenu contextMenu = new ContextMenu();
+    	MenuItem rem = new MenuItem("Remove" /*+ ftp.getID()*/);
+    	contextMenu.getItems().addAll( rem);
+    	
+    	rem.setOnAction(new EventHandler<ActionEvent>() 
+    	{
+    	    @Override
+    	    public void handle( ActionEvent event) 
+    	    {
+    	    	TreeItem<Object> c = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
+    	    	int idx = treeView.getSelectionModel().getSelectedIndex();
+    	    	if( c == null ) return;    	    	
+    	    	
+    	    	removeService(srv, src);
+                c.getParent().getChildren().remove(c);
+                               
+                treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
+    	    }
+    	});
+    	return contextMenu;
+    }
+    
+   /* public void removeService( Environment e, Server ftp)
+    {
+    	environmentService.removeService( e.getID(), ftp.getID());
+    }*/
+
 }
