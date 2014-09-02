@@ -42,6 +42,7 @@ import com.wstester.model.MySQLService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.ServiceType;
+import com.wstester.model.SoapService;
 
 public class EnvironmentSearchPresenter implements Initializable
 {
@@ -99,6 +100,12 @@ public class EnvironmentSearchPresenter implements Initializable
     {
         mainPresenter.showMySQLDb(serverUID, mysqlUId);
     }
+    
+    public void selectSoapService( String serverUID, String soaplUId)
+    {
+        mainPresenter.showSoap(serverUID, soaplUId);
+    }
+    
     public String getFirstEnv()
     {
     	return environmentService.getFirstEnv().getID();
@@ -133,7 +140,8 @@ public class EnvironmentSearchPresenter implements Initializable
 	    						icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_MySQL_DB.png")));
 	    					else if ( service.getType() == ServiceType.MONGO)
 	    						icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_Mongo_DB.png")));
-	    					
+	    					else if ( service.getType() == ServiceType.SOAP)
+	    						icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_Mongo_DB.png")));
 	    					TreeItem<Object> serviceNode = new TreeItem<>(service, icon);
 	    					serverNode.getChildren().add( serviceNode);
 	        			}
@@ -183,13 +191,13 @@ public class EnvironmentSearchPresenter implements Initializable
 		                    	selectEnvironment( ((Environment) getItem()).getID());
 		                    else if ( getItem().getClass() == Server.class)
 		                    	selectServer(  ((Server) getItem()).getID());
-		                    else if ( getItem().getClass() == MongoService.class)
-		                    	
+		                    else if ( getItem().getClass() == MongoService.class)		                    	
 		                    	selectMongoService(  ((Server)getTreeItem().getParent().getValue()).getID(),((MongoService) getItem()).getID());
-		                     else if ( getItem().getClass() == MySQLService.class)
-		                     {      	 	            
+		                    else if ( getItem().getClass() == MySQLService.class)		                   	 	        
 	                    		selectMySQLService(  ((Server)getTreeItem().getParent().getValue()).getID(),((MySQLService) getItem()).getID());
-		                     }
+		                    else if ( getItem().getClass() == SoapService.class)		                   	 	        
+		                    	selectSoapService(  ((Server)getTreeItem().getParent().getValue()).getID(),((SoapService) getItem()).getID());
+		                
 	                	}
                 	}
                 }
@@ -244,6 +252,12 @@ public class EnvironmentSearchPresenter implements Initializable
 	                	this.setContextMenu(createServiceContextMenu(srv,src));
 	                }
 	                else if( getItem().getClass() == MongoService.class)
+	                {
+	                	Server srv=(Server)getTreeItem().getParent().getValue();
+	                	Service src=(Service) getItem();
+	                	this.setContextMenu(createServiceContextMenu(srv,src));
+	                }
+	                else if( getItem().getClass() == SoapService.class)
 	                {
 	                	Server srv=(Server)getTreeItem().getParent().getValue();
 	                	Service src=(Service) getItem();
@@ -368,7 +382,8 @@ public class EnvironmentSearchPresenter implements Initializable
     	MenuItem rem = new MenuItem("Remove" /*+ ftp.getID()*/);
     	MenuItem add1 = new MenuItem("Add MySQLService" /*+ ftp.getID()*/);
     	MenuItem add2 = new MenuItem("Add MongoDBService" /*+ ftp.getID()*/);
-    	contextMenu.getItems().addAll( rem,add1,add2);
+    	MenuItem add3 = new MenuItem("Add SoapService"/*+ ftp.getID()*/);
+    	contextMenu.getItems().addAll( rem,add1,add2,add3);
     	
     	rem.setOnAction(new EventHandler<ActionEvent>() 
     	{
@@ -432,7 +447,29 @@ public class EnvironmentSearchPresenter implements Initializable
     	                //treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
     	    	    }
     	    	});
-    	
+    	add3.setOnAction(new EventHandler<ActionEvent>() 
+    	    	{
+    	    	    @Override
+    	    	    public void handle(ActionEvent event) 
+    	    	    {
+    	    	    	TreeItem<Object> item = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
+    	    	    	if( item == null ) return;
+
+    	    	    	Server s = (Server)(item.getValue());
+    	    	    	Service service = environmentService.addSoapServiceforServ(s.getID());
+    	    	    	
+    	    	    	if (service != null)
+    	    	    	{
+    	    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_Mongo_DB.png")));
+    	    	    		TreeItem<Object> serviceNode = new TreeItem<>(service,icon);
+    	    	    		item.getChildren().add( serviceNode);
+    	    	    		treeView.getSelectionModel().select( serviceNode);
+    	    	    		//show details in right pane
+    	    	    		selectSoapService( s.getID(),service.getID());
+    	    	    	}
+    	                //treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
+    	    	    }
+    	    	});
     	return contextMenu;
     }
     

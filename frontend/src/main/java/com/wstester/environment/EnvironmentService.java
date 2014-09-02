@@ -12,6 +12,7 @@ import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
+import com.wstester.model.SoapService;
 
 public class EnvironmentService {
 	// private long nextId = 0;
@@ -34,6 +35,13 @@ public class EnvironmentService {
 		mysqlsrv.setPort("80");
 		mysqlsrv.setPassword("pass");
 		lstService.add(mysqlsrv);
+		//SoapService
+		SoapService soap = new SoapService();
+		soap.setName("Serviciul de Soap");
+		soap.setPath("path");
+		soap.setPort("DB Name");
+		soap.setWsdlURL("URL");
+		lstService.add(soap);
 		// Mongo service
 		MongoService mongosrv = new MongoService();
 		mongosrv.setName("Serviciul de Mongo");
@@ -45,6 +53,8 @@ public class EnvironmentService {
 		srv1.setServices(lstService);
 		list1.add(srv1);
 		e1.setServers(list1);
+		//SoapService
+		
 
 		Environment e2 = createEnvironment("CHINA Env");
 		List<Server> list2 = new ArrayList<Server>();
@@ -169,6 +179,34 @@ public class EnvironmentService {
 			result.setPort("test3");
 			result.setUser("test3");
 			result.setPassword("test3");
+			srv.addService((Service) result);
+		}
+
+		return result;
+	}
+	
+	public SoapService addSoapServiceforServ(String srvUID) {
+		SoapService result = null;
+		Server srv = null;
+		for (Map.Entry<String, Environment> entry : environments.entrySet()) {
+			// System.out.println(entry.getKey() + "/" + entry.getValue());
+			List<Server> serverList = ((Environment) entry.getValue())
+					.getServers();
+			if (serverList != null && !serverList.isEmpty()) {
+				for (Server server : serverList)
+					if (server.getID() == srvUID) {
+						srv = server;
+						break;
+					}
+			}
+		}
+
+		if (srv != null) {
+			result = new SoapService();
+			result.setName("New SoapService");
+			result.setWsdlURL("test3");
+			result.setPort("test3");
+			result.setPath("test3");
 			srv.addService((Service) result);
 		}
 

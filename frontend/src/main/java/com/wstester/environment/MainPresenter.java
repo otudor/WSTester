@@ -21,6 +21,7 @@ public class MainPresenter
     private ServerDetailsPresenter ftpDetailPresenter;
     private MongoDBPresenter mngDBPresenter;
     private MySQLDBPresenter mysqlDBPresenter;
+    private SoapPresenter soapPresenter;
 
     public void setEnvironmentSearchPresenter(EnvironmentSearchPresenter envSearchPresenter)
     {
@@ -50,6 +51,11 @@ public class MainPresenter
     public void setMySQLPresenter(MySQLDBPresenter mysqlDBPresenter)
     {
         this.mysqlDBPresenter = mysqlDBPresenter;
+    }
+    
+    public void setSoapPresenter(SoapPresenter soapPresenter)
+    {
+        this.soapPresenter = soapPresenter;
     }
     
     public Parent getView()
@@ -88,6 +94,12 @@ public class MainPresenter
     {
 	  	mysqlDBPresenter.setMySQLDB( serverUID, mysqlUID);
         contentArea.setCenter( mysqlDBPresenter.getView());
+    }
+    
+    public void showSoap(String serverUID, String soaplUID)
+    {
+    	soapPresenter.setSoapWindow( serverUID, soaplUID);
+        contentArea.setCenter( soapPresenter.getView());
     }
     
     public String getFirstEnvironment()
