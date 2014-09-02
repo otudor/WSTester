@@ -39,6 +39,7 @@ import javax.swing.tree.TreeNode;
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
+import com.wstester.model.RestService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.ServiceType;
@@ -106,6 +107,11 @@ public class EnvironmentSearchPresenter implements Initializable
         mainPresenter.showSoap(serverUID, soaplUId);
     }
     
+    public void selectRestService( String serverUID, String rstUId)
+    {
+        mainPresenter.showRest(serverUID, rstUId);
+    }
+    
     public String getFirstEnv()
     {
     	return environmentService.getFirstEnv().getID();
@@ -142,6 +148,8 @@ public class EnvironmentSearchPresenter implements Initializable
 	    						icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_Mongo_DB.png")));
 	    					else if ( service.getType() == ServiceType.SOAP)
 	    						icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_Mongo_DB.png")));
+	    					else if ( service.getType() == ServiceType.REST)
+			    				icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treelcon_Rest.png")));
 	    					TreeItem<Object> serviceNode = new TreeItem<>(service, icon);
 	    					serverNode.getChildren().add( serviceNode);
 	        			}
@@ -197,7 +205,8 @@ public class EnvironmentSearchPresenter implements Initializable
 	                    		selectMySQLService(  ((Server)getTreeItem().getParent().getValue()).getID(),((MySQLService) getItem()).getID());
 		                    else if ( getItem().getClass() == SoapService.class)		                   	 	        
 		                    	selectSoapService(  ((Server)getTreeItem().getParent().getValue()).getID(),((SoapService) getItem()).getID());
-		                
+		                    else if ( getItem().getClass() == RestService.class)		                        	 	            
+	                    		selectRestService(  ((Server)getTreeItem().getParent().getValue()).getID(),((RestService) getItem()).getID());		                                     
 	                	}
                 	}
                 }
@@ -262,6 +271,12 @@ public class EnvironmentSearchPresenter implements Initializable
 	                	Server srv=(Server)getTreeItem().getParent().getValue();
 	                	Service src=(Service) getItem();
 	                	this.setContextMenu(createServiceContextMenu(srv,src));
+	                }
+	                else if( getItem().getClass() == RestService.class)
+	 	            {
+	 	                	Server srv=(Server)getTreeItem().getParent().getValue();
+	 	                	Service src=(Service) getItem();
+	 	                	this.setContextMenu(createServiceContextMenu(srv,src));	
 	                }
             }
         }
@@ -383,7 +398,8 @@ public class EnvironmentSearchPresenter implements Initializable
     	MenuItem add1 = new MenuItem("Add MySQLService" /*+ ftp.getID()*/);
     	MenuItem add2 = new MenuItem("Add MongoDBService" /*+ ftp.getID()*/);
     	MenuItem add3 = new MenuItem("Add SoapService"/*+ ftp.getID()*/);
-    	contextMenu.getItems().addAll( rem,add1,add2,add3);
+    	MenuItem add4 = new MenuItem("Add RestService" /*+ ftp.getID()*/);
+    	contextMenu.getItems().addAll( rem,add1,add2,add3,add4);
     	
     	rem.setOnAction(new EventHandler<ActionEvent>() 
     	{
@@ -466,6 +482,29 @@ public class EnvironmentSearchPresenter implements Initializable
     	    	    		treeView.getSelectionModel().select( serviceNode);
     	    	    		//show details in right pane
     	    	    		selectSoapService( s.getID(),service.getID());
+    	    	    	}
+    	                //treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
+    	    	    }
+    	    	});
+    	add4.setOnAction(new EventHandler<ActionEvent>() 
+    	    	{
+    	    	    @Override
+    	    	    public void handle(ActionEvent event) 
+    	    	    {
+    	    	    	TreeItem<Object> item = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
+    	    	    	if( item == null ) return;
+
+    	    	    	Server s = (Server)(item.getValue());
+    	    	    	Service service = environmentService.addRestServiceforServ(s.getID());
+    	    	    	
+    	    	    	if (service != null)
+    	    	    	{
+    	    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treelcon_Rest.png")));
+    	    	    		TreeItem<Object> serviceNode = new TreeItem<>(service,icon);
+    	    	    		item.getChildren().add( serviceNode);
+    	    	    		treeView.getSelectionModel().select( serviceNode);
+    	    	    		//show details in right pane
+    	    	    		selectRestService( s.getID(),service.getID());
     	    	    	}
     	                //treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
     	    	    }

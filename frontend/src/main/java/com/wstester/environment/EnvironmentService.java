@@ -10,6 +10,7 @@ import javafx.scene.control.TreeItem;
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
+import com.wstester.model.RestService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.SoapService;
@@ -42,6 +43,11 @@ public class EnvironmentService {
 		soap.setPort("DB Name");
 		soap.setWsdlURL("URL");
 		lstService.add(soap);
+		// Rest service
+		RestService rstsrv = new RestService();
+		rstsrv.setName("Serviciul de Rest");
+		rstsrv.setPort("9080");
+		lstService.add(rstsrv);
 		// Mongo service
 		MongoService mongosrv = new MongoService();
 		mongosrv.setName("Serviciul de Mongo");
@@ -207,6 +213,32 @@ public class EnvironmentService {
 			result.setWsdlURL("test3");
 			result.setPort("test3");
 			result.setPath("test3");
+			srv.addService((Service) result);
+		}
+
+		return result;
+	}
+	
+	public RestService addRestServiceforServ(String srvUID) {
+		RestService result = null;
+		Server srv = null;
+		for (Map.Entry<String, Environment> entry : environments.entrySet()) {
+			// System.out.println(entry.getKey() + "/" + entry.getValue());
+			List<Server> serverList = ((Environment) entry.getValue())
+					.getServers();
+			if (serverList != null && !serverList.isEmpty()) {
+				for (Server server : serverList)
+					if (server.getID() == srvUID) {
+						srv = server;
+						break;
+					}
+			}
+		}
+
+		if (srv != null) {
+			result = new RestService();
+			result.setName("New RestService");
+			result.setPort("00000");
 			srv.addService((Service) result);
 		}
 

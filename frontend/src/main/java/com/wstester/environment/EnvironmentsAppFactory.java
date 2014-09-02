@@ -13,6 +13,7 @@ public class EnvironmentsAppFactory
     private MongoDBPresenter mngDBPresenter;
     private MySQLDBPresenter mysqlDBPresenter;
     private SoapPresenter soapPresenter;
+    private RestPresenter rstPresenter;
     
     public MainPresenter getMainPresenter()
     {
@@ -29,6 +30,7 @@ public class EnvironmentsAppFactory
                 mainPresenter.setMongoDBPresenter( getMongoDBPresenter());
                 mainPresenter.setMySQLPresenter( getMySQLPresenter());
                 mainPresenter.setSoapPresenter( getSoapPresenter());
+                mainPresenter.setRestPresenter( getRestPresenter());
             }
             catch (IOException e)
             {
@@ -156,6 +158,26 @@ public class EnvironmentsAppFactory
             }
         }
         return soapPresenter;
+    }
+    
+    public RestPresenter getRestPresenter()
+    {
+        if (rstPresenter == null)
+        {
+            try
+            {
+                FXMLLoader loader = new FXMLLoader();
+                loader.load(getClass().getResourceAsStream("/fxml/environment/EnvRest.fxml"));
+                rstPresenter = (RestPresenter) loader.getController();
+                rstPresenter.setEnvironmentService(getEnvironmentService());
+                rstPresenter.setMainPresenter(getMainPresenter());
+            }
+            catch (IOException e)
+            {
+                throw new RuntimeException("Unable to load EnvRest.fxml", e);
+            }
+        }
+        return rstPresenter;
     }
     
     public EnvironmentService getEnvironmentService()
