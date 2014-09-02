@@ -54,6 +54,11 @@ public class TestSuite {
 		this.variableList = variableList;
 	}
 
+	public String toString()
+	{
+		return this.name;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
