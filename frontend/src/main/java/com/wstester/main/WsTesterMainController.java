@@ -321,7 +321,7 @@ public class WsTesterMainController implements Initializable {
 									stageSoap.centerOnScreen();
 									stageSoap.setIconified(false);
 									stageSoap.toFront();
-									
+									stageSoap.show();
 								}
 								
 								 
@@ -342,6 +342,7 @@ public class WsTesterMainController implements Initializable {
 						stageSoap.initOwner(WsTesterMain.stage);
 						//stageSoap.initModality(Modality.WINDOW_MODAL);
 						
+						
 						stageSoap.show();
 						
 						
@@ -359,7 +360,13 @@ public class WsTesterMainController implements Initializable {
 					              poz=poz-100;
 					          }
 					      }); 
-						
+						stageSoap.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
+
+						    @Override
+						    public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+						    	stageSoap.hide();
+						    }
+						});
 						
 					        
 					   //pana aici 
@@ -377,7 +384,7 @@ public class WsTesterMainController implements Initializable {
 					stageSoap.toFront();
 					stageSoap.centerOnScreen();
 					stageSoap.setIconified(false);
-					
+					stageSoap.show();
 				}
 				
 			}
@@ -412,6 +419,7 @@ public class WsTesterMainController implements Initializable {
 						newIcoM3.setLayoutX(poz);
 						newIcoM3.setLayoutY(1);
 						lista.add(newIcoM3);
+						//AfiseazaIcons("/images/task_img_open.png","RestWindow");
 						bar.getChildren().add(newIcoM3);
 						poz=poz+100;
 						expandIcons(newIcoM3);
@@ -428,6 +436,7 @@ public class WsTesterMainController implements Initializable {
 									stageRest.centerOnScreen();
 									stageRest.setIconified(false);
 									stageRest.toFront();
+									stageRest.show();
 									
 								}
 								
@@ -435,6 +444,21 @@ public class WsTesterMainController implements Initializable {
 								
 							}
 						});
+						
+						stageRest.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
+
+						    @Override
+						    public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+						    	stageRest.hide();
+						    }
+						});
+						
+						//if(stageRest.setIconified(true))
+						//{
+							//stageRest.initStyle(StageStyle.TRANSPARENT);
+							//stageRest.centerOnScreen();
+						//}
+						
 						
 						//Menu menu2 = new Menu("CreateREST");
 						//menuBar.getMenus().add(menu2);
@@ -465,7 +489,13 @@ public class WsTesterMainController implements Initializable {
 					              poz=poz-100;
 					          }
 					      });        
+						stageRest.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
 
+						    @Override
+						    public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+						    	stageRest.hide();
+						    }
+						});
 					
 						
 						//pana aici 
@@ -486,7 +516,7 @@ public class WsTesterMainController implements Initializable {
 					stageRest.setIconified(false);
 					stageRest.toFront();
 					//stageRest.isShowing();
-					
+					stageRest.show();
 					
 					
 					
@@ -553,9 +583,10 @@ public class WsTesterMainController implements Initializable {
 									stageRnd.toFront();
 									stageRnd.centerOnScreen();
 									stageRnd.setIconified(false);
-									
+									stageRnd.show();
 								}
-								
+						
+						
 								 
 								
 							}
@@ -583,7 +614,13 @@ public class WsTesterMainController implements Initializable {
 					              poz=poz-100;
 					          }
 					      });        
-						
+						stageRnd.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
+
+						    @Override
+						    public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+						    	stageRnd.hide();
+						    }
+						});
 						
 						//pana aici
 					} catch (IOException e) {
@@ -596,6 +633,7 @@ public class WsTesterMainController implements Initializable {
 					stageRnd.toFront();
 					stageRnd.centerOnScreen();
 					stageRnd.setIconified(false);
+					stageRnd.show();
 				}
 			}
 		});
@@ -638,14 +676,20 @@ public class WsTesterMainController implements Initializable {
 									stageAssets.toFront();
 									stageAssets.centerOnScreen();
 									stageAssets.setIconified(false);
-									
+									stageAssets.show();
 								}
 								
 								 
 								
 							}
 						});
-						
+						stageAssets.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
+
+						    @Override
+						    public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+						    	stageAssets.hide();
+						    }
+						});
 						//stage.initModality(Modality.WINDOW_MODAL);
 						//menu = new Menu("Assets");
 						//menuBar.getMenus().add(menu);
@@ -675,12 +719,14 @@ public class WsTesterMainController implements Initializable {
 						e.printStackTrace();
 					}
 				}
+				
+				
 				if (isDisplayed == true && event.getClickCount() == 2)
 				{
 					stageAssets.toFront();
 					stageAssets.centerOnScreen();
 					stageAssets.setIconified(false);
-					
+					stageAssets.show();
 				}
 			}
 		});
@@ -730,7 +776,7 @@ public class WsTesterMainController implements Initializable {
 									stageEnv.toFront();
 									stageEnv.centerOnScreen();
 									stageEnv.setIconified(false);
-									
+									stageEnv.show();
 								}
 								
 								 
@@ -761,7 +807,13 @@ public class WsTesterMainController implements Initializable {
 					      });        
 						
 						//stageEnv.setOnHidden(value);
-						
+						stageEnv.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
+
+						    @Override
+						    public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+						    	stageEnv.hide();
+						    }
+						});
 						//pana aici
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -772,7 +824,7 @@ public class WsTesterMainController implements Initializable {
 					stageEnv.toFront();
 					stageEnv.centerOnScreen();
 					stageEnv.setIconified(false);
-					
+					stageEnv.show();
 				}
 			}
 		});
@@ -929,5 +981,95 @@ public class WsTesterMainController implements Initializable {
 	  {
 		  lista.get(i).setLayoutX(lista.get(i).getLayoutX()-100);
 	  }
+	}
+	
+	static Node AfiseazaIcons(String iconPath, String text){
+		VBox vbox3 = new VBox();
+		vbox3.setPadding(new Insets(2)); // Set all sides to 10
+		vbox3.setSpacing(2);
+		ImageView imageComp = new ImageView(new Image(
+				WsTesterMainController.class.getResourceAsStream(iconPath)));
+		imageComp
+		.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
+		
+		
+		Reflection reflection = new Reflection();
+		reflection.setFraction(0.7);
+		imageComp.setEffect(reflection);
+		Timeline bouncer=new Timeline();
+		//boolean mouseIn = false;
+		 boolean mouseIn = false;  
+		  imageComp.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		   @Override public void handle(MouseEvent mouseEvent) {
+			  // mouseIn = true;
+			   
+			   imageComp.setCursor(Cursor.HAND);	
+		    
+		    bouncer.getKeyFrames().addAll(
+		    		  makeKeyFrame(0,0,1.2,1),
+		    		  makeKeyFrame(0,0,1,1.2),
+		    		  makeKeyFrame(300,-20,1,1),
+		    		  makeKeyFrame(0,0,1,1.2),
+		    		  makeKeyFrame(600,0,1.2,1.0),
+		    		  makeKeyFrame(0,100,0.8,0.8)
+		    		  		    		  		    		  
+		    		 );
+		  
+		    
+		    				//	  new KeyFrame(new Duration(0),new KeyValue(icon.translateYProperty(),0.0)),
+					//  new KeyFrame(new Duration(3000),new KeyValue(icon.translateYProperty(),-20.0)),
+					//  new KeyFrame(new Duration(6000),new KeyValue(icon.translateYProperty(),0.0))
+							
+					  
+			  	 
+			  bouncer.setCycleCount(1);			 		  		  
+			 // bouncer.play();
+			  bouncer.setOnFinished(new EventHandler<ActionEvent>(){
+					  
+				  @Override
+				  public void handle (ActionEvent arg0){
+					  
+					  //new KeyValue(image.c)
+					 // imageComp.setX(1);
+					 // imageComp.setY(1);
+					  
+				  }
+					  
+					  });
+			  
+		    bouncer.play();  
+		    
+		   }		
+		   
+		   private KeyFrame makeKeyFrame(int d, double y, double sx, double sy){
+			   return new KeyFrame(
+					   new Duration(d),
+					   new KeyValue(imageComp.translateYProperty(),y),
+					   new KeyValue(imageComp.scaleXProperty(), sx),
+					   new KeyValue(imageComp.scaleYProperty(), sy)
+					   
+					   );
+		   }
+		   
+		   
+		  });
+
+		
+		  imageComp.setOnMouseExited(new EventHandler<MouseEvent>() {
+			   @Override public void handle(MouseEvent mouseEvent) {
+				   bouncer.play();
+				imageComp.setCursor(Cursor.HAND);	
+			    
+			   }	  
+			  });
+		
+		
+		
+		
+		
+		Text t2 = SetText(text);
+		vbox3.getChildren().addAll(imageComp, t2);
+		return vbox3;
+		
 	}
 }

@@ -24,13 +24,13 @@ public class WsTesterMain extends Application {
         scene.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
         //stage.initStyle(StageStyle.TRANSPARENT);
         
-     
+        stage.toBack();
         
         stage.setTitle("WsTester");
         root.getChildrenUnmodifiable().get(0).getStyleClass().add("mainWindow");
         root.getChildrenUnmodifiable().get(1).getStyleClass().add("bar");
         stage.setScene(scene);
-        stage.setFullScreen(true);
+        //stage.setFullScreen(true);
         stage.show();
 	}
 
