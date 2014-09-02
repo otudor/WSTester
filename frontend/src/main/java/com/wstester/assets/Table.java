@@ -2,18 +2,21 @@ package com.wstester.assets;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.ProgressBar;
 
 public class Table {
 	private final StringProperty name;
 	private final StringProperty date;
 	private final StringProperty path;
 	private final StringProperty size;
+	private final StringProperty progress;
 	
-	public Table(String name, String date, String path, String size){
+	public Table(String name, String date, String path, String size, String progress){
 		this.name = new SimpleStringProperty(name);
 		this.date = new SimpleStringProperty(date);
 		this.path = new SimpleStringProperty(path);
 		this.size = new SimpleStringProperty(size);
+		this.progress = new SimpleStringProperty(progress);
 	}
 	
 	public String getName(){
@@ -32,6 +35,9 @@ public class Table {
 		return size.get();
 	}
 	
+	public String getProgress(){
+		return progress.get();
+	}
 	public StringProperty nameProperty(){
 		return name;
 	}
@@ -46,5 +52,8 @@ public class Table {
 	
 	public StringProperty sizeProperty(){
 		return size;
+	}
+	public StringProperty progressProperty(){
+		return progress;
 	}
 }

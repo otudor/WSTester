@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
@@ -36,6 +37,8 @@ public class EventHandlerDemoController{
 	private TableColumn<Table, String> tablePath;
 	@FXML	
 	private TableColumn<Table, String> tableSize;
+	@FXML	
+	private TableColumn<Table, String> tableProgress;
 	@FXML
 	private Button addButton;
 	@FXML
@@ -156,6 +159,7 @@ public class EventHandlerDemoController{
 							String dateModified = dateFormat.format(file.lastModified());
 							
 							String size = FileUtils.byteCountToDisplaySize(file.length());
+							String Tableprogress = new String("Complete");
 							
 							String extension="";
 							int i = fileName.lastIndexOf('.');
@@ -166,15 +170,17 @@ public class EventHandlerDemoController{
 							
 							if(newValue.toString().toLowerCase().equals(extension.toString().toLowerCase())){
 								if(newValue.toString().toLowerCase().equals(TypeInterface.types[0].toLowerCase())){
-									getTableDataXml().add(new Table(fileName, dateModified, path, size));
+									getTableDataXml().add(new Table(fileName, dateModified, path, size, Tableprogress));
 								}else if(newValue.toString().toLowerCase().equals(TypeInterface.types[1].toLowerCase())){
-									getTableDataXsd().add(new Table(fileName, dateModified, path, size));
+									getTableDataXsd().add(new Table(fileName, dateModified, path, size, Tableprogress));
 								}else if(newValue.toString().toLowerCase().equals(TypeInterface.types[2].toLowerCase())){
-									getTableDataJson().add(new Table(fileName, dateModified, path, size));
+									getTableDataJson().add(new Table(fileName, dateModified, path, size, Tableprogress));
 								}else if(newValue.toString().toLowerCase().equals(TypeInterface.types[3].toLowerCase())){
-									getTableDataCsv().add(new Table(fileName, dateModified, path, size));
+									getTableDataCsv().add(new Table(fileName, dateModified, path, size, Tableprogress));
 								}else if(newValue.toString().toLowerCase().equals(TypeInterface.types[4].toLowerCase())){
-									getTableDataXls().add(new Table(fileName, dateModified, path, size));
+									getTableDataXls().add(new Table(fileName, dateModified, path, size, Tableprogress));
+								}else if(newValue.toString().toLowerCase().equals(TypeInterface.types[5].toLowerCase())){
+									getTableDataXls().add(new Table(fileName, dateModified, path, size, Tableprogress));
 								}
 	                		}else{
 								Dialogs.create()
@@ -236,5 +242,7 @@ public class EventHandlerDemoController{
 				.pathProperty());
 		tableSize.setCellValueFactory(cellData -> cellData.getValue()
 				.sizeProperty());
+		tableProgress.setCellValueFactory(cellData -> cellData.getValue()
+				.progressProperty());
 	}
 }
