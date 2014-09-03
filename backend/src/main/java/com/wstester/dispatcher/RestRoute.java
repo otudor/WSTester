@@ -4,6 +4,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+
 import com.wstester.model.Response;
 import com.wstester.model.RestService;
 import com.wstester.model.RestStep;
@@ -17,14 +18,16 @@ public class RestRoute extends RouteBuilder{
 	@Override
 	public void configure() throws Exception {
 		
-		from("jms:restQueue")
+		from("jms:restQueue?concurrentConsumers=20&asyncConsumer=true")
+		.bean(ExchangeDelayer.class, "delay")
 		.process(new Processor() {
 			
 			@Override
 			public void process(Exchange exchange) throws Exception {
 				
 				step = exchange.getIn().getBody(RestStep.class);
-		
+				System.out.println("Received rest step: " + step.getID());
+				
 				exchange.getIn().setBody(step.getBody());
 				exchange.getIn().setHeader(Exchange.HTTP_URI, getURI(step));
 				exchange.getIn().setHeader(Exchange.HTTP_QUERY, step.getQuery());

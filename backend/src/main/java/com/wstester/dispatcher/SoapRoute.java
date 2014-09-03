@@ -15,9 +15,9 @@ public class SoapRoute extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 		
-		from("jms:soapQueue")
+		from("jms:soapQueue?concurrentConsumers=20&asyncConsumer=true")
+		.bean(ExchangeDelayer.class, "delay")
 		.bean(SoapConnection.class)
-		.delay().method(ExchangeDelayer.class, "delay").asyncDelayed()
 		.process(new Processor() {
 			
 			@Override

@@ -1,17 +1,10 @@
 package com.wstester.camel;
 
 import java.lang.reflect.Field;
-
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.springframework.context.support.AbstractXmlApplicationContext;
-
 import com.wstester.actions.TestRunner;
-
-import java.util.HashSet;
-
-import com.wstester.dispatcher.ResponseCallback;
-import com.wstester.model.Response;
 
 public class TestBaseClass {
 
@@ -30,10 +23,6 @@ public class TestBaseClass {
 		Field contextField = testRunner.getClass().getDeclaredField("camelContext");
 		contextField.setAccessible(true);
 		context = (AbstractXmlApplicationContext) contextField.get(testRunner);
-		
-		Field responsField = ResponseCallback.class.getDeclaredField("responseList");
-		responsField.setAccessible(true);
-		responsField.set(ResponseCallback.class, new HashSet<Response>());
 	}
 	
 	@AfterClass

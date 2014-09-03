@@ -1,12 +1,8 @@
 package com.wstester.camel.unittest;
 
 import static org.apache.camel.component.jms.JmsComponent.jmsComponentClientAcknowledge;
-
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
-
 import javax.jms.ConnectionFactory;
-
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
@@ -17,7 +13,6 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import com.mongodb.Mongo;
 import com.wstester.dispatcher.ExchangeDelayer;
 import com.wstester.dispatcher.MongoRoute;
@@ -102,11 +97,8 @@ public class DependantStepsTest extends CamelTestSupport{
 		mongoStepDependant.setDependsOn(restStep.getID());
 		MongoStep mongoStep = getMongoStep();
 		
-		System.out.println("rest: " + restStep.getID());
-		System.out.println("mongo: " + mongoStep.getID());
-		System.out.println("mongoD: " + mongoStepDependant.getID());
 		template.asyncSendBody("jms:mongoQueue", mongoStepDependant);
-		resultEndpoint.await(1, TimeUnit.SECONDS);
+		Thread.sleep(2000);
 		template.asyncSendBody("jms:mongoQueue", mongoStep);
 		
 		resultEndpoint.expectedMessageCount(1);
@@ -120,7 +112,7 @@ public class DependantStepsTest extends CamelTestSupport{
 		assertEquals(resultEndpoint.getReceivedExchanges().get(1).getIn().getBody(Response.class).getStepID(), restStep.getID());
 		assertEquals(resultEndpoint.getReceivedExchanges().get(2).getIn().getBody(Response.class).getStepID(), mongoStepDependant.getID());
 		
-//		resultEndpoint.expectedMessageCount(3);
+		resultEndpoint.expectedMessageCount(3);
 		resultEndpoint.assertIsSatisfied();
 	}
 	

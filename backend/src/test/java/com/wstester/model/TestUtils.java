@@ -481,6 +481,7 @@ public class TestUtils {
 		step2.setAction(Action.INSERT);
 		step2.setCollection(collection);
 		step2.setQuery(insertQuery);
+		step2.setDependsOn(step1.getID());
 		stepList1.add(step2);
 		
 		// select after
@@ -493,6 +494,7 @@ public class TestUtils {
 		step3.setAction(Action.SELECT);
 		step3.setCollection(collection);
 		step3.setQuery(query);
+		step3.setDependsOn(step2.getID());
 		stepList1.add(step3);
 		
 		// construct test case list

@@ -37,6 +37,7 @@ public class ResponseCallback extends RouteBuilder {
 	public static boolean allResponsesReceived(int size){
 		
 		if(responseList.size() == size) {
+			responseList.removeAll(responseList);
 			return true;
 		}
 		

@@ -19,12 +19,20 @@ public abstract class Service {
 		return this.name;
 	}
 	
+	public void setName(String name){
+		this.name = name;
+	}
+
+	public String toString() 
+    { 
+    	return this.name; 
+    } 
+	  
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		return result;
 	}
 
@@ -42,23 +50,6 @@ public abstract class Service {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (uuid == null) {
-			if (other.uuid != null)
-				return false;
-		} else if (!uuid.equals(other.uuid))
-			return false;
 		return true;
 	}
-
-	public void setName(String name){
-		this.name = name;
-	}
-	
-
-	public String toString() 
-    { 
-    	return this.name; 
-    } 
-	  
-	
 }

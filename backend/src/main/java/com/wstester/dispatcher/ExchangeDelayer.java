@@ -1,31 +1,27 @@
 package com.wstester.dispatcher;
 
-import java.util.ArrayList;
-
+import java.util.HashSet;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.spi.ExecutorServiceManager;
-import org.apache.camel.spi.ThreadPoolProfile;
-
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 
 public class ExchangeDelayer extends RouteBuilder{
 
-	private static ArrayList<String> stepsFinished = new ArrayList<String>();
+	private static HashSet<String> stepsFinished = new HashSet<String>();
 	
 	public void delay(Step step) throws InterruptedException{
 		
-		ExecutorServiceManager manager = getContext().getExecutorServiceManager();
-		ThreadPoolProfile mongoProfile = manager.getDefaultThreadPoolProfile();
-		mongoProfile.setMaxPoolSize(50);
-		
+		// TODO: change this to a file property
+		int timeout = 10000;
 		if(step.getDependsOn() != null){
-			while(!stepsFinished.contains(step.getDependsOn())){
+			while(!stepsFinished.contains(step.getDependsOn()) && timeout > 0){
 				System.out.println("Waiting for: " + step.getDependsOn());
+				timeout-=1000;
 				Thread.sleep(1000);
 			}
+			//TODO: memory leak here, we don't remove all the steps that finished only the ones that block other steps
 			stepsFinished.remove(step.getDependsOn());
 		}
 			
@@ -44,5 +40,4 @@ public class ExchangeDelayer extends RouteBuilder{
 			}
 		});
 	}
-	
 }
