@@ -1,19 +1,14 @@
 package com.wstester.dispatcher;
 
-import java.util.ArrayList;
-
+import java.util.HashSet;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.springframework.context.ApplicationEvent;
-import org.springframework.context.ApplicationListener;
-
-import com.wstester.events.StepRunEvent;
 import com.wstester.model.Response;
 
-public class ResponseCallback extends RouteBuilder implements ApplicationListener<ApplicationEvent>{
+public class ResponseCallback extends RouteBuilder {
 
-	private static ArrayList<Response> responseList = new ArrayList<Response>();
+	private static HashSet<Response> responseList = new HashSet<Response>();
 	
 	@Override
 	public void configure() throws Exception {
@@ -29,14 +24,6 @@ public class ResponseCallback extends RouteBuilder implements ApplicationListene
 		});
 	}
 	
-	@Override
-	public void onApplicationEvent(ApplicationEvent event) {
-		
-		if(event instanceof StepRunEvent){
-			responseList.add(((StepRunEvent) event).getResponse());
-		}
-	}
-	
 	public static Response getResponse(String stepId){
 		
 		for(Response response : responseList){
@@ -49,8 +36,9 @@ public class ResponseCallback extends RouteBuilder implements ApplicationListene
 	
 	public static boolean allResponsesReceived(int size){
 		
-		if(responseList.size() == size)
+		if(responseList.size() == size) {
 			return true;
+		}
 		
 		return false;
 	}

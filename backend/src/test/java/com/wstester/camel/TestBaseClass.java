@@ -8,7 +8,7 @@ import org.springframework.context.support.AbstractXmlApplicationContext;
 
 import com.wstester.actions.TestRunner;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import com.wstester.dispatcher.ResponseCallback;
 import com.wstester.model.Response;
@@ -33,7 +33,7 @@ public class TestBaseClass {
 		
 		Field responsField = ResponseCallback.class.getDeclaredField("responseList");
 		responsField.setAccessible(true);
-		responsField.set(ResponseCallback.class, new ArrayList<Response>());
+		responsField.set(ResponseCallback.class, new HashSet<Response>());
 	}
 	
 	@AfterClass

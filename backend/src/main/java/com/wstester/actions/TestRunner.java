@@ -110,7 +110,7 @@ public class TestRunner {
 				}
 
 				Long timeout = 10000L;
-				while(!ResponseCallback.allResponsesReceived(stepSize) && (timeout-=1000) > 0){
+				while(!ResponseCallback.allResponsesReceived(stepSize) && ((timeout-=1000) > 0)){
 					Thread.sleep(1000);
 				}
 				

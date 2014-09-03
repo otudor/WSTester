@@ -5,6 +5,9 @@ import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mongodb.MongoDbConstants;
+import org.apache.camel.spi.ExecutorServiceManager;
+import org.apache.camel.spi.ThreadPoolProfile;
+
 import com.wstester.model.MongoService;
 import com.wstester.model.MongoStep;
 import com.wstester.model.Response;
@@ -16,9 +19,13 @@ public class MongoRoute extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 		
+		ExecutorServiceManager manager = getContext().getExecutorServiceManager();
+		ThreadPoolProfile mongoProfile = manager.getDefaultThreadPoolProfile();
+		mongoProfile.setMaxPoolSize(50);
+		
 		from("jms:mongoQueue")
 		.bean(MongoConnection.class, "setConnectionBean")
-		.delay().method(ExchangeDelayer.class, "delay").asyncDelayed()
+		.delay().method(ExchangeDelayer.class, "delay")
 		.process(new Processor() {
 			
 			@Override
