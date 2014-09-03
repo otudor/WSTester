@@ -9,7 +9,7 @@ public abstract class Service {
 	
 	protected String uuid;
 	protected String name;
-	protected ServiceType type;
+	
 	
 	public String getID() {
 		return this.uuid;
@@ -19,23 +19,15 @@ public abstract class Service {
 		return this.name;
 	}
 	
-	public void setName(String name){
-		this.name = name;
-	}
-	
-	public ServiceType getType() {
-		return type;
-	}
-
-	protected void setType(ServiceType type) {
-		this.type = type;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
+		return result;
 	}
 
-	public String toString() 
-    { 
-    	return this.name; 
-    } 
-	  
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -50,8 +42,23 @@ public abstract class Service {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (type != other.type)
+		if (uuid == null) {
+			if (other.uuid != null)
+				return false;
+		} else if (!uuid.equals(other.uuid))
 			return false;
 		return true;
 	}
+
+	public void setName(String name){
+		this.name = name;
+	}
+	
+
+	public String toString() 
+    { 
+    	return this.name; 
+    } 
+	  
+	
 }

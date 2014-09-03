@@ -13,7 +13,7 @@ public class MongoService extends Service implements Serializable{
 	
 	public MongoService() {
 		uuid = UUID.randomUUID().toString();
-		setType(ServiceType.MONGO);
+
 	}
 	
 	public String getPort() {
@@ -49,10 +49,22 @@ public class MongoService extends Service implements Serializable{
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((dbName == null) ? 0 : dbName.hashCode());
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((port == null) ? 0 : port.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -79,4 +91,6 @@ public class MongoService extends Service implements Serializable{
 			return false;
 		return true;
 	}
+
+	
 }

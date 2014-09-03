@@ -142,13 +142,13 @@ public class EnvironmentSearchPresenter implements Initializable
     				if ( services!= null && !services.isEmpty())
 	    				for (Service service: services)
 	        			{
-	    					if ( service.getType() == ServiceType.MYSQL)
+	    					if ( service instanceof MySQLService)
 	    						icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_MySQL_DB.png")));
-	    					else if ( service.getType() == ServiceType.MONGO)
+	    					else if ( service instanceof MongoService)
 	    						icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_Mongo_DB.png")));
-	    					else if ( service.getType() == ServiceType.SOAP)
+	    					else if ( service instanceof SoapService)
 	    						icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_Mongo_DB.png")));
-	    					else if ( service.getType() == ServiceType.REST)
+	    					else if ( service instanceof RestService)
 			    				icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treelcon_Rest.png")));
 	    					TreeItem<Object> serviceNode = new TreeItem<>(service, icon);
 	    					serverNode.getChildren().add( serviceNode);

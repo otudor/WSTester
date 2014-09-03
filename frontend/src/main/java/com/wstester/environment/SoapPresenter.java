@@ -16,6 +16,7 @@ public class SoapPresenter {
     @FXML private TextField SoapPort;
     @FXML private TextField SoapWsdl;
 
+    private String uid = null;
     private EnvironmentService envService;
     private MainPresenter mainPresenter;
 
@@ -39,7 +40,9 @@ public class SoapPresenter {
     	SoapPath.setText("");
     	SoapPort.setText("");
     	SoapWsdl.setText("");
-    	
+    	SoapPath.setEditable(false);
+    	SoapPort.setEditable(false);
+    	SoapWsdl.setEditable(false);
         
     	SoapPath.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
     	SoapPort.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
@@ -47,15 +50,14 @@ public class SoapPresenter {
     	
         
     	Server server = envService.getServerByUID( serverUID);
-		Service service = envService.getServiceByUID( server.getID(), serviceUID );
-    	SoapService soap = (SoapService) service;
-//    	SoapPath.setText( soap.getPath());
-//    	SoapPort.setText( soap.getPort());
-//    	SoapWsdl.setText( soap.getWsdlURL());
+		Service service = envService.getServiceByUID( server.getID(), serviceUID );    	
+		uid = serviceUID;
+		SoapService soap = (SoapService) service;
+		SoapPath.setText( soap.getPath());
+    	SoapPort.setText( soap.getPort());
+    	SoapWsdl.setText( soap.getWsdlURL());
     	
-    	SoapPath.setText("test");
-    	SoapPort.setText("test");
-    	SoapWsdl.setText("test");
+    	
     }
     
     public void seteditable(ActionEvent event)
@@ -79,6 +81,11 @@ public class SoapPresenter {
     	SoapPath.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
     	SoapPort.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
     	SoapWsdl.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
+    	SoapService sop = new SoapService();
+    	sop.setWsdlURL(SoapWsdl.getText());
+    	sop.setPath(SoapPath.getText());
+    	sop.setPort(SoapPort.getText());
+    	envService.setSoapServiceByUID(sop, uid);
     }
     
 }

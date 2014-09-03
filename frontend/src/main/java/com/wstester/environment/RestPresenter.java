@@ -20,12 +20,15 @@ public class RestPresenter {
 	private Button saveRest;
 	@FXML
 	private Button editRest;
-
+	private String uid = null;
+	
 	public void saveRest(ActionEvent e) {
 		saveRest.setDisable(true);
 		restField.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
 		restField.setEditable(false);
-
+		RestService rst = new RestService();
+		rst.setPort(restField.getText());
+		envService.setRestServiceByUID(rst,uid);
 
 	}
 	
@@ -64,6 +67,7 @@ public class RestPresenter {
 		Server server = envService.getServerByUID( serverUID);
 		Service service = envService.getServiceByUID( server.getID(), serviceUID );
 		RestService srv = (RestService) service;
+		uid = serviceUID;
 		restField.setText(srv.getPort());
 
 		
