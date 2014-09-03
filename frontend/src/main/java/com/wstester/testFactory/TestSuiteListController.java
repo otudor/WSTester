@@ -27,12 +27,17 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.hamcrest.core.IsInstanceOf;
+
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
+import com.wstester.model.ServiceType;
+import com.wstester.model.SoapStep;
+import com.wstester.model.Step;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestSuite;
 
@@ -75,9 +80,19 @@ public class TestSuiteListController implements Initializable
     
     public void selectTestSuite( String tsUID)
     {
-    	tsManagerController.showTestSuiteDetail( tsUID);
+    	tsManagerController.showTestSuite( tsUID);
+    }
+    
+    public void selectTestCase( String tsUID)
+    {
+    	tsManagerController.showTestCase( tsUID);
     }
 
+    public void selectMySQLStep( String sUID)
+    {
+    	tsManagerController.showMySQLStep( sUID);
+    }
+    
     public String getFirstEnv()
     {
     	return tsService.getFirstTestSuite().getID();
@@ -103,7 +118,18 @@ public class TestSuiteListController implements Initializable
     			{
     				icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_server.png")));
     				TreeItem<Object> tcNode = new TreeItem<>(tc, icon);
-		
+    				
+    				List<Step> steps = tc.getStepList();    				
+    				if ( steps!= null && !steps.isEmpty())
+	    				for (Step step: steps)
+	        			{
+	    					if ( step instanceof MySQLStep )
+	    						icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_MySQL_DB.png")));
+
+	    					TreeItem<Object> stepNode = new TreeItem<>(step, icon);
+	    					tcNode.getChildren().add( stepNode);
+	        			}
+    				
     				envNode.getChildren().add( tcNode);
     			}
     		}
@@ -202,7 +228,8 @@ public class TestSuiteListController implements Initializable
     	    	    	
     	    	    	if (mysqlStep != null)
     	    	    	{
-    	    	    		TreeItem<Object> stepNode = new TreeItem<>(mysqlStep);
+    	    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_MySQL_DB.png")));
+    	    	    		TreeItem<Object> stepNode = new TreeItem<>(mysqlStep, icon);
     	    	    		item.getChildren().add( stepNode);
     	    	    		treeView.getSelectionModel().select( stepNode);
     	    	    		//show details in right pane
@@ -235,8 +262,10 @@ public class TestSuiteListController implements Initializable
                     	{
     	                	if ( getItem().getClass() == TestSuite.class)
     	                    	selectTestSuite( ((TestSuite) getItem()).getID());
-    	                    //else if ( getItem().getClass() == Server.class)
-    	                    //	select(  ((Server) getItem()).getID());
+    	                    else if ( getItem().getClass() == TestCase.class)
+    	                    	selectTestCase(  ((TestCase) getItem()).getID());
+    	                    else if ( getItem().getClass() == MySQLStep.class)
+    	                    	selectMySQLStep(  ((MySQLStep) getItem()).getID());
                     	}
                 	}
                 }
