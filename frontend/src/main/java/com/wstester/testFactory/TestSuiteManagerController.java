@@ -10,8 +10,9 @@ public class TestSuiteManagerController
     @FXML private BorderPane contentArea;
 
     private TestSuiteListController tsListController;
-    private TestSuiteController tsDetailController;
-    private TestCaseController tcDetailController;
+    private TestSuiteController testSuiteController;
+    private TestCaseController testCaseController;
+    private MySQLStepController mysqlStepController;
 
     public void setTestSuiteListController( TestSuiteListController tsListController)
     {
@@ -20,12 +21,17 @@ public class TestSuiteManagerController
 
     public void setTestSuiteDetailController( TestSuiteController tsDetailController)
     {
-        this.tsDetailController = tsDetailController;
+        this.testSuiteController = tsDetailController;
     }
 
     public void setTestCaseDetailController( TestCaseController tcDetailController)
     {
-        this.tcDetailController = tcDetailController;
+        this.testCaseController = tcDetailController;
+    }
+    
+    public void setMySQLStepController( MySQLStepController mysqlStepController)
+    {
+        this.mysqlStepController = mysqlStepController;
     }
     
     public Parent getView()
@@ -33,23 +39,29 @@ public class TestSuiteManagerController
         return root;
     }
 
-    public void loadEnvironments()
+    public void loadTestSuites()
     {
     	tsListController.search();
     	tsListController.loadTreeItems();
         contentArea.setLeft( tsListController.getView());        
     }
 
-    public void showTestSuiteDetail( String envUID)
+    public void showTestSuite( String tsUID)
     {
-    	tsDetailController.setTestSuite( envUID);
-        contentArea.setCenter( tsDetailController.getView());
+    	testSuiteController.setTestSuite( tsUID);
+        contentArea.setCenter( testSuiteController.getView());
     }
     
-    public void showTestCaseDetail( String tcUID)
+    public void showTestCase( String tcUID)
     {
-    	tcDetailController.setTestCase( tcUID);
-        contentArea.setCenter( tcDetailController.getView());
+    	testCaseController.setTestCase( tcUID);
+        contentArea.setCenter( testCaseController.getView());
+    }
+    
+    public void showMySQLStep( String sUID)
+    {
+    	mysqlStepController.setMySQLStep(sUID);
+        contentArea.setCenter( mysqlStepController.getView());
     }
     
     public String getFirstEnvironment()

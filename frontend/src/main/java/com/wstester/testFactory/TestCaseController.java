@@ -8,8 +8,7 @@ import javafx.scene.control.TextField;
 public class TestCaseController
 {
     @FXML private Node rootTCDetails;
-    @FXML private TextField ftpNameField;
-    @FXML private TextField ftpIPField;
+    @FXML private TextField txtTCName;
 
     private TestSuiteService tsService;
     private TestSuiteManagerController tsMainController;
@@ -31,12 +30,10 @@ public class TestCaseController
 
     public void setTestCase(final String tcUID)
     {
-        /*//this.serverUID = serverUID;
-        ftpNameField.setText("");
-        ftpIPField.setText("");
+        //this.serverUID = serverUID;
+        txtTCName.setText("Test Case name");
         
-        Server server = tsService.getServerByUID( serverUID);
-        ftpNameField.setText( server.getName());
-        ftpIPField.setText( server.getIp());*/
+        //Server server = tsService.getServerByUID( serverUID);
+        //txtTCName.setText( tc.getName());
     }
 }

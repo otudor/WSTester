@@ -562,7 +562,7 @@ public class WsTesterMainController implements Initializable {
 						root = FXMLLoader.load(getClass().getResource("/fxml/TestFactory/TestSuiteManager.fxml"));
 						TestSuiteFactory factory = new TestSuiteFactory();
 	                    TestSuiteManagerController mainPresenter = factory.getManagerController();
-                        mainPresenter.loadEnvironments();
+                        mainPresenter.loadTestSuites();
                         root = mainPresenter.getView();
 						Scene second = new Scene(root, 600, 480);
 						root.getStylesheets().add("/styles/Styles.css");

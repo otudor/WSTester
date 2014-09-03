@@ -1,14 +1,13 @@
 package com.wstester.testFactory;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.wstester.model.Environment;
 import com.wstester.model.MySQLService;
 import com.wstester.model.MySQLStep;
-import com.wstester.model.Server;
-import com.wstester.model.Service;
+import com.wstester.model.Step;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestSuite;
 
@@ -21,10 +20,16 @@ public class TestSuiteService
     {
         this.tsList = new HashMap<String, TestSuite>();
 
-        TestSuite ts1 = createTestSuite( "Test Suite 1");
+        TestSuite ts1 = createTestSuite( "Test Suite");
         List<TestCase> tcList = new ArrayList<TestCase>();
 		TestCase tc1 = new TestCase();
 		tc1.setName("Test Case 1");
+		List<Step> stpList = new ArrayList<Step>();
+		MySQLStep mysqlStep = new MySQLStep();
+		mysqlStep.setName("MySQL step name");
+		mysqlStep.setOperation("select * from employee");
+		stpList.add(mysqlStep);
+		tc1.setStepList(stpList);
 		tcList.add( tc1);
 		ts1.setTestCaseList( tcList);		
     }
@@ -124,6 +129,26 @@ public class TestSuiteService
     					break;
     				}
     	}
+    }
+    
+    public Step getStep( String stepUID)
+    {
+    	if( tsList != null && !tsList.isEmpty())
+    		for (Map.Entry<String, TestSuite> tSuite : tsList.entrySet()) 
+    		{
+    			List<TestCase> tcList = ((TestSuite) tSuite.getValue()).getTestCaseList();
+    			if (tcList != null && !tcList.isEmpty())
+    				for (TestCase tc: tcList)
+    				{
+    					List<Step> stepList = tc.getStepList();
+    					if( stepList != null && !stepList.isEmpty())
+    						for( Step stp: stepList)
+    							if (stp.getID() == stepUID)
+									return stp;    								
+    				}
+    		}
+    	
+    	return null;
     }
     
 

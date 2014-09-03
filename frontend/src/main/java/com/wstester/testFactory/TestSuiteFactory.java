@@ -9,7 +9,7 @@ public class TestSuiteFactory
     private TestSuiteListController tsListController;
     private TestSuiteController tSuiteController;
     private TestCaseController tCaseController;
-    private TestStepController tStepController;
+    private MySQLStepController mySQLStepController;
     private TestSuiteService tsService;
     
     public TestSuiteManagerController getManagerController()
@@ -24,6 +24,7 @@ public class TestSuiteFactory
                 tsManagerController.setTestSuiteDetailController( getTestSuiteController());
                 tsManagerController.setTestSuiteListController( getTestSuiteListController());
                 tsManagerController.setTestCaseDetailController( getTestCaseController());
+                tsManagerController.setMySQLStepController( getMySQLStepController());
             }
             catch (IOException e)
             {
@@ -73,24 +74,24 @@ public class TestSuiteFactory
         return tCaseController;
     }
 
-    public TestStepController getTestStepController()
+    public MySQLStepController getMySQLStepController()
     {
-        if (tStepController == null)
+        if (mySQLStepController == null)
         {
             try
             {
                 FXMLLoader loader = new FXMLLoader();
-                loader.load(getClass().getResourceAsStream("/fxml/TestFactory/TestStep.fxml"));
-                tStepController = (TestStepController) loader.getController();
-                tStepController.setTestSuiteService( getTestSuiteService());
-                tStepController.setTestSuiteManagerController( getManagerController());
+                loader.load(getClass().getResourceAsStream("/fxml/TestFactory/MySQLStep.fxml"));
+                mySQLStepController = (MySQLStepController) loader.getController();
+                mySQLStepController.setTestSuiteService( getTestSuiteService());
+                mySQLStepController.setTestSuiteManagerController( getManagerController());
             }
             catch (IOException e)
             {
-                throw new RuntimeException("Unable to load TestStep.fxml", e);
+                throw new RuntimeException("Unable to load MySQLStep.fxml", e);
             }
         }
-        return tStepController;
+        return mySQLStepController;
     }
     
     public TestSuiteController getTestSuiteController()
