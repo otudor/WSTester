@@ -12,6 +12,8 @@ public class EnvironmentsAppFactory
     private EnvironmentService environmentService;
     private MongoDBPresenter mngDBPresenter;
     private MySQLDBPresenter mysqlDBPresenter;
+    private SoapPresenter soapPresenter;
+    private RestPresenter rstPresenter;
     
     public MainPresenter getMainPresenter()
     {
@@ -27,6 +29,8 @@ public class EnvironmentsAppFactory
                 mainPresenter.setFTPDetailPresenter( getFTPServerDetailPresenter());
                 mainPresenter.setMongoDBPresenter( getMongoDBPresenter());
                 mainPresenter.setMySQLPresenter( getMySQLPresenter());
+                mainPresenter.setSoapPresenter( getSoapPresenter());
+                mainPresenter.setRestPresenter( getRestPresenter());
             }
             catch (IOException e)
             {
@@ -134,6 +138,46 @@ public class EnvironmentsAppFactory
             }
         }
         return mysqlDBPresenter;
+    }
+    
+    public SoapPresenter getSoapPresenter()
+    {
+        if (soapPresenter == null)
+        {
+            try
+            {
+                FXMLLoader loader = new FXMLLoader();
+                loader.load(getClass().getResourceAsStream("/fxml/environment/SoapWindow.fxml"));
+                soapPresenter = (SoapPresenter) loader.getController();
+                soapPresenter.setEnvironmentService(getEnvironmentService());
+                soapPresenter.setMainPresenter(getMainPresenter());
+            }
+            catch (IOException e)
+            {
+                throw new RuntimeException("Unable to load SoapWindow.fxml", e);
+            }
+        }
+        return soapPresenter;
+    }
+    
+    public RestPresenter getRestPresenter()
+    {
+        if (rstPresenter == null)
+        {
+            try
+            {
+                FXMLLoader loader = new FXMLLoader();
+                loader.load(getClass().getResourceAsStream("/fxml/environment/EnvRest.fxml"));
+                rstPresenter = (RestPresenter) loader.getController();
+                rstPresenter.setEnvironmentService(getEnvironmentService());
+                rstPresenter.setMainPresenter(getMainPresenter());
+            }
+            catch (IOException e)
+            {
+                throw new RuntimeException("Unable to load EnvRest.fxml", e);
+            }
+        }
+        return rstPresenter;
     }
     
     public EnvironmentService getEnvironmentService()

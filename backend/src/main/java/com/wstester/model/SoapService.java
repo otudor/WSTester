@@ -12,7 +12,7 @@ public class SoapService extends Service implements Serializable{
 	
 	public SoapService() {
 		uuid = UUID.randomUUID().toString();
-		setType(ServiceType.SOAP);
+		
 	}
 
 	public String getPort() {
@@ -46,7 +46,7 @@ public class SoapService extends Service implements Serializable{
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((path == null) ? 0 : path.hashCode());
 		result = prime * result + ((port == null) ? 0 : port.hashCode());
 		result = prime * result + ((wsdlURL == null) ? 0 : wsdlURL.hashCode());
@@ -78,5 +78,7 @@ public class SoapService extends Service implements Serializable{
 		} else if (!wsdlURL.equals(other.wsdlURL))
 			return false;
 		return true;
-	}		
+	}
+
+	
 }

@@ -10,7 +10,7 @@ public class RestService extends Service implements Serializable{
 	
 	public RestService() {
 		uuid = UUID.randomUUID().toString();
-		setType(ServiceType.REST);
+		
 	}
 	
 	public String getPort() {
@@ -20,28 +20,31 @@ public class RestService extends Service implements Serializable{
 	public void setPort(String port) {
 		this.port = port;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((port == null) ? 0 : port.hashCode());
+		return result;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		RestService other = (RestService) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
 		if (port == null) {
 			if (other.port != null)
 				return false;
 		} else if (!port.equals(other.port))
 			return false;
-		if (type != other.type)
-			return false;
 		return true;
 	}
+	
+	
 }

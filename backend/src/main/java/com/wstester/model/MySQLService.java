@@ -13,7 +13,7 @@ public class MySQLService extends Service implements Serializable{
 	
 	public MySQLService() {
 		uuid = UUID.randomUUID().toString();
-		setType(ServiceType.MYSQL);
+		
 	}
 	
 	public String getPort() {
@@ -49,6 +49,18 @@ public class MySQLService extends Service implements Serializable{
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((dbName == null) ? 0 : dbName.hashCode());
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((port == null) ? 0 : port.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -79,4 +91,6 @@ public class MySQLService extends Service implements Serializable{
 			return false;
 		return true;
 	}
+
+	
 }

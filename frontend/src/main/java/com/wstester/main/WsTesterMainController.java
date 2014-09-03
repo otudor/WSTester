@@ -1,6 +1,6 @@
 package com.wstester.main;
 
-import insidefx.undecorator.Undecorator;
+//import insidefx.undecorator.Undecorator;
 
 import java.io.IOException;
 import java.net.URL;
@@ -54,6 +54,8 @@ import com.wstester.environment.Delta;
 import com.wstester.environment.EnvironmentsAppFactory;
 import com.wstester.environment.MainPresenter;
 import com.wstester.model.Server;
+import com.wstester.testFactory.TestSuiteFactory;
+import com.wstester.testFactory.TestSuiteManagerController;
 
 public class WsTesterMainController implements Initializable {
 	@FXML
@@ -545,7 +547,7 @@ public class WsTesterMainController implements Initializable {
 					stageRnd = new Stage();
 					isDisplayed5 = true;
 					try {
-						Parent root = FXMLLoader.load(getClass().getResource("/fxml/TestFactory/TestFactoryManager.fxml"));
+						/*Parent root = FXMLLoader.load(getClass().getResource("/fxml/TestFactory/TestFactoryManager.fxml"));
 						 Undecorator undecorator = new Undecorator(stageRnd, (Region) root);
 						 undecorator.getStylesheets().add("skin/undecorator.css");
 						 undecorator.setFadeInTransition();
@@ -556,7 +558,15 @@ public class WsTesterMainController implements Initializable {
 						 stageRnd.setMinHeight(400);
 
 						 stageRnd.setHeight(600);
-						 stageRnd.setWidth(700);
+						 stageRnd.setWidth(700);*/
+						root = FXMLLoader.load(getClass().getResource("/fxml/TestFactory/TestSuiteManager.fxml"));
+						TestSuiteFactory factory = new TestSuiteFactory();
+	                    TestSuiteManagerController mainPresenter = factory.getManagerController();
+                        mainPresenter.loadTestSuites();
+                        root = mainPresenter.getView();
+						Scene second = new Scene(root, 600, 480);
+						root.getStylesheets().add("/styles/Styles.css");
+						stage.setTitle("Test Suites window");
 						 
 						//root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
 						//Scene second = new Scene(root);
@@ -595,7 +605,7 @@ public class WsTesterMainController implements Initializable {
 						//menuBar.getMenus().add(menuRnd);
 						stageRnd.initOwner(pane.getScene().getWindow());
 						//stage.initModality(Modality.WINDOW_MODAL);
-						stageRnd.setScene(secound);
+						stageRnd.setScene(second);
 						//stageRnd.initOwner(WsTesterMain.stage);
 						stageRnd.show();
 						

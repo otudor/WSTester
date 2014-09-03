@@ -3,6 +3,9 @@ import java.io.IOException;
 
 
 
+
+
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,6 +24,8 @@ public class MainPresenter
     private ServerDetailsPresenter ftpDetailPresenter;
     private MongoDBPresenter mngDBPresenter;
     private MySQLDBPresenter mysqlDBPresenter;
+    private SoapPresenter soapPresenter;
+    private RestPresenter rstPresenter;
 
     public void setEnvironmentSearchPresenter(EnvironmentSearchPresenter envSearchPresenter)
     {
@@ -50,6 +55,16 @@ public class MainPresenter
     public void setMySQLPresenter(MySQLDBPresenter mysqlDBPresenter)
     {
         this.mysqlDBPresenter = mysqlDBPresenter;
+    }
+    
+    public void setSoapPresenter(SoapPresenter soapPresenter)
+    {
+        this.soapPresenter = soapPresenter;
+    }
+    
+    public void setRestPresenter(RestPresenter rstPresenter)
+    {
+        this.rstPresenter = rstPresenter;
     }
     
     public Parent getView()
@@ -88,6 +103,18 @@ public class MainPresenter
     {
 	  	mysqlDBPresenter.setMySQLDB( serverUID, mysqlUID);
         contentArea.setCenter( mysqlDBPresenter.getView());
+    }
+    
+    public void showSoap(String serverUID, String soaplUID)
+    {
+    	soapPresenter.setSoapWindow( serverUID, soaplUID);
+        contentArea.setCenter( soapPresenter.getView());
+    }
+    
+    public void showRest(String serverUID, String rstUID)
+    {
+	  	rstPresenter.setRest( serverUID, rstUID);
+        contentArea.setCenter( rstPresenter.getView());
     }
     
     public String getFirstEnvironment()

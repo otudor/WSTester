@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.assets.EventHandlerDemoController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.assets.EventHandlerDemoController">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" layoutX="246.0" layoutY="141.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -30,7 +30,7 @@
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../images/button_add.png" />
+                                          <Image url="@../../images/button_add.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -39,7 +39,7 @@
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../images/DeleteButton.png" />
+                                          <Image url="@../../images/DeleteButton.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -48,7 +48,7 @@
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../images/rename.png" />
+                                          <Image url="@../../images/rename.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -67,6 +67,7 @@
  								  </TableColumn>
                                   <TableColumn fx:id="tableSize" prefWidth="105.0" text="Size">
  								  </TableColumn>
+                                    <TableColumn fx:id="tableProgress" prefWidth="75.0" text="Progress" />
                                 </columns>
                               </TableView>
                            </children>

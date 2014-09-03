@@ -1,5 +1,6 @@
 package com.wstester.environment;
 
+import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
@@ -26,7 +27,8 @@ public class MySQLDBPresenter {
 	private Button save;
 	@FXML
 	private Button edit;
-
+	private String uid = null;
+	
 	public void saveMySQL(ActionEvent e) {
 		save.setDisable(true);
 		portField.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
@@ -38,6 +40,13 @@ public class MySQLDBPresenter {
 		dbUsernameField.setEditable(false);
 		dbPassField.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
 		dbPassField.setEditable(false);
+		MySQLService sql = new MySQLService();
+		sql.setDbName(dbNameField.getText());
+		sql.setPassword(dbPassField.getText());
+		sql.setUser(dbUsernameField.getText());
+		sql.setPort(portField.getText());
+    	envService.setMySQLServiceByUID(sql, uid);
+		
 
 	}
 	
@@ -99,6 +108,7 @@ public class MySQLDBPresenter {
 		Server server = envService.getServerByUID( serverUID);
 		Service service = envService.getServiceByUID( server.getID(), serviceUID );
 		MySQLService srv = (MySQLService) service;
+		uid = serviceUID;
 		portField.setText(srv.getPort());
 		dbNameField.setText(srv.getDbName());
 		dbUsernameField.setText(srv.getUser());

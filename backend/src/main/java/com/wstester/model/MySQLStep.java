@@ -22,6 +22,11 @@ public class MySQLStep extends Step {
 		this.operation = operation;
 	}
 
+	public String toString()
+	{
+		return super.getName();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

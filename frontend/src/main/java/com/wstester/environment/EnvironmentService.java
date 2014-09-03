@@ -10,8 +10,10 @@ import javafx.scene.control.TreeItem;
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
+import com.wstester.model.RestService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
+import com.wstester.model.SoapService;
 
 public class EnvironmentService {
 	// private long nextId = 0;
@@ -34,6 +36,18 @@ public class EnvironmentService {
 		mysqlsrv.setPort("80");
 		mysqlsrv.setPassword("pass");
 		lstService.add(mysqlsrv);
+		// SoapService
+		SoapService soap = new SoapService();
+		soap.setName("Sviciul de Soap");
+		soap.setPath("path");
+		soap.setPort("DB Name");
+		soap.setWsdlURL("URL");
+		lstService.add(soap);
+		// Rest service
+		RestService rstsrv = new RestService();
+		rstsrv.setName("Serviciul de Rest");
+		rstsrv.setPort("9080");
+		lstService.add(rstsrv);
 		// Mongo service
 		MongoService mongosrv = new MongoService();
 		mongosrv.setName("Serviciul de Mongo");
@@ -45,6 +59,7 @@ public class EnvironmentService {
 		srv1.setServices(lstService);
 		list1.add(srv1);
 		e1.setServers(list1);
+		// SoapService
 
 		Environment e2 = createEnvironment("CHINA Env");
 		List<Server> list2 = new ArrayList<Server>();
@@ -175,6 +190,60 @@ public class EnvironmentService {
 		return result;
 	}
 
+	public SoapService addSoapServiceforServ(String srvUID) {
+		SoapService result = null;
+		Server srv = null;
+		for (Map.Entry<String, Environment> entry : environments.entrySet()) {
+			// System.out.println(entry.getKey() + "/" + entry.getValue());
+			List<Server> serverList = ((Environment) entry.getValue())
+					.getServers();
+			if (serverList != null && !serverList.isEmpty()) {
+				for (Server server : serverList)
+					if (server.getID() == srvUID) {
+						srv = server;
+						break;
+					}
+			}
+		}
+
+		if (srv != null) {
+			result = new SoapService();
+			result.setName("New SoapService");
+			result.setWsdlURL("test3");
+			result.setPort("test3");
+			result.setPath("test3");
+			srv.addService((Service) result);
+		}
+
+		return result;
+	}
+
+	public RestService addRestServiceforServ(String srvUID) {
+		RestService result = null;
+		Server srv = null;
+		for (Map.Entry<String, Environment> entry : environments.entrySet()) {
+			// System.out.println(entry.getKey() + "/" + entry.getValue());
+			List<Server> serverList = ((Environment) entry.getValue())
+					.getServers();
+			if (serverList != null && !serverList.isEmpty()) {
+				for (Server server : serverList)
+					if (server.getID() == srvUID) {
+						srv = server;
+						break;
+					}
+			}
+		}
+
+		if (srv != null) {
+			result = new RestService();
+			result.setName("New RestService");
+			result.setPort("00000");
+			srv.addService((Service) result);
+		}
+
+		return result;
+	}
+
 	public void removeEnvironmentById(String uId) {
 		environments.remove(uId);
 	}
@@ -225,6 +294,126 @@ public class EnvironmentService {
 		return result;
 	}
 
+	public void setMongoServiceByUID(MongoService src, String serviceUID) {
+		for (Map.Entry<String, Environment> entry : environments.entrySet()) {
+			// System.out.println(entry.getKey() + "/" + entry.getValue());
+			List<Server> serverList = ((Environment) entry.getValue())
+					.getServers();
+			if (serverList != null && !serverList.isEmpty()) 
+			{
+				for (Server server : serverList)
+				{
+					List<Service> serviceList = server.getServices();
+						if (serviceList != null && !serviceList.isEmpty())
+						{
+							for (Service service : serviceList) 
+							{
+								if (service.getID() == serviceUID) 
+								{
+											MongoService mongo = new MongoService();
+											mongo = (MongoService) service;
+											mongo.setDbName(src.getDbName());
+											mongo.setPassword(src.getPassword());
+											mongo.setPort(src.getPort());
+											mongo.setUser(src.getUser());
+											service = (Service) mongo;
+								}			
+							}
+						}
+				}
+			}
+		}
+	}
+
+	public void setMySQLServiceByUID(MySQLService src, String serviceUID) {
+		for (Map.Entry<String, Environment> entry : environments.entrySet()) {
+			// System.out.println(entry.getKey() + "/" + entry.getValue());
+			List<Server> serverList = ((Environment) entry.getValue())
+					.getServers();
+			if (serverList != null && !serverList.isEmpty()) 
+			{
+				for (Server server : serverList)
+				{
+					List<Service> serviceList = server.getServices();
+						if (serviceList != null && !serviceList.isEmpty())
+						{
+							for (Service service : serviceList) 
+							{
+								if (service.getID() == serviceUID) 
+								{
+											MySQLService serv = new MySQLService();
+											serv = (MySQLService) service;
+											serv.setDbName(src.getDbName());
+											serv.setPassword(src.getPassword());
+											serv.setPort(src.getPort());
+											serv.setUser(src.getUser());
+											service = (Service) serv;
+								}			
+							}
+						}
+				}
+			}
+		}
+	}
+	
+	public void setRestServiceByUID(RestService src, String serviceUID) {
+		for (Map.Entry<String, Environment> entry : environments.entrySet()) {
+			// System.out.println(entry.getKey() + "/" + entry.getValue());
+			List<Server> serverList = ((Environment) entry.getValue())
+					.getServers();
+			if (serverList != null && !serverList.isEmpty()) 
+			{
+				for (Server server : serverList)
+				{
+					List<Service> serviceList = server.getServices();
+						if (serviceList != null && !serviceList.isEmpty())
+						{
+							for (Service service : serviceList) 
+							{
+								if (service.getID() == serviceUID) 
+								{
+											RestService serv = new RestService();
+											serv = (RestService) service;
+											serv.setPort(src.getPort());
+											service = (Service) serv;
+								}			
+							}
+						}
+				}
+			}
+		}
+	}
+	
+	public void setSoapServiceByUID(SoapService src, String serviceUID) {
+		for (Map.Entry<String, Environment> entry : environments.entrySet()) {
+			// System.out.println(entry.getKey() + "/" + entry.getValue());
+			List<Server> serverList = ((Environment) entry.getValue())
+					.getServers();
+			if (serverList != null && !serverList.isEmpty()) 
+			{
+				for (Server server : serverList)
+				{
+					List<Service> serviceList = server.getServices();
+						if (serviceList != null && !serviceList.isEmpty())
+						{
+							for (Service service : serviceList) 
+							{
+								if (service.getID() == serviceUID) 
+								{
+											SoapService serv = new SoapService();
+											serv = (SoapService) service;
+											serv.setPath(src.getPath());
+											serv.setWsdlURL(src.getWsdlURL());
+											serv.setPort(src.getPort());
+											service = (Service) serv;
+								}			
+							}
+						}
+				}
+			}
+		}
+	}
+	
 	public void removeService(String srvUID, String srcUID) {
 		// Pentru implementarea cu Backendul, posibil ca functia sa necesite ID
 		// enviormentului

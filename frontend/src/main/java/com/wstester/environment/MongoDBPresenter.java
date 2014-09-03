@@ -16,9 +16,10 @@ public class MongoDBPresenter {
     @FXML private TextField MongoUser;
     @FXML private TextField MongoPassfield;
     
-    
+    private String uid = null;
     private EnvironmentService envService;
     private MainPresenter mainPresenter;
+    
 
     public void setEnvironmentService(EnvironmentService environmentService)
     {
@@ -49,11 +50,12 @@ public class MongoDBPresenter {
         
     	Server server = envService.getServerByUID( serverUID);
 		Service service = envService.getServiceByUID( server.getID(), serviceUID );
-    	MongoService mng = (MongoService) service;
-        MongoPort.setText( mng.getPort());
-        MongoName.setText( mng.getDbName());
-        MongoUser.setText( mng.getUser());
-        MongoPassfield.setText( mng.getPassword());
+		uid = serviceUID;
+		MongoService mng = (MongoService) service;
+		MongoPort.setText( mng.getPort());
+		MongoName.setText( mng.getDbName());
+		MongoUser.setText( mng.getUser());
+		MongoPassfield.setText( mng.getPassword());
     }
     
     public void seteditable(ActionEvent event)
@@ -78,5 +80,12 @@ public class MongoDBPresenter {
     	MongoPort.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
     	MongoUser.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
     	MongoPassfield.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
+    	MongoService mng = new MongoService();
+    	mng.setDbName(MongoName.getText());
+    	mng.setPassword(MongoPassfield.getText());
+    	mng.setUser(MongoUser.getText());
+    	mng.setPort(MongoPort.getText());
+    	envService.setMongoServiceByUID(mng, uid);
+    	
     }
 }

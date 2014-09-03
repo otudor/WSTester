@@ -62,6 +62,11 @@ public class TestCase {
 		variableList.add(variable);
 	}
 
+	public String toString()
+	{
+		return this.name;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
