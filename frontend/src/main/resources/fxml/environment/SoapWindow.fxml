@@ -21,12 +21,12 @@
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#setuneditable" prefHeight="25.0" prefWidth="75.0" text="Save">
+            <Button fx:id="edit" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#seteditable" prefHeight="25.0" prefWidth="75.0" text="Edit">
                <HBox.margin>
                   <Insets left="10.0" top="2.5" />
                </HBox.margin>
             </Button>
-            <Button fx:id="edit" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#seteditable" prefHeight="25.0" prefWidth="75.0" text="Edit">
+            <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#setuneditable" prefHeight="25.0" prefWidth="75.0" text="Save">
                <HBox.margin>
                   <Insets left="55.0" right="10.0" top="2.5" />
                </HBox.margin>

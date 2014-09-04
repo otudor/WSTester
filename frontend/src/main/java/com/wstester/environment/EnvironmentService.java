@@ -414,6 +414,36 @@ public class EnvironmentService {
 		}
 	}
 	
+	public void setServerByUID(Server srv,String serverUID) {
+		for (Map.Entry<String, Environment> entry : environments.entrySet()) {
+			// System.out.println(entry.getKey() + "/" + entry.getValue());
+			List<Server> serverList = ((Environment) entry.getValue())
+					.getServers();
+			if (serverList != null && !serverList.isEmpty()) 
+			{
+				for (Server server : serverList)
+				{
+					if (server.getID() == serverUID) 
+						{
+							server.setName(srv.getName());
+							server.setIp(srv.getIp());
+							server.setDescription(srv.getDescription());
+						}			
+				}
+			}
+		}
+	}
+	
+	public void setEnvNameByUID(String name,String envUID) {
+		for (Map.Entry<String, Environment> entry : environments.entrySet()) {
+			if (entry.getValue().getID() == envUID) 
+						{
+							entry.getValue().setName(name);
+							
+						}			
+		}
+	}
+	
 	public void removeService(String srvUID, String srcUID) {
 		// Pentru implementarea cu Backendul, posibil ca functia sa necesite ID
 		// enviormentului
