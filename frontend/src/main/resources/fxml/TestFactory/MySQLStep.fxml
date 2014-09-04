@@ -14,5 +14,12 @@
         <TextField fx:id="txtName" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
         <Label text="SQL" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
         <TextField fx:id="txtSQL" GridPane.rowIndex = "1" GridPane.columnIndex="1"/>
+        
+        <Label text="Status:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+        <TextField fx:id="txtStatus" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="30"/>
+        
+        <Label text="Response:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtResponse" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        
     </children>
 </GridPane>

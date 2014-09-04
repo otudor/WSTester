@@ -47,10 +47,10 @@ public class TestSuiteListController implements Initializable
     //@FXML private TextField searchField;
    // @FXML private ListView<Old> resultsList;
     private ObservableList<TestSuite> tsList;
-    @FXML private TreeView<Object> treeView;
+    @FXML static private TreeView<Object> treeView;
     
     private TestSuiteManagerController tsManagerController;
-    private TestSuiteService tsService;
+    static private TestSuiteService tsService;
     
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -73,7 +73,7 @@ public class TestSuiteListController implements Initializable
 
     public void search()
     {
-    	tsList = FXCollections.observableList(tsService.loadTestSuites());    
+    	tsList = FXCollections.observableList(tsService.getTestSuites());    
         //load the tree also
         loadTreeItems();
     }
@@ -105,10 +105,10 @@ public class TestSuiteListController implements Initializable
     	TreeItem<Object> root = new TreeItem<Object>("");
     	root.setExpanded(true);
     	
-    	List<TestSuite> envs = (List<TestSuite>) tsService.loadTestSuites();    	
+    	List<TestSuite> envs = (List<TestSuite>) tsService.getTestSuites();    	
     	for (TestSuite env : envs)
     	{
-    		icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_environment.png")));
+    		icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestSuite.png")));
     		TreeItem<Object> envNode = new TreeItem<>(env, icon);    		
     		List<TestCase> tclist = env.getTestCaseList();
     		
@@ -116,7 +116,7 @@ public class TestSuiteListController implements Initializable
     		{
     			for (TestCase tc: tclist)
     			{
-    				icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_server.png")));
+    				icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestCase.png")));
     				TreeItem<Object> tcNode = new TreeItem<>(tc, icon);
     				
     				List<Step> steps = tc.getStepList();    				
@@ -124,7 +124,7 @@ public class TestSuiteListController implements Initializable
 	    				for (Step step: steps)
 	        			{
 	    					if ( step instanceof MySQLStep )
-	    						icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_MySQL_DB.png")));
+	    						icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
 
 	    					TreeItem<Object> stepNode = new TreeItem<>(step, icon);
 	    					tcNode.getChildren().add( stepNode);
@@ -167,7 +167,7 @@ public class TestSuiteListController implements Initializable
     	    	TestCase newTC = tsService.addTestCaseForTestSuite(ts.getID());
     	    	if (newTC != null)
     	    	{
-    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_server.png")));
+    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestCase.png")));
     	    		TreeItem<Object> tcNode = new TreeItem<>(newTC, icon);
     	    		item.getChildren().add( tcNode);
     	    		treeView.getSelectionModel().select( tcNode);
@@ -228,7 +228,7 @@ public class TestSuiteListController implements Initializable
     	    	    	
     	    	    	if (mysqlStep != null)
     	    	    	{
-    	    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_MySQL_DB.png")));
+    	    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
     	    	    		TreeItem<Object> stepNode = new TreeItem<>(mysqlStep, icon);
     	    	    		item.getChildren().add( stepNode);
     	    	    		treeView.getSelectionModel().select( stepNode);
@@ -360,4 +360,50 @@ public class TestSuiteListController implements Initializable
             });
         }
     }
+    
+    /*
+    public static void updateRunStatus()
+    {
+    	Node icon = null;
+    	
+    	TreeItem<Object> root = new TreeItem<Object>("");
+    	root.setExpanded(true);
+    	
+    	List<TestSuite> envs = (List<TestSuite>) tsService.getTestSuites();    	
+    	for (TestSuite env : envs)
+    	{
+    		//icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestSuite.png")));
+    		TreeItem<Object> envNode = new TreeItem<>(env, icon);    		
+    		List<TestCase> tclist = env.getTestCaseList();
+    		
+    		if ( tclist!= null && !tclist.isEmpty())
+    		{
+    			for (TestCase tc: tclist)
+    			{
+    				icon =  new ImageView(new Image(TestSuiteListController.class.getResourceAsStream("/images/treeIcon_TestCase.png")));
+    				TreeItem<Object> tcNode = new TreeItem<>(tc, icon);
+    				
+    				    				
+    				List<Step> steps = tc.getStepList();    				
+    				if ( steps!= null && !steps.isEmpty())
+	    				for (Step step: steps)
+	        			{
+	    					if ( step instanceof MySQLStep )
+	    					{
+	    						TreeItem<Object> ts = 
+	    					
+	    						//response = testRunner.getResponse(stp.getID(), 25000L);
+	    						//root.getChildren().get(0).s
+	    						treeView.getTreeItem( treeView.getRow());
+	    					}
+	    					
+	        			}
+    				
+    				envNode.getChildren().add( tcNode);
+    			}
+    		}
+    		
+    		root.getChildren().add(envNode);
+    	}
+    }*/
 }
