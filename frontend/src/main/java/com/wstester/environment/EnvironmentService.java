@@ -433,6 +433,17 @@ public class EnvironmentService {
 			}
 		}
 	}
+	
+	public void setEnvNameByUID(String name,String envUID) {
+		for (Map.Entry<String, Environment> entry : environments.entrySet()) {
+			if (entry.getValue().getID() == envUID) 
+						{
+							entry.getValue().setName(name);
+							
+						}			
+		}
+	}
+	
 	public void removeService(String srvUID, String srcUID) {
 		// Pentru implementarea cu Backendul, posibil ca functia sa necesite ID
 		// enviormentului

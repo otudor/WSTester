@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="rootEnvDetails" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="326.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.EnvironmentDetailPresenter">
+<GridPane fx:id="rootEnvDetails" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="58.0" prefWidth="327.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.EnvironmentDetailPresenter">
 
     <children>
         <Label alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="130.0" text="Environment name:" GridPane.columnIndex="0">
@@ -23,6 +23,8 @@
          <GridPane.margin>
             <Insets right="10.0" />
          </GridPane.margin></TextField>
+      <Button fx:id="editEnv" mnemonicParsing="false" onAction="#editEnv" prefHeight="25.0" prefWidth="60.0" text="Edit" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+      <Button fx:id="saveEnv" mnemonicParsing="false" onAction="#saveEnv" prefHeight="25.0" prefWidth="60.0" text="Save" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
 
         <!-- <Label text="Environment IP" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
         <TextField fx:id="envIPField" GridPane.rowIndex="1" GridPane.columnIndex="1"/> -->
