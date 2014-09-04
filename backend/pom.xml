@@ -4,6 +4,7 @@
 
 	<artifactId>backend</artifactId>
 	<name>backend</name>
+	<packaging>pom</packaging>
 
 	<parent>
 		<groupId>com.wstester</groupId>
