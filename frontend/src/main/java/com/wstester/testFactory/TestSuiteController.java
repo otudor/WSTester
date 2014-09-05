@@ -5,9 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import org.codehaus.jettison.json.JSONArray;
-
 import com.wstester.actions.TestRunner;
 import com.wstester.model.Environment;
 import com.wstester.model.MySQLStep;
@@ -25,7 +22,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class TestSuiteController extends BaseRunner 
+public class TestSuiteController 
 {
 	@FXML private Node rootEnvDetails;
 	@FXML private TextField tsName;
@@ -63,11 +60,15 @@ public class TestSuiteController extends BaseRunner
     	//tsService.getFirstTestSuite();
 		TestProject testProject = new TestProject();
 		testProject.setTestSuiteList(tsService.getTestSuites());
-		testRunner = new TestRunner();
+		TestRunner testRunner = new TestRunner();
 		testRunner.setTestProject(testProject);
 		
 		testRunner.run();
 		
+		//TestSuiteListController.updateRunStatus();
+		
+		ExecutionUpdate execUpd = new ExecutionUpdate();
+		execUpd.updateRunStatus();
 		
 		//Response mysqlResponse = 
 		

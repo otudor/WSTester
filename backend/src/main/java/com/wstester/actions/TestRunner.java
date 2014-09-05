@@ -28,7 +28,6 @@ public class TestRunner {
 
 	public TestRunner(){
 		
-		camelContext = new ClassPathXmlApplicationContext("camel/CamelContext.xml");
 	}
 	
 	public TestProject getTestProject() {
@@ -71,7 +70,7 @@ public class TestRunner {
 		@Override
 		public void run() {
 
-			
+			camelContext = new ClassPathXmlApplicationContext("camel/CamelContext.xml");
 			camelContext.start();
 			
 			try {

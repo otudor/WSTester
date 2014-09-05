@@ -19,6 +19,10 @@ public abstract class Step implements Serializable {
 	private List<Assert> assertList;
 	private List<Asset> assetList;
 	private List<Variable> variableList;
+//	pirvate List<Executions> executions;
+//	
+//	Execution: timestamp, status, response
+//	Execution: timestamp, status, response
 	private String dependsOn;
 
 	public String getID() {
