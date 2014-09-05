@@ -1,7 +1,7 @@
 package com.wstester.model;
 
+import java.util.HashMap;
 import java.util.UUID;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -9,28 +9,43 @@ public class RestStep extends Step {
 
 	private static final long serialVersionUID = 1L;
 	private String path;
-	private String header;
-	private String cookie;
-	private String query;
-	
-	public String getCookie() {
-		return cookie;
-	}
-
-	public void setCookie(String cookie) {
-		this.cookie = cookie;
-	}
-
+	private HashMap<String,String> query;
+	private HashMap<String,String> cookie;
+	private HashMap<String,String> header;
+	private String contentType = "text/plain";
 	private String method;
 	private Object body;
 	
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
 	
-	public String getQuery() {
+	public HashMap<String, String> getQuery() {
 		return query;
 	}
 
-	public void setQuery(String query) {
+	public void setQuery(HashMap<String, String> query) {
 		this.query = query;
+	}
+
+	public HashMap<String, String> getCookie() {
+		return cookie;
+	}
+
+	public void setCookie(HashMap<String, String> cookie) {
+		this.cookie = cookie;
+	}
+
+	public HashMap<String, String> getHeader() {
+		return header;
+	}
+
+	public void setHeader(HashMap<String, String> header) {
+		this.header = header;
 	}
 
 	public Object getBody() {
@@ -61,22 +76,18 @@ public class RestStep extends Step {
 		this.path = path;
 	}
 
-	public String getHeader() {
-		return header;
-	}
-
-	public void setHeader(String header) {
-		this.header = header;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((body == null) ? 0 : body.hashCode());
+		result = prime * result
+				+ ((contentType == null) ? 0 : contentType.hashCode());
+		result = prime * result + ((cookie == null) ? 0 : cookie.hashCode());
 		result = prime * result + ((header == null) ? 0 : header.hashCode());
 		result = prime * result + ((method == null) ? 0 : method.hashCode());
 		result = prime * result + ((path == null) ? 0 : path.hashCode());
+		result = prime * result + ((query == null) ? 0 : query.hashCode());
 		return result;
 	}
 
@@ -94,6 +105,16 @@ public class RestStep extends Step {
 				return false;
 		} else if (!body.equals(other.body))
 			return false;
+		if (contentType == null) {
+			if (other.contentType != null)
+				return false;
+		} else if (!contentType.equals(other.contentType))
+			return false;
+		if (cookie == null) {
+			if (other.cookie != null)
+				return false;
+		} else if (!cookie.equals(other.cookie))
+			return false;
 		if (header == null) {
 			if (other.header != null)
 				return false;
@@ -109,6 +130,11 @@ public class RestStep extends Step {
 				return false;
 		} else if (!path.equals(other.path))
 			return false;
+		if (query == null) {
+			if (other.query != null)
+				return false;
+		} else if (!query.equals(other.query))
+			return false;
 		return true;
-	}
+	}	
 }

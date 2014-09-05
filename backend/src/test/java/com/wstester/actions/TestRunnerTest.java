@@ -2,10 +2,8 @@ package com.wstester.actions;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import org.codehaus.jettison.json.JSONArray;
 import org.junit.Test;
-
 import com.wstester.camel.rest.RestTestBaseClass;
 import com.wstester.model.Response;
 import com.wstester.model.TestProject;

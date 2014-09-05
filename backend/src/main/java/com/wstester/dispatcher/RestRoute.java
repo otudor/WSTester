@@ -4,12 +4,10 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-
 import com.wstester.model.Response;
 import com.wstester.model.RestService;
 import com.wstester.model.RestStep;
 import com.wstester.model.Server;
-
 public class RestRoute extends RouteBuilder{
 
 	private RestStep step = null;
@@ -26,15 +24,30 @@ public class RestRoute extends RouteBuilder{
 			public void process(Exchange exchange) throws Exception {
 				
 				step = exchange.getIn().getBody(RestStep.class);
-				System.out.println("Received rest step: " + step.getID());
-				
+		
 				exchange.getIn().setBody(step.getBody());
 				exchange.getIn().setHeader(Exchange.HTTP_URI, getURI(step));
-				exchange.getIn().setHeader(Exchange.HTTP_QUERY, step.getQuery());
 				exchange.getIn().setHeader(Exchange.HTTP_PATH, step.getPath());
 				exchange.getIn().setHeader(Exchange.HTTP_METHOD, step.getMethod());
-				exchange.getIn().setHeader("name", step.getHeader());
-				exchange.getIn().setHeader("Cookie", "name" + "=" + step.getCookie());
+				exchange.getIn().setHeader(Exchange.CONTENT_TYPE, step.getContentType());
+				
+				if(step.getQuery() != null)	{
+					for(String key : step.getQuery().keySet()){
+						exchange.getIn().setHeader(Exchange.HTTP_QUERY, key + "=" + step.getQuery().get(key));
+						}
+				}
+			
+				if(step.getHeader() != null) {
+					for(String key : step.getHeader().keySet()){
+						exchange.getIn().setHeader(key, step.getHeader().get(key));
+						}
+				}	
+			
+				if(step.getCookie() != null) {
+					for(String key : step.getCookie().keySet()){
+						exchange.getIn().setHeader("Cookie", key + "=" + step.getCookie().get(key));
+						}
+				}
 			}
 		})
 		.recipientList(simple("http://none.none"))
@@ -50,7 +63,6 @@ public class RestRoute extends RouteBuilder{
 				response.setStepID(step.getID());
 				response.setContent(in.getBody(String.class));
 				response.setPass(true);
-
 				
 				exchange.getIn().setBody(response);
 			}
