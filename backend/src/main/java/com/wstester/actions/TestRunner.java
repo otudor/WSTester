@@ -41,7 +41,7 @@ public class TestRunner {
 	public void run() throws Exception{
 	
 		ExecutorService executor = Executors.newFixedThreadPool(1);
-		executor.execute(new RunThread());
+		executor.execute(new ProjectRunThread());
 		
 		executor.shutdown();
 	}
@@ -65,7 +65,7 @@ public class TestRunner {
 		return response;
 	}
 	
-	class RunThread implements Runnable{
+	class ProjectRunThread implements Runnable{
 
 		@Override
 		public void run() {
@@ -123,4 +123,3 @@ public class TestRunner {
 		}
 	}
 }
-
