@@ -1,5 +1,6 @@
 package com.wstester.testFactory;
 import com.sun.prism.paint.Color;
+import com.wstester.actions.TestRunner;
 import com.wstester.model.MongoService;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
@@ -9,15 +10,16 @@ import com.wstester.model.Step;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class MySQLStepController extends BaseRunner
+public class MySQLStepController
 {
     @FXML private Node rootMySQLStep;
-    @FXML private TextField txtName;
-    @FXML private TextField txtSQL;
-    @FXML private TextField txtResponse;
-    @FXML private TextField txtStatus;
+    @FXML private Label lblName;
+    @FXML private Label lblSQL;
+    @FXML private Label lblStatus;
+    @FXML private Label lblResponse;
     
     private MySQLStep stp;
     
@@ -39,32 +41,38 @@ public class MySQLStepController extends BaseRunner
         return rootMySQLStep;
     }
 
-    public void setTxtResponse(){
-    	
-    	Response response = null;
-    	if(stp!=null && testRunner!=null){
-    		
-    		response = testRunner.getResponse(stp.getID(), 25000L);
-    	}
-    	
-    	if( response != null)
-    	{
-    		if( response.isPass())
-    			txtStatus.setStyle("-fx-background-color: green;");
-    		else
-    			txtStatus.setStyle("-fx-background-color: gray;");
-    		this.txtResponse.setText(response.getContent());
-    	}
-    }
+//    public void setTxtResponse(){
+//    	TestRunner testRunner = new TestRunner();
+//    	Response response = null;
+//    	
+//    	if(stp!=null){
+//    		
+//    		response = testRunner.getResponse(stp.getID(), 25000L);
+//    	}
+//    	
+//    	if( response != null)
+//    	{
+//    		if( response.isPass())
+//    		{
+//    			lblStatus.setStyle("-fx-background-color: green;");
+//    			lblStatus.setText("");
+//    		}
+//    		else
+//    			lblStatus.setStyle("-fx-background-color: gray;");
+//    		this.lblResponse.setText(response.getContent());
+//    	}
+//    }
     
     public void setMySQLStep(final String stepUID)
     {
-    	txtName.setText("");
-        txtSQL.setText("SQL");
+    	lblName.setText("");
+        lblSQL.setText("SQL");
+        lblStatus.setText("Not run");
+        lblResponse.setText("Not run");
         
         stp = (MySQLStep) tsService.getStep( stepUID);
-        txtName.setText(stp.getName());
-        txtSQL.setText(stp.getOperation());
-        setTxtResponse();
+        lblName.setText(stp.getName());
+        lblSQL.setText(stp.getOperation());
+//        setTxtResponse();
     }
 }

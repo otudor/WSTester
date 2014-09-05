@@ -17,7 +17,7 @@ public class SelectTest extends TestBaseClass{
 
 		TestProject testProject = TestUtils.getMySQLTestPlan();
 		MySQLStep step = (MySQLStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
-		step.setOperation("SELECT * FROM nume");
+		step.setOperation("SELECT * FROM Angajati");
 		
 		testRunner.setTestProject(testProject);
 
