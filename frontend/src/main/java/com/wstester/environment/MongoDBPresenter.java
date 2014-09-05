@@ -16,7 +16,7 @@ import com.wstester.model.Service;
 public class MongoDBPresenter {
 	@FXML private Node rootMongoDB;
 	@FXML private HBox hbox1;
-	@FXML private GridPane gridmongo;
+	@FXML private GridPane gridpane;
     @FXML private TextField MongoName;
     @FXML private TextField MongoPort;
     @FXML private TextField MongoUser;
@@ -53,11 +53,22 @@ public class MongoDBPresenter {
     public void setMongoDB(final String serverUID, final String serviceUID)
     {
     	hbox1.getChildren().remove(save);
-    	gridmongo.getChildren().remove(cancel);
-    	gridmongo.getChildren().remove(MongoName);
-    	gridmongo.getChildren().remove(MongoPort);
-    	gridmongo.getChildren().remove(MongoUser);
-    	gridmongo.getChildren().remove(MongoPassfield);
+    	gridpane.getChildren().remove(cancel);
+    	hbox1.getChildren().remove(edit);
+    	gridpane.getChildren().remove(MongoName);
+    	gridpane.getChildren().remove(MongoPort);
+    	gridpane.getChildren().remove(MongoUser);
+    	gridpane.getChildren().remove(MongoPassfield);
+    	gridpane.getChildren().remove(labelname);
+    	gridpane.getChildren().remove(labeluser);
+    	gridpane.getChildren().remove(labelpass);
+    	gridpane.getChildren().remove(labelport);
+    	
+    	hbox1.getChildren().add(edit);
+    	gridpane.getChildren().add(labelname);
+    	gridpane.getChildren().add(labeluser);
+    	gridpane.getChildren().add(labelpass);
+    	gridpane.getChildren().add(labelport);
                      
     	Server server = envService.getServerByUID( serverUID);
 		Service service = envService.getServiceByUID( server.getID(), serviceUID );
@@ -75,18 +86,18 @@ public class MongoDBPresenter {
     
     public void seteditable(ActionEvent event)
     {
-    	gridmongo.getChildren().add(MongoName);
-    	gridmongo.getChildren().add(MongoPort);
-    	gridmongo.getChildren().add(MongoUser);
-    	gridmongo.getChildren().add(MongoPassfield);
-    	gridmongo.getChildren().remove(labelport);
-    	gridmongo.getChildren().remove(labelname);
-    	gridmongo.getChildren().remove(labeluser);
-    	gridmongo.getChildren().remove(labelpass);
+    	gridpane.getChildren().add(MongoName);
+    	gridpane.getChildren().add(MongoPort);
+    	gridpane.getChildren().add(MongoUser);
+    	gridpane.getChildren().add(MongoPassfield);
+    	gridpane.getChildren().remove(labelport);
+    	gridpane.getChildren().remove(labelname);
+    	gridpane.getChildren().remove(labeluser);
+    	gridpane.getChildren().remove(labelpass);
     	
     	hbox1.getChildren().remove(edit);
     	hbox1.getChildren().add(save);
-    	gridmongo.getChildren().add(cancel);
+    	gridpane.getChildren().add(cancel);
     	
     }
     public void setuneditable(ActionEvent event)
@@ -100,15 +111,15 @@ public class MongoDBPresenter {
     	envService.setMongoServiceByUID(mng, uid);
     	hbox1.getChildren().add(edit);
     	hbox1.getChildren().remove(save);
-    	gridmongo.getChildren().remove(cancel);
-    	gridmongo.getChildren().remove(MongoName);
-    	gridmongo.getChildren().remove(MongoPort);
-    	gridmongo.getChildren().remove(MongoUser);
-    	gridmongo.getChildren().remove(MongoPassfield);
-    	gridmongo.getChildren().add(labelport);
-    	gridmongo.getChildren().add(labelname);
-    	gridmongo.getChildren().add(labeluser);
-    	gridmongo.getChildren().add(labelpass);
+    	gridpane.getChildren().remove(cancel);
+    	gridpane.getChildren().remove(MongoName);
+    	gridpane.getChildren().remove(MongoPort);
+    	gridpane.getChildren().remove(MongoUser);
+    	gridpane.getChildren().remove(MongoPassfield);
+    	gridpane.getChildren().add(labelport);
+    	gridpane.getChildren().add(labelname);
+    	gridpane.getChildren().add(labeluser);
+    	gridpane.getChildren().add(labelpass);
     	
     }
     
@@ -118,16 +129,16 @@ public class MongoDBPresenter {
     	MongoPort.setText(labelport.getText());
     	MongoUser.setText(labeluser.getText());
     	MongoPassfield.setText(labelpass.getText());
-    	gridmongo.getChildren().remove(cancel);
+    	gridpane.getChildren().remove(cancel);
     	hbox1.getChildren().remove(save);
     	hbox1.getChildren().add(edit);
-    	gridmongo.getChildren().remove(MongoName);
-    	gridmongo.getChildren().remove(MongoPort);
-    	gridmongo.getChildren().remove(MongoUser);
-    	gridmongo.getChildren().remove(MongoPassfield);
-    	gridmongo.getChildren().add(labelport);
-    	gridmongo.getChildren().add(labelname);
-    	gridmongo.getChildren().add(labeluser);
-    	gridmongo.getChildren().add(labelpass);
+    	gridpane.getChildren().remove(MongoName);
+    	gridpane.getChildren().remove(MongoPort);
+    	gridpane.getChildren().remove(MongoUser);
+    	gridpane.getChildren().remove(MongoPassfield);
+    	gridpane.getChildren().add(labelport);
+    	gridpane.getChildren().add(labelname);
+    	gridpane.getChildren().add(labeluser);
+    	gridpane.getChildren().add(labelpass);
     }
 }

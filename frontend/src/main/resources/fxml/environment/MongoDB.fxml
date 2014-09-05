@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="rootMongoDB" maxHeight="150.0" maxWidth="350.0" prefHeight="150.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.MongoDBPresenter">
    <children>
-      <GridPane fx:id="gridmongo" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="150.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane fx:id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="150.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
             <ColumnConstraints hgrow="NEVER" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="250.0" />
