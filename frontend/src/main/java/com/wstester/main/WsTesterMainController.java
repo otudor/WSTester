@@ -764,7 +764,7 @@ public class WsTesterMainController implements Initializable {
                         root = mainPresenter.getView();
 						Scene second = new Scene(root, 600, 480);
 						stage.setTitle("Environments window");
-						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
+						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/EnvWindows.css").toExternalForm());					
 						root.getStyleClass().add("mainWind");	
 						
 						newIcoM6 = (VBox) CreateIcon("/images/task_img_open.png","Env");	

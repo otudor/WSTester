@@ -281,7 +281,7 @@ public class EnvironmentSearchPresenter implements Initializable
             }
         }
     	
-    	@Override
+    /*	@Override
         public void startEdit()
     	{
             super.startEdit();
@@ -324,9 +324,9 @@ public class EnvironmentSearchPresenter implements Initializable
                     }
                 }
             });
-        }
+        }*/
     }
-    
+   
     public ContextMenu createEnvironmentContextMenu( Environment e)
     {
     	final ContextMenu contextMenu = new ContextMenu();
