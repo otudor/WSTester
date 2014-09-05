@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javafx.event.Event;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
@@ -53,9 +54,12 @@ class UpdateStatusThread implements Runnable{
     						{
     							TestRunner testRunner = new TestRunner();
     							Response rsp = testRunner.getResponse(step.getID(), 25000L);
-    							step.setName("Passed");
-    							stepItem.setValue( step);
-//	    							TreeItem.valueChangedEvent();
+    							step.setName( step.getName() + ": Passed");
+    							
+    							Step updatedStep = new MySQLStep();
+    							updatedStep.setName("");
+    							TreeItem<Object> newStepItem = new TreeItem<>(updatedStep);
+    							Event.fireEvent( stepItem, new TreeItem.TreeModificationEvent<Object>(TreeItem.valueChangedEvent(), stepItem, newStepItem));
     						}
     					}
     	    		}
