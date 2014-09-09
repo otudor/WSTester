@@ -15,9 +15,8 @@ public class TestRunnerTest extends RestTestBaseClass{
 	public void runTestProject() throws Exception{
 		
 		TestProject testProject = TestUtils.getTestPlan();
-		testRunner.setTestProject(testProject);
 		
-		testRunner.run();
+		testRunner.run(testProject);
 		
 		// rest check
 		Response restResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);

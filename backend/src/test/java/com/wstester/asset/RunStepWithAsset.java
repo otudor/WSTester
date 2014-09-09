@@ -40,8 +40,7 @@ public class RunStepWithAsset extends RestTestBaseClass{
 		assetList.add(asset);
 		step.setAssetList(assetList);
 		
-		testRunner.setTestProject(testProject);
-		testRunner.run();
+		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();

@@ -15,9 +15,8 @@ public class GetRequestTest extends RestTestBaseClass{
 	public void simplePath() throws Exception{
 			
 		TestProject testProject = TestUtils.getRestTestPlan();
-		testRunner.setTestProject(testProject);
 		
-		testRunner.run();
+		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
@@ -38,8 +37,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		step.setQuery(map);
 		
-		testRunner.setTestProject(testProject);
-		testRunner.run();
+		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
@@ -60,8 +58,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		step.setCookie(map);
 		
-		testRunner.setTestProject(testProject);
-		testRunner.run();
+		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
@@ -82,8 +79,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		step.setHeader(map);
 		
-		testRunner.setTestProject(testProject);
-		testRunner.run();
+		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
@@ -111,8 +107,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		step.setQuery(mapQuery);
 		step.setCookie(mapCookie);
 		
-		testRunner.setTestProject(testProject);
-		testRunner.run();
+		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
