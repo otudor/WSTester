@@ -9,7 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 public class RestPresenter {
 	@FXML
@@ -17,31 +20,69 @@ public class RestPresenter {
 	@FXML
 	private TextField restField;
 	@FXML
-	private Button saveRest;
+	private Button save;
 	@FXML
-	private Button editRest;
-	private String uid = null;
+	private Button edit;
+	@FXML Button cancel;
+	@FXML Label labelport;
+	@FXML HBox hbox1;
+	@FXML GridPane gridpane;
 	
+	private String uid = null;
+	private EnvironmentService envService;
+	private MainPresenter mainPresenter;
+	
+public void setRest( final String serverUID, final String serviceUID) 
+	{
+		hbox1.getChildren().remove(save);
+		hbox1.getChildren().remove(cancel);
+		hbox1.getChildren().remove(edit);
+		gridpane.getChildren().remove(restField);
+		gridpane.getChildren().remove(labelport);
+		
+		hbox1.getChildren().add(edit);
+		gridpane.getChildren().add(labelport);
+		Server server = envService.getServerByUID( serverUID);
+		Service service = envService.getServiceByUID( server.getID(), serviceUID );
+		RestService srv = (RestService) service;
+		uid = serviceUID;
+		restField.setText(srv.getPort());
+		labelport.setText(srv.getPort());
+		
+	}
+
 	public void saveRest(ActionEvent e) {
-		saveRest.setDisable(true);
-		restField.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
-		restField.setEditable(false);
+		
 		RestService rst = new RestService();
 		rst.setPort(restField.getText());
 		envService.setRestServiceByUID(rst,uid);
-
+    	hbox1.getChildren().add(edit);
+    	hbox1.getChildren().remove(save);
+    	hbox1.getChildren().remove(cancel);
+    	gridpane.getChildren().remove(restField);
+    	gridpane.getChildren().add(labelport);
+    	labelport.setText(restField.getText());
 	}
 	
 	public void editRest(ActionEvent e) {
-		saveRest.setDisable(false);
 		
-		restField.setStyle("-fx-background-color: rgba(255, 255, 255, 0.95);");
-		restField.setEditable(true);
-
+		gridpane.getChildren().add(restField);
+		gridpane.getChildren().remove(labelport);
+		hbox1.getChildren().remove(edit);
+    	
+    	hbox1.getChildren().add(save);
+    	hbox1.getChildren().add(cancel);
 	}
-
-	private EnvironmentService envService;
-	private MainPresenter mainPresenter;
+	
+	public void cancelEdit(ActionEvent e)
+	{
+		restField.setText(labelport.getText());
+		hbox1.getChildren().remove(cancel);
+    	hbox1.getChildren().remove(save);
+    	hbox1.getChildren().add(edit);
+    	gridpane.getChildren().remove(restField);
+    	gridpane.getChildren().add(labelport);
+	}
 
 	public void setEnvironmentService(EnvironmentService envService) {
 		this.envService = envService;
@@ -55,22 +96,7 @@ public class RestPresenter {
 		return restPanel;
 	}
 
-	public void setRest( final String serverUID, final String serviceUID) {
-		saveRest.setDisable(true);
-		saveRest.setStyle("-fx-base: #b6e7c9;");
-		restField.setText("");
-
-		restField.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
-		restField.setEditable(false);
-		
-
-		Server server = envService.getServerByUID( serverUID);
-		Service service = envService.getServiceByUID( server.getID(), serviceUID );
-		RestService srv = (RestService) service;
-		uid = serviceUID;
-		restField.setText(srv.getPort());
-
-		
-	}
+	
+	
 
 }

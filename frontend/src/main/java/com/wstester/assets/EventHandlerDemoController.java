@@ -13,6 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
@@ -21,9 +24,12 @@ import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import org.apache.commons.io.FileUtils;
 import org.controlsfx.dialog.Dialogs;
+
+import com.wstester.main.WsTesterMain;
 
 public class EventHandlerDemoController {
 
@@ -46,6 +52,11 @@ public class EventHandlerDemoController {
 	private Button addButton;
 	@FXML
 	private Button deleteButton;
+	@FXML
+	private Button editButton;
+	@FXML
+	private Stage stageEditor = new Stage(); 
+	Parent root;
 	@FXML
 	private ListView<AssetModel> listView;
 
@@ -144,6 +155,35 @@ public class EventHandlerDemoController {
 						}
 					}
 				});
+		
+		editButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("apasat buton edit");
+				stageEditor= new Stage();
+				try {
+					root = FXMLLoader.load(getClass().getResource("/fxml/assets/editor.fxml"));
+					Scene second = new Scene(root);
+					second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
+					stageEditor.setScene(second);
+					stageEditor.setTitle("editor");
+					stageEditor.show();
+					
+					
+					
+					
+					
+					
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			
+				
+			
+			}
+			});
 
 		addButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
