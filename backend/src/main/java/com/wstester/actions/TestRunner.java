@@ -22,26 +22,21 @@ import com.wstester.model.TestSuite;
 
 public class TestRunner {
 
-	private TestProject testProject;
 	private AbstractXmlApplicationContext camelContext;
 	protected Logger log = LoggerFactory.getLogger(getClass());
-
-	public TestRunner(){
-		
-	}
 	
-	public TestProject getTestProject() {
-		return testProject;
-	}
-
-	public void setTestProject(TestProject testProject) {
-		this.testProject = testProject;
-	}
-	
-	public void run() throws Exception{
+	public void run(TestProject testProject) throws Exception{
 	
 		ExecutorService executor = Executors.newFixedThreadPool(1);
-		executor.execute(new ProjectRunThread());
+		executor.execute(new ProjectRunThread(testProject));
+		
+		executor.shutdown();
+	}
+	
+	public void run(TestSuite testSuite) throws Exception{
+		
+		ExecutorService executor = Executors.newFixedThreadPool(1);
+		executor.execute(new ProjectRunThread(testSuite));
 		
 		executor.shutdown();
 	}
@@ -66,6 +61,13 @@ public class TestRunner {
 	}
 	
 	class ProjectRunThread implements Runnable{
+
+		Object entityToRun;
+		
+		public ProjectRunThread(Object entityToRun) {
+			
+			this.entityToRun = entityToRun;
+		}
 
 		@Override
 		public void run() {
@@ -92,7 +94,7 @@ public class TestRunner {
 				producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
 				int stepSize = 0;
-				for (TestSuite testSuite : testProject.getTestSuiteList()) {
+				for (TestSuite testSuite : ((TestProject)entityToRun).getTestSuiteList()) {
 					for (TestCase testCase : testSuite.getTestCaseList()) {
 						for (Step testStep : testCase.getStepList()) {
 						
@@ -119,7 +121,7 @@ public class TestRunner {
 				connection.close();
 				camelContext.close();
 			} catch (Exception e){
-				
+				//TODO: auto generated block
 			}
 		}
 	}

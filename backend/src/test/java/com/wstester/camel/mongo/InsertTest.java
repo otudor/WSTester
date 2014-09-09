@@ -17,9 +17,8 @@ public class InsertTest extends TestBaseClass{
 	public void insertOneRow() throws Exception{
 		
 		TestProject testProject = TestUtils.getMongoTestPlanInsert();
-		testRunner.setTestProject(testProject);
 		
-		testRunner.run();
+		testRunner.run(testProject);
 		
 		Response selectBeforeResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		int rowsBefore = new JSONArray(selectBeforeResponse.getContent()).length();

@@ -13,15 +13,13 @@ import com.wstester.model.TestUtils;
 public class SelectTest extends TestBaseClass{
 	
 	@Test
-	public void test() throws Exception {
+	public void selectAllTest() throws Exception {
 
 		TestProject testProject = TestUtils.getMySQLTestPlan();
 		MySQLStep step = (MySQLStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
 		step.setOperation("SELECT * FROM Angajati");
-		
-		testRunner.setTestProject(testProject);
 
-		testRunner.run();
+		testRunner.run(testProject);
 
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		

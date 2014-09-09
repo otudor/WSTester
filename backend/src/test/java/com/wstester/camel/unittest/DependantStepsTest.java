@@ -1,8 +1,11 @@
 package com.wstester.camel.unittest;
 
 import static org.apache.camel.component.jms.JmsComponent.jmsComponentClientAcknowledge;
+
 import java.util.HashMap;
+
 import javax.jms.ConnectionFactory;
+
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
@@ -13,10 +16,11 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import com.mongodb.Mongo;
 import com.wstester.dispatcher.ExchangeDelayer;
-import com.wstester.dispatcher.MongoRoute;
 import com.wstester.dispatcher.RestRoute;
+import com.wstester.dispatcher.mongo.MongoRoute;
 import com.wstester.model.Action;
 import com.wstester.model.MongoService;
 import com.wstester.model.MongoStep;

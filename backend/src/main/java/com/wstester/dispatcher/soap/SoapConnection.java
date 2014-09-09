@@ -1,4 +1,4 @@
-package com.wstester.dispatcher;
+package com.wstester.dispatcher.soap;
 
 import javax.xml.namespace.QName;
 
