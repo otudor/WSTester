@@ -11,5 +11,6 @@
       <Button fx:id="butonLoad" layoutX="308.0" layoutY="111.0" mnemonicParsing="false" text="Load" />
       <TextArea fx:id="textarea" layoutX="36.0" layoutY="54.0" prefHeight="357.0" prefWidth="235.0" />
       <Button fx:id="butonPretty" layoutX="303.0" layoutY="182.0" mnemonicParsing="false" text="Pretty" />
+      <Button fx:id="butonSave" layoutX="307.0" layoutY="250.0" mnemonicParsing="false" text="Save" />
    </children>
 </AnchorPane>

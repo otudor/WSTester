@@ -57,9 +57,12 @@ public class EditController {
 	@FXML
 	private Button butonPretty;
 	@FXML
+	private Button butonSave;
+	@FXML
 	private TextArea textarea;
 	@FXML
 	private Stage stageEditor;
+	
 	
 	
 	//@FXML
@@ -108,14 +111,44 @@ public class EditController {
 	            
 	        });
 		
-		
+		butonSave.setOnAction(new EventHandler<ActionEvent>() {
+			 @Override
+	          public void handle(ActionEvent event) {
+	              FileChooser fileChooser = new FileChooser();
+	  
+	              //Set extension filter
+	              FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.xml)", "*.xml");
+	              fileChooser.getExtensionFilters().add(extFilter);
+	              
+	              //Show save file dialog
+	              File file = fileChooser.showSaveDialog(stageEditor);
+	              
+	              if(file != null){
+	                  SaveFile(textarea.getText(), file);
+	              }
+	          }
+	      });
 		
      
 		}  
      
 		
-      
+		 private void SaveFile(String content, File file){
+		        try {
+		            FileWriter fileWriter = null;
+		             
+		            fileWriter = new FileWriter(file);
+		            fileWriter.write(content);
+		            fileWriter.close();
+		        } catch (IOException ex) {
+		            Logger.getLogger(EditController.class.getName()).log(Level.SEVERE, null, ex);
+		        }
+		         
+		    }
      
+		
+		
+		
      private String readFile(File file){
          StringBuilder stringBuffer = new StringBuilder();
          BufferedReader bufferedReader = null;
