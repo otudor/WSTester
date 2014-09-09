@@ -87,9 +87,9 @@ public class SoapPresenter {
     	gridpane.getChildren().remove(labelpath);
     	
     	hbox1.getChildren().remove(edit);
-    	hbox1.getChildren().add(cancel);
-    	hbox1.getChildren().add(save);
     	
+    	hbox1.getChildren().add(save);
+    	hbox1.getChildren().add(cancel);
     }
     
     public void setuneditable(ActionEvent event)

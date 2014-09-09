@@ -108,12 +108,15 @@
             </Label>
             <HBox fx:id="hbox1" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
-                  <Button fx:id="cancel" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelEdit" prefHeight="25.0" prefWidth="75.0" text="Cancel" />
                   <Button fx:id="save" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveMySQL" prefHeight="25.0" prefWidth="75.0" text="Save">
                      <HBox.margin>
-                        <Insets left="65.0" />
+                        <Insets left="60.0" />
                      </HBox.margin>
                   </Button>
+                  <Button fx:id="cancel" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelEdit" prefHeight="25.0" prefWidth="75.0" text="Cancel">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin></Button>
                   <Button fx:id="edit" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#editMySQL" prefHeight="25.0" prefWidth="75.0" text="Edit">
                      <HBox.margin>
                         <Insets left="140.0" />

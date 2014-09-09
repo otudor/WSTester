@@ -85,9 +85,9 @@ public class ServerDetailsPresenter
     	gridpane.getChildren().remove(labeldesc);
        	
     	hbox1.getChildren().remove(edit);
-    	hbox1.getChildren().add(cancel);
-    	hbox1.getChildren().add(save);
     	
+    	hbox1.getChildren().add(save);
+    	hbox1.getChildren().add(cancel);
 		
 		
 	}

@@ -28,14 +28,14 @@
                         <Insets left="140.0" top="2.5" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="cancel" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelEdit" prefHeight="25.0" prefWidth="75.0" text="Cancel">
-                     <HBox.margin>
-                        <Insets top="2.5" />
-                     </HBox.margin>
-                  </Button>
                   <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setuneditable" prefHeight="25.0" prefWidth="75.0" text="Save">
                      <HBox.margin>
-                        <Insets left="65.0" top="2.5" />
+                        <Insets left="60.0" top="2.5" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="cancel" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelEdit" prefHeight="25.0" prefWidth="75.0" text="Cancel">
+                     <HBox.margin>
+                        <Insets left="5.0" top="2.5" />
                      </HBox.margin>
                   </Button>
                </children>

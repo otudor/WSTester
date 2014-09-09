@@ -69,9 +69,9 @@ public void setRest( final String serverUID, final String serviceUID)
 		gridpane.getChildren().add(restField);
 		gridpane.getChildren().remove(labelport);
 		hbox1.getChildren().remove(edit);
-    	hbox1.getChildren().add(cancel);
-    	hbox1.getChildren().add(save);
     	
+    	hbox1.getChildren().add(save);
+    	hbox1.getChildren().add(cancel);
 	}
 	
 	public void cancelEdit(ActionEvent e)

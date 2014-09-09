@@ -49,9 +49,9 @@ public class EnvironmentDetailPresenter {
 		gridpane.getChildren().remove(labelname);
 		gridpane.getChildren().add(envNameField);
 		hbox1.getChildren().remove(edit);
-    	hbox1.getChildren().add(cancel);
-    	hbox1.getChildren().add(save);
     	
+    	hbox1.getChildren().add(save);
+    	hbox1.getChildren().add(cancel);
 		}
 	public void saveEnv(ActionEvent e){
 		
