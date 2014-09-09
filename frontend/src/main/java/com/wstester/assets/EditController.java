@@ -38,10 +38,15 @@ import org.xml.sax.SAXException;
 
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
+import com.wstester.main.WsTesterMain;
 import com.wstester.services.definition.IAssetManager;
 import com.wstester.services.impl.AssetManager;
+import com.wstester.util.MainWindowListener;
 
-public class EditController {
+public class EditController implements MainWindowListener {
+	
+	private Logger logger = Logger.getLogger(this.getClass().getSimpleName());
+	
 	XmlFormatter formatter = new XmlFormatter();
 	@FXML
 	private Button butonLoad;
@@ -55,6 +60,10 @@ public class EditController {
 	private Stage stageEditor;
 
 	private IAssetManager assetManager;
+	
+	private ProcessBuilder processBuilder;
+	
+	private Process process;
 
 	//@FXML
 	//private void initialize() {
@@ -73,11 +82,16 @@ public class EditController {
 	
 	@FXML
 	private void initialize() {
-		
+		processBuilder = new ProcessBuilder("C:\\Program Files (x86)\\Notepad++\\notepad++.exe");
 		butonLoad.setOnAction(new EventHandler<ActionEvent>() {
 			@Override	
 			public void handle(ActionEvent arg0) {
-				handleLoad();
+				try {
+					handleLoad();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
@@ -97,6 +111,8 @@ public class EditController {
 				saveFile();
 			}
 		});
+		
+		WsTesterMain.registerListener(this);
 	}
 	
 	private String readFile(File file){
@@ -113,14 +129,14 @@ public class EditController {
 			}
 
 		} catch (FileNotFoundException ex) {
-			Logger.getLogger(EditController.class.getName()).log(Level.SEVERE, null, ex);
+			logger.log(Level.SEVERE, null, ex);
 		} catch (IOException ex) {
-			Logger.getLogger(EditController.class.getName()).log(Level.SEVERE, null, ex);
+			logger.log(Level.SEVERE, null, ex);
 		} finally {
 			try {
 				bufferedReader.close();
 			} catch (IOException ex) {
-				Logger.getLogger(EditController.class.getName()).log(Level.SEVERE, null, ex);
+				logger.log(Level.SEVERE, null, ex);
 			}
 		} 
 
@@ -207,21 +223,22 @@ public class EditController {
 	}
 	
 
-	private void handleLoad() {
-		FileChooser fileChooser = new FileChooser();
-
-		//Set extension filter
-		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.xml)", "*.xml");
-		fileChooser.getExtensionFilters().add(extFilter);
-
-		//Show save file dialog
-
-
-		File file = fileChooser.showOpenDialog(stageEditor);
-		if(file != null){
-
-			textarea.setText(readFile(file));
-		}
+	private void handleLoad() throws IOException {
+		process = processBuilder.start();
+//		FileChooser fileChooser = new FileChooser();
+//
+//		//Set extension filter
+//		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.xml)", "*.xml");
+//		fileChooser.getExtensionFilters().add(extFilter);
+//
+//		//Show save file dialog
+//
+//
+//		File file = fileChooser.showOpenDialog(stageEditor);
+//		if(file != null){
+//
+//			textarea.setText(readFile(file));
+//		}
 	}
 
 	private void saveFile() {
@@ -262,6 +279,12 @@ public class EditController {
 		bar.progressProperty().bind(task.progressProperty());
 		new Thread(task).start();
 		//TODO: butonSave enable
+	}
+
+	public void shutDown() {
+		if(process != null) {
+			process.destroy();
+		}
 	}
 
 }
