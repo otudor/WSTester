@@ -14,7 +14,11 @@ public class RestStep extends Step {
 	private HashMap<String,String> header;
 	private String contentType = "text/plain";
 	private String method;
-	private Object body;
+	private Object request;
+	
+	public RestStep() {
+		uuid = UUID.randomUUID().toString();
+	}
 	
 	public String getContentType() {
 		return contentType;
@@ -48,12 +52,12 @@ public class RestStep extends Step {
 		this.header = header;
 	}
 
-	public Object getBody() {
-		return body;
+	public Object getRequest() {
+		return request;
 	}
 
-	public void setBody(Object body) {
-		this.body = body;
+	public void setRequest(Object request) {
+		this.request = request;
 	}
 
 	public String getMethod() {
@@ -62,10 +66,6 @@ public class RestStep extends Step {
 
 	public void setMethod(String method) {
 		this.method = method;
-	}
-
-	public RestStep() {
-		uuid = UUID.randomUUID().toString();
 	}
 
 	public String getPath() {
@@ -80,9 +80,8 @@ public class RestStep extends Step {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((body == null) ? 0 : body.hashCode());
-		result = prime * result
-				+ ((contentType == null) ? 0 : contentType.hashCode());
+		result = prime * result + ((request == null) ? 0 : request.hashCode());
+		result = prime * result	+ ((contentType == null) ? 0 : contentType.hashCode());
 		result = prime * result + ((cookie == null) ? 0 : cookie.hashCode());
 		result = prime * result + ((header == null) ? 0 : header.hashCode());
 		result = prime * result + ((method == null) ? 0 : method.hashCode());
@@ -100,10 +99,10 @@ public class RestStep extends Step {
 		if (getClass() != obj.getClass())
 			return false;
 		RestStep other = (RestStep) obj;
-		if (body == null) {
-			if (other.body != null)
+		if (request == null) {
+			if (other.request != null)
 				return false;
-		} else if (!body.equals(other.body))
+		} else if (!request.equals(other.request))
 			return false;
 		if (contentType == null) {
 			if (other.contentType != null)

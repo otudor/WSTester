@@ -10,7 +10,6 @@ import com.wstester.model.Asset;
 
 public class AssetRoute extends RouteBuilder {
 
-	Asset asset;
 	
 	@Override
 	public void configure() throws Exception {
@@ -21,7 +20,8 @@ public class AssetRoute extends RouteBuilder {
 			@Override
 			public void process(Exchange exchange) throws Exception {
 				
-				asset = exchange.getIn().getBody(Asset.class);
+				Asset asset = exchange.getIn().getBody(Asset.class);
+				
 				exchange.getIn().setHeader("fileName", asset.getName());
 				exchange.getIn().setHeader(Exchange.FILE_LAST_MODIFIED, asset.getLastmodified());
 				
@@ -39,5 +39,4 @@ public class AssetRoute extends RouteBuilder {
 		})
 		.to("file:assets?fileName=${in.header.fileName}&autoCreate=true&keepLastModified=true");
 	}
-
 }

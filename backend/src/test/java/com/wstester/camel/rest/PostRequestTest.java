@@ -18,7 +18,7 @@ public class PostRequestTest extends RestTestBaseClass {
 		RestStep step = (RestStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
 		step.setPath("/customer/insertCustomer");
 		step.setMethod("POST");
-		step.setBody("Inovation");
+		step.setRequest("Inovation");
 		
 		testRunner.setTestProject(testProject);
 		testRunner.run();
@@ -44,7 +44,7 @@ public class PostRequestTest extends RestTestBaseClass {
 		JSONObject name = new JSONObject();
 		name.put("name", "Crix");
 		
-		step.setBody(name.toString());
+		step.setRequest(name.toString());
 		
 		testRunner.setTestProject(testProject);
 		testRunner.run();

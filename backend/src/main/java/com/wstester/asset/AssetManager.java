@@ -1,5 +1,9 @@
 package com.wstester.asset;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import javax.jms.Connection;
 import javax.jms.DeliveryMode;
 import javax.jms.Destination;
@@ -55,6 +59,20 @@ public class AssetManager {
 		}catch (Exception e){
 			
 		}
+	}
+	
+	public String getAssetContent(Asset asset) {
+		
+		String content = null;
+		
+		try {
+			content = new String(Files.readAllBytes(Paths.get("assets/" + asset.getName())));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return content;
 	}
 	
 	public void close(){

@@ -117,9 +117,6 @@ public class TestUtils {
 		restStep.setName("Step 1");
 		restStep.setServer(server11);
 		restStep.setService(restService);
-		List<Asset> assetList1 = new ArrayList<Asset>();
-		assetList1.add(asset1);
-		restStep.setAssetList(assetList1);
 		List<Assert> assertList = new ArrayList<Assert>();
 		Assert oneAssert = new Assert();
 		oneAssert.setAsserts("First assert");
@@ -133,9 +130,6 @@ public class TestUtils {
 		step2.setName("Step 2");
 		step2.setServer(server12);
 		step2.setService(service2);
-		List<Asset> assetList2 = new ArrayList<Asset>();
-		assetList2.add(asset2);
-		step2.setAssetList(assetList2);
 		List<Assert> assertList2 = new ArrayList<Assert>();
 		Assert oneAssert2 = new Assert();
 		oneAssert2.setAsserts("Second assert");
@@ -155,9 +149,6 @@ public class TestUtils {
 		step3.setName("Step 3");
 		step3.setServer(server21);
 		step3.setService(service4);
-		List<Asset> assetList3 = new ArrayList<Asset>();
-		assetList3.add(asset3);
-		step3.setAssetList(assetList3);
 		List<Assert> assertList3 = new ArrayList<Assert>();
 		Assert oneAssert3 = new Assert();
 		oneAssert3.setAsserts("Third assert");
@@ -170,9 +161,6 @@ public class TestUtils {
 		step4.setName("Step 4");
 		step4.setServer(server22);
 		step4.setService(service3);
-		List<Asset> assetList4 = new ArrayList<Asset>();
-		assetList4.add(asset4);
-		step4.setAssetList(assetList4);
 		List<Assert> assertList4 = new ArrayList<Assert>();
 		Assert oneAssert4 = new Assert();
 		oneAssert4.setAsserts("Forth assert");
@@ -266,9 +254,6 @@ public class TestUtils {
 		restStep.setName("Step 1");
 		restStep.setServer(server11);
 		restStep.setService(restService);
-		List<Asset> assetList1 = new ArrayList<Asset>();
-		assetList1.add(asset1);
-		restStep.setAssetList(assetList1);
 		List<Assert> assertList = new ArrayList<Assert>();
 		Assert oneAssert = new Assert();
 		oneAssert.setAsserts("First assert");
@@ -355,9 +340,6 @@ public class TestUtils {
 		step2.setName("Step 2");
 		step2.setServer(server12);
 		step2.setService(service2);
-		List<Asset> assetList2 = new ArrayList<Asset>();
-		assetList2.add(asset2);
-		step2.setAssetList(assetList2);
 		List<Assert> assertList2 = new ArrayList<Assert>();
 		Assert oneAssert2 = new Assert();
 		oneAssert2.setAsserts("Second assert");
@@ -448,9 +430,6 @@ public class TestUtils {
 		step1.setName("Step 1");
 		step1.setServer(server12);
 		step1.setService(service2);
-		List<Asset> assetList2 = new ArrayList<Asset>();
-		assetList2.add(asset2);
-		step1.setAssetList(assetList2);
 		List<Assert> assertList2 = new ArrayList<Assert>();
 		Assert oneAssert2 = new Assert();
 		oneAssert2.setAsserts("Second assert");
@@ -471,7 +450,6 @@ public class TestUtils {
 		step2.setName("Step 2");
 		step2.setServer(server12);
 		step2.setService(service2);
-		step2.setAssetList(assetList2);
 		step2.setAssertList(assertList2);
 		HashMap<String, String> insertQuery = new HashMap<String, String>();
 		String id = "100";
@@ -489,7 +467,6 @@ public class TestUtils {
 		step3.setName("Step 3");
 		step3.setServer(server12);
 		step3.setService(service2);
-		step3.setAssetList(assetList2);
 		step3.setAssertList(assertList2);
 		step3.setAction(Action.SELECT);
 		step3.setCollection(collection);
@@ -572,18 +549,12 @@ public class TestUtils {
 		testProject.setEnvironmentList(environmentList);
 
 		// construct test steps
-		
-	
-		
 		// test 3
 		List<Step> stepList2 = new ArrayList<Step>();
 		MySQLStep step3 = new MySQLStep();
 		step3.setName("Step 3");
 		step3.setServer(server21);
 		step3.setService(service4);
-		List<Asset> assetList3 = new ArrayList<Asset>();
-		assetList3.add(asset3);
-		step3.setAssetList(assetList3);
 		List<Assert> assertList3 = new ArrayList<Assert>();
 		Assert oneAssert3 = new Assert();
 		oneAssert3.setAsserts("Third assert");
@@ -593,8 +564,6 @@ public class TestUtils {
 		
 		
 		// construct test case list
-		
-		
 		// test case 2		
 		List<TestCase> testCaseList2 = new ArrayList<TestCase>();
 		TestCase testCase2 = new TestCase();
@@ -673,9 +642,6 @@ public class TestUtils {
 		step4.setName("Step 4");
 		step4.setServer(server22);
 		step4.setService(service3);
-		List<Asset> assetList4 = new ArrayList<Asset>();
-		assetList4.add(asset4);
-		step4.setAssetList(assetList4);
 		List<Assert> assertList4 = new ArrayList<Assert>();
 		Assert oneAssert4 = new Assert();
 		oneAssert4.setAsserts("Forth assert");
