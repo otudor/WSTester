@@ -2,18 +2,17 @@ package com.wstester.actions;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import javax.jms.Connection;
 import javax.jms.DeliveryMode;
 import javax.jms.Destination;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
-
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.wstester.dispatcher.ResponseCallback;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
@@ -25,6 +24,7 @@ public class TestRunner {
 
 	private TestProject testProject;
 	private AbstractXmlApplicationContext camelContext;
+	protected Logger log = LoggerFactory.getLogger(getClass());
 
 	public TestRunner(){
 		
@@ -102,7 +102,8 @@ public class TestRunner {
 					         ObjectMessage message = session.createObjectMessage(testStep);
 					        
 					         // Tell the producer to send the message
-					         System.out.println("Sent message: "+  testStep.getID());	
+					         log.info("Sent message: "+  testStep.getID());	
+					         
 					         producer.send(message);
 						}
 					}
