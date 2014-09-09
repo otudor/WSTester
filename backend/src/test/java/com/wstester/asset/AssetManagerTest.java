@@ -5,15 +5,15 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Test;
 
 import com.wstester.model.Asset;
 
-public class GetAssetContentTest {
-	
+public class AssetManagerTest {
+
 	@Test
-	public void addAsset() throws Exception{
+	public void addAsset() throws InterruptedException{
 		
 		AssetManager assetManager = new AssetManager();
 		
@@ -22,18 +22,35 @@ public class GetAssetContentTest {
 		asset.setPath("src/test/resources");
 		assetManager.addAsset(asset);
 		
-		Thread.sleep(2000);
+		assetManager.waitUntilFileCopied(asset);
+		
+		File file = new File("assets/AssetFile.xml");
+		assertTrue(file.exists());
+		assetManager.close();
+	}
+	
+	@Test
+	public void verifyContentAsset() throws Exception{
+		
+		AssetManager assetManager = new AssetManager();
+		
+		Asset asset = new Asset();
+		asset.setName("AssetFile.xml");
+		asset.setPath("src/test/resources");
+		assetManager.addAsset(asset);
+		
+		assetManager.waitUntilFileCopied(asset);
 		
 		File file = new File("assets/AssetFile.xml");
 		assertTrue(file.exists());
 		assetManager.close();
 		
 		String content = assetManager.getAssetContent(asset);
-		assertEquals("Merge ACUM", content);
+		assertEquals("Harap Alb", content);
 	}
 	
-	@AfterClass
-	public static void after(){
+	@After
+	public void after(){
 		
 		File file = new File("assets/AssetFile.xml");
 		file.delete();

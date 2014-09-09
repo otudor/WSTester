@@ -75,6 +75,25 @@ public class AssetManager {
 		return content;
 	}
 	
+	public void waitUntilFileCopied(Asset asset){
+		
+		while(!Files.isReadable(Paths.get("assets/" + asset.getName() + ".done"))){
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		try {
+			Files.delete(Paths.get("assets/" + asset.getName() + ".done"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void close(){
 		camelContext.close();
 	}

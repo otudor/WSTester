@@ -31,12 +31,12 @@ public class AssetRoute extends RouteBuilder {
 				consumer.start();
 				Exchange fileExchange = consumer.receiveNoWait();
 				
-				exchange.getIn().setBody(fileExchange.getIn().getBody(String.class));
+				exchange.getIn().setBody(fileExchange.getIn().getBody());
 				
 				consumer.stop();
 				fileExchange.handoverCompletions(exchange);
 			}
 		})
-		.to("file:assets?fileName=${in.header.fileName}&autoCreate=true&keepLastModified=true");
+		.to("file:assets?fileName=${in.header.fileName}&autoCreate=true&keepLastModified=true&doneFileName=${file:name}.done");
 	}
 }

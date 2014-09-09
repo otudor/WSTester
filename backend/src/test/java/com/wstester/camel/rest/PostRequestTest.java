@@ -30,8 +30,6 @@ public class PostRequestTest extends RestTestBaseClass {
 		assertEquals("Inovation", entry);
 	}
 	
-	//TODO: De verificat si implementat corect testul de JSON
-	
 	@Test
 	public void postWithJson() throws Exception{
 		
