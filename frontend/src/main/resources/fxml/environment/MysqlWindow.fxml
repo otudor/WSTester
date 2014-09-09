@@ -7,76 +7,121 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<GridPane fx:id="rootMysqlDB" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="150.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.MySQLDBPresenter">
-   <columnConstraints>
-      <ColumnConstraints hgrow="NEVER" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
-      <ColumnConstraints hgrow="NEVER" maxWidth="250.0" minWidth="10.0" prefWidth="250.0" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-   </rowConstraints>
+<AnchorPane fx:id="rootMysqlDB" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.MySQLDBPresenter">
    <children>
-      <Label fx:id="dbUsernameLabel" alignment="CENTER_RIGHT" layoutX="54.0" layoutY="178.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="100.0" text="MySQL user:" GridPane.rowIndex="2">
-         <font>
-            <Font name="Times New Roman" size="14.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="20.0" />
-         </GridPane.margin>
-      </Label>
-      <TextField fx:id="portField" layoutX="143.0" layoutY="116.0" prefHeight="25.0" prefWidth="280.0" GridPane.columnIndex="1">
-         <GridPane.margin>
-            <Insets right="10.0" />
-         </GridPane.margin></TextField>
-      <Label fx:id="portLabel" alignment="CENTER_RIGHT" layoutX="48.0" layoutY="116.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="100.0" text="Port:">
-         <font>
-            <Font name="Times New Roman" size="14.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="20.0" />
-         </GridPane.margin>
-      </Label>
-      <Label fx:id="dbPassLabel" alignment="CENTER_RIGHT" layoutX="54.0" layoutY="215.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="100.0" text="MySQL pass:" GridPane.rowIndex="3">
-         <font>
-            <Font name="Times New Roman" size="14.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="20.0" />
-         </GridPane.margin>
-      </Label>
-      <TextField fx:id="dbUsernameField" layoutX="143.0" layoutY="178.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets right="10.0" />
-         </GridPane.margin></TextField>
-      <PasswordField fx:id="dbPassField" layoutX="143.0" layoutY="215.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets right="10.0" />
-         </GridPane.margin></PasswordField>
-      <Label fx:id="dbNameLabel" alignment="CENTER_RIGHT" layoutX="48.0" layoutY="145.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="100.0" text="Db Name:" GridPane.rowIndex="1">
-         <font>
-            <Font name="Times New Roman" size="14.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="20.0" />
-         </GridPane.margin>
-      </Label>
-      <TextField fx:id="dbNameField" layoutX="143.0" layoutY="145.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets right="10.0" />
-         </GridPane.margin></TextField>
-      <Button fx:id="edit" mnemonicParsing="false" onAction="#editMySQL" prefHeight="25.0" prefWidth="75.0" text="Edit" GridPane.columnIndex="1" GridPane.rowIndex="4">
-         <GridPane.margin>
-            <Insets left="10.0" />
-         </GridPane.margin>
-      </Button>
-      <Button fx:id="save" mnemonicParsing="false" onAction="#saveMySQL" prefHeight="25.0" prefWidth="75.0" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="4">
-         <GridPane.margin>
-            <Insets left="140.0" right="10.0" />
-         </GridPane.margin>
-      </Button>
+      <GridPane fx:id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="150.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="NEVER" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="250.0" minWidth="10.0" prefWidth="250.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label fx:id="dbUsernameLabel" alignment="CENTER_RIGHT" layoutX="54.0" layoutY="178.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="100.0" text="MySQL user:" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Times New Roman" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="portField" layoutX="143.0" layoutY="116.0" prefHeight="25.0" prefWidth="280.0" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label fx:id="portLabel" alignment="CENTER_RIGHT" layoutX="48.0" layoutY="116.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="100.0" text="Port:">
+               <font>
+                  <Font name="Times New Roman" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="dbPassLabel" alignment="CENTER_RIGHT" layoutX="54.0" layoutY="215.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="100.0" text="MySQL pass:" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Times New Roman" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="dbUsernameField" layoutX="143.0" layoutY="178.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <PasswordField fx:id="dbPassField" layoutX="143.0" layoutY="215.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </PasswordField>
+            <Label fx:id="dbNameLabel" alignment="CENTER_RIGHT" layoutX="48.0" layoutY="145.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="100.0" text="Db Name:" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Times New Roman" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="dbNameField" layoutX="143.0" layoutY="145.0" prefHeight="25.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label fx:id="labelport" prefHeight="25.0" prefWidth="240.0" text="Label" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
+            </Label>
+            <Label fx:id="labelname" prefHeight="25.0" prefWidth="240.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
+            </Label>
+            <Label fx:id="labeluser" prefHeight="25.0" prefWidth="240.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
+            </Label>
+            <Label fx:id="labelpass" prefHeight="25.0" prefWidth="240.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
+            </Label>
+            <HBox fx:id="hbox1" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <children>
+                  <Button fx:id="cancel" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelEdit" prefHeight="25.0" prefWidth="75.0" text="Cancel" />
+                  <Button fx:id="save" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveMySQL" prefHeight="25.0" prefWidth="75.0" text="Save">
+                     <HBox.margin>
+                        <Insets left="65.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="edit" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#editMySQL" prefHeight="25.0" prefWidth="75.0" text="Edit">
+                     <HBox.margin>
+                        <Insets left="140.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
    </children>
-</GridPane>
+</AnchorPane>

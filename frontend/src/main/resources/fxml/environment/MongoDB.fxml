@@ -88,14 +88,19 @@
             </TextField>
             <HBox fx:id="hbox1" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
-                  <Button fx:id="edit" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#seteditable" prefHeight="25.0" prefWidth="75.0" text="Edit" HBox.hgrow="NEVER">
+                  <Button fx:id="edit" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#seteditable" prefHeight="25.0" prefWidth="75.0" text="Edit" HBox.hgrow="NEVER">
                      <HBox.margin>
-                        <Insets left="120.0" right="10.0" top="2.5" />
+                        <Insets left="140.0" right="10.0" top="2.5" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="save" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#setuneditable" prefHeight="25.0" prefWidth="75.0" text="Save" HBox.hgrow="NEVER">
+                  <Button fx:id="cancel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelEdit" prefHeight="25.0" prefWidth="75.0" text="Cancel">
                      <HBox.margin>
-                        <Insets left="120.0" right="10.0" top="2.5" />
+                        <Insets top="2.5" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="save" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setuneditable" prefHeight="25.0" prefWidth="75.0" text="Save" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets left="65.0" right="10.0" top="2.5" />
                      </HBox.margin>
                   </Button>
                </children>
@@ -129,11 +134,6 @@
                   <Insets left="8.0" />
                </padding>
             </Label>
-            <Button fx:id="cancel" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#cancelEdit" prefHeight="25.0" prefWidth="75.0" text="Cancel" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
-               <GridPane.margin>
-                  <Insets left="50.0" />
-               </GridPane.margin>
-            </Button>
          </children>
       </GridPane>
    </children>

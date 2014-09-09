@@ -5,54 +5,79 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="rootFTPDetails" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.ServerDetailsPresenter">
-          
-    <children>
-        <Label text="FTP Server name" GridPane.columnIndex="0" GridPane.rowIndex="0">
-         <GridPane.margin>
-            <Insets right="10.0" />
-         </GridPane.margin></Label>
-        <TextField fx:id="ftpNameField" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
-         <GridPane.margin>
-            <Insets right="10.0" />
-         </GridPane.margin></TextField>
-        <Label text="IP" GridPane.columnIndex="0" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets right="10.0" />
-         </GridPane.margin></Label>
-        <TextField fx:id="ftpIPField" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets right="10.0" />
-         </GridPane.margin></TextField>
-      <Button fx:id="save" mnemonicParsing="false" onAction="#SaveServer" prefWidth="75.0" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets left="140.0" />
-         </GridPane.margin>
-      </Button>
-      <Button fx:id="edit" mnemonicParsing="false" onAction="#EditServer" prefHeight="25.0" prefWidth="75.0" text="Edit" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets left="10.0" />
-         </GridPane.margin>
-      </Button>
-      <Label text="Description" GridPane.rowIndex="2">
-         <padding>
-            <Insets right="10.0" />
-         </padding>
-      </Label>
-      <TextField fx:id="DescField" prefHeight="25.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets right="10.0" />
-         </GridPane.margin>
-      </TextField>
-    </children>
-   <columnConstraints>
-      <ColumnConstraints halignment="RIGHT" maxWidth="150.0" prefWidth="150.0" />
-      <ColumnConstraints maxWidth="250.0" prefWidth="250.0" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints maxHeight="30.0" prefHeight="30.0" />
-      <RowConstraints maxHeight="30.0" prefHeight="30.0" />
-      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" />
-   </rowConstraints>
-</GridPane>
+<AnchorPane fx:id="rootFTPDetails" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.ServerDetailsPresenter">
+   <children>
+      <GridPane fx:id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                
+          <children>
+              <Label text="FTP Server name" GridPane.columnIndex="0" GridPane.rowIndex="0">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Label>
+              <TextField fx:id="ftpNameField" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </TextField>
+              <Label text="IP" GridPane.columnIndex="0" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Label>
+              <TextField fx:id="ftpIPField" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label text="Description" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="DescField" prefHeight="25.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <HBox fx:id="hbox1" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Button fx:id="cancel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelEdit" prefHeight="25.0" prefWidth="75.0" text="Cancel" />
+                  <Button fx:id="save" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#SaveServer" prefHeight="25.0" prefWidth="75.0" text="Save">
+                     <HBox.margin>
+                        <Insets left="65.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="edit" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#EditServer" prefHeight="25.0" prefWidth="75.0" text="Edit">
+                     <HBox.margin>
+                        <Insets left="140.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <Label fx:id="labelname" prefHeight="25.0" prefWidth="240.0" text="Label" GridPane.columnIndex="1">
+               <padding>
+                  <Insets left="8.0" />
+               </padding></Label>
+            <Label fx:id="labelip" prefHeight="25.0" prefWidth="240.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <padding>
+                  <Insets left="8.0" />
+               </padding></Label>
+            <Label fx:id="labeldesc" prefHeight="25.0" prefWidth="240.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <padding>
+                  <Insets left="8.0" />
+               </padding></Label>
+          </children>
+         <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" maxWidth="150.0" minWidth="100.0" prefWidth="150.0" />
+            <ColumnConstraints maxWidth="250.0" prefWidth="250.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="30.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="30.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" />
+         </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>

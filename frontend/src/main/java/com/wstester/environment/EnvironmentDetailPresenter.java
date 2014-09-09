@@ -6,32 +6,64 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 public class EnvironmentDetailPresenter {
 	@FXML private Node rootEnvDetails;
 	@FXML private TextField envNameField;
-	@FXML private Button editEnv;
-	@FXML private Button saveEnv;
+	@FXML private Label labelname;
+	@FXML HBox hbox1;
+	@FXML GridPane gridpane;
+	@FXML private Button edit;
+	@FXML private Button save;
+	@FXML private Button cancel;
+	
 	private String uid;
 
 	private EnvironmentService environmentService;
 	private MainPresenter mainPresenter;
 	
-	public void editEnv(ActionEvent e){
-		saveEnv.setDisable(false);
-		envNameField.setStyle("-fx-background-color: rgba(255, 255, 255, 0.95);");
-		envNameField.setEditable(true);
+	public void setEnvironment(final String envUID)	{
+		
+		hbox1.getChildren().remove(save);
+    	hbox1.getChildren().remove(cancel);
+    	hbox1.getChildren().remove(edit);
+    	gridpane.getChildren().remove(envNameField);
+    	gridpane.getChildren().remove(labelname);
+    	
+    	hbox1.getChildren().add(edit);
+    	gridpane.getChildren().add(labelname);
+		Environment env = environmentService.getEnvironment( envUID);
+		envNameField.setText( env.getName());
+		labelname.setText( env.getName());
+		uid=envUID;
+		
+		
 	}
+
+	public void editEnv(ActionEvent e){
+		
+		gridpane.getChildren().remove(labelname);
+		gridpane.getChildren().add(envNameField);
+		hbox1.getChildren().remove(edit);
+    	hbox1.getChildren().add(cancel);
+    	hbox1.getChildren().add(save);
+    	
+		}
 	public void saveEnv(ActionEvent e){
-		saveEnv.setDisable(true);
-		envNameField.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
-		envNameField.setEditable(false);
+		
 		Environment env = new Environment();
 		env.setName(envNameField.getText());
 		environmentService.setEnvNameByUID(env.getName(),uid);
-		
-		
+		hbox1.getChildren().add(edit);
+    	hbox1.getChildren().remove(save);
+    	hbox1.getChildren().remove(cancel);
+    	gridpane.getChildren().add(labelname);
+    	gridpane.getChildren().remove(envNameField);
+    	labelname.setText(envNameField.getText());
 	}
 
 	public void setEnvironmentService(EnvironmentService environmentService)	{
@@ -45,15 +77,16 @@ public class EnvironmentDetailPresenter {
 	public Node getView()	{
 		return rootEnvDetails;
 	}
-
-	public void setEnvironment(final String envUID)	{
-		saveEnv.setDisable(false);
-		
-		envNameField.setEditable(false);
-		envNameField.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
-		envNameField.setText("");
-		Environment env = environmentService.getEnvironment( envUID);
-		envNameField.setText( env.getName());
-		uid=envUID;
+	
+	public void cancelEdit(ActionEvent event)
+	{
+		envNameField.setText(labelname.getText());
+	    hbox1.getChildren().remove(cancel);
+	    hbox1.getChildren().remove(save);
+	    hbox1.getChildren().add(edit);
+	    gridpane.getChildren().remove(envNameField);
+	    gridpane.getChildren().add(labelname);
 	}
+
+	
 }

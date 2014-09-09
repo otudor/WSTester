@@ -51,9 +51,10 @@ public class MongoDBPresenter {
     }
     
     public void setMongoDB(final String serverUID, final String serviceUID)
-    {
+    {	
+    	//removing FXML childrens to set them
     	hbox1.getChildren().remove(save);
-    	gridpane.getChildren().remove(cancel);
+    	hbox1.getChildren().remove(cancel);
     	hbox1.getChildren().remove(edit);
     	gridpane.getChildren().remove(MongoName);
     	gridpane.getChildren().remove(MongoPort);
@@ -63,7 +64,7 @@ public class MongoDBPresenter {
     	gridpane.getChildren().remove(labeluser);
     	gridpane.getChildren().remove(labelpass);
     	gridpane.getChildren().remove(labelport);
-    	
+    	//adding the needed childrens
     	hbox1.getChildren().add(edit);
     	gridpane.getChildren().add(labelname);
     	gridpane.getChildren().add(labeluser);
@@ -96,8 +97,9 @@ public class MongoDBPresenter {
     	gridpane.getChildren().remove(labelpass);
     	
     	hbox1.getChildren().remove(edit);
+    	hbox1.getChildren().add(cancel);
     	hbox1.getChildren().add(save);
-    	gridpane.getChildren().add(cancel);
+    	
     	
     }
     public void setuneditable(ActionEvent event)
@@ -111,7 +113,7 @@ public class MongoDBPresenter {
     	envService.setMongoServiceByUID(mng, uid);
     	hbox1.getChildren().add(edit);
     	hbox1.getChildren().remove(save);
-    	gridpane.getChildren().remove(cancel);
+    	hbox1.getChildren().remove(cancel);
     	gridpane.getChildren().remove(MongoName);
     	gridpane.getChildren().remove(MongoPort);
     	gridpane.getChildren().remove(MongoUser);
@@ -120,7 +122,10 @@ public class MongoDBPresenter {
     	gridpane.getChildren().add(labelname);
     	gridpane.getChildren().add(labeluser);
     	gridpane.getChildren().add(labelpass);
-    	
+    	labelport.setText(MongoPort.getText());
+    	labelname.setText(MongoName.getText());
+    	labeluser.setText(MongoUser.getText());   	
+    	labelpass.setText(MongoPassfield.getText());
     }
     
     public void cancelEdit(ActionEvent event)
@@ -129,7 +134,7 @@ public class MongoDBPresenter {
     	MongoPort.setText(labelport.getText());
     	MongoUser.setText(labeluser.getText());
     	MongoPassfield.setText(labelpass.getText());
-    	gridpane.getChildren().remove(cancel);
+    	hbox1.getChildren().remove(cancel);
     	hbox1.getChildren().remove(save);
     	hbox1.getChildren().add(edit);
     	gridpane.getChildren().remove(MongoName);

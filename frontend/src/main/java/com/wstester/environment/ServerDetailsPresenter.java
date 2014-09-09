@@ -6,18 +6,32 @@ import com.wstester.model.Service;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 public class ServerDetailsPresenter
 {
     @FXML private Node rootFTPDetails;
-    @FXML private TextField ftpNameField;
+   // @FXML private TextField ftpNameField;
     @FXML private TextField ftpIPField;
     @FXML private TextField DescField;
-    
-    private EnvironmentService envService;
+    @FXML private TextField ftpNameField;
+    @FXML private Label labelname;
+    @FXML private Label labelip;
+    @FXML private Label labeldesc;
+    @FXML private HBox hbox1;
+	@FXML private GridPane gridpane;
+	@FXML private Button edit;
+	@FXML private Button save;
+	@FXML private Button cancel;
+   
+	private EnvironmentService envService;
     private MainPresenter mainPresenter;
     private String uid=null;
+    
     public void setEnvService( EnvironmentService envService)
     {
         this.envService = envService;
@@ -35,52 +49,86 @@ public class ServerDetailsPresenter
 
     public void setFTP(final String serverUID)
     {
-        //this.serverUID = serverUID;
-        ftpNameField.setText("");
-        ftpIPField.setText("");
-        DescField.setText("");
-        ftpNameField.setEditable(false);
-        ftpIPField.setEditable(false);
-        ftpNameField.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
-        ftpIPField.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
-        DescField.setEditable(false);
-        DescField.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
-        uid=serverUID;
+    	hbox1.getChildren().remove(save);
+    	hbox1.getChildren().remove(cancel);
+    	hbox1.getChildren().remove(edit);
+    	gridpane.getChildren().remove(ftpIPField);
+    	gridpane.getChildren().remove(DescField);
+    	gridpane.getChildren().remove(ftpNameField);
+    	gridpane.getChildren().remove(labelname);
+    	gridpane.getChildren().remove(labelip);
+    	gridpane.getChildren().remove(labeldesc);
+    	 
+    	hbox1.getChildren().add(edit);
+    	gridpane.getChildren().add(labelname);
+    	gridpane.getChildren().add(labelip);
+    	gridpane.getChildren().add(labeldesc);
+
+    	uid=serverUID;
         Server server = envService.getServerByUID( serverUID);
         ftpNameField.setText( server.getName());
         ftpIPField.setText( server.getIp());
         DescField.setText(server.getDescription());
+        labelname.setText( server.getName());
+        labelip.setText( server.getIp());
+        labeldesc.setText(server.getDescription());
+        
     }
     
     public void EditServer(ActionEvent e) {
 		//Save.setDisable(false);
-		
-    	ftpNameField.setStyle("-fx-background-color: rgba(255, 255, 255, 0.95);");
-    	ftpNameField.setEditable(true);
-    	ftpIPField.setStyle("-fx-background-color: rgba(255, 255, 255, 0.95);");
-    	ftpIPField.setEditable(true);
-    	DescField.setStyle("-fx-background-color: rgba(255, 255, 255, 0.95);");
-    	DescField.setEditable(true);
+    	gridpane.getChildren().add(ftpNameField);
+    	gridpane.getChildren().add(DescField);
+    	gridpane.getChildren().add(ftpIPField);
+    	gridpane.getChildren().remove(labelname);
+    	gridpane.getChildren().remove(labelip);
+    	gridpane.getChildren().remove(labeldesc);
+       	
+    	hbox1.getChildren().remove(edit);
+    	hbox1.getChildren().add(cancel);
+    	hbox1.getChildren().add(save);
+    	
 		
 		
 	}
     
     public void SaveServer(ActionEvent e) {
 		//save.setDisable(true);
-    	ftpNameField.setEditable(false);
-        ftpIPField.setEditable(false);
-        ftpNameField.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
-        ftpIPField.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
-        DescField.setEditable(false);
-        DescField.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
+    	
         Server srv = new Server();
 		srv.setName(ftpNameField.getText());
 		srv.setIp(ftpIPField.getText());
 		srv.setDescription(DescField.getText());		
     	envService.setServerByUID(srv,uid);
-		
+    	hbox1.getChildren().add(edit);
+    	hbox1.getChildren().remove(save);
+    	hbox1.getChildren().remove(cancel);
+    	gridpane.getChildren().remove(ftpNameField);
+    	gridpane.getChildren().remove(DescField);
+    	gridpane.getChildren().remove(ftpIPField);
+    	gridpane.getChildren().add(labelname);
+    	gridpane.getChildren().add(labelip);
+    	gridpane.getChildren().add(labeldesc);
+    	labelname.setText(ftpNameField.getText());
+    	labelip.setText(ftpIPField.getText());   	
+    	labeldesc.setText(DescField.getText());		
 
 	}
     
+    public void cancelEdit(ActionEvent e)
+    {
+    	ftpNameField.setText(labelname.getText());
+    	ftpIPField.setText(labelip.getText());
+    	DescField.setText(labeldesc.getText());
+    	hbox1.getChildren().remove(cancel);
+    	hbox1.getChildren().remove(save);
+    	hbox1.getChildren().add(edit);
+    	gridpane.getChildren().remove(ftpNameField);
+    	gridpane.getChildren().remove(DescField);
+    	gridpane.getChildren().remove(ftpIPField);
+      	gridpane.getChildren().add(labelname);
+    	gridpane.getChildren().add(labelip);
+    	gridpane.getChildren().add(labeldesc);
+    }
     
 }
