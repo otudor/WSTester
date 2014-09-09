@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.wstester.assets.EditController">
+   <children>
+      <Button fx:id="butonLoad" layoutX="308.0" layoutY="111.0" mnemonicParsing="false" text="Load" />
+      <TextArea fx:id="textarea" layoutX="36.0" layoutY="54.0" prefHeight="357.0" prefWidth="235.0" />
+      <Button fx:id="butonPretty" layoutX="303.0" layoutY="182.0" mnemonicParsing="false" text="Pretty" />
+   </children>
+</AnchorPane>
