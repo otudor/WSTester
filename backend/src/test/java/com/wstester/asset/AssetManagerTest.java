@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import com.wstester.model.Asset;
+import com.wstester.services.impl.AssetManager;
 
 public class AssetManagerTest {
 

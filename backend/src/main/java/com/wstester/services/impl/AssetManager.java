@@ -1,4 +1,4 @@
-package com.wstester.asset;
+package com.wstester.services.impl;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,15 +16,18 @@ import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.wstester.model.Asset;
+import com.wstester.services.definition.IAssetManager;
 
-public class AssetManager {
+public class AssetManager implements IAssetManager {
 
 	private AbstractXmlApplicationContext camelContext;
 	
-	public AssetManager(){
-		
-	}
-	
+	/**
+	 * <br><br>
+	 * Method responsible to create a new Asset entity through JMS(Async) mechanism
+	 * </br>
+	 * @param the asset
+	 */
 	public void addAsset(Asset asset){
 		
 		try{
@@ -59,6 +62,11 @@ public class AssetManager {
 		}catch (Exception e){
 			
 		}
+	}
+	
+	@Override
+	public void saveAsset(Asset asset) {
+		
 	}
 	
 	public String getAssetContent(Asset asset) {
@@ -97,4 +105,5 @@ public class AssetManager {
 	public void close(){
 		camelContext.close();
 	}
+
 }

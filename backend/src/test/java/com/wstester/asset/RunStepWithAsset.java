@@ -14,6 +14,7 @@ import com.wstester.model.Response;
 import com.wstester.model.RestStep;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
+import com.wstester.services.impl.AssetManager;
 
 public class RunStepWithAsset extends RestTestBaseClass{
 
