@@ -1,6 +1,7 @@
 package com.wstester.dispatcher;
 
 import org.apache.camel.Exchange;
+import org.apache.camel.LoggingLevel;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
@@ -19,6 +20,7 @@ public class RestRoute extends RouteBuilder{
 		
 		from("jms:restQueue?concurrentConsumers=20&asyncConsumer=true")
 		.bean(ExchangeDelayer.class, "delay")
+		.log(LoggingLevel.INFO, "Processing ${id}  Me Got ${body}")
 		.process(new Processor() {
 			
 			@Override
@@ -71,6 +73,7 @@ public class RestRoute extends RouteBuilder{
 				exchange.getIn().setBody(response);
 			}
 		})
+		.to("log:com.mycompany.order?showAll=true&multiline=true")
 		.to("jms:topic:responseTopic");
 	}
 	
