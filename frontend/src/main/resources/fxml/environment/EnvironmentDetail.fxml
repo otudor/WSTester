@@ -6,35 +6,66 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="rootEnvDetails" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="58.0" prefWidth="327.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.EnvironmentDetailPresenter">
-
-    <children>
-        <Label alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="130.0" text="Environment name:" GridPane.columnIndex="0">
-         <font>
-            <Font name="Times New Roman" size="14.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="20.0" />
-         </GridPane.margin>
-         <padding>
-            <Insets right="10.0" />
-         </padding></Label>
-        <TextField fx:id="envNameField" prefHeight="25.0" prefWidth="280.0" GridPane.columnIndex="1">
-         <GridPane.margin>
-            <Insets right="10.0" />
-         </GridPane.margin></TextField>
-      <Button fx:id="editEnv" mnemonicParsing="false" onAction="#editEnv" prefHeight="25.0" prefWidth="60.0" text="Edit" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-      <Button fx:id="saveEnv" mnemonicParsing="false" onAction="#saveEnv" prefHeight="25.0" prefWidth="60.0" text="Save" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-
-        <!-- <Label text="Environment IP" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <TextField fx:id="envIPField" GridPane.rowIndex="1" GridPane.columnIndex="1"/> -->
-    </children>
-   <columnConstraints>
-      <ColumnConstraints maxWidth="155.0" minWidth="89.0" prefWidth="144.0" />
-      <ColumnConstraints maxWidth="261.0" minWidth="182.0" prefWidth="182.0" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-   </rowConstraints>
-</GridPane>
+<AnchorPane fx:id="rootEnvDetails" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.EnvironmentDetailPresenter">
+   <children>
+      <GridPane fx:id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="60.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      
+          <children>
+              <Label alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" text="Environment name:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Times New Roman" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+              <TextField fx:id="envNameField" prefHeight="25.0" prefWidth="190.0" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <HBox fx:id="hbox1" prefHeight="30.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Button fx:id="save" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveEnv" prefHeight="25.0" prefWidth="75.0" text="Save">
+                     <HBox.margin>
+                        <Insets left="35.0" top="2.5" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="cancel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelEdit" prefHeight="25.0" prefWidth="75.0" text="Cancel">
+                     <HBox.margin>
+                        <Insets left="5.0" top="2.5" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="edit" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#editEnv" prefHeight="25.0" prefWidth="75.0" text="Edit">
+                     <HBox.margin>
+                        <Insets left="115.0" top="2.5" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <Label fx:id="labelname" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="190.0" text="Label" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
+            </Label>
+      
+              <!-- <Label text="Environment IP" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+              <TextField fx:id="envIPField" GridPane.rowIndex="1" GridPane.columnIndex="1"/> -->
+          </children>
+         <columnConstraints>
+            <ColumnConstraints maxWidth="150.0" minWidth="100.0" prefWidth="150.0" />
+            <ColumnConstraints maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" />
+         </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>
