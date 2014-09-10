@@ -1,13 +1,15 @@
 package com.wstester.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class TestProject {
+public class TestProject implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private List<TestSuite> testSuiteList;
 	private List<Asset> assetList;

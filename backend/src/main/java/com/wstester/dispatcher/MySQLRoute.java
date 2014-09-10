@@ -21,8 +21,8 @@ public class MySQLRoute extends RouteBuilder  {
 	@Override
 	public void configure() throws Exception {
 
-		from("jms:mySQLQueue?concurrentConsumers=20&asyncConsumer=true")
-		.bean(ExchangeDelayer.class, "delay")
+		from("jms:mySQLQueue")
+		.delay().method(ExchangeDelayer.class, "delay").asyncDelayed()
 		.process(new Processor() {
 			
 			@Override

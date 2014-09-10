@@ -2,18 +2,16 @@ package com.wstester.actions;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import javax.jms.Connection;
 import javax.jms.DeliveryMode;
 import javax.jms.Destination;
+import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
-
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.wstester.dispatcher.ResponseCallback;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
@@ -98,7 +96,6 @@ public class TestRunner {
 						for (Step testStep : testCase.getStepList()) {
 						
 							stepSize++;
-							
 							 // Create a messages
 					         ObjectMessage message = session.createObjectMessage(testStep);
 					        
@@ -109,11 +106,13 @@ public class TestRunner {
 					}
 				}
 
+				//TODO: change timeout to configuration file
 				Long timeout = 10000L;
 				while(!ResponseCallback.allResponsesReceived(stepSize) && ((timeout-=1000) > 0)){
 					Thread.sleep(1000);
 				}
-				
+				manageVariable(session);
+				runSteps(session);
 				// Clean up
 				session.close();
 				connection.close();
@@ -122,6 +121,91 @@ public class TestRunner {
 				
 			}
 		}
+	}
+	private int runSteps (Session session  ) throws JMSException, InterruptedException{
+		
+		// Create the destination (Topic or Queue)
+		Destination destination = session.createQueue("startQueue");
+
+		// Create a MessageProducer from the Session to the Topic or Queue
+		MessageProducer producer = session.createProducer(destination);
+		producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+
+		int stepSize = 0;
+			for (TestSuite testSuite : testProject.getTestSuiteList()) {
+				for (TestCase testCase : testSuite.getTestCaseList()) {
+					for (Step testStep : testCase.getStepList()) {
+				
+						stepSize ++;
+						 // Create a messages
+				         ObjectMessage message = session.createObjectMessage(testStep);
+				        
+				         // Tell the producer to send the message
+				         System.out.println("Sent message: "+  testStep.getID());	
+				         producer.send(message);
+					}
+				}
+			}
+
+			Long timeout = 10000L;
+			while(!ResponseCallback.allResponsesReceived(stepSize) && (timeout-=1000) > 0){
+				Thread.sleep(1000);
+			
+			}		
+		return stepSize;
+
+	}
+	private int manageVariable (Session session  ) throws JMSException, InterruptedException{
+		
+		// Create the destination (Topic or Queue)
+		Destination destination = session.createQueue("variableQueue");
+
+		// Create a MessageProducer from the Session to the Topic or Queue
+		MessageProducer producer = session.createProducer(destination);
+		producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+		
+		for (int i = 0 ; i < testProject.getVariableList().size() ; i++){
+		
+			ObjectMessage messageProject = session.createObjectMessage(testProject.getVariableList().get(i));
+			producer.send(messageProject);
+		
+		}
+		int variableSize = 0;
+			for (TestSuite testSuite : testProject.getTestSuiteList()) {
+				 for (int i = 0 ; i < testSuite.getVariableList().size() ; i++){
+				
+				ObjectMessage messageSuite = session.createObjectMessage(testSuite.getVariableList().get(i));
+				producer.send(messageSuite);
+				 
+				 }
+				for (TestCase testCase : testSuite.getTestCaseList()) {
+					 for (int i = 0 ; i < testCase.getVariableList().size() ; i++){
+					 
+						 ObjectMessage messageCase = session.createObjectMessage(testCase.getVariableList().get(i));
+						 producer.send(messageCase);
+					 
+					 }
+					 
+					 for (Step testStep : testCase.getStepList()) {
+						 variableSize ++;
+					   for (int i = 0 ; i < testStep.getVariableList().size() ; i++){
+						
+						 // Create a messages
+				         ObjectMessage message = session.createObjectMessage(testStep.getVariableList().get(i));
+				         
+				         producer.send(message);
+					   }
+					}
+				}
+			}
+
+			Long timeout = 10000L;
+			while(!ResponseCallback.allResponsesReceived(variableSize) && (timeout-=1000) > 0){
+				Thread.sleep(1000);
+			
+			}		
+		return variableSize;
+
 	}
 }
 
