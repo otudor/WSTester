@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="61.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.assets.PathController">
+   <children>
+      <SplitPane prefHeight="61.0" prefWidth="300.0">
+         <items>
+            <TextField fx:id="textPath" prefHeight="25.0" prefWidth="137.0" />
+         </items>
+      </SplitPane>
+      <Button fx:id="butonPath" layoutX="317.0" layoutY="14.0" mnemonicParsing="false" text="Browse" />
+      <Button fx:id="butonApply" layoutX="403.0" layoutY="14.0" mnemonicParsing="false" text="Apply" />
+   </children>
+</AnchorPane>

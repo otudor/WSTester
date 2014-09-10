@@ -22,7 +22,6 @@ import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.annotation.PostConstruct;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -39,11 +38,11 @@ import org.xml.sax.SAXException;
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 import com.wstester.main.WsTesterMain;
-import com.wstester.services.definition.IAssetManager;
-import com.wstester.services.impl.AssetManager;
 import com.wstester.util.MainWindowListener;
 
 public class EditController implements MainWindowListener {
+	
+	
 	
 	private Logger logger = Logger.getLogger(this.getClass().getSimpleName());
 	
@@ -58,8 +57,6 @@ public class EditController implements MainWindowListener {
 	private TextArea textarea;
 	@FXML
 	private Stage stageEditor;
-
-	private IAssetManager assetManager;
 	
 	private ProcessBuilder processBuilder;
 	
@@ -75,14 +72,8 @@ public class EditController implements MainWindowListener {
 			}
 			});*/
 	
-	@PostConstruct
-	public void postInit() {
-		assetManager = new AssetManager();
-	}
-	
 	@FXML
 	private void initialize() {
-		processBuilder = new ProcessBuilder("C:\\Program Files (x86)\\Notepad++\\notepad++.exe");
 		butonLoad.setOnAction(new EventHandler<ActionEvent>() {
 			@Override	
 			public void handle(ActionEvent arg0) {
@@ -224,7 +215,13 @@ public class EditController implements MainWindowListener {
 	
 
 	private void handleLoad() throws IOException {
-		process = processBuilder.start();
+		String editorPath = System.getProperty("editor.path");
+//		processBuilder = new ProcessBuilder(editorPath);
+//		process = processBuilder.start();
+		
+		Runtime runtime = Runtime.getRuntime();
+		process = runtime.exec(editorPath + " " + "C:\\Users\\gvasile\\Desktop\\mydocument.xml");
+		
 //		FileChooser fileChooser = new FileChooser();
 //
 //		//Set extension filter

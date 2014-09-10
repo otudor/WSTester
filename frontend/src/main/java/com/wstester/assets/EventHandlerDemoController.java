@@ -3,8 +3,8 @@ package com.wstester.assets;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -18,7 +18,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
@@ -29,12 +28,17 @@ import javafx.stage.Stage;
 import org.apache.commons.io.FileUtils;
 import org.controlsfx.dialog.Dialogs;
 
+import com.sun.org.apache.xerces.internal.impl.xs.identity.Selector.Matcher;
 import com.wstester.main.WsTesterMain;
 
 public class EventHandlerDemoController {
 
+	private Logger logger = Logger.getLogger(this.getClass().getSimpleName());
+
 	private AssetModel assetModel;
 	private AssetModel newValue, oldValue;
+	
+	private Process process;
 
 	@FXML
 	private TableView<Table> tableView = new TableView<>();
@@ -51,11 +55,17 @@ public class EventHandlerDemoController {
 	@FXML
 	private Button addButton;
 	@FXML
+	private Button ed;
+	@FXML
 	private Button deleteButton;
 	@FXML
 	private Button editButton;
 	@FXML
+	private Button pathButton;
+	@FXML
 	private Stage stageEditor = new Stage(); 
+	@FXML
+	private Stage stagePath = new Stage(); 
 	Parent root;
 	@FXML
 	private ListView<AssetModel> listView;
@@ -183,7 +193,47 @@ public class EventHandlerDemoController {
 				
 			
 			}
+			});  
+		
+		
+		pathButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("apasat buton edit");
+				stagePath= new Stage();
+				try {
+					root = FXMLLoader.load(getClass().getResource("/fxml/assets/path.fxml"));
+					Scene seconda = new Scene(root);
+					seconda.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
+					stagePath.setScene(seconda);
+					stagePath.setTitle("path");
+					stagePath.show();
+					
+									
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+						
+			
+			}
 			});
+		
+		
+	
+		
+		/*pathButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("lalal");
+				FileChooser fileChooser = new FileChooser();
+				FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("EXE files (*.exe)", "*.exe");
+				fileChooser.getExtensionFilters().add(extFilter);
+				
+				File file = fileChooser.showSaveDialog(stageEditor);
+			}
+			}); */
 
 		addButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -305,6 +355,82 @@ public class EventHandlerDemoController {
 				}
 			}
 		});
+		
+		
+		ed.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				if (listView != null){
+				if (listView.getSelectionModel().getSelectedItem() != null) {
+				
+					System.out.println("selectat");
+					//private void handleLoad() throws IOException {
+						String editorPath = System.getProperty("editor.path");
+//						processBuilder = new ProcessBuilder(editorPath);
+//						process = processBuilder.start();
+						
+						try {
+							String filePath = tablePath.getCellData(tableView.getSelectionModel().getSelectedIndex());
+							//String filePath = tablePath.getCellData(0);
+							
+							
+						//	if(filePath.contains("\\")) {
+							//	filePath.replaceAll("\\", "\\\\");
+								
+							//}
+							process = openSelectedFile(editorPath, filePath);
+							
+						}
+						 catch (IOException e) {
+							 logger.log(Level.SEVERE, "Selected file: " + tablePath.getCellData(0) + " failed to open. Exception: " + e);
+						}
+						
+//						FileChooser fileChooser = new FileChooser();
+				//
+//						//Set extension filter
+//						FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.xml)", "*.xml");
+//						fileChooser.getExtensionFilters().add(extFilter);
+				//
+//						//Show save file dialog
+				//
+				//
+//						File file = fileChooser.showOpenDialog(stageEditor);
+//						if(file != null){
+				//
+//							textarea.setText(readFile(file));
+//						}
+					//}
+					
+				}
+				 else {
+					try {
+						// dialog from controlsfx jar
+						Dialogs.create()
+								.lightweight()
+								.owner(null)
+								.title("Error")
+								.message(
+										"Please select a file that you want to edit!")
+								.showError();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				 }
+				
+			}
+				
+			}
+			
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 		deleteButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -364,5 +490,16 @@ public class EventHandlerDemoController {
 		tableProgress.setCellValueFactory(cellData -> cellData.getValue()
 				.progressProperty());
 	}
-
+	
+	private Process openSelectedFile(String editorPath, String filePath) throws IOException {
+		Runtime runtime = Runtime.getRuntime();
+		return runtime.exec(editorPath + " " + filePath);	
+		
+		
+	}
+	public void shutDown() {
+		if(process != null) {
+			process.destroy();
+		}
+	}
 }

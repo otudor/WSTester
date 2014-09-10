@@ -1,7 +1,11 @@
 package com.wstester.main;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -51,6 +55,7 @@ public class WsTesterMain extends Application {
 				}
 			}
 		});
+        loadProperties();
 	}
 
 	public static void main(String[] args) {launch(args);}
@@ -59,6 +64,16 @@ public class WsTesterMain extends Application {
 		if(listeners != null) {
 			listeners.add(listener);
 		}
+	}
+	
+	private void loadProperties() throws IOException {
+		FileInputStream propFile = new FileInputStream("C:\\Users\\gvasile\\Documents\\GitHub\\WSTester\\frontend\\src\\main\\resources\\system.properties");
+        Properties p = new Properties(System.getProperties());
+        p.load(propFile);
+        // set the system properties
+        System.setProperties(p);
+        // display new properties
+//        System.getProperties().list(System.out);
 	}
 
 }
