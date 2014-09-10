@@ -67,8 +67,8 @@ public class TestSuiteController
 		
 		//TestSuiteListController.updateRunStatus();
 		
-		ExecutionUpdate execUpd = new ExecutionUpdate();
-		execUpd.updateRunStatus();
+//		ExecutionUpdate execUpd = new ExecutionUpdate();
+//		execUpd.updateRunStatus();
 		
 		//Response mysqlResponse = 
 		

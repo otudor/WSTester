@@ -17,7 +17,7 @@ public class TestSuiteManagerController
 {
     @FXML private Parent root;
     @FXML private BorderPane contentArea;
-    @FXML public static Button btnRun;
+    @FXML public Button btnRun;
 
     private TestSuiteListController tsListController;
     private TestSuiteController testSuiteController;
@@ -94,11 +94,14 @@ public class TestSuiteManagerController
 		testRunner.run(testProject);
 		//testRunner.run();
 		
-		ExecutionUpdate execUpd = new ExecutionUpdate();
+		ExecutionUpdate execUpd = new ExecutionUpdate(tsListController);
 		
 		//btnRun.setText("Running...");
-		//btnRun.setDisable(true);
+		
 		execUpd.updateRunStatus();
+		
+		//btnRun.setDisable(true);
+		
 //		btnRun.setDisable(false);
 	}
 }
