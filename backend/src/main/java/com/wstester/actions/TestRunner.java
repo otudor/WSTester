@@ -102,8 +102,10 @@ public class TestRunner {
 					         ObjectMessage message = session.createObjectMessage(testStep);
 					        
 					         // Tell the producer to send the message
-					         log.info("Sent message: "+  testStep.getID());	
-					         
+					         log.info("[" + testStep.getID() +  "] Sent message: = {}"+  testStep.getID());	
+					         log.debug("Aici este debuging\n\n");
+					         log.error("aici sunt erorile");
+					         log.warn("Aici este warn");
 					         producer.send(message);
 						}
 					}

@@ -5,7 +5,6 @@ import org.apache.camel.LoggingLevel;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-
 import com.wstester.asset.AssetProcessor;
 import com.wstester.model.Response;
 import com.wstester.model.RestService;
@@ -19,8 +18,10 @@ public class RestRoute extends RouteBuilder{
 	public void configure() throws Exception {
 		
 		from("jms:restQueue?concurrentConsumers=20&asyncConsumer=true")
+		.log(LoggingLevel.INFO, "[${body.getID}] Received message on the rest queue")
+		.log(LoggingLevel.INFO, "Delaying message bla bla")
 		.bean(ExchangeDelayer.class, "delay")
-		.log(LoggingLevel.INFO, "Processing ${id}  Me Got ${body}")
+		.log(LoggingLevel.INFO, "Processing ${id}  Me Got ${body.getID}")
 		.process(new Processor() {
 			
 			@Override
@@ -76,6 +77,8 @@ public class RestRoute extends RouteBuilder{
 		.to("log:com.mycompany.order?showAll=true&multiline=true")
 		.to("jms:topic:responseTopic");
 	}
+	
+	
 	
 	private Object getURI(RestStep step) {
 		
