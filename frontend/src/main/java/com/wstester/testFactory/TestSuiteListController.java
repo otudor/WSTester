@@ -58,7 +58,7 @@ public class TestSuiteListController implements Initializable
     //@FXML private TextField searchField;
    // @FXML private ListView<Old> resultsList;
     private List<TestSuite> tsList;
-    @FXML public static TreeView<Object> treeView;
+    @FXML private TreeView<Object> treeView;
     
     private TestSuiteManagerController tsManagerController;
     private TestSuiteService tsService;
@@ -114,11 +114,15 @@ public class TestSuiteListController implements Initializable
     	return this.tsList;
     }
     
+    public TreeView<Object> getTreeView(){
+    	return this.treeView;
+    }
+    
     public void loadTreeItems() 
     {
     	Node icon = null;
     	
-    	TreeItem<Object> root = new TreeItem<Object>("");
+    	TreeItem<Object> root = new TreeItem<Object>("treeRoot");
     	root.setExpanded(true);
     	
     	List<TestSuite> suiteList = this.tsList; /*tsService.getTestSuites();*/    	

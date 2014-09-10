@@ -1,13 +1,11 @@
 package com.wstester.testFactory;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javafx.event.Event;
-import javafx.scene.control.Button;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
@@ -20,10 +18,18 @@ import com.wstester.model.StepStatusType;
 
 public class ExecutionUpdate {
 
-	public static void updateRunStatus()
+	TestSuiteListController testSuiteListController;
+	
+	public ExecutionUpdate(TestSuiteListController tsListController) {
+		
+		this.testSuiteListController = tsListController;
+	}
+
+	public void updateRunStatus()
     {
 		ExecutorService executor = Executors.newFixedThreadPool(1);
-		executor.execute(new UpdateStatusThread(TestSuiteListController.treeView));
+		
+		executor.execute(new UpdateStatusThread(testSuiteListController.getTreeView()));
 		
 		executor.shutdown();
     }
