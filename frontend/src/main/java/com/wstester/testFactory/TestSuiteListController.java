@@ -6,8 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -20,6 +23,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import javafx.collections.ObservableList;
 
@@ -43,6 +47,8 @@ import com.wstester.model.Service;
 import com.wstester.model.ServiceType;
 import com.wstester.model.SoapStep;
 import com.wstester.model.Step;
+import com.wstester.model.Execution;
+import com.wstester.model.StepStatusType;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestSuite;
 
@@ -51,7 +57,7 @@ public class TestSuiteListController implements Initializable
     @FXML private Node root;
     //@FXML private TextField searchField;
    // @FXML private ListView<Old> resultsList;
-    private ObservableList<TestSuite> tsList;
+    private List<TestSuite> tsList;
     @FXML public static TreeView<Object> treeView;
     
     private TestSuiteManagerController tsManagerController;
@@ -76,12 +82,11 @@ public class TestSuiteListController implements Initializable
         this.tsService = tsService;
     }
 
-    public void search()
+    public void loadSuites()
     {
-
-    FXCollections.observableList(tsService.getTestSuites());    
+    	tsList = tsService.getTestSuites();    
         //load the tree also
-        loadTreeItems();
+        //loadTreeItems();
     }
     
     public void selectTestSuite( String tsUID)
@@ -104,6 +109,11 @@ public class TestSuiteListController implements Initializable
     	return tsService.getFirstTestSuite().getID();
     }
     
+    public List<TestSuite> getTestSuiteList()
+    {
+    	return this.tsList;
+    }
+    
     public void loadTreeItems() 
     {
     	Node icon = null;
@@ -111,12 +121,12 @@ public class TestSuiteListController implements Initializable
     	TreeItem<Object> root = new TreeItem<Object>("");
     	root.setExpanded(true);
     	
-    	List<TestSuite> envs = (List<TestSuite>) tsService.getTestSuites();    	
-    	for (TestSuite env : envs)
+    	List<TestSuite> suiteList = this.tsList; /*tsService.getTestSuites();*/    	
+    	for (TestSuite ts : suiteList)
     	{
     		icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestSuite.png")));
-    		TreeItem<Object> envNode = new TreeItem<>(env, icon);    		
-    		List<TestCase> tclist = env.getTestCaseList();
+    		TreeItem<Object> envNode = new TreeItem<>(ts, icon);    		
+    		List<TestCase> tclist = ts.getTestCaseList();
     		
     		if ( tclist!= null && !tclist.isEmpty())
     		{
@@ -302,15 +312,28 @@ public class TestSuiteListController implements Initializable
             	else */
             	{
             		//System.out.println("updateItem (" + getItem().toString() + ") nu e editing ");
-            		setText(getItem() == null ? "" : getItem().toString());
-                    setGraphic(getTreeItem().getGraphic());
+            		//setText(getItem() == null ? "" : getItem().toString());
+                    //setGraphic(getTreeItem().getGraphic());
+            		//setGraphic( addHBox());
             	}
+            	
+            	//System.out.println("am un nod: " + getItem().getClass());
+            
+                if ( getItem().getClass() == MySQLStep.class )
+                {
+                	setGraphic( createStepGraphic(item));
+                }
+                else
+                {
+                	setText(getItem() == null ? "" : getItem().toString());
+                	setGraphic(getTreeItem().getGraphic());
+                }
                 
                 if( getItem() != null)
                     if ( getItem().getClass() == TestSuite.class)
                     {
                     	TestSuite ts = (TestSuite) getItem();
-                    	this.setContextMenu( createTestSuiteContextMenu(ts));                    	
+                    	this.setContextMenu( createTestSuiteContextMenu(ts));
                     }
                     else if ( getItem().getClass() == TestCase.class)
 	                {
@@ -318,8 +341,31 @@ public class TestSuiteListController implements Initializable
 	                	TestCase tc = (TestCase) getItem();
 	                	this.setContextMenu( createTestCaseContextMenu(ts, tc));
 	                }
+                
+
             }
         }
+    	
+    	public HBox createStepGraphic( Object item) {
+    	    HBox hbox = new HBox();
+    	    hbox.setPadding(new Insets(0, 0, 0, 0));
+    	    hbox.setSpacing(5);
+
+    	    Label lblNodeName = new Label( getItem() == null ? "" : getItem().toString() ); 
+    	    hbox.getChildren().addAll(lblNodeName);
+    	    
+    	    Execution execution = ((MySQLStep) getItem()).getLastExecution();
+    	    if ( execution != null)
+    	    {
+	    	    ImageView pic = null;
+	    	    if ( execution.getStatus() == StepStatusType.PASSED)
+	    	    	pic = new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_step_passed.png")));
+
+	    	    hbox.getChildren().addAll(pic);
+    	    }
+    	    
+    	    return hbox;
+    	}
     	
     	@Override
         public void startEdit()

@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="rootMySQLStep"
-          hgap="10" vgap="10"
-          fx:controller="com.wstester.testFactory.MySQLStepController"
-          xmlns:fx="http://javafx.com/fxml">
+<GridPane fx:id="rootMySQLStep" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.wstester.testFactory.MySQLStepController">
           
     <children>
-        <Label text="Step Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <Label fx:id="lblName" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-        <Label text="SQL" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <Label fx:id="lblSQL" GridPane.rowIndex = "1" GridPane.columnIndex="1"/>
+        <Label text="Step Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label fx:id="lblName" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label text="SQL" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label fx:id="lblSQL" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         
-        <Label text="Status:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-        <Label fx:id="lblStatus" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="50"/>
+        <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Label fx:id="lblStatus" prefWidth="50" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         
-        <Label text="Response:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-        <Label fx:id="lblResponse" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        <Label text="Response:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Label fx:id="lblResponse" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         
+        <Label text="Past executions" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+        <TableView fx:id="tblExecutions" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5">
+		     <columns>
+		          <TableColumn fx:id="columnDate" text="Date">
+		          </TableColumn>
+		          <TableColumn fx:id="columnStatus" text="Status">
+		          </TableColumn>
+		          <TableColumn fx:id="ccolumnResponse" text="Response">
+		          </TableColumn>
+		     </columns>
+		</TableView>
     </children>
+   <padding>
+      <Insets left="10.0" />
+   </padding>
 </GridPane>
