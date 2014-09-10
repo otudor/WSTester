@@ -27,7 +27,7 @@ public class TestSuiteController
 	@FXML private Node rootEnvDetails;
 	@FXML private TextField tsName;
 	@FXML private TextField txtEnvName;
-	@FXML private Button btnRun;
+	//@FXML private Button btnRun;
 	
 	private TestSuiteService tsService;
 	

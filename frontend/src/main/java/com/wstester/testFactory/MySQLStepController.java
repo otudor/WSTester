@@ -1,4 +1,6 @@
 package com.wstester.testFactory;
+import java.util.List;
+
 import com.sun.prism.paint.Color;
 import com.wstester.actions.TestRunner;
 import com.wstester.model.MongoService;
@@ -7,11 +9,19 @@ import com.wstester.model.Response;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.Step;
+import com.wstester.model.Execution;
+import com.wstester.model.StepStatusType;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class MySQLStepController
 {
@@ -20,12 +30,21 @@ public class MySQLStepController
     @FXML private Label lblSQL;
     @FXML private Label lblStatus;
     @FXML private Label lblResponse;
+    @FXML private TableView<Execution> tblExecutions;
+    @FXML private TableColumn<Execution, String> columnDate;
+    @FXML private TableColumn<Execution, String> columnStatus;
+    @FXML private TableColumn<Execution, String> columnResponse;
     
-    private MySQLStep stp;
-    
+    private MySQLStep step;    
     private TestSuiteService tsService;
     private TestSuiteManagerController tsMainController;
-
+    
+	@FXML
+	private void initialize() 
+	{
+		
+	}
+	
     public void setTestSuiteService( TestSuiteService tsService)
     {
         this.tsService = tsService;
@@ -41,28 +60,6 @@ public class MySQLStepController
         return rootMySQLStep;
     }
 
-//    public void setTxtResponse(){
-//    	TestRunner testRunner = new TestRunner();
-//    	Response response = null;
-//    	
-//    	if(stp!=null){
-//    		
-//    		response = testRunner.getResponse(stp.getID(), 25000L);
-//    	}
-//    	
-//    	if( response != null)
-//    	{
-//    		if( response.isPass())
-//    		{
-//    			lblStatus.setStyle("-fx-background-color: green;");
-//    			lblStatus.setText("");
-//    		}
-//    		else
-//    			lblStatus.setStyle("-fx-background-color: gray;");
-//    		this.lblResponse.setText(response.getContent());
-//    	}
-//    }
-    
     public void setMySQLStep(final String stepUID)
     {
     	lblName.setText("");
@@ -70,9 +67,18 @@ public class MySQLStepController
         lblStatus.setText("Not run");
         lblResponse.setText("Not run");
         
-        stp = (MySQLStep) tsService.getStep( stepUID);
-        lblName.setText(stp.getName());
-        lblSQL.setText(stp.getOperation());
-//        setTxtResponse();
+        step = (MySQLStep) tsService.getStep( stepUID);
+        lblName.setText(step.getName());
+        lblSQL.setText(step.getOperation());
+        Execution execution = step.getLastExecution();
+        if( execution != null)
+        {
+        	if (execution.getStatus() == StepStatusType.PASSED)
+        		lblStatus.setText("PASSED");
+        	//else ....
+        		//FAILED
+        	lblResponse.setText(execution.getResponse().getContent());
+        }
     }
+
 }

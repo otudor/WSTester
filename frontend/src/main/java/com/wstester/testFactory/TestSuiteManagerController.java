@@ -1,19 +1,36 @@
 package com.wstester.testFactory;
 
+import com.wstester.actions.TestRunner;
+import com.wstester.model.TestProject;
+
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventTarget;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
 public class TestSuiteManagerController
 {
     @FXML private Parent root;
     @FXML private BorderPane contentArea;
+    @FXML public static Button btnRun;
 
     private TestSuiteListController tsListController;
     private TestSuiteController testSuiteController;
     private TestCaseController testCaseController;
     private MySQLStepController mysqlStepController;
 
+	@FXML
+	private void initialize() 
+	{
+		//btnRun.addEventHandler(ActionEvent.ANY, new BtnHandler());
+		//btnRun.addEventHandler(MyEvent.CEVA, new MyEventHandler());
+	}
+	
     public void setTestSuiteListController( TestSuiteListController tsListController)
     {
         this.tsListController = tsListController;
@@ -41,7 +58,7 @@ public class TestSuiteManagerController
 
     public void loadTestSuites()
     {
-    	tsListController.search();
+    	tsListController.loadSuites();
     	tsListController.loadTreeItems();
         contentArea.setLeft( tsListController.getView());        
     }
@@ -69,4 +86,21 @@ public class TestSuiteManagerController
     	return tsListController.getFirstEnv();
     }
 
+    public void runTestSuite( ActionEvent event) throws Exception
+    {
+		TestProject testProject = new TestProject();
+		testProject.setTestSuiteList(tsListController.getTestSuiteList());
+		TestRunner testRunner = new TestRunner();
+		testRunner.run(testProject);
+		//testRunner.run();
+		
+		ExecutionUpdate execUpd = new ExecutionUpdate();
+		
+		//btnRun.setText("Running...");
+		//btnRun.setDisable(true);
+		execUpd.updateRunStatus();
+//		btnRun.setDisable(false);
+	}
 }
+
+

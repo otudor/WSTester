@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 @XmlSeeAlso({RestStep.class, MongoStep.class, MySQLStep.class, SoapStep.class})
+
 public abstract class Step implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -19,10 +20,7 @@ public abstract class Step implements Serializable {
 	private List<Assert> assertList;
 	private List<Asset> assetList;
 	private List<Variable> variableList;
-//	pirvate List<Executions> executions;
-//	
-//	Execution: timestamp, status, response
-//	Execution: timestamp, status, response
+	private List<Execution> executionList;
 	private String dependsOn;
 
 	public String getID() {
@@ -86,6 +84,27 @@ public abstract class Step implements Serializable {
 		}
 		
 		this.variableList.add(variable);
+	}
+	
+	public void addExecution(Execution execution){
+		if(this.executionList == null){
+			this.executionList = new ArrayList<Execution>();
+		}
+		
+		this.executionList.add(execution);
+
+	}
+	
+	public Execution getLastExecution()
+	{
+		if(this.executionList != null)
+			return executionList.get( this.executionList.size() - 1);
+		
+		return null;
+	}
+	
+	public List<Execution> getExecutionList() {
+		return executionList;
 	}
 	
 	public String getDependsOn() {
