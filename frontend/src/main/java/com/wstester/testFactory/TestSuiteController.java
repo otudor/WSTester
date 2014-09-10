@@ -11,7 +11,6 @@ import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
-import com.wstester.model.TestUtils;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

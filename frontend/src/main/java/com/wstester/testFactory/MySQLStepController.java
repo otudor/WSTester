@@ -60,6 +60,7 @@ public class MySQLStepController
         return rootMySQLStep;
     }
 
+
     public void setMySQLStep(final String stepUID)
     {
     	lblName.setText("");
