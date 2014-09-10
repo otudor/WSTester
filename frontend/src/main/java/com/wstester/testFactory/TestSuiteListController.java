@@ -26,13 +26,18 @@ import javafx.collections.ObservableList;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
+import org.apache.camel.util.CaseInsensitiveMap;
 import org.hamcrest.core.IsInstanceOf;
 
+import com.wstester.actions.TestRunner;
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
 import com.wstester.model.MySQLStep;
+import com.wstester.model.Response;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.ServiceType;
@@ -47,7 +52,7 @@ public class TestSuiteListController implements Initializable
     //@FXML private TextField searchField;
    // @FXML private ListView<Old> resultsList;
     private ObservableList<TestSuite> tsList;
-    @FXML private TreeView<Object> treeView;
+    @FXML public static TreeView<Object> treeView;
     
     private TestSuiteManagerController tsManagerController;
     private TestSuiteService tsService;
@@ -73,7 +78,8 @@ public class TestSuiteListController implements Initializable
 
     public void search()
     {
-    	tsList = FXCollections.observableList(tsService.loadTestSuites());    
+
+    FXCollections.observableList(tsService.getTestSuites());    
         //load the tree also
         loadTreeItems();
     }
@@ -105,10 +111,10 @@ public class TestSuiteListController implements Initializable
     	TreeItem<Object> root = new TreeItem<Object>("");
     	root.setExpanded(true);
     	
-    	List<TestSuite> envs = (List<TestSuite>) tsService.loadTestSuites();    	
+    	List<TestSuite> envs = (List<TestSuite>) tsService.getTestSuites();    	
     	for (TestSuite env : envs)
     	{
-    		icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_environment.png")));
+    		icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestSuite.png")));
     		TreeItem<Object> envNode = new TreeItem<>(env, icon);    		
     		List<TestCase> tclist = env.getTestCaseList();
     		
@@ -116,7 +122,7 @@ public class TestSuiteListController implements Initializable
     		{
     			for (TestCase tc: tclist)
     			{
-    				icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_server.png")));
+    				icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestCase.png")));
     				TreeItem<Object> tcNode = new TreeItem<>(tc, icon);
     				
     				List<Step> steps = tc.getStepList();    				
@@ -124,7 +130,7 @@ public class TestSuiteListController implements Initializable
 	    				for (Step step: steps)
 	        			{
 	    					if ( step instanceof MySQLStep )
-	    						icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_MySQL_DB.png")));
+	    						icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
 
 	    					TreeItem<Object> stepNode = new TreeItem<>(step, icon);
 	    					tcNode.getChildren().add( stepNode);
@@ -167,7 +173,7 @@ public class TestSuiteListController implements Initializable
     	    	TestCase newTC = tsService.addTestCaseForTestSuite(ts.getID());
     	    	if (newTC != null)
     	    	{
-    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_server.png")));
+    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestCase.png")));
     	    		TreeItem<Object> tcNode = new TreeItem<>(newTC, icon);
     	    		item.getChildren().add( tcNode);
     	    		treeView.getSelectionModel().select( tcNode);
@@ -228,7 +234,7 @@ public class TestSuiteListController implements Initializable
     	    	    	
     	    	    	if (mysqlStep != null)
     	    	    	{
-    	    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_MySQL_DB.png")));
+    	    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
     	    	    		TreeItem<Object> stepNode = new TreeItem<>(mysqlStep, icon);
     	    	    		item.getChildren().add( stepNode);
     	    	    		treeView.getSelectionModel().select( stepNode);
@@ -359,5 +365,5 @@ public class TestSuiteListController implements Initializable
                 }
             });
         }
-    }
+    }   
 }

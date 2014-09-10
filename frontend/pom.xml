@@ -14,7 +14,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<mainClass>com.wstester.MainApp</mainClass>
+		<mainClass>com.wstester.main.WsTesterMain</mainClass>
 		<jfx.version>8.0-r1</jfx.version>
 		<controlsfx.version>8.0.2</controlsfx.version>
 	</properties>
@@ -108,6 +108,29 @@
 					<additionalClasspathElements>
 						<additionalClasspathElement>${java.home}/jre/lib/jfxrt.jar</additionalClasspathElement>
 					</additionalClasspathElements>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>${mainClass}</mainClass>
+						</manifest>
+					</archive>
+					<finalName>Executable JAR</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
 				</configuration>
 			</plugin>
 		</plugins>

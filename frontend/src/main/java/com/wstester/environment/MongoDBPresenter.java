@@ -3,7 +3,11 @@ package com.wstester.environment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
@@ -11,10 +15,20 @@ import com.wstester.model.Server;
 import com.wstester.model.Service;
 public class MongoDBPresenter {
 	@FXML private Node rootMongoDB;
+	@FXML private HBox hbox1;
+	@FXML private GridPane gridpane;
     @FXML private TextField MongoName;
     @FXML private TextField MongoPort;
     @FXML private TextField MongoUser;
     @FXML private TextField MongoPassfield;
+    @FXML private Label labelname;
+    @FXML private Label labeluser;
+    @FXML private Label labelpass;
+    @FXML private Label labelport;
+    @FXML private Button edit;
+    @FXML private Button save;
+    @FXML private Button cancel;
+    
     
     private String uid = null;
     private EnvironmentService envService;
@@ -37,55 +51,99 @@ public class MongoDBPresenter {
     }
     
     public void setMongoDB(final String serverUID, final String serviceUID)
-    {
-    	MongoName.setText("");
-    	MongoPort.setText("");
-    	MongoUser.setText("");
-    	MongoPassfield.setText("");
-        
-        MongoName.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
-    	MongoPort.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
-    	MongoUser.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
-    	MongoPassfield.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
-        
+    {	
+    	//removing FXML childrens to set them
+    	hbox1.getChildren().remove(save);
+    	hbox1.getChildren().remove(cancel);
+    	hbox1.getChildren().remove(edit);
+    	gridpane.getChildren().remove(MongoName);
+    	gridpane.getChildren().remove(MongoPort);
+    	gridpane.getChildren().remove(MongoUser);
+    	gridpane.getChildren().remove(MongoPassfield);
+    	gridpane.getChildren().remove(labelname);
+    	gridpane.getChildren().remove(labeluser);
+    	gridpane.getChildren().remove(labelpass);
+    	gridpane.getChildren().remove(labelport);
+    	//adding the needed childrens
+    	hbox1.getChildren().add(edit);
+    	gridpane.getChildren().add(labelname);
+    	gridpane.getChildren().add(labeluser);
+    	gridpane.getChildren().add(labelpass);
+    	gridpane.getChildren().add(labelport);
+                     
     	Server server = envService.getServerByUID( serverUID);
 		Service service = envService.getServiceByUID( server.getID(), serviceUID );
 		uid = serviceUID;
 		MongoService mng = (MongoService) service;
-		MongoPort.setText( mng.getPort());
-		MongoName.setText( mng.getDbName());
-		MongoUser.setText( mng.getUser());
-		MongoPassfield.setText( mng.getPassword());
+		labelport.setText( mng.getPort());
+		labelname.setText( mng.getDbName());
+		labeluser.setText( mng.getUser());
+		labelpass.setText( mng.getPassword());
+		MongoName.setText(mng.getDbName());
+    	MongoPort.setText(mng.getPort());
+    	MongoUser.setText(mng.getUser());
+    	MongoPassfield.setText(mng.getPassword());
     }
     
     public void seteditable(ActionEvent event)
     {
-    	MongoName.setEditable(true);
-    	MongoPort.setEditable(true);
-    	MongoUser.setEditable(true);
-    	MongoPassfield.setEditable(true);
-    	MongoName.setStyle("-fx-background-color: rgba(255, 255, 255, 0.95);");
-    	MongoPort.setStyle("-fx-background-color: rgba(255, 255, 255, 0.95);");
-    	MongoUser.setStyle("-fx-background-color: rgba(255, 255, 255, 0.95);");
-    	MongoPassfield.setStyle("-fx-background-color: rgba(255, 255, 255, 0.95);");
+    	gridpane.getChildren().add(MongoName);
+    	gridpane.getChildren().add(MongoPort);
+    	gridpane.getChildren().add(MongoUser);
+    	gridpane.getChildren().add(MongoPassfield);
+    	gridpane.getChildren().remove(labelport);
+    	gridpane.getChildren().remove(labelname);
+    	gridpane.getChildren().remove(labeluser);
+    	gridpane.getChildren().remove(labelpass);
+    	
+    	hbox1.getChildren().remove(edit);
+    	
+    	hbox1.getChildren().add(save);
+    	hbox1.getChildren().add(cancel);
     	
     }
     public void setuneditable(ActionEvent event)
     {
-    	MongoName.setEditable(false);
-    	MongoPort.setEditable(false);
-    	MongoUser.setEditable(false);
-    	MongoPassfield.setEditable(false);
-    	MongoName.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
-    	MongoPort.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
-    	MongoUser.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
-    	MongoPassfield.setStyle("-fx-background-color: rgba(200, 200, 200, 1);");
+    	    
     	MongoService mng = new MongoService();
     	mng.setDbName(MongoName.getText());
     	mng.setPassword(MongoPassfield.getText());
     	mng.setUser(MongoUser.getText());
     	mng.setPort(MongoPort.getText());
     	envService.setMongoServiceByUID(mng, uid);
-    	
+    	hbox1.getChildren().add(edit);
+    	hbox1.getChildren().remove(save);
+    	hbox1.getChildren().remove(cancel);
+    	gridpane.getChildren().remove(MongoName);
+    	gridpane.getChildren().remove(MongoPort);
+    	gridpane.getChildren().remove(MongoUser);
+    	gridpane.getChildren().remove(MongoPassfield);
+    	gridpane.getChildren().add(labelport);
+    	gridpane.getChildren().add(labelname);
+    	gridpane.getChildren().add(labeluser);
+    	gridpane.getChildren().add(labelpass);
+    	labelport.setText(MongoPort.getText());
+    	labelname.setText(MongoName.getText());
+    	labeluser.setText(MongoUser.getText());   	
+    	labelpass.setText(MongoPassfield.getText());
+    }
+    
+    public void cancelEdit(ActionEvent event)
+    {
+    	MongoName.setText(labelname.getText());
+    	MongoPort.setText(labelport.getText());
+    	MongoUser.setText(labeluser.getText());
+    	MongoPassfield.setText(labelpass.getText());
+    	hbox1.getChildren().remove(cancel);
+    	hbox1.getChildren().remove(save);
+    	hbox1.getChildren().add(edit);
+    	gridpane.getChildren().remove(MongoName);
+    	gridpane.getChildren().remove(MongoPort);
+    	gridpane.getChildren().remove(MongoUser);
+    	gridpane.getChildren().remove(MongoPassfield);
+    	gridpane.getChildren().add(labelport);
+    	gridpane.getChildren().add(labelname);
+    	gridpane.getChildren().add(labeluser);
+    	gridpane.getChildren().add(labelpass);
     }
 }

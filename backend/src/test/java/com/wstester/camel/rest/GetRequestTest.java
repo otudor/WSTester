@@ -2,6 +2,7 @@ package com.wstester.camel.rest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import java.util.HashMap;
 import org.junit.Test;
 import com.wstester.model.Response;
 import com.wstester.model.RestStep;
@@ -10,14 +11,12 @@ import com.wstester.model.TestUtils;
 
 public class GetRequestTest extends RestTestBaseClass{
 
-	
 	@Test
-	public void multiplePath() throws Exception{
+	public void simplePath() throws Exception{
 			
 		TestProject testProject = TestUtils.getRestTestPlan();
-		testRunner.setTestProject(testProject);
 		
-		testRunner.run();
+		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
@@ -32,16 +31,19 @@ public class GetRequestTest extends RestTestBaseClass{
 		TestProject testProject = TestUtils.getRestTestPlan();
 		RestStep step = (RestStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
 		step.setPath("/customer/searchCustomer");
-		step.setQuery("name=query");
-		testRunner.setTestProject(testProject);
 		
-		testRunner.run();
+		HashMap<String,String> map = new HashMap<String,String>();	
+		map.put("name","Alex");
+		
+		step.setQuery(map);
+		
+		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
 		
 		assertTrue(response.isPass());
-		assertEquals("query", entry);
+		assertEquals("Alex", entry);
 	}
 	
 	@Test
@@ -50,16 +52,19 @@ public class GetRequestTest extends RestTestBaseClass{
 		TestProject testProject = TestUtils.getRestTestPlan();
 		RestStep step = (RestStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
 		step.setPath("/customer/searchWithCookie");
-		step.setCookie("cookie");
-		testRunner.setTestProject(testProject);
 		
-		testRunner.run();
+		HashMap<String,String> map = new HashMap<String,String>();	
+		map.put("name","Vlad");
+		
+		step.setCookie(map);
+		
+		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
 		
 		assertTrue(response.isPass());
-		assertEquals("cookie", entry);
+		assertEquals("Vlad", entry);
 	}
 	
 	@Test
@@ -68,15 +73,46 @@ public class GetRequestTest extends RestTestBaseClass{
 		TestProject testProject = TestUtils.getRestTestPlan();
 		RestStep step = (RestStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
 		step.setPath("/customer/searchWithHeader");	
-		step.setHeader("header");
-		testRunner.setTestProject(testProject);
 		
-		testRunner.run();
+		HashMap<String,String> map = new HashMap<String,String>();	
+		map.put("name","Popa");
+		
+		step.setHeader(map);
+		
+		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
 		
 		assertTrue(response.isPass());
-		assertEquals("header", entry);
+		assertEquals("Popa", entry);
+	}
+	
+	@Test
+	public void multiPath() throws Exception{
+		
+		TestProject testProject = TestUtils.getRestTestPlan();
+		RestStep step = (RestStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
+		step.setPath("/customer/searchWithAll");	
+		
+		HashMap<String,String> mapHeader = new HashMap<String,String>();
+		HashMap<String,String> mapQuery = new HashMap<String,String>();	
+		HashMap<String,String> mapCookie = new HashMap<String,String>();	
+		
+		mapHeader.put("headerName","Popa");
+		mapCookie.put("cookieName","Aladin");
+		mapQuery.put("queryName","Goku");
+		
+		step.setHeader(mapHeader);
+		step.setQuery(mapQuery);
+		step.setCookie(mapCookie);
+		
+		testRunner.run(testProject);
+		
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		String entry =  response.getContent();
+		
+		assertTrue(response.isPass());
+		assertEquals("Goku" + "," + "Aladin" + "," + "Popa", entry);
 	}
 }

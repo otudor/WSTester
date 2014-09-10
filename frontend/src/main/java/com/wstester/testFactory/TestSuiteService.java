@@ -5,8 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.wstester.model.Environment;
 import com.wstester.model.MySQLService;
 import com.wstester.model.MySQLStep;
+import com.wstester.model.Server;
+import com.wstester.model.Service;
 import com.wstester.model.Step;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestSuite;
@@ -21,14 +24,36 @@ public class TestSuiteService
         this.tsList = new HashMap<String, TestSuite>();
 
         TestSuite ts1 = createTestSuite( "Test Suite");
+        ts1.setEnvironment( new Environment("Environment de test"));
         List<TestCase> tcList = new ArrayList<TestCase>();
 		TestCase tc1 = new TestCase();
-		tc1.setName("Test Case 1");
+		tc1.setName("Test Case");
 		List<Step> stpList = new ArrayList<Step>();
+		//step
+		List<Server> srvList = new ArrayList<Server>();
+		Server server = new Server();
+		server.setIp("localhost");
+		List<Service> srviceList = new ArrayList<Service>();
+		MySQLService service = new MySQLService();
+		service.setDbName("test");
+		service.setPort("3306");
+		service.setUser("appuser");
+		service.setPassword("apppass");		
 		MySQLStep mysqlStep = new MySQLStep();
-		mysqlStep.setName("MySQL step name");
-		mysqlStep.setOperation("select * from employee");
+		mysqlStep.setName("MySQL Step");
+		mysqlStep.setServer(server);
+		mysqlStep.setService(service);		
+		mysqlStep.setOperation("select * from Angajati where id='4'");
+		
+		MySQLStep mysqlStep2 = new MySQLStep();
+		mysqlStep2.setName("MySQL Step");
+		mysqlStep2.setServer(server);
+		mysqlStep2.setService(service);		
+		mysqlStep2.setOperation("select * from Angajati where id='2'");
+		mysqlStep2.setDependsOn(mysqlStep.getID());
+		
 		stpList.add(mysqlStep);
+		stpList.add(mysqlStep2);
 		tc1.setStepList(stpList);
 		tcList.add( tc1);
 		ts1.setTestCaseList( tcList);		
@@ -42,7 +67,7 @@ public class TestSuiteService
         return ts;
     }
 
-    public List<TestSuite> loadTestSuites()
+    public List<TestSuite> getTestSuites()
     {
         List<TestSuite> matches = new ArrayList<TestSuite>();
         matches.addAll( tsList.values());

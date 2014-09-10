@@ -8,13 +8,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SoapStep extends Step{
 
 	private static final long serialVersionUID = 1L;
-	private String request;
+	private Object request;
 	
-	public String getRequest() {
+	public Object getRequest() {
 		return request;
 	}
 
-	public void setRequest(String request) {
+	public void setRequest(Object request) {
 		this.request = request;
 	}
 

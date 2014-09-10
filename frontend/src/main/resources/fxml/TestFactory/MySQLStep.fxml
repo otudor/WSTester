@@ -10,9 +10,16 @@
           xmlns:fx="http://javafx.com/fxml">
           
     <children>
-        <Label text="Test Step Name" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtName" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Label text="Step Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Label fx:id="lblName" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
         <Label text="SQL" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtSQL" GridPane.rowIndex = "1" GridPane.columnIndex="1"/>
+        <Label fx:id="lblSQL" GridPane.rowIndex = "1" GridPane.columnIndex="1"/>
+        
+        <Label text="Status:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+        <Label fx:id="lblStatus" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="50"/>
+        
+        <Label text="Response:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <Label fx:id="lblResponse" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        
     </children>
 </GridPane>

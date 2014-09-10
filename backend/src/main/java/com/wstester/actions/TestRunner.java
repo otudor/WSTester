@@ -10,6 +10,8 @@ import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.wstester.dispatcher.ResponseCallback;
@@ -20,14 +22,10 @@ import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
 
 public class TestRunner {
-
+	
 	private TestProject testProject;
 	private AbstractXmlApplicationContext camelContext;
-
-	public TestRunner(){
-		
-		camelContext = new ClassPathXmlApplicationContext("camel/CamelContext.xml");
-	}
+	protected Logger log = LoggerFactory.getLogger(getClass());
 	
 	public TestProject getTestProject() {
 		return testProject;
@@ -37,10 +35,18 @@ public class TestRunner {
 		this.testProject = testProject;
 	}
 	
-	public void run() throws Exception{
+	public void run(TestProject testProject) throws Exception{
 	
 		ExecutorService executor = Executors.newFixedThreadPool(1);
-		executor.execute(new RunThread());
+		executor.execute(new ProjectRunThread(testProject));
+		
+		executor.shutdown();
+	}
+	
+	public void run(TestSuite testSuite) throws Exception{
+		
+		ExecutorService executor = Executors.newFixedThreadPool(1);
+		executor.execute(new ProjectRunThread(testSuite));
 		
 		executor.shutdown();
 	}
@@ -64,12 +70,19 @@ public class TestRunner {
 		return response;
 	}
 	
-	class RunThread implements Runnable{
+	class ProjectRunThread implements Runnable{
+
+		Object entityToRun;
+		
+		public ProjectRunThread(Object entityToRun) {
+			
+			this.entityToRun = entityToRun;
+		}
 
 		@Override
 		public void run() {
 
-			
+			camelContext = new ClassPathXmlApplicationContext("camel/CamelContext.xml");
 			camelContext.start();
 			
 			try {
@@ -91,7 +104,7 @@ public class TestRunner {
 				producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
 				int stepSize = 0;
-				for (TestSuite testSuite : testProject.getTestSuiteList()) {
+				for (TestSuite testSuite : ((TestProject)entityToRun).getTestSuiteList()) {
 					for (TestCase testCase : testSuite.getTestCaseList()) {
 						for (Step testStep : testCase.getStepList()) {
 						
@@ -100,7 +113,8 @@ public class TestRunner {
 					         ObjectMessage message = session.createObjectMessage(testStep);
 					        
 					         // Tell the producer to send the message
-					         System.out.println("Sent message: "+  testStep.getID());	
+					         log.info("Sent message: "+  testStep.getID());	
+					         
 					         producer.send(message);
 						}
 					}
@@ -118,7 +132,7 @@ public class TestRunner {
 				connection.close();
 				camelContext.close();
 			} catch (Exception e){
-				
+				//TODO: auto generated block
 			}
 		}
 	}
@@ -208,4 +222,3 @@ public class TestRunner {
 
 	}
 }
-

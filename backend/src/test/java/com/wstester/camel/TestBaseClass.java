@@ -1,36 +1,46 @@
 package com.wstester.camel;
 
 import java.lang.reflect.Field;
-import org.junit.AfterClass;
-import org.junit.Before;
+import java.util.HashSet;
+
+import org.junit.After;
+import org.junit.BeforeClass;
 import org.springframework.context.support.AbstractXmlApplicationContext;
+
 import com.wstester.actions.TestRunner;
+import com.wstester.dispatcher.ResponseCallback;
+import com.wstester.model.Response;
 
 public class TestBaseClass {
 
 	protected static TestRunner testRunner;
 	static AbstractXmlApplicationContext context;
 	
-	@Before
-	public void before() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, InterruptedException{
-		
-		if(context != null)
-			while(context.isActive()){
-				Thread.sleep(500);
-			}
+	@BeforeClass
+	public static void before() {
 		
 		testRunner = new TestRunner();
+	}
+	
+	@After
+	public void after() throws InterruptedException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
+		
 		Field contextField = testRunner.getClass().getDeclaredField("camelContext");
 		contextField.setAccessible(true);
 		context = (AbstractXmlApplicationContext) contextField.get(testRunner);
-	}
-	
-	@AfterClass
-	public static void after() throws InterruptedException{
 		
-		if(context != null)
+		if(context != null){
 			while(context.isActive()){
 				Thread.sleep(500);
 			}
+		}
+		
+		Field responseListField = ResponseCallback.class.getDeclaredField("responseList");
+		responseListField.setAccessible(true);
+		responseListField.set(null, new HashSet<Response>());
+		
+		Field totalResponsesField = ResponseCallback.class.getDeclaredField("totalResponses");
+		totalResponsesField.setAccessible(true);
+		totalResponsesField.set(null, 0);
 	}
 }

@@ -9,6 +9,7 @@ import com.wstester.model.Response;
 public class ResponseCallback extends RouteBuilder {
 
 	private static HashSet<Response> responseList = new HashSet<Response>();
+	private static int totalResponses = 0;
 	
 	@Override
 	public void configure() throws Exception {
@@ -20,6 +21,7 @@ public class ResponseCallback extends RouteBuilder {
 			public void process(Exchange exchange) throws Exception {
 				System.out.println("ResponseCallback: received: " + exchange.getIn().getBody(Response.class).getStepID());
 				responseList.add(exchange.getIn().getBody(Response.class));
+				totalResponses++;
 			}
 		});
 	}
@@ -28,6 +30,7 @@ public class ResponseCallback extends RouteBuilder {
 		
 		for(Response response : responseList){
 			if(response.getStepID().equals(stepId)){
+				responseList.remove(response);
 				return response;
 			}
 		}
@@ -36,8 +39,7 @@ public class ResponseCallback extends RouteBuilder {
 	
 	public static boolean allResponsesReceived(int size){
 		
-		if(responseList.size() == size) {
-			responseList.removeAll(responseList);
+		if(totalResponses == size) {
 			return true;
 		}
 		

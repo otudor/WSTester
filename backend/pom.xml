@@ -4,6 +4,7 @@
 
 	<artifactId>backend</artifactId>
 	<name>backend</name>
+	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>com.wstester</groupId>
@@ -16,7 +17,7 @@
 		<junit.version>4.11</junit.version>
 		<mysql.version>5.1.31</mysql.version>
 		<wsdl.name>info.wsdl</wsdl.name>
-		<camel-core.version>2.12.2</camel-core.version>
+		<camel-core.version>2.13.2</camel-core.version>
 		<activemq.version>5.9.0</activemq.version>
 		<xbean-spring.version>3.14</xbean-spring.version>
 		<swagger4j.version>1.0-beta4</swagger4j.version>
@@ -25,11 +26,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-json</artifactId>
-			<version>${jersey.version}</version>
-		</dependency>
 		<!-- dependencies for camel -->
 		<dependency>
 			<groupId>org.apache.camel</groupId>
@@ -116,6 +112,12 @@
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-server</artifactId>
+			<version>${jersey.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
 			<version>${jersey.version}</version>
 			<scope>test</scope>
 		</dependency>
