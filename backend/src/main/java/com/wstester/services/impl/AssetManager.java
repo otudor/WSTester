@@ -1,4 +1,4 @@
-package com.wstester.asset;
+package com.wstester.services.impl;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,15 +16,18 @@ import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.wstester.model.Asset;
+import com.wstester.services.definition.IAssetManager;
 
-public class AssetManager {
+public class AssetManager implements IAssetManager {
 
 	private AbstractXmlApplicationContext camelContext;
 	
-	public AssetManager(){
-		
-	}
-	
+	/**
+	 * <br><br>
+	 * Method responsible to create a new Asset entity through JMS(Async) mechanism
+	 * </br>
+	 * @param the asset
+	 */
 	public void addAsset(Asset asset){
 		
 		try{
@@ -61,6 +64,11 @@ public class AssetManager {
 		}
 	}
 	
+	@Override
+	public void saveAsset(Asset asset) {
+		
+	}
+	
 	public String getAssetContent(Asset asset) {
 		
 		String content = null;
@@ -75,7 +83,27 @@ public class AssetManager {
 		return content;
 	}
 	
+	public void waitUntilFileCopied(Asset asset){
+		
+		while(!Files.isReadable(Paths.get("assets/" + asset.getName() + ".done"))){
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		try {
+			Files.delete(Paths.get("assets/" + asset.getName() + ".done"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void close(){
 		camelContext.close();
 	}
+
 }

@@ -1,10 +1,13 @@
 package com.wstester.testFactory;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javafx.event.Event;
+import javafx.scene.control.Button;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
@@ -12,6 +15,8 @@ import com.wstester.actions.TestRunner;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
+import com.wstester.model.Execution;
+import com.wstester.model.StepStatusType;
 
 public class ExecutionUpdate {
 
@@ -54,7 +59,14 @@ class UpdateStatusThread implements Runnable{
     						{
     							TestRunner testRunner = new TestRunner();
     							Response rsp = testRunner.getResponse(step.getID(), 25000L);
-    							step.setName( step.getName() + ": Passed");
+    							//step.setName( step.getName());
+    							
+    							Execution execution = new Execution();
+    							Date date= new Date();
+    							execution.setRunDate( new Date()/*new Timestamp(date.getTime())*/);
+    							execution.setStatus( StepStatusType.PASSED);
+    							execution.setResponse( rsp);
+    							step.addExecution( execution);
     							
     							Step updatedStep = new MySQLStep();
     							updatedStep.setName("");
@@ -66,5 +78,10 @@ class UpdateStatusThread implements Runnable{
     			}
     		}
     	}
+    	
+    	//re enable the button
+    	//TestSuiteManagerController.btnRun.setDisable(false);
+    	//Event.fireEvent( TestSuiteManagerController.btnRun, new MyEvent());
+    	//TestSuiteManagerController.btnRun.fireEvent( new );
 	}
 }

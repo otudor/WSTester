@@ -1,5 +1,6 @@
 package com.wstester.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -7,8 +8,9 @@ import java.util.UUID;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class TestCase {
+public class TestCase implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private List<Step> stepList;
 	private List<Variable> variableList;

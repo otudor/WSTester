@@ -27,7 +27,7 @@ public class TestSuiteController
 	@FXML private Node rootEnvDetails;
 	@FXML private TextField tsName;
 	@FXML private TextField txtEnvName;
-	@FXML private Button btnRun;
+	//@FXML private Button btnRun;
 	
 	private TestSuiteService tsService;
 	
@@ -61,9 +61,9 @@ public class TestSuiteController
 		TestProject testProject = new TestProject();
 		testProject.setTestSuiteList(tsService.getTestSuites());
 		TestRunner testRunner = new TestRunner();
-		testRunner.setTestProject(testProject);
+//		testRunner.setTestProject(testProject);
 		
-		testRunner.run();
+//		testRunner.run();
 		
 		//TestSuiteListController.updateRunStatus();
 		

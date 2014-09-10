@@ -1,4 +1,4 @@
-package com.wstester.dispatcher;
+package com.wstester.dispatcher.mongo;
 
 import java.net.UnknownHostException;
 

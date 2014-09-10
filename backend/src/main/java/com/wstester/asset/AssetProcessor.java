@@ -4,6 +4,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 
 import com.wstester.model.Step;
+import com.wstester.services.impl.AssetManager;
 
 public class AssetProcessor implements Processor{
 

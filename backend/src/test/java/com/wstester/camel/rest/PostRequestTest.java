@@ -20,8 +20,7 @@ public class PostRequestTest extends RestTestBaseClass {
 		step.setMethod("POST");
 		step.setRequest("Inovation");
 		
-		testRunner.setTestProject(testProject);
-		testRunner.run();
+		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
@@ -29,8 +28,6 @@ public class PostRequestTest extends RestTestBaseClass {
 		assertTrue(response.isPass());
 		assertEquals("Inovation", entry);
 	}
-	
-	//TODO: De verificat si implementat corect testul de JSON
 	
 	@Test
 	public void postWithJson() throws Exception{
@@ -46,8 +43,7 @@ public class PostRequestTest extends RestTestBaseClass {
 		
 		step.setRequest(name.toString());
 		
-		testRunner.setTestProject(testProject);
-		testRunner.run();
+		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();

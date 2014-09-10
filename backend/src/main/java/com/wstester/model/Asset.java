@@ -14,6 +14,7 @@ public class Asset implements Serializable {
 	private String name;
 	private String path;
 	private String type;
+	private long size;
 
 	public Asset() {
 		uuid = UUID.randomUUID().toString();
@@ -55,6 +56,26 @@ public class Asset implements Serializable {
 		this.type = type;
 	}
 
+	public long getSize() {
+		return size;
+	}
+
+	public void setSize(long size) {
+		this.size = size;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (lastmodified ^ (lastmodified >>> 32));
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((path == null) ? 0 : path.hashCode());
+		result = prime * result + (int) (size ^ (size >>> 32));
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -75,6 +96,8 @@ public class Asset implements Serializable {
 			if (other.path != null)
 				return false;
 		} else if (!path.equals(other.path))
+			return false;
+		if (size != other.size)
 			return false;
 		if (type == null) {
 			if (other.type != null)
