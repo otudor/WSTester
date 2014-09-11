@@ -99,7 +99,12 @@ public class EditController  {
 		butonSave.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				saveFile();
+				try {
+					saveFile();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -238,7 +243,7 @@ public class EditController  {
 		}
 	}
 
-	private void saveFile() {
+	/*private void saveFile() {
 		//TODO: move this code in AssetManager
 		//TODO: disable save button
 		Task<Void> task = new Task<Void>() {
@@ -272,16 +277,42 @@ public class EditController  {
 			
 		};
 		
-		ProgressBar bar = new ProgressBar();
-		bar.progressProperty().bind(task.progressProperty());
-		new Thread(task).start();
+		//ProgressBar bar = new ProgressBar();                            //progress bar ideea 
+		//bar.progressProperty().bind(task.progressProperty());
+		//new Thread(task).start();
 		//TODO: butonSave enable
-	}
+	}       */
 
 //	public void shutDown() {
 	//	if(process != null) {
 	//		process.destroy();
 	//	}
 	//}
+	
+	
+	private void saveFile() throws IOException {
+		
+		
+		FileChooser fileChooser = new FileChooser();
+
+		//Set extension filter
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.xml)", "*.xml");
+		fileChooser.getExtensionFilters().add(extFilter);
+
+		//Show save file dialog
+
+
+		File file = fileChooser.showSaveDialog(stageEditor);
+		if(file != null){
+			FileWriter fileWriter = null;
+			
+				fileWriter = new FileWriter(file);
+				fileWriter.write(textarea.getText());
+				fileWriter.close();
+
+		
+		}
+	}
+	
 
 }
