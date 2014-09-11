@@ -40,7 +40,7 @@ import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 import com.wstester.main.WsTesterMain;
 import com.wstester.util.MainWindowListener;
 
-public class EditController implements MainWindowListener {
+public class EditController  {
 	
 	
 	
@@ -58,9 +58,9 @@ public class EditController implements MainWindowListener {
 	@FXML
 	private Stage stageEditor;
 	
-	private ProcessBuilder processBuilder;
+//	private ProcessBuilder processBuilder;
 	
-	private Process process;
+//	private Process process;
 
 	//@FXML
 	//private void initialize() {
@@ -103,7 +103,7 @@ public class EditController implements MainWindowListener {
 			}
 		});
 		
-		WsTesterMain.registerListener(this);
+		//WsTesterMain.registerListener(this);
 	}
 	
 	private String readFile(File file){
@@ -215,27 +215,27 @@ public class EditController implements MainWindowListener {
 	
 
 	private void handleLoad() throws IOException {
-		String editorPath = System.getProperty("editor.path");
+		//String editorPath = System.getProperty("editor.path");
 //		processBuilder = new ProcessBuilder(editorPath);
 //		process = processBuilder.start();
 		
-		Runtime runtime = Runtime.getRuntime();
-		process = runtime.exec(editorPath + " " + "C:\\Users\\gvasile\\Desktop\\mydocument.xml");
+		//Runtime runtime = Runtime.getRuntime();
+		//process = runtime.exec(editorPath + " " + "C:\\Users\\gvasile\\Desktop\\mydocument.xml");
 		
-//		FileChooser fileChooser = new FileChooser();
-//
-//		//Set extension filter
-//		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.xml)", "*.xml");
-//		fileChooser.getExtensionFilters().add(extFilter);
-//
-//		//Show save file dialog
-//
-//
-//		File file = fileChooser.showOpenDialog(stageEditor);
-//		if(file != null){
-//
-//			textarea.setText(readFile(file));
-//		}
+		FileChooser fileChooser = new FileChooser();
+
+		//Set extension filter
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.xml)", "*.xml");
+		fileChooser.getExtensionFilters().add(extFilter);
+
+		//Show save file dialog
+
+
+		File file = fileChooser.showOpenDialog(stageEditor);
+		if(file != null){
+
+		textarea.setText(readFile(file));
+		}
 	}
 
 	private void saveFile() {
@@ -278,10 +278,10 @@ public class EditController implements MainWindowListener {
 		//TODO: butonSave enable
 	}
 
-	public void shutDown() {
-		if(process != null) {
-			process.destroy();
-		}
-	}
+//	public void shutDown() {
+	//	if(process != null) {
+	//		process.destroy();
+	//	}
+	//}
 
 }
