@@ -63,7 +63,7 @@ class UpdateStatusThread implements Runnable{
     						Step step = (Step)stepItem.getValue();
     						if( step instanceof MySQLStep)
     						{
-    							TestRunner testRunner = new TestRunner();
+    							TestRunner testRunner = new TestRunner(null);
     							Response rsp = testRunner.getResponse(step.getID(), 25000L);
     							//step.setName( step.getName());
     							

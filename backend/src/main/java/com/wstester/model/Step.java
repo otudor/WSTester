@@ -20,7 +20,7 @@ public abstract class Step implements Serializable {
 	private List<Assert> assertList;
 	private List<Asset> assetList;
 	private List<Variable> variableList;
-	//private List<Execution> executionList;
+	private List<Execution> executionList;
 	private String dependsOn;
 
 	public String getID() {
@@ -70,6 +70,10 @@ public abstract class Step implements Serializable {
 		return variableList;
 	}
 
+	public void setVariableList(List<Variable> variableList) {
+		this.variableList = variableList;
+	}
+	
 	public void addVariableList(List<Variable> variableList){
 		if(this.variableList == null){
 			this.variableList = new ArrayList<Variable>();
@@ -86,26 +90,30 @@ public abstract class Step implements Serializable {
 		this.variableList.add(variable);
 	}
 	
-//	public void addExecution(Execution execution){
-//		if(this.executionList == null){
-//			this.executionList = new ArrayList<Execution>();
-//		}
-//		
-//		this.executionList.add(execution);
-//
-//	}
-//	
-//	public Execution getLastExecution()
-//	{
-//		if(this.executionList != null)
-//			return executionList.get( this.executionList.size() - 1);
-//		
-//		return null;
-//	}
-//	
-//	public List<Execution> getExecutionList() {
-//		return executionList;
-//	}
+	public List<Execution> getExecutionList() {
+		return executionList;
+	}
+	
+	public void setExecutionList(List<Execution> executionList){
+		this.executionList = executionList;
+	}
+	
+	public void addExecution(Execution execution){
+		if(this.executionList == null){
+			this.executionList = new ArrayList<Execution>();
+		}
+		
+		this.executionList.add(execution);
+
+	}
+	
+	public Execution getLastExecution()
+	{
+		if(this.executionList != null)
+			return executionList.get( this.executionList.size() - 1);
+		
+		return null;
+	}
 	
 	public String getDependsOn() {
 		return dependsOn;
@@ -118,17 +126,14 @@ public abstract class Step implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((assertList == null) ? 0 : assertList.hashCode());
-		result = prime * result
-				+ ((assetList == null) ? 0 : assetList.hashCode());
-		result = prime * result
-				+ ((dependsOn == null) ? 0 : dependsOn.hashCode());
+		result = prime * result + ((assertList == null) ? 0 : assertList.hashCode());
+		result = prime * result + ((assetList == null) ? 0 : assetList.hashCode());
+		result = prime * result + ((dependsOn == null) ? 0 : dependsOn.hashCode());
+		result = prime * result + ((executionList == null) ? 0 : executionList.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((server == null) ? 0 : server.hashCode());
 		result = prime * result + ((service == null) ? 0 : service.hashCode());
-		result = prime * result
-				+ ((variableList == null) ? 0 : variableList.hashCode());
+		result = prime * result + ((variableList == null) ? 0 : variableList.hashCode());
 		return result;
 	}
 	
@@ -156,6 +161,11 @@ public abstract class Step implements Serializable {
 				return false;
 		} else if (!dependsOn.equals(other.dependsOn))
 			return false;
+		if (executionList == null) {
+			if (other.executionList != null)
+				return false;
+		} else if (!executionList.equals(other.executionList))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -177,5 +187,5 @@ public abstract class Step implements Serializable {
 		} else if (!variableList.equals(other.variableList))
 			return false;
 		return true;
-	}	
+	}
 }

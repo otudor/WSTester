@@ -59,7 +59,7 @@ public class TestSuiteController
     	//tsService.getFirstTestSuite();
 		TestProject testProject = new TestProject();
 		testProject.setTestSuiteList(tsService.getTestSuites());
-		TestRunner testRunner = new TestRunner();
+		TestRunner testRunner = new TestRunner(testProject);
 //		testRunner.setTestProject(testProject);
 		
 //		testRunner.run();
