@@ -20,7 +20,7 @@ public abstract class Step implements Serializable {
 	private List<Assert> assertList;
 	private List<Asset> assetList;
 	private List<Variable> variableList;
-	private List<Execution> executionList;
+	//private List<Execution> executionList;
 	private String dependsOn;
 
 	public String getID() {
@@ -86,26 +86,26 @@ public abstract class Step implements Serializable {
 		this.variableList.add(variable);
 	}
 	
-	public void addExecution(Execution execution){
-		if(this.executionList == null){
-			this.executionList = new ArrayList<Execution>();
-		}
-		
-		this.executionList.add(execution);
-
-	}
-	
-	public Execution getLastExecution()
-	{
-		if(this.executionList != null)
-			return executionList.get( this.executionList.size() - 1);
-		
-		return null;
-	}
-	
-	public List<Execution> getExecutionList() {
-		return executionList;
-	}
+//	public void addExecution(Execution execution){
+//		if(this.executionList == null){
+//			this.executionList = new ArrayList<Execution>();
+//		}
+//		
+//		this.executionList.add(execution);
+//
+//	}
+//	
+//	public Execution getLastExecution()
+//	{
+//		if(this.executionList != null)
+//			return executionList.get( this.executionList.size() - 1);
+//		
+//		return null;
+//	}
+//	
+//	public List<Execution> getExecutionList() {
+//		return executionList;
+//	}
 	
 	public String getDependsOn() {
 		return dependsOn;

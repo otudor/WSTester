@@ -20,6 +20,7 @@ import com.wstester.model.Step;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
+import com.wstester.model.Variable;
 
 public class TestRunner {
 	
@@ -96,39 +97,9 @@ public class TestRunner {
 				// Create a Session
 				Session session = connection.createSession(false,Session.AUTO_ACKNOWLEDGE);
 
-				// Create the destination (Topic or Queue)
-				Destination destination = session.createQueue("startQueue");
-
-				// Create a MessageProducer from the Session to the Topic or Queue
-				MessageProducer producer = session.createProducer(destination);
-				producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-
-				int stepSize = 0;
-				for (TestSuite testSuite : ((TestProject)entityToRun).getTestSuiteList()) {
-					for (TestCase testCase : testSuite.getTestCaseList()) {
-						for (Step testStep : testCase.getStepList()) {
-						
-							stepSize++;
-							 // Create a messages
-					         ObjectMessage message = session.createObjectMessage(testStep);
-					        
-					         // Tell the producer to send the message
-					         log.info("[" + testStep.getID() +  "] Sent message: = {}"+  testStep.getID());	
-					         log.debug("Aici este debuging\n\n");
-					         log.error("aici sunt erorile");
-					         log.warn("Aici este warn");
-					         producer.send(message);
-						}
-					}
-				}
-
-				//TODO: change timeout to configuration file
-				Long timeout = 10000L;
-				while(!ResponseCallback.allResponsesReceived(stepSize) && ((timeout-=1000) > 0)){
-					Thread.sleep(1000);
-				}
 				manageVariable(session);
 				runSteps(session);
+				
 				// Clean up
 				session.close();
 				connection.close();
@@ -139,6 +110,8 @@ public class TestRunner {
 		}
 	}
 	private int runSteps (Session session  ) throws JMSException, InterruptedException{
+		
+		
 		
 		// Create the destination (Topic or Queue)
 		Destination destination = session.createQueue("startQueue");
@@ -171,7 +144,7 @@ public class TestRunner {
 		return stepSize;
 
 	}
-	private int manageVariable (Session session  ) throws JMSException, InterruptedException{
+	private int manageVariable (Session session  ) throws JMSException, InterruptedException {
 		
 		// Create the destination (Topic or Queue)
 		Destination destination = session.createQueue("variableQueue");
@@ -180,46 +153,50 @@ public class TestRunner {
 		MessageProducer producer = session.createProducer(destination);
 		producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 		
-		for (int i = 0 ; i < testProject.getVariableList().size() ; i++){
-		
-			ObjectMessage messageProject = session.createObjectMessage(testProject.getVariableList().get(i));
+		int variableSize = 0;
+	
+		for (Variable variable : testProject.getVariableList()){
+			
+			ObjectMessage messageProject = session.createObjectMessage(variable);
+			System.out.println("for each" +variable);
 			producer.send(messageProject);
+			variableSize++;
 		
 		}
-		int variableSize = 0;
 			for (TestSuite testSuite : testProject.getTestSuiteList()) {
-				 for (int i = 0 ; i < testSuite.getVariableList().size() ; i++){
+				 for (Variable variable : testSuite.getVariableList()){
 				
-				ObjectMessage messageSuite = session.createObjectMessage(testSuite.getVariableList().get(i));
+				ObjectMessage messageSuite = session.createObjectMessage(variable);
 				producer.send(messageSuite);
-				 
+				variableSize++;
 				 }
 				for (TestCase testCase : testSuite.getTestCaseList()) {
-					 for (int i = 0 ; i < testCase.getVariableList().size() ; i++){
+					 for (Variable variable : testCase.getVariableList()){
 					 
-						 ObjectMessage messageCase = session.createObjectMessage(testCase.getVariableList().get(i));
+						 ObjectMessage messageCase = session.createObjectMessage(variable);
 						 producer.send(messageCase);
-					 
+						 variableSize++;
 					 }
 					 
 					 for (Step testStep : testCase.getStepList()) {
-						 variableSize ++;
-					   for (int i = 0 ; i < testStep.getVariableList().size() ; i++){
+						
+					   for (Variable variable : testStep.getVariableList()){
 						
 						 // Create a messages
-				         ObjectMessage message = session.createObjectMessage(testStep.getVariableList().get(i));
-				         
+				         ObjectMessage message = session.createObjectMessage(variable);
 				         producer.send(message);
+				         variableSize ++;
 					   }
 					}
 				}
 			}
-
+			
 			Long timeout = 10000L;
 			while(!ResponseCallback.allResponsesReceived(variableSize) && (timeout-=1000) > 0){
 				Thread.sleep(1000);
 			
 			}		
+			
 		return variableSize;
 
 	}
