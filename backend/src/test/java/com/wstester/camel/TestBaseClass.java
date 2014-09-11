@@ -6,9 +6,9 @@ import java.util.HashSet;
 import org.junit.After;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 
-import com.wstester.actions.TestRunner;
 import com.wstester.dispatcher.ResponseCallback;
 import com.wstester.model.Response;
+import com.wstester.services.impl.TestRunner;
 
 public class TestBaseClass {
 

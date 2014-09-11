@@ -9,12 +9,12 @@ import javafx.event.Event;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
-import com.wstester.actions.TestRunner;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 import com.wstester.model.Execution;
 import com.wstester.model.StepStatusType;
+import com.wstester.services.impl.TestRunner;
 
 public class ExecutionUpdate {
 

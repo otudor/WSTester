@@ -1,4 +1,4 @@
-package com.wstester.actions;
+package com.wstester.services.impl;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,9 +25,10 @@ import com.wstester.model.TestCase;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
 import com.wstester.model.Variable;
-import com.wstester.variableManage.VariableManager;
+import com.wstester.services.definition.ITestRunner;
+import com.wstester.variables.VariableManager;
 
-public class TestRunner {
+public class TestRunner implements ITestRunner{
 	
 	private AbstractXmlApplicationContext camelContext;
 	private TestProject testProject;
@@ -38,6 +39,7 @@ public class TestRunner {
 		this.testProject = testProject;
 	}
 	
+	@Override
 	public void run(TestProject testProject) throws Exception{
 	
 		ExecutorService executor = Executors.newFixedThreadPool(1);
@@ -46,6 +48,7 @@ public class TestRunner {
 		executor.shutdown();
 	}
 	
+	@Override
 	public void run(TestSuite testSuite) throws Exception{
 		
 		ExecutorService executor = Executors.newFixedThreadPool(1);
@@ -54,6 +57,7 @@ public class TestRunner {
 		executor.shutdown();
 	}
 	
+	@Override
 	public void run(TestCase testCase) throws Exception{
 		
 		ExecutorService executor = Executors.newFixedThreadPool(1);
@@ -62,6 +66,7 @@ public class TestRunner {
 		executor.shutdown();
 	}
 
+	@Override
 	public void run(Step testStep) throws Exception{
 		
 		ExecutorService executor = Executors.newFixedThreadPool(1);
@@ -70,6 +75,7 @@ public class TestRunner {
 		executor.shutdown();
 	}
 	
+	@Override
 	public Response getResponse(String stepId, Long timeout){
 	
 		System.out.println("Gettting response for: " + stepId);

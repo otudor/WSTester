@@ -2,7 +2,6 @@ package com.wstester.testFactory;
 import java.util.List;
 
 import com.sun.prism.paint.Color;
-import com.wstester.actions.TestRunner;
 import com.wstester.model.MongoService;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
@@ -11,6 +10,7 @@ import com.wstester.model.Service;
 import com.wstester.model.Step;
 import com.wstester.model.Execution;
 import com.wstester.model.StepStatusType;
+import com.wstester.services.impl.TestRunner;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;

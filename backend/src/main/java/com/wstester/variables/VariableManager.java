@@ -26,4 +26,10 @@ public abstract class VariableManager extends RouteBuilder {
 		});
 		
 	}
+	
+	public static boolean allVariablesReceived(int variableSize) {
+		
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

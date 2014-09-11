@@ -36,7 +36,6 @@ import java.util.concurrent.Executors;
 import org.apache.camel.util.CaseInsensitiveMap;
 import org.hamcrest.core.IsInstanceOf;
 
-import com.wstester.actions.TestRunner;
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
@@ -51,6 +50,7 @@ import com.wstester.model.Execution;
 import com.wstester.model.StepStatusType;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestSuite;
+import com.wstester.services.impl.TestRunner;
 
 public class TestSuiteListController implements Initializable
 {

@@ -5,12 +5,13 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import com.wstester.actions.TestRunner;
+
 import com.wstester.model.Environment;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
+import com.wstester.services.impl.TestRunner;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

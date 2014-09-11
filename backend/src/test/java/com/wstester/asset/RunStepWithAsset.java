@@ -7,7 +7,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Test;
 
 import com.wstester.camel.rest.RestTestBaseClass;
@@ -49,10 +48,6 @@ public class RunStepWithAsset extends RestTestBaseClass{
 		
 		assertTrue(response.isPass());
 		assertEquals("Harap Alb", entry);
-	}
-	
-	@After
-	public void after(){
 		
 		File file = new File("assets/AssetFile.xml");
 		file.delete();

@@ -73,25 +73,13 @@
 			<artifactId>xbean-spring</artifactId>
 			<version>${xbean-spring.version}</version>
 		</dependency>
-		<!-- end of dependencies for camel -->
-		<!-- dependencies for swagger4j -->
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.json</artifactId>
-			<version>${javax.json.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.smartbear</groupId>
-			<artifactId>swagger4j</artifactId>
-			<version>${swagger4j.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j-log4j12.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- end of dependencies for swagger4j -->
+		<!-- end of dependencies for camel -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -122,12 +110,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<repositories>
-		<repository>
-			<id>soapUI Repository</id>
-			<url>http://www.soapui.org/repository/maven2</url>
-		</repository>
-	</repositories>
 </project>
 

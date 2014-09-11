@@ -7,11 +7,11 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
-import com.wstester.actions.TestRunner;
 import com.wstester.model.Response;
 import com.wstester.model.RestStep;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
+import com.wstester.services.impl.TestRunner;
 
 public class GetRequestTest extends RestTestBaseClass{
 

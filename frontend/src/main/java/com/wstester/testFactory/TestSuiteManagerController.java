@@ -1,7 +1,7 @@
 package com.wstester.testFactory;
 
-import com.wstester.actions.TestRunner;
 import com.wstester.model.TestProject;
+import com.wstester.services.impl.TestRunner;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;

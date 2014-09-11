@@ -13,6 +13,7 @@ import com.wstester.model.TestCase;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
 import com.wstester.model.TestUtils;
+import com.wstester.services.impl.TestRunner;
 
 public class TestRunnerTest extends RestTestBaseClass{
 

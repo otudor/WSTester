@@ -28,6 +28,7 @@ public class AssetManager implements IAssetManager {
 	 * </br>
 	 * @param the asset
 	 */
+	@Override
 	public void addAsset(Asset asset){
 		
 		try{
@@ -69,6 +70,7 @@ public class AssetManager implements IAssetManager {
 		
 	}
 	
+	@Override
 	public String getAssetContent(Asset asset) {
 		
 		String content = null;
