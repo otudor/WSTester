@@ -8,6 +8,7 @@ import java.util.HashMap;
 import org.codehaus.jettison.json.JSONArray;
 import org.junit.Test;
 
+import com.wstester.actions.TestRunner;
 import com.wstester.camel.TestBaseClass;
 import com.wstester.model.MongoStep;
 import com.wstester.model.Response;
@@ -20,6 +21,7 @@ public class SelectTest extends TestBaseClass{
 	public void selectOneRow() throws Exception{
 		
 		TestProject testProject = TestUtils.getMongoTestPlan();
+		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 		
@@ -41,6 +43,7 @@ public class SelectTest extends TestBaseClass{
 		String key = "name";
 		query.put(key, name);
 		step.setQuery(query);
+		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 		

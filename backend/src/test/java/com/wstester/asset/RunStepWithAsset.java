@@ -19,7 +19,7 @@ import com.wstester.services.impl.AssetManager;
 public class RunStepWithAsset extends RestTestBaseClass{
 
 	@Test
-	public void test() throws Exception{
+	public void runStep() throws Exception{
 			
 		AssetManager assetManager = new AssetManager();
 

@@ -1,7 +1,10 @@
 package com.wstester.camel.mysql;
 
 import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
+
+import com.wstester.actions.TestRunner;
 import com.wstester.camel.TestBaseClass;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
@@ -15,7 +18,8 @@ public class InsertTest extends TestBaseClass{
 
 		TestProject testProject = TestUtils.getMySQLTestPlan();
 		MySQLStep step = (MySQLStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
-		step.setOperation("INSERT INTO test.nume(detalii) VALUES('Another gicu')");
+		step.setOperation("INSERT INTO nume(detalii) VALUES('Another gicu')");
+		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 

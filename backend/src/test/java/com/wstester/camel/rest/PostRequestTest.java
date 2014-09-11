@@ -2,8 +2,11 @@ package com.wstester.camel.rest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
+
+import com.wstester.actions.TestRunner;
 import com.wstester.model.Response;
 import com.wstester.model.RestStep;
 import com.wstester.model.TestProject;
@@ -19,6 +22,7 @@ public class PostRequestTest extends RestTestBaseClass {
 		step.setPath("/customer/insertCustomer");
 		step.setMethod("POST");
 		step.setRequest("Inovation");
+		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 		
@@ -42,6 +46,7 @@ public class PostRequestTest extends RestTestBaseClass {
 		name.put("name", "Crix");
 		
 		step.setRequest(name.toString());
+		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 		

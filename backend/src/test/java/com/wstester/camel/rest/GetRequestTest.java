@@ -2,8 +2,12 @@ package com.wstester.camel.rest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 import java.util.HashMap;
+
 import org.junit.Test;
+
+import com.wstester.actions.TestRunner;
 import com.wstester.model.Response;
 import com.wstester.model.RestStep;
 import com.wstester.model.TestProject;
@@ -15,6 +19,7 @@ public class GetRequestTest extends RestTestBaseClass{
 	public void simplePath() throws Exception{
 			
 		TestProject testProject = TestUtils.getRestTestPlan();
+		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 		
@@ -36,6 +41,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		map.put("name","Alex");
 		
 		step.setQuery(map);
+		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 		
@@ -57,6 +63,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		map.put("name","Vlad");
 		
 		step.setCookie(map);
+		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 		
@@ -78,6 +85,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		map.put("name","Popa");
 		
 		step.setHeader(map);
+		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 		
@@ -106,6 +114,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		step.setHeader(mapHeader);
 		step.setQuery(mapQuery);
 		step.setCookie(mapCookie);
+		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 		

@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.util.HashSet;
 
 import org.junit.After;
-import org.junit.BeforeClass;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 
 import com.wstester.actions.TestRunner;
@@ -15,12 +14,6 @@ public class TestBaseClass {
 
 	protected static TestRunner testRunner;
 	static AbstractXmlApplicationContext context;
-	
-	@BeforeClass
-	public static void before() {
-		
-		testRunner = new TestRunner();
-	}
 	
 	@After
 	public void after() throws InterruptedException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{

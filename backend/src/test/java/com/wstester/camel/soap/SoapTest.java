@@ -1,7 +1,10 @@
 package com.wstester.camel.soap;
 
 import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
+
+import com.wstester.actions.TestRunner;
 import com.wstester.camel.TestBaseClass;
 import com.wstester.model.Response;
 import com.wstester.model.TestProject;
@@ -13,6 +16,7 @@ public class SoapTest extends TestBaseClass{
 	public void test() throws Exception{
 
 		TestProject testProject = TestUtils.getSOAPTestPlan();
+		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 		

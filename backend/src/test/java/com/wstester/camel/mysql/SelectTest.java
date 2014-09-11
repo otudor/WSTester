@@ -2,8 +2,11 @@ package com.wstester.camel.mysql;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 import org.codehaus.jettison.json.JSONArray;
 import org.junit.Test;
+
+import com.wstester.actions.TestRunner;
 import com.wstester.camel.TestBaseClass;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
@@ -17,8 +20,9 @@ public class SelectTest extends TestBaseClass{
 
 		TestProject testProject = TestUtils.getMySQLTestPlan();
 		MySQLStep step = (MySQLStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
-		step.setOperation("SELECT * FROM test");
-
+		step.setOperation("SELECT * FROM Angajati");
+		testRunner = new TestRunner(testProject);
+		
 		testRunner.run(testProject);
 
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);

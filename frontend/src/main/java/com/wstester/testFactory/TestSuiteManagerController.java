@@ -90,7 +90,7 @@ public class TestSuiteManagerController
     {
 		TestProject testProject = new TestProject();
 		testProject.setTestSuiteList(tsListController.getTestSuiteList());
-		TestRunner testRunner = new TestRunner();
+		TestRunner testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);
 		//testRunner.run();
 		
