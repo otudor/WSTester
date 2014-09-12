@@ -10,15 +10,12 @@ import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
-
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.wstester.dispatcher.ResponseCallback;
 import com.wstester.exceptions.WsException;
+import com.wstester.logs.MyLogger;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 import com.wstester.model.TestCase;
@@ -32,7 +29,7 @@ public class TestRunner implements ITestRunner{
 	
 	private AbstractXmlApplicationContext camelContext;
 	private TestProject testProject;
-	protected Logger log = LoggerFactory.getLogger(getClass());
+	protected MyLogger mylog = new MyLogger("Logger");
 	
 	public TestRunner(TestProject testProject){
 		
@@ -78,7 +75,7 @@ public class TestRunner implements ITestRunner{
 	@Override
 	public Response getResponse(String stepId, Long timeout){
 	
-		System.out.println("Gettting response for: " + stepId);
+		mylog.info("Gettting response for: ",  stepId);
 		
 		Response response = ResponseCallback.getResponse(stepId);
 		
@@ -229,7 +226,7 @@ public class TestRunner implements ITestRunner{
 						ObjectMessage message = session.createObjectMessage(testStep);
 
 						// Tell the producer to send the message
-						System.out.println("Sent message: " + testStep.getID());
+						mylog.info("Sent message: " , testStep.getID());
 						producer.send(message);
 						stepSize++;
 					}
@@ -245,7 +242,7 @@ public class TestRunner implements ITestRunner{
 					ObjectMessage message = session.createObjectMessage(testStep);
 
 					// Tell the producer to send the message
-					System.out.println("Sent message: " + testStep.getID());
+					mylog.info("Sent message: " + testStep.getID());
 					producer.send(message);
 					stepSize++;
 				}
@@ -258,7 +255,7 @@ public class TestRunner implements ITestRunner{
 				ObjectMessage message = session.createObjectMessage(testStep);
 
 				// Tell the producer to send the message
-				System.out.println("Sent message: " + testStep.getID());
+				mylog.info("Sent message: " + testStep.getID());
 				producer.send(message);
 				stepSize++;
 			}
@@ -269,7 +266,7 @@ public class TestRunner implements ITestRunner{
 			ObjectMessage message = session.createObjectMessage((Step)entityToRun);
 
 			// Tell the producer to send the message
-			System.out.println("Sent message: " + ((Step)entityToRun).getID());
+			mylog.info("Sent message: " + ((Step)entityToRun).getID());
 			producer.send(message);
 			stepSize++;
 		}

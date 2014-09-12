@@ -1,15 +1,19 @@
 package com.wstester.dispatcher;
 
 import java.util.HashSet;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+
+import com.wstester.logs.MyLogger;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 
 public class ExchangeDelayer extends RouteBuilder{
 
 	private static HashSet<String> stepsFinished = new HashSet<String>();
+	protected MyLogger mylog = new MyLogger("Logger");
 	
 	public void delay(Step step) throws InterruptedException{
 		
@@ -17,7 +21,7 @@ public class ExchangeDelayer extends RouteBuilder{
 		int timeout = 10000;
 		if(step.getDependsOn() != null){
 			while(!stepsFinished.contains(step.getDependsOn()) && timeout > 0){
-				System.out.println("Waiting for: " + step.getDependsOn());
+				mylog.info(step.getID()," Waiting for: " + step.getDependsOn());
 				timeout-=1000;
 				Thread.sleep(1000);
 			}
@@ -35,7 +39,7 @@ public class ExchangeDelayer extends RouteBuilder{
 			
 			@Override
 			public void process(Exchange exchange) throws Exception {
-				System.out.println("Received: " + exchange.getIn().getBody(Response.class).getStepID());
+				mylog.info("Received: " + exchange.getIn().getBody(Response.class).getStepID());
 				stepsFinished.add(exchange.getIn().getBody(Response.class).getStepID());
 			}
 		});

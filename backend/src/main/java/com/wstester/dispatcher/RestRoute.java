@@ -19,9 +19,9 @@ public class RestRoute extends RouteBuilder{
 		
 		from("jms:restQueue?concurrentConsumers=20&asyncConsumer=true")
 		.log(LoggingLevel.INFO, "[${body.getID}] Received message on the rest queue")
-		.log(LoggingLevel.INFO, "Delaying message bla bla")
+		.log(LoggingLevel.INFO, "Delaying message: ")
 		.bean(ExchangeDelayer.class, "delay")
-		.log(LoggingLevel.INFO, "Processing ${id}  Me Got ${body.getID}")
+		.log(LoggingLevel.INFO, "Processing ${id}  got ${body.getID}")
 		.process(new Processor() {
 			
 			@Override
