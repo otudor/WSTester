@@ -10,12 +10,14 @@ import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
+
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.wstester.customLogger.MyLogger;
 import com.wstester.dispatcher.ResponseCallback;
 import com.wstester.exceptions.WsException;
-import com.wstester.logs.MyLogger;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 import com.wstester.model.TestCase;

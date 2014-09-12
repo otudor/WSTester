@@ -6,7 +6,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 
-import com.wstester.logs.MyLogger;
+import com.wstester.customLogger.MyLogger;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 
