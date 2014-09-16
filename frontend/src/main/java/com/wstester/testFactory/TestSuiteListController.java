@@ -34,10 +34,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.apache.camel.util.CaseInsensitiveMap;
-import org.hamcrest.core.IsInstanceOf;
 
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
+import com.wstester.model.MongoStep;
 import com.wstester.model.MySQLService;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
@@ -104,6 +104,11 @@ public class TestSuiteListController implements Initializable
     	tsManagerController.showMySQLStep( sUID);
     }
     
+    public void selectMongoStep( String sUID)
+    {
+    	tsManagerController.showMongoStep( sUID);
+    }
+    
     public String getFirstEnv()
     {
     	return tsService.getFirstTestSuite().getID();
@@ -141,15 +146,17 @@ public class TestSuiteListController implements Initializable
     				
     				List<Step> steps = tc.getStepList();    				
     				if ( steps!= null && !steps.isEmpty())
-	    				for (Step step: steps)
+	    				
+    					for (Step step: steps)
 	        			{
 	    					if ( step instanceof MySQLStep )
 	    						icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
-
+	    					else
+	    						if ( step instanceof MongoStep )
+	    							icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
 	    					TreeItem<Object> stepNode = new TreeItem<>(step, icon);
 	    					tcNode.getChildren().add( stepNode);
-	        			}
-    				
+	        			}    				    				  				
     				envNode.getChildren().add( tcNode);
     			}
     		}
@@ -215,8 +222,10 @@ public class TestSuiteListController implements Initializable
     {
     	final ContextMenu contextMenu = new ContextMenu();
     	MenuItem addMysqlItem = new MenuItem("Add MySQL step" /*+ ftp.getID()*/);
+    	MenuItem addMongoItem = new MenuItem("Add Mongo step" /*+ ftp.getID()*/);
     	MenuItem removeItem = new MenuItem("Remove" /*+ ftp.getID()*/);
     	contextMenu.getItems().addAll( addMysqlItem);
+    	contextMenu.getItems().addAll( addMongoItem);
     	contextMenu.getItems().addAll( removeItem);
     	
     	removeItem.setOnAction(new EventHandler<ActionEvent>() 
@@ -259,8 +268,33 @@ public class TestSuiteListController implements Initializable
     	    	    }
     	    	});
     	
+    	addMongoItem.setOnAction(new EventHandler<ActionEvent>() 
+    	    	{
+    	    	    @Override
+    	    	    public void handle(ActionEvent event) 
+    	    	    {
+    	    	    	TreeItem<Object> item = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
+    	    	    	if( item == null ) return;
+
+    	    	    	//TestCase tcItem = (TestCase)(item.getValue());
+    	    	    	MongoStep mongoStep = tsService.addMongoStepforTestCase( tc.getID());
+    	    	    	
+    	    	    	if (mongoStep != null)
+    	    	    	{
+    	    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
+    	    	    		TreeItem<Object> stepNode = new TreeItem<>(mongoStep, icon);
+    	    	    		item.getChildren().add( stepNode);
+    	    	    		treeView.getSelectionModel().select( stepNode);
+    	    	    		//show details in right pane
+    	    	    		//selectMongoService( s.getID(),service.getID());
+    	    	    	}
+    	                //treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
+    	    	    }
+    	    	});
+    	
     	return contextMenu;
     }
+    
     
     // TREE CELL CLASS
     public class TestSuiteTreeCellImplementation extends TreeCell<Object> 
@@ -286,6 +320,8 @@ public class TestSuiteListController implements Initializable
     	                    	selectTestCase(  ((TestCase) getItem()).getID());
     	                    else if ( getItem().getClass() == MySQLStep.class)
     	                    	selectMySQLStep(  ((MySQLStep) getItem()).getID());
+    	                    else if ( getItem().getClass() == MongoStep.class)
+    	                    	selectMongoStep(  ((MongoStep) getItem()).getID());
                     	}
                 	}
                 }
@@ -333,6 +369,16 @@ public class TestSuiteListController implements Initializable
                 	setGraphic(getTreeItem().getGraphic());
                 }
                 
+                if ( getItem().getClass() == MongoStep.class )
+                {
+                	setGraphic( createMongoStepGraphic(item));
+                }
+                else
+                {
+                	setText(getItem() == null ? "" : getItem().toString());
+                	setGraphic(getTreeItem().getGraphic());
+                }
+                
                 if( getItem() != null)
                     if ( getItem().getClass() == TestSuite.class)
                     {
@@ -359,6 +405,27 @@ public class TestSuiteListController implements Initializable
     	    hbox.getChildren().addAll(lblNodeName);
     	    
     	    Execution execution = ((MySQLStep) getItem()).getLastExecution();
+    	    if ( execution != null)
+    	    {
+	    	    ImageView pic = null;
+	    	    if ( execution.getStatus() == StepStatusType.PASSED)
+	    	    	pic = new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_step_passed.png")));
+
+	    	    hbox.getChildren().addAll(pic);
+    	    }
+    	    
+    	    return hbox;
+    	}
+    	
+    	public HBox createMongoStepGraphic( Object item) {
+    	    HBox hbox = new HBox();
+    	    hbox.setPadding(new Insets(0, 0, 0, 0));
+    	    hbox.setSpacing(5);
+
+    	    Label lblNodeName = new Label( getItem() == null ? "" : getItem().toString() ); 
+    	    hbox.getChildren().addAll(lblNodeName);
+    	    
+    	    Execution execution = ((MongoStep) getItem()).getLastExecution();
     	    if ( execution != null)
     	    {
 	    	    ImageView pic = null;

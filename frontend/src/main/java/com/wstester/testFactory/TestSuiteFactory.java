@@ -10,6 +10,7 @@ public class TestSuiteFactory
     private TestSuiteController tSuiteController;
     private TestCaseController tCaseController;
     private MySQLStepController mySQLStepController;
+    private MongoStepController mongoStepController;
     private TestSuiteService tsService;
     
     public TestSuiteManagerController getManagerController()
@@ -92,6 +93,25 @@ public class TestSuiteFactory
             }
         }
         return mySQLStepController;
+    }
+    public MongoStepController getMongoStepController()
+    {
+        if (mongoStepController == null)
+        {
+            try
+            {
+                FXMLLoader loader = new FXMLLoader();
+                loader.load(getClass().getResourceAsStream("/fxml/TestFactory/MongoStep.fxml"));
+                mongoStepController = (MongoStepController) loader.getController();
+                mongoStepController.setTestSuiteService( getTestSuiteService());
+                mongoStepController.setTestSuiteManagerController( getManagerController());
+            }
+            catch (IOException e)
+            {
+                throw new RuntimeException("Unable to load MongoStep.fxml", e);
+            }
+        }
+        return mongoStepController;
     }
     
     public TestSuiteController getTestSuiteController()
