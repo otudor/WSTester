@@ -1,5 +1,7 @@
 package com.wstester.assets;
 
+import com.wstester.model.Asset;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.ProgressBar;
@@ -10,6 +12,7 @@ public class Table {
 	private final StringProperty path;
 	private final StringProperty size;
 	private final StringProperty progress;
+	private Asset asset;
 	
 	public Table(String name, String date, String path, String size, String progress){
 		this.name = new SimpleStringProperty(name);
@@ -55,5 +58,13 @@ public class Table {
 	}
 	public StringProperty progressProperty(){
 		return progress;
+	}
+
+	public Asset getAsset() {
+		return asset;
+	}
+
+	public void setAsset(Asset asset) {
+		this.asset = asset;
 	}
 }

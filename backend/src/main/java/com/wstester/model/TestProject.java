@@ -1,6 +1,7 @@
 package com.wstester.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,6 +43,14 @@ public class TestProject implements Serializable {
 		this.assetList = assetList;
 	}
 
+	public void addAsset(Asset asset){
+		if(this.assetList == null){
+			this.assetList = new ArrayList<Asset>();
+		}
+		
+		this.assetList.add(asset);
+	}
+	
 	public List<Environment> getEnvironmentList() {
 		return environmentList;
 	}

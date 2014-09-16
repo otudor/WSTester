@@ -46,7 +46,7 @@ public class AssetManagerTest {
 		assertTrue(file.exists());
 		assetManager.close();
 		
-		String content = assetManager.getAssetContent(asset);
+		String content = assetManager.getAssetContent(asset.getName());
 		assertEquals("Harap Alb", content);
 	}
 	

@@ -14,5 +14,9 @@ public interface IAssetManager {
 	
 	void saveAsset(Asset asset);
 
-	String getAssetContent(Asset asset);
+	String getAssetContent(String fileName);
+
+	void waitUntilFileCopied(Asset asset);
+
+	void close();
 }

@@ -1,14 +1,10 @@
 package com.wstester.main;
 
-//import insidefx.undecorator.Undecorator;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -20,13 +16,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.effect.Reflection;
@@ -35,25 +29,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.VBoxBuilder;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
-
 import com.wstester.environment.Delta;
 import com.wstester.environment.EnvironmentsAppFactory;
 import com.wstester.environment.MainPresenter;
-import com.wstester.model.Server;
 import com.wstester.testFactory.TestSuiteFactory;
 import com.wstester.testFactory.TestSuiteManagerController;
 
@@ -559,7 +545,7 @@ public class WsTesterMainController implements Initializable {
 
 						 stageRnd.setHeight(600);
 						 stageRnd.setWidth(700);*/
-						root = FXMLLoader.load(getClass().getResource("/fxml/TestFactory/TestSuiteManagerNew.fxml"));
+						root = FXMLLoader.load(getClass().getResource("/fxml/TestFactory/TestSuiteManager.fxml"));
 						TestSuiteFactory factory = new TestSuiteFactory();
 	                    TestSuiteManagerController mainPresenter = factory.getManagerController();
                         mainPresenter.loadTestSuites();
@@ -871,7 +857,7 @@ public class WsTesterMainController implements Initializable {
 		    		  makeKeyFrame(600,0,1.2,1.0)
 		    		  
 		    		   
-		    		 // makeKeyFrame(0,100,0.8,0.8)
+		    		  //makeKeyFrame(0,100,0.8,0.8)
 		    		  		    		  		    		  
 		    		 );
 		  

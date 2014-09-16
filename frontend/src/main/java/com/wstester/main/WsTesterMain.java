@@ -1,16 +1,15 @@
 package com.wstester.main;
 
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -23,8 +22,9 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import com.wstester.util.MainWindowListener;
+import com.wstester.util.Util;
 
-public class WsTesterMain extends Application {
+public class WsTesterMain extends Application implements MainWindowListener {
 	
 	private static List<MainWindowListener> listeners;
 	
@@ -60,7 +60,7 @@ public class WsTesterMain extends Application {
 				}
 			}
 		});
-        loadProperties();
+        loadConfiguration();
 	}
 
 	public static void main(String[] args) {launch(args);}
@@ -71,14 +71,29 @@ public class WsTesterMain extends Application {
 		}
 	}
 	
-	private void loadProperties() throws IOException {
-
+	private void loadConfiguration() throws IOException {
 		InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream ("/system.properties"));
-        Properties p = new Properties(System.getProperties());
+        Properties p = new Properties();
         p.load(reader);
-        // set the system properties
-        System.setProperties(p);
+        
+        Set keys = p.keySet();
+        for(Object key : keys) {
+        	Util.addOrReplaceProperty(key.toString(), p.getProperty(key.toString()));
+        }
 	}
 
+	@Override
+	public void shutDown() {
+		Properties props = Util.getRuntimeProperties();
+		
+		File f = new File("/system.properties");
+		OutputStream out;
+		try {
+			out = new FileOutputStream(f);
+			props.store(out, null);
+		} catch (IOException ex) {
+			//TODO: log exception
+		}
+	}
 }
 

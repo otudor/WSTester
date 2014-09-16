@@ -71,12 +71,12 @@ public class AssetManager implements IAssetManager {
 	}
 	
 	@Override
-	public String getAssetContent(Asset asset) {
+	public String getAssetContent(String fileName) {
 		
 		String content = null;
 		
 		try {
-			content = new String(Files.readAllBytes(Paths.get("assets/" + asset.getName())));
+			content = new String(Files.readAllBytes(Paths.get("assets/" + fileName)));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,6 +85,7 @@ public class AssetManager implements IAssetManager {
 		return content;
 	}
 	
+	@Override
 	public void waitUntilFileCopied(Asset asset){
 		
 		while(!Files.isReadable(Paths.get("assets/" + asset.getName() + ".done"))){
@@ -104,6 +105,7 @@ public class AssetManager implements IAssetManager {
 		}
 	}
 	
+	@Override
 	public void close(){
 		camelContext.close();
 	}
