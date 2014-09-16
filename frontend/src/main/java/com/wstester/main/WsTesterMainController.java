@@ -559,7 +559,7 @@ public class WsTesterMainController implements Initializable {
 
 						 stageRnd.setHeight(600);
 						 stageRnd.setWidth(700);*/
-						root = FXMLLoader.load(getClass().getResource("/fxml/TestFactory/TestSuiteManager.fxml"));
+						root = FXMLLoader.load(getClass().getResource("/fxml/TestFactory/TestSuiteManagerNew.fxml"));
 						TestSuiteFactory factory = new TestSuiteFactory();
 	                    TestSuiteManagerController mainPresenter = factory.getManagerController();
                         mainPresenter.loadTestSuites();
