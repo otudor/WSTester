@@ -1,4 +1,5 @@
 package com.wstester.testFactory;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.sun.prism.paint.Color;
@@ -41,7 +42,7 @@ public class MySQLStepController
     private MySQLStep step;    
     private TestSuiteService tsService;
     private TestSuiteManagerController tsMainController;
-    final ObservableList<Execut> lista = FXCollections.observableArrayList();
+    
     
 	@FXML
 	private void initialize() 
@@ -82,8 +83,14 @@ public class MySQLStepController
         	//else ....
         		//FAILED
         	lblResponse.setText(execution.getResponse().getContent());
-        	Execut exemplu = new Execut(execution.getRunDate().toString(),execution.getStatus().toString(),execution.getResponse().getContent());
+        	List<Execution> list = new ArrayList<>();
+        	ObservableList<Execut> lista = FXCollections.observableArrayList();
+        	list = step.getExecutionList();
+        	for(Execution exec : list)
+        	{
+        	Execut exemplu = new Execut(exec.getRunDate().toString(),exec.getStatus().toString(),exec.getResponse().getContent());
             lista.add(exemplu);
+        	}
             tblExecutions.setItems(lista);
             columnDate.setCellValueFactory(
             		new PropertyValueFactory<Execut,String>("Date")
