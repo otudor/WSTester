@@ -234,12 +234,12 @@ public class EnvironmentSearchPresenter implements Initializable
             		setGraphic(textField);
             		System.out.println("updateItem -" + getItem().toString() + "- e editing ");
             	}
-            	else */
+            	else 
             	{
             		//System.out.println("updateItem (" + getItem().toString() + ") nu e editing ");
             		setText(getItem() == null ? "" : getItem().toString());
                     setGraphic(getTreeItem().getGraphic());
-            	}
+            	}*/
                 
                 if( getItem() != null)
 	                if ( getItem().getClass() == Environment.class)

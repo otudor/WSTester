@@ -67,7 +67,9 @@ public class MongoStepController
         
         step = (MongoStep) tsService.getStep( stepUID);
         lblName.setText(step.getName());
-        mongoAction.setText(step.getAction().toString());
+        if(step.getAction()!=null){
+        	mongoAction.setText(step.getAction().toString());
+        }
         //mongoQuery.setText(step.getQuery().toString());
         mongoCollection.setText(step.getCollection());
         Execution execution = step.getLastExecution();
