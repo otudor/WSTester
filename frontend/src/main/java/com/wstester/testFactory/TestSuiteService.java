@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.wstester.model.Environment;
+import com.wstester.model.MongoStep;
 import com.wstester.model.MySQLService;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Server;
@@ -51,6 +52,7 @@ public class TestSuiteService
 		mysqlStep2.setService(service);		
 		mysqlStep2.setOperation("select * from Angajati where id='2'");
 		mysqlStep2.setDependsOn(mysqlStep.getID());
+		
 		
 		stpList.add(mysqlStep);
 		stpList.add(mysqlStep2);
@@ -116,6 +118,39 @@ public class TestSuiteService
 		{
 			result = new MySQLStep();
 			result.setName("MySQL Step");
+			tCase.addStep(result);
+		}
+		
+		return result;
+	}
+    
+    public MongoStep addMongoStepforTestCase(String tcUID) 
+    {
+		TestCase tCase = null;
+		MongoStep result = null;
+		
+		for (Map.Entry<String, TestSuite> entry : tsList.entrySet()) 
+		{
+			List<TestCase> tcList = ((TestSuite) entry.getValue()).getTestCaseList();
+			
+			if (tcList != null && !tcList.isEmpty()) 
+			{
+				for ( TestCase tc : tcList)
+					if (tc.getID() == tcUID) 
+					{
+						tCase = tc;
+						break;
+					}
+				
+				if (tCase != null)
+					break;
+			}
+		}
+
+		if( tCase != null)
+		{
+			result = new MongoStep();
+			result.setName("Mongo Step");
 			tCase.addStep(result);
 		}
 		

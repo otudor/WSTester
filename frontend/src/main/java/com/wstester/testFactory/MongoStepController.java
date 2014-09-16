@@ -1,17 +1,4 @@
 package com.wstester.testFactory;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.sun.prism.paint.Color;
-import com.wstester.model.MongoService;
-import com.wstester.model.MySQLStep;
-import com.wstester.model.Response;
-import com.wstester.model.Server;
-import com.wstester.model.Service;
-import com.wstester.model.Step;
-import com.wstester.model.Execution;
-import com.wstester.model.StepStatusType;
-import com.wstester.services.impl.TestRunner;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -21,17 +8,21 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-public class MySQLStepController
+import com.wstester.model.Execution;
+import com.wstester.model.MongoStep;
+import com.wstester.model.MySQLStep;
+import com.wstester.model.StepStatusType;
+import com.wstester.testFactory.MySQLStepController.Execut;
+
+public class MongoStepController
 {
-    @FXML private Node rootMySQLStep;
+    @FXML private Node rootMongoStep;
     @FXML private Label lblName;
-    @FXML private Label lblSQL;
+    @FXML private Label mongoCollection;
+    @FXML private Label mongoAction;
+    @FXML private Label mongoQuery;
     @FXML private Label lblStatus;
     @FXML private Label lblResponse;
     @FXML private TableView<Execut> tblExecutions;
@@ -39,10 +30,10 @@ public class MySQLStepController
     @FXML private TableColumn<Execut, String> columnStatus;
     @FXML private TableColumn<Execut, String> columnResponse;
     
-    private MySQLStep step;    
+    private MongoStep step;    
     private TestSuiteService tsService;
     private TestSuiteManagerController tsMainController;
-    
+    final ObservableList<Execut> lista = FXCollections.observableArrayList();
     
 	@FXML
 	private void initialize() 
@@ -50,7 +41,7 @@ public class MySQLStepController
 		
 	}
 	
-    public void setTestSuiteService( TestSuiteService tsService)
+	public void setTestSuiteService( TestSuiteService tsService)
     {
         this.tsService = tsService;
     }
@@ -62,19 +53,23 @@ public class MySQLStepController
 
     public Node getView()
     {
-        return rootMySQLStep;
+        return rootMongoStep;
     }
 
-    public void setMySQLStep(final String stepUID)
+    public void setMongoStep(final String stepUID)
     {
     	lblName.setText("");
-        lblSQL.setText("SQL");
+    	mongoQuery.setText("");
+        mongoAction.setText("");
+        mongoCollection.setText("");
         lblStatus.setText("Not run");
         lblResponse.setText("Not run");
         
-        step = (MySQLStep) tsService.getStep( stepUID);
+        step = (MongoStep) tsService.getStep( stepUID);
         lblName.setText(step.getName());
-        lblSQL.setText(step.getOperation());
+        mongoAction.setText(step.getAction().toString());
+        //mongoQuery.setText(step.getQuery().toString());
+        mongoCollection.setText(step.getCollection());
         Execution execution = step.getLastExecution();
         if( execution != null)
         {
@@ -83,14 +78,8 @@ public class MySQLStepController
         	//else ....
         		//FAILED
         	lblResponse.setText(execution.getResponse().getContent());
-        	List<Execution> list = new ArrayList<>();
-        	ObservableList<Execut> lista = FXCollections.observableArrayList();
-        	list = step.getExecutionList();
-        	for(Execution exec : list)
-        	{
-        	Execut exemplu = new Execut(exec.getRunDate().toString(),exec.getStatus().toString(),exec.getResponse().getContent());
+        	Execut exemplu = new Execut(execution.getRunDate().toString(),execution.getStatus().toString(),execution.getResponse().getContent());
             lista.add(exemplu);
-        	}
             tblExecutions.setItems(lista);
             columnDate.setCellValueFactory(
             		new PropertyValueFactory<Execut,String>("Date")
@@ -138,8 +127,5 @@ public class MySQLStepController
     		response.set(Response);
     	}
     }
-    
-    
-    
-    
 }
+	
