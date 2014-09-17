@@ -9,13 +9,17 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import com.wstester.log.CustomLogger;
 import com.wstester.model.TestProject;
 import com.wstester.services.definition.ITestProjectActions;
 
 public class TestProjectActions implements ITestProjectActions{
 
+	private CustomLogger log = new CustomLogger(TestProjectActions.class);
+	
 	public void save(String path, TestProject testProject) throws IOException {
 
+		log.info("Saving " + testProject);
 		try {
 
 			JAXBContext context = JAXBContext.newInstance(TestProject.class);
@@ -29,10 +33,12 @@ public class TestProjectActions implements ITestProjectActions{
 			e.printStackTrace();
 			throw new IOException("Test Plan couldn't be saved! " + e.getMessage());
 		}
+		log.info("Saved to " + path);
 	}
 
 	public TestProject open(String path) throws IOException {
 
+		log.info("Loading from " + path);
 		TestProject testProject = null;
 		
 		try {
@@ -47,6 +53,7 @@ public class TestProjectActions implements ITestProjectActions{
 			throw new IOException("Test Plan couldn't be opened! " + e.getMessage());
 		}
 		
+		log.info("Loaded " + testProject);
 		return testProject;
 	}
 }

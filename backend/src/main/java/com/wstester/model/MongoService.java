@@ -1,9 +1,8 @@
 package com.wstester.model;
 
-import java.io.Serializable;
 import java.util.UUID;
 
-public class MongoService extends Service implements Serializable{
+public class MongoService extends Service{
 
 	private static final long serialVersionUID = 1L;
 	private String port;
