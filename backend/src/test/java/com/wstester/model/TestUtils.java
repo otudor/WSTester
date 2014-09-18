@@ -886,4 +886,112 @@ public class TestUtils {
 		
 		return testProject;
 	}
+public static TestProject variableTestPlan() throws IOException{
+		
+		TestProject testProject = new TestProject();
+		testProject.setName("Test Project");
+		
+		// construct asset list
+		List<Asset> assetList = new ArrayList<Asset>();
+		Asset asset1 = new Asset();
+		Asset asset2 = new Asset();
+		Asset asset3 = new Asset();
+		Asset asset4 = new Asset();
+		
+		assetList.add(asset1);
+		assetList.add(asset2);
+		assetList.add(asset3);
+		assetList.add(asset4);
+		testProject.setAssetList(assetList);
+		
+		//construct variableList
+		
+		List<Variable> variableList = new ArrayList<Variable>();
+		
+		Variable variable = new Variable();
+		String content = "content";
+		variable.setName("varName");
+		variable.setSelector("selector");
+		variable.setType(VariableType.STRING);	
+		variable.setContent(content);
+		
+		Variable variable1 = new Variable();
+//		variable1.setContent("test");
+		variable.setName("testName");
+		variable.setSelector("testSelector");
+		variable.setType(VariableType.STRING);
+		
+		variableList.add(variable);
+		variableList.add(variable1);
+		
+		testProject.setVariableList(variableList);
+
+		// construct service list
+		// Service 3
+		List<Service> serviceList3 = new ArrayList<Service>();
+		SoapService service3 = new SoapService();
+		service3.setName("Service SOAP");
+		service3.setPort("80");
+		service3.setPath("/data/info.wso");
+		service3.setWsdlURL("http://footballpool.dataaccess.eu/data/info.wso?wsdl");
+		serviceList3.add(service3);
+		
+		// construct server list
+		List<Server> serverList2 = new ArrayList<Server>();
+
+		// Server 4
+		Server server22 = new Server();
+		server22.setDescription("This is the second server of the second env");
+		server22.setIp("http://footballpool.dataaccess.eu");
+		server22.setName("Server 22");
+		server22.setServices(serviceList3);
+		serverList2.add(server22);
+		
+		// construct environment list
+		List<Environment> environmentList = new ArrayList<Environment>();
+
+		// Environment 2
+		Environment env2 = new Environment();
+		env2.setName("Env 2");
+		env2.setServers(serverList2);
+		environmentList.add(env2);
+		testProject.setEnvironmentList(environmentList);
+
+		// construct test steps
+		List<Step> stepList2 = new ArrayList<Step>();
+
+		// test 4
+		SoapStep step4 = new SoapStep();
+		step4.setName("Step 4");
+		step4.setServer(server22);
+		step4.setService(service3);
+		List<Assert> assertList4 = new ArrayList<Assert>();
+		Assert oneAssert4 = new Assert();
+		oneAssert4.setAsserts("Forth assert");
+		assertList4.add(oneAssert4);
+		step4.setAssertList(assertList4);
+		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
+		step4.setRequest(request);
+		stepList2.add(step4);
+		
+		// construct test case list
+		// test case 2		
+		List<TestCase> testCaseList2 = new ArrayList<TestCase>();
+		TestCase testCase2 = new TestCase();
+		testCase2.setName("TC 1");
+		testCase2.setStepList(stepList2);
+		testCaseList2.add(testCase2);
+		
+		// construct test suite list
+		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
+		TestSuite testSuite2 = new TestSuite();
+		testSuite2.setName("Test Suite 2");
+		testSuite2.setEnvironment(env2);
+		testSuite2.setTestCaseList(testCaseList2);
+		testSuiteList.add(testSuite2);
+		
+		testProject.setTestSuiteList(testSuiteList);
+	
+		return testProject;
+	}
 }
