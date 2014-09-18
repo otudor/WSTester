@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -87,6 +88,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	boolean isDisplayed4 =false;
 	boolean isDisplayed5 =false;
 	private int poz = 200;
+	public TestProject testProject;
 	MenuBar menuBar ;
 	Menu menu;
 	private Menu menuRnd = new Menu("CreateRnd");
@@ -96,13 +98,21 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	private int ind=0;
 	Menu menu2 = new Menu("Environments definition");
 	ScreensController myController;
-	  public void setScreenParent(ScreensController screenParent){
+	
+	public void setScreenParent(ScreensController screenParent){
 	        myController = screenParent;
 	    }
-	TestProject testproject;
-	    
 	
-	
+	 public void setLoadedTestProject(TestProject testproject)
+	 {
+		 this.testProject = testproject;
+	 }
+	 
+	 public TestProject getLoadedTestProject()
+	 {
+		 return testProject;
+	 }
+		
 	//main functionality 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -144,7 +154,14 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 			
 			@Override
 			public void handle(MouseEvent event) {
-				//testproject= new TestProject();
+				if (getLoadedTestProject()==null)
+				{
+					System.out.println("e bun");
+				}
+				else
+				{
+					System.out.println("nuuuuuuuu");
+				}
 				
 			}
 			
@@ -608,6 +625,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						Scene second = new Scene(root, 600, 480);
 						root.getStylesheets().add("/styles/Styles.css");
 						stage.setTitle("Test Suites window");
+						
 						 
 						//root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
 						//Scene second = new Scene(root);
@@ -800,14 +818,21 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/environment/EnvironmentManager.fxml"));
 						EnvironmentsAppFactory factory = new EnvironmentsAppFactory();
-	                    MainPresenter mainPresenter = factory.getMainPresenter();
+					    MainPresenter mainPresenter = factory.getMainPresenter();
                         mainPresenter.loadEnvironments();
+                        mainPresenter.setTestProject(testProject);
                         root = mainPresenter.getView();
 						Scene second = new Scene(root, 600, 480);
 						stage.setTitle("Environments window");
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/Envwindows.css").toExternalForm());					
-						root.getStyleClass().add("mainWind");	
+						root.getStyleClass().add("mainWind");
 						
+						
+						
+						
+						
+						
+																		
 						newIcoM6 = (VBox) CreateIcon("/images/task_img_open.png","Env");	
 						newIcoM6.setLayoutX(poz);
 						newIcoM6.setLayoutY(1);
