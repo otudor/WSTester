@@ -1,6 +1,9 @@
 package com.wstester.testFactory;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import org.apache.camel.Exchange;
 
 import com.sun.prism.paint.Color;
 import com.wstester.model.MongoService;
@@ -49,7 +52,9 @@ public class RestStepController
     private RestStep step;    
     private TestSuiteService tsService;
     private TestSuiteManagerController tsMainController;
-    
+    private String query;
+    private String cookie;
+    private String header;
     
 	@FXML
 	private void initialize() 
@@ -72,7 +77,7 @@ public class RestStepController
         return rootRestStep;
     }
 
-    public void setMySQLStep(final String stepUID)
+    public void setRestStep(final String stepUID)
     {
     	lblName.setText("");
         restPath.setText("");
@@ -84,16 +89,30 @@ public class RestStepController
         restRequest.setText("");
         lblStatus.setText("Not run");
         lblResponse.setText("Not run");
-        
         step = (RestStep) tsService.getStep( stepUID);
         lblName.setText(step.getName());
         restPath.setText(step.getPath());
-        restQuery.setText(step.getQuery().toString());
-        restCookie.setText(step.getCookie().toString());
-        restHeader.setText(step.getHeader().toString());
+        if (step.getQuery() != null) {
+			for (String key : step.getQuery().keySet()) {
+				query = query + step.getQuery().get(key);
+			}
+		}
+        restQuery.setText(query);
+        if (step.getCookie() != null) {
+			for (String key : step.getCookie().keySet()) {
+				cookie = cookie + step.getCookie().get(key);
+			}
+		}
+        restCookie.setText(cookie);
+        if (step.getHeader() != null) {
+			for (String key : step.getHeader().keySet()) {
+				header = header + step.getHeader().get(key);
+			}
+		}
+        restHeader.setText(header);
         restContentType.setText(step.getContentType());
         restMethod.setText(step.getMethod());
-        restRequest.setText(step.getRequest().toString());
+        restRequest.setText((String) step.getRequest());
         Execution execution = step.getLastExecution();
         if( execution != null)
         {

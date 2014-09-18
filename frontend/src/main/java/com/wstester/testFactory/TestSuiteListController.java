@@ -41,6 +41,7 @@ import com.wstester.model.MongoStep;
 import com.wstester.model.MySQLService;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
+import com.wstester.model.RestStep;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.SoapStep;
@@ -75,7 +76,7 @@ public class TestSuiteListController implements Initializable
     {
         this.tsManagerController = tsManagerController;
     }
-
+    
     public void setTestSuiteService(TestSuiteService tsService)
     {
         this.tsService = tsService;
@@ -111,6 +112,11 @@ public class TestSuiteListController implements Initializable
     public void selectSoapStep( String sUID)
     {
     	tsManagerController.showSoapStep( sUID);
+    }
+    
+    public void selectRestStep( String sUID)
+    {
+    	tsManagerController.showRestStep( sUID);
     }
     
     public String getFirstEnv()
@@ -160,6 +166,8 @@ public class TestSuiteListController implements Initializable
 	    							icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
 	    						else if ( step instanceof SoapStep )
     							icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
+	    						else if ( step instanceof RestStep )
+	    							icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
 	    					TreeItem<Object> stepNode = new TreeItem<>(step, icon);
 	    					tcNode.getChildren().add( stepNode);
 	        			}    				    				  				
@@ -229,9 +237,10 @@ public class TestSuiteListController implements Initializable
     	final ContextMenu contextMenu = new ContextMenu();
     	MenuItem addMysqlItem = new MenuItem("Add MySQL step" /*+ ftp.getID()*/);
     	MenuItem addMongoItem = new MenuItem("Add Mongo step" /*+ ftp.getID()*/);
-    	MenuItem addSoapItem = new MenuItem("Add Soap step" /*+ ftp.getID()*/);    	
+    	MenuItem addSoapItem = new MenuItem("Add Soap step" /*+ ftp.getID()*/);
+    	MenuItem addRestItem = new MenuItem("Add Rest step" /*+ ftp.getID()*/);
     	MenuItem removeItem = new MenuItem("Remove" /*+ ftp.getID()*/);
-    	contextMenu.getItems().addAll( addMysqlItem,addMongoItem,addSoapItem,removeItem);
+    	contextMenu.getItems().addAll( addMysqlItem,addMongoItem,addSoapItem,addRestItem,removeItem);
     	
     	
     	removeItem.setOnAction(new EventHandler<ActionEvent>() 
@@ -320,6 +329,29 @@ public class TestSuiteListController implements Initializable
     	                //treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
     	    	    }
     	    	});
+    	addRestItem.setOnAction(new EventHandler<ActionEvent>() 
+    	    	{
+    	    	    @Override
+    	    	    public void handle(ActionEvent event) 
+    	    	    {
+    	    	    	TreeItem<Object> item = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
+    	    	    	if( item == null ) return;
+
+    	    	    	//TestCase tcItem = (TestCase)(item.getValue());
+    	    	    	RestStep restStep = tsService.addRestStepforTestCase( tc.getID());
+    	    	    	
+    	    	    	if (restStep != null)
+    	    	    	{
+    	    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
+    	    	    		TreeItem<Object> stepNode = new TreeItem<>(restStep, icon);
+    	    	    		item.getChildren().add( stepNode);
+    	    	    		treeView.getSelectionModel().select( stepNode);
+    	    	    		//show details in right pane
+    	    	    		//selectMongoService( s.getID(),service.getID());
+    	    	    	}
+    	                //treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
+    	    	    }
+    	    	});
     	
     	return contextMenu;
     }
@@ -353,6 +385,8 @@ public class TestSuiteListController implements Initializable
     	                    	selectMongoStep(  ((MongoStep) getItem()).getID());
     	                    else if ( getItem().getClass() == SoapStep.class)
     	                    	selectSoapStep(  ((SoapStep) getItem()).getID());
+    	                    else if ( getItem().getClass() == RestStep.class)
+    	                    	selectRestStep(  ((RestStep) getItem()).getID());
                     	}
                 	}
                 }
@@ -399,6 +433,10 @@ public class TestSuiteListController implements Initializable
                     	setGraphic( createStepGraphic(item));
                 }
                 else if ( getItem().getClass() == SoapStep.class )
+                {
+                    	setGraphic( createStepGraphic(item));
+                }
+                else if ( getItem().getClass() == RestStep.class )
                 {
                     	setGraphic( createStepGraphic(item));
                 }

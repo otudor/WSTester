@@ -2,6 +2,7 @@ package com.wstester.model;
 
 import java.util.HashMap;
 import java.util.UUID;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -22,6 +23,11 @@ public class RestStep extends Step {
 	
 	public String getContentType() {
 		return contentType;
+	}
+	
+	public String toString()
+	{
+		return super.getName();
 	}
 
 	public void setContentType(String contentType) {

@@ -9,6 +9,7 @@ import com.wstester.model.Environment;
 import com.wstester.model.MongoStep;
 import com.wstester.model.MySQLService;
 import com.wstester.model.MySQLStep;
+import com.wstester.model.RestStep;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.SoapStep;
@@ -185,6 +186,39 @@ public class TestSuiteService
 		{
 			result = new SoapStep();
 			result.setName("Soap Step");
+			tCase.addStep(result);
+		}
+		
+		return result;
+	}
+    
+    public RestStep addRestStepforTestCase(String tcUID) 
+    {
+		TestCase tCase = null;
+		RestStep result = null;
+		
+		for (Map.Entry<String, TestSuite> entry : tsList.entrySet()) 
+		{
+			List<TestCase> tcList = ((TestSuite) entry.getValue()).getTestCaseList();
+			
+			if (tcList != null && !tcList.isEmpty()) 
+			{
+				for ( TestCase tc : tcList)
+					if (tc.getID() == tcUID) 
+					{
+						tCase = tc;
+						break;
+					}
+				
+				if (tCase != null)
+					break;
+			}
+		}
+
+		if( tCase != null)
+		{
+			result = new RestStep();
+			result.setName("Rest Step");
 			tCase.addStep(result);
 		}
 		

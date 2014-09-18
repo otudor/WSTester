@@ -115,6 +115,8 @@ public class EnvironmentSearchPresenter implements Initializable
     	for (Environment env : envs)
     	{
     		icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_environment.png")));
+    		
+    		
     		TreeItem<Object> envNode = new TreeItem<>(env, icon);    		
     		List<Server> serverlist = env.getServers();
     		
@@ -146,6 +148,7 @@ public class EnvironmentSearchPresenter implements Initializable
     		}
     		
     		root.getChildren().add(envNode);
+    		
     	}
     	
     	treeView.setShowRoot(false);
