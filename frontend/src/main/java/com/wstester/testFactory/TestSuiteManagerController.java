@@ -24,6 +24,7 @@ public class TestSuiteManagerController
     private TestCaseController testCaseController;
     private MySQLStepController mysqlStepController;
     private MongoStepController mongoStepController;
+    private SoapStepController soapStepController;
     
 	@FXML
 	private void initialize() 
@@ -57,6 +58,10 @@ public class TestSuiteManagerController
         this.mongoStepController = mongoStepController;
     }
     
+    public void setSoapStepController( SoapStepController soapStepController)
+    {
+        this.soapStepController = soapStepController;
+    }
     
     public Parent getView()
     {
@@ -92,6 +97,12 @@ public class TestSuiteManagerController
     {
     	mongoStepController.setMongoStep(sUID);
         contentArea.setCenter( mongoStepController.getView());
+    }
+    
+    public void showSoapStep( String sUID)
+    {
+    	soapStepController.setSoapStep(sUID);
+        contentArea.setCenter( soapStepController.getView());
     }
     
     public String getFirstEnvironment()

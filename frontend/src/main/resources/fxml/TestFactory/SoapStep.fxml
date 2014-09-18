@@ -5,9 +5,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="rootSoapStep" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.SoapStepController">
+<Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.SoapStepController">
    <children>
-      <GridPane fx:id="gridSoapStep" hgap="10" vgap="10">
+      <GridPane fx:id="rootSoapStep" hgap="10" vgap="10">
                 
           <children>
               <Label text="Step Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
