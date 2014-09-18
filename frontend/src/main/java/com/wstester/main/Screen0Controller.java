@@ -6,7 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-
+/**
+ * 
+ * @author lvasile
+ * TODO: add java doc && rename class
+ */
 public class Screen0Controller implements Initializable, ControlledScreen {
 
     ScreensController myController;

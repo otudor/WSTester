@@ -3,9 +3,6 @@ package com.wstester.assets;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.beans.value.ChangeListener;
@@ -27,27 +24,29 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import org.apache.commons.io.FileUtils;
 import org.controlsfx.dialog.Dialogs;
 
-import com.sun.org.apache.xerces.internal.impl.xs.identity.Selector.Matcher;
-import com.wstester.main.WsTesterMain;
 import com.wstester.model.Asset;
 import com.wstester.model.TestProject;
 import com.wstester.services.definition.IAssetManager;
 import com.wstester.services.impl.AssetManager;
 
+/**
+ * 
+ * @author lvasile
+ * TODO: add java doc
+ */
 public class EventHandlerDemoController {
 
 	private Logger logger = Logger.getLogger(this.getClass().getSimpleName());
 
 	private AssetModel assetModel;
 	private AssetModel newValue, oldValue;
-	
+
 	private Process process;
 	public TextArea primaryTextArea;
 
@@ -95,36 +94,15 @@ public class EventHandlerDemoController {
 	private ObservableList<Table> tableViewDataXls = FXCollections
 			.observableArrayList();
 
-	private String a;
-	
-	public String cs="lalal";
 	public EventHandlerDemoController() {
 		// Create some sample data for the ComboBox and ListView
 
 		for (int i = 0; i < TypeInterface.types.length; i++) {
 			assetModel = new AssetModel(TypeInterface.types[i]);
-			System.out.println(TypeInterface.types[i]);
 			listViewData.add(assetModel);
 		}
 
 	}
-	
-	
-	public void setA(String a) {
-		
-		this.a = a;
-	}
-
-	public String getA() {
-		return a;
-	}
-
-
-	
-
-
-
-
 
 	public ObservableList<Table> getTableDataXml() {
 		return tableViewDataXml;
@@ -168,35 +146,35 @@ public class EventHandlerDemoController {
 		listView.setItems(listViewData);
 
 		listView.getSelectionModel().selectedItemProperty()
-				.addListener(new ChangeListener<AssetModel>() {
+		.addListener(new ChangeListener<AssetModel>() {
 
-					@Override
-					public void changed(
-							ObservableValue<? extends AssetModel> observable,
-							AssetModel oldValue, AssetModel newValue) {
-						// add data for xml files
+			@Override
+			public void changed(
+					ObservableValue<? extends AssetModel> observable,
+					AssetModel oldValue, AssetModel newValue) {
+				// add data for xml files
 
-						linkValues(oldValue, newValue);
+				linkValues(oldValue, newValue);
 
-						if (newValue.toString() == TypeInterface.types[0]) {
-							setCellValueFactory();
-							tableView.setItems(tableViewDataXml);
-						} else if (newValue.toString() == TypeInterface.types[1]) {
-							setCellValueFactory();
-							tableView.setItems(tableViewDataXsd);
-						} else if (newValue.toString() == TypeInterface.types[2]) {
-							setCellValueFactory();
-							tableView.setItems(tableViewDataJson);
-						} else if (newValue.toString() == TypeInterface.types[3]) {
-							setCellValueFactory();
-							tableView.setItems(tableViewDataCsv);
-						} else if (newValue.toString() == TypeInterface.types[4]) {
-							setCellValueFactory();
-							tableView.setItems(tableViewDataXls);
-						}
-					}
-				});
-		
+				if (newValue.toString() == TypeInterface.types[0]) {
+					setCellValueFactory();
+					tableView.setItems(tableViewDataXml);
+				} else if (newValue.toString() == TypeInterface.types[1]) {
+					setCellValueFactory();
+					tableView.setItems(tableViewDataXsd);
+				} else if (newValue.toString() == TypeInterface.types[2]) {
+					setCellValueFactory();
+					tableView.setItems(tableViewDataJson);
+				} else if (newValue.toString() == TypeInterface.types[3]) {
+					setCellValueFactory();
+					tableView.setItems(tableViewDataCsv);
+				} else if (newValue.toString() == TypeInterface.types[4]) {
+					setCellValueFactory();
+					tableView.setItems(tableViewDataXls);
+				}
+			}
+		});
+
 		//de sters dupa ce termin de facut load + set text area 
 		/*editButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -210,24 +188,24 @@ public class EventHandlerDemoController {
 					stageEditor.setScene(second);
 					stageEditor.setTitle("editor");
 					stageEditor.show();
-					
-					
-					
-					
-					
-					
-					
+
+
+
+
+
+
+
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
-			
-				
-			
+
+
+
 			}
 			});  */
-		
-		
+
+
 		/*pathButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -240,21 +218,21 @@ public class EventHandlerDemoController {
 					stagePath.setScene(seconda);
 					stagePath.setTitle("path");
 					stagePath.show();
-					
-									
-					
+
+
+
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
-						
-			
+
+
 			}
 			});*/
-		
-		
-	
-		
+
+
+
+
 		/*pathButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -262,7 +240,7 @@ public class EventHandlerDemoController {
 				FileChooser fileChooser = new FileChooser();
 				FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("EXE files (*.exe)", "*.exe");
 				fileChooser.getExtensionFilters().add(extFilter);
-				
+
 				File file = fileChooser.showSaveDialog(stageEditor);
 			}
 			}); */
@@ -275,14 +253,14 @@ public class EventHandlerDemoController {
 					fileChooser.getExtensionFilters().addAll(
 							new FileChooser.ExtensionFilter(
 									TypeInterface.types[0], "*.xml"),
-							new FileChooser.ExtensionFilter(
-									TypeInterface.types[1], "*.xsd"),
-							new FileChooser.ExtensionFilter(
-									TypeInterface.types[2], "*.json"),
-							new FileChooser.ExtensionFilter(
-									TypeInterface.types[3], "*.csv"),
-							new FileChooser.ExtensionFilter(
-									TypeInterface.types[4], "*.xls"));
+									new FileChooser.ExtensionFilter(
+											TypeInterface.types[1], "*.xsd"),
+											new FileChooser.ExtensionFilter(
+													TypeInterface.types[2], "*.json"),
+													new FileChooser.ExtensionFilter(
+															TypeInterface.types[3], "*.csv"),
+															new FileChooser.ExtensionFilter(
+																	TypeInterface.types[4], "*.xls"));
 					File file = fileChooser.showOpenDialog(null);
 					if (file != null && newValue.toString() != null) {
 						try {
@@ -297,7 +275,7 @@ public class EventHandlerDemoController {
 
 							String size = FileUtils.byteCountToDisplaySize(file
 									.length());
-							
+
 							String Tableprogress = new String("Complete");
 
 							String extension = "";
@@ -306,7 +284,7 @@ public class EventHandlerDemoController {
 							if (i > 0) {
 								extension = fileName.substring(i + 1);
 							}
-							
+
 							IAssetManager assetManager= new AssetManager();
 							Asset asset = new Asset();
 							asset.setName(fileName);
@@ -317,10 +295,9 @@ public class EventHandlerDemoController {
 							assetManager.addAsset(asset);
 							assetManager.waitUntilFileCopied(asset);
 							assetManager.close();
-							System.out.println("lalala "  +asset.getPath() + "\\" + asset.getName());
 							TestProject testProject = new TestProject();
 							testProject.addAsset(asset);
-							
+
 							if (newValue.toString().toLowerCase()
 									.equals(extension.toString().toLowerCase())) {
 								if (newValue
@@ -374,14 +351,14 @@ public class EventHandlerDemoController {
 								}
 							} else {
 								Dialogs.create()
-										.lightweight()
-										.owner(null)
-										.title("Error")
-										.message(
-												"Please select "
-														+ newValue.toString()
-														+ " file format")
-										.showError();
+								.lightweight()
+								.owner(null)
+								.title("Error")
+								.message(
+										"Please select "
+												+ newValue.toString()
+												+ " file format")
+												.showError();
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -391,11 +368,11 @@ public class EventHandlerDemoController {
 					try {
 						// dialog from controlsfx jar
 						Dialogs.create()
-								.lightweight()
-								.owner(null)
-								.title("Error")
-								.message(
-										"Please select an asset where you want to add data!")
+						.lightweight()
+						.owner(null)
+						.title("Error")
+						.message(
+								"Please select an asset where you want to add data!")
 								.showError();
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -403,8 +380,8 @@ public class EventHandlerDemoController {
 				}
 			}
 		});
-		
-		
+
+
 		/*editButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -420,20 +397,20 @@ public class EventHandlerDemoController {
 					stageEditor.setScene(second);
 					stageEditor.setTitle("editor");
 					stageEditor.show();
-					
-					
-					
-					
-					
-					
-					
+
+
+
+
+
+
+
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
-			
-				
-			
+
+
+
 			}
 					else {
 						try {
@@ -452,31 +429,17 @@ public class EventHandlerDemoController {
 				}
 			}
 			});*/
-		
+
 		ed.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				if (listView != null){
-				if (listView.getSelectionModel().getSelectedItem() != null) {
-				
-					System.out.println("sel");
-					String tableNamee = tableName.getCellData(tableView.getSelectionModel().getSelectedItem());
-					String filePath = tablePath.getCellData(tableView.getSelectionModel().getSelectedItem());
-					String abso = filePath.concat("\\".concat(tableNamee));
-					setA(abso);
-					
-					//String filePath = tablePath.getCellData(0);
-					
-					System.out.println(getA());
-				System.out.println(filePath + "sii " + tableNamee);
-				
-					
-					
-	
-						
+					if (listView.getSelectionModel().getSelectedItem() != null) {
+
+						String tableNamee = tableName.getCellData(tableView.getSelectionModel().getSelectedItem());
 						try {
-						
-						
+
+
 							/*root = FXMLLoader.load(getClass().getResource("/fxml/assets/editor.fxml"));
 							Scene second = new Scene(root);
 							second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
@@ -486,88 +449,88 @@ public class EventHandlerDemoController {
 							FXMLLoader fxmlLoader = new FXMLLoader();
 							Pane p = fxmlLoader.load(getClass().getResource("/fxml/assets/editor.fxml").openStream());
 							EditController editController = (EditController) fxmlLoader.getController();
-							
-							editController.updatePage();*/
-							
-							Group root = new Group();
-					        Stage stage = new Stage();
-					        
-					        FXMLLoader fxmlLoader = new FXMLLoader();	        
-					        AnchorPane frame = fxmlLoader.load(getClass().getResource("/fxml/assets/editor.fxml").openStream());
-					        EditController editController = (EditController) fxmlLoader.getController();
-					        editController.updatePage(tableNamee);
-					        root.getChildren().add(frame);
-					        Scene scene = new Scene(root);
 
-					        stage.setScene(scene);
-					        stage.show();
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
+							editController.updatePage();*/
+
+							Group root = new Group();
+							Stage stage = new Stage();
+
+							FXMLLoader fxmlLoader = new FXMLLoader();	        
+							AnchorPane frame = fxmlLoader.load(getClass().getResource("/fxml/assets/editor.fxml").openStream());
+							EditController editController = (EditController) fxmlLoader.getController();
+							editController.updatePage(tableNamee);
+							root.getChildren().add(frame);
+							Scene scene = new Scene(root);
+
+							stage.setScene(scene);
+							stage.show();
+
+
+
+
+
+
+
+
+
+
+
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						} 
-					
-						
-					
-						
-							
-							
-//						FileChooser fileChooser = new FileChooser();
-				//
-//						//Set extension filter
-//						FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.xml)", "*.xml");
-//						fileChooser.getExtensionFilters().add(extFilter);
-				//
-//						//Show save file dialog
-				//
-				//
-//						File file = fileChooser.showOpenDialog(stageEditor);
-//						if(file != null){
-				//
-//							textarea.setText(readFile(file));
-//						}
-					//}
-					
-				}
-				 else {
-					try {
-						// dialog from controlsfx jar
-						Dialogs.create()
-								.lightweight()
-								.owner(null)
-								.title("Error")
-								.message(
-										"Please select a file that you want to edit!")
-								.showError();
-					} catch (Exception e) {
-						e.printStackTrace();
+
+
+
+
+
+
+						//						FileChooser fileChooser = new FileChooser();
+						//
+						//						//Set extension filter
+						//						FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.xml)", "*.xml");
+						//						fileChooser.getExtensionFilters().add(extFilter);
+						//
+						//						//Show save file dialog
+						//
+						//
+						//						File file = fileChooser.showOpenDialog(stageEditor);
+						//						if(file != null){
+						//
+						//							textarea.setText(readFile(file));
+						//						}
+						//}
+
 					}
-				 }
-				
+					else {
+						try {
+							// dialog from controlsfx jar
+							Dialogs.create()
+							.lightweight()
+							.owner(null)
+							.title("Error")
+							.message(
+									"Please select a file that you want to edit!")
+									.showError();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+
+				}
+
 			}
-				
-			}
-			
+
 		});
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
+
+
 
 		deleteButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -580,11 +543,11 @@ public class EventHandlerDemoController {
 					try {
 						// dialog from controlsfx jar
 						Dialogs.create()
-								.lightweight()
-								.owner(null)
-								.title("Error")
-								.message(
-										"Please select a file and then perform delete actions!")
+						.lightweight()
+						.owner(null)
+						.title("Error")
+						.message(
+								"Please select a file and then perform delete actions!")
 								.showError();
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -595,24 +558,24 @@ public class EventHandlerDemoController {
 
 		// get the selected item value 
 		tableView.getSelectionModel().selectedItemProperty()
-				.addListener(new ChangeListener<Object>() {
-					@Override
-					public void changed(ObservableValue<?> observableValue,
-							Object oldValue, Object newValue) {
-						if (tableView.getSelectionModel().getSelectedItem() != null) {
-							TableViewSelectionModel<Table> selectionModel = tableView
-									.getSelectionModel();
-							ObservableList<?> selectedCells = selectionModel
-									.getSelectedCells();
-							TablePosition<Object, ?> tablePosition = (TablePosition<Object, ?>) selectedCells
-									.get(0);
-							Object val = tablePosition.getTableColumn()
-									.getCellData(newValue);
-							System.out.println("Selected value IS :" + val);
-						}
+		.addListener(new ChangeListener<Object>() {
+			@Override
+			public void changed(ObservableValue<?> observableValue,
+					Object oldValue, Object newValue) {
+				if (tableView.getSelectionModel().getSelectedItem() != null) {
+					TableViewSelectionModel<Table> selectionModel = tableView
+							.getSelectionModel();
+					ObservableList<?> selectedCells = selectionModel
+							.getSelectedCells();
+					TablePosition<Object, ?> tablePosition = (TablePosition<Object, ?>) selectedCells
+							.get(0);
+					Object val = tablePosition.getTableColumn()
+							.getCellData(newValue);
+					System.out.println("Selected value IS :" + val);
+				}
 
-					}
-				});
+			}
+		});
 	}
 
 	private void setCellValueFactory() {
@@ -627,12 +590,12 @@ public class EventHandlerDemoController {
 		tableProgress.setCellValueFactory(cellData -> cellData.getValue()
 				.progressProperty());
 	}
-	
+
 	private Process openSelectedFile(String editorPath, String filePath) throws IOException {
 		Runtime runtime = Runtime.getRuntime();
 		return runtime.exec(editorPath + " " + filePath);	
-		
-		
+
+
 	}
 	public void shutDown() {
 		if(process != null) {

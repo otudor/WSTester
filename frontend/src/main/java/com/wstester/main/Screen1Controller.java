@@ -4,11 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.wstester.assets.EditController;
-import com.wstester.model.TestProject;
-import com.wstester.model.TestUtils;
-import com.wstester.services.impl.TestProjectActions;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +11,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;
 
+import com.wstester.model.TestProject;
+import com.wstester.services.impl.TestProjectActions;
+import com.wstester.util.MainConstants;
+import com.wstester.util.UtilityTool;
 
+/**
+ * 
+ * @author lvasile
+ * TODO: add java doc   && rename class
+ */
 public class Screen1Controller implements Initializable, ControlledScreen {
 
     ScreensController myController;
@@ -30,13 +34,9 @@ public class Screen1Controller implements Initializable, ControlledScreen {
 		this.testproject = testproject;
 	}
 
-	/**
-     * Initializes the controller class.
-     */
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    	
     }
     
     public void setScreenParent(ScreensController screenParent){
@@ -59,8 +59,9 @@ public class Screen1Controller implements Initializable, ControlledScreen {
 			Group root = new Group();
 			FXMLLoader fxmlLoader = new FXMLLoader();	        
 			AnchorPane frame = fxmlLoader.load(getClass().getResource("/fxml/main/WsTesterMain.fxml").openStream());
-			WsTesterMainController projectController = (WsTesterMainController) fxmlLoader.getController();
-			projectController.setLoadedTestProject(testproject);			 		  
+
+			UtilityTool.addEntity(MainConstants.TESTPROJECT, testproject);
+			
 	      	root.getChildren().add(frame);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
