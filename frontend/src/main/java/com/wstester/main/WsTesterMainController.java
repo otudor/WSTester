@@ -43,10 +43,14 @@ import javafx.util.Duration;
 import com.wstester.environment.Delta;
 import com.wstester.environment.EnvironmentsAppFactory;
 import com.wstester.environment.MainPresenter;
+import com.wstester.model.TestProject;
+import com.wstester.model.TestUtils;
+import com.wstester.services.impl.TestProjectActions;
 import com.wstester.testFactory.TestSuiteFactory;
 import com.wstester.testFactory.TestSuiteManagerController;
 
 public class WsTesterMainController implements Initializable, ControlledScreen {
+	
 	@FXML
 	private AnchorPane pane;
 	@FXML
@@ -55,6 +59,8 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	private VBox newIco;
 	@FXML
 	private AnchorPane bar = new AnchorPane();
+	@FXML
+	private Button SaveProject = new Button();
 	
 	@FXML
 	private VBox newIco2= new VBox();
@@ -93,7 +99,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	  public void setScreenParent(ScreensController screenParent){
 	        myController = screenParent;
 	    }
-
+	TestProject testproject;
 	    
 	
 	
@@ -107,6 +113,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		//this.createTaskbar();
 		this.createRESTWindow();
 		this.createTestFactoryWindow();
+		this.saveProject();
 		this.goToLoad();
 		stage.initOwner(WsTesterMain.stage);
 		
@@ -132,6 +139,21 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	}
 	
 	
+	private void saveProject() {
+		SaveProject.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			
+			@Override
+			public void handle(MouseEvent event) {
+				//testproject= new TestProject();
+				
+			}
+			
+			});
+	}
+
+
+
+
 	private void goToLoad() {
 		newIcoM1.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			
