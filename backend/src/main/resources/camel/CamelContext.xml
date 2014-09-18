@@ -32,6 +32,7 @@
 
 	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
 		<package>com.wstester.dispatcher</package>
+		<package>com.wstester.mock</package>
 	</camelContext>
 
 </beans>

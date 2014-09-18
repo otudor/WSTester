@@ -36,8 +36,6 @@ public class SerializationTest {
 		TestProjectActions actions = new TestProjectActions();
         testPlanAfter = actions.open(filePath);
         
-        System.out.println(testPlanBefore.getID());
-        System.out.println(testPlanAfter.getID());
         assertEquals(testPlanBefore, testPlanAfter);
 	}
 	

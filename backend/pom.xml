@@ -36,32 +36,68 @@
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-http</artifactId>
 			<version>${camel-core.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>camel-core</artifactId>
+					<groupId>org.apache.camel</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-jms</artifactId>
 			<version>${camel-core.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>camel-core</artifactId>
+					<groupId>org.apache.camel</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-mongodb</artifactId>
 			<version>${camel-core.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>camel-core</artifactId>
+					<groupId>org.apache.camel</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-jdbc</artifactId>
 			<version>${camel-core.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>camel-core</artifactId>
+					<groupId>org.apache.camel</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-test</artifactId>
 			<version>${camel-core.version}</version>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>camel-core</artifactId>
+					<groupId>org.apache.camel</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-cxf</artifactId>
 			<version>${camel-core.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>camel-core</artifactId>
+					<groupId>org.apache.camel</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
@@ -72,6 +108,12 @@
 			<groupId>org.apache.xbean</groupId>
 			<artifactId>xbean-spring</artifactId>
 			<version>${xbean-spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>

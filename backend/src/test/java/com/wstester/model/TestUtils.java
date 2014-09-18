@@ -994,4 +994,86 @@ public static TestProject variableTestPlan() throws IOException{
 	
 		return testProject;
 	}
+	
+	public static TestProject getMockedRestProject() {
+		
+		TestProject testPlan = new TestProject();
+		testPlan.setName("Rest Test Plan");
+		
+		// construct asset list
+		List<Asset> assetList = new ArrayList<Asset>();
+		Asset asset1 = new Asset();
+		Asset asset2 = new Asset();
+		Asset asset3 = new Asset();
+		Asset asset4 = new Asset();
+		assetList.add(asset1);
+		assetList.add(asset2);
+		assetList.add(asset3);
+		assetList.add(asset4);
+		testPlan.setAssetList(assetList);
+
+		// construct service list
+		// Service 1
+		List<Service> serviceList1 = new ArrayList<Service>();
+		RestService restService = new RestService();
+		restService.setName("Service Rest");
+		restService.setPort("9997");
+		restService.setStatus(ServiceStatus.MOCKED);
+		serviceList1.add(restService);
+		
+		// construct server list
+		List<Server> serverList1 = new ArrayList<Server>();
+		// Server 1
+		Server server11 = new Server();
+		server11.setDescription("This is the first server of the first env");
+		server11.setIp("localhost");
+		server11.setName("Server 11");
+		server11.setServices(serviceList1);
+		serverList1.add(server11);
+		
+		// construct environment list
+		List<Environment> environmentList = new ArrayList<Environment>();
+		// Environment 1
+		Environment env1 = new Environment();
+		env1.setName("Env 1");
+		env1.setServers(serverList1);
+		environmentList.add(env1);
+		testPlan.setEnvironmentList(environmentList);
+
+		// construct test steps
+		// test 1
+		List<Step> stepList1 = new ArrayList<Step>();
+		RestStep restStep = new RestStep();
+		restStep.setName("Step 1");
+		restStep.setServer(server11);
+		restStep.setService(restService);
+		List<Assert> assertList = new ArrayList<Assert>();
+		Assert oneAssert = new Assert();
+		oneAssert.setAsserts("First assert");
+		assertList.add(oneAssert);
+		restStep.setAssertList(assertList);
+		restStep.setPath("/customer/getCustomers");
+		restStep.setMethod("GET");
+		stepList1.add(restStep);
+		
+		// construct test case list
+		// test case 1
+		List<TestCase> testCaseList1 = new ArrayList<TestCase>();
+		TestCase testCase = new TestCase();
+		testCase.setName("TC 1");
+		testCase.setStepList(stepList1);
+		testCaseList1.add(testCase);
+		
+		// construct test suite list
+		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
+		TestSuite testSuite1 = new TestSuite();
+		testSuite1.setName("Test Suite 1");
+		testSuite1.setEnvironment(env1);
+		testSuite1.setTestCaseList(testCaseList1);
+		testSuiteList.add(testSuite1);
+	
+		testPlan.setTestSuiteList(testSuiteList);
+		
+		return testPlan;
+	}
 }

@@ -21,12 +21,14 @@ public class MySQLStep extends Step {
 	public void setOperation(String operation) {
 		this.operation = operation;
 	}
-
-	public String toString()
-	{
-		return super.getName();
-	}
 	
+	@Override
+	public String detailedToString() {
+		return "MySQLStep [operation=" + operation + ", ID=" + getID() + ", Server=" + getServer() + ", AssertList=" + getAssertList() + ", Service=" + getService()
+				+ ", AssetList=" + getAssetList() + ", Name=" + getName() + ", VariableList=" + getVariableList() + ", ExecutionList=" + getExecutionList() + ", DependsOn="
+				+ getDependsOn() + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

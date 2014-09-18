@@ -12,7 +12,6 @@ public class MongoService extends Service{
 	
 	public MongoService() {
 		uuid = UUID.randomUUID().toString();
-
 	}
 	
 	public String getPort() {
@@ -45,6 +44,11 @@ public class MongoService extends Service{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public String detailedToString() {
+		return "MongoService [port=" + port + ", dbName=" + dbName + ", user=" + user + ", password=" + password + ", uuid=" + uuid + ", name=" + name + ", status=" + status + "]";
 	}
 
 	@Override
@@ -90,6 +94,4 @@ public class MongoService extends Service{
 			return false;
 		return true;
 	}
-
-	
 }

@@ -18,11 +18,11 @@ public abstract class Service implements Serializable{
 		return this.uuid;
 	}
 	
-	public String getName(){
+	public String getName() {
 		return this.name;
 	}
 	
-	public void setName(String name){
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -34,8 +34,10 @@ public abstract class Service implements Serializable{
 		this.status = status;
 	}
 
-	public String toString() 
-    { 
+	public abstract String detailedToString();
+	
+	@Override
+	public String toString() { 
     	return this.name; 
     }
 

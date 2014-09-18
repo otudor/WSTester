@@ -169,7 +169,7 @@ public class TestSuiteListController implements Initializable
 	    						else if ( step instanceof RestStep )
 	    							icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
 	    					TreeItem<Object> stepNode = new TreeItem<>(step, icon);
-	    					tcNode.getChildren().add( stepNode);
+	    					tcNode.getChildren().add(stepNode);
 	        			}    				    				  				
     				envNode.getChildren().add( tcNode);
     			}

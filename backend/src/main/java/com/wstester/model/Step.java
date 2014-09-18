@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 @XmlSeeAlso({RestStep.class, MongoStep.class, MySQLStep.class, SoapStep.class})
-
 public abstract class Step implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -74,16 +73,16 @@ public abstract class Step implements Serializable {
 		this.variableList = variableList;
 	}
 	
-	public void addVariableList(List<Variable> variableList){
-		if(this.variableList == null){
+	public void addVariableList(List<Variable> variableList) {
+		if(this.variableList == null) {
 			this.variableList = new ArrayList<Variable>();
 		}
 		
 		this.variableList.addAll(variableList);
 	}
 	
-	public void addVariable(Variable variable){
-		if(this.variableList == null){
+	public void addVariable(Variable variable) {
+		if(this.variableList == null) {
 			this.variableList = new ArrayList<Variable>();
 		}
 		
@@ -94,11 +93,11 @@ public abstract class Step implements Serializable {
 		return executionList;
 	}
 	
-	public void setExecutionList(List<Execution> executionList){
+	public void setExecutionList(List<Execution> executionList) {
 		this.executionList = executionList;
 	}
 	
-	public void addExecution(Execution execution){
+	public void addExecution(Execution execution) {
 		if(this.executionList == null){
 			this.executionList = new ArrayList<Execution>();
 		}
@@ -107,8 +106,7 @@ public abstract class Step implements Serializable {
 
 	}
 	
-	public Execution getLastExecution()
-	{
+	public Execution getLastExecution() {
 		if(this.executionList != null)
 			return executionList.get( this.executionList.size() - 1);
 		
@@ -118,9 +116,17 @@ public abstract class Step implements Serializable {
 	public String getDependsOn() {
 		return dependsOn;
 	}
+	
 	public void setDependsOn(String dependsOn) {
 		this.dependsOn = dependsOn;
 	}
+	
+	@Override
+	public String toString(){
+		return this.name;
+	}
+	
+	public abstract String detailedToString();
 	
 	@Override
 	public int hashCode() {

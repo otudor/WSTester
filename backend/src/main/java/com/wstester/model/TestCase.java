@@ -56,7 +56,7 @@ public class TestCase implements Serializable {
 		this.variableList = variableList;
 	}
 
-	public void addVariable(Variable variable){
+	public void addVariable(Variable variable) {
 		if(this.variableList == null){
 			this.variableList = new ArrayList<Variable>();
 		}
@@ -64,11 +64,43 @@ public class TestCase implements Serializable {
 		variableList.add(variable);
 	}
 
-	public String toString()
-	{
+	@Override
+	public String toString() {
 		return this.name;
 	}
-	
+
+	public String detailedToString() {
+		return "TestCase [name=" + name + ", stepList=" + toString(stepList) + ", variableList=" + variableList + ", uuid=" + uuid + "]";
+	}
+
+	private String toString(List<Step> stepList) {
+
+		if(stepList == null){
+			return "null";
+		}
+		
+		StringBuilder sb = new StringBuilder("[");
+		for(Step step : stepList){
+			if(stepList.indexOf(step) != 0){
+				sb.append(", ");
+			}
+			sb.append(step.detailedToString());
+		}
+		sb.append("]");
+		
+		return sb.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((stepList == null) ? 0 : stepList.hashCode());
+		result = prime * result + ((variableList == null) ? 0 : variableList.hashCode());
+		return result;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -106,4 +106,9 @@ public class Asset implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Asset [uuid=" + uuid + ", lastmodified=" + lastmodified + ", name=" + name + ", path=" + path + ", type=" + type + ", size=" + size + "]";
+	}
 }

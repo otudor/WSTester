@@ -11,7 +11,6 @@ public class SoapService extends Service {
 	
 	public SoapService() {
 		uuid = UUID.randomUUID().toString();
-		
 	}
 
 	public String getPort() {
@@ -27,9 +26,9 @@ public class SoapService extends Service {
 	}
 
 	public void setPath(String path) {
-		
-		if(path.charAt(0) != '/')
+		if(path.charAt(0) != '/'){
 			path = '/' + path;
+		}
 		
 		this.path = path;
 	}
@@ -40,6 +39,11 @@ public class SoapService extends Service {
 
 	public void setWsdlURL(String wsdlURL) {
 		this.wsdlURL = wsdlURL;
+	}
+
+	@Override
+	public String detailedToString() {
+		return "SoapService [port=" + port + ", path=" + path + ", wsdlURL=" + wsdlURL + ", uuid=" + uuid + ", name=" + name + ", status=" + status + "]";
 	}
 
 	@Override
@@ -78,6 +82,4 @@ public class SoapService extends Service {
 			return false;
 		return true;
 	}
-
-	
 }

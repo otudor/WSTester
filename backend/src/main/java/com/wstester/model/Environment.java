@@ -18,7 +18,7 @@ public class Environment {
 		name = "";
 	}
 	
-	public Environment( String name) {
+	public Environment(String name) {
 		uuid = UUID.randomUUID().toString();
 		this.name = name;
 	}
@@ -35,11 +35,6 @@ public class Environment {
 		this.name = name;
 	}
 
-    public String toString() 
-    { 
-    	return this.name; 
-    }
-    
 	public List<Server> getServers() {
 		return serverList;
 	}
@@ -48,12 +43,47 @@ public class Environment {
 		this.serverList = servers;
 	}
 	
-	public void addServer( Server server)
-	{
-		if ( this.serverList == null)
+	public void addServer(Server server) {
+		if (this.serverList == null)
 			this.serverList = new ArrayList<Server>();
 		
-		this.serverList.add( server);
+		this.serverList.add(server);
+	}
+
+	@Override
+    public String toString() { 
+    	return this.name; 
+    }
+    
+	public String detailedToString() {
+		return "Environment [serverList=" + toString(serverList) + ", name=" + name + ", uuid=" + uuid + "]";
+	}
+
+	private String toString(List<Server> serverList) {
+
+		if(serverList == null){
+			return "null";
+		}
+		
+		StringBuilder sb = new StringBuilder("[");
+		for(Server server : serverList){
+			if(serverList.indexOf(server) != 0){
+				sb.append(", ");
+			}
+			sb.append(server.detailedToString());
+		}
+		sb.append("]");
+		
+		return sb.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((serverList == null) ? 0 : serverList.hashCode());
+		return result;
 	}
 
 	@Override

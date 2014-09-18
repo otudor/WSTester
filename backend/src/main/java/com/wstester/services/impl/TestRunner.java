@@ -35,8 +35,10 @@ public class TestRunner implements ITestRunner{
 	
 	public TestRunner(TestProject testProject){
 		
-		log.info("Received " + testProject.toString());
-		this.testProject = testProject;
+		if(testProject != null){
+			log.info("Received " + testProject);
+			this.testProject = testProject;
+		}
 	}
 	
 	@Override
@@ -109,12 +111,12 @@ public class TestRunner implements ITestRunner{
 		@Override
 		public void run() {
 
-			camelContext = new ClassPathXmlApplicationContext("camel/CamelContext.xml");
-			camelContext.start();
-			
 			Connection connection = null;
 			Session session = null;
 			try {
+				camelContext = new ClassPathXmlApplicationContext("camel/CamelContext.xml");
+				camelContext.start();
+				
 				// Create a ConnectionFactory
 				ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
 
@@ -273,7 +275,7 @@ public class TestRunner implements ITestRunner{
 
 			Step testStep = (Step)entityToRun;
 			// Create a messages
-			ObjectMessage message = session.createObjectMessage();
+			ObjectMessage message = session.createObjectMessage(testStep);
 
 			// Tell the producer to send the message
 			log.info(testStep.getID(), "Sent message to startQueue");

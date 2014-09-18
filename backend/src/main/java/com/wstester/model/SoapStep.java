@@ -10,6 +10,10 @@ public class SoapStep extends Step{
 	private static final long serialVersionUID = 1L;
 	private Object request;
 	
+	public SoapStep() {
+		uuid = UUID.randomUUID().toString();
+	}
+	
 	public Object getRequest() {
 		return request;
 	}
@@ -18,8 +22,11 @@ public class SoapStep extends Step{
 		this.request = request;
 	}
 
-	public SoapStep() {
-		uuid = UUID.randomUUID().toString();
+	@Override
+	public String detailedToString() {
+		return "SoapStep [request=" + request + ", getID()=" + getID() + ", getServer()=" + getServer() + ", getAssertList()=" + getAssertList() + ", getService()=" + getService()
+				+ ", getAssetList()=" + getAssetList() + ", getName()=" + getName() + ", getVariableList()=" + getVariableList() + ", getExecutionList()=" + getExecutionList() + ", getDependsOn()="
+				+ getDependsOn() + "]";
 	}
 	
 	public String toString()

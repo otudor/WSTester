@@ -9,7 +9,6 @@ public class RestService extends Service {
 	
 	public RestService() {
 		uuid = UUID.randomUUID().toString();
-		
 	}
 	
 	public String getPort() {
@@ -18,6 +17,11 @@ public class RestService extends Service {
 
 	public void setPort(String port) {
 		this.port = port;
+	}
+
+	@Override
+	public String detailedToString() {
+		return "RestService [port=" + port + ", uuid=" + uuid + ", name=" + name + ", status=" + status + "]";
 	}
 
 	@Override
@@ -44,6 +48,4 @@ public class RestService extends Service {
 			return false;
 		return true;
 	}
-	
-	
 }

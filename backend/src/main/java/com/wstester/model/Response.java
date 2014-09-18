@@ -9,11 +9,6 @@ public class Response implements Serializable{
 	private String content;
 	private boolean pass;
 	
-	@Override
-	public String toString() {
-		return "Response [stepID=" + stepID + ", content=" + content + ", pass=" + pass + "]";
-	}
-	
 	public String getStepID() {
 		return stepID;
 	}
@@ -38,6 +33,11 @@ public class Response implements Serializable{
 		this.pass = pass;
 	}
 
+	@Override
+	public String toString() {
+		return "Response [stepID=" + stepID + ", content=" + content + ", pass=" + pass + "]";
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

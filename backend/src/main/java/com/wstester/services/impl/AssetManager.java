@@ -58,13 +58,14 @@ public class AssetManager implements IAssetManager {
 	        ObjectMessage message = session.createObjectMessage(asset);
 	        
 	        // Tell the producer to send the message
-	        log.info("Sent asset: "+  asset.getID());	
+	        log.info("Sent asset to asset queue: " +  asset.getID());	
 	        producer.send(message);
 	        
 	        session.close();
 			connection.close();
 		}catch (Exception e){
 			
+			log.error("Can't create camel context: " + e.getMessage());
 		}
 	}
 	

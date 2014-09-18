@@ -1,4 +1,4 @@
-WSTester
+STEP
 ========
 
-Web Service Testing
+Software testing enhancement platform

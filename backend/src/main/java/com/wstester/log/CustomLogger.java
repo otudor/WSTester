@@ -15,6 +15,10 @@ public class CustomLogger extends Logger {
 	public void debug(String stepID, String logMessage){
 		logger.debug("[" + stepID + "] " + logMessage);
 	}
+	
+	public void error(String message){
+		logger.error(message);
+	}
 
 	public void error(String stepID, String logMessage){
 		logger.error("[" + stepID + "] " + logMessage);

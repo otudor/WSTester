@@ -81,7 +81,14 @@ public class RestStep extends Step {
 	public void setPath(String path) {
 		this.path = path;
 	}
-
+	
+	@Override
+	public String detailedToString() {
+		return "RestStep [path=" + path + ", query=" + query + ", cookie=" + cookie + ", header=" + header + ", contentType=" + contentType + ", method=" + method + ", request=" + request
+				+ ", getID()=" + getID() + ", getServer()=" + getServer() + ", getAssertList()=" + getAssertList() + ", getService()=" + getService() + ", getAssetList()=" + getAssetList()
+				+ ", getName()=" + getName() + ", getVariableList()=" + getVariableList() + ", getExecutionList()=" + getExecutionList() + ", getDependsOn()=" + getDependsOn() + "]";
+	}	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -141,5 +148,5 @@ public class RestStep extends Step {
 		} else if (!query.equals(other.query))
 			return false;
 		return true;
-	}	
+	}
 }

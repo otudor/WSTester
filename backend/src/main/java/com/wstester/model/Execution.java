@@ -15,7 +15,7 @@ public class Execution implements Serializable {
 	private StepStatusType status;
 	private Response response;
 	
-	public Execution(){
+	public Execution() {
 		uuid = UUID.randomUUID().toString();
 	}
 	
@@ -35,8 +35,8 @@ public class Execution implements Serializable {
 		return this.response;
 	}
 
-	public void setResponse(Response r) {
-		this.response = r;
+	public void setResponse(Response response) {
+		this.response = response;
 	}
 	
 	public Date getRunDate() {
@@ -45,6 +45,11 @@ public class Execution implements Serializable {
 
 	public void setRunDate(Date date) {
 		this.runDate = date;
+	}
+
+	@Override
+	public String toString() {
+		return "Execution [uuid=" + uuid + ", runDate=" + runDate + ", status=" + status + ", response=" + response + "]";
 	}
 
 	@Override

@@ -56,11 +56,45 @@ public class TestSuite implements Serializable {
 		this.variableList = variableList;
 	}
 
-	public String toString()
-	{
+	@Override
+	public String toString() {
 		return this.name;
 	}
 	
+	public String detailedToString() {
+		return "TestSuite [name=" + name + ", environment=" + environment.detailedToString() + ", testCaseList=" + toString(testCaseList) + ", variableList=" + variableList + ", uuid=" + uuid + "]";
+	}
+
+	private String toString(List<TestCase> testCaseList) {
+		
+		if(testCaseList == null){
+			return "null";
+		}
+		
+		StringBuilder sb = new StringBuilder("[");
+		for(TestCase testCase : testCaseList){
+			if(testCaseList.indexOf(testCase) != 0){
+				sb.append(", ");
+			}
+			sb.append(testCase.detailedToString());
+		}
+		
+		sb.append("]");
+		
+		return sb.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((environment == null) ? 0 : environment.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((testCaseList == null) ? 0 : testCaseList.hashCode());
+		result = prime * result + ((variableList == null) ? 0 : variableList.hashCode());
+		return result;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

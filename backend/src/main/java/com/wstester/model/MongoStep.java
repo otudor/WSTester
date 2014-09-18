@@ -39,13 +39,25 @@ public class MongoStep extends Step{
 		return action;
 	}
 	
-	public String toString()
-	{
-		return super.getName();
-	}
-	
 	public void setAction(Action action) {
 		this.action = action;
+	}
+	
+	@Override
+	public String detailedToString() {
+		return "MongoStep [action=" + action + ", collection=" + collection + ", query=" + query + ", getID()=" + getID() + ", getServer()=" + getServer() + ", getAssertList()=" + getAssertList()
+				+ ", getService()=" + getService() + ", getAssetList()=" + getAssetList() + ", getName()=" + getName() + ", getVariableList()=" + getVariableList() + ", getExecutionList()="
+				+ getExecutionList() + ", getDependsOn()=" + getDependsOn() + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((action == null) ? 0 : action.hashCode());
+		result = prime * result + ((collection == null) ? 0 : collection.hashCode());
+		result = prime * result + ((query == null) ? 0 : query.hashCode());
+		return result;
 	}
 
 	@Override

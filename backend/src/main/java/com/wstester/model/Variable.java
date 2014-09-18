@@ -15,12 +15,6 @@ public class Variable implements Serializable {
 	private Object content;
 	private String selector;
 	
-
-	@Override
-	public String toString() {
-		return "Variable [uuid=" + uuid + ", name=" + name + ", type=" + type + ", content=" + content + ", selector=" + selector + "]";
-	}
-	
 	public Variable(){
 		uuid = UUID.randomUUID().toString();
 	}
@@ -87,6 +81,11 @@ public class Variable implements Serializable {
 		this.selector = selector;
 	}
 
+	@Override
+	public String toString() {
+		return "Variable [uuid=" + uuid + ", name=" + name + ", type=" + type + ", content=" + content + ", selector=" + selector + "]";
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

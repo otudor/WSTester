@@ -64,18 +64,51 @@ public class Server implements Serializable {
 		this.description = description;
 	}
 
-    public String toString() 
-    { 
-    	return this.name; 
-    }
-    
-    public void addService( Service service)
-	{
-		if ( this.serviceList == null)
+    public void addService( Service service) {
+		if ( this.serviceList == null){
 			this.serviceList = new ArrayList<Service>();
+		}
 		
 		this.serviceList.add( service);
 	}
+
+    @Override
+    public String toString() { 
+    	return this.name; 
+    }
+    
+	public Object detailedToString() {
+		return "Server [serviceList=" + toString(serviceList) + ", name=" + name + ", ip=" + ip + ", description=" + description + ", uuid=" + uuid + "]";
+	}
+	
+	private String toString(List<Service> serviceList) {
+	
+		if(serviceList == null){
+			return "null";
+		}
+		StringBuilder sb = new StringBuilder("[");
+		for(Service service : serviceList){
+			if(serviceList.indexOf(service) != 0){
+				sb.append(", ");
+			}
+			sb.append(service.detailedToString());
+		}
+		sb.append("]");
+		
+		return sb.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((ip == null) ? 0 : ip.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((serviceList == null) ? 0 : serviceList.hashCode());
+		return result;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

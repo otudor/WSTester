@@ -8,7 +8,7 @@ public class MockRoute extends RouteBuilder {
 	public void configure() throws Exception {
 
 		from("jms:mockingQueue")
-		.bean(MockSystem.class, "mockExchange")
+		.process(new MockSystem())
 		.to("jms:topic:responseTopic");
 	}
 }

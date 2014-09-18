@@ -18,12 +18,6 @@ public class TestProject implements Serializable {
 	private List<Environment> environmentList;
 	private List<Variable> variableList;
 
-	@Override
-	public String toString() {
-		return "TestProject [name=" + name + ", testSuiteList=" + testSuiteList + ", assetList=" + assetList + ", environmentList=" + environmentList + ", variableList=" + variableList + ", uuid="
-				+ uuid + "]";
-	}
-	
 	public TestProject() {
 		uuid = UUID.randomUUID().toString();
 	}
@@ -80,6 +74,48 @@ public class TestProject implements Serializable {
 		this.variableList = variableList;
 	}
 
+	@Override
+	public String toString() {
+		return "TestProject [name=" + name + ", testSuiteList=" + toStringSuite(testSuiteList) + ", assetList=" + assetList + ", environmentList=" + toStringEnv(environmentList) + ", variableList=" + variableList + ", uuid="
+				+ uuid + "]";
+	}
+	
+	private String toStringEnv(List<Environment> environmentList) {
+		
+		if(environmentList == null){
+			return "null";
+		}
+		
+		StringBuilder sb = new StringBuilder("[");
+		for(Environment environment : environmentList){
+			if(environmentList.indexOf(environment) != 0){
+				sb.append(", ");
+			}
+			sb.append(environment.detailedToString());
+		}
+		sb.append("]");
+		
+		return sb.toString();
+	}
+
+	private String toStringSuite(List<TestSuite> testSuiteList) {
+		
+		if(testSuiteList == null){
+			return "null";
+		}
+		
+		StringBuilder sb = new StringBuilder("[");
+		for(TestSuite testSuite : testSuiteList){
+			if(testSuiteList.indexOf(testSuite) != 0){
+				sb.append(", ");
+			}
+			sb.append(testSuite.detailedToString());
+		}
+		sb.append("]");
+		
+		return sb.toString();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
