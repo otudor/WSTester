@@ -21,6 +21,11 @@ public class SoapStep extends Step{
 	public SoapStep() {
 		uuid = UUID.randomUUID().toString();
 	}
+	
+	public String toString()
+	{
+		return super.getName();
+	}
 
 	@Override
 	public int hashCode() {

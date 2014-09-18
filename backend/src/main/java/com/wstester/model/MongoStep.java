@@ -38,7 +38,12 @@ public class MongoStep extends Step{
 	public Action getAction() {
 		return action;
 	}
-
+	
+	public String toString()
+	{
+		return super.getName();
+	}
+	
 	public void setAction(Action action) {
 		this.action = action;
 	}

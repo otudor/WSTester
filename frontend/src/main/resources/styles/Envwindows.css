@@ -21,7 +21,7 @@
  	-fx-effect: 
  		dropshadow( three-pass-box ,rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1);
  }
- #gridpane
+ /* #gridpane
  {
  	-fx-background-radius: 10;
 	-fx-border-radius: 20;
@@ -36,12 +36,4 @@
 	-fx-background-repeat: stretch;  
     -fx-background-size: stretch;
  	
- }
-.label
- {
- 	-fx-text-fill: white;
- }
-.menu-item .label
-{
-	-fx-text-fill:black;
-}
+ }*/

@@ -1,23 +1,12 @@
 package com.wstester.testFactory;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import com.wstester.model.Environment;
-import com.wstester.model.MySQLStep;
-import com.wstester.model.Response;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
 import com.wstester.services.impl.TestRunner;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class TestSuiteController 
 {

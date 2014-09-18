@@ -16,6 +16,7 @@ import com.wstester.model.RestStep;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
 import com.wstester.services.impl.AssetManager;
+import com.wstester.services.impl.TestRunner;
 
 public class RunStepWithAsset extends RestTestBaseClass{
 
@@ -41,6 +42,7 @@ public class RunStepWithAsset extends RestTestBaseClass{
 		assetList.add(asset);
 		step.setAssetList(assetList);
 		
+		testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);

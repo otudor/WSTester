@@ -6,9 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,9 +20,11 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -38,9 +44,14 @@ import org.xml.sax.SAXException;
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 import com.wstester.main.WsTesterMain;
+import com.wstester.model.Asset;
+import com.wstester.services.definition.IAssetManager;
+import com.wstester.services.impl.AssetManager;
+import com.wstester.util.MainConstants;
 import com.wstester.util.MainWindowListener;
+import com.wstester.util.Util;
 
-public class EditController  {
+public class EditController implements MainWindowListener {
 	
 	
 	
@@ -58,6 +69,22 @@ public class EditController  {
 	@FXML
 	private Stage stageEditor;
 	
+	private Asset asset;
+	
+	public void setAsset(Asset asset){
+		
+		this.asset = asset;
+	}
+	
+	public void updatePage(String fileName){
+	    //textarea.setText(text);
+		IAssetManager assetManager= new AssetManager();
+		textarea.setText(assetManager.getAssetContent(fileName));
+		//assetManager.close();
+	    
+	}
+	
+	
 //	private ProcessBuilder processBuilder;
 	
 //	private Process process;
@@ -73,17 +100,18 @@ public class EditController  {
 			});*/
 	
 	@FXML
-	private void initialize() {
+	private void initialize() throws IOException {
+		
+		
+		
 		butonLoad.setOnAction(new EventHandler<ActionEvent>() {
 			@Override	
 			public void handle(ActionEvent arg0) {
-				try {
-					handleLoad();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				//handleLoad();
+				incercare();
 			}
+
+			
 		});
 
 
@@ -108,37 +136,9 @@ public class EditController  {
 			}
 		});
 		
+		
+		
 		//WsTesterMain.registerListener(this);
-	}
-	
-	private String readFile(File file){
-		StringBuilder stringBuffer = new StringBuilder();
-		BufferedReader bufferedReader = null;
-
-		try {
-
-			bufferedReader = new BufferedReader(new FileReader(file));
-
-			String text;
-			while ((text = bufferedReader.readLine()) != null) {
-				stringBuffer.append(text);
-			}
-
-		} catch (FileNotFoundException ex) {
-			logger.log(Level.SEVERE, null, ex);
-		} catch (IOException ex) {
-			logger.log(Level.SEVERE, null, ex);
-		} finally {
-			try {
-				bufferedReader.close();
-			} catch (IOException ex) {
-				logger.log(Level.SEVERE, null, ex);
-			}
-		} 
-
-
-		return stringBuffer.toString();
-
 	}
 
 	public class XmlFormatter {
@@ -218,9 +218,26 @@ public class EditController  {
 		 }
 	}
 	
+	
+	private void incercare(){
+		//File file = new File ("C:\\Users\\gvasile\\Desktop\\mydocument.xml");
+		InputStream input = getClass().getResourceAsStream("C:\\Users\\gvasile\\Desktop\\mydocument.xml");
+		try {
+		 BufferedReader reader=new BufferedReader(new InputStreamReader(input));
+	    String line=null;
+	    while((line=reader.readLine())!=null){
+            System.out.println(line);
+        }}
+	    catch (Exception e) {
+    // TODO Auto-generated catch block
+    e.printStackTrace();}
+		//InputStream in = FileLoadder.class.getResourceAsStream("<relative path from this class to the file to be read>");
+		//System.out.println(file);
+	}
 
 	private void handleLoad() throws IOException {
-		//String editorPath = System.getProperty("editor.path");
+//		String editorPath = System.getProperty("editor.path");
+	//	String propr = Util.getPropertyValue(MainConstants.EDITORPATH.name());
 //		processBuilder = new ProcessBuilder(editorPath);
 //		process = processBuilder.start();
 		
@@ -239,7 +256,10 @@ public class EditController  {
 		File file = fileChooser.showOpenDialog(stageEditor);
 		if(file != null){
 
-		textarea.setText(readFile(file));
+		IAssetManager assetManager = new AssetManager();
+		//TODO: get asset from the list in the EventHandlerDemoController
+		//String content = assetManager.getAssetContent(asset);
+		//textarea.setText(content);
 		}
 	}
 
@@ -312,6 +332,12 @@ public class EditController  {
 
 		
 		}
+	}
+	
+
+	@Override
+	public void shutDown() {
+		
 	}
 	
 

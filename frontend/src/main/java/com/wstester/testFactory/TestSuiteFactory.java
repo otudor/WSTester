@@ -11,6 +11,7 @@ public class TestSuiteFactory
     private TestCaseController tCaseController;
     private MySQLStepController mySQLStepController;
     private MongoStepController mongoStepController;
+    private SoapStepController soapStepController;
     private TestSuiteService tsService;
     
     public TestSuiteManagerController getManagerController()
@@ -26,6 +27,8 @@ public class TestSuiteFactory
                 tsManagerController.setTestSuiteListController( getTestSuiteListController());
                 tsManagerController.setTestCaseDetailController( getTestCaseController());
                 tsManagerController.setMySQLStepController( getMySQLStepController());
+                tsManagerController.setMongoStepController(getMongoStepController());
+                tsManagerController.setSoapStepController(getSoapStepController());
             }
             catch (IOException e)
             {
@@ -112,6 +115,26 @@ public class TestSuiteFactory
             }
         }
         return mongoStepController;
+    }
+    
+    public SoapStepController getSoapStepController()
+    {
+        if (soapStepController == null)
+        {
+            try
+            {
+                FXMLLoader loader = new FXMLLoader();
+                loader.load(getClass().getResourceAsStream("/fxml/TestFactory/SoapStep.fxml"));
+                soapStepController = (SoapStepController) loader.getController();
+                soapStepController.setTestSuiteService( getTestSuiteService());
+                soapStepController.setTestSuiteManagerController( getManagerController());
+            }
+            catch (IOException e)
+            {
+                throw new RuntimeException("Unable to load SoapStep.fxml", e);
+            }
+        }
+        return soapStepController;
     }
     
     public TestSuiteController getTestSuiteController()

@@ -12,7 +12,11 @@ public interface IAssetManager {
 
 	void addAsset(Asset asset);
 	
-	void saveAsset(Asset asset);
+	void saveAsset(Asset asset, String content);
 
-	String getAssetContent(Asset asset);
+	String getAssetContent(String fileName);
+
+	void waitUntilFileCopied(Asset asset);
+
+	void close();
 }

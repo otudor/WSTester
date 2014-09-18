@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="708.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.main.Screen1Controller">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="600.0">
+         <children>
+            <Label text="Project Manager">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <HBox spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#goToScreen2" text="New Project" />
+                  <Button mnemonicParsing="false" text="Button" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -76,6 +76,7 @@ public class MySQLStepController
         lblName.setText(step.getName());
         lblSQL.setText(step.getOperation());
         Execution execution = step.getLastExecution();
+        
         if( execution != null)
         {
         	if (execution.getStatus() == StepStatusType.PASSED)
@@ -83,15 +84,18 @@ public class MySQLStepController
         	//else ....
         		//FAILED
         	lblResponse.setText(execution.getResponse().getContent());
-        	List<Execution> list = new ArrayList<>();
-        	ObservableList<Execut> lista = FXCollections.observableArrayList();
-        	list = step.getExecutionList();
+        	//List<Execution> list = new ArrayList<>();
+        	List<Execution> list = step.getExecutionList();
+        	List<Execut> lista = new ArrayList<>();// = FXCollections.observableArrayList(step.getExecutionList());
+        	//list = step.getExecutionList();
         	for(Execution exec : list)
         	{
-        	Execut exemplu = new Execut(exec.getRunDate().toString(),exec.getStatus().toString(),exec.getResponse().getContent());
-            lista.add(exemplu);
+        		Execut exemplu = new Execut(exec.getRunDate().toString(),exec.getStatus().toString(),exec.getResponse().getContent());
+        		lista.add(exemplu);
         	}
-            tblExecutions.setItems(lista);
+        	tblExecutions.setItems(null);
+        	tblExecutions.setItems(FXCollections.observableArrayList(lista));
+            //tblExecutions.setItems(lista);
             columnDate.setCellValueFactory(
             		new PropertyValueFactory<Execut,String>("Date")
             		);
