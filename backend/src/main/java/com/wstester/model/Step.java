@@ -107,8 +107,9 @@ public abstract class Step implements Serializable {
 	}
 	
 	public Execution getLastExecution() {
-		if(this.executionList != null)
+		if(this.executionList != null){
 			return executionList.get( this.executionList.size() - 1);
+		}
 		
 		return null;
 	}

@@ -12,7 +12,6 @@ public class Execution implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String uuid;
 	private Date runDate;
-	private StepStatusType status;
 	private Response response;
 	
 	public Execution() {
@@ -21,14 +20,6 @@ public class Execution implements Serializable {
 	
 	public String getUuid() {
 		return uuid;
-	}
-
-	public StepStatusType getStatus() {
-		return this.status;
-	}
-
-	public void setStatus(StepStatusType status) {
-		this.status = status;
 	}
 	
 	public Response getResponse() {
@@ -49,7 +40,7 @@ public class Execution implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Execution [uuid=" + uuid + ", runDate=" + runDate + ", status=" + status + ", response=" + response + "]";
+		return "Execution [uuid=" + uuid + ", runDate=" + runDate + ", response=" + response + "]";
 	}
 
 	@Override
@@ -58,7 +49,6 @@ public class Execution implements Serializable {
 		int result = 1;
 		result = prime * result + ((response == null) ? 0 : response.hashCode());
 		result = prime * result + ((runDate == null) ? 0 : runDate.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
 
@@ -80,8 +70,6 @@ public class Execution implements Serializable {
 			if (other.runDate != null)
 				return false;
 		} else if (!runDate.equals(other.runDate))
-			return false;
-		if (status != other.status)
 			return false;
 		return true;
 	}

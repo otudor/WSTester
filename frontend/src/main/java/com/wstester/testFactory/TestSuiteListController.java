@@ -47,7 +47,7 @@ import com.wstester.model.Service;
 import com.wstester.model.SoapStep;
 import com.wstester.model.Step;
 import com.wstester.model.Execution;
-import com.wstester.model.StepStatusType;
+import com.wstester.model.ExecutionStatus;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestSuite;
 import com.wstester.services.impl.TestRunner;
@@ -474,7 +474,7 @@ public class TestSuiteListController implements Initializable
     	    if ( execution != null)
     	    {
 	    	    ImageView pic = null;
-	    	    if ( execution.getStatus() == StepStatusType.PASSED)
+	    	    if ( execution.getResponse().getStatus() == ExecutionStatus.PASSED)
 	    	    	pic = new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_step_passed.png")));
 
 	    	    hbox.getChildren().addAll(pic);

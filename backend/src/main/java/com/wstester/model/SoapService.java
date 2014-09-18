@@ -43,7 +43,8 @@ public class SoapService extends Service {
 
 	@Override
 	public String detailedToString() {
-		return "SoapService [port=" + port + ", path=" + path + ", wsdlURL=" + wsdlURL + ", uuid=" + uuid + ", name=" + name + ", status=" + status + "]";
+		return "SoapService [port=" + port + ", path=" + path + ", wsdlURL=" + wsdlURL + ", uuid=" + uuid + ", name=" + name + ", status=" + status + ", ruleList=" 
+				+ ruleList + "]";
 	}
 
 	@Override

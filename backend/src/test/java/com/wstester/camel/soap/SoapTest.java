@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import com.wstester.camel.TestBaseClass;
+import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
@@ -23,7 +24,7 @@ public class SoapTest extends TestBaseClass{
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
 		
-		assertTrue(response.isPass());
+		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertTrue(entry.contains("AllDefendersResponse"));
 	}
 }

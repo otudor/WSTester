@@ -94,7 +94,13 @@ public class TestRunner implements ITestRunner{
 			timeout-=1000;
 		} 
 		
-		log.info(stepId, response.toString());
+		if(response != null){
+			log.info(stepId, response.toString());
+		}
+		else{
+			log.info(stepId, "Response is null");
+		}
+		
 		return response;
 	}
 	

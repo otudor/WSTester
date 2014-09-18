@@ -7,6 +7,7 @@ import org.codehaus.jettison.json.JSONArray;
 import org.junit.Test;
 
 import com.wstester.camel.rest.RestTestBaseClass;
+import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 import com.wstester.model.TestCase;
@@ -29,14 +30,14 @@ public class TestRunnerTest extends RestTestBaseClass{
 		Response restResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String restContent =  restResponse.getContent();
 		
-		assertTrue(restResponse.isPass());
+		assertTrue(restResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("All customers", restContent);
 		
 		// mongo check
 		Response mongoResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(1).getID(), 1000L);
 		JSONArray entry =  new JSONArray(mongoResponse.getContent());
 		
-		assertTrue(mongoResponse.isPass());
+		assertTrue(mongoResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals(entry.length(), 1);
 		assertEquals(entry.getJSONObject(0).getString("id"), "1");
 		assertEquals(entry.getJSONObject(0).getString("name"), "HAC");
@@ -46,7 +47,7 @@ public class TestRunnerTest extends RestTestBaseClass{
 		
 		JSONArray result = new JSONArray(mysqlResponse.getContent());
 
-		assertTrue(mysqlResponse.isPass());
+		assertTrue(mysqlResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("popescu", result.getJSONObject(0).get("detalii"));
 		assertEquals("ion", result.getJSONObject(1).get("detalii"));
 		
@@ -54,7 +55,7 @@ public class TestRunnerTest extends RestTestBaseClass{
 		Response soapResponse = testRunner.getResponse(testProject.getTestSuiteList().get(1).getTestCaseList().get(0).getStepList().get(1).getID(), 25000L);
 		String soapContent =  soapResponse.getContent();
 		
-		assertTrue(soapResponse.isPass());
+		assertTrue(soapResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertTrue(soapContent.contains("AllDefendersResponse"));
 	}
 	
@@ -71,14 +72,14 @@ public class TestRunnerTest extends RestTestBaseClass{
 		Response restResponse = testRunner.getResponse(testSuite.getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String restContent =  restResponse.getContent();
 		
-		assertTrue(restResponse.isPass());
+		assertTrue(restResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("All customers", restContent);
 		
 		// mongo check
 		Response mongoResponse = testRunner.getResponse(testSuite.getTestCaseList().get(0).getStepList().get(1).getID(), 1000L);
 		JSONArray entry =  new JSONArray(mongoResponse.getContent());
 		
-		assertTrue(mongoResponse.isPass());
+		assertTrue(mongoResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals(entry.length(), 1);
 		assertEquals(entry.getJSONObject(0).getString("id"), "1");
 		assertEquals(entry.getJSONObject(0).getString("name"), "HAC");
@@ -97,14 +98,14 @@ public class TestRunnerTest extends RestTestBaseClass{
 		Response restResponse = testRunner.getResponse(testCase.getStepList().get(0).getID(), 25000L);
 		String restContent =  restResponse.getContent();
 		
-		assertTrue(restResponse.isPass());
+		assertTrue(restResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("All customers", restContent);
 		
 		// mongo check
 		Response mongoResponse = testRunner.getResponse(testCase.getStepList().get(1).getID(), 1000L);
 		JSONArray entry =  new JSONArray(mongoResponse.getContent());
 		
-		assertTrue(mongoResponse.isPass());
+		assertTrue(mongoResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals(entry.length(), 1);
 		assertEquals(entry.getJSONObject(0).getString("id"), "1");
 		assertEquals(entry.getJSONObject(0).getString("name"), "HAC");
@@ -123,7 +124,7 @@ public class TestRunnerTest extends RestTestBaseClass{
 		Response restResponse = testRunner.getResponse(testStep.getID(), 25000L);
 		String restContent =  restResponse.getContent();
 		
-		assertTrue(restResponse.isPass());
+		assertTrue(restResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("All customers", restContent);
 	}
 }

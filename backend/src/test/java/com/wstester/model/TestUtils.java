@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.wstester.model.RestRule.InputType;
+
 public class TestUtils {
 
 	public static TestProject getTestPlan() throws IOException{
@@ -1019,6 +1021,14 @@ public static TestProject variableTestPlan() throws IOException{
 		restService.setName("Service Rest");
 		restService.setPort("9997");
 		restService.setStatus(ServiceStatus.MOCKED);
+		String output = "mockedOutput";
+		Rule rule = new RestRule(InputType.PATH, "getCustomers", output);
+		String output2 = "mockedMethod";
+		Rule rule2 = new RestRule(InputType.METHOD, "PUT", output2);
+		ArrayList<Rule> ruleList = new ArrayList<Rule>();
+		ruleList.add(rule);
+		ruleList.add(rule2);
+		restService.setRuleList(ruleList);
 		serviceList1.add(restService);
 		
 		// construct server list

@@ -10,7 +10,7 @@ import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.Step;
 import com.wstester.model.Execution;
-import com.wstester.model.StepStatusType;
+import com.wstester.model.ExecutionStatus;
 import com.wstester.services.impl.TestRunner;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -79,7 +79,7 @@ public class MySQLStepController
         
         if( execution != null)
         {
-        	if (execution.getStatus() == StepStatusType.PASSED)
+        	if (execution.getResponse().getStatus() == ExecutionStatus.PASSED)
         		lblStatus.setText("PASSED");
         	//else ....
         		//FAILED
@@ -90,7 +90,7 @@ public class MySQLStepController
         	//list = step.getExecutionList();
         	for(Execution exec : list)
         	{
-        		Execut exemplu = new Execut(exec.getRunDate().toString(),exec.getStatus().toString(),exec.getResponse().getContent());
+        		Execut exemplu = new Execut(exec.getRunDate().toString(),exec.getResponse().getStatus().toString(),exec.getResponse().getContent());
         		lista.add(exemplu);
         	}
         	tblExecutions.setItems(null);

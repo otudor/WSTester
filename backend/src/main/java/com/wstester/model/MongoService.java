@@ -48,7 +48,8 @@ public class MongoService extends Service{
 
 	@Override
 	public String detailedToString() {
-		return "MongoService [port=" + port + ", dbName=" + dbName + ", user=" + user + ", password=" + password + ", uuid=" + uuid + ", name=" + name + ", status=" + status + "]";
+		return "MongoService [port=" + port + ", dbName=" + dbName + ", user=" + user + ", password=" + password + ", uuid=" + uuid + ", name=" + name + ", status=" + status + ", ruleList=" 
+				+ ruleList +"]";
 	}
 
 	@Override

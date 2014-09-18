@@ -48,7 +48,8 @@ public class MySQLService extends Service {
 
 	@Override
 	public String detailedToString() {
-		return "MySQLService [port=" + port + ", dbName=" + dbName + ", user=" + user + ", password=" + password + ", uuid=" + uuid + ", name=" + name + ", status=" + status + "]";
+		return "MySQLService [port=" + port + ", dbName=" + dbName + ", user=" + user + ", password=" + password + ", uuid=" + uuid + ", name=" + name + ", status=" + status + ", ruleList=" 
+				+ ruleList + "]";
 	}
 
 	@Override

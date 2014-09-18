@@ -13,7 +13,7 @@ import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 import com.wstester.model.Execution;
-import com.wstester.model.StepStatusType;
+import com.wstester.model.ExecutionStatus;
 import com.wstester.services.impl.TestRunner;
 
 public class ExecutionUpdate {
@@ -69,9 +69,8 @@ class UpdateStatusThread implements Runnable{
     							
     							Execution execution = new Execution();
     							Date date= new Date();
-    							execution.setRunDate( new Date()/*new Timestamp(date.getTime())*/);
-    							execution.setStatus( StepStatusType.PASSED);
-    							execution.setResponse( rsp);
+    							execution.setRunDate(date);
+    							execution.setResponse(rsp);
     							step.addExecution( execution);
     							
     							Step updatedStep = new MySQLStep();

@@ -4,6 +4,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 
+import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 
@@ -18,7 +19,7 @@ public class MongoPostProcessor implements Processor{
 		Response response = new Response();
 		response.setStepID(step.getID());
 		response.setContent(in.getBody(String.class));
-		response.setPass(true);
+		response.setStatus(ExecutionStatus.PASSED);
 
 		exchange.getIn().setBody(response);
 	}

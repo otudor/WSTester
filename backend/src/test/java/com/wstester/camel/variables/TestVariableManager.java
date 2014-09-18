@@ -1,6 +1,5 @@
 package com.wstester.camel.variables;
 
-
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -8,12 +7,12 @@ import java.util.List;
 import org.junit.Test;
 
 import com.wstester.camel.TestBaseClass;
+import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
 import com.wstester.model.Variable;
 import com.wstester.services.impl.TestRunner;
-import com.wstester.variables.VariableManager;
 
 public class TestVariableManager extends TestBaseClass {
 
@@ -36,7 +35,7 @@ public class TestVariableManager extends TestBaseClass {
 			Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 			String entry =  response.getContent();
 			
-			assertTrue(response.isPass());
+			assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 			assertTrue(entry.contains("AllDefendersResponse"));
 		}
 }

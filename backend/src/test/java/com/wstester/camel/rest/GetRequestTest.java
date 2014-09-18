@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
+import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
 import com.wstester.model.RestStep;
 import com.wstester.model.TestProject;
@@ -26,7 +27,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
 		
-		assertTrue(response.isPass());
+		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("All customers", entry);
 	}
 	
@@ -48,7 +49,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
 		
-		assertTrue(response.isPass());
+		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("Alex", entry);
 	}
 	
@@ -70,7 +71,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
 		
-		assertTrue(response.isPass());
+		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("Vlad", entry);
 	}
 	
@@ -92,7 +93,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
 		
-		assertTrue(response.isPass());
+		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("Popa", entry);
 	}
 	
@@ -121,7 +122,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
 		
-		assertTrue(response.isPass());
+		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("Goku" + "," + "Aladin" + "," + "Popa", entry);
 	}
 }
