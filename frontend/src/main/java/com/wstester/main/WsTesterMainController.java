@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -23,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.SplitPane;
 import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -37,13 +39,14 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
+
 import com.wstester.environment.Delta;
 import com.wstester.environment.EnvironmentsAppFactory;
 import com.wstester.environment.MainPresenter;
 import com.wstester.testFactory.TestSuiteFactory;
 import com.wstester.testFactory.TestSuiteManagerController;
 
-public class WsTesterMainController implements Initializable {
+public class WsTesterMainController implements Initializable, ControlledScreen {
 	@FXML
 	private AnchorPane pane;
 	@FXML
@@ -52,11 +55,13 @@ public class WsTesterMainController implements Initializable {
 	private VBox newIco;
 	@FXML
 	private AnchorPane bar = new AnchorPane();
+	
 	@FXML
 	private VBox newIco2= new VBox();
 	private VBox newIco3= new VBox();
 	private VBox newIco4= new VBox();
 	private VBox newIco5= new VBox();
+	private VBox newIcoM0= new VBox();
 	private VBox newIcoM1= new VBox();
 	private VBox newIcoM2= new VBox();
 	private VBox newIcoM3= new VBox();
@@ -84,7 +89,14 @@ public class WsTesterMainController implements Initializable {
 	List<VBox> lista = new ArrayList<VBox>();
 	private int ind=0;
 	Menu menu2 = new Menu("Environments definition");
+	ScreensController myController;
+	  public void setScreenParent(ScreensController screenParent){
+	        myController = screenParent;
+	    }
 
+	    
+	
+	
 	//main functionality 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -95,7 +107,12 @@ public class WsTesterMainController implements Initializable {
 		//this.createTaskbar();
 		this.createRESTWindow();
 		this.createTestFactoryWindow();
+		this.goToLoad();
 		stage.initOwner(WsTesterMain.stage);
+		
+		 
+		//pane.setRightAnchor(bar, 10d);
+		//topPane.setLeftAnchor(child, value);
 		//stage.initModality(Modality.
 		//stage.initModality(Modality.WINDOW_MODAL);
 		/*stageRnd.setOnHidden(new EventHandler<WindowEvent>() {
@@ -113,6 +130,19 @@ public class WsTesterMainController implements Initializable {
 		});*/
 
 	}
+	
+	
+	private void goToLoad() {
+		newIcoM1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			
+			@Override
+			public void handle(MouseEvent event) {
+				 myController.setScreen(ScreensFramework.screen1ID);
+			}
+			
+			});
+		
+	}
 	//method to create+add the icons
 	private void createIcons(){		
 		newIco = (VBox) CreateIcon("/images/document-open-remote.png","Assets");
@@ -129,9 +159,11 @@ public class WsTesterMainController implements Initializable {
 		newIco5 = (VBox) CreateIcon("/images/document-open-remote.png","Generate random JSON");
 		newIco5.setLayoutX(10);
 		newIco5.setLayoutY(400);
+		
 		newIcoM1 = (VBox) CreateIcon("/images/start.png","Start");
 		newIcoM1.setLayoutX(1);
 		newIcoM1.setLayoutY(1);
+		
 		//newIcoM2 = (VBox) CreateIcon("/images/task_img_open.png","Soap");	
 		//newIcoM2.setLayoutX(poz);
 		//newIcoM2.setLayoutY(1);
@@ -179,6 +211,7 @@ public class WsTesterMainController implements Initializable {
 		
 	}*/
 	
+
 	public void moveIcons(VBox icon){
 		  icon.setOnMousePressed(new EventHandler<MouseEvent>() {
 		   @Override
@@ -1068,4 +1101,5 @@ public class WsTesterMainController implements Initializable {
 		return vbox3;
 		
 	}
+	
 }

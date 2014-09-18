@@ -39,7 +39,7 @@ public class WsTesterMain extends Application implements MainWindowListener {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/main/WsTesterMain.fxml"));
         Scene scene = new Scene(root);
         
-        scene.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/styles/application.css").toExternalForm());
         //stage.initStyle(StageStyle.TRANSPARENT);
         
         stage.toBack();

@@ -1,7 +1,8 @@
 #mainWindow{
     -fx-background-image: url("../images/dice.jpg");
     -fx-background-repeat: stretch;  
-    -fx-background-size: stretch;  
+    -fx-background-size: stretch;
+      
 }
 
 .mainWind
@@ -20,6 +21,10 @@
   -fx-background-size: cover;
   
 }
+#pane {
+	-fx-background-color: red;
+}
+
 .bar
 {
   
