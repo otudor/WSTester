@@ -19,8 +19,8 @@ import org.junit.Test;
 
 import com.mongodb.Mongo;
 import com.wstester.dispatcher.ExchangeDelayer;
-import com.wstester.dispatcher.RestRoute;
 import com.wstester.dispatcher.mongo.MongoRoute;
+import com.wstester.dispatcher.rest.RestRoute;
 import com.wstester.model.Action;
 import com.wstester.model.MongoService;
 import com.wstester.model.MongoStep;
@@ -44,6 +44,7 @@ public class DependantStepsTest extends CamelTestSupport{
         server.stop();
     }
     
+    @Override
     protected CamelContext createCamelContext() throws Exception {
         CamelContext camelContext = super.createCamelContext();
         

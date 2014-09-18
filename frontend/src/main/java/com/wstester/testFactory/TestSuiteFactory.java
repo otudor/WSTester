@@ -26,6 +26,7 @@ public class TestSuiteFactory
                 tsManagerController.setTestSuiteListController( getTestSuiteListController());
                 tsManagerController.setTestCaseDetailController( getTestCaseController());
                 tsManagerController.setMySQLStepController( getMySQLStepController());
+                tsManagerController.setMongoStepController(getMongoStepController());
             }
             catch (IOException e)
             {

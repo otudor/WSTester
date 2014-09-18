@@ -15,6 +15,12 @@ public class Variable implements Serializable {
 	private Object content;
 	private String selector;
 	
+
+	@Override
+	public String toString() {
+		return "Variable [uuid=" + uuid + ", name=" + name + ", type=" + type + ", content=" + content + ", selector=" + selector + "]";
+	}
+	
 	public Variable(){
 		uuid = UUID.randomUUID().toString();
 	}
@@ -79,6 +85,17 @@ public class Variable implements Serializable {
 
 	public void setSelector(String selector) {
 		this.selector = selector;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((selector == null) ? 0 : selector.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
 	}
 
 	@Override

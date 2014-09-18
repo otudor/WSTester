@@ -15,9 +15,9 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.wstester.customLogger.MyLogger;
 import com.wstester.dispatcher.ResponseCallback;
 import com.wstester.exceptions.WsException;
+import com.wstester.log.CustomLogger;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 import com.wstester.model.TestCase;
@@ -31,10 +31,11 @@ public class TestRunner implements ITestRunner{
 	
 	private AbstractXmlApplicationContext camelContext;
 	private TestProject testProject;
-	protected MyLogger mylog = new MyLogger("Logger");
+	private CustomLogger log = new CustomLogger(TestRunner.class);
 	
 	public TestRunner(TestProject testProject){
 		
+		log.info("Received " + testProject.toString());
 		this.testProject = testProject;
 	}
 	
@@ -77,7 +78,7 @@ public class TestRunner implements ITestRunner{
 	@Override
 	public Response getResponse(String stepId, Long timeout){
 	
-		mylog.info("Gettting response for: ",  stepId);
+		log.info(stepId, "Waiting response");
 		
 		Response response = ResponseCallback.getResponse(stepId);
 		
@@ -91,6 +92,7 @@ public class TestRunner implements ITestRunner{
 			timeout-=1000;
 		} 
 		
+		log.info(stepId, response.toString());
 		return response;
 	}
 	
@@ -100,6 +102,7 @@ public class TestRunner implements ITestRunner{
 		
 		public ProjectRunThread(Object entityToRun) {
 			
+			log.info("Running " + entityToRun);
 			this.entityToRun = entityToRun;
 		}
 
@@ -163,6 +166,7 @@ public class TestRunner implements ITestRunner{
 				ObjectMessage messageProject = session.createObjectMessage(variable);
 				producer.send(messageProject);
 				variableSize++;
+				log.info("Added project variable: " + variable);
 			}
 		}
 		
@@ -173,6 +177,7 @@ public class TestRunner implements ITestRunner{
 					ObjectMessage messageSuite = session.createObjectMessage(variable);
 					producer.send(messageSuite);
 					variableSize++;
+					log.info("Added suite variable: " + variable);
 				}
 			}
 			
@@ -183,6 +188,7 @@ public class TestRunner implements ITestRunner{
 						ObjectMessage messageCase = session.createObjectMessage(variable);
 						producer.send(messageCase);
 						variableSize++;
+						log.info("Added case variable: " + variable);
 					}
 				}
 
@@ -193,6 +199,7 @@ public class TestRunner implements ITestRunner{
 							ObjectMessage message = session.createObjectMessage(variable);
 							producer.send(message);
 							variableSize++;
+							log.info("Added step variable: " + variable);
 						}
 					}
 				}
@@ -228,7 +235,7 @@ public class TestRunner implements ITestRunner{
 						ObjectMessage message = session.createObjectMessage(testStep);
 
 						// Tell the producer to send the message
-						mylog.info("Sent message: " , testStep.getID());
+						log.info(testStep.getID(), "Sent message to startQueue");
 						producer.send(message);
 						stepSize++;
 					}
@@ -244,7 +251,7 @@ public class TestRunner implements ITestRunner{
 					ObjectMessage message = session.createObjectMessage(testStep);
 
 					// Tell the producer to send the message
-					mylog.info("Sent message: " + testStep.getID());
+					log.info(testStep.getID(), "Sent message to startQueue");
 					producer.send(message);
 					stepSize++;
 				}
@@ -257,18 +264,19 @@ public class TestRunner implements ITestRunner{
 				ObjectMessage message = session.createObjectMessage(testStep);
 
 				// Tell the producer to send the message
-				mylog.info("Sent message: " + testStep.getID());
+				log.info(testStep.getID(), "Sent message to startQueue");
 				producer.send(message);
 				stepSize++;
 			}
 		}
 		else if(entityToRun instanceof Step){
 
+			Step testStep = (Step)entityToRun;
 			// Create a messages
-			ObjectMessage message = session.createObjectMessage((Step)entityToRun);
+			ObjectMessage message = session.createObjectMessage();
 
 			// Tell the producer to send the message
-			mylog.info("Sent message: " + ((Step)entityToRun).getID());
+			log.info(testStep.getID(), "Sent message to startQueue");
 			producer.send(message);
 			stepSize++;
 		}

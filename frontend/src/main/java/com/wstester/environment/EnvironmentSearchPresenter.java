@@ -1,18 +1,12 @@
 package com.wstester.environment;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+
 import javafx.collections.FXCollections;
-import javafx.concurrent.Task;
-import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -21,20 +15,14 @@ import javafx.scene.control.TreeView;
 import javafx.scene.control.TreeCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import javafx.collections.ObservableList;
 
-import java.lang.reflect.Field;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import javax.swing.tree.TreeNode;
 
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
@@ -42,7 +30,6 @@ import com.wstester.model.MySQLService;
 import com.wstester.model.RestService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
-import com.wstester.model.ServiceType;
 import com.wstester.model.SoapService;
 
 public class EnvironmentSearchPresenter implements Initializable
@@ -234,12 +221,12 @@ public class EnvironmentSearchPresenter implements Initializable
             		setGraphic(textField);
             		System.out.println("updateItem -" + getItem().toString() + "- e editing ");
             	}
-            	else */
+            	else 
             	{
             		//System.out.println("updateItem (" + getItem().toString() + ") nu e editing ");
             		setText(getItem() == null ? "" : getItem().toString());
                     setGraphic(getTreeItem().getGraphic());
-            	}
+            	}*/
                 
                 if( getItem() != null)
 	                if ( getItem().getClass() == Environment.class)

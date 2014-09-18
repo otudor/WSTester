@@ -11,14 +11,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class TestProject implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private String uuid;
 	private String name;
 	private List<TestSuite> testSuiteList;
 	private List<Asset> assetList;
 	private List<Environment> environmentList;
 	private List<Variable> variableList;
 
-	private String uuid;
-
+	@Override
+	public String toString() {
+		return "TestProject [name=" + name + ", testSuiteList=" + testSuiteList + ", assetList=" + assetList + ", environmentList=" + environmentList + ", variableList=" + variableList + ", uuid="
+				+ uuid + "]";
+	}
+	
 	public TestProject() {
 		uuid = UUID.randomUUID().toString();
 	}
@@ -73,6 +78,18 @@ public class TestProject implements Serializable {
 
 	public void setVariableList(List<Variable> variableList) {
 		this.variableList = variableList;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((assetList == null) ? 0 : assetList.hashCode());
+		result = prime * result + ((environmentList == null) ? 0 : environmentList.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((testSuiteList == null) ? 0 : testSuiteList.hashCode());
+		result = prime * result + ((variableList == null) ? 0 : variableList.hashCode());
+		return result;
 	}
 
 	@Override

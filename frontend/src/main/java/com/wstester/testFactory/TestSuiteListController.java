@@ -26,7 +26,6 @@ import javafx.util.Callback;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import com.wstester.model.Environment;
 import com.wstester.model.MongoStep;
 import com.wstester.model.MySQLStep;
@@ -347,22 +346,15 @@ public class TestSuiteListController implements Initializable
                 {
                 	setGraphic( createStepGraphic(item));
                 }
-                else
+                else if ( getItem().getClass() == MongoStep.class )
                 {
-                	setText(getItem() == null ? "" : getItem().toString());
-                	setGraphic(getTreeItem().getGraphic());
-                }
-                
-                if ( getItem().getClass() == MongoStep.class )
-                {
-                	setGraphic( createMongoStepGraphic(item));
+                    	setGraphic( createStepGraphic(item));
                 }
                 else
                 {
                 	setText(getItem() == null ? "" : getItem().toString());
                 	setGraphic(getTreeItem().getGraphic());
-                }
-                
+                }                       
                 if( getItem() != null)
                     if ( getItem().getClass() == TestSuite.class)
                     {
@@ -388,7 +380,7 @@ public class TestSuiteListController implements Initializable
     	    Label lblNodeName = new Label( getItem() == null ? "" : getItem().toString() ); 
     	    hbox.getChildren().addAll(lblNodeName);
     	    
-    	    Execution execution = ((MySQLStep) getItem()).getLastExecution();
+    	    Execution execution = ((Step) getItem()).getLastExecution();
     	    if ( execution != null)
     	    {
 	    	    ImageView pic = null;
@@ -400,28 +392,7 @@ public class TestSuiteListController implements Initializable
     	    
     	    return hbox;
     	}
-    	
-    	public HBox createMongoStepGraphic( Object item) {
-    	    HBox hbox = new HBox();
-    	    hbox.setPadding(new Insets(0, 0, 0, 0));
-    	    hbox.setSpacing(5);
-
-    	    Label lblNodeName = new Label( getItem() == null ? "" : getItem().toString() ); 
-    	    hbox.getChildren().addAll(lblNodeName);
-    	    
-    	    Execution execution = ((MongoStep) getItem()).getLastExecution();
-    	    if ( execution != null)
-    	    {
-	    	    ImageView pic = null;
-	    	    if ( execution.getStatus() == StepStatusType.PASSED)
-	    	    	pic = new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_step_passed.png")));
-
-	    	    hbox.getChildren().addAll(pic);
-    	    }
-    	    
-    	    return hbox;
-    	}
-    	
+    	    	   	
     	@Override
         public void startEdit()
     	{
