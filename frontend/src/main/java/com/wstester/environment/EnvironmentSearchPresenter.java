@@ -115,8 +115,6 @@ public class EnvironmentSearchPresenter implements Initializable
     	for (Environment env : envs)
     	{
     		icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_environment.png")));
-    		
-    		
     		TreeItem<Object> envNode = new TreeItem<>(env, icon);    		
     		List<Server> serverlist = env.getServers();
     		
@@ -148,7 +146,6 @@ public class EnvironmentSearchPresenter implements Initializable
     		}
     		
     		root.getChildren().add(envNode);
-    		
     	}
     	
     	treeView.setShowRoot(false);
@@ -216,7 +213,7 @@ public class EnvironmentSearchPresenter implements Initializable
             }
             else 
             {
-            	/*if( isEditing())
+            	if( isEditing())
             	{
             		if (textField != null) 
                         textField.setText( getItem().toString());
@@ -229,7 +226,7 @@ public class EnvironmentSearchPresenter implements Initializable
             		//System.out.println("updateItem (" + getItem().toString() + ") nu e editing ");
             		setText(getItem() == null ? "" : getItem().toString());
                     setGraphic(getTreeItem().getGraphic());
-            	}*/
+            	}
                 
                 if( getItem() != null)
 	                if ( getItem().getClass() == Environment.class)
