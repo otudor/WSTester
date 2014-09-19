@@ -21,7 +21,7 @@ import com.wstester.util.UtilityTool;
  * @author lvasile
  * TODO: add java doc   && rename class
  */
-public class Screen1Controller implements Initializable, ControlledScreen {
+public class ProjectDashbordController implements Initializable, ControlledScreen {
 	
 	TestProjectActions actions = new TestProjectActions();
     ScreensController myController;
@@ -45,24 +45,22 @@ public class Screen1Controller implements Initializable, ControlledScreen {
     }
 
      @FXML
-    private void NewProject(ActionEvent event){
-    	 myController.setScreen(ScreensFramework.screen2ID);
-    	 TestProject testProject = new TestProject();
-    	 UtilityTool.addEntity(MainConstants.TESTPROJECT, testProject);
-    	 /*
+    private void goToScreen2(ActionEvent event){
+    	 myController.setScreen(MainLauncher.screen2ID);
+    	
     	 try {
 			testproject=actions.open("src/main/resources/testProject/New.xml");
 			UtilityTool.addEntity(MainConstants.TESTPROJECT, testproject); 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
     	
     }
     
     @FXML
-    private void LoadProject(ActionEvent event){
-    	myController.setScreen(ScreensFramework.screen2ID);
+    private void goToScreen3(ActionEvent event){
+    	myController.setScreen(MainLauncher.screen2ID);
     	//TestProjectActions actions = new TestProjectActions();
     	try {
 			testproject = actions.open("src/main/resources/testProject/Output.xml");

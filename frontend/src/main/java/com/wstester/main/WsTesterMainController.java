@@ -151,7 +151,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 			@Override
 			public void handle(MouseEvent event) {
-				myController.setScreen(ScreensFramework.screen1ID);
+				myController.setScreen(MainLauncher.screen1ID);
 			}
 
 		});
