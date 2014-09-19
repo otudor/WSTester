@@ -9,7 +9,10 @@
 <AnchorPane id="mainWindow" fx:id="pane" minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.main.WsTesterMainController">
   <!-- TODO Add Nodes -->
   <children>
-    <AnchorPane fx:id="topPane" layoutX="0.0" layoutY="0.0" prefHeight="662.0" prefWidth="800.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    <AnchorPane fx:id="topPane" prefHeight="662.0" prefWidth="800.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="SaveProject" layoutX="610.0" layoutY="87.0" mnemonicParsing="false" text="Button" />
+         </children></AnchorPane>
     <AnchorPane fx:id="bar" layoutX="0.0" layoutY="624.0" minWidth="800.0" prefHeight="46.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
   </children>
  </AnchorPane>

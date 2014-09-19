@@ -10,12 +10,14 @@ import java.util.Properties;
  * <p>
  * Utility class to manipulate global application Properties cache
  */
-public final class Util {
+public final class UtilityTool {
 	
 	private static Map<String, String> runtimeProperties = new HashMap<>();
 	private static Properties properties = new Properties();
 
-	private Util() {}
+	private static Map<MainConstants, Object> cache = new HashMap<>();
+	
+	private UtilityTool() {}
 
 	/**
 	 * Add a property(Key with Value) in Application cache
@@ -50,4 +52,11 @@ public final class Util {
 		return properties;
 	}
 
+	public static void addEntity(MainConstants key, Object obj) {
+		cache.put(key, obj);
+	}
+
+	public static Object getEntity(MainConstants key) {
+		return cache.get(key);
+	}
 }

@@ -6,18 +6,22 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 
 import com.wstester.log.CustomLogger;
+import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
+import com.wstester.model.Rule;
 import com.wstester.model.Step;
 
 public class MockSystem implements Processor{
 
-	private static ArrayList<Rule> ruleList = new ArrayList<Rule>();
+	private ArrayList<Rule> ruleList = new ArrayList<Rule>();
 	private CustomLogger log = new CustomLogger(MockSystem.class);		
 	
 	@Override
 	public void process(Exchange exchange) throws Exception {
 		
 		Step step = exchange.getIn().getBody(Step.class);
+		addRules(step.getService().getRuleList());
+
 		
 		log.info(step.getID(), "running mockSystem to return result");
 		String responseContent = runRules(step);
@@ -25,15 +29,17 @@ public class MockSystem implements Processor{
 		Response response = new Response();
 		response.setStepID(step.getID());
 		response.setContent(responseContent);
-		response.setPass(true);
+		response.setStatus(ExecutionStatus.PASSED);
 
 		exchange.getIn().setBody(response);
 	}
 	
-	public void addRule(Rule rule){
+	private void addRules(ArrayList<Rule> ruleList){
 		
-		ruleList.add(rule);
-		log.info("Adding rule: " + rule);
+		for(Rule rule : ruleList){
+			this.ruleList.add(rule);
+			log.info("Adding rule: " + rule);
+		}
 	}
 	
 	private String runRules(Step step){

@@ -7,6 +7,7 @@ import org.codehaus.jettison.json.JSONArray;
 import org.junit.Test;
 
 import com.wstester.camel.TestBaseClass;
+import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
@@ -28,7 +29,7 @@ public class InsertTest extends TestBaseClass{
 		Response selectAfterResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(2).getID(), 25000L);
 		JSONArray after = new JSONArray(selectAfterResponse.getContent());
 
-		assertTrue(selectAfterResponse.isPass());
+		assertTrue(selectAfterResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals(rowsBefore + 1, after.length());
 		for(int i=0; i<after.length(); i++){
 			assertEquals("Ana" , after.getJSONObject(i).get("name"));

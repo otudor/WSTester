@@ -6,6 +6,9 @@ import java.io.IOException;
 
 
 
+
+import com.wstester.model.TestProject;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,8 +29,17 @@ public class MainPresenter
     private MySQLDBPresenter mysqlDBPresenter;
     private SoapPresenter soapPresenter;
     private RestPresenter rstPresenter;
+    public TestProject testProject;
 
-    public void setEnvironmentSearchPresenter(EnvironmentSearchPresenter envSearchPresenter)
+    public TestProject getTestProject() {
+		return testProject;
+	}
+
+	public void setTestProject(TestProject testproject) {
+		this.testProject = testproject;
+	}
+
+	public void setEnvironmentSearchPresenter(EnvironmentSearchPresenter envSearchPresenter)
     {
         this.envSearchPresenter = envSearchPresenter;
     }

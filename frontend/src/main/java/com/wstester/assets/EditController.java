@@ -49,7 +49,7 @@ import com.wstester.services.definition.IAssetManager;
 import com.wstester.services.impl.AssetManager;
 import com.wstester.util.MainConstants;
 import com.wstester.util.MainWindowListener;
-import com.wstester.util.Util;
+import com.wstester.util.UtilityTool;
 
 public class EditController implements MainWindowListener {
 	

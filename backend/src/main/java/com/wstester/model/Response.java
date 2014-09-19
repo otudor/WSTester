@@ -7,7 +7,7 @@ public class Response implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String stepID;
 	private String content;
-	private boolean pass;
+	private ExecutionStatus status;
 	
 	public String getStepID() {
 		return stepID;
@@ -25,25 +25,25 @@ public class Response implements Serializable{
 		this.content = content;
 	}
 	
-	public boolean isPass() {
-		return pass;
+	public ExecutionStatus getStatus() {
+		return status;
 	}
-	
-	public void setPass(boolean pass) {
-		this.pass = pass;
+
+	public void setStatus(ExecutionStatus status) {
+		this.status = status;
 	}
 
 	@Override
 	public String toString() {
-		return "Response [stepID=" + stepID + ", content=" + content + ", pass=" + pass + "]";
+		return "Response [stepID=" + stepID + ", content=" + content + ", status=" + status + "]";
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result + (pass ? 1231 : 1237);
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((stepID == null) ? 0 : stepID.hashCode());
 		return result;
 	}
@@ -62,7 +62,7 @@ public class Response implements Serializable{
 				return false;
 		} else if (!content.equals(other.content))
 			return false;
-		if (pass != other.pass)
+		if (status != other.status)
 			return false;
 		if (stepID == null) {
 			if (other.stepID != null)

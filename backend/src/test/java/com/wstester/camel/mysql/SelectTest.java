@@ -7,6 +7,7 @@ import org.codehaus.jettison.json.JSONArray;
 import org.junit.Test;
 
 import com.wstester.camel.TestBaseClass;
+import com.wstester.model.ExecutionStatus;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
 import com.wstester.model.TestProject;
@@ -29,7 +30,7 @@ public class SelectTest extends TestBaseClass{
 		
 		JSONArray result = new JSONArray(response.getContent());
 
-		assertTrue(response.isPass());
+		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("popescu", result.getJSONObject(0).get("detalii"));
 		assertEquals("ion", result.getJSONObject(1).get("detalii"));
 	}

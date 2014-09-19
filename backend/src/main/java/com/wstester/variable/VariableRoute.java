@@ -1,4 +1,4 @@
-package com.wstester.variables;
+package com.wstester.variable;
 
 import java.util.*;
 import org.apache.camel.Exchange;
@@ -7,9 +7,10 @@ import org.apache.camel.builder.RouteBuilder;
 import com.wstester.model.Variable;
 
 
-public class VariableManager extends RouteBuilder {
+public class VariableRoute extends RouteBuilder {
 
-	private static Set<Variable> variableSet = new HashSet<Variable>() ;
+	private static Set<Variable> variableSet = new HashSet<Variable>();
+	
 	public void configure() throws Exception{
 		 
 		from("jms:variableQueue")
@@ -24,11 +25,10 @@ public class VariableManager extends RouteBuilder {
 		});
 	}
 
-	public static Variable getVariable (String variableId) {
+	public Variable getVariable (String variableId) {
 
 		for (Variable variable : variableSet){
 				if(variable.getID().equals(variableId)){
-					variableSet.remove(variable);
 					return variable;
 				}
 			}
@@ -36,9 +36,16 @@ public class VariableManager extends RouteBuilder {
 		return null;
 		
 	}
+	
 	public static boolean allVariablesReceived(int variableSize) {
 		
-		return true;
+		System.out.println("Expected: " + variableSize + " Actual: " + variableSet.size());
+		if(variableSet.size() == variableSize){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 }

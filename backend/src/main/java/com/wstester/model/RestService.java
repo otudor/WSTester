@@ -21,7 +21,8 @@ public class RestService extends Service {
 
 	@Override
 	public String detailedToString() {
-		return "RestService [port=" + port + ", uuid=" + uuid + ", name=" + name + ", status=" + status + "]";
+		return "RestService [port=" + port + ", uuid=" + uuid + ", name=" + name + ", status=" + status + ", ruleList=" 
+				+ ruleList + "]";
 	}
 
 	@Override

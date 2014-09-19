@@ -33,6 +33,7 @@
 	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
 		<package>com.wstester.dispatcher</package>
 		<package>com.wstester.mock</package>
+		<package>com.wstester.variable</package>
 	</camelContext>
 
 </beans>

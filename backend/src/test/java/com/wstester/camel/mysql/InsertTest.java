@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import com.wstester.camel.TestBaseClass;
+import com.wstester.model.ExecutionStatus;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
 import com.wstester.model.TestProject;
@@ -25,6 +26,6 @@ public class InsertTest extends TestBaseClass{
 
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 
-		assertTrue(response.isPass());
+		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 	}
 }

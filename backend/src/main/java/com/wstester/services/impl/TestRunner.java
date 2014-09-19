@@ -25,7 +25,7 @@ import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
 import com.wstester.model.Variable;
 import com.wstester.services.definition.ITestRunner;
-import com.wstester.variables.VariableManager;
+import com.wstester.variable.VariableRoute;
 
 public class TestRunner implements ITestRunner{
 	
@@ -94,7 +94,13 @@ public class TestRunner implements ITestRunner{
 			timeout-=1000;
 		} 
 		
-		log.info(stepId, response.toString());
+		if(response != null){
+			log.info(stepId, response.toString());
+		}
+		else{
+			log.info(stepId, "Response is null");
+		}
+		
 		return response;
 	}
 	
@@ -106,11 +112,12 @@ public class TestRunner implements ITestRunner{
 			
 			log.info("Running " + entityToRun);
 			this.entityToRun = entityToRun;
+			
 		}
-
+		
 		@Override
 		public void run() {
-
+			
 			Connection connection = null;
 			Session session = null;
 			try {
@@ -126,7 +133,7 @@ public class TestRunner implements ITestRunner{
 
 				// Create a Session
 				session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-
+				
 				// Manage the variables
 				manageVariable(session);
 				
@@ -148,6 +155,7 @@ public class TestRunner implements ITestRunner{
 				}
 			}
 		}
+		
 	}
 	
 	private void manageVariable(Session session) throws JMSException, InterruptedException{
@@ -207,10 +215,11 @@ public class TestRunner implements ITestRunner{
 				}
 			}
 		}
-
+		System.out.println("queue created!!!!!");
 		// TODO: change timeout to configuration file
 		Long timeout = 10000L;
-		while(!VariableManager.allVariablesReceived(variableSize) && ((timeout -= 1000) > 0)){
+		// TODO: change the source of the allVariablesReceived from VariableRoute to VariableManager
+		while(!VariableRoute.allVariablesReceived(variableSize) && ((timeout -= 1000) > 0)){
 			
 			Thread.sleep(1000);
 		}	

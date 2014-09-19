@@ -45,6 +45,7 @@ public class ResponseCallback extends RouteBuilder {
 	public static boolean allResponsesReceived(int size){
 		
 		if(totalResponses == size) {
+			totalResponses = 0;
 			return true;
 		}
 		

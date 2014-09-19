@@ -39,7 +39,7 @@ public class SerializationTest {
         assertEquals(testPlanBefore, testPlanAfter);
 	}
 	
-	@AfterClass
+//	@AfterClass
 	public static void delete(){
 		
 		if(file.delete()){

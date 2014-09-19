@@ -15,6 +15,14 @@ public class TestSuiteFactory
     private RestStepController restStepController;
     private TestSuiteService tsService;
     
+    public void scrie(String scrie)
+	 {
+		 System.out.println(scrie);
+	 }
+    
+    
+    
+    
     public TestSuiteManagerController getManagerController()
     {
         if (tsManagerController == null)

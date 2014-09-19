@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
 
+import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
 import com.wstester.model.RestStep;
 import com.wstester.model.TestProject;
@@ -29,7 +30,7 @@ public class PostRequestTest extends RestTestBaseClass {
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
 		
-		assertTrue(response.isPass());
+		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("Inovation", entry);
 	}
 	
@@ -53,7 +54,7 @@ public class PostRequestTest extends RestTestBaseClass {
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
 		
-		assertTrue(response.isPass());
+		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals(name.toString(), entry);
 	}
 }

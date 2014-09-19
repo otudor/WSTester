@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import com.wstester.util.MainWindowListener;
-import com.wstester.util.Util;
+import com.wstester.util.UtilityTool;
 
 public class WsTesterMain extends Application implements MainWindowListener {
 	
@@ -78,13 +78,13 @@ public class WsTesterMain extends Application implements MainWindowListener {
         
         Set keys = p.keySet();
         for(Object key : keys) {
-        	Util.addOrReplaceProperty(key.toString(), p.getProperty(key.toString()));
+        	UtilityTool.addOrReplaceProperty(key.toString(), p.getProperty(key.toString()));
         }
 	}
 
 	@Override
 	public void shutDown() {
-		Properties props = Util.getRuntimeProperties();
+		Properties props = UtilityTool.getRuntimeProperties();
 		
 		File f = new File("/system.properties");
 		OutputStream out;

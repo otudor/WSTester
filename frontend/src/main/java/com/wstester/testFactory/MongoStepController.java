@@ -13,7 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import com.wstester.model.Execution;
 import com.wstester.model.MongoStep;
 import com.wstester.model.MySQLStep;
-import com.wstester.model.StepStatusType;
+import com.wstester.model.ExecutionStatus;
 import com.wstester.testFactory.MySQLStepController.Execut;
 
 public class MongoStepController
@@ -75,12 +75,12 @@ public class MongoStepController
         Execution execution = step.getLastExecution();
         if( execution != null)
         {
-        	if (execution.getStatus() == StepStatusType.PASSED)
+        	if (execution.getResponse().getStatus() == ExecutionStatus.PASSED)
         		lblStatus.setText("PASSED");
         	//else ....
         		//FAILED
         	lblResponse.setText(execution.getResponse().getContent());
-        	Execut exemplu = new Execut(execution.getRunDate().toString(),execution.getStatus().toString(),execution.getResponse().getContent());
+        	Execut exemplu = new Execut(execution.getRunDate().toString(),execution.getResponse().getStatus().toString(),execution.getResponse().getContent());
             lista.add(exemplu);
             tblExecutions.setItems(lista);
             columnDate.setCellValueFactory(
