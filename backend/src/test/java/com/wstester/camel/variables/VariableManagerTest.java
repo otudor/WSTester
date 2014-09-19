@@ -11,7 +11,7 @@ import com.wstester.model.Variable;
 import com.wstester.services.impl.TestRunner;
 import com.wstester.variable.VariableRoute;
 
-public class TestVariableManager extends TestBaseClass {
+public class VariableManagerTest extends TestBaseClass {
 
 		@Test
 		public void runTest() throws Exception{
@@ -36,5 +36,14 @@ public class TestVariableManager extends TestBaseClass {
 			
 			Variable projectVariableAfter = manager.getVariable(projectVariable.getID());
 			assertEquals(projectVariable, projectVariableAfter);
+			
+			Variable suiteVariableAfter = manager.getVariable(suiteVariable.getID());
+			assertEquals(suiteVariable, suiteVariableAfter);
+		
+			Variable caseVariableAfter = manager.getVariable(caseVariable.getID());
+			assertEquals(caseVariable, caseVariableAfter);
+			
+			Variable stepVariableAfter = manager.getVariable(stepVariable.getID());
+			assertEquals(stepVariable, stepVariableAfter);
 		}
 }
