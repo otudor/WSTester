@@ -17,8 +17,8 @@
             </Label>
             <HBox spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#goToScreen2" text="New Project" />
-                  <Button mnemonicParsing="false" onAction="#goToScreen3" text="Load Project" />
+                  <Button mnemonicParsing="false" onAction="#NewProject" text="New Project" />
+                  <Button mnemonicParsing="false" onAction="#LoadProject" text="Load Project" />
                </children>
             </HBox>
          </children>

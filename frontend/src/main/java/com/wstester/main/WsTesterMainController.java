@@ -109,7 +109,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		this.createRESTWindow();
 		this.createTestFactoryWindow();
 		this.saveProject();
-//		this.goToLoad();
+		this.goToLoad();
 		stage.initOwner(WsTesterMain.stage);
 
 
@@ -146,17 +146,17 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 
 
-//	private void goToLoad() {
-//		newIcoM1.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//
-//			@Override
-//			public void handle(MouseEvent event) {
-//				myController.setScreen(ScreensFramework.screen1ID);
-//			}
-//
-//		});
-//
-//	}
+	private void goToLoad() {
+		newIcoM1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				myController.setScreen(ScreensFramework.screen1ID);
+			}
+
+		});
+
+	}
 	//method to create+add the icons
 	private void createIcons(){		
 		newIco = (VBox) CreateIcon("/images/document-open-remote.png","Assets");
@@ -370,11 +370,11 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						//Menu menu2 = new Menu("CreateSOAP");
 						//menuBar.getMenus().add(menu2);
 
-						//stageSoap.initOwner(pane.getScene().getWindow());
+						stageSoap.initOwner(pane.getScene().getWindow());
 						stageSoap.setScene(second);
 
 						stageSoap.setTitle("SOAP Window");
-						stageSoap.initOwner(WsTesterMain.stage);
+						
 						//stageSoap.initModality(Modality.WINDOW_MODAL);
 
 
@@ -801,12 +801,6 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						stage.setTitle("Environments window");
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/Envwindows.css").toExternalForm());					
 						root.getStyleClass().add("mainWind");
-
-
-
-
-
-
 
 						newIcoM6 = (VBox) CreateIcon("/images/task_img_open.png","Env");	
 						newIcoM6.setLayoutX(poz);
