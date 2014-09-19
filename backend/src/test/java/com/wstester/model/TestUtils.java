@@ -916,10 +916,10 @@ public static TestProject variableTestPlan() throws IOException{
 		variable.setContent(content);
 		
 		Variable variable1 = new Variable();
-//		variable1.setContent("test");
-		variable.setName("testName");
-		variable.setSelector("testSelector");
-		variable.setType(VariableType.STRING);
+		variable1.setContent("test");
+		variable1.setName("testName");
+		variable1.setSelector("testSelector");
+		variable1.setType(VariableType.STRING);
 		
 		variableList.add(variable);
 		variableList.add(variable1);

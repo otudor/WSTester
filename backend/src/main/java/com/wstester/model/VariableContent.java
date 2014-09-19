@@ -7,9 +7,11 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 
+import com.wstester.exceptions.WsException;
+
 public class VariableContent extends RouteBuilder {
  
-	private static Set<Variable> variableSet = new HashSet<Variable>() ;
+	private static Set<Variable> varSet = new HashSet<Variable>() ;
 	private static int contentResponses = 0;
 	
 	@Override
@@ -21,26 +23,22 @@ public class VariableContent extends RouteBuilder {
 		.process(new Processor() {
 			@Override
 			public void process(Exchange exchange) throws Exception {
+				System.out.println("intra");
 				Variable variable = exchange.getIn().getBody(Variable.class);
-				variableSet.add(variable);
+				varSet.add(variable);
 				contentResponses++;
 			}
-		}).endChoice();
+		});
 	}
-	public static Variable getContent(String variableID){
+	public static Variable getContent(String variableID) throws WsException{
 		
-			for (Variable variable : variableSet){
+			for (Variable variable : varSet){
 				if (variable.getID().equals(variableID)){
 					if(variable.getContent()== null){
-						
-						try {
-								
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						throw new WsException("Variable content is null....please define a variable content", null);
+					
 					}
-					variableSet.remove(variable);
+					varSet.remove(variable);
 					return variable;
 				}
 			}
@@ -49,9 +47,9 @@ public class VariableContent extends RouteBuilder {
 public static boolean allContentResponsesReceived(int size){
 		
 		if(contentResponses == size) {
+			
 			return true;
 		}
-		
 		return false;
 	}
 }
