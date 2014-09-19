@@ -23,7 +23,7 @@
             <ip>localhost</ip>
             <name>Server 11</name>
             <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="restService">
-                <name>Service Rest</name>
+                <name>Service Rest Test</name>
                 <port>9997</port>
             </services>
         </servers>
@@ -186,9 +186,17 @@
                 <assertList>
                     <asserts xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">Third assert</asserts>
                 </assertList>
-                <name>Step 3</name>
-                <operation>SELECT * FROM nume</operation>
-                <server>
+                <name>MySQL Step 1</name>
+                <operation>SELECT * FROM Angajati where id='2'</operation>
+                
+                <service xsi:type="mySQLService">
+                    <dbName>test</dbName>
+                    <name>Service MYSQL</name>
+                    <password>apppass</password>
+                    <port>3306</port>
+                    <user>appuser</user>
+                </service>
+            <server>
                     <description>This is the first server of the second env</description>
                     <ip>localhost</ip>
                     <name>Server 21</name>
@@ -199,15 +207,7 @@
                         <port>3306</port>
                         <user>appuser</user>
                     </services>
-                </server>
-                <service xsi:type="mySQLService">
-                    <dbName>test</dbName>
-                    <name>Service MYSQL</name>
-                    <password>apppass</password>
-                    <port>3306</port>
-                    <user>appuser</user>
-                </service>
-            </stepList>
+                </server></stepList>
             <stepList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="soapStep">
                 <assertList>
                     <asserts xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">Forth assert</asserts>
@@ -239,6 +239,31 @@
                     <wsdlURL>http://footballpool.dataaccess.eu/data/info.wso?wsdl</wsdlURL>
                 </service>
             </stepList>
+            <stepList
+            	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            	xsi:type="mySQLStep">
+            	<assertList>
+            		<asserts></asserts></assertList>
+            	<name>MySQL Step 2</name>
+            	<operation>Select * FROM Angajati</operation>
+            <service xsi:type="mySQLService">
+                    <dbName>test</dbName>
+                    <name>Service MYSQL</name>
+                    <password>apppass</password>
+                    <port>3306</port>
+                    <user>appuser</user>
+                </service><server>
+                    <description>This is the first server of the second env</description>
+                    <ip>localhost</ip>
+                    <name>Server 21</name>
+                    <services xsi:type="mySQLService">
+                        <dbName>test</dbName>
+                        <name>Service MYSQL</name>
+                        <password>apppass</password>
+                        <port>3306</port>
+                        <user>appuser</user>
+                    </services>
+                </server></stepList>
         </testCaseList>
     </testSuiteList>
 </testProject>

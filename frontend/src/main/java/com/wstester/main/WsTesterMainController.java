@@ -370,11 +370,11 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						//Menu menu2 = new Menu("CreateSOAP");
 						//menuBar.getMenus().add(menu2);
 
-						//stageSoap.initOwner(pane.getScene().getWindow());
+						stageSoap.initOwner(pane.getScene().getWindow());
 						stageSoap.setScene(second);
 
 						stageSoap.setTitle("SOAP Window");
-						stageSoap.initOwner(WsTesterMain.stage);
+						
 						//stageSoap.initModality(Modality.WINDOW_MODAL);
 
 
@@ -597,7 +597,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						TestSuiteManagerController mainPresenter = factory.getManagerController();
 						mainPresenter.loadTestSuites();
 						root = mainPresenter.getView();
-						Scene second = new Scene(root, 600, 480);
+						Scene second = new Scene(root,1280, 720);
 						root.getStylesheets().add("/styles/Styles.css");
 						stage.setTitle("Test Suites window");
 
@@ -801,12 +801,6 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						stage.setTitle("Environments window");
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/Envwindows.css").toExternalForm());					
 						root.getStyleClass().add("mainWind");
-
-
-
-
-
-
 
 						newIcoM6 = (VBox) CreateIcon("/images/task_img_open.png","Env");	
 						newIcoM6.setLayoutX(poz);

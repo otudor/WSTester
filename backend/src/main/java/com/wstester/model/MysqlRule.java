@@ -1,13 +1,13 @@
 package com.wstester.model;
 
-public class RestRule extends Rule{
+public class MysqlRule extends Rule {
 
 	private static final long serialVersionUID = 1L;
 
-	public enum InputType {PATH, METHOD};
+	public enum InputType {OPERATION};
 	private InputType inputType;
 	
-	public RestRule(InputType inputType, String input, String output){
+	public MysqlRule(InputType inputType, String input, String output){
 		
 		this.inputType = inputType;
 		this.inputString = input;
@@ -15,29 +15,21 @@ public class RestRule extends Rule{
 	}
 	
 	@Override
-	public String run(Step step){
-		
-		if(step instanceof RestStep){
-			
-			if(inputType.equals(InputType.PATH)){
-				if(inputString != null && ((RestStep)step).getPath().contains(inputString)){
-					return output;
-				}
-			}
-			
-			if(inputType.equals(InputType.METHOD)){
-				if(inputString != null && ((RestStep)step).getMethod().equals(inputString)){
+	public String run(Step step) {
+
+		if(step instanceof MySQLStep){
+			if(inputType.equals(InputType.OPERATION)){
+				if(inputString != null && ((MySQLStep)step).getOperation().equals(inputString)){
 					return output;
 				}
 			}
 		}
-		
 		return null;
 	}
 
 	@Override
 	public String toString() {
-		return "RestRule [inputType=" + inputType + ", inputString=" + inputString + ", inputAsset=" + inputAsset + ", output=" + output + "]";
+		return "MysqlRule [inputType=" + inputType + ", inputString=" + inputString + ", inputAsset=" + inputAsset + ", output=" + output + "]";
 	}
 
 	@Override
@@ -56,7 +48,7 @@ public class RestRule extends Rule{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RestRule other = (RestRule) obj;
+		MysqlRule other = (MysqlRule) obj;
 		if (inputType != other.inputType)
 			return false;
 		return true;

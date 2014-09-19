@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="708.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.main.Screen1Controller">
+<AnchorPane minHeight="768.0" minWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.main.Screen1Controller">
    <children>
       <VBox fx:id="goToScreen3" prefHeight="600.0" prefWidth="600.0">
          <children>
@@ -17,8 +17,8 @@
             </Label>
             <HBox spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#goToScreen2" text="New Project" />
-                  <Button mnemonicParsing="false" onAction="#goToScreen3" text="Load Project" />
+                  <Button mnemonicParsing="false" onAction="#NewProject" text="New Project" />
+                  <Button mnemonicParsing="false" onAction="#LoadProject" text="Load Project" />
                </children>
             </HBox>
          </children>

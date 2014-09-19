@@ -15,18 +15,26 @@ import com.wstester.model.Service;
 import com.wstester.model.SoapStep;
 import com.wstester.model.Step;
 import com.wstester.model.TestCase;
+import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
+import com.wstester.util.MainConstants;
+import com.wstester.util.UtilityTool;
 
 public class TestSuiteService
 {
     //private long nextId = 0;
     private Map<String, TestSuite> tsList;
+    private TestProject testProject;
 
     public TestSuiteService()
     {
         this.tsList = new HashMap<String, TestSuite>();
-
-        TestSuite ts1 = createTestSuite( "Test Suite");
+        testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+        for(TestSuite entry:testProject.getTestSuiteList())
+        {
+        	tsList.put(entry.getID(),entry);
+        }
+        /*TestSuite ts1 = createTestSuite( "Test Suite");
         ts1.setEnvironment( new Environment("Environment de test"));
         List<TestCase> tcList = new ArrayList<TestCase>();
 		TestCase tc1 = new TestCase();
@@ -60,7 +68,7 @@ public class TestSuiteService
 		stpList.add(mysqlStep2);
 		tc1.setStepList(stpList);
 		tcList.add( tc1);
-		ts1.setTestCaseList( tcList);		
+		ts1.setTestCaseList( tcList);*/		
     }
 
     public TestSuite createTestSuite(String name)
@@ -279,6 +287,15 @@ public class TestSuiteService
     	return null;
     }
     
+    public void saveEnv()
+	{	
+		List<TestSuite> list = new ArrayList<>();
+		for(TestSuite entry : tsList.values() )
+		{
+			list.add(entry);
+		}
+		((TestProject)UtilityTool.getEntity(MainConstants.TESTPROJECT)).setTestSuiteList(list);
+	}
 
     
     /*public void removeEnvironmentById( String uId)

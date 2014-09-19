@@ -28,12 +28,13 @@ public class EnvironmentService {
 		this.environments = new HashMap<String, Environment>();
 		// createContact("Cathy", "Freeman");
 		testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		if(testProject.getEnvironmentList()!=null)
+		{
 		for(Environment entry:testProject.getEnvironmentList())
 		{
 			environments.put(entry.getID(), entry);
-			//list.add(entry);
 		}
-			
+		}
 	}
 
 	public Environment createEnvironment(String name) {
@@ -437,10 +438,5 @@ public class EnvironmentService {
 			list.add(entry);
 		}
 		((TestProject)UtilityTool.getEntity(MainConstants.TESTPROJECT)).setEnvironmentList(list);
-		environments.clear();
-		for(Environment entry:testProject.getEnvironmentList())
-		{
-			environments.put(entry.getID(), entry);
-		}		
 	}
 }

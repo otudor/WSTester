@@ -112,7 +112,7 @@ public class ServerDetailsPresenter
     	labelname.setText(ftpNameField.getText());
     	labelip.setText(ftpIPField.getText());   	
     	labeldesc.setText(DescField.getText());		
-
+    	envService.saveEnv();
 	}
     
     public void cancelEdit(ActionEvent e)

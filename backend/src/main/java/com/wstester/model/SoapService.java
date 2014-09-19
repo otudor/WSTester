@@ -20,7 +20,7 @@ public class SoapService extends Service {
 	public String getPath() {
 		return path;
 	}
-
+	
 	public void setPort(String port) {
 		this.port = port;
 	}
@@ -32,7 +32,7 @@ public class SoapService extends Service {
 		
 		this.path = path;
 	}
-
+	
 	public String getWsdlURL() {
 		return wsdlURL;
 	}
@@ -46,6 +46,11 @@ public class SoapService extends Service {
 		return "SoapService [port=" + port + ", path=" + path + ", wsdlURL=" + wsdlURL + ", uuid=" + uuid + ", name=" + name + ", status=" + status + ", ruleList=" 
 				+ ruleList + "]";
 	}
+	
+	@Override
+    public String toString() { 
+    	return this.name; 
+    }
 
 	@Override
 	public int hashCode() {

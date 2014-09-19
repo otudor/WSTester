@@ -25,7 +25,7 @@ public class MySQLService extends Service {
 	public String getDbName() {
 		return dbName;
 	}
-
+	
 	public void setDbName(String dbName) {
 		this.dbName = dbName;
 	}
@@ -51,6 +51,11 @@ public class MySQLService extends Service {
 		return "MySQLService [port=" + port + ", dbName=" + dbName + ", user=" + user + ", password=" + password + ", uuid=" + uuid + ", name=" + name + ", status=" + status + ", ruleList=" 
 				+ ruleList + "]";
 	}
+	
+	@Override
+    public String toString() { 
+    	return this.name; 
+    }
 
 	@Override
 	public int hashCode() {

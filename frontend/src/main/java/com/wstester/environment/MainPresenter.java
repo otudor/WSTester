@@ -30,6 +30,7 @@ public class MainPresenter
     private SoapPresenter soapPresenter;
     private RestPresenter rstPresenter;
     public TestProject testProject;
+    private EnvironmentService envService;
 
     public TestProject getTestProject() {
 		return testProject;

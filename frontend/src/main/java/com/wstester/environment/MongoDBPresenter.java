@@ -126,6 +126,7 @@ public class MongoDBPresenter {
     	labelname.setText(MongoName.getText());
     	labeluser.setText(MongoUser.getText());   	
     	labelpass.setText(MongoPassfield.getText());
+    	envService.saveEnv();
     }
     
     public void cancelEdit(ActionEvent event)

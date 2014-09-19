@@ -62,6 +62,7 @@ public void setRest( final String serverUID, final String serviceUID)
     	gridpane.getChildren().remove(restField);
     	gridpane.getChildren().add(labelport);
     	labelport.setText(restField.getText());
+    	envService.saveEnv();
 	}
 	
 	public void editRest(ActionEvent e) {

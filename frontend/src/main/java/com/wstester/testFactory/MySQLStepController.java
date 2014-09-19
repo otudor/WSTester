@@ -30,10 +30,10 @@ import javafx.scene.image.ImageView;
 public class MySQLStepController
 {
     @FXML private Node rootMySQLStep;
-    @FXML private Label lblName;
-    @FXML private Label lblSQL;
-    @FXML private Label lblStatus;
-    @FXML private Label lblResponse;
+    @FXML private TextField stepName;
+    @FXML private TextField sqlField;
+    @FXML private TextField sqlStatus;
+    @FXML private TextField sqlResponse;
     @FXML private TableView<Execut> tblExecutions;
     @FXML private TableColumn<Execut, String> columnDate;
     @FXML private TableColumn<Execut, String> columnStatus;
@@ -67,23 +67,23 @@ public class MySQLStepController
 
     public void setMySQLStep(final String stepUID)
     {
-    	lblName.setText("");
-        lblSQL.setText("SQL");
-        lblStatus.setText("Not run");
-        lblResponse.setText("Not run");
+    /*	stepName.setText("");
+        sqlField.setText("SQL");
+        sqlStatus.setText("Not run");
+        sqlResponce.setText("Not run");*/
         
         step = (MySQLStep) tsService.getStep( stepUID);
-        lblName.setText(step.getName());
-        lblSQL.setText(step.getOperation());
+        stepName.setText(step.getName());
+        sqlField.setText(step.getOperation());
         Execution execution = step.getLastExecution();
         
         if( execution != null)
         {
         	if (execution.getResponse().getStatus() == ExecutionStatus.PASSED)
-        		lblStatus.setText("PASSED");
+        		sqlStatus.setText("PASSED");
         	//else ....
         		//FAILED
-        	lblResponse.setText(execution.getResponse().getContent());
+        	sqlResponse.setText(execution.getResponse().getContent());
         	//List<Execution> list = new ArrayList<>();
         	List<Execution> list = step.getExecutionList();
         	List<Execut> lista = new ArrayList<>();// = FXCollections.observableArrayList(step.getExecutionList());

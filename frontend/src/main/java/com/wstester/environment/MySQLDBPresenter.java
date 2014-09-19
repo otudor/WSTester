@@ -109,7 +109,7 @@ public class MySQLDBPresenter {
     	labelname.setText(dbNameField.getText());
     	labeluser.setText(dbUsernameField.getText());   	
     	labelpass.setText(dbPassField.getText());
-
+    	envService.saveEnv();
 	}
 
 	public void editMySQL(ActionEvent e) {

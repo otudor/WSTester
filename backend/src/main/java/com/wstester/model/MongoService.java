@@ -29,7 +29,7 @@ public class MongoService extends Service{
 	public void setDbName(String dbName) {
 		this.dbName = dbName;
 	}
-
+	
 	public String getUser() {
 		return user;
 	}
@@ -51,6 +51,11 @@ public class MongoService extends Service{
 		return "MongoService [port=" + port + ", dbName=" + dbName + ", user=" + user + ", password=" + password + ", uuid=" + uuid + ", name=" + name + ", status=" + status + ", ruleList=" 
 				+ ruleList +"]";
 	}
+	
+	@Override
+    public String toString() { 
+    	return this.name; 
+    }
 
 	@Override
 	public int hashCode() {

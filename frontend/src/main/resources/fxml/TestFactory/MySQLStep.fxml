@@ -9,38 +9,39 @@
           
     <children>
         <Label text="Step Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Label fx:id="lblName" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <Label text="SQL" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <Label fx:id="lblSQL" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         
         <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <Label fx:id="lblStatus" prefWidth="50" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         
         <Label text="Response:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <Label fx:id="lblResponse" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         
         <Label text="Past executions" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-        <TableView fx:id="tblExecutions" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5">
+        <TableView fx:id="tblExecutions" prefWidth="710.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5">
 		     <columns>
-		          <TableColumn fx:id="columnDate" text="Date">
+		          <TableColumn fx:id="columnDate" prefWidth="200.0" text="Date">
 		          </TableColumn>
-		          <TableColumn fx:id="columnStatus" text="Status">
+		          <TableColumn fx:id="columnStatus" prefWidth="100.0" text="Status">
 		          </TableColumn>
-		          <TableColumn fx:id="columnResponse" text="Response">
+		          <TableColumn fx:id="columnResponse" prefWidth="400.0" text="Response">
 		          </TableColumn>
 		     </columns>
 		</TableView>
+      <TextField fx:id="sqlField" maxHeight="17.0" minHeight="22.0" minWidth="17.0" promptText="Name of SQL" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextField fx:id="stepName" maxHeight="26.0" minHeight="22.0" minWidth="20.0" prefHeight="26.0" prefWidth="573.0" promptText="The Name of the Step" GridPane.columnIndex="1" />
+      <TextField fx:id="sqlStatus" maxHeight="17.0" minHeight="22.0" minWidth="17.0" promptText="Curent Status" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="sqlResponse" maxHeight="17.0" minHeight="22.0" minWidth="17.0" promptText="Response returned" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <TextField fx:id="sqlPastExecutions" maxHeight="17.0" minHeight="22.0" minWidth="17.0" promptText="Passed Executions" GridPane.columnIndex="1" GridPane.rowIndex="4" />
     </children>
    <padding>
       <Insets left="10.0" />
    </padding>
    <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
+      <ColumnConstraints maxWidth="127.0" minWidth="68.0" prefWidth="127.0" />
+      <ColumnConstraints maxWidth="632.0" minWidth="573.0" prefWidth="573.0" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
+      <RowConstraints maxHeight="24.0" minHeight="17.0" prefHeight="17.0" />
+      <RowConstraints maxHeight="17.0" minHeight="10.0" prefHeight="17.0" />
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />
