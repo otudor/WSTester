@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javafx.scene.control.TreeItem;
 
+import com.sun.xml.bind.v2.util.QNameMap.Entry;
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
@@ -14,63 +15,25 @@ import com.wstester.model.RestService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.SoapService;
+import com.wstester.model.TestProject;
+import com.wstester.util.*;
 
 public class EnvironmentService {
 	// private long nextId = 0;
 	private Map<String, Environment> environments;
+	private TestProject testProject;
+	
 
 	public EnvironmentService() {
 		this.environments = new HashMap<String, Environment>();
 		// createContact("Cathy", "Freeman");
-		Environment e1 = createEnvironment("CT");
-		List<Server> list1 = new ArrayList<Server>();
-		Server srv1 = new Server("Server1", "44.44.44.44",
-				"description ftp server");
-
-		List<Service> lstService = new ArrayList<Service>();
-		// MySQL service
-		MySQLService mysqlsrv = new MySQLService();
-		mysqlsrv.setName("Serviciul de MySQL");
-		mysqlsrv.setUser("user");
-		mysqlsrv.setDbName("DB Name");
-		mysqlsrv.setPort("80");
-		mysqlsrv.setPassword("pass");
-		lstService.add(mysqlsrv);
-		// SoapService
-		SoapService soap = new SoapService();
-		soap.setName("Sviciul de Soap");
-		soap.setPath("path");
-		soap.setPort("DB Name");
-		soap.setWsdlURL("URL");
-		lstService.add(soap);
-		// Rest service
-		RestService rstsrv = new RestService();
-		rstsrv.setName("Serviciul de Rest");
-		rstsrv.setPort("9080");
-		lstService.add(rstsrv);
-		// Mongo service
-		MongoService mongosrv = new MongoService();
-		mongosrv.setName("Serviciul de Mongo");
-		mongosrv.setUser("user");
-		mongosrv.setDbName("DB Name");
-		mongosrv.setPort("70");
-		mongosrv.setPassword("pass");
-		lstService.add(mongosrv);
-		srv1.setServices(lstService);
-		list1.add(srv1);
-		e1.setServers(list1);
-		// SoapService
-
-		Environment e2 = createEnvironment("CHINA Env");
-		List<Server> list2 = new ArrayList<Server>();
-		list2.add(new Server("Server2", "55.55.55.55",
-				"description China server"));
-		e2.setServers(list2);
-
-		Environment e3 = createEnvironment("UK Env");
-		List<Server> list3 = new ArrayList<Server>();
-		list3.add(new Server("Server3", "55.99.80.71", "description UK server"));
-		e3.setServers(list3);
+		testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		for(Environment entry:testProject.getEnvironmentList())
+		{
+			environments.put(entry.getID(), entry);
+			//list.add(entry);
+		}
+			
 	}
 
 	public Environment createEnvironment(String name) {
@@ -465,6 +428,19 @@ public class EnvironmentService {
 					}
 			}
 		}
-
+	}
+	public void saveEnv()
+	{	
+		List<Environment> list = new ArrayList<>();
+		for(Environment entry : environments.values() )
+		{
+			list.add(entry);
+		}
+		((TestProject)UtilityTool.getEntity(MainConstants.TESTPROJECT)).setEnvironmentList(list);
+		environments.clear();
+		for(Environment entry:testProject.getEnvironmentList())
+		{
+			environments.put(entry.getID(), entry);
+		}		
 	}
 }
