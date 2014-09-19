@@ -31,7 +31,6 @@ public class EnvironmentService {
 		for(Environment entry:testProject.getEnvironmentList())
 		{
 			environments.put(entry.getID(), entry);
-			//list.add(entry);
 		}
 			
 	}
@@ -437,10 +436,5 @@ public class EnvironmentService {
 			list.add(entry);
 		}
 		((TestProject)UtilityTool.getEntity(MainConstants.TESTPROJECT)).setEnvironmentList(list);
-		environments.clear();
-		for(Environment entry:testProject.getEnvironmentList())
-		{
-			environments.put(entry.getID(), entry);
-		}		
 	}
 }

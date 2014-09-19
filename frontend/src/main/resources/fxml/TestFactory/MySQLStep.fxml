@@ -20,13 +20,13 @@
         <Label fx:id="lblResponse" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         
         <Label text="Past executions" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-        <TableView fx:id="tblExecutions" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5">
+        <TableView fx:id="tblExecutions" prefWidth="710.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5">
 		     <columns>
-		          <TableColumn fx:id="columnDate" text="Date">
+		          <TableColumn fx:id="columnDate" prefWidth="200.0" text="Date">
 		          </TableColumn>
-		          <TableColumn fx:id="columnStatus" text="Status">
+		          <TableColumn fx:id="columnStatus" prefWidth="100.0" text="Status">
 		          </TableColumn>
-		          <TableColumn fx:id="columnResponse" text="Response">
+		          <TableColumn fx:id="columnResponse" prefWidth="400.0" text="Response">
 		          </TableColumn>
 		     </columns>
 		</TableView>

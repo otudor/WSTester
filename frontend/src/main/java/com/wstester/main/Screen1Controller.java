@@ -22,7 +22,8 @@ import com.wstester.util.UtilityTool;
  * TODO: add java doc   && rename class
  */
 public class Screen1Controller implements Initializable, ControlledScreen {
-
+	
+	TestProjectActions actions = new TestProjectActions();
     ScreensController myController;
     public TestProject testproject;
    
@@ -45,25 +46,27 @@ public class Screen1Controller implements Initializable, ControlledScreen {
 
      @FXML
     private void goToScreen2(ActionEvent event){
+    	 myController.setScreen(ScreensFramework.screen2ID);
     	
-    	 testproject= new TestProject();
-       myController.setScreen(ScreensFramework.screen2ID);
+    	 try {
+			testproject=actions.open("src/main/resources/testProject/New.xml");
+			UtilityTool.addEntity(MainConstants.TESTPROJECT, testproject); 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
     }
     
     @FXML
     private void goToScreen3(ActionEvent event){
     	myController.setScreen(ScreensFramework.screen2ID);
-    	TestProjectActions actions = new TestProjectActions();
+    	//TestProjectActions actions = new TestProjectActions();
     	try {
 			testproject = actions.open("src/main/resources/testProject/Output.xml");
-			Group root = new Group();
-			FXMLLoader fxmlLoader = new FXMLLoader();	        
-			AnchorPane frame = fxmlLoader.load(getClass().getResource("/fxml/main/WsTesterMain.fxml").openStream());
-
 			UtilityTool.addEntity(MainConstants.TESTPROJECT, testproject);
 			
-	      	root.getChildren().add(frame);
-		} catch (IOException e) {
+	     } catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

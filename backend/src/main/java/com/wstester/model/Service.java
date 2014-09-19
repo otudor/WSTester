@@ -39,7 +39,7 @@ public abstract class Service implements Serializable{
 	public ArrayList<Rule> getRuleList() {
 		return ruleList;
 	}
-
+			
 	public void setRuleList(ArrayList<Rule> ruleList) {
 		this.ruleList = ruleList;
 	}

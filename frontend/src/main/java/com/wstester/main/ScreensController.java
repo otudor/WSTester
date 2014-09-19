@@ -41,7 +41,6 @@ public class ScreensController  extends StackPane {
             Parent loadScreen = (Parent) myLoader.load();
             ControlledScreen myScreenControler = ((ControlledScreen) myLoader.getController());
             myScreenControler.setScreenParent(this);
-            
             if (name.contains("mainea"))
             {
            	

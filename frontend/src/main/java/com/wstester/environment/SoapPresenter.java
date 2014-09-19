@@ -111,6 +111,7 @@ public class SoapPresenter {
     	labelpath.setText(SoapPath.getText());
     	labelport.setText(SoapPort.getText());
     	labelwsdl.setText(SoapWsdl.getText());
+    	envService.saveEnv();
     }
     
     public void cancelEdit(ActionEvent event)

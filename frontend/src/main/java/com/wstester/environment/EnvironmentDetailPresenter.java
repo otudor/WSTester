@@ -64,6 +64,7 @@ public class EnvironmentDetailPresenter {
     	gridpane.getChildren().add(labelname);
     	gridpane.getChildren().remove(envNameField);
     	labelname.setText(envNameField.getText());
+    	environmentService.saveEnv();
 	}
 
 	public void setEnvironmentService(EnvironmentService environmentService)	{

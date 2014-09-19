@@ -24,6 +24,11 @@ public class RestService extends Service {
 		return "RestService [port=" + port + ", uuid=" + uuid + ", name=" + name + ", status=" + status + ", ruleList=" 
 				+ ruleList + "]";
 	}
+	
+	@Override
+    public String toString() { 
+    	return this.name; 
+    }
 
 	@Override
 	public int hashCode() {

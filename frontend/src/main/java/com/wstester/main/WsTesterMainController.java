@@ -109,7 +109,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		this.createRESTWindow();
 		this.createTestFactoryWindow();
 		this.saveProject();
-		this.goToLoad();
+//		this.goToLoad();
 		stage.initOwner(WsTesterMain.stage);
 
 
@@ -146,17 +146,17 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 
 
-	private void goToLoad() {
-		newIcoM1.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				myController.setScreen(ScreensFramework.screen1ID);
-			}
-
-		});
-
-	}
+//	private void goToLoad() {
+//		newIcoM1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//
+//			@Override
+//			public void handle(MouseEvent event) {
+//				myController.setScreen(ScreensFramework.screen1ID);
+//			}
+//
+//		});
+//
+//	}
 	//method to create+add the icons
 	private void createIcons(){		
 		newIco = (VBox) CreateIcon("/images/document-open-remote.png","Assets");
@@ -597,7 +597,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						TestSuiteManagerController mainPresenter = factory.getManagerController();
 						mainPresenter.loadTestSuites();
 						root = mainPresenter.getView();
-						Scene second = new Scene(root, 600, 480);
+						Scene second = new Scene(root,1280, 720);
 						root.getStylesheets().add("/styles/Styles.css");
 						stage.setTitle("Test Suites window");
 
