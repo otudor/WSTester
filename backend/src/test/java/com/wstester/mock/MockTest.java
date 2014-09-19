@@ -1,20 +1,24 @@
 package com.wstester.mock;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import com.wstester.camel.TestBaseClass;
+import com.wstester.model.Asset;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
 import com.wstester.model.RestStep;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
+import com.wstester.services.impl.AssetManager;
 import com.wstester.services.impl.TestRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class RestMockTest extends TestBaseClass{
+public class MockTest extends TestBaseClass{
 
 	@Test
 	public void getContentFromMock() throws Exception{
@@ -58,5 +62,52 @@ public class RestMockTest extends TestBaseClass{
 		
 		assertTrue(secondResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals(output2, secondResponse.getContent());
+	}
+	
+	@Test
+	public void runDifferentTypesOfMockSteps() throws Exception{
+		
+		TestProject testProject = TestUtils.getMockedRestSoapProject();
+		
+		testRunner = new TestRunner(testProject);
+		testRunner.run(testProject);
+		
+		Response firstResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 2500l);
+		
+		assertTrue(firstResponse.getStatus().equals(ExecutionStatus.PASSED));
+		assertEquals("mockedOutput", firstResponse.getContent());
+		
+		Response secondResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(1).getID(), 2500l);
+		
+		assertTrue(secondResponse.getStatus().equals(ExecutionStatus.PASSED));
+		assertEquals("Mocked response", secondResponse.getContent());
+	}
+	
+	@Test
+	public void runMockServiceWithAssetAsInput() throws Exception{
+		
+		AssetManager assetManager = new AssetManager();
+
+		Asset asset = new Asset();
+		asset.setName("AssetFile.xml");
+		asset.setPath("src/test/resources");
+		assetManager.addAsset(asset);
+
+		assetManager.waitUntilFileCopied(asset);
+
+		assetManager.close();
+		
+		TestProject testProject = TestUtils.getMockedSoapProject();
+		
+		testRunner = new TestRunner(testProject);
+		testRunner.run(testProject);
+		
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 2500L);
+		
+		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
+		assertEquals("Mocked Asset", response.getContent());
+		
+		File file = new File("assets/AssetFile.xml");
+		file.delete();
 	}
 }
