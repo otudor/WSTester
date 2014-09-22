@@ -1,5 +1,6 @@
 package com.wstester.main;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +17,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import com.wstester.model.TestProject;
 import com.wstester.services.impl.TestProjectActions;
@@ -42,7 +45,8 @@ public class ProjectDashbordController implements Initializable, ControlledScree
     private VBox newButtonLed= new VBox();
     private VBox loadButtonLed= new VBox();
     
-    
+    @FXML
+    private Stage Load;
     
     
     
@@ -132,7 +136,7 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 					myController.setScreen(MainLauncher.screen2ID);
 			    	
 			    	 try {
-						testproject=actions.open("src/main/resources/testProject/New.xml");
+						testproject=actions.open("src/main/resources/testProject/Output.xml");
 						UtilityTool.addEntity(MainConstants.TESTPROJECT, testproject); 
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
@@ -154,8 +158,17 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 					myController.setScreen(MainLauncher.screen2ID);
 			    	
 			    	 try {
-						testproject=actions.open("src/main/resources/testProject/New.xml");
-						UtilityTool.addEntity(MainConstants.TESTPROJECT, testproject); 
+			    		FileChooser fileChooser = new FileChooser();
+			    		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("STEP project files (*.step)", "*.step");
+			    		fileChooser.getExtensionFilters().add(extFilter);
+			    		File file = fileChooser.showOpenDialog(Load);
+			    		if(file != null){
+			    			System.out.println(file.getCanonicalPath());
+			    			testproject=actions.open(file.getCanonicalPath());
+			    			UtilityTool.addEntity(MainConstants.TESTPROJECT, testproject);
+			    		}
+						//testproject=actions.open("src/main/resources/testProject/Output.xml");
+						//UtilityTool.addEntity(MainConstants.TESTPROJECT, testproject); 
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
