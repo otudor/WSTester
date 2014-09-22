@@ -192,9 +192,12 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	}
 	//method to create+add the icons
 	private void createIcons(){		
-		newIco = (VBox) CreateIcon("/images/document-open-remote.png","Assets");
-		newIco.setLayoutX(10);
-		newIco2 = (VBox) CreateIcon("/images/envirorment.png","Environments Definition");
+		newIco = (VBox) CreateIcon("/images/assets2.png","Assets");
+		newIco.setLayoutX(40);
+		newIco.setLayoutY(20);
+		newIco.setScaleX(1.3);
+		newIco.setScaleY(1.3);
+		newIco2 = (VBox) CreateIcon("/images/envirorment.png","   Environments Definition");
 		newIco2.setLayoutX(10);
 		newIco2.setLayoutY(120);
 		newIco3 = (VBox) CreateIcon("/images/document-open-remote.png","Import SOAP Definitions");
