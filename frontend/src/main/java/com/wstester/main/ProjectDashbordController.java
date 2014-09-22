@@ -135,14 +135,8 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 				public void handle(MouseEvent event) {
 					myController.setScreen(MainLauncher.screen2ID);
 			    	
-			    	 try {
-						testproject=actions.open("src/main/resources/testProject/Output.xml");
-						UtilityTool.addEntity(MainConstants.TESTPROJECT, testproject); 
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
+			    	 TestProject t = new TestProject();
+			    	 UtilityTool.addEntity(MainConstants.TESTPROJECT, t);
 			
 		}
 			});
