@@ -149,7 +149,7 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 
 				@Override
 				public void handle(MouseEvent event) {
-					myController.setScreen(MainLauncher.screen2ID);
+					
 			    	
 			    	 try {
 			    		FileChooser fileChooser = new FileChooser();
@@ -160,6 +160,7 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 			    			System.out.println(file.getCanonicalPath());
 			    			testproject=actions.open(file.getCanonicalPath());
 			    			UtilityTool.addEntity(MainConstants.TESTPROJECT, testproject);
+			    			myController.setScreen(MainLauncher.screen2ID);
 			    		}
 						//testproject=actions.open("src/main/resources/testProject/Output.xml");
 						//UtilityTool.addEntity(MainConstants.TESTPROJECT, testproject); 
