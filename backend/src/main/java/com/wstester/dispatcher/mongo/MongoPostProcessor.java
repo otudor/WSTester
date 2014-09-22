@@ -11,7 +11,7 @@ import com.wstester.model.Step;
 public class MongoPostProcessor implements Processor{
 
 	@Override
-	public void process(Exchange exchange) throws Exception {
+	public void process(Exchange exchange) {
 		
 		Step step = exchange.getProperty("step", Step.class);
 		Message in = exchange.getIn();

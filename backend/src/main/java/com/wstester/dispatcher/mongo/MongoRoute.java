@@ -1,20 +1,14 @@
 package com.wstester.dispatcher.mongo;
 
-import java.net.ConnectException;
-import org.apache.camel.builder.RouteBuilder;
 import com.wstester.asset.AssetProcessor;
 import com.wstester.dispatcher.ExchangeDelayer;
-import com.wstester.errorHandlers.GlobalExceptionProcessor;
 
-public class MongoRoute extends RouteBuilder {
+public class MongoRoute extends MongoExceptionRoute {
 
 	@Override
 	public void configure() throws Exception {
 		
-		onException(ConnectException.class)
-		.handled(true)
-		.process(new GlobalExceptionProcessor())
-		.to("jms:topic:responseTopic");
+		super.configure();
 		
 		from("jms:mongoQueue?concurrentConsumers=20&asyncConsumer=true")
 		
@@ -27,6 +21,5 @@ public class MongoRoute extends RouteBuilder {
 		
 		.process(new MongoPostProcessor())
 		.to("jms:topic:responseTopic");
-		
 	}
 }
