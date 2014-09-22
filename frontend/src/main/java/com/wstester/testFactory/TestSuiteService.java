@@ -30,45 +30,13 @@ public class TestSuiteService
     {
         this.tsList = new HashMap<String, TestSuite>();
         testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
-        for(TestSuite entry:testProject.getTestSuiteList())
+        if(testProject.getTestSuiteList()!=null)
         {
-        	tsList.put(entry.getID(),entry);
-        }
-        /*TestSuite ts1 = createTestSuite( "Test Suite");
-        ts1.setEnvironment( new Environment("Environment de test"));
-        List<TestCase> tcList = new ArrayList<TestCase>();
-		TestCase tc1 = new TestCase();
-		tc1.setName("Test Case");
-		List<Step> stpList = new ArrayList<Step>();
-		//step
-		List<Server> srvList = new ArrayList<Server>();
-		Server server = new Server();
-		server.setIp("localhost");
-		List<Service> srviceList = new ArrayList<Service>();
-		MySQLService service = new MySQLService();
-		service.setDbName("test");
-		service.setPort("3306");
-		service.setUser("appuser");
-		service.setPassword("apppass");		
-		MySQLStep mysqlStep = new MySQLStep();
-		mysqlStep.setName("MySQL Step");
-		mysqlStep.setServer(server);
-		mysqlStep.setService(service);		
-		mysqlStep.setOperation("select * from Angajati where id='4'");
-		
-		MySQLStep mysqlStep2 = new MySQLStep();
-		mysqlStep2.setName("MySQL Step");
-		mysqlStep2.setServer(server);
-		mysqlStep2.setService(service);		
-		mysqlStep2.setOperation("select * from Angajati where id='2'");
-		mysqlStep2.setDependsOn(mysqlStep.getID());
-		
-		
-		stpList.add(mysqlStep);
-		stpList.add(mysqlStep2);
-		tc1.setStepList(stpList);
-		tcList.add( tc1);
-		ts1.setTestCaseList( tcList);*/		
+        	for(TestSuite entry:testProject.getTestSuiteList())
+        	{
+        		tsList.put(entry.getID(),entry);
+        	}
+        }       
     }
 
     public TestSuite createTestSuite(String name)
