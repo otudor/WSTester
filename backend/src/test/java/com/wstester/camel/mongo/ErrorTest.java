@@ -2,10 +2,7 @@ package com.wstester.camel.mongo;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
-import org.codehaus.jettison.json.JSONArray;
 import org.junit.Test;
-
 import com.wstester.camel.TestBaseClass;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
@@ -23,7 +20,7 @@ public class ErrorTest extends TestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 10000L);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.FAILED));
 		System.out.println(response.getErrorMessage());
