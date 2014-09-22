@@ -899,36 +899,20 @@ public class TestUtils {
 		Asset asset2 = new Asset();
 		Asset asset3 = new Asset();
 		Asset asset4 = new Asset();
-		
 		assetList.add(asset1);
 		assetList.add(asset2);
 		assetList.add(asset3);
 		assetList.add(asset4);
 		testProject.setAssetList(assetList);
 		
-		//construct variableList
-		
-		List<Variable> variableList = new ArrayList<Variable>();
-		
-		Variable variable = new Variable();
-		String content = "content";
-		variable.setName("varName");
-		variable.setSelector("selector");
-		variable.setType(VariableType.STRING);	
-		variable.setContent(content);
-		
-		Variable variable1 = new Variable();
-		variable1.setContent("test");
-		variable1.setName("testName");
-		variable1.setSelector("testSelector");
-		variable1.setType(VariableType.STRING);
-		
-		variableList.add(variable);
-		variableList.add(variable1);
-		
-		testProject.setVariableList(variableList);
+		// set the variable list
+		Variable variable = new Variable("projectVar", VariableType.STRING, "selector");
+		List<Variable> projectVariableList = new ArrayList<Variable>();
+		projectVariableList.add(variable);
+		testProject.setVariableList(projectVariableList );
 
 		// construct service list
+		
 		// Service 3
 		List<Service> serviceList3 = new ArrayList<Service>();
 		SoapService service3 = new SoapService();
@@ -974,6 +958,10 @@ public class TestUtils {
 		step4.setAssertList(assertList4);
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
+		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
+		List<Variable> stepVariableList = new ArrayList<Variable>();
+		stepVariableList.add(stepVariable);
+		step4.addVariableList(stepVariableList);
 		stepList2.add(step4);
 		
 		// construct test case list
@@ -982,6 +970,8 @@ public class TestUtils {
 		TestCase testCase2 = new TestCase();
 		testCase2.setName("TC 1");
 		testCase2.setStepList(stepList2);
+		Variable caseVariable = new Variable("caseVar", VariableType.STRING, "selector");
+		testCase2.addVariable(caseVariable );
 		testCaseList2.add(testCase2);
 		
 		// construct test suite list
@@ -990,6 +980,10 @@ public class TestUtils {
 		testSuite2.setName("Test Suite 2");
 		testSuite2.setEnvironment(env2);
 		testSuite2.setTestCaseList(testCaseList2);
+		Variable suiteVariable = new Variable("suiteVar", VariableType.INTEGER, "content");
+		List<Variable> suiteVariableList = new ArrayList<Variable>();
+		suiteVariableList.add(suiteVariable);
+		testSuite2.setVariableList(suiteVariableList);
 		testSuiteList.add(testSuite2);
 		
 		testProject.setTestSuiteList(testSuiteList);

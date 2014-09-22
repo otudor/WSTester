@@ -23,14 +23,13 @@ public class VariableContent extends RouteBuilder {
 		.process(new Processor() {
 			@Override
 			public void process(Exchange exchange) throws Exception {
-				System.out.println("intra");
 				Variable variable = exchange.getIn().getBody(Variable.class);
 				varSet.add(variable);
 				contentResponses++;
 			}
 		});
 	}
-	public static Variable getContent(String variableID) throws WsException{
+	public Variable getContent(String variableID) throws WsException{
 		
 			for (Variable variable : varSet){
 				if (variable.getID().equals(variableID)){
@@ -38,7 +37,6 @@ public class VariableContent extends RouteBuilder {
 						throw new WsException("Variable content is null....please define a variable content", null);
 					
 					}
-					varSet.remove(variable);
 					return variable;
 				}
 			}

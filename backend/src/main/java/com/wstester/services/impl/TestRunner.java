@@ -215,7 +215,6 @@ public class TestRunner implements ITestRunner{
 				}
 			}
 		}
-		System.out.println("queue created!!!!!");
 		// TODO: change timeout to configuration file
 		Long timeout = 10000L;
 		// TODO: change the source of the allVariablesReceived from VariableRoute to VariableManager

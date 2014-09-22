@@ -45,5 +45,6 @@ public class VariableManagerTest extends TestBaseClass {
 			
 			Variable stepVariableAfter = manager.getVariable(stepVariable.getID());
 			assertEquals(stepVariable, stepVariableAfter);
+			
 		}
 }

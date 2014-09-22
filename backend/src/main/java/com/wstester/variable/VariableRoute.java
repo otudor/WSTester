@@ -39,7 +39,6 @@ public class VariableRoute extends RouteBuilder {
 	
 	public static boolean allVariablesReceived(int variableSize) {
 		
-		System.out.println("Expected: " + variableSize + " Actual: " + variableSet.size());
 		if(variableSet.size() == variableSize){
 			return true;
 		}
