@@ -151,6 +151,39 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 			@Override
 			public void handle(MouseEvent event) {
+				if (isDisplayed==true) {
+					stageAssets.close();
+					bar.getChildren().remove(newIcoM5);
+					isDisplayed=false;
+					poz=poz-100;
+				}
+				
+				if (isDisplayed2==true) {
+					isDisplayed2=false;
+					stageEnv.close();
+					bar.getChildren().remove(newIcoM6);
+					poz=poz-100;
+				}
+				
+				if (isDisplayed3==true) {
+					stageSoap.close();
+					bar.getChildren().remove(newIcoM2);
+					isDisplayed3=false;
+					poz=poz-100;
+				}
+				if (isDisplayed4==true) {
+					stageRest.close();
+					bar.getChildren().remove(newIcoM3);
+					isDisplayed4=false;
+					poz=poz-100;
+				}
+				if (isDisplayed5==true) {
+					stageRnd.close();
+					bar.getChildren().remove(newIcoM4);
+					isDisplayed5=false;
+					poz=poz-100;
+				}
+				
 				myController.setScreen(MainLauncher.screen1ID);
 			}
 
@@ -161,9 +194,9 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	private void createIcons(){		
 		newIco = (VBox) CreateIcon("/images/document-open-remote.png","Assets");
 		newIco.setLayoutX(10);
-		newIco2 = (VBox) CreateIcon("/images/document-open-remote.png","Environments Definition");
+		newIco2 = (VBox) CreateIcon("/images/envirorment.png","Environments Definition");
 		newIco2.setLayoutX(10);
-		newIco2.setLayoutY(100);
+		newIco2.setLayoutY(120);
 		newIco3 = (VBox) CreateIcon("/images/document-open-remote.png","Import SOAP Definitions");
 		newIco3.setLayoutX(10);
 		newIco3.setLayoutY(200);
@@ -1103,6 +1136,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		imageComp.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override public void handle(MouseEvent mouseEvent) {
 				bouncer.play();
+				
 				imageComp.setCursor(Cursor.HAND);	
 
 			}	  
