@@ -202,13 +202,13 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		newIco2.setLayoutY(120);
 		newIco3 = (VBox) CreateIcon("/images/document-open-remote.png","Import SOAP Definitions");
 		newIco3.setLayoutX(10);
-		newIco3.setLayoutY(200);
+		newIco3.setLayoutY(300);
 		newIco4 = (VBox) CreateIcon("/images/document-open-remote.png","Import REST Definitions");
 		newIco4.setLayoutX(10);
-		newIco4.setLayoutY(300);
+		newIco4.setLayoutY(400);
 		newIco5 = (VBox) CreateIcon("/images/document-open-remote.png","Generate random JSON");
 		newIco5.setLayoutX(10);
-		newIco5.setLayoutY(400);
+		newIco5.setLayoutY(500);
 
 		newIcoM1 = (VBox) CreateIcon("/images/start.png","Start");
 		newIcoM1.setLayoutX(1);
