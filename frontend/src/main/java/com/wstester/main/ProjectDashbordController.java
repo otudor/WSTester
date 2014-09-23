@@ -69,19 +69,19 @@ public class ProjectDashbordController implements Initializable, ControlledScree
    
 
 	private void createButtons() {
-		newButton = (VBox) CreateButton("/images/but.png");
+		newButton = (VBox) CreateButton("/images/butNew.png");
 		newButton.setLayoutX(100);
 		newButton.setLayoutY(100);
 		
-		newButtonLed = (VBox) CreateButton("/images/but1.png");
+		newButtonLed = (VBox) CreateButton("/images/butNewLed.png");
 		newButtonLed.setLayoutX(100);
 		newButtonLed.setLayoutY(100);
 		
-		loadButton = (VBox) CreateButton("/images/but.png");
+		loadButton = (VBox) CreateButton("/images/butLoad.png");
 		loadButton.setLayoutX(500);
 		loadButton.setLayoutY(100);
 		
-		loadButtonLed = (VBox) CreateButton("/images/but1.png");
+		loadButtonLed = (VBox) CreateButton("/images/butLoadLed.png");
 		loadButtonLed.setLayoutX(500);
 		loadButtonLed.setLayoutY(100);
 		
