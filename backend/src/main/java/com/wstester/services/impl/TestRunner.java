@@ -134,6 +134,7 @@ public class TestRunner implements ITestRunner{
 				// Create a Session
 				session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 				
+				
 				// Manage the variables
 				manageVariable(session);
 				
