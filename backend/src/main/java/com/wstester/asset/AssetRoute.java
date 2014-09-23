@@ -1,15 +1,20 @@
 package com.wstester.asset;
 
+import java.io.FileNotFoundException;
+
 import org.apache.camel.Endpoint;
 import org.apache.camel.Exchange;
 import org.apache.camel.PollingConsumer;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 
+import com.wstester.log.CustomLogger;
 import com.wstester.model.Asset;
 
+//TODO: exception handler
 public class AssetRoute extends RouteBuilder {
-
+	
+	private CustomLogger log = new CustomLogger(AssetRoute.class);
 	
 	@Override
 	public void configure() throws Exception {
@@ -29,7 +34,12 @@ public class AssetRoute extends RouteBuilder {
 				Endpoint fileEndpoint = exchange.getContext().getEndpoint("file:" + asset.getPath() + "?fileName=" + asset.getName() + "&noop=true&initialDelay=10&readLock=none");
 				PollingConsumer consumer = fileEndpoint.createPollingConsumer();
 				consumer.start();
-				Exchange fileExchange = consumer.receiveNoWait();
+				// TODO: change the time value in a config file
+				log.info(asset.getID(), "Copy asset content");
+				Exchange fileExchange = consumer.receive(5000);
+				if(fileExchange == null){
+					throw new FileNotFoundException("File to be copied: " + asset.getPath() + "/" + asset.getName() + " is not found");
+				}
 				
 				exchange.getIn().setBody(fileExchange.getIn().getBody());
 				

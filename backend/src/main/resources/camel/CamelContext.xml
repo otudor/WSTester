@@ -36,5 +36,6 @@
 		<package>com.wstester.dispatcher</package>
 		<package>com.wstester.mock</package>
 		<package>com.wstester.variable</package>
+		<package>com.wstester.asset</package>
 	</camelContext>
 </beans>

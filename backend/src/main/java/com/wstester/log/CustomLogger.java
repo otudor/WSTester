@@ -12,11 +12,15 @@ public class CustomLogger extends Logger {
 		logger = Logger.getLogger(name);
 	}
 
+	public void debug(Object message){
+		logger.debug(message);
+	}
+	
 	public void debug(String stepID, String logMessage){
 		logger.debug("[" + stepID + "] " + logMessage);
 	}
 	
-	public void error(String message){
+	public void error(Object message){
 		logger.error(message);
 	}
 
@@ -24,14 +28,18 @@ public class CustomLogger extends Logger {
 		logger.error("[" + stepID + "] " + logMessage);
 	}
 
-	public void info(String message){
+	public void info(Object message){
 		logger.info(message);
 	}
 	
 	public void info(String stepID, String logMessage){
 		logger.info("[" + stepID + "] " + logMessage);
 	}
-
+	
+	public void warn(Object message){
+		logger.warn(message);
+	}
+	
 	public void warn(String stepID, String logMessage){
 		logger.warn("[" + stepID + "] " + logMessage);
 	}

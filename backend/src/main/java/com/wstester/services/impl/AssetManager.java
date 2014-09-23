@@ -3,25 +3,19 @@ package com.wstester.services.impl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import javax.jms.Connection;
 import javax.jms.DeliveryMode;
 import javax.jms.Destination;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
-
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.springframework.context.support.AbstractXmlApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Asset;
 import com.wstester.services.definition.IAssetManager;
 
 public class AssetManager implements IAssetManager {
 
-	private AbstractXmlApplicationContext camelContext;
 	private CustomLogger log = new CustomLogger(AssetManager.class);
 	
 	/**
@@ -35,7 +29,6 @@ public class AssetManager implements IAssetManager {
 		
 		try{
 			log.info("Adding asset: " + asset);
-			camelContext = new ClassPathXmlApplicationContext("camel/CamelAssetContext.xml");
 			
 			// Create a ConnectionFactory
 			ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
@@ -58,14 +51,14 @@ public class AssetManager implements IAssetManager {
 	        ObjectMessage message = session.createObjectMessage(asset);
 	        
 	        // Tell the producer to send the message
-	        log.info("Sent asset to asset queue: " +  asset.getID());	
+	        log.info(asset.getID(), "Sent asset to asset queue");	
 	        producer.send(message);
 	        
 	        session.close();
-			connection.close();
+			connection.stop();
 		}catch (Exception e){
 			
-			log.error("Can't create camel context: " + e.getMessage());
+			log.error("Can't create ActiveMQ instance: " + e.getMessage());
 		}
 	}
 	
@@ -90,10 +83,12 @@ public class AssetManager implements IAssetManager {
 	}
 	
 	@Override
-	public void waitUntilFileCopied(Asset asset){
+	public boolean waitUntilFileCopied(Asset asset){
 		
-		while(!Files.isReadable(Paths.get("assets/" + asset.getName() + ".done"))){
+		long timeout = 5000;
+		while(!Files.isReadable(Paths.get("assets/" + asset.getName() + ".done")) && timeout > 0){
 			try {
+				timeout -= 1000;
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -102,16 +97,15 @@ public class AssetManager implements IAssetManager {
 		}
 		
 		try {
-			Files.delete(Paths.get("assets/" + asset.getName() + ".done"));
+			if(timeout > 0){
+				Files.delete(Paths.get("assets/" + asset.getName() + ".done"));
+				return true;
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return false;
 	}
-	
-	@Override
-	public void close(){
-		camelContext.close();
-	}
-
 }

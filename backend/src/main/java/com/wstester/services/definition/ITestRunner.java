@@ -17,4 +17,6 @@ public interface ITestRunner extends IService{
 	void run(Step testStep) throws Exception;
 	
 	Response getResponse(String stepId, Long timeout);
+
+	boolean hasFinished();
 }

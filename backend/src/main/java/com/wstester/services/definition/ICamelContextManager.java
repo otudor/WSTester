@@ -1,11 +1,8 @@
 package com.wstester.services.definition;
 
-import com.wstester.services.common.Stateful;
+public interface ICamelContextManager {
 
-@Stateful
-public interface ICamelContextManager extends IService{
-
-	void startContext();
+	void startCamelContext();
 	
-	void stopContext();
+	void closeCamelContext();
 }

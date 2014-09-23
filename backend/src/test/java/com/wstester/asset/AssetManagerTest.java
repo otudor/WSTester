@@ -5,13 +5,13 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import org.junit.After;
 import org.junit.Test;
 
+import com.wstester.camel.TestBaseClass;
 import com.wstester.model.Asset;
 import com.wstester.services.impl.AssetManager;
 
-public class AssetManagerTest {
+public class AssetManagerTest extends TestBaseClass{
 
 	@Test
 	public void addAsset() throws InterruptedException{
@@ -19,15 +19,16 @@ public class AssetManagerTest {
 		AssetManager assetManager = new AssetManager();
 		
 		Asset asset = new Asset();
-		asset.setName("AssetFile.xml");
+		asset.setName("SOAPRequest.xml");
 		asset.setPath("src/test/resources");
 		assetManager.addAsset(asset);
 		
 		assetManager.waitUntilFileCopied(asset);
 		
-		File file = new File("assets/AssetFile.xml");
+		File file = new File("assets/SOAPRequest.xml");
 		assertTrue(file.exists());
-		assetManager.close();
+		
+		file.delete();
 	}
 	
 	@Test
@@ -44,16 +45,10 @@ public class AssetManagerTest {
 		
 		File file = new File("assets/AssetFile.xml");
 		assertTrue(file.exists());
-		assetManager.close();
 		
 		String content = assetManager.getAssetContent(asset.getName());
 		assertEquals("Harap Alb", content);
-	}
-	
-	@After
-	public void after(){
 		
-		File file = new File("assets/AssetFile.xml");
 		file.delete();
 	}
 }

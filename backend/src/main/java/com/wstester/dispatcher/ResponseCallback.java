@@ -1,11 +1,9 @@
 package com.wstester.dispatcher;
 
 import java.util.HashSet;
-
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Response;
 
@@ -13,6 +11,7 @@ public class ResponseCallback extends RouteBuilder {
 
 	private static HashSet<Response> responseList = new HashSet<Response>();
 	private static int totalResponses = 0;
+	private static boolean finished = false;
 	private static CustomLogger log = new CustomLogger(ResponseCallback.class);
 	
 	@Override
@@ -28,6 +27,28 @@ public class ResponseCallback extends RouteBuilder {
 			}
 		})
 		.log("[${body.getStepID}] ResponseCallback Received response");
+		
+		from("jms:topic:finishTopic")
+		.log("[${body.getID}] received finish message")
+		.process(new Processor() {
+			
+			@Override
+			public void process(Exchange exchange) throws Exception {
+				
+				finished = true;
+			}
+		});
+	
+		from("jms:topic:startTopic")
+		.log("[${body.getID}] received start message")
+		.process(new Processor() {
+			
+			@Override
+			public void process(Exchange exchange) throws Exception {
+				
+				finished = false;
+			}
+		});
 	}
 	
 	public static Response getResponse(String stepId){
@@ -50,5 +71,12 @@ public class ResponseCallback extends RouteBuilder {
 		}
 		
 		return false;
+	}
+
+	public static boolean hasFinished() {
+		boolean hasFinished = finished;
+		finished = false;
+		
+		return hasFinished;
 	}
 }

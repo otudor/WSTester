@@ -20,7 +20,17 @@ public class VariableRoute extends RouteBuilder {
 
 				Variable variable = exchange.getIn().getBody(Variable.class);
 				variableSet.add(variable);
+			}
+		});
+		
+		from("jms:topic:finishTopic")
+		.log("[${body.getID}] received finish message")
+		.process(new Processor() {
+			
+			@Override
+			public void process(Exchange exchange) throws Exception {
 				
+				variableSet = new HashSet<Variable>(); 
 			}
 		});
 	}
@@ -42,9 +52,8 @@ public class VariableRoute extends RouteBuilder {
 		if(variableSet.size() == variableSize){
 			return true;
 		}
-		else{
-			return false;
-		}
+
+		return false;
 	}
 
 }

@@ -32,8 +32,6 @@ public class RunStepWithAsset extends RestTestBaseClass{
 		assetManager.addAsset(asset);
 
 		assetManager.waitUntilFileCopied(asset);
-
-		assetManager.close();
 		
 		TestProject testProject = TestUtils.getRestTestPlan();
 		RestStep step = (RestStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);

@@ -37,7 +37,7 @@ public class SoapRule extends Rule{
 				//TODO: now only the first asset will be set to the body of the request
 				//TODO: in the future, send a request for every asset in the list
 				IAssetManager assetManager = new AssetManager();
-				if((inputAsset != null) && 
+				if((inputAsset != null) && step.getAssetList() != null && step.getAssetList().get(0) !=null &&
 						(step.getAssetList().get(0).getName().equals(inputAsset.getName()) ||
 						(assetManager.getAssetContent(step.getAssetList().get(0).getName()).equals(assetManager.getAssetContent(inputAsset.getName())))))		
 					return output;

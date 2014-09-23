@@ -13,12 +13,13 @@ import com.wstester.model.Step;
 
 public class MockSystem implements Processor{
 
-	private ArrayList<Rule> ruleList = new ArrayList<Rule>();
+	private ArrayList<Rule> ruleList;
 	private CustomLogger log = new CustomLogger(MockSystem.class);		
 	
 	@Override
 	public void process(Exchange exchange) throws Exception {
 		
+		ruleList = new ArrayList<Rule>();
 		Step step = exchange.getIn().getBody(Step.class);
 		addRules(step.getService().getRuleList());
 
@@ -47,7 +48,7 @@ public class MockSystem implements Processor{
 		log.info(step.getID(), "Running mocking rules");
 		String response = null;
 		
-		for(Rule rule : ruleList){
+		for(Rule rule : this.ruleList){
 			response = rule.run(step);
 			if(response != null){
 				log.info(step.getID(), "Found rule: " + rule);

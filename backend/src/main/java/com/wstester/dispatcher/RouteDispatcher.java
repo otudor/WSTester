@@ -16,7 +16,7 @@ public class RouteDispatcher extends RouteBuilder{
 	@Override
 	public void configure() throws Exception {
 	    
-		from("jms:startQueue")
+		from("jms:startQueue?concurrentConsumers=20&asyncConsumer=true")
 		.choice()
 			.when(new Predicate() {				
 				@Override

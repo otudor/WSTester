@@ -7,13 +7,12 @@ import javax.jms.Connection;
 import javax.jms.DeliveryMode;
 import javax.jms.Destination;
 import javax.jms.JMSException;
+import javax.jms.Message;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.springframework.context.support.AbstractXmlApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.wstester.dispatcher.ResponseCallback;
 import com.wstester.exceptions.WsException;
@@ -29,7 +28,6 @@ import com.wstester.variable.VariableRoute;
 
 public class TestRunner implements ITestRunner{
 	
-	private AbstractXmlApplicationContext camelContext;
 	private TestProject testProject;
 	private CustomLogger log = new CustomLogger(TestRunner.class);
 	
@@ -44,7 +42,7 @@ public class TestRunner implements ITestRunner{
 	@Override
 	public void run(TestProject testProject) throws Exception{
 	
-		ExecutorService executor = Executors.newFixedThreadPool(1);
+		ExecutorService executor = Executors.newFixedThreadPool(10);
 		executor.execute(new ProjectRunThread(testProject));
 		
 		executor.shutdown();
@@ -53,7 +51,7 @@ public class TestRunner implements ITestRunner{
 	@Override
 	public void run(TestSuite testSuite) throws Exception{
 		
-		ExecutorService executor = Executors.newFixedThreadPool(1);
+		ExecutorService executor = Executors.newFixedThreadPool(10);
 		executor.execute(new ProjectRunThread(testSuite));
 		
 		executor.shutdown();
@@ -62,7 +60,7 @@ public class TestRunner implements ITestRunner{
 	@Override
 	public void run(TestCase testCase) throws Exception{
 		
-		ExecutorService executor = Executors.newFixedThreadPool(1);
+		ExecutorService executor = Executors.newFixedThreadPool(10);
 		executor.execute(new ProjectRunThread(testCase));
 		
 		executor.shutdown();
@@ -71,7 +69,7 @@ public class TestRunner implements ITestRunner{
 	@Override
 	public void run(Step testStep) throws Exception{
 		
-		ExecutorService executor = Executors.newFixedThreadPool(1);
+		ExecutorService executor = Executors.newFixedThreadPool(10);
 		executor.execute(new ProjectRunThread(testStep));
 		
 		executor.shutdown();
@@ -104,6 +102,12 @@ public class TestRunner implements ITestRunner{
 		return response;
 	}
 	
+	@Override
+	public boolean hasFinished(){
+		
+		return ResponseCallback.hasFinished();
+	}
+	
 	class ProjectRunThread implements Runnable{
 
 		Object entityToRun;
@@ -121,12 +125,9 @@ public class TestRunner implements ITestRunner{
 			Connection connection = null;
 			Session session = null;
 			try {
-				camelContext = new ClassPathXmlApplicationContext("camel/CamelContext.xml");
-				camelContext.start();
-				
+
 				// Create a ConnectionFactory
 				ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
-
 				// Create a Connection
 				connection = connectionFactory.createConnection();
 				connection.start();
@@ -134,10 +135,12 @@ public class TestRunner implements ITestRunner{
 				// Create a Session
 				session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 				
+				// send a start message to startTopic
+				sendStartMessage(session);
 				
 				// Manage the variables
 				manageVariable(session);
-				
+
 				// Run the tests
 				runSteps(session, entityToRun);
 			} catch (Exception e){
@@ -147,16 +150,14 @@ public class TestRunner implements ITestRunner{
 				
 				// Clean up
 				try {
-					connection.close();
 					session.close();
-					camelContext.close();
+					connection.stop();
 				} catch (JMSException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		}
-		
 	}
 	
 	private void manageVariable(Session session) throws JMSException, InterruptedException{
@@ -220,21 +221,19 @@ public class TestRunner implements ITestRunner{
 		Long timeout = 10000L;
 		// TODO: change the source of the allVariablesReceived from VariableRoute to VariableManager
 		while(!VariableRoute.allVariablesReceived(variableSize) && ((timeout -= 1000) > 0)){
-			
 			Thread.sleep(1000);
 		}	
 	}
 
 	private void runSteps(Session session, Object entityToRun) throws JMSException, InterruptedException, WsException{
 
-		
 		// Create the destination (Topic or Queue)
 		Destination destination = session.createQueue("startQueue");
-
+		
 		// Create a MessageProducer from the Session to the Topic or Queue
 		MessageProducer producer = session.createProducer(destination);
 		producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-
+		
 		int stepSize = 0;
 		
 		if(entityToRun instanceof TestProject){
@@ -300,5 +299,35 @@ public class TestRunner implements ITestRunner{
 		while (!ResponseCallback.allResponsesReceived(stepSize) && ((timeout -= 1000) > 0)) {
 			Thread.sleep(1000);
 		}
+		
+		// send a message to a finishTopic meaning that the current run has finished
+		sendFinishMessage(session);
+
+	}
+
+	private void sendStartMessage(Session session) throws JMSException {
+
+		// Create the destination (Topic or Queue)
+		Destination destination = session.createTopic("startTopic");
+		
+		// Create a MessageProducer from the Session to the Topic or Queue
+		MessageProducer producer = session.createProducer(destination);
+		producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+		
+		Message message = session.createObjectMessage(testProject);
+		producer.send(message);
+	}
+	
+	private void sendFinishMessage(Session session) throws JMSException {
+
+		// Create the destination (Topic or Queue)
+		Destination destination = session.createTopic("finishTopic");
+		
+		// Create a MessageProducer from the Session to the Topic or Queue
+		MessageProducer producer = session.createProducer(destination);
+		producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+		
+		Message message = session.createObjectMessage(testProject);
+		producer.send(message);
 	}
 }

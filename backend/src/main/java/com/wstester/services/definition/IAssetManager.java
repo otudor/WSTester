@@ -2,12 +2,6 @@ package com.wstester.services.definition;
 
 import com.wstester.model.Asset;
 
-/**
- * 
- * @author lvasile
- * since v 1.0
- * Backend Service responsible for managing Asset states: new/save/get/...
- */
 public interface IAssetManager extends IService {
 
 	void addAsset(Asset asset);
@@ -16,7 +10,5 @@ public interface IAssetManager extends IService {
 
 	String getAssetContent(String fileName);
 
-	void waitUntilFileCopied(Asset asset);
-
-	void close();
+	boolean waitUntilFileCopied(Asset asset);
 }
