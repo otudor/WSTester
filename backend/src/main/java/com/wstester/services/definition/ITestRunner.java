@@ -6,7 +6,7 @@ import com.wstester.model.TestCase;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
 
-public interface ITestRunner {
+public interface ITestRunner extends IService{
 
 	void run(TestProject testProject) throws Exception;
 	

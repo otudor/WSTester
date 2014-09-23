@@ -1,40 +1,22 @@
 package com.wstester.services.impl;
 
-import javax.jms.JMSException;
-import javax.jms.Session;
-import javax.jms.Connection;
-
-import org.apache.activemq.ActiveMQConnectionFactory;
+import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class CamelContextManager {
+import com.wstester.services.definition.ICamelContextManager;
 
-	ClassPathXmlApplicationContext camelContext ;
-	
-	public  void startCamelContext (Session session , Connection connection) throws JMSException{
-		
-		camelContext = new ClassPathXmlApplicationContext("camel/CamelContext.xml");
-		camelContext.start();
-		
-		// Create a ConnectionFactory
-		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+public class CamelContextManager implements ICamelContextManager {
 
-		// Create a Connection
-		connection = connectionFactory.createConnection();
-		connection.start();
+	private AbstractXmlApplicationContext camelContext;
 
-		// Create a Session
-		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+	@Override
+	public void startContext() {
+		camelContext = new ClassPathXmlApplicationContext("camel/CamelAssetContext.xml");
 	}
-	
-	public void startAssetContext(Session session , Connection connection){
-		
+
+	@Override
+	public void stopContext() {
+		camelContext.close();
 	}
-	
-	public void closeCamelContext(Session session , Connection connection) throws JMSException{
-		
-			connection.close();
-			session.close();
-			camelContext.close();
-	}
+
 }

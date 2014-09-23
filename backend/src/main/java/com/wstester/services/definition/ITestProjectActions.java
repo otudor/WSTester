@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import com.wstester.model.TestProject;
 
-public interface ITestProjectActions {
+public interface ITestProjectActions extends IService {
 	
 	void save(String path, TestProject testProject) throws IOException;
 

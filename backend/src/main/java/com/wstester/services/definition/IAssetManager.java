@@ -8,7 +8,7 @@ import com.wstester.model.Asset;
  * since v 1.0
  * Backend Service responsible for managing Asset states: new/save/get/...
  */
-public interface IAssetManager {
+public interface IAssetManager extends IService {
 
 	void addAsset(Asset asset);
 	
