@@ -18,7 +18,7 @@ public class MongoConnection {
 	@Autowired
 	private Mongo mongo;
 	
-	public String getConnection(String body, @Header(Exchange.SLIP_ENDPOINT) String previous) throws Exception{
+	public String getConnection(String body, @Header(Exchange.SLIP_ENDPOINT) String previous) {
 
 		if(previous == null)
 			return "mongodb://mongoConnection?database=none&collection=none&dynamicity=true";

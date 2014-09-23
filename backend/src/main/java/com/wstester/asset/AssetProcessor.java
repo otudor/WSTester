@@ -9,7 +9,7 @@ import com.wstester.services.impl.AssetManager;
 public class AssetProcessor implements Processor{
 
 	@Override
-	public void process(Exchange exchange) throws Exception {
+	public void process(Exchange exchange) {
 		
 		Step step = exchange.getProperty("step", Step.class);
 		AssetManager assetManager = new AssetManager();

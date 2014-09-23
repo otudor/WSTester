@@ -1,7 +1,6 @@
 package com.wstester.main;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,6 +23,12 @@ import javafx.stage.WindowEvent;
 import com.wstester.util.MainWindowListener;
 import com.wstester.util.UtilityTool;
 
+/**
+ * Thiss class will be deleted in the newr future(2014/09/19)
+ * @author lvasile
+ *
+ */
+@Deprecated
 public class WsTesterMain extends Application implements MainWindowListener {
 	
 	private static List<MainWindowListener> listeners;

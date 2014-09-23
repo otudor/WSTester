@@ -10,7 +10,7 @@ import com.wstester.model.MongoStep;
 public class MongoPreProcessor implements Processor {
 
 	@Override
-	public void process(Exchange exchange) throws Exception {
+	public void process(Exchange exchange) {
 		
 		MongoStep step = exchange.getIn().getBody(MongoStep.class);
 		exchange.setProperty("step", step);

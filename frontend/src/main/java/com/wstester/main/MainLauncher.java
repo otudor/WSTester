@@ -1,20 +1,22 @@
 package com.wstester.main;
 
+import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class ScreensFramework extends Application {
+public class MainLauncher extends Application {
     
     public static String screen1ID = "screen1";
     public static String screen1File = "/fxml/main/screen1.fxml";
     public static String screen2ID = "maineaa";
     public static String screen2File = "/fxml/main/WsTesterMain.fxml";
-    public static String screen3ID = "screen3";
+    public static String screen3ID = "loadingScreen";
     public static String screen3File = "/fxml/main/La.fxml";
     
     
@@ -22,16 +24,18 @@ public class ScreensFramework extends Application {
     public void start(Stage primaryStage) {
         
         ScreensController mainContainer = new ScreensController();
-        mainContainer.loadScreen(ScreensFramework.screen1ID, ScreensFramework.screen1File);
-        mainContainer.loadScreen(ScreensFramework.screen2ID, ScreensFramework.screen2File);
-        mainContainer.loadScreen(ScreensFramework.screen3ID, ScreensFramework.screen3File);
+        mainContainer.loadScreen(MainLauncher.screen1ID, MainLauncher.screen1File);
+        mainContainer.loadScreen(MainLauncher.screen2ID, MainLauncher.screen2File);
+        mainContainer.loadScreen(MainLauncher.screen3ID, MainLauncher.screen3File);
         
         
         
-        mainContainer.setScreen1(ScreensFramework.screen3ID);
+        mainContainer.setScreen(MainLauncher.screen3ID);
        // mainContainer.unloadScreen(ScreensFramework.screen3ID);
+       
         
-        mainContainer.setScreen(ScreensFramework.screen1ID);
+        
+        mainContainer.setScreen(MainLauncher.screen1ID);
         
         
         Group root = new Group();

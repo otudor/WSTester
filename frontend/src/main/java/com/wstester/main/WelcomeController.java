@@ -11,7 +11,7 @@ import javafx.fxml.Initializable;
  * @author lvasile
  * TODO: add java doc && rename class
  */
-public class Screen0Controller implements Initializable, ControlledScreen {
+public class WelcomeController implements Initializable, ControlledScreen {
 
     ScreensController myController;
     /**
@@ -28,6 +28,6 @@ public class Screen0Controller implements Initializable, ControlledScreen {
 
      @FXML
     private void goToScreen2(ActionEvent event){
-       myController.setScreen(ScreensFramework.screen2ID);
+       myController.setScreen(MainLauncher.screen2ID);
     }
 }
