@@ -25,10 +25,8 @@ public class ExchangeDelayer extends RouteBuilder{
 				timeout-=1000;
 				Thread.sleep(1000);
 			}
-			//TODO: memory leak here, we don't remove all the steps that finished only the ones that block other steps
 			stepsFinished.remove(step.getDependsOn());
 		}
-			
 	}
 
 	@Override
@@ -42,6 +40,19 @@ public class ExchangeDelayer extends RouteBuilder{
 				
 				String stepID = exchange.getIn().getBody(Response.class).getStepID();
 				stepsFinished.add(stepID);
+			}
+		});
+		
+		from("jms:topic:finishTopic")
+		.log("[${body.getID}] received finish message")
+		.process(new Processor() {
+			
+			@Override
+			public void process(Exchange exchange) throws Exception {
+				
+				stepsFinished.clear();
+				stepsFinished = null;
+				stepsFinished = new HashSet<String>();
 			}
 		});
 	}

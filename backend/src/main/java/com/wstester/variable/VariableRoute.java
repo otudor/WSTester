@@ -30,6 +30,8 @@ public class VariableRoute extends RouteBuilder {
 			@Override
 			public void process(Exchange exchange) throws Exception {
 				
+				variableSet.clear();
+				variableSet = null;
 				variableSet = new HashSet<Variable>(); 
 			}
 		});
@@ -55,5 +57,4 @@ public class VariableRoute extends RouteBuilder {
 
 		return false;
 	}
-
 }
