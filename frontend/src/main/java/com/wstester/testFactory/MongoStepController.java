@@ -3,6 +3,7 @@ package com.wstester.testFactory;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -34,7 +35,7 @@ public class MongoStepController
     private TestSuiteService tsService;
     private TestSuiteManagerController tsMainController;
     final ObservableList<Execut> lista = FXCollections.observableArrayList();
-    
+    private String uid = null;
 	@FXML
 	private void initialize() 
 	{
@@ -73,6 +74,7 @@ public class MongoStepController
         //mongoQuery.setText(step.getQuery().toString());
         mongoCollection.setText(step.getCollection());
         Execution execution = step.getLastExecution();
+        uid = stepUID;
         if( execution != null)
         {
         	if (execution.getResponse().getStatus() == ExecutionStatus.PASSED)
@@ -129,5 +131,24 @@ public class MongoStepController
     		response.set(Response);
     	}
     }
+    
+    public void saveMongo(ActionEvent e) {
+
+		MongoStep mongo = new MongoStep();
+		
+		mongo.setAction(step.getAction());
+		mongo.setAssertList(step.getAssertList());
+		mongo.setAssetList(step.getAssetList());
+		mongo.setCollection(step.getCollection());
+		mongo.setDependsOn(step.getDependsOn());
+		mongo.setExecutionList(step.getExecutionList());
+		mongo.setName(step.getName());
+		mongo.setQuery(step.getQuery());
+		mongo.setServer(step.getServer());
+		mongo.setService(step.getService());
+		mongo.setVariableList(step.getVariableList());
+		tsService.setMongoStepByUID(mongo, uid);
+		//tsService.saveEnv();
+	} 
 }
 	

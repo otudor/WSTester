@@ -20,6 +20,7 @@ import com.wstester.services.impl.TestRunner;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -55,6 +56,7 @@ public class RestStepController
     private String query;
     private String cookie;
     private String header;
+    private String uid = null;
     
 	@FXML
 	private void initialize() 
@@ -114,6 +116,7 @@ public class RestStepController
         restMethod.setText(step.getMethod());
         restRequest.setText((String) step.getRequest());
         Execution execution = step.getLastExecution();
+        uid = stepUID;
         if( execution != null)
         {
         	if (execution.getResponse().getStatus() == ExecutionStatus.PASSED)
@@ -177,7 +180,27 @@ public class RestStepController
     	}
     }
     
-    
+    public void saveRest(ActionEvent e) {
+
+		RestStep rest = new RestStep();
+		rest.setAssertList(step.getAssertList());
+		rest.setAssetList(step.getAssetList());
+		rest.setContentType(step.getContentType());
+		rest.setCookie(step.getCookie());
+		rest.setDependsOn(step.getDependsOn());
+		rest.setExecutionList(step.getExecutionList());
+		rest.setHeader(step.getHeader());
+		rest.setMethod(step.getMethod());
+		rest.setName(step.getName());
+		rest.setPath(step.getPath());
+		rest.setQuery(step.getQuery());
+		rest.setRequest(step.getRequest());
+		rest.setServer(step.getServer());
+		rest.setService(step.getService());
+		rest.setVariableList(step.getVariableList());
+		tsService.setRestStepByUID(rest, uid);
+		//tsService.saveEnv();
+	} 
     
     
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sun.prism.paint.Color;
 import com.wstester.model.MongoService;
+import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
@@ -16,6 +17,7 @@ import com.wstester.services.impl.TestRunner;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -42,7 +44,7 @@ public class SoapStepController
     private SoapStep step;    
     private TestSuiteService tsService;
     private TestSuiteManagerController tsMainController;
-    
+    private String uid = null;
     
 	@FXML
 	private void initialize() 
@@ -75,6 +77,7 @@ public class SoapStepController
         step = (SoapStep) tsService.getStep( stepUID);
         lblName.setText(step.getName());
         Execution execution = step.getLastExecution();
+        uid = stepUID;
         if( execution != null)
         {
         	if (execution.getResponse().getStatus() == ExecutionStatus.PASSED)
@@ -138,7 +141,21 @@ public class SoapStepController
     	}
     }
     
-    
+    public void saveSoap(ActionEvent e) {
+    	SoapStep soap = new SoapStep();
+		soap.setAssertList(step.getAssertList());
+		soap.setAssetList(step.getAssetList());
+		soap.setDependsOn(step.getDependsOn());
+		soap.setExecutionList(step.getExecutionList());
+		soap.setName(step.getName());
+		soap.setRequest(step.getRequest());
+		soap.setServer(step.getServer());
+		soap.setService(step.getService());
+		soap.setVariableList(step.getVariableList());
+		
+		tsService.setSoapStepByUID(soap, uid);
+		//tsService.saveEnv();
+	} 
     
     
 }

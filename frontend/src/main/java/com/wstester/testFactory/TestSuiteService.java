@@ -302,5 +302,124 @@ public class TestSuiteService
 			}
 		}
 	}
+    
+    
+    public void setMongoStepByUID(MongoStep src, String stepUID) {
+		for (Map.Entry<String, TestSuite> entry : tsList.entrySet()) {
+			// System.out.println(entry.getKey() + "/" + entry.getValue());
+			List<TestCase> caseList = ((TestSuite) entry.getValue())
+					.getTestCaseList();
+			if (caseList != null && !caseList.isEmpty()) 
+			{
+				for (TestCase testCase : caseList)
+				{
+					List<Step> stepList = testCase.getStepList();
+						if (stepList != null && !stepList.isEmpty())
+						{
+							for (Step step : stepList) 
+							{
+								if (step.getID() == stepUID) 
+								{
+									MongoStep mongo = new MongoStep();
+									mongo = (MongoStep) step;
+									mongo.setAction(src.getAction());
+									mongo.setAssertList(src.getAssertList());
+									mongo.setAssetList(src.getAssetList());
+									mongo.setCollection(src.getCollection());
+									mongo.setDependsOn(src.getDependsOn());
+									mongo.setExecutionList(src.getExecutionList());
+									mongo.setName(src.getName());
+									mongo.setQuery(src.getQuery());
+									mongo.setServer(src.getServer());
+									mongo.setService(src.getService());
+									mongo.setVariableList(src.getVariableList());
+									step = (Step) mongo;
+								}			
+							}
+						}
+				}
+			}
+		}
+	}
+    
+    public void setRestStepByUID(RestStep src, String stepUID) {
+		for (Map.Entry<String, TestSuite> entry : tsList.entrySet()) {
+			// System.out.println(entry.getKey() + "/" + entry.getValue());
+			List<TestCase> caseList = ((TestSuite) entry.getValue())
+					.getTestCaseList();
+			if (caseList != null && !caseList.isEmpty()) 
+			{
+				for (TestCase testCase : caseList)
+				{
+					List<Step> stepList = testCase.getStepList();
+						if (stepList != null && !stepList.isEmpty())
+						{
+							for (Step step : stepList) 
+							{
+								if (step.getID() == stepUID) 
+								{
+									RestStep rest = new RestStep();
+									rest = (RestStep) step;
+									rest.setAssertList(src.getAssertList());
+									rest.setAssetList(src.getAssetList());
+									rest.setContentType(src.getContentType());
+									rest.setCookie(src.getCookie());
+									rest.setDependsOn(src.getDependsOn());
+									rest.setExecutionList(src.getExecutionList());
+									rest.setHeader(src.getHeader());
+									rest.setMethod(src.getMethod());
+									rest.setName(src.getName());
+									rest.setPath(src.getPath());
+									rest.setQuery(src.getQuery());
+									rest.setRequest(src.getRequest());
+									rest.setServer(src.getServer());
+									rest.setService(src.getService());
+									rest.setVariableList(src.getVariableList());
+ 									rest = (RestStep) step;
+									step = (Step) rest;
+								}			
+							}
+						}
+				}
+			}
+		}
+	}
+    
+    public void setSoapStepByUID(SoapStep src, String stepUID) {
+		for (Map.Entry<String, TestSuite> entry : tsList.entrySet()) {
+			// System.out.println(entry.getKey() + "/" + entry.getValue());
+			List<TestCase> caseList = ((TestSuite) entry.getValue())
+					.getTestCaseList();
+			if (caseList != null && !caseList.isEmpty()) 
+			{
+				for (TestCase testCase : caseList)
+				{
+					List<Step> stepList = testCase.getStepList();
+						if (stepList != null && !stepList.isEmpty())
+						{
+							for (Step step : stepList) 
+							{
+								if (step.getID() == stepUID) 
+								{
+									SoapStep soap = new SoapStep();
+									soap = (SoapStep) step;
+									soap.setAssertList(src.getAssertList());
+									soap.setAssetList(src.getAssetList());
+									soap.setDependsOn(src.getDependsOn());
+									soap.setExecutionList(src.getExecutionList());
+									soap.setName(src.getName());
+									soap.setRequest(src.getRequest());
+									soap.setServer(src.getServer());
+									soap.setService(src.getService());
+									soap.setVariableList(src.getVariableList());
+									
+									step = (Step) soap;
+								}			
+							}
+						}
+				}
+			}
+		}
+	}
      
 }

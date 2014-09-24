@@ -22,7 +22,7 @@
               <Label fx:id="lblResponse" GridPane.columnIndex="1" GridPane.rowIndex="3" />
               
               <Label text="Past executions" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-              <TableView fx:id="tblExecutions" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5">
+              <TableView fx:id="tblExecutions" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="6">
       		     <columns>
       		          <TableColumn fx:id="columnDate" text="Date">
 		          </TableColumn>
@@ -35,6 +35,7 @@
                   <Insets left="5.0" right="5.0" />
                </GridPane.margin>
       		</TableView>
+            <Button mnemonicParsing="false" onAction="#saveSoap" text="Save" GridPane.rowIndex="5" />
           </children>
          <columnConstraints>
             <ColumnConstraints />
@@ -46,6 +47,7 @@
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
             <RowConstraints />
          </rowConstraints>
       </GridPane>
