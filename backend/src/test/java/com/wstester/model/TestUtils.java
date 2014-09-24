@@ -156,7 +156,7 @@ public class TestUtils {
 		oneAssert3.setAsserts("Third assert");
 		assertList3.add(oneAssert3);
 		step3.setAssertList(assertList3);
-		step3.setOperation("SELECT * FROM nume");
+		step3.setOperation("SELECT * FROM angajati");
 		stepList2.add(step3);
 		// test 4
 		SoapStep step4 = new SoapStep();

@@ -71,6 +71,7 @@ public final class ServiceLocator {
 		return instance;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public synchronized <T> T lookup(Class<? extends IService> clazz) {
 		Object service = null;
 		if(clazz.isAnnotationPresent(Stateful.class)) {
