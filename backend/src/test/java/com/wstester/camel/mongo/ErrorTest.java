@@ -96,6 +96,7 @@ public class ErrorTest extends CamelTestSupport{
 		resultEndpoint.await(5, TimeUnit.SECONDS);
 		Response response = resultEndpoint.getReceivedExchanges().get(0).getIn().getBody(Response.class);
 		assertEquals(ExecutionStatus.FAILED, response.getStatus());
-		assertEquals("UnknownHostException:andrei.test", response.getErrorMessage());
+		assertTrue("expected: " + "UnknownHostException:andrei.test" + " but was: " + response.getErrorMessage(), 
+				response.getErrorMessage().contains("UnknownHostException:andrei.test"));
 	}
 }
