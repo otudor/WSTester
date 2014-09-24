@@ -32,6 +32,5 @@ public class SelectTest extends TestBaseClass{
 
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("popescu", result.getJSONObject(0).get("detalii"));
-		assertEquals("ion", result.getJSONObject(1).get("detalii"));
 	}
 }
