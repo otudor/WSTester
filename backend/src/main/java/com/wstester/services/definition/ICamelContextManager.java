@@ -7,5 +7,7 @@ public interface ICamelContextManager extends IService{
 
 	void startCamelContext();
 	
+	boolean isStarted();
+	
 	void closeCamelContext();
 }

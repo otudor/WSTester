@@ -24,6 +24,7 @@ import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
 import com.wstester.model.Variable;
 import com.wstester.services.definition.ITestRunner;
+import com.wstester.util.ProjectProperties;
 import com.wstester.variable.VariableRoute;
 
 public class TestRunner implements ITestRunner{
@@ -217,8 +218,8 @@ public class TestRunner implements ITestRunner{
 				}
 			}
 		}
-		// TODO: change timeout to configuration file
-		Long timeout = 10000L;
+		ProjectProperties properties = new ProjectProperties();
+		Long timeout = properties.getLongProperty("stepFinishTimeout");
 		// TODO: change the source of the allVariablesReceived from VariableRoute to VariableManager
 		while(!VariableRoute.allVariablesReceived(variableSize) && ((timeout -= 1000) > 0)){
 			Thread.sleep(1000);
@@ -294,8 +295,8 @@ public class TestRunner implements ITestRunner{
 			throw new WsException("Can't run object: " + entityToRun + "! Please run only instances of TestProject, TestSuite, TestCase or Step", null);
 		}
 		
-		// TODO: change timeout to configuration file
-		Long timeout = 10000L;
+		ProjectProperties properties = new ProjectProperties();
+		Long timeout = properties.getLongProperty("stepFinishTimeout");
 		while (!ResponseCallback.allResponsesReceived(stepSize) && ((timeout -= 1000) > 0)) {
 			Thread.sleep(1000);
 		}

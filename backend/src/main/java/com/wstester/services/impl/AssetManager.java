@@ -3,27 +3,25 @@ package com.wstester.services.impl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import javax.jms.Connection;
 import javax.jms.DeliveryMode;
 import javax.jms.Destination;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
+
 import org.apache.activemq.ActiveMQConnectionFactory;
+
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Asset;
 import com.wstester.services.definition.IAssetManager;
+import com.wstester.util.ProjectProperties;
 
 public class AssetManager implements IAssetManager {
 
 	private CustomLogger log = new CustomLogger(AssetManager.class);
 	
-	/**
-	 * <br><br>
-	 * Method responsible to create a new Asset entity through JMS(Async) mechanism
-	 * </br>
-	 * @param the asset
-	 */
 	@Override
 	public void addAsset(Asset asset){
 		
@@ -85,11 +83,12 @@ public class AssetManager implements IAssetManager {
 	@Override
 	public boolean waitUntilFileCopied(Asset asset){
 		
-		long timeout = 5000;
+		ProjectProperties properties = new ProjectProperties();
+		Long timeout = properties.getLongProperty("assetCopyTimeout");
 		while(!Files.isReadable(Paths.get("assets/" + asset.getName() + ".done")) && timeout > 0){
 			try {
 				timeout -= 1000;
-				Thread.sleep(500);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

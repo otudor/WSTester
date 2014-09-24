@@ -10,6 +10,7 @@ import org.apache.camel.builder.RouteBuilder;
 
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Asset;
+import com.wstester.util.ProjectProperties;
 
 //TODO: exception handler
 public class AssetRoute extends RouteBuilder {
@@ -34,9 +35,11 @@ public class AssetRoute extends RouteBuilder {
 				Endpoint fileEndpoint = exchange.getContext().getEndpoint("file:" + asset.getPath() + "?fileName=" + asset.getName() + "&noop=true&initialDelay=10&readLock=none");
 				PollingConsumer consumer = fileEndpoint.createPollingConsumer();
 				consumer.start();
-				// TODO: change the time value in a config file
+				
 				log.info(asset.getID(), "Copy asset content");
-				Exchange fileExchange = consumer.receive(5000);
+				ProjectProperties properties = new ProjectProperties();
+				Long timeout = properties.getLongProperty("assetCopyTimeout");
+				Exchange fileExchange = consumer.receive(timeout);
 				if(fileExchange == null){
 					throw new FileNotFoundException("File to be copied: " + asset.getPath() + "/" + asset.getName() + " is not found");
 				}

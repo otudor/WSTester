@@ -9,6 +9,7 @@ import org.apache.camel.builder.RouteBuilder;
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
+import com.wstester.util.ProjectProperties;
 
 public class ExchangeDelayer extends RouteBuilder{
 
@@ -17,8 +18,8 @@ public class ExchangeDelayer extends RouteBuilder{
 	
 	public void delay(Step step) throws InterruptedException{
 		
-		// TODO: change this to a file property
-		int timeout = 10000;
+		ProjectProperties properties = new ProjectProperties();
+		Long timeout = properties.getLongProperty("stepFinishTimeout");
 		if(step.getDependsOn() != null){
 			while(!stepsFinished.contains(step.getDependsOn()) && timeout > 0){
 				log.info(step.getID(),"Waiting for: " + step.getDependsOn());
