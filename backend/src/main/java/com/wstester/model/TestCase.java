@@ -25,6 +25,10 @@ public class TestCase implements Serializable {
 	}
 
 	public List<Step> getStepList() {
+		if(this.stepList == null){
+			this.stepList = new ArrayList<Step>();
+		}
+		
 		return stepList;
 	}
 

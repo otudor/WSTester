@@ -31,7 +31,7 @@ public class CamelContextManager implements ICamelContextManager {
 		
 		camelContext.close();
 		
-		while(camelContext.isActive()){
+		while(camelContext.isRunning()){
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
