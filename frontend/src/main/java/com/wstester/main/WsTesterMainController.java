@@ -42,8 +42,11 @@ import javafx.util.Duration;
 import com.wstester.environment.Delta;
 import com.wstester.environment.EnvironmentsAppFactory;
 import com.wstester.environment.MainPresenter;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.ICamelContextManager;
 import com.wstester.testFactory.TestSuiteFactory;
 import com.wstester.testFactory.TestSuiteManagerController;
+
 public class WsTesterMainController implements Initializable, ControlledScreen {
 
 
@@ -83,7 +86,6 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	boolean isDisplayed4 =false;
 	boolean isDisplayed5 =false;
 	private int poz = 200;
-	//	private static TestProject testProject;
 	MenuBar menuBar ;
 	Menu menu;
 	private Menu menuRnd = new Menu("CreateRnd");
@@ -184,10 +186,24 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					poz=poz-100;
 				}
 				
+				ServiceLocator serviceLocator = ServiceLocator.getInstance();
+	    		ICamelContextManager manager = serviceLocator.lookup(ICamelContextManager.class);
+	    		manager.closeCamelContext();
+				
 				myController.setScreen(MainLauncher.screen1ID);
 			}
 
 		});
+		
+		
+//		WsTesterMain.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+//			public void handle(WindowEvent we) {
+//				
+//				ServiceLocator serviceLocator = ServiceLocator.getInstance();
+//	    		ICamelContextManager manager = serviceLocator.lookup(ICamelContextManager.class);
+//	    		manager.closeCamelContext();
+//			}
+//		});        
 
 	}
 	//method to create+add the icons

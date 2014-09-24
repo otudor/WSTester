@@ -28,6 +28,7 @@ public class EnvironmentService {
 		this.environments = new HashMap<String, Environment>();
 		// createContact("Cathy", "Freeman");
 		testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		System.out.println(testProject);
 		if(testProject.getEnvironmentList()!=null)
 		{
 		for(Environment entry:testProject.getEnvironmentList())
