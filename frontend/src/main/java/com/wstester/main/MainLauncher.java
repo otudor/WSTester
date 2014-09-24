@@ -1,14 +1,14 @@
 package com.wstester.main;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
-import javafx.animation.SequentialTransition;
-import javafx.animation.Timeline;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.ICamelContextManager;
+
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+import javafx.stage.WindowEvent;
 
 public class MainLauncher extends Application {
     
@@ -53,6 +53,18 @@ public class MainLauncher extends Application {
         }
         
         primaryStage.setScene(scene);
+        if(mainContainer.getScreen(screen2ID)!=null){
+        	primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+    			public void handle(WindowEvent we) {
+    				
+    				ServiceLocator serviceLocator = ServiceLocator.getInstance();
+    	    		ICamelContextManager manager = serviceLocator.lookup(ICamelContextManager.class);
+    	    		manager.closeCamelContext();
+    	    		
+    			}
+    		});  
+        	
+        }
         primaryStage.show();
     }
 

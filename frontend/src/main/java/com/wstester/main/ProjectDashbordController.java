@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ICamelContextManager;
-import com.wstester.services.impl.CamelContextManager;
 import com.wstester.services.impl.TestProjectActions;
 import com.wstester.util.MainConstants;
 import com.wstester.util.UtilityTool;
@@ -162,11 +161,17 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 				    		ICamelContextManager manager;
 							manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
 							manager.startCamelContext();
+							while (!manager.isStarted()){
+								Thread.sleep(1000);
+							}
 							myController.setScreen(MainLauncher.screen2ID);
 			    		}
 			    		
 			    		
 					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
