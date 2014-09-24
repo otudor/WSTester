@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sun.prism.paint.Color;
 import com.wstester.model.MongoService;
+import com.wstester.model.MySQLService;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
 import com.wstester.model.Server;
@@ -78,7 +79,7 @@ public class MySQLStepController
     private MySQLStep step;    
     private TestSuiteService tsService;
     private TestSuiteManagerController tsMainController;
-    
+    private String uid = null;
     
 	@FXML
 	private void initialize() 
@@ -104,11 +105,16 @@ public class MySQLStepController
     public void setMySQLStep(final String stepUID)
     {
           
-        step = (MySQLStep) tsService.getStep( stepUID);
+        step = (MySQLStep) tsService.getStep(stepUID);
+        
         stepName.setText(step.getName());
         sqlField.setText(step.getOperation());
         Execution execution = step.getLastExecution();
-        
+        if(gridPane.getChildren().contains(cellButton))
+        {
+        	gridPane.getChildren().remove(cellButton);
+        }
+        uid = stepUID;
         if( execution != null)
         {
         	if (execution.getResponse().getStatus() == ExecutionStatus.PASSED)
@@ -218,6 +224,21 @@ public class MySQLStepController
             }
         }
     }
+    public void saveMySQL(ActionEvent e) {
+
+		MySQLStep sql = new MySQLStep();
+		sql.setOperation(sqlField.getText());
+		sql.setName(stepName.getText());
+		sql.setService(step.getService());
+		sql.setServer(step.getServer());
+		sql.setExecutionList(step.getExecutionList());
+		sql.setAssertList(step.getAssertList());
+		sql.setAssetList(step.getAssetList());
+		sql.setDependsOn(step.getDependsOn());
+		sql.setVariableList(step.getVariableList());
+		tsService.setMySQLStepByUID(sql, uid);
+		//tsService.saveEnv();
+	} 
     
     
     
