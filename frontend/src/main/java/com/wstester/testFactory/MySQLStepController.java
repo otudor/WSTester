@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sun.prism.paint.Color;
 import com.wstester.model.MongoService;
+import com.wstester.model.MySQLService;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
 import com.wstester.model.Server;
@@ -28,7 +29,9 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 import java.util.Random;
+
 import javafx.application.Application;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -52,6 +55,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBoxBuilder;
 import javafx.stage.Modality;
@@ -68,12 +72,14 @@ public class MySQLStepController
     @FXML private TableView<Execut> tblExecutions;
     @FXML private TableColumn<Execut, String> columnDate;
     @FXML private TableColumn<Execut, String> columnStatus;
+    @FXML private GridPane gridPane;
+    @FXML private Button cellButton;
    // @FXML private TableColumn<Execut, String> columnResponse;
     
     private MySQLStep step;    
     private TestSuiteService tsService;
     private TestSuiteManagerController tsMainController;
-    
+    private String uid = null;
     
 	@FXML
 	private void initialize() 
@@ -99,11 +105,16 @@ public class MySQLStepController
     public void setMySQLStep(final String stepUID)
     {
           
-        step = (MySQLStep) tsService.getStep( stepUID);
+        step = (MySQLStep) tsService.getStep(stepUID);
+        
         stepName.setText(step.getName());
         sqlField.setText(step.getOperation());
         Execution execution = step.getLastExecution();
-        
+        if(gridPane.getChildren().contains(cellButton))
+        {
+        	gridPane.getChildren().remove(cellButton);
+        }
+        uid = stepUID;
         if( execution != null)
         {
         	if (execution.getResponse().getStatus() == ExecutionStatus.PASSED)
@@ -146,6 +157,7 @@ public class MySQLStepController
                     }
      
                 });
+            columnResponse.setPrefWidth(80);
             tblExecutions.getColumns().add(columnResponse);
             if(tblExecutions.getColumns().size()>3)
             {
@@ -162,13 +174,11 @@ public class MySQLStepController
     public static class Execut{
     	private final SimpleStringProperty date;
     	private final SimpleStringProperty status;
-    //	private final SimpleStringProperty response;
-		
+  	
     	private Execut(String Date, String Status, String Response){
     		this.date = new SimpleStringProperty(Date);
     		this.status = new SimpleStringProperty(Status);
-    	//	this.response = new SimpleStringProperty(Response);
-     	}
+       	}
     	
     	public String getDate(){
     		return date.get();
@@ -189,9 +199,10 @@ public class MySQLStepController
     private class ButtonCell extends TableCell<Execut, Boolean> {
     	 
         final Button cellButton = new Button("Details");
- 
+        
         ButtonCell(final TableView tblView) {
- 
+        	
+        	cellButton.setPrefSize(80, 25);
             cellButton.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
@@ -213,6 +224,21 @@ public class MySQLStepController
             }
         }
     }
+    public void saveMySQL(ActionEvent e) {
+
+		MySQLStep sql = new MySQLStep();
+		sql.setOperation(sqlField.getText());
+		sql.setName(stepName.getText());
+		sql.setService(step.getService());
+		sql.setServer(step.getServer());
+		sql.setExecutionList(step.getExecutionList());
+		sql.setAssertList(step.getAssertList());
+		sql.setAssetList(step.getAssetList());
+		sql.setDependsOn(step.getDependsOn());
+		sql.setVariableList(step.getVariableList());
+		tsService.setMySQLStepByUID(sql, uid);
+		//tsService.saveEnv();
+	} 
     
     
     

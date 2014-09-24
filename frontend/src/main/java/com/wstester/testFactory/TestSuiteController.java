@@ -35,7 +35,6 @@ public class TestSuiteController
 
 	public void setTestSuite(final String tsUID)	{
 		tsName.setText("");
-
 		TestSuite ts = tsService.getTestSuite( tsUID);
 		tsName.setText( ts.getName());
 		txtEnvName.setText( ts.getEnvironment().getName());

@@ -1,6 +1,7 @@
 package com.wstester.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,6 +42,9 @@ public class TestSuite implements Serializable {
 	}
 
 	public List<TestCase> getTestCaseList() {
+		if(this.testCaseList == null){
+			this.testCaseList = new ArrayList<TestCase>();
+		}
 		return testCaseList;
 	}
 

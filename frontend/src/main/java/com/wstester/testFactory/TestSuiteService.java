@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.wstester.model.Environment;
+import com.wstester.model.MongoService;
 import com.wstester.model.MongoStep;
 import com.wstester.model.MySQLService;
 import com.wstester.model.MySQLStep;
@@ -43,6 +44,7 @@ public class TestSuiteService
     {
     	TestSuite ts = new TestSuite();
     	ts.setName( name);
+    	//ts.setEnvironment(envList.get(0));
     	tsList.put( ts.getID(), ts);
         return ts;
     }
@@ -205,13 +207,13 @@ public class TestSuiteService
     {
     	TestCase result = null;
     	TestSuite ts = tsList.get( tsUID);
-    	
+    		
     	if( ts != null)
     	{
-    		List<TestCase> tcList = ts.getTestCaseList();
+    		List <TestCase>tcList = ts.getTestCaseList();
     		result = new TestCase();
-    		result.setName("Test Case");
-    		tcList.add(result);
+        	result.setName("Test Case");
+        	tcList.add(result);
     		//ts.setTestCaseList(tcList);
     	}
     	
@@ -264,64 +266,41 @@ public class TestSuiteService
 		}
 		((TestProject)UtilityTool.getEntity(MainConstants.TESTPROJECT)).setTestSuiteList(list);
 	}
-
     
-    /*public void removeEnvironmentById( String uId)
-    {
-    	tsList.remove( uId);
-    }
-    
-    public Server getServerByUID( String serverUID)
-    {
-    	Server result = null;
-
-		for (Map.Entry<String, Environment> entry : tsList.entrySet())
-		{
-		    //System.out.println(entry.getKey() + "/" + entry.getValue());
-    		List<Server> serverList = ((Environment)entry.getValue()).getServers();
-    		if ( serverList != null && !serverList.isEmpty())
-    		{
-    			for (Server server: serverList)
-    				if (server.getID() == serverUID)
-    				{
-    					result = server;
-    					break;
-    				}
-    		}
-    	}
-    	
-    	return result;
-    	//return new Server( "Server 3", "0909.05.05.05", "description server 3");
-    }
-    
-    public Service getServiceByUID (String serverUID, String serviceUID)
-    {
-    	Service result = null;
-    	for (Map.Entry<String, Environment> entry : tsList.entrySet())
-		{
-		    //System.out.println(entry.getKey() + "/" + entry.getValue());
-    		List<Server> serverList = ((Environment)entry.getValue()).getServers();
-    		if ( serverList != null && !serverList.isEmpty())
-    		{
-    			for (Server server: serverList)
-    				if (server.getID() == serverUID)
-    				{
-    					List<Service> serviceList = server.getServices();
-    					if ( serviceList != null && !serviceList.isEmpty())
-    					{
-    						for (Service service: serviceList)
-    						{
-    		    				if (service.getID() == serviceUID)
-    		    				{
-    		    					result = service;
-    		    					return result;
-    		    				}
-    						}
-    					}
-    			}
-    		}
-   		}
-    	
-    	return result;
-    }*/
+    public void setMySQLStepByUID(MySQLStep src, String stepUID) {
+		for (Map.Entry<String, TestSuite> entry : tsList.entrySet()) {
+			// System.out.println(entry.getKey() + "/" + entry.getValue());
+			List<TestCase> caseList = ((TestSuite) entry.getValue())
+					.getTestCaseList();
+			if (caseList != null && !caseList.isEmpty()) 
+			{
+				for (TestCase testCase : caseList)
+				{
+					List<Step> stepList = testCase.getStepList();
+						if (stepList != null && !stepList.isEmpty())
+						{
+							for (Step step : stepList) 
+							{
+								if (step.getID() == stepUID) 
+								{
+									MySQLStep mySQL = new MySQLStep();
+									mySQL = (MySQLStep) step;
+									mySQL.setOperation(src.getOperation());
+									mySQL.setName(src.getName());
+									mySQL.setService(src.getService());
+									mySQL.setServer(src.getServer());
+									mySQL.setExecutionList(src.getExecutionList());
+									mySQL.setAssertList(src.getAssertList());
+									mySQL.setAssetList(src.getAssetList());
+									mySQL.setDependsOn(src.getDependsOn());
+									mySQL.setVariableList(src.getVariableList());
+									step = (Step) mySQL;
+								}			
+							}
+						}
+				}
+			}
+		}
+	}
+     
 }
