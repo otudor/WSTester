@@ -17,7 +17,7 @@ public class CamelContextManager implements ICamelContextManager {
 	@Override
 	public boolean isStarted(){
 		
-		if(camelContext.isRunning()){
+		if(camelContext != null && camelContext.isRunning()){
 			return true;
 		}
 		
@@ -26,6 +26,9 @@ public class CamelContextManager implements ICamelContextManager {
 	
 	@Override
 	public void closeCamelContext() {
+		if(camelContext == null)
+			return;
+		
 		camelContext.close();
 		
 		while(camelContext.isActive()){
