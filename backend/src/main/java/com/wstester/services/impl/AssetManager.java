@@ -1,18 +1,18 @@
 package com.wstester.services.impl;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import javax.jms.Connection;
 import javax.jms.DeliveryMode;
 import javax.jms.Destination;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
-
 import org.apache.activemq.ActiveMQConnectionFactory;
-
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Asset;
 import com.wstester.services.definition.IAssetManager;
@@ -61,8 +61,18 @@ public class AssetManager implements IAssetManager {
 	}
 	
 	@Override
-	public void saveAsset(Asset asset, String content) {
+	public void saveAsset(Asset asset, String content) throws IOException {
 		
+		File file = new File("assets/" + asset.getName());
+		
+		if (!file.exists()) {
+			log.error("File dosen't exists");
+		}
+		
+		FileWriter fw = new FileWriter(file.getAbsoluteFile());
+		BufferedWriter bw = new BufferedWriter(fw);
+		bw.write(content);
+		bw.close();
 	}
 	
 	@Override

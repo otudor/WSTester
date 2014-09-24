@@ -1,12 +1,14 @@
 package com.wstester.services.definition;
 
+import java.io.IOException;
+
 import com.wstester.model.Asset;
 
 public interface IAssetManager extends IService {
 
 	void addAsset(Asset asset);
 	
-	void saveAsset(Asset asset, String content);
+	void saveAsset(Asset asset, String content) throws IOException;
 
 	String getAssetContent(String fileName);
 

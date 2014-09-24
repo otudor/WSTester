@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -29,6 +30,26 @@ public class AssetManagerTest extends TestBaseClass{
 		assertTrue(file.exists());
 		
 		file.delete();
+	}
+	
+	@Test
+	public void saveAsset() throws InterruptedException{
+		
+		AssetManager assetManager = new AssetManager();
+		
+		Asset asset = new Asset();
+		asset.setName("SOAPRequest.xml");
+		asset.setPath("src/test/resources");
+		
+		File file = new File("assets/SOAPRequest.xml");
+		assertTrue(file.exists());
+		
+		try {
+			assetManager.saveAsset(asset, "Testam daca este functional");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
