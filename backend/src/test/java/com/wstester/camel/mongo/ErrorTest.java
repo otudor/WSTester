@@ -81,7 +81,8 @@ public class ErrorTest extends CamelTestSupport{
 		resultEndpoint.await(5, TimeUnit.SECONDS);
 		Response response = resultEndpoint.getReceivedExchanges().get(0).getIn().getBody(Response.class);
 		assertEquals(ExecutionStatus.FAILED, response.getStatus());		
-		assertEquals("ConnectException:" + exceptionMessage, response.getErrorMessage());
+		assertTrue("expected: " + "ConnectException:" + exceptionMessage + " but was: " + response.getErrorMessage(), 
+						response.getErrorMessage().contains("ConnectException:" + exceptionMessage));
 	}
 	
 	@Test
