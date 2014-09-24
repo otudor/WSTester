@@ -14,7 +14,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<mainClass>com.wstester.main.ScreensFramework</mainClass>
+		<mainClass>com.wstester.main.MainLauncher</mainClass>
 		<jfx.version>8.0-r1</jfx.version>
 		<controlsfx.version>8.0.2</controlsfx.version>
 	</properties>
