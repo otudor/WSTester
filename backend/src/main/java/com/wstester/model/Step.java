@@ -66,6 +66,9 @@ public abstract class Step implements Serializable {
 	}
 
 	public List<Variable> getVariableList() {
+		if(this.variableList == null){
+			this.variableList = new ArrayList<Variable>();
+		}
 		return variableList;
 	}
 

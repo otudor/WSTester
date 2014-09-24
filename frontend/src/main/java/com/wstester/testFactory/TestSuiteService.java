@@ -256,17 +256,7 @@ public class TestSuiteService
     	
     	return null;
     }
-    
-    public void saveEnv()
-	{	
-		List<TestSuite> list = new ArrayList<>();
-		for(TestSuite entry : tsList.values() )
-		{
-			list.add(entry);
-		}
-		((TestProject)UtilityTool.getEntity(MainConstants.TESTPROJECT)).setTestSuiteList(list);
-	}
-    
+        
     public void setMySQLStepByUID(MySQLStep src, String stepUID) {
 		for (Map.Entry<String, TestSuite> entry : tsList.entrySet()) {
 			// System.out.println(entry.getKey() + "/" + entry.getValue());
@@ -420,6 +410,16 @@ public class TestSuiteService
 				}
 			}
 		}
+	}
+    
+    public void saveTestSuite()
+	{	
+		List<TestSuite> list = new ArrayList<>();
+		for(TestSuite entry : tsList.values() )
+		{
+			list.add(entry);
+		}
+		((TestProject)UtilityTool.getEntity(MainConstants.TESTPROJECT)).setTestSuiteList(list);
 	}
      
 }

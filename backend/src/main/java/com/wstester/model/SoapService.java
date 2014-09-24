@@ -14,10 +14,14 @@ public class SoapService extends Service {
 	}
 
 	public String getPort() {
+		if (this.port == null)
+			this.port = "";
 		return port;
 	}
 
 	public String getPath() {
+		if (this.path == null)
+			this.path = "";
 		return path;
 	}
 	
@@ -34,6 +38,8 @@ public class SoapService extends Service {
 	}
 	
 	public String getWsdlURL() {
+		if (this.wsdlURL == null)
+			this.wsdlURL = "";
 		return wsdlURL;
 	}
 

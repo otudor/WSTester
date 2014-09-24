@@ -45,6 +45,8 @@ public class TestCase implements Serializable {
 	}
 
 	public String getName() {
+		if (this.name == null)
+			this.name = "";
 		return name;
 	}
 

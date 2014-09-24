@@ -199,7 +199,7 @@ public class RestStepController
 		rest.setService(step.getService());
 		rest.setVariableList(step.getVariableList());
 		tsService.setRestStepByUID(rest, uid);
-		//tsService.saveEnv();
+		tsService.saveTestSuite();
 	} 
     
     

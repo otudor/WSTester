@@ -15,6 +15,8 @@ public class MySQLStep extends Step {
 	}
 	
 	public String getOperation() {
+		if (this.operation == null)
+			this.operation = "";
 		return operation;
 	}
 

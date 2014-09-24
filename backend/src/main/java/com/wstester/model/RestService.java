@@ -12,6 +12,8 @@ public class RestService extends Service {
 	}
 	
 	public String getPort() {
+		if (this.port == null)
+			this.port = "";
 		return port;
 	}
 

@@ -38,6 +38,9 @@ public class TestProject implements Serializable {
 	}
 
 	public List<Asset> getAssetList() {
+		if(this.assetList == null){
+			this.assetList = new ArrayList<Asset>();
+		}
 		return assetList;
 	}
 
@@ -54,6 +57,9 @@ public class TestProject implements Serializable {
 	}
 	
 	public List<Environment> getEnvironmentList() {
+		if(this.environmentList == null){
+			this.environmentList = new ArrayList<Environment>();
+		}
 		return environmentList;
 	}
 
@@ -62,6 +68,8 @@ public class TestProject implements Serializable {
 	}
 
 	public String getName() {
+		if (this.name == null)
+			this.name = "";
 		return name;
 	}
 

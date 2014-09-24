@@ -34,6 +34,9 @@ public class TestSuite implements Serializable {
 	}
 
 	public Environment getEnvironment() {
+		if(this.environment == null){
+			this.environment = new Environment();
+		}
 		return environment;
 	}
 
@@ -53,6 +56,9 @@ public class TestSuite implements Serializable {
 	}
 
 	public List<Variable> getVariableList() {
+		if(this.variableList == null){
+			this.variableList = new ArrayList<Variable>();
+		}
 		return variableList;
 	}
 

@@ -1,5 +1,6 @@
 package com.wstester.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -20,6 +21,8 @@ public class MongoStep extends Step{
 	}
 
 	public String getCollection() {
+		if (this.collection == null)
+			this.collection = "";
 		return collection;
 	}
 
@@ -28,6 +31,8 @@ public class MongoStep extends Step{
 	}
 
 	public HashMap<String, String> getQuery() {
+		if (this.query == null)
+			this.query = new HashMap<String, String>();
 		return query;
 	}
 
