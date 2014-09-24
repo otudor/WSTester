@@ -5,12 +5,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="rootFTPDetails" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.ServerDetailsPresenter">
+<AnchorPane fx:id="rootFTPDetails" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="360.0" styleClass="primepanel" stylesheets="@../../styles/Envwindows.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.ServerDetailsPresenter">
    <children>
-      <GridPane fx:id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane fx:id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
                 
           <children>
-              <Label text="Server Name" GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <Label styleClass="insidelabel" stylesheets="@../../styles/Envwindows.css" text=" Name:" GridPane.columnIndex="0" GridPane.rowIndex="0">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -20,7 +20,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </TextField>
-              <Label text="IP" GridPane.columnIndex="0" GridPane.rowIndex="1">
+              <Label styleClass="insidelabel" stylesheets="@../../styles/Envwindows.css" text="IP:" GridPane.columnIndex="0" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -30,7 +30,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </TextField>
-            <Label text="Description" GridPane.rowIndex="2">
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="25.0" prefWidth="95.0" styleClass="insidelabel" stylesheets="@../../styles/Envwindows.css" text="Description:" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -58,15 +58,15 @@
                   </Button>
                </children>
             </HBox>
-            <Label fx:id="labelname" prefHeight="25.0" prefWidth="240.0" text="Label" GridPane.columnIndex="1">
+            <Label fx:id="labelname" prefHeight="25.0" prefWidth="240.0" styleClass="insidelabel" stylesheets="@../../styles/Envwindows.css" text="Label" GridPane.columnIndex="1">
                <padding>
                   <Insets left="8.0" />
                </padding></Label>
-            <Label fx:id="labelip" prefHeight="25.0" prefWidth="240.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="labelip" prefHeight="25.0" prefWidth="240.0" styleClass="insidelabel" stylesheets="@../../styles/Envwindows.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <padding>
                   <Insets left="8.0" />
                </padding></Label>
-            <Label fx:id="labeldesc" prefHeight="25.0" prefWidth="240.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="labeldesc" prefHeight="25.0" prefWidth="240.0" styleClass="insidelabel" stylesheets="@../../styles/Envwindows.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <padding>
                   <Insets left="8.0" />
                </padding></Label>
@@ -82,5 +82,6 @@
             <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" />
          </rowConstraints>
       </GridPane>
+      <Label alignment="CENTER" layoutX="118.0" layoutY="20.0" prefHeight="25.0" prefWidth="114.0" styleClass="titlenviroment" stylesheets="@../../styles/Envwindows.css" text="Server" />
    </children>
 </AnchorPane>
