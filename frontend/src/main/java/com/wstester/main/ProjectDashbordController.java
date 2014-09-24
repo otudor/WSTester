@@ -34,6 +34,7 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 	TestProjectActions actions = new TestProjectActions();
     ScreensController myController;
     public TestProject testproject;
+    public static boolean loadState = false;
     
     @FXML
     private AnchorPane ancor = new AnchorPane();
@@ -148,11 +149,13 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 				@Override
 				public void handle(MouseEvent event) {
 			    	 try {
-			    		
+			    		if (loadState==false){
+			    		loadState= true;	
 			    		FileChooser fileChooser = new FileChooser();
 			    		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("STEP project files (*.step)", "*.step");
 			    		fileChooser.getExtensionFilters().add(extFilter);
 			    		File file = fileChooser.showOpenDialog(Load);
+			    		
 			    		if(file != null){
 			    			
 			    			testproject=actions.open(file.getCanonicalPath());
@@ -164,7 +167,15 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 							while (!manager.isStarted()){
 								Thread.sleep(1000);
 							}
+							
 							myController.setScreen(MainLauncher.screen2ID);
+							loadState=false;
+			    		}
+			    		else
+			    		{
+			    			loadState = false;
+			    		}
+			    		
 			    		}
 			    		
 			    		

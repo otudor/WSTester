@@ -191,6 +191,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	    		manager.closeCamelContext();
 				
 				myController.setScreen(MainLauncher.screen1ID);
+				
 			}
 
 		});
