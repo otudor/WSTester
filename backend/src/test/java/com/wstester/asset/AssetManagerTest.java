@@ -2,12 +2,8 @@ package com.wstester.asset;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import java.io.File;
-import java.io.IOException;
-
 import org.junit.Test;
-
 import com.wstester.camel.TestBaseClass;
 import com.wstester.model.Asset;
 import com.wstester.services.impl.AssetManager;
@@ -38,27 +34,21 @@ public class AssetManagerTest extends TestBaseClass{
 		AssetManager assetManager = new AssetManager();
 		
 		Asset asset = new Asset();
-		asset.setName("SOAPRequest.xml");
+		asset.setName("info.wsdl");
 		asset.setPath("src/test/resources");
 		assetManager.addAsset(asset);
 		
 		assetManager.waitUntilFileCopied(asset);
 		
-		asset.setPath("assets/" + asset.getName());
-		
-		File file = new File("assets/SOAPRequest.xml");
+		File file = new File("assets/info.wsdl");
 		assertTrue(file.exists());
 		
-		try {
-			assetManager.saveAsset(asset, "Testam daca este functional");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		assetManager.saveAsset(asset, "Testam daca este functional");
 		
 		String content = assetManager.getAssetContent(asset.getName());
 		assertEquals("Testam daca este functional", content);
 		
+		file.delete();
 	}
 	
 	@Test

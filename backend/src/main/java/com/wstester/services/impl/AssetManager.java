@@ -1,8 +1,5 @@
 package com.wstester.services.impl;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -61,18 +58,14 @@ public class AssetManager implements IAssetManager {
 	}
 	
 	@Override
-	public void saveAsset(Asset asset, String content) throws IOException {
+	public void saveAsset(Asset asset, String content) {
 		
-		File file = new File("assets/" + asset.getName());
-		
-		if (!file.exists()) {
-			log.error("File dosen't exists");
+		try {
+			Files.write(Paths.get("assets/" + asset.getName()), content.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			log.error("File does not exist");
 		}
-		
-		FileWriter fw = new FileWriter(file.getAbsoluteFile());
-		BufferedWriter bw = new BufferedWriter(fw);
-		bw.write(content);
-		bw.close();
 	}
 	
 	@Override

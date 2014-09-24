@@ -8,7 +8,7 @@ public interface IAssetManager extends IService {
 
 	void addAsset(Asset asset);
 	
-	void saveAsset(Asset asset, String content) throws IOException;
+	void saveAsset(Asset asset, String content);
 
 	String getAssetContent(String fileName);
 
