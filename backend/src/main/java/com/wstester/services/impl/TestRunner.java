@@ -32,6 +32,8 @@ public class TestRunner implements ITestRunner{
 	private TestProject testProject;
 	private CustomLogger log = new CustomLogger(TestRunner.class);
 	
+	public TestRunner() {}
+	
 	public TestRunner(TestProject testProject){
 		
 		if(testProject != null){

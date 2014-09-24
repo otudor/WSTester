@@ -5,12 +5,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,6 +18,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import com.wstester.model.TestProject;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.ICamelContextManager;
+import com.wstester.services.impl.CamelContextManager;
 import com.wstester.services.impl.TestProjectActions;
 import com.wstester.util.MainConstants;
 import com.wstester.util.UtilityTool;
@@ -134,7 +134,6 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 				@Override
 				public void handle(MouseEvent event) {
 					myController.setScreen(MainLauncher.screen2ID);
-			    	
 			    	 TestProject t = new TestProject();
 			    	 UtilityTool.addEntity(MainConstants.TESTPROJECT, t);
 			
@@ -146,24 +145,27 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 	 
 	 private void loadExistingProject() {
 			loadButtonLed.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
+				
 				@Override
 				public void handle(MouseEvent event) {
-					
-			    	
 			    	 try {
+			    		
 			    		FileChooser fileChooser = new FileChooser();
 			    		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("STEP project files (*.step)", "*.step");
 			    		fileChooser.getExtensionFilters().add(extFilter);
 			    		File file = fileChooser.showOpenDialog(Load);
 			    		if(file != null){
-			    			System.out.println(file.getCanonicalPath());
+			    			
 			    			testproject=actions.open(file.getCanonicalPath());
 			    			UtilityTool.addEntity(MainConstants.TESTPROJECT, testproject);
-			    			myController.setScreen(MainLauncher.screen2ID);
+			    			
+				    		ICamelContextManager manager;
+							manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
+							manager.startCamelContext();
+							myController.setScreen(MainLauncher.screen2ID);
 			    		}
-						//testproject=actions.open("src/main/resources/testProject/Output.xml");
-						//UtilityTool.addEntity(MainConstants.TESTPROJECT, testproject); 
+			    		
+			    		
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

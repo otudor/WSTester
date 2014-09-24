@@ -42,8 +42,12 @@ import javafx.util.Duration;
 import com.wstester.environment.Delta;
 import com.wstester.environment.EnvironmentsAppFactory;
 import com.wstester.environment.MainPresenter;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.ICamelContextManager;
+import com.wstester.services.impl.CamelContextManager;
 import com.wstester.testFactory.TestSuiteFactory;
 import com.wstester.testFactory.TestSuiteManagerController;
+
 public class WsTesterMainController implements Initializable, ControlledScreen {
 
 
@@ -184,10 +188,26 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					poz=poz-100;
 				}
 				
+				ServiceLocator serviceLocator = ServiceLocator.getInstance();
+//	    		ICamelContextManager manager = serviceLocator.lookup(CamelContextManager.class);
+				ICamelContextManager manager = new CamelContextManager();
+	    		manager.closeCamelContext();
+				
 				myController.setScreen(MainLauncher.screen1ID);
 			}
 
 		});
+		
+		
+		WsTesterMain.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent we) {
+				
+				ServiceLocator serviceLocator = ServiceLocator.getInstance();
+//	    		ICamelContextManager manager = serviceLocator.lookup(CamelContextManager.class);
+				ICamelContextManager manager = new CamelContextManager();
+	    		manager.closeCamelContext();
+			}
+		});        
 
 	}
 	//method to create+add the icons

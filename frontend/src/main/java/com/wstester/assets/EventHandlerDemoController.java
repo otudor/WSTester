@@ -294,7 +294,6 @@ public class EventHandlerDemoController {
 							asset.setType(extension);
 							assetManager.addAsset(asset);
 							assetManager.waitUntilFileCopied(asset);
-							assetManager.close();
 							TestProject testProject = new TestProject();
 							testProject.addAsset(asset);
 
