@@ -65,6 +65,7 @@ public class AssetManager implements IAssetManager {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			log.error("File does not exist");
+			e.printStackTrace();
 		}
 	}
 	
