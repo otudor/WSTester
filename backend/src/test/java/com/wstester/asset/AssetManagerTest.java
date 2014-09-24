@@ -40,6 +40,11 @@ public class AssetManagerTest extends TestBaseClass{
 		Asset asset = new Asset();
 		asset.setName("SOAPRequest.xml");
 		asset.setPath("src/test/resources");
+		assetManager.addAsset(asset);
+		
+		assetManager.waitUntilFileCopied(asset);
+		
+		asset.setPath("assets/" + asset.getName());
 		
 		File file = new File("assets/SOAPRequest.xml");
 		assertTrue(file.exists());
@@ -50,6 +55,10 @@ public class AssetManagerTest extends TestBaseClass{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		String content = assetManager.getAssetContent(asset.getName());
+		assertEquals("Testam daca este functional", content);
+		
 	}
 	
 	@Test
