@@ -212,9 +212,8 @@ public class TestSuiteListController implements Initializable
     	    		TreeItem<Object> tcNode = new TreeItem<>(newTC, icon);
     	    		item.getChildren().add( tcNode);
     	    		treeView.getSelectionModel().select( tcNode);
-    	    		//show details in right pane
-    	    		//selectServer( server.getID());
-    	    	}
+    	    		selectTestCase(newTC.getID());
+       	    	}
     	    }
     	});
     	
@@ -276,6 +275,7 @@ public class TestSuiteListController implements Initializable
     	    	    		TreeItem<Object> stepNode = new TreeItem<>(mysqlStep, icon);
     	    	    		item.getChildren().add( stepNode);
     	    	    		treeView.getSelectionModel().select( stepNode);
+    	    	    		selectMySQLStep(mysqlStep.getID());
     	    	    		//show details in right pane
     	    	    		//selectMySQLService( s.getID(),service.getID());
     	    	    	}
@@ -300,6 +300,7 @@ public class TestSuiteListController implements Initializable
     	    	    		TreeItem<Object> stepNode = new TreeItem<>(mongoStep, icon);
     	    	    		item.getChildren().add( stepNode);
     	    	    		treeView.getSelectionModel().select( stepNode);
+    	    	    		selectMongoStep(mongoStep.getID());
     	    	    		//show details in right pane
     	    	    		//selectMongoService( s.getID(),service.getID());
     	    	    	}
@@ -323,6 +324,7 @@ public class TestSuiteListController implements Initializable
     	    	    		TreeItem<Object> stepNode = new TreeItem<>(soapStep, icon);
     	    	    		item.getChildren().add( stepNode);
     	    	    		treeView.getSelectionModel().select( stepNode);
+    	    	    		selectSoapStep(soapStep.getID());
     	    	    		//show details in right pane
     	    	    		//selectMongoService( s.getID(),service.getID());
     	    	    	}
@@ -346,6 +348,7 @@ public class TestSuiteListController implements Initializable
     	    	    		TreeItem<Object> stepNode = new TreeItem<>(restStep, icon);
     	    	    		item.getChildren().add( stepNode);
     	    	    		treeView.getSelectionModel().select( stepNode);
+    	    	    		selectRestStep(restStep.getID());
     	    	    		//show details in right pane
     	    	    		//selectMongoService( s.getID(),service.getID());
     	    	    	}
@@ -482,50 +485,19 @@ public class TestSuiteListController implements Initializable
     	    
     	    return hbox;
     	}
-    	    	   	
-    	@Override
-        public void startEdit()
-    	{
-            super.startEdit();
-
-            if (textField == null)
-                createTextField();
-                
-            setText(null);
-            setGraphic(textField);
-            textField.selectAll();
-        }
-
-        @Override
-        public void cancelEdit()
-        {
-            super.cancelEdit();
-            
-            setText( ((Environment) getItem()).getName());
-            if( getTreeItem() != null )
-            	setGraphic(getTreeItem().getGraphic());
-            
-            //textField = null;
-            treeView.setEditable( false);
-        }
-
-        private void createTextField() 
-        {
-            textField = new TextField( ((Environment) getItem()).getName());
-            textField.setOnKeyReleased(new EventHandler<KeyEvent>() 
-            { 
-                @Override
-                public void handle(KeyEvent t) {
-                    if (t.getCode() == KeyCode.ENTER) 
-                    {
-                    	Environment e = (Environment) getItem();
-                    	e.setName( textField.getText());
-                        commitEdit( e);
-                    } else if (t.getCode() == KeyCode.ESCAPE) {
-                        cancelEdit();
-                    }
-                }
-            });
-        }
-    }   
+    }
+    
+    public void createTestSuite( ActionEvent event)
+    {
+    	TestSuite ts = tsService.createTestSuite("New TestSuite");
+    	Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_environment.png")));
+    	TreeItem<Object> node = new TreeItem<>( ts, icon);
+        treeView.getRoot().getChildren().add(node);
+        //root.getChildren().add(envNode);
+        treeView.setEditable(true);
+        treeView.getSelectionModel().select( node);
+        treeView.getFocusModel().focusNext();
+        treeView.edit( node);
+        selectTestSuite( ts.getID());
+    }
 }

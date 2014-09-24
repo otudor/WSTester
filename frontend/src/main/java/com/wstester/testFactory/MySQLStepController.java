@@ -28,7 +28,9 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 import java.util.Random;
+
 import javafx.application.Application;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -52,6 +54,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBoxBuilder;
 import javafx.stage.Modality;
@@ -68,6 +71,8 @@ public class MySQLStepController
     @FXML private TableView<Execut> tblExecutions;
     @FXML private TableColumn<Execut, String> columnDate;
     @FXML private TableColumn<Execut, String> columnStatus;
+    @FXML private GridPane gridPane;
+    @FXML private Button cellButton;
    // @FXML private TableColumn<Execut, String> columnResponse;
     
     private MySQLStep step;    
@@ -146,6 +151,7 @@ public class MySQLStepController
                     }
      
                 });
+            columnResponse.setPrefWidth(80);
             tblExecutions.getColumns().add(columnResponse);
             if(tblExecutions.getColumns().size()>3)
             {
@@ -162,13 +168,11 @@ public class MySQLStepController
     public static class Execut{
     	private final SimpleStringProperty date;
     	private final SimpleStringProperty status;
-    //	private final SimpleStringProperty response;
-		
+  	
     	private Execut(String Date, String Status, String Response){
     		this.date = new SimpleStringProperty(Date);
     		this.status = new SimpleStringProperty(Status);
-    	//	this.response = new SimpleStringProperty(Response);
-     	}
+       	}
     	
     	public String getDate(){
     		return date.get();
@@ -189,9 +193,10 @@ public class MySQLStepController
     private class ButtonCell extends TableCell<Execut, Boolean> {
     	 
         final Button cellButton = new Button("Details");
- 
+        
         ButtonCell(final TableView tblView) {
- 
+        	
+        	cellButton.setPrefSize(80, 25);
             cellButton.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override

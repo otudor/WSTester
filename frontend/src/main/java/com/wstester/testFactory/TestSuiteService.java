@@ -43,6 +43,7 @@ public class TestSuiteService
     {
     	TestSuite ts = new TestSuite();
     	ts.setName( name);
+    	//ts.setEnvironment(envList.get(0));
     	tsList.put( ts.getID(), ts);
         return ts;
     }
@@ -205,13 +206,13 @@ public class TestSuiteService
     {
     	TestCase result = null;
     	TestSuite ts = tsList.get( tsUID);
-    	
+    		
     	if( ts != null)
     	{
-    		List<TestCase> tcList = ts.getTestCaseList();
+    		List <TestCase>tcList = ts.getTestCaseList();
     		result = new TestCase();
-    		result.setName("Test Case");
-    		tcList.add(result);
+        	result.setName("Test Case");
+        	tcList.add(result);
     		//ts.setTestCaseList(tcList);
     	}
     	
@@ -324,4 +325,6 @@ public class TestSuiteService
     	
     	return result;
     }*/
+    
+    
 }

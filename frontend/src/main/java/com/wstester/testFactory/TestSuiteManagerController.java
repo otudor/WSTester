@@ -1,5 +1,6 @@
 package com.wstester.testFactory;
 
+import com.wstester.model.Environment;
 import com.wstester.model.TestProject;
 import com.wstester.services.impl.TestRunner;
 
@@ -9,8 +10,12 @@ import javafx.event.EventHandler;
 import javafx.event.EventTarget;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TreeItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 public class TestSuiteManagerController
@@ -122,6 +127,7 @@ public class TestSuiteManagerController
     	return tsListController.getFirstEnv();
     }
 
+    
     public void runTestSuite( ActionEvent event) throws Exception
     {
 		TestProject testProject = new TestProject();

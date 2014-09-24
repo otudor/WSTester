@@ -27,6 +27,9 @@ public class TestProject implements Serializable {
 	}
 
 	public List<TestSuite> getTestSuiteList() {
+		if(this.testSuiteList == null){
+			this.testSuiteList = new ArrayList<TestSuite>();
+		}
 		return testSuiteList;
 	}
 
