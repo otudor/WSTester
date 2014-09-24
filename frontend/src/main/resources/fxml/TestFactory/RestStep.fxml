@@ -20,7 +20,7 @@
               
               <Label text="Response:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
               <Label fx:id="lblResponse" prefHeight="17.0" prefWidth="179.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-              <TableView fx:id="tblExecutions" prefHeight="400.0" prefWidth="266.0" GridPane.columnSpan="2" GridPane.rowIndex="11">
+              <TableView fx:id="tblExecutions" prefHeight="400.0" prefWidth="266.0" GridPane.columnSpan="2" GridPane.rowIndex="12">
       		     <columns>
       		          <TableColumn fx:id="columnDate" text="Date">
 		          </TableColumn>
@@ -47,6 +47,7 @@
             <Label fx:id="restQuery" prefHeight="17.0" prefWidth="183.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="restCookie" prefHeight="17.0" prefWidth="183.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label fx:id="restHeader" prefHeight="17.0" prefWidth="184.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveRest" text="Save" GridPane.rowIndex="11" />
           </children>
          <columnConstraints>
             <ColumnConstraints />
@@ -64,6 +65,7 @@
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
             <RowConstraints />
          </rowConstraints>
       </GridPane>
