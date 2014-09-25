@@ -850,11 +850,12 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						mainPresenter.loadEnvironments();
 						//                        mainPresenter.setTestProject(testProject);
 						root = mainPresenter.getView();
-						Scene second = new Scene(root, 600, 480);
+						Scene second = new Scene(root, 600, 550);
 						stage.setTitle("Environments window");
-						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/Envwindows.css").toExternalForm());					
+						String cssPath = "/styles/Envwindows.css";
+						//second.getStylesheets().addAll(WsTesterMain.class.getResource(cssPath).toExternalForm());		
+						second.getStylesheets().addAll(cssPath);
 						root.getStyleClass().add("mainWind");
-
 						newIcoM6 = (VBox) CreateIcon("/images/task_img_open.png","Env");	
 						newIcoM6.setLayoutX(poz);
 						newIcoM6.setLayoutY(1);

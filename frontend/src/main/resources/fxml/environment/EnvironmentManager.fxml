@@ -4,21 +4,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="root" style="-fx-background-color: #323232;" stylesheets="@../../styles/Envwindows.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.MainPresenter">
+<BorderPane fx:id="root" style="-fx-background-color: #323232;" stylesheets="styles/Envwindows.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.MainPresenter">
 
           <!-- Header -->
     <top>
-        <VBox spacing="5" styleClass="vboxtry" stylesheets="@../../styles/Envwindows.css">
+        <VBox spacing="5" styleClass="vboxtry" stylesheets="styles/Envwindows.css">
             <!--  <styleClass><String fx:value="header"/></styleClass> -->
             <children>
-                <Label prefHeight="47.0" prefWidth="230.0" styleClass="insidelabel" stylesheets="@../../styles/Envwindows.css" text="Environment Management" />
+                <Label prefHeight="47.0" prefWidth="230.0" styleClass="insidelabel" stylesheets="styles/Envwindows.css" text="Environment Management" />
             </children>
         </VBox>
     </top>
 
           <!-- Content Area -->
     <center>
-        <BorderPane fx:id="contentArea" styleClass="border-pane" stylesheets="@../../styles/Envwindows.css">
+        <BorderPane fx:id="contentArea" styleClass="border-pane" stylesheets="styles/Envwindows.css">
             <!-- <styleClass><String fx:value="body"/></styleClass> -->
         </BorderPane>
     </center>

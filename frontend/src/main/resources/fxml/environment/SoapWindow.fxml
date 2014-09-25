@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="rootSoapService" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="190.0" prefWidth="350.0" styleClass="primepanel" stylesheets="@../../styles/Envwindows.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.SoapPresenter">
+<AnchorPane fx:id="rootSoapService" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="190.0" prefWidth="350.0" styleClass="primepanel" stylesheets="styles/Envwindows.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.SoapPresenter">
    <children>
       <GridPane fx:id="gridpane" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
         <columnConstraints>
@@ -40,17 +40,17 @@
                   </Button>
                </children>
             </HBox>
-            <Label alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="110.0" styleClass="insidelabel" stylesheets="@../../styles/Envwindows.css" text="WSDL URL:" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+            <Label alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="110.0" styleClass="insidelabel" stylesheets="styles/Envwindows.css" text="WSDL URL:" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" styleClass="insidelabel" stylesheets="@../../styles/Envwindows.css" text="Port:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Label alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" styleClass="insidelabel" stylesheets="styles/Envwindows.css" text="Port:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" styleClass="insidelabel" stylesheets="@../../styles/Envwindows.css" text="Path:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Label alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" styleClass="insidelabel" stylesheets="styles/Envwindows.css" text="Path:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
@@ -73,7 +73,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </TextField>
-            <Label fx:id="labelwsdl" prefHeight="25.0" prefWidth="240.0" styleClass="insidelabel" stylesheets="@../../styles/Envwindows.css" text="Label" GridPane.columnIndex="1">
+            <Label fx:id="labelwsdl" prefHeight="25.0" prefWidth="240.0" styleClass="insidelabel" stylesheets="styles/Envwindows.css" text="Label" GridPane.columnIndex="1">
                <padding>
                   <Insets left="8.0" />
                </padding>
@@ -81,7 +81,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="labelport" prefHeight="25.0" prefWidth="240.0" styleClass="insidelabel" stylesheets="@../../styles/Envwindows.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="labelport" prefHeight="25.0" prefWidth="240.0" styleClass="insidelabel" stylesheets="styles/Envwindows.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <padding>
                   <Insets left="8.0" />
                </padding>
@@ -89,7 +89,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="labelpath" prefHeight="25.0" prefWidth="240.0" styleClass="insidelabel" stylesheets="@../../styles/Envwindows.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="labelpath" prefHeight="25.0" prefWidth="240.0" styleClass="insidelabel" stylesheets="styles/Envwindows.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <padding>
                   <Insets left="8.0" />
                </padding>
@@ -99,6 +99,6 @@
             </Label>
          </children>
       </GridPane>
-      <Label alignment="CENTER" layoutX="95.0" layoutY="14.0" prefHeight="36.0" prefWidth="160.0" styleClass="titlenviroment" stylesheets="@../../styles/Envwindows.css" text="Soap Service" />
+      <Label alignment="CENTER" layoutX="95.0" layoutY="14.0" prefHeight="36.0" prefWidth="160.0" styleClass="titlenviroment" stylesheets="styles/Envwindows.css" text="Soap Service" />
    </children>
 </AnchorPane>
