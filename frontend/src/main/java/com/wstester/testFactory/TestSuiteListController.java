@@ -117,11 +117,6 @@ public class TestSuiteListController implements Initializable
     	tsManagerController.showRestStep( sUID);
     }
     
-    public String getFirstEnv()
-    {
-    	return tsService.getFirstTestSuite().getID();
-    }
-    
     public List<TestSuite> getTestSuiteList()
     {
     	return this.tsList;
@@ -147,12 +142,12 @@ public class TestSuiteListController implements Initializable
     		
     		if ( tclist!= null && !tclist.isEmpty())
     		{
-    			for (TestCase tc: tclist)
+    			for (TestCase testCase: tclist)
     			{
     				icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestCase.png")));
-    				TreeItem<Object> tcNode = new TreeItem<>(tc, icon);
+    				TreeItem<Object> tcNode = new TreeItem<>(testCase, icon);
     				
-    				List<Step> steps = tc.getStepList();    				
+    				List<Step> steps = testCase.getStepList();    				
     				if ( steps!= null && !steps.isEmpty())
 	    				
     					for (Step step: steps)
@@ -163,7 +158,7 @@ public class TestSuiteListController implements Initializable
 	    						if ( step instanceof MongoStep )
 	    							icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
 	    						else if ( step instanceof SoapStep )
-    							icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
+	    							icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
 	    						else if ( step instanceof RestStep )
 	    							icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
 	    					TreeItem<Object> stepNode = new TreeItem<>(step, icon);
@@ -188,7 +183,7 @@ public class TestSuiteListController implements Initializable
         });
     }
     
-    public ContextMenu createTestSuiteContextMenu( TestSuite ts)
+    public ContextMenu createTestSuiteContextMenu( TestSuite testSuite)
     {
     	final ContextMenu contextMenu = new ContextMenu();
     	MenuItem addTCMenu = new MenuItem("Add Test Case");
@@ -201,17 +196,16 @@ public class TestSuiteListController implements Initializable
     	    {
     	    	TreeItem<Object> item = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
     	    	if( item == null ) return;
-
-    	    	//Environment e = (Environment)(item.getValue());
-    	    	TestCase newTC = tsService.addTestCaseForTestSuite(ts.getID());
-    	    	if (newTC != null)
-    	    	{
-    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestCase.png")));
-    	    		TreeItem<Object> tcNode = new TreeItem<>(newTC, icon);
-    	    		item.getChildren().add( tcNode);
-    	    		treeView.getSelectionModel().select( tcNode);
-    	    		selectTestCase(newTC.getID());
-       	    	}
+    	    	
+    	    	TestCase testCase = new TestCase();
+    	    	testCase.setName("New Test Case");
+    	    	tsService.addTestCaseForTestSuite(testCase, testSuite.getID());    	    	
+    	    	    	    	
+    	    	Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestCase.png")));
+    	    	TreeItem<Object> tcNode = new TreeItem<>(testCase, icon);
+    	    	item.getChildren().add( tcNode);
+    	    	treeView.getSelectionModel().select( tcNode);
+    	    	selectTestCase(testCase.getID());
     	    }
     	});
     	
@@ -389,24 +383,7 @@ public class TestSuiteListController implements Initializable
             }
             else 
             {
-            	/*if( isEditing())
-            	{
-            		if (textField != null) 
-                        textField.setText( getItem().toString());
-            		setText(null);
-            		setGraphic(textField);
-            		System.out.println("updateItem -" + getItem().toString() + "- e editing ");
-            	}
-            	else */
-            	{
-            		//System.out.println("updateItem (" + getItem().toString() + ") nu e editing ");
-            		//setText(getItem() == null ? "" : getItem().toString());
-                    //setGraphic(getTreeItem().getGraphic());
-            		//setGraphic( addHBox());
-            	}
-            	
-            	//System.out.println("am un nod: " + getItem().getClass());
-            
+                      
                 if ( getItem().getClass() == MySQLStep.class )
                 {
                 	setGraphic( createStepGraphic(item));
@@ -469,15 +446,14 @@ public class TestSuiteListController implements Initializable
     
     public void createTestSuite( ActionEvent event)
     {
-    	TestSuite ts = tsService.createTestSuite("New TestSuite");
+    	TestSuite testSuite = tsService.createTestSuite("New TestSuite");
     	Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_environment.png")));
-    	TreeItem<Object> node = new TreeItem<>( ts, icon);
+    	TreeItem<Object> node = new TreeItem<>( testSuite, icon);
         treeView.getRoot().getChildren().add(node);
-        //root.getChildren().add(envNode);
         treeView.setEditable(true);
         treeView.getSelectionModel().select( node);
         treeView.getFocusModel().focusNext();
         treeView.edit( node);
-        selectTestSuite( ts.getID());
+        selectTestSuite( testSuite.getID());
     }
 }

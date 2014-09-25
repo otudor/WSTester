@@ -45,15 +45,9 @@ public class TestSuiteService {
 	public TestSuite getTestSuite(String uID) {
 		return testProject.getTestSuite(uID);
 	}
-
-	public TestSuite getFirstTestSuite() {
-		TestSuite result = testProject.getFirstTestSuite();
-		return result;
-	}
 	
-	public TestCase addTestCaseForTestSuite(String tsUID) {
-		TestCase result = testProject.addTestCaseForTestSuite(tsUID);
-		return result;
+	public void addTestCaseForTestSuite(TestCase testCase, String tsUID) {
+		testProject.addTestCaseForTestSuite(testCase, tsUID);
 	}
 
 	public void removeTestCase(String tcUID) {

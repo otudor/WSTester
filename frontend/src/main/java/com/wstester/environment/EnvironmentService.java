@@ -19,14 +19,12 @@ import com.wstester.model.TestProject;
 import com.wstester.util.*;
 
 public class EnvironmentService {
-	// private long nextId = 0;
 	private Map<String, Environment> environments;
 	private TestProject testProject;
 	
 
 	public EnvironmentService() {
 		this.environments = new HashMap<String, Environment>();
-		// createContact("Cathy", "Freeman");
 		testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
 		System.out.println(testProject);
 		if(testProject.getEnvironmentList()!=null)
