@@ -70,7 +70,7 @@ public class EnvironmentService {
 			List<Server> serverList = env.getServers();
 			if (serverList != null && !serverList.isEmpty())
 				for (Server server : serverList)
-					if (server.getID() == serverUID) {
+					if (server.getID().equals(serverUID)) {
 						env.getServers().remove(server);
 						break;
 					}
@@ -106,7 +106,7 @@ public class EnvironmentService {
 					.getServers();
 			if (serverList != null && !serverList.isEmpty()) {
 				for (Server server : serverList)
-					if (server.getID() == srvUID) {
+					if (server.getID().equals(srvUID)) {
 						srv = server;
 						break;
 					}
@@ -135,7 +135,7 @@ public class EnvironmentService {
 					.getServers();
 			if (serverList != null && !serverList.isEmpty()) {
 				for (Server server : serverList)
-					if (server.getID() == srvUID) {
+					if (server.getID().equals(srvUID)) {
 						srv = server;
 						break;
 					}
@@ -164,7 +164,7 @@ public class EnvironmentService {
 					.getServers();
 			if (serverList != null && !serverList.isEmpty()) {
 				for (Server server : serverList)
-					if (server.getID() == srvUID) {
+					if (server.getID().equals(srvUID)) {
 						srv = server;
 						break;
 					}
@@ -192,7 +192,7 @@ public class EnvironmentService {
 					.getServers();
 			if (serverList != null && !serverList.isEmpty()) {
 				for (Server server : serverList)
-					if (server.getID() == srvUID) {
+					if (server.getID().equals(srvUID)) {
 						srv = server;
 						break;
 					}
@@ -222,7 +222,7 @@ public class EnvironmentService {
 					.getServers();
 			if (serverList != null && !serverList.isEmpty()) {
 				for (Server server : serverList)
-					if (server.getID() == serverUID) {
+					if (server.getID().equals(serverUID)) {
 						result = server;
 						break;
 					}
@@ -242,11 +242,11 @@ public class EnvironmentService {
 					.getServers();
 			if (serverList != null && !serverList.isEmpty()) {
 				for (Server server : serverList)
-					if (server.getID() == serverUID) {
+					if (server.getID().equals(serverUID)) {
 						List<Service> serviceList = server.getServices();
 						if (serviceList != null && !serviceList.isEmpty()) {
 							for (Service service : serviceList) {
-								if (service.getID() == serviceUID) {
+								if (service.getID().equals(serviceUID)) {
 									result = service;
 									return result;
 								}
@@ -273,7 +273,7 @@ public class EnvironmentService {
 						{
 							for (Service service : serviceList) 
 							{
-								if (service.getID() == serviceUID) 
+								if (service.getID().equals(serviceUID)) 
 								{
 											MongoService mongo = new MongoService();
 											mongo = (MongoService) service;
@@ -304,7 +304,7 @@ public class EnvironmentService {
 						{
 							for (Service service : serviceList) 
 							{
-								if (service.getID() == serviceUID) 
+								if (service.getID().equals(serviceUID)) 
 								{
 											MySQLService serv = new MySQLService();
 											serv = (MySQLService) service;
@@ -335,7 +335,7 @@ public class EnvironmentService {
 						{
 							for (Service service : serviceList) 
 							{
-								if (service.getID() == serviceUID) 
+								if (service.getID().equals(serviceUID)) 
 								{
 											RestService serv = new RestService();
 											serv = (RestService) service;
@@ -363,7 +363,7 @@ public class EnvironmentService {
 						{
 							for (Service service : serviceList) 
 							{
-								if (service.getID() == serviceUID) 
+								if (service.getID().equals(serviceUID)) 
 								{
 											SoapService serv = new SoapService();
 											serv = (SoapService) service;
@@ -388,7 +388,7 @@ public class EnvironmentService {
 			{
 				for (Server server : serverList)
 				{
-					if (server.getID() == serverUID) 
+					if (server.getID().equals(serverUID)) 
 						{
 							server.setName(srv.getName());
 							server.setIp(srv.getIp());
@@ -421,7 +421,7 @@ public class EnvironmentService {
 						List<Service> serviceList = server.getServices();
 						if (serviceList != null && !serviceList.isEmpty()) {
 							for (Service service : serviceList) {
-								if (service.getID() == srcUID) {
+								if (service.getID().equals(srcUID)) {
 									server.getServices().remove(service);
 									break;
 								}

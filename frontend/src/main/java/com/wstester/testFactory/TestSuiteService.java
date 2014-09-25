@@ -83,7 +83,7 @@ public class TestSuiteService
 			if (tcList != null && !tcList.isEmpty()) 
 			{
 				for ( TestCase tc : tcList)
-					if (tc.getID() == tcUID) 
+					if (tc.getID().equals(tcUID)) 
 					{
 						tCase = tc;
 						break;
@@ -116,7 +116,7 @@ public class TestSuiteService
 			if (tcList != null && !tcList.isEmpty()) 
 			{
 				for ( TestCase tc : tcList)
-					if (tc.getID() == tcUID) 
+					if (tc.getID().equals(tcUID)) 
 					{
 						tCase = tc;
 						break;
@@ -149,7 +149,7 @@ public class TestSuiteService
 			if (tcList != null && !tcList.isEmpty()) 
 			{
 				for ( TestCase tc : tcList)
-					if (tc.getID() == tcUID) 
+					if (tc.getID().equals(tcUID)) 
 					{
 						tCase = tc;
 						break;
@@ -182,7 +182,7 @@ public class TestSuiteService
 			if (tcList != null && !tcList.isEmpty()) 
 			{
 				for ( TestCase tc : tcList)
-					if (tc.getID() == tcUID) 
+					if (tc.getID().equals(tcUID)) 
 					{
 						tCase = tc;
 						break;
@@ -229,7 +229,7 @@ public class TestSuiteService
     		List<TestCase> tcList = ts.getTestCaseList();
     		if ( tcList != null && !tcList.isEmpty())
     			for (TestCase tc: tcList)
-    				if ( tc.getID() == tcUID)
+    				if ( tc.getID().equals(tcUID))
     				{
     					ts.getTestCaseList().remove(tc);
     					break;
@@ -249,7 +249,7 @@ public class TestSuiteService
     					List<Step> stepList = tc.getStepList();
     					if( stepList != null && !stepList.isEmpty())
     						for( Step stp: stepList)
-    							if (stp.getID() == stepUID)
+    							if (stp.getID().equals(stepUID))
 									return stp;    								
     				}
     		}
@@ -271,7 +271,7 @@ public class TestSuiteService
 						{
 							for (Step step : stepList) 
 							{
-								if (step.getID() == stepUID) 
+								if (step.getID().equals(stepUID)) 
 								{
 									MySQLStep mySQL = new MySQLStep();
 									mySQL = (MySQLStep) step;
@@ -308,7 +308,7 @@ public class TestSuiteService
 						{
 							for (Step step : stepList) 
 							{
-								if (step.getID() == stepUID) 
+								if (step.getID().equals(stepUID)) 
 								{
 									MongoStep mongo = new MongoStep();
 									mongo = (MongoStep) step;
@@ -346,7 +346,7 @@ public class TestSuiteService
 						{
 							for (Step step : stepList) 
 							{
-								if (step.getID() == stepUID) 
+								if (step.getID().equals(stepUID)) 
 								{
 									RestStep rest = new RestStep();
 									rest = (RestStep) step;
@@ -389,7 +389,7 @@ public class TestSuiteService
 						{
 							for (Step step : stepList) 
 							{
-								if (step.getID() == stepUID) 
+								if (step.getID().equals(stepUID)) 
 								{
 									SoapStep soap = new SoapStep();
 									soap = (SoapStep) step;
