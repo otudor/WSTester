@@ -85,8 +85,6 @@ public class TestSuiteListController implements Initializable
     public void loadSuites()
     {
     	tsList = tsService.getTestSuites();    
-        //load the tree also
-        //loadTreeItems();
     }
     
     public void selectTestSuite( String tsUID)
@@ -139,7 +137,7 @@ public class TestSuiteListController implements Initializable
     	
     	TreeItem<Object> root = new TreeItem<Object>("treeRoot");
     	root.setExpanded(true);
-    	
+        	
     	List<TestSuite> suiteList = this.tsList; /*tsService.getTestSuites();*/    	
     	for (TestSuite ts : suiteList)
     	{
@@ -251,7 +249,7 @@ public class TestSuiteListController implements Initializable
     	    	int idx = treeView.getSelectionModel().getSelectedIndex();
     	    	if( c == null ) return;    	    	
     	    	
-    	    	tsService.removeTestCase( ts.getID(), tc.getID());
+    	    	tsService.removeTestCase( tc.getID());
                 c.getParent().getChildren().remove(c);
                                
                 treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
@@ -265,21 +263,17 @@ public class TestSuiteListController implements Initializable
     	    	    {
     	    	    	TreeItem<Object> item = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
     	    	    	if( item == null ) return;
-
-    	    	    	//TestCase tcItem = (TestCase)(item.getValue());
-    	    	    	MySQLStep mysqlStep = tsService.addMySQLStepforTestCase( tc.getID());
     	    	    	
-    	    	    	if (mysqlStep != null)
-    	    	    	{
-    	    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
-    	    	    		TreeItem<Object> stepNode = new TreeItem<>(mysqlStep, icon);
-    	    	    		item.getChildren().add( stepNode);
-    	    	    		treeView.getSelectionModel().select( stepNode);
-    	    	    		selectMySQLStep(mysqlStep.getID());
-    	    	    		//show details in right pane
-    	    	    		//selectMySQLService( s.getID(),service.getID());
-    	    	    	}
-    	                //treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
+    	    	    	MySQLStep mySQLStep = new MySQLStep();
+    	    	    	mySQLStep.setName("New MySQL Step");
+    	    	    	tsService.addStepForTestCase( mySQLStep, tc.getID());
+    	    	    	
+    	    	    	Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
+    	    	    	TreeItem<Object> stepNode = new TreeItem<>(mySQLStep, icon);
+    	    	    	item.getChildren().add( stepNode);
+    	    	    	treeView.getSelectionModel().select( stepNode);
+    	    	    	selectMySQLStep(mySQLStep.getID());
+    	    	    	
     	    	    }
     	    	});
     	
@@ -291,21 +285,17 @@ public class TestSuiteListController implements Initializable
     	    	    	TreeItem<Object> item = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
     	    	    	if( item == null ) return;
 
-    	    	    	//TestCase tcItem = (TestCase)(item.getValue());
-    	    	    	MongoStep mongoStep = tsService.addMongoStepforTestCase( tc.getID());
-    	    	    	
-    	    	    	if (mongoStep != null)
-    	    	    	{
-    	    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
-    	    	    		TreeItem<Object> stepNode = new TreeItem<>(mongoStep, icon);
-    	    	    		item.getChildren().add( stepNode);
-    	    	    		treeView.getSelectionModel().select( stepNode);
-    	    	    		selectMongoStep(mongoStep.getID());
-    	    	    		//show details in right pane
-    	    	    		//selectMongoService( s.getID(),service.getID());
-    	    	    	}
-    	                //treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
-    	    	    }
+    	    	    	MongoStep mongoStep = new MongoStep();
+    	    	    	mongoStep.setName("New Mongo Step");
+    	    	    	tsService.addStepForTestCase( mongoStep, tc.getID());
+    	    	   
+    	    	    	Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
+    	    	    	TreeItem<Object> stepNode = new TreeItem<>(mongoStep, icon);
+    	    	    	item.getChildren().add( stepNode);
+    	    	    	treeView.getSelectionModel().select( stepNode);
+    	    	    	selectMongoStep(mongoStep.getID());
+    	       	    	
+    	            }
     	    	});
     	addSoapItem.setOnAction(new EventHandler<ActionEvent>() 
     	    	{
@@ -314,46 +304,36 @@ public class TestSuiteListController implements Initializable
     	    	    {
     	    	    	TreeItem<Object> item = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
     	    	    	if( item == null ) return;
-
-    	    	    	//TestCase tcItem = (TestCase)(item.getValue());
-    	    	    	SoapStep soapStep = tsService.addSoapStepforTestCase( tc.getID());
+    	    	    	  	    	    	
+    	    	    	SoapStep soapStep = new SoapStep();
+    	    	    	soapStep.setName("New Soap Step");
+    	    	    	tsService.addStepForTestCase( soapStep, tc.getID());
     	    	    	
-    	    	    	if (soapStep != null)
-    	    	    	{
-    	    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
-    	    	    		TreeItem<Object> stepNode = new TreeItem<>(soapStep, icon);
-    	    	    		item.getChildren().add( stepNode);
-    	    	    		treeView.getSelectionModel().select( stepNode);
-    	    	    		selectSoapStep(soapStep.getID());
-    	    	    		//show details in right pane
-    	    	    		//selectMongoService( s.getID(),service.getID());
-    	    	    	}
-    	                //treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
+    	    	    	Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
+    	    	    	TreeItem<Object> stepNode = new TreeItem<>(soapStep, icon);
+    	    	    	item.getChildren().add( stepNode);
+    	    	    	treeView.getSelectionModel().select( stepNode);
+    	    	    	selectSoapStep(soapStep.getID());
+    	    	    	
+    	              
     	    	    }
     	    	});
     	addRestItem.setOnAction(new EventHandler<ActionEvent>() 
     	    	{
     	    	    @Override
-    	    	    public void handle(ActionEvent event) 
-    	    	    {
+    	    	    public void handle(ActionEvent event) {
     	    	    	TreeItem<Object> item = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
     	    	    	if( item == null ) return;
-
-    	    	    	//TestCase tcItem = (TestCase)(item.getValue());
-    	    	    	RestStep restStep = tsService.addRestStepforTestCase( tc.getID());
-    	    	    	
-    	    	    	if (restStep != null)
-    	    	    	{
-    	    	    		Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
-    	    	    		TreeItem<Object> stepNode = new TreeItem<>(restStep, icon);
-    	    	    		item.getChildren().add( stepNode);
-    	    	    		treeView.getSelectionModel().select( stepNode);
-    	    	    		selectRestStep(restStep.getID());
-    	    	    		//show details in right pane
-    	    	    		//selectMongoService( s.getID(),service.getID());
-    	    	    	}
-    	                //treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
-    	    	    }
+    	    	    	RestStep restStep = new RestStep();
+    	    	    	restStep.setName("New Rest Step");
+    	    	    	tsService.addStepForTestCase( restStep, tc.getID());
+						
+    	    	    	Node icon = new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
+						TreeItem<Object> stepNode = new TreeItem<>(restStep, icon);
+						item.getChildren().add(stepNode);
+						treeView.getSelectionModel().select(stepNode);
+						selectRestStep(restStep.getID());
+				  }
     	    	});
     	
     	return contextMenu;
