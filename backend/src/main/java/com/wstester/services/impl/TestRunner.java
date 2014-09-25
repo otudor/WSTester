@@ -299,6 +299,7 @@ public class TestRunner implements ITestRunner{
 		
 		ProjectProperties properties = new ProjectProperties();
 		Long timeout = properties.getLongProperty("stepFinishTimeout");
+		
 		while (!ResponseCallback.allResponsesReceived(stepSize) && ((timeout -= 1000) > 0)) {
 			Thread.sleep(1000);
 		}

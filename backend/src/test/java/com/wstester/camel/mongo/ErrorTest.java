@@ -80,7 +80,7 @@ public class ErrorTest extends CamelTestSupport{
 		
 		resultEndpoint.await(5, TimeUnit.SECONDS);
 		Response response = resultEndpoint.getReceivedExchanges().get(0).getIn().getBody(Response.class);
-		assertEquals(ExecutionStatus.FAILED, response.getStatus());		
+		assertEquals(ExecutionStatus.ERROR, response.getStatus());		
 		assertEquals("ConnectException:" + exceptionMessage, response.getErrorMessage());
 	}
 	
@@ -95,7 +95,7 @@ public class ErrorTest extends CamelTestSupport{
 		
 		resultEndpoint.await(5, TimeUnit.SECONDS);
 		Response response = resultEndpoint.getReceivedExchanges().get(0).getIn().getBody(Response.class);
-		assertEquals(ExecutionStatus.FAILED, response.getStatus());
+		assertEquals(ExecutionStatus.ERROR, response.getStatus());
 		assertTrue("expected: " + "UnknownHostException:andrei.test" + " but was: " + response.getErrorMessage(), 
 				response.getErrorMessage().contains("UnknownHostException:andrei.test"));
 	}

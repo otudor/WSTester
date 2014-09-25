@@ -7,6 +7,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public enum ExecutionStatus implements Serializable {
 
-	PASSED, FAILED
+	PASSED, FAILED, ERROR
 }
 

@@ -121,7 +121,7 @@ public class TestUtils {
 		restStep.setService(restService);
 		List<Assert> assertList = new ArrayList<Assert>();
 		Assert oneAssert = new Assert();
-		oneAssert.setAsserts("First assert");
+		oneAssert.setExpected("First assert");
 		assertList.add(oneAssert);
 		restStep.setAssertList(assertList);
 		restStep.setPath("/customer/getCustomers");
@@ -134,7 +134,7 @@ public class TestUtils {
 		step2.setService(service2);
 		List<Assert> assertList2 = new ArrayList<Assert>();
 		Assert oneAssert2 = new Assert();
-		oneAssert2.setAsserts("Second assert");
+		oneAssert2.setExpected("Second assert");
 		assertList2.add(oneAssert2);
 		step2.setAssertList(assertList2);
 		String collection = "customer";
@@ -153,7 +153,7 @@ public class TestUtils {
 		step3.setService(service4);
 		List<Assert> assertList3 = new ArrayList<Assert>();
 		Assert oneAssert3 = new Assert();
-		oneAssert3.setAsserts("Third assert");
+		oneAssert3.setExpected("Third assert");
 		assertList3.add(oneAssert3);
 		step3.setAssertList(assertList3);
 		step3.setOperation("SELECT * FROM angajati");
@@ -165,7 +165,7 @@ public class TestUtils {
 		step4.setService(service3);
 		List<Assert> assertList4 = new ArrayList<Assert>();
 		Assert oneAssert4 = new Assert();
-		oneAssert4.setAsserts("Forth assert");
+		oneAssert4.setExpected("Forth assert");
 		assertList4.add(oneAssert4);
 		step4.setAssertList(assertList4);
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
@@ -258,7 +258,7 @@ public class TestUtils {
 		restStep.setService(restService);
 		List<Assert> assertList = new ArrayList<Assert>();
 		Assert oneAssert = new Assert();
-		oneAssert.setAsserts("First assert");
+		oneAssert.setExpected("First assert");
 		assertList.add(oneAssert);
 		restStep.setAssertList(assertList);
 		restStep.setPath("/customer/getCustomers");
@@ -344,7 +344,7 @@ public class TestUtils {
 		step2.setService(service2);
 		List<Assert> assertList2 = new ArrayList<Assert>();
 		Assert oneAssert2 = new Assert();
-		oneAssert2.setAsserts("Second assert");
+		oneAssert2.setExpected("Second assert");
 		assertList2.add(oneAssert2);
 		step2.setAssertList(assertList2);
 		String collection = "customer";
@@ -434,7 +434,7 @@ public class TestUtils {
 		step1.setService(service2);
 		List<Assert> assertList2 = new ArrayList<Assert>();
 		Assert oneAssert2 = new Assert();
-		oneAssert2.setAsserts("Second assert");
+		oneAssert2.setExpected("Second assert");
 		assertList2.add(oneAssert2);
 		step1.setAssertList(assertList2);
 		String collection = "customer";
@@ -559,7 +559,7 @@ public class TestUtils {
 		step3.setService(service4);
 		List<Assert> assertList3 = new ArrayList<Assert>();
 		Assert oneAssert3 = new Assert();
-		oneAssert3.setAsserts("Third assert");
+		oneAssert3.setExpected("Third assert");
 		assertList3.add(oneAssert3);
 		step3.setAssertList(assertList3);
 		stepList2.add(step3);
@@ -652,7 +652,7 @@ public class TestUtils {
 		step4.setService(service3);
 		List<Assert> assertList4 = new ArrayList<Assert>();
 		Assert oneAssert4 = new Assert();
-		oneAssert4.setAsserts("Forth assert");
+		oneAssert4.setExpected("Forth assert");
 		assertList4.add(oneAssert4);
 		step4.setAssertList(assertList4);
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
@@ -953,7 +953,7 @@ public class TestUtils {
 		step4.setService(service3);
 		List<Assert> assertList4 = new ArrayList<Assert>();
 		Assert oneAssert4 = new Assert();
-		oneAssert4.setAsserts("Forth assert");
+		oneAssert4.setExpected("Forth assert");
 		assertList4.add(oneAssert4);
 		step4.setAssertList(assertList4);
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
@@ -1053,7 +1053,7 @@ public class TestUtils {
 		restStep.setService(restService);
 		List<Assert> assertList = new ArrayList<Assert>();
 		Assert oneAssert = new Assert();
-		oneAssert.setAsserts("First assert");
+		oneAssert.setExpected("First assert");
 		assertList.add(oneAssert);
 		restStep.setAssertList(assertList);
 		restStep.setPath("/customer/getCustomers");
@@ -1161,7 +1161,7 @@ public class TestUtils {
 		restStep.setService(restService);
 		List<Assert> assertList = new ArrayList<Assert>();
 		Assert oneAssert = new Assert();
-		oneAssert.setAsserts("First assert");
+		oneAssert.setExpected("First assert");
 		assertList.add(oneAssert);
 		restStep.setAssertList(assertList);
 		restStep.setPath("/customer/getCustomers");
@@ -1174,7 +1174,7 @@ public class TestUtils {
 		step4.setService(service3);
 		List<Assert> assertList4 = new ArrayList<Assert>();
 		Assert oneAssert4 = new Assert();
-		oneAssert4.setAsserts("Forth assert");
+		oneAssert4.setExpected("Forth assert");
 		assertList4.add(oneAssert4);
 		step4.setAssertList(assertList4);
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
@@ -1272,7 +1272,7 @@ public class TestUtils {
 		step4.setService(service3);
 		List<Assert> assertList4 = new ArrayList<Assert>();
 		Assert oneAssert4 = new Assert();
-		oneAssert4.setAsserts("Forth assert");
+		oneAssert4.setExpected("Forth assert");
 		step4.setAssetList(assetList);
 		assertList4.add(oneAssert4);
 		step4.setAssertList(assertList4);

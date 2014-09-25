@@ -23,7 +23,7 @@ public class ExceptionProcessor implements Processor {
 		
 		Response response = new Response();
 		response.setStepID(step.getID());
-		response.setStatus(ExecutionStatus.FAILED);
+		response.setStatus(ExecutionStatus.ERROR);
 		
 		Exception exception = exchange.getProperty(Exchange.EXCEPTION_CAUGHT,Exception.class);
 		response.setErrorMessage(exception.getClass().getSimpleName() +":" + exception.getLocalizedMessage());

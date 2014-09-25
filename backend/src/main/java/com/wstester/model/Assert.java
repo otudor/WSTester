@@ -9,19 +9,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Assert implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	private Object asserts;
+	private Object expected;
 	private String uuid;
 	
 	public Assert(){
 		uuid = UUID.randomUUID().toString();
 	}
 	
-	public Object getAsserts() {
-		return asserts;
+	public Object getExpected() {
+		return expected;
 	}
 
-	public void setAsserts(Object asserts) {
-		this.asserts = asserts;
+	public void setExpected(Object expected) {
+		this.expected = expected;
 	}
 
 	public String getID(){
@@ -37,10 +37,10 @@ public class Assert implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Assert other = (Assert) obj;
-		if (asserts == null) {
-			if (other.asserts != null)
+		if (expected == null) {
+			if (other.expected != null)
 				return false;
-		} else if (!asserts.equals(other.asserts))
+		} else if (!expected.equals(other.expected))
 			return false;
 		return true;
 	}

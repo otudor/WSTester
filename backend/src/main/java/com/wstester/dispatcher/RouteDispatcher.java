@@ -44,8 +44,9 @@ public class RouteDispatcher extends RouteBuilder{
 			.when(body().isInstanceOf(SoapStep.class))
 				.log("[${body.getID}] Sent message to soap queue")
 				.to("jms:soapQueue")
-		.endChoice();
-		
+		.endChoice()
+		.log("[${body.getID}] Sent message to assert queue")
+		.wireTap("jms:assertQueue");
 	}
 }
 
