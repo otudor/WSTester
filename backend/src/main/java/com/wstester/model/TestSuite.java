@@ -19,6 +19,8 @@ public class TestSuite implements Serializable {
 
 	public TestSuite() {
 		uuid = UUID.randomUUID().toString();
+		environment = new Environment();
+		testCaseList = new ArrayList<>();
 	}
 
 	public String getID() {
@@ -34,9 +36,6 @@ public class TestSuite implements Serializable {
 	}
 
 	public Environment getEnvironment() {
-		if(this.environment == null){
-			this.environment = new Environment();
-		}
 		return environment;
 	}
 
@@ -45,9 +44,6 @@ public class TestSuite implements Serializable {
 	}
 
 	public List<TestCase> getTestCaseList() {
-		if(this.testCaseList == null){
-			this.testCaseList = new ArrayList<TestCase>();
-		}
 		return testCaseList;
 	}
 
@@ -56,9 +52,6 @@ public class TestSuite implements Serializable {
 	}
 
 	public List<Variable> getVariableList() {
-		if(this.variableList == null){
-			this.variableList = new ArrayList<Variable>();
-		}
 		return variableList;
 	}
 

@@ -18,6 +18,7 @@ public class TestCase implements Serializable {
 
 	public TestCase() {
 		uuid = UUID.randomUUID().toString();
+		stepList = new ArrayList<>();
 	}
 
 	public String getID() {
@@ -25,10 +26,6 @@ public class TestCase implements Serializable {
 	}
 
 	public List<Step> getStepList() {
-		if(this.stepList == null){
-			this.stepList = new ArrayList<Step>();
-		}
-		
 		return stepList;
 	}
 
@@ -45,8 +42,6 @@ public class TestCase implements Serializable {
 	}
 
 	public String getName() {
-		if (this.name == null)
-			this.name = "";
 		return name;
 	}
 

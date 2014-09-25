@@ -40,8 +40,6 @@ public class Environment implements Serializable{
 	}
 
 	public List<Server> getServers() {
-		if (this.serverList == null)
-			this.serverList = new ArrayList<Server>();
 		return serverList;
 	}
 
@@ -52,7 +50,6 @@ public class Environment implements Serializable{
 	public void addServer(Server server) {
 		if (this.serverList == null)
 			this.serverList = new ArrayList<Server>();
-		
 		this.serverList.add(server);
 	}
 
