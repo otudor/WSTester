@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="root" styleClass="primepanel" stylesheets="styles/Envwindows.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.EnvironmentSearchPresenter">
+   <children>
+      <VBox spacing="10" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      
+          <children>
+              <!-- Search Bar -->
+              <HBox spacing="10">
+                  <children>
+                      <!-- <TextField fx:id="searchField" prefColumnCount="20" onAction="#search"/> -->
+          			<Button fx:id="addEnv" layoutX="30.0" layoutY="40.0" onAction="#addEnvAction" text="Add Environment" />
+                  </children>
+              </HBox>
+      
+              <!-- Search Results -->
+              <!--  ListView fx:id="resultsList" VBox.vgrow="ALWAYS"/ -->
+              <TreeView fx:id="treeView" layoutX="12.0" layoutY="158.0" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: black;" stylesheets="styles/Envwindows.css" />
+          </children>
+      </VBox>
+   </children>
+</AnchorPane>

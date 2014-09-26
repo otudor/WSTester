@@ -121,13 +121,7 @@ public class TestSuiteManagerController
     	restStepController.setRestStep(sUID);
         contentArea.setCenter( restStepController.getView());
     }
-    
-//    public String getFirstEnvironment()
-//    {
-//    	return tsListController.getFirstEnv();
-//    }
-
-    
+        
     public void runTestSuite( ActionEvent event) throws Exception
     {
 		TestProject testProject = new TestProject();

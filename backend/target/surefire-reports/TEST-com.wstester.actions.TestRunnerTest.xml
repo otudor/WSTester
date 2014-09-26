@@ -1,0 +1,1775 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="4" failures="0" name="com.wstester.actions.TestRunnerTest" time="40.243" errors="3" skipped="0">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_05\jre\bin"/>
+    <property name="java.vm.version" value="25.5-b02"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="D:\tap1\WSTester"/>
+    <property name="java.runtime.version" value="1.8.0_05-b13"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_05\jre\lib\endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\VDUMIT~1\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 8.1"/>
+    <property name="classworlds.conf" value="C:\Users\vdumitrache\workspaceLuna2\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf3101877760838456641.tmp"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_05\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\CCM;C:\Program Files\OpenVPN\bin;C:\Python27\Scripts;C:\Python27;."/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="6.3"/>
+    <property name="user.home" value="C:\Users\vdumitrache"/>
+    <property name="user.timezone" value="Europe/Minsk"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="user.name" value="vdumitrache"/>
+    <property name="java.class.path" value="/C:/Users/vdumitrache/Desktop/Eclipse Luna/eclipse/plugins/org.eclipse.m2e.maven.runtime_1.5.0.20140605-2032/jars/plexus-classworlds-2.5.1.jar"/>
+    <property name="org.slf4j.simpleLogger.defaultLogLevel" value="info"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_05\jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B install"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.8.0_05"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_05\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_05\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_05\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_05\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_05\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_05\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_05\jre\classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="D:\tap1\WSTester\EMBEDDED"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase classname="com.wstester.actions.TestRunnerTest" name="runTestSuite" time="10.2">
+    <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at com.wstester.actions.TestRunnerTest.runTestSuite(TestRunnerTest.java:80)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</error>
+    <system-out>[                          main] BrokerService                  INFO  Using Persistence Adapter: MemoryPersistenceAdapter
+[                          main] BrokerService                  INFO  Apache ActiveMQ 5.9.0 (localhost, ID:EN61102-54392-1411629140448-0:1) is starting
+[                          main] TransportServerThreadSupport   INFO  Listening for connections at: tcp://127.0.0.1:61616
+[                          main] TransportConnector             INFO  Connector tcp started
+[                          main] BrokerService                  INFO  Apache ActiveMQ 5.9.0 (localhost, ID:EN61102-54392-1411629140448-0:1) started
+[                          main] BrokerService                  INFO  For help or more information please see: http://activemq.apache.org
+[                          main] SpringCamelContext             INFO  Apache Camel 2.13.2 (CamelContext: camel) is starting
+[                          main] ManagedManagementStrategy      INFO  JMX is enabled
+[                          main] DefaultTypeConverter           INFO  Loaded 211 type converters
+[                          main] SpringCamelContext             INFO  AllowUseOriginalMessage is enabled. If access to the original message is not needed, then its recommended to turn this option off as it may improve performance.
+[                          main] SpringCamelContext             INFO  StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
+[                          main] SpringCamelContext             INFO  Route: route1 started and consuming from: Endpoint[jms://topic:responseTopic]
+[                          main] SpringCamelContext             INFO  Route: route2 started and consuming from: Endpoint[jms://topic:finishTopic]
+[                          main] SpringCamelContext             INFO  Route: route3 started and consuming from: Endpoint[jms://mongoQueue?asyncConsumer=true&amp;concurrentConsumers=20]
+[                          main] SpringCamelContext             INFO  Route: route4 started and consuming from: Endpoint[jms://mySQLQueue?asyncConsumer=true&amp;concurrentConsumers=20]
+[                          main] SpringCamelContext             INFO  Route: route5 started and consuming from: Endpoint[jms://topic:responseTopic]
+[                          main] SpringCamelContext             INFO  Route: route6 started and consuming from: Endpoint[jms://topic:finishTopic]
+[                          main] SpringCamelContext             INFO  Route: route7 started and consuming from: Endpoint[jms://topic:startTopic]
+[                          main] SpringCamelContext             INFO  Route: route8 started and consuming from: Endpoint[jms://restQueue?asyncConsumer=true&amp;concurrentConsumers=20]
+[                          main] SpringCamelContext             INFO  Route: route9 started and consuming from: Endpoint[jms://startQueue?asyncConsumer=true&amp;concurrentConsumers=20]
+[                          main] SpringCamelContext             INFO  Route: route10 started and consuming from: Endpoint[jms://soapQueue?asyncConsumer=true&amp;concurrentConsumers=20]
+[                          main] SpringCamelContext             INFO  Route: route11 started and consuming from: Endpoint[jms://mockingQueue]
+[                          main] SpringCamelContext             INFO  Route: route12 started and consuming from: Endpoint[jms://variableQueue]
+[                          main] SpringCamelContext             INFO  Route: route13 started and consuming from: Endpoint[jms://topic:finishTopic]
+[                          main] SpringCamelContext             INFO  Route: route14 started and consuming from: Endpoint[jms://assetQueue]
+[                          main] SpringCamelContext             INFO  Total 14 routes, of which 14 is started.
+[                          main] SpringCamelContext             INFO  Apache Camel 2.13.2 (CamelContext: camel) started in 2.024 seconds
+Starting Rest with grizzly...
+[                          main] TestBaseClass                  INFO  ********************************************************************************
+[                          main] TestBaseClass                  INFO  Testing: runTestSuite(com.wstester.actions.TestRunnerTest)
+[                          main] TestBaseClass                  INFO  ********************************************************************************
+[                          main] TestRunner                     INFO  Received TestProject [name=Test Project, testSuiteList=[TestSuite [name=Test Suite 1, environment=Environment [serverList=[Server [serviceList=[RestService [port=9997, uuid=4e10df3a-d424-4e37-99f2-390ee6f3cffe, name=Service Rest, status=null, ruleList=null]], name=Server 11, ip=localhost, description=This is the first server of the first env, uuid=2e2a3e8f-09e7-4bb1-a880-78c8844b4cc1], Server [serviceList=[MongoService [port=27017, dbName=test, user=appuser, password=apppass, uuid=a6302162-bdd6-47d5-a8e5-f2070fc280c9, name=Service Mongo, status=null, ruleList=null]], name=Server 12, ip=localhost, description=This is the second server of the first env, uuid=410f025f-d563-4068-8b08-c5edbb6a664b]], name=Env 1, uuid=ee9fd145-383c-4707-8749-d67d2dfc6a8b], testCaseList=[TestCase [name=TC 1, stepList=[RestStep [path=/customer/getCustomers, query=null, cookie=null, header=null, contentType=text/plain, method=GET, request=null, getID()=6c3c0b86-3c77-4f18-8e5f-559851672057, getServer()=Server 11, getAssertList()=[com.wstester.model.Assert@1deceb67], getService()=Service Rest, getAssetList()=null, getName()=Step 1, getVariableList()=[], getExecutionList()=null, getDependsOn()=null], MongoStep [action=SELECT, collection=customer, query={name=HAC}, getID()=6462e1e8-0128-4c0f-87e8-1b94170e6f0e, getServer()=Server 12, getAssertList()=[com.wstester.model.Assert@582a764a], getService()=Service Mongo, getAssetList()=null, getName()=Step 2, getVariableList()=[], getExecutionList()=null, getDependsOn()=null]], variableList=null, uuid=49778c46-aa09-4612-9c4c-efaead9da493]], variableList=null, uuid=495b0a1c-91d6-4a2e-958f-b9bddbd34ffe], TestSuite [name=Test Suite 2, environment=Environment [serverList=[Server [serviceList=[MySQLService [port=3306, dbName=test, user=appuser, password=apppass, uuid=5f47af94-98b1-49c3-b62c-b451dfbcc062, name=Service MYSQL, status=null, ruleList=null]], name=Server 21, ip=localhost, description=This is the first server of the second env, uuid=0b4587ea-7b6f-4c9d-889c-0f5c89a2cd91], Server [serviceList=[SoapService [port=80, path=/data/info.wso, wsdlURL=http://footballpool.dataaccess.eu/data/info.wso?wsdl, uuid=d5d8ed1b-2e21-4379-b4cb-215be629aafc, name=Service SOAP, status=null, ruleList=null]], name=Server 22, ip=http://footballpool.dataaccess.eu, description=This is the second server of the second env, uuid=46fa2d86-062b-4019-9ad5-d68db2b01481]], name=Env 2, uuid=c77e1f5f-c166-45fd-98fd-3ee24c2a6436], testCaseList=[TestCase [name=TC 1, stepList=[MySQLStep [operation=SELECT * FROM angajati, ID=405773d0-224f-42e3-937c-7842107aed6f, Server=Server 21, AssertList=[com.wstester.model.Assert@64984b0f], Service=Service MYSQL, AssetList=null, Name=Step 3, VariableList=[], ExecutionList=null, DependsOn=null], SoapStep [request=&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot; xmlns:foot=&quot;http://footballpool.dataaccess.eu&quot;&gt;
+   &lt;soap:Header/&gt;
+   &lt;soap:Body&gt;
+      &lt;foot:AllDefenders&gt;
+         &lt;foot:sCountryName&gt;Brazil&lt;/foot:sCountryName&gt;
+      &lt;/foot:AllDefenders&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;, getID()=5fe2108f-a3af-4db1-855f-9e320a2f313e, getServer()=Server 22, getAssertList()=[com.wstester.model.Assert@292158f8], getService()=Service SOAP, getAssetList()=null, getName()=Step 4, getVariableList()=[], getExecutionList()=null, getDependsOn()=null]], variableList=null, uuid=60f9b168-0aab-4245-b2e6-8ba9f87275dd]], variableList=null, uuid=9dfde04a-147c-4ec4-a778-88e67cbfca72]], assetList=[Asset [uuid=f4db8ea6-d8dd-42be-b92d-13bbdc3eef1f, lastmodified=0, name=null, path=null, type=null, size=0], Asset [uuid=0c903803-fe5f-4049-b449-667bddcf5857, lastmodified=0, name=null, path=null, type=null, size=0], Asset [uuid=297fb11d-8931-4218-ac9a-5f4503ccb75f, lastmodified=0, name=null, path=null, type=null, size=0], Asset [uuid=0688d5a4-5edd-4dba-a02b-fc65bcb997d5, lastmodified=0, name=null, path=null, type=null, size=0]], environmentList=[Environment [serverList=[Server [serviceList=[RestService [port=9997, uuid=4e10df3a-d424-4e37-99f2-390ee6f3cffe, name=Service Rest, status=null, ruleList=null]], name=Server 11, ip=localhost, description=This is the first server of the first env, uuid=2e2a3e8f-09e7-4bb1-a880-78c8844b4cc1], Server [serviceList=[MongoService [port=27017, dbName=test, user=appuser, password=apppass, uuid=a6302162-bdd6-47d5-a8e5-f2070fc280c9, name=Service Mongo, status=null, ruleList=null]], name=Server 12, ip=localhost, description=This is the second server of the first env, uuid=410f025f-d563-4068-8b08-c5edbb6a664b]], name=Env 1, uuid=ee9fd145-383c-4707-8749-d67d2dfc6a8b], Environment [serverList=[Server [serviceList=[MySQLService [port=3306, dbName=test, user=appuser, password=apppass, uuid=5f47af94-98b1-49c3-b62c-b451dfbcc062, name=Service MYSQL, status=null, ruleList=null]], name=Server 21, ip=localhost, description=This is the first server of the second env, uuid=0b4587ea-7b6f-4c9d-889c-0f5c89a2cd91], Server [serviceList=[SoapService [port=80, path=/data/info.wso, wsdlURL=http://footballpool.dataaccess.eu/data/info.wso?wsdl, uuid=d5d8ed1b-2e21-4379-b4cb-215be629aafc, name=Service SOAP, status=null, ruleList=null]], name=Server 22, ip=http://footballpool.dataaccess.eu, description=This is the second server of the second env, uuid=46fa2d86-062b-4019-9ad5-d68db2b01481]], name=Env 2, uuid=c77e1f5f-c166-45fd-98fd-3ee24c2a6436]], variableList=null, uuid=83d64050-8022-421c-9f32-727dc074f41e]
+[                          main] TestRunner                     INFO  Running Test Suite 1
+[                          main] TestRunner                     INFO  [6c3c0b86-3c77-4f18-8e5f-559851672057] Waiting response
+[               pool-1-thread-1] TestRunner                     INFO  [6c3c0b86-3c77-4f18-8e5f-559851672057] Sent message to startQueue
+[               pool-1-thread-1] TestRunner                     INFO  [6462e1e8-0128-4c0f-87e8-1b94170e6f0e] Sent message to startQueue
+[ #44 - JmsConsumer[startTopic]] route7                         INFO  [83d64050-8022-421c-9f32-727dc074f41e] received start message
+[ #79 - JmsConsumer[startQueue]] route9                         INFO  [6c3c0b86-3c77-4f18-8e5f-559851672057] Sent message to rest queue
+[ #68 - JmsConsumer[startQueue]] route9                         INFO  [6462e1e8-0128-4c0f-87e8-1b94170e6f0e] Sent message to mongo queue
+[ #10 - JmsConsumer[mongoQueue]] MongoDbEndpoint                INFO  Initialising MongoDb endpoint: Endpoint[mongodb://mongoConnection?collection=none&amp;database=none&amp;dynamicity=true]
+200
+[2 - JmsConsumer[responseTopic]] route5                         INFO  [6c3c0b86-3c77-4f18-8e5f-559851672057] ResponseCallback Received response
+[                          main] ResponseCallback               INFO  [6c3c0b86-3c77-4f18-8e5f-559851672057] Response sent: Response [stepID=6c3c0b86-3c77-4f18-8e5f-559851672057, content=All customers, status=PASSED, errorMessage=null]
+[                          main] TestRunner                     INFO  [6c3c0b86-3c77-4f18-8e5f-559851672057] Response [stepID=6c3c0b86-3c77-4f18-8e5f-559851672057, content=All customers, status=PASSED, errorMessage=null]
+[                          main] TestRunner                     INFO  [6462e1e8-0128-4c0f-87e8-1b94170e6f0e] Waiting response
+[                          main] TestRunner                     INFO  [6462e1e8-0128-4c0f-87e8-1b94170e6f0e] Response is null
+[ #10 - JmsConsumer[mongoQueue]] DefaultErrorHandler            WARN  Failed delivery for (MessageId: ID:EN61102-54392-1411629140448-3:9:5:1:1 on ExchangeId: ID-EN61102-54393-1411629140859-0-4). On delivery attempt: 0 caught: org.apache.camel.component.mongodb.CamelMongoDbException: com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test
+[9 - ErrorHandlerRedeliveryTask] DefaultErrorHandler            WARN  Failed delivery for (MessageId: ID:EN61102-54392-1411629140448-3:9:5:1:1 on ExchangeId: ID-EN61102-54393-1411629140859-0-4). On delivery attempt: 1 caught: org.apache.camel.component.mongodb.CamelMongoDbException: com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test
+[9 - ErrorHandlerRedeliveryTask] DefaultErrorHandler            WARN  Failed delivery for (MessageId: ID:EN61102-54392-1411629140448-3:9:5:1:1 on ExchangeId: ID-EN61102-54393-1411629140859-0-4). On delivery attempt: 2 caught: org.apache.camel.component.mongodb.CamelMongoDbException: com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test
+[2 - JmsConsumer[responseTopic]] route5                         INFO  [6462e1e8-0128-4c0f-87e8-1b94170e6f0e] ResponseCallback Received response
+[9 - ErrorHandlerRedeliveryTask] DefaultErrorHandler            ERROR Failed delivery for (MessageId: ID:EN61102-54392-1411629140448-3:9:5:1:1 on ExchangeId: ID-EN61102-54393-1411629140859-0-4). Exhausted after delivery attempt: 3 caught: org.apache.camel.component.mongodb.CamelMongoDbException: com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test. Processed by failure processor: FatalFallbackErrorHandler[Pipeline[[Channel[DelegateSync[com.wstester.exceptions.ExceptionProcessor@733037]], Channel[sendTo(Endpoint[jms://topic:responseTopic])]]]]
+
+Message History
+---------------------------------------------------------------------------------------------------------------------------------------
+RouteId              ProcessorId          Processor                                                                        Elapsed (ms)
+[route3            ] [route3            ] [jms://mongoQueue?asyncConsumer=true&amp;concurrentConsumers=20                    ] [      8312]
+[route3            ] [bean1             ] [bean[Routes: []]                                                              ] [         1]
+[route3            ] [bean2             ] [bean[com.wstester.dispatcher.mongo.MongoConnection@6a1ebcff]                  ] [        84]
+[route3            ] [process6          ] [com.wstester.dispatcher.mongo.MongoPreProcessor@50b0bc4c                      ] [         0]
+[route3            ] [process7          ] [com.wstester.asset.AssetProcessor@13c612bd                                    ] [         0]
+[route3            ] [dynamicRouter1    ] [dynamicRouter[bean{com.wstester.dispatcher.mongo.MongoConnection, method=getCo] [      8225]
+[                  ] [process4          ] [com.wstester.exceptions.ExceptionProcessor@733037                             ] [         0]
+[                  ] [to2               ] [jms:topic:responseTopic                                                       ] [        19]
+
+Exchange
+---------------------------------------------------------------------------------------------------------------------------------------
+Exchange[
+	Id                  ID-EN61102-54393-1411629140859-0-4
+	ExchangePattern     InOnly
+	Headers             {breadcrumbId=ID:EN61102-54392-1411629140448-5:1:1:3:2, CamelJmsDeliveryMode=1, CamelMongoDbCollection=customer, CamelMongoDbDatabase=test, CamelMongoDbOperation=findAll, JMSCorrelationID=null, JMSDeliveryMode=2, JMSDestination=queue://mongoQueue, JMSExpiration=0, JMSMessageID=ID:EN61102-54392-1411629140448-3:9:5:1:1, JMSPriority=4, JMSRedelivered=false, JMSReplyTo=null, JMSTimestamp=1411629147626, JMSType=null, JMSXGroupID=null, JMSXUserID=null}
+	BodyType            com.wstester.model.Response
+	Body                Response [stepID=6462e1e8-0128-4c0f-87e8-1b94170e6f0e, content=null, status=FAILED, errorMessage=CamelMongoDbException:com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test]
+]
+
+Stacktrace
+---------------------------------------------------------------------------------------------------------------------------------------
+org.apache.camel.component.mongodb.CamelMongoDbException: com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test
+	at org.apache.camel.component.mongodb.MongoDbComponent.wrapInCamelMongoDbException(MongoDbComponent.java:75)[camel-mongodb-2.13.2.jar:2.13.2]
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:74)[camel-mongodb-2.13.2.jar:2.13.2]
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)[camel-core-2.13.2.jar:2.13.2]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)[:1.8.0_05]
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)[:1.8.0_05]
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)[:1.8.0_05]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)[:1.8.0_05]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)[:1.8.0_05]
+	at java.lang.Thread.run(Thread.java:745)[:1.8.0_05]
+[ #1 - JmsConsumer[finishTopic]] route2                         INFO  [83d64050-8022-421c-9f32-727dc074f41e] received finish message
+[#43 - JmsConsumer[finishTopic]] route6                         INFO  [83d64050-8022-421c-9f32-727dc074f41e] received finish message
+[107 - JmsConsumer[finishTopic]] route13                        INFO  [83d64050-8022-421c-9f32-727dc074f41e] received finish message
+[                          main] TestBaseClass                  INFO  ********************************************************************************
+[                          main] TestBaseClass                  INFO  Done testing: runTestSuite(com.wstester.actions.TestRunnerTest)
+[                          main] TestBaseClass                  INFO  ********************************************************************************
+</system-out>
+    <system-err>SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/C:/Users/vdumitrache/.m2/repository/org/apache/activemq/activemq-all/5.9.0/activemq-all-5.9.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/C:/Users/vdumitrache/.m2/repository/org/slf4j/slf4j-log4j12/1.7.7/slf4j-log4j12-1.7.7.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+Sep 25, 2014 10:12:25 AM com.sun.jersey.api.core.PackagesResourceConfig init
+INFO: Scanning for root resource and provider classes in the packages:
+  com.wstester.server
+Sep 25, 2014 10:12:25 AM com.sun.jersey.api.core.ScanningResourceConfig logClasses
+INFO: Root resource classes found:
+  class com.wstester.server.RestServer
+Sep 25, 2014 10:12:25 AM com.sun.jersey.api.core.ScanningResourceConfig init
+INFO: No provider classes found.
+Sep 25, 2014 10:12:25 AM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version &apos;Jersey: 1.18.1 02/19/2014 03:28 AM&apos;
+Sep 25, 2014 10:12:27 AM org.glassfish.grizzly.http.server.NetworkListener start
+INFO: Started listener bound to [localhost:9997]
+Sep 25, 2014 10:12:27 AM org.glassfish.grizzly.http.server.HttpServer start
+INFO: [HttpServer] Started.
+Sep 25, 2014 10:12:28 AM com.mongodb.DBTCPConnector initDirectConnection
+WARNING: Exception executing isMaster command on /127.0.0.1:27017
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.go(DBPort.java:106)
+	at com.mongodb.DBPort.findOne(DBPort.java:162)
+	at com.mongodb.DBPort.runCommand(DBPort.java:170)
+	at com.mongodb.DBTCPConnector.initDirectConnection(DBTCPConnector.java:547)
+	at com.mongodb.DBTCPConnector.isMongosConnection(DBTCPConnector.java:334)
+	at com.mongodb.Mongo.isMongosConnection(Mongo.java:618)
+	at com.mongodb.DB.wrapCommand(DB.java:282)
+	at com.mongodb.DB.command(DB.java:260)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler.process(RedeliveryErrorHandler.java:398)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:118)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:80)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.component.jms.EndpointMessageListener.onMessage(EndpointMessageListener.java:114)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:562)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:500)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:468)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:325)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:263)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1101)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1093)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:990)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:29 AM com.mongodb.DBTCPConnector initDirectConnection
+WARNING: Exception executing isMaster command on /127.0.0.1:27017
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.go(DBPort.java:106)
+	at com.mongodb.DBPort.findOne(DBPort.java:162)
+	at com.mongodb.DBPort.runCommand(DBPort.java:170)
+	at com.mongodb.DBTCPConnector.initDirectConnection(DBTCPConnector.java:547)
+	at com.mongodb.DBTCPConnector.checkMaster(DBTCPConnector.java:526)
+	at com.mongodb.DBTCPConnector.innerCall(DBTCPConnector.java:236)
+	at com.mongodb.DBTCPConnector.call(DBTCPConnector.java:216)
+	at com.mongodb.DBApiLayer$MyCollection.__find(DBApiLayer.java:288)
+	at com.mongodb.DB.command(DB.java:262)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler.process(RedeliveryErrorHandler.java:398)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:118)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:80)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.component.jms.EndpointMessageListener.onMessage(EndpointMessageListener.java:114)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:562)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:500)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:468)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:325)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:263)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1101)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1093)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:990)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:30 AM com.mongodb.DBPortPool gotError
+WARNING: emptying DBPortPool to /127.0.0.1:27017 b/c of error
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.call(DBPort.java:92)
+	at com.mongodb.DBTCPConnector.innerCall(DBTCPConnector.java:244)
+	at com.mongodb.DBTCPConnector.call(DBTCPConnector.java:216)
+	at com.mongodb.DBApiLayer$MyCollection.__find(DBApiLayer.java:288)
+	at com.mongodb.DB.command(DB.java:262)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler.process(RedeliveryErrorHandler.java:398)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:118)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:80)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.component.jms.EndpointMessageListener.onMessage(EndpointMessageListener.java:114)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:562)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:500)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:468)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:325)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:263)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1101)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1093)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:990)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:33 AM com.mongodb.DBTCPConnector initDirectConnection
+WARNING: Exception executing isMaster command on /127.0.0.1:27017
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.go(DBPort.java:106)
+	at com.mongodb.DBPort.findOne(DBPort.java:162)
+	at com.mongodb.DBPort.runCommand(DBPort.java:170)
+	at com.mongodb.DBTCPConnector.initDirectConnection(DBTCPConnector.java:547)
+	at com.mongodb.DBTCPConnector.isMongosConnection(DBTCPConnector.java:334)
+	at com.mongodb.Mongo.isMongosConnection(Mongo.java:618)
+	at com.mongodb.DB.wrapCommand(DB.java:282)
+	at com.mongodb.DB.command(DB.java:260)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:34 AM com.mongodb.DBTCPConnector initDirectConnection
+WARNING: Exception executing isMaster command on /127.0.0.1:27017
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.go(DBPort.java:106)
+	at com.mongodb.DBPort.findOne(DBPort.java:162)
+	at com.mongodb.DBPort.runCommand(DBPort.java:170)
+	at com.mongodb.DBTCPConnector.initDirectConnection(DBTCPConnector.java:547)
+	at com.mongodb.DBTCPConnector.checkMaster(DBTCPConnector.java:526)
+	at com.mongodb.DBTCPConnector.innerCall(DBTCPConnector.java:236)
+	at com.mongodb.DBTCPConnector.call(DBTCPConnector.java:216)
+	at com.mongodb.DBApiLayer$MyCollection.__find(DBApiLayer.java:288)
+	at com.mongodb.DB.command(DB.java:262)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:35 AM com.mongodb.DBPortPool gotError
+WARNING: emptying DBPortPool to /127.0.0.1:27017 b/c of error
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.call(DBPort.java:92)
+	at com.mongodb.DBTCPConnector.innerCall(DBTCPConnector.java:244)
+	at com.mongodb.DBTCPConnector.call(DBTCPConnector.java:216)
+	at com.mongodb.DBApiLayer$MyCollection.__find(DBApiLayer.java:288)
+	at com.mongodb.DB.command(DB.java:262)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+</system-err>
+  </testcase>
+  <testcase classname="com.wstester.actions.TestRunnerTest" name="runTestProject" time="10.017">
+    <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at com.wstester.actions.TestRunnerTest.runTestProject(TestRunnerTest.java:38)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</error>
+    <system-out>[                          main] TestBaseClass                  INFO  ********************************************************************************
+[                          main] TestBaseClass                  INFO  Testing: runTestProject(com.wstester.actions.TestRunnerTest)
+[                          main] TestBaseClass                  INFO  ********************************************************************************
+[                          main] TestRunner                     INFO  Received TestProject [name=Test Project, testSuiteList=[TestSuite [name=Test Suite 1, environment=Environment [serverList=[Server [serviceList=[RestService [port=9997, uuid=f75bc84c-d4f7-4bb9-89cd-ad3b2403b921, name=Service Rest, status=null, ruleList=null]], name=Server 11, ip=localhost, description=This is the first server of the first env, uuid=2a82c2f6-5aa6-42e8-823b-615be3524a32], Server [serviceList=[MongoService [port=27017, dbName=test, user=appuser, password=apppass, uuid=a9558b5e-a9b1-4085-8b2f-0525282fbd4b, name=Service Mongo, status=null, ruleList=null]], name=Server 12, ip=localhost, description=This is the second server of the first env, uuid=5d4883c1-a017-45d1-a7cd-56f9927f8b58]], name=Env 1, uuid=b5ccc61a-a8a4-4b02-be83-853d57c53840], testCaseList=[TestCase [name=TC 1, stepList=[RestStep [path=/customer/getCustomers, query=null, cookie=null, header=null, contentType=text/plain, method=GET, request=null, getID()=56a6e8f1-d782-4d72-bbb9-88a8f465d791, getServer()=Server 11, getAssertList()=[com.wstester.model.Assert@4674d90], getService()=Service Rest, getAssetList()=null, getName()=Step 1, getVariableList()=[], getExecutionList()=null, getDependsOn()=null], MongoStep [action=SELECT, collection=customer, query={name=HAC}, getID()=2000f655-6024-4234-96f7-701b44539cdf, getServer()=Server 12, getAssertList()=[com.wstester.model.Assert@60783105], getService()=Service Mongo, getAssetList()=null, getName()=Step 2, getVariableList()=[], getExecutionList()=null, getDependsOn()=null]], variableList=null, uuid=3a0e0602-9bcd-4819-825d-46dc1b7fedc9]], variableList=null, uuid=8e405761-b2f7-4187-82bc-f14bd8fbb4c0], TestSuite [name=Test Suite 2, environment=Environment [serverList=[Server [serviceList=[MySQLService [port=3306, dbName=test, user=appuser, password=apppass, uuid=a70757cb-15c6-4fa9-a10e-fa8b05c9dd2f, name=Service MYSQL, status=null, ruleList=null]], name=Server 21, ip=localhost, description=This is the first server of the second env, uuid=93ef7d8d-604a-4e5b-b186-d223542709b8], Server [serviceList=[SoapService [port=80, path=/data/info.wso, wsdlURL=http://footballpool.dataaccess.eu/data/info.wso?wsdl, uuid=0779f140-b084-4cd1-bac0-66fa81f0e630, name=Service SOAP, status=null, ruleList=null]], name=Server 22, ip=http://footballpool.dataaccess.eu, description=This is the second server of the second env, uuid=6835e043-f753-4dc6-90c8-e65053e3262f]], name=Env 2, uuid=84a5e9ac-bcb2-4a52-82ab-4aff0bc336bf], testCaseList=[TestCase [name=TC 1, stepList=[MySQLStep [operation=SELECT * FROM angajati, ID=b90abff6-f70d-4160-8b32-0bcfd2a0254e, Server=Server 21, AssertList=[com.wstester.model.Assert@1292071f], Service=Service MYSQL, AssetList=null, Name=Step 3, VariableList=[], ExecutionList=null, DependsOn=null], SoapStep [request=&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot; xmlns:foot=&quot;http://footballpool.dataaccess.eu&quot;&gt;
+   &lt;soap:Header/&gt;
+   &lt;soap:Body&gt;
+      &lt;foot:AllDefenders&gt;
+         &lt;foot:sCountryName&gt;Brazil&lt;/foot:sCountryName&gt;
+      &lt;/foot:AllDefenders&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;, getID()=7b79a64c-047b-4b77-9628-52b157a8e58c, getServer()=Server 22, getAssertList()=[com.wstester.model.Assert@35d5ac51], getService()=Service SOAP, getAssetList()=null, getName()=Step 4, getVariableList()=[], getExecutionList()=null, getDependsOn()=null]], variableList=null, uuid=2bead400-52d4-4457-9fc7-a1cb57895377]], variableList=null, uuid=6d5f92be-c330-4b9c-b80d-74094cb9f79e]], assetList=[Asset [uuid=607778ad-f3ca-444a-898e-99b68c501750, lastmodified=0, name=null, path=null, type=null, size=0], Asset [uuid=bdfa43f7-ad93-4488-8b14-b21c5ab832cc, lastmodified=0, name=null, path=null, type=null, size=0], Asset [uuid=9e3b012b-2e8b-49c4-9966-e2e8892dd5f4, lastmodified=0, name=null, path=null, type=null, size=0], Asset [uuid=14ca323e-1e42-4407-bfd5-e35ad9e1fe14, lastmodified=0, name=null, path=null, type=null, size=0]], environmentList=[Environment [serverList=[Server [serviceList=[RestService [port=9997, uuid=f75bc84c-d4f7-4bb9-89cd-ad3b2403b921, name=Service Rest, status=null, ruleList=null]], name=Server 11, ip=localhost, description=This is the first server of the first env, uuid=2a82c2f6-5aa6-42e8-823b-615be3524a32], Server [serviceList=[MongoService [port=27017, dbName=test, user=appuser, password=apppass, uuid=a9558b5e-a9b1-4085-8b2f-0525282fbd4b, name=Service Mongo, status=null, ruleList=null]], name=Server 12, ip=localhost, description=This is the second server of the first env, uuid=5d4883c1-a017-45d1-a7cd-56f9927f8b58]], name=Env 1, uuid=b5ccc61a-a8a4-4b02-be83-853d57c53840], Environment [serverList=[Server [serviceList=[MySQLService [port=3306, dbName=test, user=appuser, password=apppass, uuid=a70757cb-15c6-4fa9-a10e-fa8b05c9dd2f, name=Service MYSQL, status=null, ruleList=null]], name=Server 21, ip=localhost, description=This is the first server of the second env, uuid=93ef7d8d-604a-4e5b-b186-d223542709b8], Server [serviceList=[SoapService [port=80, path=/data/info.wso, wsdlURL=http://footballpool.dataaccess.eu/data/info.wso?wsdl, uuid=0779f140-b084-4cd1-bac0-66fa81f0e630, name=Service SOAP, status=null, ruleList=null]], name=Server 22, ip=http://footballpool.dataaccess.eu, description=This is the second server of the second env, uuid=6835e043-f753-4dc6-90c8-e65053e3262f]], name=Env 2, uuid=84a5e9ac-bcb2-4a52-82ab-4aff0bc336bf]], variableList=null, uuid=1e3e5c9f-1d74-472b-974d-9edf2f4db570]
+[                          main] TestRunner                     INFO  Running TestProject [name=Test Project, testSuiteList=[TestSuite [name=Test Suite 1, environment=Environment [serverList=[Server [serviceList=[RestService [port=9997, uuid=f75bc84c-d4f7-4bb9-89cd-ad3b2403b921, name=Service Rest, status=null, ruleList=null]], name=Server 11, ip=localhost, description=This is the first server of the first env, uuid=2a82c2f6-5aa6-42e8-823b-615be3524a32], Server [serviceList=[MongoService [port=27017, dbName=test, user=appuser, password=apppass, uuid=a9558b5e-a9b1-4085-8b2f-0525282fbd4b, name=Service Mongo, status=null, ruleList=null]], name=Server 12, ip=localhost, description=This is the second server of the first env, uuid=5d4883c1-a017-45d1-a7cd-56f9927f8b58]], name=Env 1, uuid=b5ccc61a-a8a4-4b02-be83-853d57c53840], testCaseList=[TestCase [name=TC 1, stepList=[RestStep [path=/customer/getCustomers, query=null, cookie=null, header=null, contentType=text/plain, method=GET, request=null, getID()=56a6e8f1-d782-4d72-bbb9-88a8f465d791, getServer()=Server 11, getAssertList()=[com.wstester.model.Assert@4674d90], getService()=Service Rest, getAssetList()=null, getName()=Step 1, getVariableList()=[], getExecutionList()=null, getDependsOn()=null], MongoStep [action=SELECT, collection=customer, query={name=HAC}, getID()=2000f655-6024-4234-96f7-701b44539cdf, getServer()=Server 12, getAssertList()=[com.wstester.model.Assert@60783105], getService()=Service Mongo, getAssetList()=null, getName()=Step 2, getVariableList()=[], getExecutionList()=null, getDependsOn()=null]], variableList=null, uuid=3a0e0602-9bcd-4819-825d-46dc1b7fedc9]], variableList=null, uuid=8e405761-b2f7-4187-82bc-f14bd8fbb4c0], TestSuite [name=Test Suite 2, environment=Environment [serverList=[Server [serviceList=[MySQLService [port=3306, dbName=test, user=appuser, password=apppass, uuid=a70757cb-15c6-4fa9-a10e-fa8b05c9dd2f, name=Service MYSQL, status=null, ruleList=null]], name=Server 21, ip=localhost, description=This is the first server of the second env, uuid=93ef7d8d-604a-4e5b-b186-d223542709b8], Server [serviceList=[SoapService [port=80, path=/data/info.wso, wsdlURL=http://footballpool.dataaccess.eu/data/info.wso?wsdl, uuid=0779f140-b084-4cd1-bac0-66fa81f0e630, name=Service SOAP, status=null, ruleList=null]], name=Server 22, ip=http://footballpool.dataaccess.eu, description=This is the second server of the second env, uuid=6835e043-f753-4dc6-90c8-e65053e3262f]], name=Env 2, uuid=84a5e9ac-bcb2-4a52-82ab-4aff0bc336bf], testCaseList=[TestCase [name=TC 1, stepList=[MySQLStep [operation=SELECT * FROM angajati, ID=b90abff6-f70d-4160-8b32-0bcfd2a0254e, Server=Server 21, AssertList=[com.wstester.model.Assert@1292071f], Service=Service MYSQL, AssetList=null, Name=Step 3, VariableList=[], ExecutionList=null, DependsOn=null], SoapStep [request=&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot; xmlns:foot=&quot;http://footballpool.dataaccess.eu&quot;&gt;
+   &lt;soap:Header/&gt;
+   &lt;soap:Body&gt;
+      &lt;foot:AllDefenders&gt;
+         &lt;foot:sCountryName&gt;Brazil&lt;/foot:sCountryName&gt;
+      &lt;/foot:AllDefenders&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;, getID()=7b79a64c-047b-4b77-9628-52b157a8e58c, getServer()=Server 22, getAssertList()=[com.wstester.model.Assert@35d5ac51], getService()=Service SOAP, getAssetList()=null, getName()=Step 4, getVariableList()=[], getExecutionList()=null, getDependsOn()=null]], variableList=null, uuid=2bead400-52d4-4457-9fc7-a1cb57895377]], variableList=null, uuid=6d5f92be-c330-4b9c-b80d-74094cb9f79e]], assetList=[Asset [uuid=607778ad-f3ca-444a-898e-99b68c501750, lastmodified=0, name=null, path=null, type=null, size=0], Asset [uuid=bdfa43f7-ad93-4488-8b14-b21c5ab832cc, lastmodified=0, name=null, path=null, type=null, size=0], Asset [uuid=9e3b012b-2e8b-49c4-9966-e2e8892dd5f4, lastmodified=0, name=null, path=null, type=null, size=0], Asset [uuid=14ca323e-1e42-4407-bfd5-e35ad9e1fe14, lastmodified=0, name=null, path=null, type=null, size=0]], environmentList=[Environment [serverList=[Server [serviceList=[RestService [port=9997, uuid=f75bc84c-d4f7-4bb9-89cd-ad3b2403b921, name=Service Rest, status=null, ruleList=null]], name=Server 11, ip=localhost, description=This is the first server of the first env, uuid=2a82c2f6-5aa6-42e8-823b-615be3524a32], Server [serviceList=[MongoService [port=27017, dbName=test, user=appuser, password=apppass, uuid=a9558b5e-a9b1-4085-8b2f-0525282fbd4b, name=Service Mongo, status=null, ruleList=null]], name=Server 12, ip=localhost, description=This is the second server of the first env, uuid=5d4883c1-a017-45d1-a7cd-56f9927f8b58]], name=Env 1, uuid=b5ccc61a-a8a4-4b02-be83-853d57c53840], Environment [serverList=[Server [serviceList=[MySQLService [port=3306, dbName=test, user=appuser, password=apppass, uuid=a70757cb-15c6-4fa9-a10e-fa8b05c9dd2f, name=Service MYSQL, status=null, ruleList=null]], name=Server 21, ip=localhost, description=This is the first server of the second env, uuid=93ef7d8d-604a-4e5b-b186-d223542709b8], Server [serviceList=[SoapService [port=80, path=/data/info.wso, wsdlURL=http://footballpool.dataaccess.eu/data/info.wso?wsdl, uuid=0779f140-b084-4cd1-bac0-66fa81f0e630, name=Service SOAP, status=null, ruleList=null]], name=Server 22, ip=http://footballpool.dataaccess.eu, description=This is the second server of the second env, uuid=6835e043-f753-4dc6-90c8-e65053e3262f]], name=Env 2, uuid=84a5e9ac-bcb2-4a52-82ab-4aff0bc336bf]], variableList=null, uuid=1e3e5c9f-1d74-472b-974d-9edf2f4db570]
+[                          main] TestRunner                     INFO  [56a6e8f1-d782-4d72-bbb9-88a8f465d791] Waiting response
+[               pool-2-thread-1] TestRunner                     INFO  [56a6e8f1-d782-4d72-bbb9-88a8f465d791] Sent message to startQueue
+[               pool-2-thread-1] TestRunner                     INFO  [2000f655-6024-4234-96f7-701b44539cdf] Sent message to startQueue
+[               pool-2-thread-1] TestRunner                     INFO  [b90abff6-f70d-4160-8b32-0bcfd2a0254e] Sent message to startQueue
+[ #44 - JmsConsumer[startTopic]] route7                         INFO  [1e3e5c9f-1d74-472b-974d-9edf2f4db570] received start message
+[               pool-2-thread-1] TestRunner                     INFO  [7b79a64c-047b-4b77-9628-52b157a8e58c] Sent message to startQueue
+[ #83 - JmsConsumer[startQueue]] route9                         INFO  [56a6e8f1-d782-4d72-bbb9-88a8f465d791] Sent message to rest queue
+[ #67 - JmsConsumer[startQueue]] route9                         INFO  [2000f655-6024-4234-96f7-701b44539cdf] Sent message to mongo queue
+[ #74 - JmsConsumer[startQueue]] route9                         INFO  [b90abff6-f70d-4160-8b32-0bcfd2a0254e] Sent message to mysql queue
+[ #71 - JmsConsumer[startQueue]] route9                         INFO  [7b79a64c-047b-4b77-9628-52b157a8e58c] Sent message to soap queue
+200
+[2 - JmsConsumer[responseTopic]] route5                         INFO  [56a6e8f1-d782-4d72-bbb9-88a8f465d791] ResponseCallback Received response
+[d #97 - JmsConsumer[soapQueue]] BusApplicationContext          INFO  Refreshing org.apache.cxf.bus.spring.BusApplicationContext@177a4430: startup date [Thu Sep 25 10:12:38 FET 2014]; parent: org.springframework.context.support.ClassPathXmlApplicationContext@51081592
+[d #97 - JmsConsumer[soapQueue]] idationXmlBeanDefinitionReader INFO  Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
+[d #97 - JmsConsumer[soapQueue]] idationXmlBeanDefinitionReader INFO  Loading XML bean definitions from class path resource [META-INF/cxf/camel/cxf-extension-camel.xml]
+[                          main] ResponseCallback               INFO  [56a6e8f1-d782-4d72-bbb9-88a8f465d791] Response sent: Response [stepID=56a6e8f1-d782-4d72-bbb9-88a8f465d791, content=All customers, status=PASSED, errorMessage=null]
+[                          main] TestRunner                     INFO  [56a6e8f1-d782-4d72-bbb9-88a8f465d791] Response [stepID=56a6e8f1-d782-4d72-bbb9-88a8f465d791, content=All customers, status=PASSED, errorMessage=null]
+[                          main] TestRunner                     INFO  [2000f655-6024-4234-96f7-701b44539cdf] Waiting response
+[ #36 - JmsConsumer[mySQLQueue]] DefaultErrorHandler            ERROR Failed delivery for (MessageId: queue_mySQLQueue_ID_EN61102-54392-1411629140448-3_9_8_1_1 on ExchangeId: ID-EN61102-54393-1411629140859-0-28). Exhausted after delivery attempt: 1 caught: java.sql.SQLException: Access denied for user &apos;appuser&apos;@&apos;localhost&apos; (using password: YES)
+
+Message History
+---------------------------------------------------------------------------------------------------------------------------------------
+RouteId              ProcessorId          Processor                                                                        Elapsed (ms)
+[route4            ] [route4            ] [jms://mySQLQueue?asyncConsumer=true&amp;concurrentConsumers=20                    ] [      1915]
+[route4            ] [bean3             ] [bean[Routes: []]                                                              ] [         4]
+[route4            ] [bean4             ] [bean[com.wstester.dispatcher.mysql.MysqlConnection@467f77a5]                  ] [         1]
+[route4            ] [process9          ] [com.wstester.dispatcher.mysql.MysqlPreProcessor@420bc288                      ] [         0]
+[route4            ] [process10         ] [com.wstester.asset.AssetProcessor@308a6984                                    ] [         0]
+[route4            ] [recipientList1    ] [recipientList[simple{Simple: jdbc:mySqlConnection}]                           ] [      1910]
+
+Exchange
+---------------------------------------------------------------------------------------------------------------------------------------
+Exchange[
+	Id                  ID-EN61102-54393-1411629140859-0-28
+	ExchangePattern     InOnly
+	Headers             {breadcrumbId=ID:EN61102-54392-1411629140448-7:1:1:3:3, CamelJmsDeliveryMode=1, CamelRedelivered=false, CamelRedeliveryCounter=0, JMSCorrelationID=null, JMSDeliveryMode=2, JMSDestination=queue://mySQLQueue, JMSExpiration=0, JMSMessageID=ID:EN61102-54392-1411629140448-3:9:8:1:1, JMSPriority=4, JMSRedelivered=false, JMSReplyTo=null, JMSTimestamp=1411629157510, JMSType=null, JMSXGroupID=null, JMSXUserID=null}
+	BodyType            String
+	Body                SELECT * FROM angajati
+]
+
+Stacktrace
+---------------------------------------------------------------------------------------------------------------------------------------
+java.sql.SQLException: Access denied for user &apos;appuser&apos;@&apos;localhost&apos; (using password: YES)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1094)[mysql-connector-java-5.1.31.jar:]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4226)[mysql-connector-java-5.1.31.jar:]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4158)[mysql-connector-java-5.1.31.jar:]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:926)[mysql-connector-java-5.1.31.jar:]
+	at com.mysql.jdbc.MysqlIO.proceedHandshakeWithPluggableAuthentication(MysqlIO.java:1748)[mysql-connector-java-5.1.31.jar:]
+	at com.mysql.jdbc.MysqlIO.doHandshake(MysqlIO.java:1288)[mysql-connector-java-5.1.31.jar:]
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2508)[mysql-connector-java-5.1.31.jar:]
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2541)[mysql-connector-java-5.1.31.jar:]
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2323)[mysql-connector-java-5.1.31.jar:]
+	at com.mysql.jdbc.ConnectionImpl.&lt;init&gt;(ConnectionImpl.java:832)[mysql-connector-java-5.1.31.jar:]
+	at com.mysql.jdbc.JDBC4Connection.&lt;init&gt;(JDBC4Connection.java:46)[mysql-connector-java-5.1.31.jar:]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)[:1.8.0_05]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)[:1.8.0_05]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)[:1.8.0_05]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:408)[:1.8.0_05]
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:408)[mysql-connector-java-5.1.31.jar:]
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:417)[mysql-connector-java-5.1.31.jar:]
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:344)[mysql-connector-java-5.1.31.jar:]
+	at com.mysql.jdbc.jdbc2.optional.MysqlDataSource.getConnection(MysqlDataSource.java:441)[mysql-connector-java-5.1.31.jar:]
+	at com.mysql.jdbc.jdbc2.optional.MysqlDataSource.getConnection(MysqlDataSource.java:139)[mysql-connector-java-5.1.31.jar:]
+	at com.mysql.jdbc.jdbc2.optional.MysqlDataSource.getConnection(MysqlDataSource.java:109)[mysql-connector-java-5.1.31.jar:]
+	at org.apache.camel.component.jdbc.JdbcProducer.processingSqlBySettingAutoCommit(JdbcProducer.java:79)[camel-jdbc-2.13.2.jar:2.13.2]
+	at org.apache.camel.component.jdbc.JdbcProducer.process(JdbcProducer.java:66)[camel-jdbc-2.13.2.jar:2.13.2]
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RedeliveryErrorHandler.process(RedeliveryErrorHandler.java:398)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.MulticastProcessor.doProcessSequential(MulticastProcessor.java:573)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.MulticastProcessor.doProcessSequential(MulticastProcessor.java:506)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.MulticastProcessor.process(MulticastProcessor.java:215)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RecipientList.sendToRecipientList(RecipientList.java:167)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RecipientList.process(RecipientList.java:120)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:118)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:80)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RedeliveryErrorHandler.process(RedeliveryErrorHandler.java:398)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:118)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:80)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.component.jms.EndpointMessageListener.onMessage(EndpointMessageListener.java:114)[camel-jms-2.13.2.jar:2.13.2]
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:562)[spring-jms-3.2.8.RELEASE.jar:3.2.8.RELEASE]
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:500)[spring-jms-3.2.8.RELEASE.jar:3.2.8.RELEASE]
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:468)[spring-jms-3.2.8.RELEASE.jar:3.2.8.RELEASE]
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:325)[spring-jms-3.2.8.RELEASE.jar:3.2.8.RELEASE]
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:263)[spring-jms-3.2.8.RELEASE.jar:3.2.8.RELEASE]
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1101)[spring-jms-3.2.8.RELEASE.jar:3.2.8.RELEASE]
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1093)[spring-jms-3.2.8.RELEASE.jar:3.2.8.RELEASE]
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:990)[spring-jms-3.2.8.RELEASE.jar:3.2.8.RELEASE]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)[:1.8.0_05]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)[:1.8.0_05]
+	at java.lang.Thread.run(Thread.java:745)[:1.8.0_05]
+[ #36 - JmsConsumer[mySQLQueue]] EndpointMessageListener        WARN  Execution of JMS message listener failed. Caused by: [org.apache.camel.RuntimeCamelException - java.sql.SQLException: Access denied for user &apos;appuser&apos;@&apos;localhost&apos; (using password: YES)]
+org.apache.camel.RuntimeCamelException: java.sql.SQLException: Access denied for user &apos;appuser&apos;@&apos;localhost&apos; (using password: YES)
+	at org.apache.camel.util.ObjectHelper.wrapRuntimeCamelException(ObjectHelper.java:1363)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.component.jms.EndpointMessageListener$EndpointMessageListenerAsyncCallback.done(EndpointMessageListener.java:186)[camel-jms-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.CamelInternalProcessor$InternalCallback.done(CamelInternalProcessor.java:251)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:106)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.component.jms.EndpointMessageListener.onMessage(EndpointMessageListener.java:114)[camel-jms-2.13.2.jar:2.13.2]
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:562)[spring-jms-3.2.8.RELEASE.jar:3.2.8.RELEASE]
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:500)[spring-jms-3.2.8.RELEASE.jar:3.2.8.RELEASE]
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:468)[spring-jms-3.2.8.RELEASE.jar:3.2.8.RELEASE]
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:325)[spring-jms-3.2.8.RELEASE.jar:3.2.8.RELEASE]
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:263)[spring-jms-3.2.8.RELEASE.jar:3.2.8.RELEASE]
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1101)[spring-jms-3.2.8.RELEASE.jar:3.2.8.RELEASE]
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1093)[spring-jms-3.2.8.RELEASE.jar:3.2.8.RELEASE]
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:990)[spring-jms-3.2.8.RELEASE.jar:3.2.8.RELEASE]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)[:1.8.0_05]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)[:1.8.0_05]
+	at java.lang.Thread.run(Thread.java:745)[:1.8.0_05]
+[                          main] TestRunner                     INFO  [2000f655-6024-4234-96f7-701b44539cdf] Response is null
+[d #97 - JmsConsumer[soapQueue]] ReflectionServiceFactoryBean   INFO  Creating Service {http://footballpool.dataaccess.eu}Info from WSDL: http://footballpool.dataaccess.eu/data/info.wso?wsdl
+[d #97 - JmsConsumer[soapQueue]] RAWDataFormatFeature           INFO  removing the interceptor org.apache.cxf.frontend.WSDLGetInterceptor@10c34b8a
+[ #11 - JmsConsumer[mongoQueue]] DefaultErrorHandler            WARN  Failed delivery for (MessageId: ID:EN61102-54392-1411629140448-3:9:7:1:1 on ExchangeId: ID-EN61102-54393-1411629140859-0-21). On delivery attempt: 0 caught: org.apache.camel.component.mongodb.CamelMongoDbException: com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test
+[2 - JmsConsumer[responseTopic]] route5                         INFO  [7b79a64c-047b-4b77-9628-52b157a8e58c] ResponseCallback Received response
+[9 - ErrorHandlerRedeliveryTask] DefaultErrorHandler            WARN  Failed delivery for (MessageId: ID:EN61102-54392-1411629140448-3:9:7:1:1 on ExchangeId: ID-EN61102-54393-1411629140859-0-21). On delivery attempt: 1 caught: org.apache.camel.component.mongodb.CamelMongoDbException: com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test
+[9 - ErrorHandlerRedeliveryTask] DefaultErrorHandler            WARN  Failed delivery for (MessageId: ID:EN61102-54392-1411629140448-3:9:7:1:1 on ExchangeId: ID-EN61102-54393-1411629140859-0-21). On delivery attempt: 2 caught: org.apache.camel.component.mongodb.CamelMongoDbException: com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test
+[2 - JmsConsumer[responseTopic]] route5                         INFO  [2000f655-6024-4234-96f7-701b44539cdf] ResponseCallback Received response
+[9 - ErrorHandlerRedeliveryTask] DefaultErrorHandler            ERROR Failed delivery for (MessageId: ID:EN61102-54392-1411629140448-3:9:7:1:1 on ExchangeId: ID-EN61102-54393-1411629140859-0-21). Exhausted after delivery attempt: 3 caught: org.apache.camel.component.mongodb.CamelMongoDbException: com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test. Processed by failure processor: FatalFallbackErrorHandler[Pipeline[[Channel[DelegateSync[com.wstester.exceptions.ExceptionProcessor@733037]], Channel[sendTo(Endpoint[jms://topic:responseTopic])]]]]
+
+Message History
+---------------------------------------------------------------------------------------------------------------------------------------
+RouteId              ProcessorId          Processor                                                                        Elapsed (ms)
+[route3            ] [route3            ] [jms://mongoQueue?asyncConsumer=true&amp;concurrentConsumers=20                    ] [      8086]
+[route3            ] [bean1             ] [bean[Routes: []]                                                              ] [         6]
+[route3            ] [bean2             ] [bean[com.wstester.dispatcher.mongo.MongoConnection@6a1ebcff]                  ] [         3]
+[route3            ] [process6          ] [com.wstester.dispatcher.mongo.MongoPreProcessor@50b0bc4c                      ] [         1]
+[route3            ] [process7          ] [com.wstester.asset.AssetProcessor@13c612bd                                    ] [         1]
+[route3            ] [dynamicRouter1    ] [dynamicRouter[bean{com.wstester.dispatcher.mongo.MongoConnection, method=getCo] [      8073]
+[                  ] [process4          ] [com.wstester.exceptions.ExceptionProcessor@733037                             ] [         0]
+[                  ] [to2               ] [jms:topic:responseTopic                                                       ] [        19]
+
+Exchange
+---------------------------------------------------------------------------------------------------------------------------------------
+Exchange[
+	Id                  ID-EN61102-54393-1411629140859-0-21
+	ExchangePattern     InOnly
+	Headers             {breadcrumbId=ID:EN61102-54392-1411629140448-7:1:1:3:2, CamelJmsDeliveryMode=1, CamelMongoDbCollection=customer, CamelMongoDbDatabase=test, CamelMongoDbOperation=findAll, JMSCorrelationID=null, JMSDeliveryMode=2, JMSDestination=queue://mongoQueue, JMSExpiration=0, JMSMessageID=ID:EN61102-54392-1411629140448-3:9:7:1:1, JMSPriority=4, JMSRedelivered=false, JMSReplyTo=null, JMSTimestamp=1411629157508, JMSType=null, JMSXGroupID=null, JMSXUserID=null}
+	BodyType            com.wstester.model.Response
+	Body                Response [stepID=2000f655-6024-4234-96f7-701b44539cdf, content=null, status=FAILED, errorMessage=CamelMongoDbException:com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test]
+]
+
+Stacktrace
+---------------------------------------------------------------------------------------------------------------------------------------
+org.apache.camel.component.mongodb.CamelMongoDbException: com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test
+	at org.apache.camel.component.mongodb.MongoDbComponent.wrapInCamelMongoDbException(MongoDbComponent.java:75)[camel-mongodb-2.13.2.jar:2.13.2]
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:74)[camel-mongodb-2.13.2.jar:2.13.2]
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)[camel-core-2.13.2.jar:2.13.2]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)[:1.8.0_05]
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)[:1.8.0_05]
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)[:1.8.0_05]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)[:1.8.0_05]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)[:1.8.0_05]
+	at java.lang.Thread.run(Thread.java:745)[:1.8.0_05]
+[ #1 - JmsConsumer[finishTopic]] route2                         INFO  [1e3e5c9f-1d74-472b-974d-9edf2f4db570] received finish message
+[107 - JmsConsumer[finishTopic]] route13                        INFO  [1e3e5c9f-1d74-472b-974d-9edf2f4db570] received finish message
+[#43 - JmsConsumer[finishTopic]] route6                         INFO  [1e3e5c9f-1d74-472b-974d-9edf2f4db570] received finish message
+[                          main] TestBaseClass                  INFO  ********************************************************************************
+[                          main] TestBaseClass                  INFO  Done testing: runTestProject(com.wstester.actions.TestRunnerTest)
+[                          main] TestBaseClass                  INFO  ********************************************************************************
+</system-out>
+    <system-err>Sep 25, 2014 10:12:38 AM com.mongodb.DBTCPConnector initDirectConnection
+WARNING: Exception executing isMaster command on /127.0.0.1:27017
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.go(DBPort.java:106)
+	at com.mongodb.DBPort.findOne(DBPort.java:162)
+	at com.mongodb.DBPort.runCommand(DBPort.java:170)
+	at com.mongodb.DBTCPConnector.initDirectConnection(DBTCPConnector.java:547)
+	at com.mongodb.DBTCPConnector.isMongosConnection(DBTCPConnector.java:334)
+	at com.mongodb.Mongo.isMongosConnection(Mongo.java:618)
+	at com.mongodb.DB.wrapCommand(DB.java:282)
+	at com.mongodb.DB.command(DB.java:260)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler.process(RedeliveryErrorHandler.java:398)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:118)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:80)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.component.jms.EndpointMessageListener.onMessage(EndpointMessageListener.java:114)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:562)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:500)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:468)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:325)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:263)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1101)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1093)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:990)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:38 AM com.mongodb.DBTCPConnector initDirectConnection
+WARNING: Exception executing isMaster command on /127.0.0.1:27017
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.go(DBPort.java:106)
+	at com.mongodb.DBPort.findOne(DBPort.java:162)
+	at com.mongodb.DBPort.runCommand(DBPort.java:170)
+	at com.mongodb.DBTCPConnector.initDirectConnection(DBTCPConnector.java:547)
+	at com.mongodb.DBTCPConnector.isMongosConnection(DBTCPConnector.java:334)
+	at com.mongodb.Mongo.isMongosConnection(Mongo.java:618)
+	at com.mongodb.DB.wrapCommand(DB.java:282)
+	at com.mongodb.DB.command(DB.java:260)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:39 AM com.mongodb.DBTCPConnector initDirectConnection
+WARNING: Exception executing isMaster command on /127.0.0.1:27017
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.go(DBPort.java:106)
+	at com.mongodb.DBPort.findOne(DBPort.java:162)
+	at com.mongodb.DBPort.runCommand(DBPort.java:170)
+	at com.mongodb.DBTCPConnector.initDirectConnection(DBTCPConnector.java:547)
+	at com.mongodb.DBTCPConnector.checkMaster(DBTCPConnector.java:526)
+	at com.mongodb.DBTCPConnector.innerCall(DBTCPConnector.java:236)
+	at com.mongodb.DBTCPConnector.call(DBTCPConnector.java:216)
+	at com.mongodb.DBApiLayer$MyCollection.__find(DBApiLayer.java:288)
+	at com.mongodb.DB.command(DB.java:262)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler.process(RedeliveryErrorHandler.java:398)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:118)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:80)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.component.jms.EndpointMessageListener.onMessage(EndpointMessageListener.java:114)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:562)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:500)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:468)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:325)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:263)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1101)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1093)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:990)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:39 AM com.mongodb.DBTCPConnector initDirectConnection
+WARNING: Exception executing isMaster command on /127.0.0.1:27017
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.go(DBPort.java:106)
+	at com.mongodb.DBPort.findOne(DBPort.java:162)
+	at com.mongodb.DBPort.runCommand(DBPort.java:170)
+	at com.mongodb.DBTCPConnector.initDirectConnection(DBTCPConnector.java:547)
+	at com.mongodb.DBTCPConnector.checkMaster(DBTCPConnector.java:526)
+	at com.mongodb.DBTCPConnector.innerCall(DBTCPConnector.java:236)
+	at com.mongodb.DBTCPConnector.call(DBTCPConnector.java:216)
+	at com.mongodb.DBApiLayer$MyCollection.__find(DBApiLayer.java:288)
+	at com.mongodb.DB.command(DB.java:262)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:40 AM com.mongodb.DBPortPool gotError
+WARNING: emptying DBPortPool to /127.0.0.1:27017 b/c of error
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.call(DBPort.java:92)
+	at com.mongodb.DBTCPConnector.innerCall(DBTCPConnector.java:244)
+	at com.mongodb.DBTCPConnector.call(DBTCPConnector.java:216)
+	at com.mongodb.DBApiLayer$MyCollection.__find(DBApiLayer.java:288)
+	at com.mongodb.DB.command(DB.java:262)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler.process(RedeliveryErrorHandler.java:398)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:118)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:80)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.component.jms.EndpointMessageListener.onMessage(EndpointMessageListener.java:114)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:562)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:500)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:468)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:325)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:263)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1101)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1093)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:990)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:40 AM com.mongodb.DBPortPool gotError
+WARNING: emptying DBPortPool to /127.0.0.1:27017 b/c of error
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.call(DBPort.java:92)
+	at com.mongodb.DBTCPConnector.innerCall(DBTCPConnector.java:244)
+	at com.mongodb.DBTCPConnector.call(DBTCPConnector.java:216)
+	at com.mongodb.DBApiLayer$MyCollection.__find(DBApiLayer.java:288)
+	at com.mongodb.DB.command(DB.java:262)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:43 AM com.mongodb.DBTCPConnector initDirectConnection
+WARNING: Exception executing isMaster command on /127.0.0.1:27017
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.go(DBPort.java:106)
+	at com.mongodb.DBPort.findOne(DBPort.java:162)
+	at com.mongodb.DBPort.runCommand(DBPort.java:170)
+	at com.mongodb.DBTCPConnector.initDirectConnection(DBTCPConnector.java:547)
+	at com.mongodb.DBTCPConnector.isMongosConnection(DBTCPConnector.java:334)
+	at com.mongodb.Mongo.isMongosConnection(Mongo.java:618)
+	at com.mongodb.DB.wrapCommand(DB.java:282)
+	at com.mongodb.DB.command(DB.java:260)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:44 AM com.mongodb.DBTCPConnector initDirectConnection
+WARNING: Exception executing isMaster command on /127.0.0.1:27017
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.go(DBPort.java:106)
+	at com.mongodb.DBPort.findOne(DBPort.java:162)
+	at com.mongodb.DBPort.runCommand(DBPort.java:170)
+	at com.mongodb.DBTCPConnector.initDirectConnection(DBTCPConnector.java:547)
+	at com.mongodb.DBTCPConnector.checkMaster(DBTCPConnector.java:526)
+	at com.mongodb.DBTCPConnector.innerCall(DBTCPConnector.java:236)
+	at com.mongodb.DBTCPConnector.call(DBTCPConnector.java:216)
+	at com.mongodb.DBApiLayer$MyCollection.__find(DBApiLayer.java:288)
+	at com.mongodb.DB.command(DB.java:262)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:45 AM com.mongodb.DBPortPool gotError
+WARNING: emptying DBPortPool to /127.0.0.1:27017 b/c of error
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.call(DBPort.java:92)
+	at com.mongodb.DBTCPConnector.innerCall(DBTCPConnector.java:244)
+	at com.mongodb.DBTCPConnector.call(DBTCPConnector.java:216)
+	at com.mongodb.DBApiLayer$MyCollection.__find(DBApiLayer.java:288)
+	at com.mongodb.DB.command(DB.java:262)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+</system-err>
+  </testcase>
+  <testcase classname="com.wstester.actions.TestRunnerTest" name="runTestCase" time="10.01">
+    <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at com.wstester.actions.TestRunnerTest.runTestCase(TestRunnerTest.java:106)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</error>
+    <system-out>[                          main] TestBaseClass                  INFO  ********************************************************************************
+[                          main] TestBaseClass                  INFO  Testing: runTestCase(com.wstester.actions.TestRunnerTest)
+[                          main] TestBaseClass                  INFO  ********************************************************************************
+[                          main] TestRunner                     INFO  Received TestProject [name=Test Project, testSuiteList=[TestSuite [name=Test Suite 1, environment=Environment [serverList=[Server [serviceList=[RestService [port=9997, uuid=37cd545a-8193-4354-be23-cd4a7bf25462, name=Service Rest, status=null, ruleList=null]], name=Server 11, ip=localhost, description=This is the first server of the first env, uuid=07e7395e-7f30-4987-a567-30fcd9ca04cc], Server [serviceList=[MongoService [port=27017, dbName=test, user=appuser, password=apppass, uuid=772f6b59-001f-4c82-97d7-31ee8bb3f668, name=Service Mongo, status=null, ruleList=null]], name=Server 12, ip=localhost, description=This is the second server of the first env, uuid=35a045c0-af93-4bf7-a099-617bcc24bba1]], name=Env 1, uuid=1a87525c-4892-4136-82a3-cc4d8f756dd9], testCaseList=[TestCase [name=TC 1, stepList=[RestStep [path=/customer/getCustomers, query=null, cookie=null, header=null, contentType=text/plain, method=GET, request=null, getID()=688cac71-2925-40a1-9dfe-d08ebaff2d07, getServer()=Server 11, getAssertList()=[com.wstester.model.Assert@2819c460], getService()=Service Rest, getAssetList()=null, getName()=Step 1, getVariableList()=[], getExecutionList()=null, getDependsOn()=null], MongoStep [action=SELECT, collection=customer, query={name=HAC}, getID()=73e86965-0d84-494e-b61c-aebce79ccc38, getServer()=Server 12, getAssertList()=[com.wstester.model.Assert@30364216], getService()=Service Mongo, getAssetList()=null, getName()=Step 2, getVariableList()=[], getExecutionList()=null, getDependsOn()=null]], variableList=null, uuid=374bf717-bcae-4bc3-8ed4-6a182036bed3]], variableList=null, uuid=9157996f-7ff3-4aef-8bec-686fef228d25], TestSuite [name=Test Suite 2, environment=Environment [serverList=[Server [serviceList=[MySQLService [port=3306, dbName=test, user=appuser, password=apppass, uuid=14a38e74-1396-4d52-9d23-2eadd1a3a89d, name=Service MYSQL, status=null, ruleList=null]], name=Server 21, ip=localhost, description=This is the first server of the second env, uuid=80d90b04-0942-4da8-bddf-91b8c1131ef9], Server [serviceList=[SoapService [port=80, path=/data/info.wso, wsdlURL=http://footballpool.dataaccess.eu/data/info.wso?wsdl, uuid=3ec00fd2-11d7-46b3-b1e3-3f4340a4dee0, name=Service SOAP, status=null, ruleList=null]], name=Server 22, ip=http://footballpool.dataaccess.eu, description=This is the second server of the second env, uuid=f79b2ed7-7b89-487e-8ddf-7b612e852f59]], name=Env 2, uuid=bce77692-c0aa-4192-a975-487a56f9daea], testCaseList=[TestCase [name=TC 1, stepList=[MySQLStep [operation=SELECT * FROM angajati, ID=e0ebf785-5ba8-4cae-81a4-b7f165695128, Server=Server 21, AssertList=[com.wstester.model.Assert@38bb9d7a], Service=Service MYSQL, AssetList=null, Name=Step 3, VariableList=[], ExecutionList=null, DependsOn=null], SoapStep [request=&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot; xmlns:foot=&quot;http://footballpool.dataaccess.eu&quot;&gt;
+   &lt;soap:Header/&gt;
+   &lt;soap:Body&gt;
+      &lt;foot:AllDefenders&gt;
+         &lt;foot:sCountryName&gt;Brazil&lt;/foot:sCountryName&gt;
+      &lt;/foot:AllDefenders&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;, getID()=da9ece4b-cfb9-472d-badd-17c75e74296e, getServer()=Server 22, getAssertList()=[com.wstester.model.Assert@1e8ab90f], getService()=Service SOAP, getAssetList()=null, getName()=Step 4, getVariableList()=[], getExecutionList()=null, getDependsOn()=null]], variableList=null, uuid=1074c6ff-383d-404f-9b0b-d4302f56e25c]], variableList=null, uuid=6f7001a8-9da5-4ab0-9b47-bbd71a7a2a0a]], assetList=[Asset [uuid=6ab43124-883e-47ec-8078-29dbee726b98, lastmodified=0, name=null, path=null, type=null, size=0], Asset [uuid=d3a05209-735f-45d1-b922-5c3fa59114fb, lastmodified=0, name=null, path=null, type=null, size=0], Asset [uuid=2e1ee7a5-8d65-4922-bef2-1128c990f56f, lastmodified=0, name=null, path=null, type=null, size=0], Asset [uuid=d12eeda9-1554-4569-bc5d-0ede03bd80ee, lastmodified=0, name=null, path=null, type=null, size=0]], environmentList=[Environment [serverList=[Server [serviceList=[RestService [port=9997, uuid=37cd545a-8193-4354-be23-cd4a7bf25462, name=Service Rest, status=null, ruleList=null]], name=Server 11, ip=localhost, description=This is the first server of the first env, uuid=07e7395e-7f30-4987-a567-30fcd9ca04cc], Server [serviceList=[MongoService [port=27017, dbName=test, user=appuser, password=apppass, uuid=772f6b59-001f-4c82-97d7-31ee8bb3f668, name=Service Mongo, status=null, ruleList=null]], name=Server 12, ip=localhost, description=This is the second server of the first env, uuid=35a045c0-af93-4bf7-a099-617bcc24bba1]], name=Env 1, uuid=1a87525c-4892-4136-82a3-cc4d8f756dd9], Environment [serverList=[Server [serviceList=[MySQLService [port=3306, dbName=test, user=appuser, password=apppass, uuid=14a38e74-1396-4d52-9d23-2eadd1a3a89d, name=Service MYSQL, status=null, ruleList=null]], name=Server 21, ip=localhost, description=This is the first server of the second env, uuid=80d90b04-0942-4da8-bddf-91b8c1131ef9], Server [serviceList=[SoapService [port=80, path=/data/info.wso, wsdlURL=http://footballpool.dataaccess.eu/data/info.wso?wsdl, uuid=3ec00fd2-11d7-46b3-b1e3-3f4340a4dee0, name=Service SOAP, status=null, ruleList=null]], name=Server 22, ip=http://footballpool.dataaccess.eu, description=This is the second server of the second env, uuid=f79b2ed7-7b89-487e-8ddf-7b612e852f59]], name=Env 2, uuid=bce77692-c0aa-4192-a975-487a56f9daea]], variableList=null, uuid=a2a35b41-f370-4180-a10e-ce454fb9fc61]
+[                          main] TestRunner                     INFO  Running TC 1
+[                          main] TestRunner                     INFO  [688cac71-2925-40a1-9dfe-d08ebaff2d07] Waiting response
+[               pool-3-thread-1] TestRunner                     INFO  [688cac71-2925-40a1-9dfe-d08ebaff2d07] Sent message to startQueue
+[               pool-3-thread-1] TestRunner                     INFO  [73e86965-0d84-494e-b61c-aebce79ccc38] Sent message to startQueue
+[ #44 - JmsConsumer[startTopic]] route7                         INFO  [a2a35b41-f370-4180-a10e-ce454fb9fc61] received start message
+[ #82 - JmsConsumer[startQueue]] route9                         INFO  [688cac71-2925-40a1-9dfe-d08ebaff2d07] Sent message to rest queue
+[ #72 - JmsConsumer[startQueue]] route9                         INFO  [73e86965-0d84-494e-b61c-aebce79ccc38] Sent message to mongo queue
+200
+[2 - JmsConsumer[responseTopic]] route5                         INFO  [688cac71-2925-40a1-9dfe-d08ebaff2d07] ResponseCallback Received response
+[                          main] ResponseCallback               INFO  [688cac71-2925-40a1-9dfe-d08ebaff2d07] Response sent: Response [stepID=688cac71-2925-40a1-9dfe-d08ebaff2d07, content=All customers, status=PASSED, errorMessage=null]
+[                          main] TestRunner                     INFO  [688cac71-2925-40a1-9dfe-d08ebaff2d07] Response [stepID=688cac71-2925-40a1-9dfe-d08ebaff2d07, content=All customers, status=PASSED, errorMessage=null]
+[                          main] TestRunner                     INFO  [73e86965-0d84-494e-b61c-aebce79ccc38] Waiting response
+[                          main] TestRunner                     INFO  [73e86965-0d84-494e-b61c-aebce79ccc38] Response is null
+[ #18 - JmsConsumer[mongoQueue]] DefaultErrorHandler            WARN  Failed delivery for (MessageId: ID:EN61102-54392-1411629140448-3:9:11:1:1 on ExchangeId: ID-EN61102-54393-1411629140859-0-42). On delivery attempt: 0 caught: org.apache.camel.component.mongodb.CamelMongoDbException: com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test
+[0 - ErrorHandlerRedeliveryTask] DefaultErrorHandler            WARN  Failed delivery for (MessageId: ID:EN61102-54392-1411629140448-3:9:11:1:1 on ExchangeId: ID-EN61102-54393-1411629140859-0-42). On delivery attempt: 1 caught: org.apache.camel.component.mongodb.CamelMongoDbException: com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test
+[0 - ErrorHandlerRedeliveryTask] DefaultErrorHandler            WARN  Failed delivery for (MessageId: ID:EN61102-54392-1411629140448-3:9:11:1:1 on ExchangeId: ID-EN61102-54393-1411629140859-0-42). On delivery attempt: 2 caught: org.apache.camel.component.mongodb.CamelMongoDbException: com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test
+[2 - JmsConsumer[responseTopic]] route5                         INFO  [73e86965-0d84-494e-b61c-aebce79ccc38] ResponseCallback Received response
+[0 - ErrorHandlerRedeliveryTask] DefaultErrorHandler            ERROR Failed delivery for (MessageId: ID:EN61102-54392-1411629140448-3:9:11:1:1 on ExchangeId: ID-EN61102-54393-1411629140859-0-42). Exhausted after delivery attempt: 3 caught: org.apache.camel.component.mongodb.CamelMongoDbException: com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test. Processed by failure processor: FatalFallbackErrorHandler[Pipeline[[Channel[DelegateSync[com.wstester.exceptions.ExceptionProcessor@733037]], Channel[sendTo(Endpoint[jms://topic:responseTopic])]]]]
+
+Message History
+---------------------------------------------------------------------------------------------------------------------------------------
+RouteId              ProcessorId          Processor                                                                        Elapsed (ms)
+[route3            ] [route3            ] [jms://mongoQueue?asyncConsumer=true&amp;concurrentConsumers=20                    ] [      8080]
+[route3            ] [bean1             ] [bean[Routes: []]                                                              ] [         1]
+[route3            ] [bean2             ] [bean[com.wstester.dispatcher.mongo.MongoConnection@6a1ebcff]                  ] [         1]
+[route3            ] [process6          ] [com.wstester.dispatcher.mongo.MongoPreProcessor@50b0bc4c                      ] [         0]
+[route3            ] [process7          ] [com.wstester.asset.AssetProcessor@13c612bd                                    ] [         0]
+[route3            ] [dynamicRouter1    ] [dynamicRouter[bean{com.wstester.dispatcher.mongo.MongoConnection, method=getCo] [      8075]
+[                  ] [process4          ] [com.wstester.exceptions.ExceptionProcessor@733037                             ] [         0]
+[                  ] [to2               ] [jms:topic:responseTopic                                                       ] [        17]
+
+Exchange
+---------------------------------------------------------------------------------------------------------------------------------------
+Exchange[
+	Id                  ID-EN61102-54393-1411629140859-0-42
+	ExchangePattern     InOnly
+	Headers             {breadcrumbId=ID:EN61102-54392-1411629140448-9:1:1:3:2, CamelJmsDeliveryMode=1, CamelMongoDbCollection=customer, CamelMongoDbDatabase=test, CamelMongoDbOperation=findAll, JMSCorrelationID=null, JMSDeliveryMode=2, JMSDestination=queue://mongoQueue, JMSExpiration=0, JMSMessageID=ID:EN61102-54392-1411629140448-3:9:11:1:1, JMSPriority=4, JMSRedelivered=false, JMSReplyTo=null, JMSTimestamp=1411629167502, JMSType=null, JMSXGroupID=null, JMSXUserID=null}
+	BodyType            com.wstester.model.Response
+	Body                Response [stepID=73e86965-0d84-494e-b61c-aebce79ccc38, content=null, status=FAILED, errorMessage=CamelMongoDbException:com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test]
+]
+
+Stacktrace
+---------------------------------------------------------------------------------------------------------------------------------------
+org.apache.camel.component.mongodb.CamelMongoDbException: com.mongodb.MongoException$Network: Read operation to server /127.0.0.1:27017 failed on database test
+	at org.apache.camel.component.mongodb.MongoDbComponent.wrapInCamelMongoDbException(MongoDbComponent.java:75)[camel-mongodb-2.13.2.jar:2.13.2]
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:74)[camel-mongodb-2.13.2.jar:2.13.2]
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)[camel-core-2.13.2.jar:2.13.2]
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)[camel-core-2.13.2.jar:2.13.2]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)[:1.8.0_05]
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)[:1.8.0_05]
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)[:1.8.0_05]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)[:1.8.0_05]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)[:1.8.0_05]
+	at java.lang.Thread.run(Thread.java:745)[:1.8.0_05]
+[107 - JmsConsumer[finishTopic]] route13                        INFO  [a2a35b41-f370-4180-a10e-ce454fb9fc61] received finish message
+[#43 - JmsConsumer[finishTopic]] route6                         INFO  [a2a35b41-f370-4180-a10e-ce454fb9fc61] received finish message
+[ #1 - JmsConsumer[finishTopic]] route2                         INFO  [a2a35b41-f370-4180-a10e-ce454fb9fc61] received finish message
+[                          main] TestBaseClass                  INFO  ********************************************************************************
+[                          main] TestBaseClass                  INFO  Done testing: runTestCase(com.wstester.actions.TestRunnerTest)
+[                          main] TestBaseClass                  INFO  ********************************************************************************
+</system-out>
+    <system-err>Sep 25, 2014 10:12:48 AM com.mongodb.DBTCPConnector initDirectConnection
+WARNING: Exception executing isMaster command on /127.0.0.1:27017
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.go(DBPort.java:106)
+	at com.mongodb.DBPort.findOne(DBPort.java:162)
+	at com.mongodb.DBPort.runCommand(DBPort.java:170)
+	at com.mongodb.DBTCPConnector.initDirectConnection(DBTCPConnector.java:547)
+	at com.mongodb.DBTCPConnector.isMongosConnection(DBTCPConnector.java:334)
+	at com.mongodb.Mongo.isMongosConnection(Mongo.java:618)
+	at com.mongodb.DB.wrapCommand(DB.java:282)
+	at com.mongodb.DB.command(DB.java:260)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler.process(RedeliveryErrorHandler.java:398)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:118)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:80)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.component.jms.EndpointMessageListener.onMessage(EndpointMessageListener.java:114)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:562)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:500)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:468)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:325)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:263)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1101)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1093)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:990)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:48 AM com.mongodb.DBTCPConnector initDirectConnection
+WARNING: Exception executing isMaster command on /127.0.0.1:27017
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.go(DBPort.java:106)
+	at com.mongodb.DBPort.findOne(DBPort.java:162)
+	at com.mongodb.DBPort.runCommand(DBPort.java:170)
+	at com.mongodb.DBTCPConnector.initDirectConnection(DBTCPConnector.java:547)
+	at com.mongodb.DBTCPConnector.isMongosConnection(DBTCPConnector.java:334)
+	at com.mongodb.Mongo.isMongosConnection(Mongo.java:618)
+	at com.mongodb.DB.wrapCommand(DB.java:282)
+	at com.mongodb.DB.command(DB.java:260)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:49 AM com.mongodb.DBTCPConnector initDirectConnection
+WARNING: Exception executing isMaster command on /127.0.0.1:27017
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.go(DBPort.java:106)
+	at com.mongodb.DBPort.findOne(DBPort.java:162)
+	at com.mongodb.DBPort.runCommand(DBPort.java:170)
+	at com.mongodb.DBTCPConnector.initDirectConnection(DBTCPConnector.java:547)
+	at com.mongodb.DBTCPConnector.checkMaster(DBTCPConnector.java:526)
+	at com.mongodb.DBTCPConnector.innerCall(DBTCPConnector.java:236)
+	at com.mongodb.DBTCPConnector.call(DBTCPConnector.java:216)
+	at com.mongodb.DBApiLayer$MyCollection.__find(DBApiLayer.java:288)
+	at com.mongodb.DB.command(DB.java:262)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler.process(RedeliveryErrorHandler.java:398)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:118)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:80)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.component.jms.EndpointMessageListener.onMessage(EndpointMessageListener.java:114)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:562)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:500)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:468)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:325)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:263)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1101)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1093)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:990)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:49 AM com.mongodb.DBTCPConnector initDirectConnection
+WARNING: Exception executing isMaster command on /127.0.0.1:27017
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.go(DBPort.java:106)
+	at com.mongodb.DBPort.findOne(DBPort.java:162)
+	at com.mongodb.DBPort.runCommand(DBPort.java:170)
+	at com.mongodb.DBTCPConnector.initDirectConnection(DBTCPConnector.java:547)
+	at com.mongodb.DBTCPConnector.checkMaster(DBTCPConnector.java:526)
+	at com.mongodb.DBTCPConnector.innerCall(DBTCPConnector.java:236)
+	at com.mongodb.DBTCPConnector.call(DBTCPConnector.java:216)
+	at com.mongodb.DBApiLayer$MyCollection.__find(DBApiLayer.java:288)
+	at com.mongodb.DB.command(DB.java:262)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:50 AM com.mongodb.DBPortPool gotError
+WARNING: emptying DBPortPool to /127.0.0.1:27017 b/c of error
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.call(DBPort.java:92)
+	at com.mongodb.DBTCPConnector.innerCall(DBTCPConnector.java:244)
+	at com.mongodb.DBTCPConnector.call(DBTCPConnector.java:216)
+	at com.mongodb.DBApiLayer$MyCollection.__find(DBApiLayer.java:288)
+	at com.mongodb.DB.command(DB.java:262)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler.process(RedeliveryErrorHandler.java:398)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:118)
+	at org.apache.camel.processor.Pipeline.process(Pipeline.java:80)
+	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:191)
+	at org.apache.camel.component.jms.EndpointMessageListener.onMessage(EndpointMessageListener.java:114)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:562)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:500)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:468)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:325)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:263)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1101)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1093)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:990)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:50 AM com.mongodb.DBPortPool gotError
+WARNING: emptying DBPortPool to /127.0.0.1:27017 b/c of error
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.call(DBPort.java:92)
+	at com.mongodb.DBTCPConnector.innerCall(DBTCPConnector.java:244)
+	at com.mongodb.DBTCPConnector.call(DBTCPConnector.java:216)
+	at com.mongodb.DBApiLayer$MyCollection.__find(DBApiLayer.java:288)
+	at com.mongodb.DB.command(DB.java:262)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:53 AM com.mongodb.DBTCPConnector initDirectConnection
+WARNING: Exception executing isMaster command on /127.0.0.1:27017
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.go(DBPort.java:106)
+	at com.mongodb.DBPort.findOne(DBPort.java:162)
+	at com.mongodb.DBPort.runCommand(DBPort.java:170)
+	at com.mongodb.DBTCPConnector.initDirectConnection(DBTCPConnector.java:547)
+	at com.mongodb.DBTCPConnector.isMongosConnection(DBTCPConnector.java:334)
+	at com.mongodb.Mongo.isMongosConnection(Mongo.java:618)
+	at com.mongodb.DB.wrapCommand(DB.java:282)
+	at com.mongodb.DB.command(DB.java:260)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:54 AM com.mongodb.DBTCPConnector initDirectConnection
+WARNING: Exception executing isMaster command on /127.0.0.1:27017
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.go(DBPort.java:106)
+	at com.mongodb.DBPort.findOne(DBPort.java:162)
+	at com.mongodb.DBPort.runCommand(DBPort.java:170)
+	at com.mongodb.DBTCPConnector.initDirectConnection(DBTCPConnector.java:547)
+	at com.mongodb.DBTCPConnector.checkMaster(DBTCPConnector.java:526)
+	at com.mongodb.DBTCPConnector.innerCall(DBTCPConnector.java:236)
+	at com.mongodb.DBTCPConnector.call(DBTCPConnector.java:216)
+	at com.mongodb.DBApiLayer$MyCollection.__find(DBApiLayer.java:288)
+	at com.mongodb.DB.command(DB.java:262)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+Sep 25, 2014 10:12:55 AM com.mongodb.DBPortPool gotError
+WARNING: emptying DBPortPool to /127.0.0.1:27017 b/c of error
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.DBPort._open(DBPort.java:223)
+	at com.mongodb.DBPort.go(DBPort.java:125)
+	at com.mongodb.DBPort.call(DBPort.java:92)
+	at com.mongodb.DBTCPConnector.innerCall(DBTCPConnector.java:244)
+	at com.mongodb.DBTCPConnector.call(DBTCPConnector.java:216)
+	at com.mongodb.DBApiLayer$MyCollection.__find(DBApiLayer.java:288)
+	at com.mongodb.DB.command(DB.java:262)
+	at com.mongodb.DB.command(DB.java:244)
+	at com.mongodb.DB.command(DB.java:301)
+	at com.mongodb.DB.command(DB.java:199)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:844)
+	at com.mongodb.DBCollection.dropIndexes(DBCollection.java:828)
+	at org.apache.camel.component.mongodb.MongoDbEndpoint.ensureIndex(MongoDbEndpoint.java:196)
+	at org.apache.camel.component.mongodb.MongoDbProducer.calculateCollection(MongoDbProducer.java:421)
+	at org.apache.camel.component.mongodb.MongoDbProducer.doFindAll(MongoDbProducer.java:269)
+	at org.apache.camel.component.mongodb.MongoDbProducer.invokeOperation(MongoDbProducer.java:101)
+	at org.apache.camel.component.mongodb.MongoDbProducer.process(MongoDbProducer.java:72)
+	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+	at org.apache.camel.processor.RoutingSlip$2.doInAsyncProducer(RoutingSlip.java:301)
+	at org.apache.camel.impl.ProducerCache.doInAsyncProducer(ProducerCache.java:307)
+	at org.apache.camel.processor.RoutingSlip.processExchange(RoutingSlip.java:294)
+	at org.apache.camel.processor.RoutingSlip.doRoutingSlip(RoutingSlip.java:215)
+	at org.apache.camel.processor.RoutingSlip.process(RoutingSlip.java:146)
+	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:72)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:131)
+	at org.apache.camel.processor.RedeliveryErrorHandler$AsyncRedeliveryTask.call(RedeliveryErrorHandler.java:99)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+</system-err>
+  </testcase>
+  <testcase classname="com.wstester.actions.TestRunnerTest" name="runTestStep" time="10.016"/>
+</testsuite>

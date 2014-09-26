@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:broker="http://activemq.apache.org/schema/core"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+    ">
+
+	<context:annotation-config />
+
+	<!-- set up ActiveMQ broker -->
+	<broker:broker useJmx="false" persistent="false"
+		brokerName="localhost">
+		<broker:transportConnectors>
+			<broker:transportConnector name="tcp"
+				uri="tcp://localhost:61616" />
+		</broker:transportConnectors>
+	</broker:broker>
+
+	<bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
+		<property name="connectionFactory">
+			<bean class="org.apache.activemq.ActiveMQConnectionFactory">
+				<property name="brokerURL" value="tcp://localhost:61616" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="mongoConnection" class="com.mongodb.Mongo" />
+	<bean id="soapConnection" class="org.apache.camel.component.cxf.CxfEndpoint" />
+	<bean id="mySqlConnection" class="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" />
+
+	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+		<package>com.wstester.dispatcher</package>
+		<package>com.wstester.mock</package>
+		<package>com.wstester.variable</package>
+		<package>com.wstester.asset</package>
+	</camelContext>
+</beans>
