@@ -22,6 +22,7 @@ public class SoapPostProcessor implements Processor {
 		response.setStatus(ExecutionStatus.PASSED);
 		
 		exchange.getIn().setBody(response);
+		
 	}
 
 }

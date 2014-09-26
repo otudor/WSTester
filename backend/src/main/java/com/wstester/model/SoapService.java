@@ -8,7 +8,12 @@ public class SoapService extends Service {
 	private String port;
 	private String path;
 	private String wsdlURL;
+	private String username;
+	private String password;
+	private String role;
 	
+
+
 	public SoapService() {
 		uuid = UUID.randomUUID().toString();
 	}
@@ -46,7 +51,29 @@ public class SoapService extends Service {
 	public void setWsdlURL(String wsdlURL) {
 		this.wsdlURL = wsdlURL;
 	}
+	public String getUsername() {
+		return username;
+	}
 
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 	@Override
 	public String detailedToString() {
 		return "SoapService [port=" + port + ", path=" + path + ", wsdlURL=" + wsdlURL + ", uuid=" + uuid + ", name=" + name + ", status=" + status + ", ruleList=" 
@@ -62,9 +89,11 @@ public class SoapService extends Service {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((path == null) ? 0 : path.hashCode());
-		result = prime * result + ((port == null) ? 0 : port.hashCode());
-		result = prime * result + ((wsdlURL == null) ? 0 : wsdlURL.hashCode());
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		result = prime * result
+				+ ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -77,20 +106,20 @@ public class SoapService extends Service {
 		if (getClass() != obj.getClass())
 			return false;
 		SoapService other = (SoapService) obj;
-		if (path == null) {
-			if (other.path != null)
+		if (password == null) {
+			if (other.password != null)
 				return false;
-		} else if (!path.equals(other.path))
+		} else if (!password.equals(other.password))
 			return false;
-		if (port == null) {
-			if (other.port != null)
+		if (role == null) {
+			if (other.role != null)
 				return false;
-		} else if (!port.equals(other.port))
+		} else if (!role.equals(other.role))
 			return false;
-		if (wsdlURL == null) {
-			if (other.wsdlURL != null)
+		if (username == null) {
+			if (other.username != null)
 				return false;
-		} else if (!wsdlURL.equals(other.wsdlURL))
+		} else if (!username.equals(other.username))
 			return false;
 		return true;
 	}
