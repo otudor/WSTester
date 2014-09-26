@@ -7,11 +7,11 @@
 
 <TabPane fx:id="rootMySQLStep" prefHeight="400.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.MySQLStepController">
    <tabs>
-      <Tab text="SQL Definition">
+      <Tab closable="false" text="SQL Definition">
          <content>
             <AnchorPane>
                <children>
-                  <GridPane fx:id="gridPane" hgap="10" prefHeight="180.0" vgap="10" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                  <GridPane fx:id="gridPane" hgap="10" prefHeight="180.0" vgap="10" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
                             
                       <children>
                           <Label text="Step Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
@@ -28,15 +28,12 @@
                            <GridPane.margin>
                               <Insets left="20.0" />
                            </GridPane.margin></Button>
-                        <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveMySQL" text="Save" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                        <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveMySQL" prefWidth="50.0" text="Save" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
                            <GridPane.margin>
                               <Insets right="20.0" />
                            </GridPane.margin>
                         </Button>
                       </children>
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
                      <columnConstraints>
                         <ColumnConstraints maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
                         <ColumnConstraints maxWidth="570.0" minWidth="570.0" prefWidth="570.0" />
@@ -54,13 +51,13 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab text="Past Executions">
+      <Tab closable="false" text="Past Executions">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                    <TableView fx:id="tblExecutions" maxWidth="450.0" prefHeight="400.0" prefWidth="450.0">
+                    <TableView fx:id="tblExecutions" maxWidth="450.0" prefHeight="400.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="0.0">
             		     <columns>
-            		          <TableColumn fx:id="columnDate" prefWidth="200.0" text="Date">
+            		          <TableColumn fx:id="columnDate" maxWidth="200.0" prefWidth="200.0" text="Date">
 		          </TableColumn>
             		          <TableColumn fx:id="columnStatus" prefWidth="100.0" text="Status">
 		          </TableColumn>
@@ -70,7 +67,7 @@
             </AnchorPane>
         </content>
       </Tab>
-      <Tab text="Variables">
+      <Tab closable="false" text="Variables">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>

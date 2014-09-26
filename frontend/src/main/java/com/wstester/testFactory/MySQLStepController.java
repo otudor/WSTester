@@ -137,7 +137,7 @@ public class MySQLStepController
             columnStatus.setCellValueFactory(
             		new PropertyValueFactory<Execut,String>("Status")
             		);
-            TableColumn columnResponse = new TableColumn("Action");
+            TableColumn columnResponse = new TableColumn("Response");
             columnResponse.setSortable(false);
             columnResponse.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Execut, Boolean>, ObservableValue<Boolean>>() {

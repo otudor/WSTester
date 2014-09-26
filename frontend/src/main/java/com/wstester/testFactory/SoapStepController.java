@@ -32,8 +32,8 @@ import javafx.scene.image.ImageView;
 public class SoapStepController
 {
     @FXML private Node rootSoapStep;
-    @FXML private Label lblName;
-    @FXML private Label soapRequest;
+    @FXML private TextField lblName;
+    @FXML private TextField soapRequest;
     @FXML private Label lblStatus;
     @FXML private Label lblResponse;
     @FXML private TableView<Execut> tblExecutions;

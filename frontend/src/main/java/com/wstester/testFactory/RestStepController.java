@@ -35,14 +35,14 @@ import javafx.scene.image.ImageView;
 public class RestStepController
 {
     @FXML private Node rootRestStep;
-    @FXML private Label lblName;
-    @FXML private Label restPath;
-    @FXML private Label restQuery;
-    @FXML private Label restCookie;
-    @FXML private Label restHeader;
-    @FXML private Label restContentType;
-    @FXML private Label restMethod;
-    @FXML private Label restRequest;
+    @FXML private TextField lblName;
+    @FXML private TextField restPath;
+    @FXML private TextField restQuery;
+    @FXML private TextField restCookie;
+    @FXML private TextField restHeader;
+    @FXML private TextField restContentType;
+    @FXML private TextField restMethod;
+    @FXML private TextField restRequest;
     @FXML private Label lblStatus;
     @FXML private Label lblResponse;
     @FXML private TableView<Execut> tblExecutions;

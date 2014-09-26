@@ -318,6 +318,7 @@ public class TestSuiteListController implements Initializable
     	    	    public void handle(ActionEvent event) {
     	    	    	TreeItem<Object> item = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
     	    	    	if( item == null ) return;
+    	    	    	
     	    	    	RestStep restStep = new RestStep();
     	    	    	restStep.setName("New Rest Step");
     	    	    	tsService.addStepForTestCase( restStep, tc.getID());
