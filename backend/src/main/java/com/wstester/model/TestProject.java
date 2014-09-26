@@ -145,6 +145,39 @@ public class TestProject implements Serializable {
 		}
 		return null;
 	}
+
+	public Server getServer(String serverUID) {
+		if (environmentList != null && !environmentList.isEmpty()) {
+			for (Environment environment : environmentList) {
+
+				if (environment.getServers() != null
+						&& !environment.getServers().isEmpty()) {
+					for (Server server : environment.getServers()) {
+
+						if (server.getID().equals(serverUID)) {
+							return server;
+						}
+					}
+				}
+			}
+		}
+
+		return null;
+	}
+	
+	public Environment getEnvironment(String envUID) {
+		if (environmentList != null && !environmentList.isEmpty()) {
+			for (Environment environment : environmentList) {
+
+				if (environment.getID().equals(envUID)) {
+					return environment;
+				}
+			}
+		}
+		return null;
+	}
+	
+	
 	
 	public void setStepByUID(Step source, String stepUID) {
 		for (TestSuite testSuite : testSuiteList) {
@@ -261,7 +294,5 @@ public class TestProject implements Serializable {
 			return false;
 		return true;
 	}
-
-	
 
 }

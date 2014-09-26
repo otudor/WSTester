@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javafx.scene.control.ChoiceBox;
+import javafx.util.Callback;
+
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
 import com.wstester.model.MongoStep;
@@ -69,6 +72,18 @@ public class TestSuiteService {
 
 	public void saveTestSuite() {
 		((TestProject)UtilityTool.getEntity(MainConstants.TESTPROJECT)).setTestSuiteList(testProject.getTestSuiteList());
+	}
+
+	public List<Environment> getEnvironmentList() {
+		return testProject.getEnvironmentList();
+	}
+
+	public List<Server> getServerList(String id) {
+		return testProject.getEnvironment(id).getServers();
+	}
+
+	public List<Service> getServiceList(String id) {
+		return testProject.getServer(id).getServices();
 	}
 
 	

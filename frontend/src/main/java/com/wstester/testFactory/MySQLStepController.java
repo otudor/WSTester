@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sun.prism.paint.Color;
+import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
 import com.wstester.model.MySQLStep;
@@ -20,6 +21,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -36,6 +38,7 @@ import javafx.application.Application;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -74,7 +77,9 @@ public class MySQLStepController
     @FXML private TableColumn<Execut, String> columnStatus;
     @FXML private GridPane gridPane;
     @FXML private Button cellButton;
-   // @FXML private TableColumn<Execut, String> columnResponse;
+    @FXML private ChoiceBox<Environment> envBox;
+    @FXML private ChoiceBox<Server> serverBox;
+    @FXML private ChoiceBox<Service> serviceBox;
     
     private MySQLStep step;    
     private TestSuiteService tsService;
@@ -106,14 +111,31 @@ public class MySQLStepController
     {
           
         step = (MySQLStep) tsService.getStep(stepUID);
-        
+        envBox.setItems(FXCollections.observableArrayList(tsService.getEnvironmentList()));
+        envBox.getSelectionModel().selectedItemProperty().addListener( new
+        		ChangeListener<Environment>() {
+        	public void changed(ObservableValue ov, Environment value, Environment new_value) {
+        			serverBox.setItems(FXCollections.observableArrayList(tsService.getServerList(new_value.getID())));
+        			if(!serviceBox.getItems().isEmpty()) {
+        				serviceBox.setItems(null);
+        			}
+        }
+        });
+//        serverBox.getSelectionModel().selectedItemProperty().addListener( new
+//        		ChangeListener<Server>() {
+//        	public void changed(ObservableValue ov, Server value, Server new_value) {
+//        			serviceBox.setItems(FXCollections.observableArrayList(tsService.getServiceList(new_value.getID())));
+//        }
+//        });
         stepName.setText(step.getName());
         sqlField.setText(step.getOperation());
         Execution execution = step.getLastExecution();
+        
         if(gridPane.getChildren().contains(cellButton))
         {
         	gridPane.getChildren().remove(cellButton);
         }
+        
         uid = stepUID;
         if( execution != null)
         {
