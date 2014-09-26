@@ -1,6 +1,5 @@
 package com.wstester.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 

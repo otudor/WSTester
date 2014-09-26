@@ -3,6 +3,8 @@ package com.wstester.asserts;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+
 import org.codehaus.jettison.json.JSONArray;
 import org.junit.Test;
 
@@ -89,7 +91,7 @@ public class AssertTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void expectedFromAssert() throws Exception{
+	public void expectedFromAsset() throws Exception{
 		
 		Asset expectedOutput = new Asset();
 		expectedOutput.setPath("src/test/resources");
@@ -114,6 +116,9 @@ public class AssertTest extends TestBaseClass{
 		assertEquals(response.getAssertResponseList().get(0).getStatus(), AssertStatus.PASSED);
 		assertEquals(response.getAssertResponseList().get(0).getMessage(), null);
 		assertEquals("popescu", result.getJSONObject(0).get("detalii"));
+		
+		File file = new File("assets/ExpectedOutput.txt");
+		file.delete();
 	}
 }
 

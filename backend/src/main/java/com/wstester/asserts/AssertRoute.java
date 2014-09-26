@@ -1,8 +1,10 @@
 package com.wstester.asserts;
 import java.util.HashSet;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+
 import com.wstester.model.Step;
 
 public class AssertRoute extends RouteBuilder {
@@ -12,20 +14,30 @@ public class AssertRoute extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 		
-		interceptSendToEndpoint("jms:topic:responseTopic")
-		.log("[${body.getStepID}] Response before running asserts: ${body}")
-		.process(new AssertProcessor(stepList));
+//		interceptSendToEndpoint("jms:topic:responseTopic")
+//		.log("[${body.getStepID}] Response before running asserts: ${body}")
+//		.bean(new AssertProcessor(stepList), "process");
+//		
+//		from("jms:assertQueue")
+//		.process(new Processor() {
+//			
+//			@Override
+//			public void process(Exchange exchange) throws Exception {
+//				
+//				Step step = exchange.getIn().getBody(Step.class);
+//				stepList.add(step);
+//				System.out.println("Added step");
+//			}
+//		});
 		
-		from("jms:assertQueue")
+		from("jms:topic:finishTopic")
 		.process(new Processor() {
 			
 			@Override
 			public void process(Exchange exchange) throws Exception {
 				
-				Step step = exchange.getIn().getBody(Step.class);
-				stepList.add(step);
+				stepList.clear();
 			}
 		});
 	}
-
 }

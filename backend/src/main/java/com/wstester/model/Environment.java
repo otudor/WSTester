@@ -30,8 +30,9 @@ public class Environment implements Serializable{
 	}
 
 	public String getName() {
-		if (this.name == null)
+		if (this.name == null) {
 			this.name = "";
+		}
 		return name;
 	}
 
@@ -48,8 +49,9 @@ public class Environment implements Serializable{
 	}
 	
 	public void addServer(Server server) {
-		if (this.serverList == null)
+		if (this.serverList == null) {
 			this.serverList = new ArrayList<Server>();
+		}
 		this.serverList.add(server);
 	}
 

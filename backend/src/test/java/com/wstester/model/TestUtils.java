@@ -121,7 +121,7 @@ public class TestUtils {
 		restStep.setService(restService);
 		List<Assert> assertList = new ArrayList<Assert>();
 		Assert oneAssert = new Assert();
-		oneAssert.setExpected("First assert");
+		oneAssert.setExpected("All customers");
 		assertList.add(oneAssert);
 		restStep.setAssertList(assertList);
 		restStep.setPath("/customer/getCustomers");
@@ -132,11 +132,6 @@ public class TestUtils {
 		step2.setName("Step 2");
 		step2.setServer(server12);
 		step2.setService(service2);
-		List<Assert> assertList2 = new ArrayList<Assert>();
-		Assert oneAssert2 = new Assert();
-		oneAssert2.setExpected("Second assert");
-		assertList2.add(oneAssert2);
-		step2.setAssertList(assertList2);
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		query.put("name", "HAC");
@@ -151,11 +146,6 @@ public class TestUtils {
 		step3.setName("Step 3");
 		step3.setServer(server21);
 		step3.setService(service4);
-		List<Assert> assertList3 = new ArrayList<Assert>();
-		Assert oneAssert3 = new Assert();
-		oneAssert3.setExpected("Third assert");
-		assertList3.add(oneAssert3);
-		step3.setAssertList(assertList3);
 		step3.setOperation("SELECT * FROM angajati");
 		stepList2.add(step3);
 		// test 4
@@ -163,11 +153,6 @@ public class TestUtils {
 		step4.setName("Step 4");
 		step4.setServer(server22);
 		step4.setService(service3);
-		List<Assert> assertList4 = new ArrayList<Assert>();
-		Assert oneAssert4 = new Assert();
-		oneAssert4.setExpected("Forth assert");
-		assertList4.add(oneAssert4);
-		step4.setAssertList(assertList4);
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
 		stepList2.add(step4);
@@ -256,11 +241,6 @@ public class TestUtils {
 		restStep.setName("Step 1");
 		restStep.setServer(server11);
 		restStep.setService(restService);
-		List<Assert> assertList = new ArrayList<Assert>();
-		Assert oneAssert = new Assert();
-		oneAssert.setExpected("First assert");
-		assertList.add(oneAssert);
-		restStep.setAssertList(assertList);
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod("GET");
 		stepList1.add(restStep);
@@ -342,11 +322,6 @@ public class TestUtils {
 		step2.setName("Step 2");
 		step2.setServer(server12);
 		step2.setService(service2);
-		List<Assert> assertList2 = new ArrayList<Assert>();
-		Assert oneAssert2 = new Assert();
-		oneAssert2.setExpected("Second assert");
-		assertList2.add(oneAssert2);
-		step2.setAssertList(assertList2);
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		query.put("name", "HAC");
@@ -432,11 +407,6 @@ public class TestUtils {
 		step1.setName("Step 1");
 		step1.setServer(server12);
 		step1.setService(service2);
-		List<Assert> assertList2 = new ArrayList<Assert>();
-		Assert oneAssert2 = new Assert();
-		oneAssert2.setExpected("Second assert");
-		assertList2.add(oneAssert2);
-		step1.setAssertList(assertList2);
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		String name = "Ana";
@@ -452,7 +422,6 @@ public class TestUtils {
 		step2.setName("Step 2");
 		step2.setServer(server12);
 		step2.setService(service2);
-		step2.setAssertList(assertList2);
 		HashMap<String, String> insertQuery = new HashMap<String, String>();
 		String id = "100";
 		String keyId = "id";
@@ -469,7 +438,6 @@ public class TestUtils {
 		step3.setName("Step 3");
 		step3.setServer(server12);
 		step3.setService(service2);
-		step3.setAssertList(assertList2);
 		step3.setAction(Action.SELECT);
 		step3.setCollection(collection);
 		step3.setQuery(query);
@@ -557,11 +525,6 @@ public class TestUtils {
 		step3.setName("Step 3");
 		step3.setServer(server21);
 		step3.setService(service4);
-		List<Assert> assertList3 = new ArrayList<Assert>();
-		Assert oneAssert3 = new Assert();
-		oneAssert3.setExpected("Third assert");
-		assertList3.add(oneAssert3);
-		step3.setAssertList(assertList3);
 		stepList2.add(step3);
 		
 		
@@ -650,11 +613,6 @@ public class TestUtils {
 		step4.setName("Step 4");
 		step4.setServer(server22);
 		step4.setService(service3);
-		List<Assert> assertList4 = new ArrayList<Assert>();
-		Assert oneAssert4 = new Assert();
-		oneAssert4.setExpected("Forth assert");
-		assertList4.add(oneAssert4);
-		step4.setAssertList(assertList4);
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
 		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
@@ -951,11 +909,6 @@ public class TestUtils {
 		step4.setName("Step 4");
 		step4.setServer(server22);
 		step4.setService(service3);
-		List<Assert> assertList4 = new ArrayList<Assert>();
-		Assert oneAssert4 = new Assert();
-		oneAssert4.setExpected("Forth assert");
-		assertList4.add(oneAssert4);
-		step4.setAssertList(assertList4);
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
 		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
@@ -1051,11 +1004,6 @@ public class TestUtils {
 		restStep.setName("Step 1");
 		restStep.setServer(server11);
 		restStep.setService(restService);
-		List<Assert> assertList = new ArrayList<Assert>();
-		Assert oneAssert = new Assert();
-		oneAssert.setExpected("First assert");
-		assertList.add(oneAssert);
-		restStep.setAssertList(assertList);
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod("GET");
 		stepList1.add(restStep);
@@ -1159,11 +1107,6 @@ public class TestUtils {
 		restStep.setName("Step 1");
 		restStep.setServer(server11);
 		restStep.setService(restService);
-		List<Assert> assertList = new ArrayList<Assert>();
-		Assert oneAssert = new Assert();
-		oneAssert.setExpected("First assert");
-		assertList.add(oneAssert);
-		restStep.setAssertList(assertList);
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod("GET");
 		stepList1.add(restStep);
@@ -1172,11 +1115,6 @@ public class TestUtils {
 		step4.setName("Step 4");
 		step4.setServer(server22);
 		step4.setService(service3);
-		List<Assert> assertList4 = new ArrayList<Assert>();
-		Assert oneAssert4 = new Assert();
-		oneAssert4.setExpected("Forth assert");
-		assertList4.add(oneAssert4);
-		step4.setAssertList(assertList4);
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
 		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
@@ -1270,12 +1208,7 @@ public class TestUtils {
 		step4.setName("Step 4");
 		step4.setServer(server22);
 		step4.setService(service3);
-		List<Assert> assertList4 = new ArrayList<Assert>();
-		Assert oneAssert4 = new Assert();
-		oneAssert4.setExpected("Forth assert");
 		step4.setAssetList(assetList);
-		assertList4.add(oneAssert4);
-		step4.setAssertList(assertList4);
 		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
 		List<Variable> stepVariableList = new ArrayList<Variable>();
 		stepVariableList.add(stepVariable);
