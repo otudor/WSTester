@@ -85,14 +85,14 @@ public class TestProject implements Serializable {
 	}
 
 	public TestSuite getTestSuite(String uID) {
-		TestSuite result = null;
-		for (TestSuite entry : testSuiteList) {
-			if (entry.getID().equals(uID)) {
-				result = entry;
-				break;
+
+		for (TestSuite testSuite : testSuiteList) {
+			if (testSuite.getID().equals(uID)) {
+				return testSuite;
 			}
 		}
-		return result;
+		
+		return null;
 	}
 
 	public void addTestSuite(TestSuite ts) {
@@ -129,11 +129,12 @@ public class TestProject implements Serializable {
 	}
 
 	public void removeTestCase(String tcUID) {
-		for (TestSuite entry : testSuiteList) {
-			if (entry != null) {
-				for (TestCase tc : entry.getTestCaseList()) {
+		
+		for (TestSuite testSuite : testSuiteList) {
+			if (testSuite != null) {
+				for (TestCase tc : testSuite.getTestCaseList()) {
 					if (tc.getID().equals(tcUID)) {
-						entry.getTestCaseList().remove(tc);
+						testSuite.getTestCaseList().remove(tc);
 						break;
 					}
 				}
@@ -142,14 +143,16 @@ public class TestProject implements Serializable {
 	}
 
 	public Step getStep(String stepUID) {
+		
 		if (testSuiteList != null && !testSuiteList.isEmpty()){
 			for (TestSuite entry : testSuiteList) {
-				if (entry.getTestCaseList() != null
-						&& !entry.getTestCaseList().isEmpty()){
+				
+				if (entry.getTestCaseList() != null	&& !entry.getTestCaseList().isEmpty()){
 					for (TestCase tc : entry.getTestCaseList()) {
-						if (tc.getStepList() != null
-								&& !tc.getStepList().isEmpty()){
+						
+						if (tc.getStepList() != null && !tc.getStepList().isEmpty()){
 							for (Step stp : tc.getStepList())
+								
 								if (stp.getID().equals(stepUID)){
 									return stp;
 								}
@@ -161,64 +164,70 @@ public class TestProject implements Serializable {
 		return null;
 	}
 	
-	public void setStepByUID(Step src, String stepUID) {
+	public void setStepByUID(Step source, String stepUID) {
+		
 		for (TestSuite entry : testSuiteList) {
+			
 			if (entry.getTestCaseList() != null && !entry.getTestCaseList().isEmpty()) {
 				for (TestCase testCase : entry.getTestCaseList()) {
+					
 					if (testCase.getStepList() != null && !testCase.getStepList().isEmpty()) {
 						for (Step step : testCase.getStepList()) {
+							
 							if (step.getID().equals(stepUID)) {
+								
+								step = source;
 								if(step instanceof MySQLStep){
-									((MySQLStep) step).setOperation(((MySQLStep)src).getOperation());
-									step.setName(src.getName());
-									step.setService(src.getService());
-									step.setServer(src.getServer());
-									step.setExecutionList(src.getExecutionList());
-									step.setAssertList(src.getAssertList());
-									step.setAssetList(src.getAssetList());
-									step.setDependsOn(src.getDependsOn());
-									step.setVariableList(src.getVariableList());
+									((MySQLStep) step).setOperation(((MySQLStep)source).getOperation());
+									step.setName(source.getName());
+									step.setService(source.getService());
+									step.setServer(source.getServer());
+									step.setExecutionList(source.getExecutionList());
+									step.setAssertList(source.getAssertList());
+									step.setAssetList(source.getAssetList());
+									step.setDependsOn(source.getDependsOn());
+									step.setVariableList(source.getVariableList());
 								}
 								if(step instanceof MongoStep){
-									((MongoStep) step).setAction(((MongoStep) src).getAction());
-									step.setAssertList(src.getAssertList());
-									step.setAssetList(src.getAssetList());
-									((MongoStep) step).setCollection(((MongoStep) src).getCollection());
-									step.setDependsOn(src.getDependsOn());
-									step.setExecutionList(src.getExecutionList());
-									step.setName(src.getName());
-									((MongoStep) step).setQuery(((MongoStep) src).getQuery());
-									step.setServer(src.getServer());
-									step.setService(src.getService());
-									step.setVariableList(src.getVariableList());
+									((MongoStep) step).setAction(((MongoStep) source).getAction());
+									step.setAssertList(source.getAssertList());
+									step.setAssetList(source.getAssetList());
+									((MongoStep) step).setCollection(((MongoStep) source).getCollection());
+									step.setDependsOn(source.getDependsOn());
+									step.setExecutionList(source.getExecutionList());
+									step.setName(source.getName());
+									((MongoStep) step).setQuery(((MongoStep) source).getQuery());
+									step.setServer(source.getServer());
+									step.setService(source.getService());
+									step.setVariableList(source.getVariableList());
 								}
 								if(step instanceof SoapStep){
-									step.setAssertList(src.getAssertList());
-									step.setAssetList(src.getAssetList());
-									step.setDependsOn(src.getDependsOn());
-									step.setExecutionList(src.getExecutionList());
-									step.setName(src.getName());
-									((SoapStep) step).setRequest(((SoapStep) src).getRequest());
-									step.setServer(src.getServer());
-									step.setService(src.getService());
-									step.setVariableList(src.getVariableList());
+									step.setAssertList(source.getAssertList());
+									step.setAssetList(source.getAssetList());
+									step.setDependsOn(source.getDependsOn());
+									step.setExecutionList(source.getExecutionList());
+									step.setName(source.getName());
+									((SoapStep) step).setRequest(((SoapStep) source).getRequest());
+									step.setServer(source.getServer());
+									step.setService(source.getService());
+									step.setVariableList(source.getVariableList());
 								}
 								if(step instanceof RestStep){
-									step.setAssertList(src.getAssertList());
-									step.setAssetList(src.getAssetList());
-									((RestStep) step).setContentType(((RestStep) src).getContentType());
-									((RestStep) step).setCookie(((RestStep) src).getCookie());
-									step.setDependsOn(src.getDependsOn());
-									step.setExecutionList(src.getExecutionList());
-									((RestStep) step).setHeader(((RestStep) src).getHeader());
-									((RestStep) step).setMethod(((RestStep) src).getMethod());
-									step.setName(src.getName());
-									((RestStep) step).setPath(((RestStep) src).getPath());
-									((RestStep) step).setQuery(((RestStep) src).getQuery());
-									((RestStep) step).setRequest(((RestStep) src).getRequest());
-									step.setServer(src.getServer());
-									step.setService(src.getService());
-									step.setVariableList(src.getVariableList());
+									step.setAssertList(source.getAssertList());
+									step.setAssetList(source.getAssetList());
+									((RestStep) step).setContentType(((RestStep) source).getContentType());
+									((RestStep) step).setCookie(((RestStep) source).getCookie());
+									step.setDependsOn(source.getDependsOn());
+									step.setExecutionList(source.getExecutionList());
+									((RestStep) step).setHeader(((RestStep) source).getHeader());
+									((RestStep) step).setMethod(((RestStep) source).getMethod());
+									step.setName(source.getName());
+									((RestStep) step).setPath(((RestStep) source).getPath());
+									((RestStep) step).setQuery(((RestStep) source).getQuery());
+									((RestStep) step).setRequest(((RestStep) source).getRequest());
+									step.setServer(source.getServer());
+									step.setService(source.getService());
+									step.setVariableList(source.getVariableList());
 								}
 							}
 						}

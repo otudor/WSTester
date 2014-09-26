@@ -122,10 +122,10 @@ public class TestSuiteManagerController
         contentArea.setCenter( restStepController.getView());
     }
     
-    public String getFirstEnvironment()
-    {
-    	return tsListController.getFirstEnv();
-    }
+//    public String getFirstEnvironment()
+//    {
+//    	return tsListController.getFirstEnv();
+//    }
 
     
     public void runTestSuite( ActionEvent event) throws Exception

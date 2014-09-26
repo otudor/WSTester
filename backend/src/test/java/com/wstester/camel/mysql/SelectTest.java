@@ -33,4 +33,22 @@ public class SelectTest extends TestBaseClass{
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("popescu", result.getJSONObject(0).get("detalii"));
 	}
+	
+	@Test
+	public void selectOneRow() throws Exception {
+
+		TestProject testProject = TestUtils.getMySQLTestPlan();
+		MySQLStep step = (MySQLStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
+		step.setOperation("SELECT detalii from angajati where id = 1");
+		testRunner = new TestRunner(testProject);
+		
+		testRunner.run(testProject);
+
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		
+		JSONArray result = new JSONArray(response.getContent());
+		System.out.println(result);
+		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
+		assertEquals("popescu", result.getJSONObject(0).get("detalii"));
+	}
 }

@@ -27,7 +27,20 @@ public class Assert implements Serializable {
 	public String getID(){
 		return this.uuid;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Assert [expected=" + expected + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((expected == null) ? 0 : expected.hashCode());
+		return result;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
