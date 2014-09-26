@@ -254,7 +254,6 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 
 
-
 		System.out.println(stage.getHeight());
 		//VBox.setVgrow(newIco6, Priority.ALWAYS);
 

@@ -1,37 +1,48 @@
 package com.wstester.main;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import com.wstester.RightClickMenu.RadialGlobalMenu;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ICamelContextManager;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 public class MainLauncher extends Application {
-    
+	
+	public static Stage stage;
     public static String screen1ID = "screen1";
     public static String screen1File = "/fxml/main/screen1.fxml";
     public static String screen2ID = "maineaa";
     public static String screen2File = "/fxml/main/WsTesterMain.fxml";
     public static String screen3ID = "loadingScreen";
     public static String screen3File = "/fxml/main/La.fxml";
-    
+    public static String screen4ID = "rigthClickMenu";
+    public static String screen4File = "/fxml/main/RightClickMenu.fxml";
+    public RadialGlobalMenu radialMenu;
     
     @Override
     public void start(Stage primaryStage) {
         
+    	MainLauncher.stage=primaryStage;
         ScreensController mainContainer = new ScreensController();
         mainContainer.loadScreen(MainLauncher.screen1ID, MainLauncher.screen1File);
         mainContainer.loadScreen(MainLauncher.screen2ID, MainLauncher.screen2File);
         mainContainer.loadScreen(MainLauncher.screen3ID, MainLauncher.screen3File);
+        mainContainer.loadScreen(MainLauncher.screen4ID, MainLauncher.screen4File);
         
         
         
         mainContainer.setScreen(MainLauncher.screen3ID);
-       // mainContainer.unloadScreen(ScreensFramework.screen3ID);
+//        mainContainer.unloadScreen(ScreensFramework.screen3ID);
        
         
         
@@ -51,6 +62,7 @@ public class MainLauncher extends Application {
        //mainContainer.getChildrenUnmodifiable().get(0).getStyleClass().add("mainWindow");
       // mainContainer.getChildrenUnmodifiable().get(1).getStyleClass().add("bar");
         }
+       
         
         primaryStage.setScene(scene);
         if(mainContainer.getScreen(screen2ID)!=null){
@@ -65,7 +77,9 @@ public class MainLauncher extends Application {
     		});  
         	
         }
-        primaryStage.show();
+       
+//        	primaryStage.initStyle(StageStyle.TRANSPARENT);
+        	primaryStage.show();
     }
 
     /**
