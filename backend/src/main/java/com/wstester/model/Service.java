@@ -21,8 +21,6 @@ public abstract class Service implements Serializable{
 	}
 	
 	public String getName() {
-		if (this.name == null)
-			this.name = "";
 		return this.name;
 	}
 	

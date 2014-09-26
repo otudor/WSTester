@@ -147,7 +147,7 @@ public class MongoStepController
 		mongo.setServer(step.getServer());
 		mongo.setService(step.getService());
 		mongo.setVariableList(step.getVariableList());
-		tsService.setMongoStepByUID(mongo, uid);
+		tsService.setStepByUID(mongo, uid);
 		tsService.saveTestSuite();
 	} 
 }

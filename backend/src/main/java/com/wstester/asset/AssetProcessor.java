@@ -17,6 +17,7 @@ public class AssetProcessor implements Processor{
 		if(step.getAssetList() != null){
 			//TODO: now only the first asset will be set to the body of the request
 			//TODO: in the future, send a request for every asset in the list
+			//TODO: put logs here to see the new content
 			exchange.getIn().setBody(assetManager.getAssetContent(step.getAssetList().get(0).getName()));
 		}
 	}

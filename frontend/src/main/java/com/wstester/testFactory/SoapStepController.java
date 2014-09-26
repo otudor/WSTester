@@ -153,7 +153,7 @@ public class SoapStepController
 		soap.setService(step.getService());
 		soap.setVariableList(step.getVariableList());
 		
-		tsService.setSoapStepByUID(soap, uid);
+		tsService.setStepByUID(soap, uid);
 		tsService.saveTestSuite();
 	} 
     

@@ -1,6 +1,8 @@
 package com.wstester.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Response implements Serializable{
 
@@ -9,6 +11,7 @@ public class Response implements Serializable{
 	private String content;
 	private ExecutionStatus status;
 	private String errorMessage;
+	private List<AssertResponse> assertResponseList;
 	
 	public String getStepID() {
 		return stepID;
@@ -16,6 +19,7 @@ public class Response implements Serializable{
 	
 	public void setStepID(String stepID) {
 		this.stepID = stepID;
+		assertResponseList = new ArrayList<AssertResponse>();
 	}
 	
 	public String getContent() {
@@ -42,15 +46,28 @@ public class Response implements Serializable{
 		this.errorMessage = errorMessage;
 	}
 
+	public List<AssertResponse> getAssertResponseList() {
+		return assertResponseList;
+	}
+
+	public void setAssertResponseList(List<AssertResponse> assertResponseList) {
+		this.assertResponseList = assertResponseList;
+	}
+
+	public void addAssertResponse(AssertResponse assertResponse){
+		this.assertResponseList.add(assertResponse);
+	}
+	
 	@Override
 	public String toString() {
-		return "Response [stepID=" + stepID + ", content=" + content + ", status=" + status + ", errorMessage=" + errorMessage + "]";
+		return "Response [stepID=" + stepID + ", content=" + content + ", status=" + status + ", errorMessage=" + errorMessage + ", assertResponseList=" + assertResponseList + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((assertResponseList == null) ? 0 : assertResponseList.hashCode());
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((errorMessage == null) ? 0 : errorMessage.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
@@ -67,6 +84,11 @@ public class Response implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Response other = (Response) obj;
+		if (assertResponseList == null) {
+			if (other.assertResponseList != null)
+				return false;
+		} else if (!assertResponseList.equals(other.assertResponseList))
+			return false;
 		if (content == null) {
 			if (other.content != null)
 				return false;
@@ -85,5 +107,5 @@ public class Response implements Serializable{
 		} else if (!stepID.equals(other.stepID))
 			return false;
 		return true;
-	}
+	}	
 }

@@ -73,10 +73,7 @@ public class ResponseCallback extends RouteBuilder {
 		return false;
 	}
 
-	public static boolean hasFinished() {
-		boolean hasFinished = finished;
-		finished = false;
-		
-		return hasFinished;
+	public static boolean hasFinished() {		
+		return finished;
 	}
 }

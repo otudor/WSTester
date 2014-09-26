@@ -19,14 +19,12 @@ import com.wstester.model.TestProject;
 import com.wstester.util.*;
 
 public class EnvironmentService {
-	// private long nextId = 0;
 	private Map<String, Environment> environments;
 	private TestProject testProject;
 	
 
 	public EnvironmentService() {
 		this.environments = new HashMap<String, Environment>();
-		// createContact("Cathy", "Freeman");
 		testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
 		System.out.println(testProject);
 		if(testProject.getEnvironmentList()!=null)
@@ -74,14 +72,7 @@ public class EnvironmentService {
 						env.getServers().remove(server);
 						break;
 					}
-			// System.out.println("inainte de remove");
-			// env.printFTPServers();
-
-			// env.getFTPList().remove( env.getFTPServerById( ftpId));
-
-			// System.out.println("dupa remove");
-			// env.printFTPServers();
-		}
+			}
 	}
 
 	public Server addServerForEnv(String envUID) {
@@ -89,8 +80,7 @@ public class EnvironmentService {
 		Environment env = environments.get(envUID);
 
 		if (env != null) {
-			result = new Server("Server nou", "44.44.44.44",
-					"description noul server");
+			result = new Server();
 			env.addServer(result);
 		}
 
@@ -115,11 +105,6 @@ public class EnvironmentService {
 
 		if (srv != null) {
 			result = new MySQLService();
-			result.setName("New MySQLService");
-			result.setDbName("test1");
-			result.setPort("test2");
-			result.setUser("test");
-			result.setPassword("test2");
 			srv.addService((Service) result);
 		}
 
@@ -144,11 +129,6 @@ public class EnvironmentService {
 
 		if (srv != null) {
 			result = new MongoService();
-			result.setName("New MongoService");
-			result.setDbName("test3");
-			result.setPort("test3");
-			result.setUser("test3");
-			result.setPassword("test3");
 			srv.addService((Service) result);
 		}
 
@@ -173,10 +153,6 @@ public class EnvironmentService {
 
 		if (srv != null) {
 			result = new SoapService();
-			result.setName("New SoapService");
-			result.setWsdlURL("test3");
-			result.setPort("test3");
-			result.setPath("test3");
 			srv.addService((Service) result);
 		}
 
@@ -201,8 +177,6 @@ public class EnvironmentService {
 
 		if (srv != null) {
 			result = new RestService();
-			result.setName("New RestService");
-			result.setPort("00000");
 			srv.addService((Service) result);
 		}
 

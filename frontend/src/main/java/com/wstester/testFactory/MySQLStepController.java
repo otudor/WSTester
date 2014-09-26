@@ -236,7 +236,7 @@ public class MySQLStepController
 		sql.setAssetList(step.getAssetList());
 		sql.setDependsOn(step.getDependsOn());
 		sql.setVariableList(step.getVariableList());
-		tsService.setMySQLStepByUID(sql, uid);
+		tsService.setStepByUID(sql, uid);
 		tsService.saveTestSuite();
 	} 
     

@@ -63,28 +63,31 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 	@FXML
 	private VBox newIco2= new VBox();
-	private VBox newIco3= new VBox();
-	private VBox newIco4= new VBox();
-	private VBox newIco5= new VBox();
-	private VBox newIcoM0= new VBox();
+	private VBox newIco3= new VBox(); //SOAP
+	private VBox newIco4= new VBox();  //REST
+	private VBox newIco5= new VBox(); 
+	private VBox newIco6 = new VBox();  //v
 	private VBox newIcoM1= new VBox();
-	private VBox newIcoM2= new VBox();
-	private VBox newIcoM3= new VBox();
+	private VBox newIcoM2= new VBox(); //SOAP
+	private VBox newIcoM3= new VBox(); //REST
 	private VBox newIcoM4= new VBox();
 	private VBox newIcoM5= new VBox();
-	private VBox newIcoM6= new VBox();
+	private VBox newIcoM6= new VBox(); //ENV
+	private VBox newIcoM7= new VBox(); //v
 	private Stage stage = new Stage();
 	private Stage stageSoap = new Stage();
 	private Stage stageRest = new Stage();
 	private Stage stageRnd = new Stage();
 	private Stage stageAssets = new Stage();
 	private Stage stageEnv = new Stage();
+	private Stage stageVar = new Stage(); //v
 	boolean isDisplayed =false;
 	boolean isDisplayed1 =false;
 	boolean isDisplayed2 =false;
 	boolean isDisplayed3 =false;
 	boolean isDisplayed4 =false;
 	boolean isDisplayed5 =false;
+	boolean isDisplayed6 =false; //v
 	private int poz = 200;
 	MenuBar menuBar ;
 	Menu menu;
@@ -110,6 +113,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		//this.createTaskbar();
 		this.createRESTWindow();
 		this.createTestFactoryWindow();
+		this.createVarWindow(); //v
 		this.saveProject();
 		this.goToLoad();
 		stage.initOwner(WsTesterMain.stage);
@@ -185,6 +189,12 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					isDisplayed5=false;
 					poz=poz-100;
 				}
+				if (isDisplayed6==true) {
+					stageRnd.close();
+					bar.getChildren().remove(newIco6);
+					isDisplayed6=false;
+					poz=poz-100;
+				}
 				
 				ServiceLocator serviceLocator = ServiceLocator.getInstance();
 	    		ICamelContextManager manager = serviceLocator.lookup(ICamelContextManager.class);
@@ -226,6 +236,9 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		newIco5 = (VBox) CreateIcon("/images/document-open-remote.png","Generate random JSON");
 		newIco5.setLayoutX(10);
 		newIco5.setLayoutY(500);
+		newIco6 = (VBox) CreateIcon("/images/document-open-remote.png","Variables"); //v
+		newIco6.setLayoutX(10); //v
+		newIco6.setLayoutY(600); //v
 
 		newIcoM1 = (VBox) CreateIcon("/images/start.png","Start");
 		newIcoM1.setLayoutX(1);
@@ -245,7 +258,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		System.out.println(stage.getHeight());
 		//VBox.setVgrow(newIco6, Priority.ALWAYS);
 
-		topPane.getChildren().addAll(newIco,newIco2,newIco3,newIco4,newIco5);
+		topPane.getChildren().addAll(newIco,newIco2,newIco3,newIco4,newIco5, newIco6);
 		bar.getChildren().addAll(newIcoM1);
 	}
 
@@ -613,12 +626,120 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 			}
 		});
 
-
-
-
 		moveIcons(newIco4);
 	}
+	
+	//v
+	private void createVarWindow(){
+		newIco6.setOnMouseClicked(new EventHandler<MouseEvent>() {			
+			@Override
+			public void handle(MouseEvent event) {
 
+
+				// TODO Auto-generated method stub	
+				if(event.getClickCount() == 2 && isDisplayed6 == false) {
+					stageVar = new Stage();
+					isDisplayed6 = true;
+					try {
+						root = FXMLLoader.load(getClass().getResource("/fxml/var/variables.fxml"));
+						Scene second = new Scene(root);
+						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
+						//second.setFill(Color.TRANSPARENT);
+						//second.setFill(Color.TRANSPARENT);
+						//stageRest.initStyle(StageStyle.TRANSPARENT);
+						root.getStyleClass().add("mainWind");
+
+						newIcoM7 = (VBox) CreateIcon("/images/task_img_open.png","Variables");	
+						newIcoM7.setLayoutX(poz);
+						newIcoM7.setLayoutY(1);
+						lista.add(newIcoM7);
+						//AfiseazaIcons("/images/task_img_open.png","RestWindow");
+						bar.getChildren().add(newIcoM7);
+						poz=poz+100;
+						expandIcons(newIcoM7);
+
+
+						newIcoM7.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+							@Override
+							public void handle(MouseEvent event2) {
+
+								// TODO Auto-generated method stub	
+								if(event2.getClickCount() == 1 ) {
+
+									stageVar.centerOnScreen();
+									stageVar.setIconified(false);
+									stageVar.toFront();
+									stageVar.show();
+
+								}
+
+
+
+							}
+						});
+
+						stageVar.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
+
+							@Override
+							public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+								stageVar.hide();
+							}
+						});
+
+
+						stageVar.initOwner(pane.getScene().getWindow());
+						//stage.initModality(Modality.WINDOW_MODAL);
+						//stageRest.initStyle(StageStyle.UTILITY);
+						stageVar.setScene(second);
+						stageVar.setTitle("Variables Window");
+						//stageRest.initOwner(WsTesterMain.stage);
+						stageVar.show();
+
+
+						// modificare laur
+
+
+
+						stageVar.setOnCloseRequest(new EventHandler<WindowEvent>() {
+							public void handle(WindowEvent we) {
+								ind=lista.indexOf(newIcoM7);
+								arrangeIcons(ind);
+								lista.remove(lista.indexOf(newIcoM7));
+
+								System.out.println("Inchid stage'ul var");
+								bar.getChildren().remove(newIcoM7);;
+								//stageRest.setScene(null);
+								isDisplayed6 = false;
+								stageVar=null;
+								poz=poz-100;
+							}
+						});        
+						stageVar.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
+
+							@Override
+							public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+								stageVar.hide();
+							}
+						});
+
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				if (isDisplayed6 == true && event.getClickCount() == 2)
+				{
+					stageVar.centerOnScreen();
+					stageVar.setIconified(false);
+					stageVar.toFront();
+					//stageRest.isShowing();
+					stageVar.show();
+				}
+			}
+		});
+
+		moveIcons(newIco6);
+	}
 
 
 	private void createTestFactoryWindow(){
@@ -755,7 +876,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
 						root.getStyleClass().add("mainWind");
 
-						newIcoM5 = (VBox) CreateIcon("/images/task_img_open.png","Assest");	
+						newIcoM5 = (VBox) CreateIcon("/images/task_img_open.png","Assets");	
 						newIcoM5.setLayoutX(poz);
 						newIcoM5.setLayoutY(1);
 						lista.add(newIcoM5);

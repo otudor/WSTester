@@ -15,8 +15,6 @@ public class MongoService extends Service{
 	}
 	
 	public String getPort() {
-		if (this.port == null)
-			this.port = "";
 		return port;
 	}
 
@@ -25,8 +23,6 @@ public class MongoService extends Service{
 	}
 	
 	public String getDbName() {
-		if (this.dbName == null)
-			this.dbName = "";
 		return dbName;
 	}
 
@@ -35,8 +31,6 @@ public class MongoService extends Service{
 	}
 	
 	public String getUser() {
-		if (this.user == null)
-			this.user = "";
 		return user;
 	}
 
@@ -45,8 +39,6 @@ public class MongoService extends Service{
 	}
 
 	public String getPassword() {
-		if (this.password == null)
-			this.password = "";
 		return password;
 	}
 

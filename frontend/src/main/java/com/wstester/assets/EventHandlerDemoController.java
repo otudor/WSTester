@@ -1,6 +1,7 @@
 package com.wstester.assets;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
@@ -34,12 +35,6 @@ import com.wstester.model.Asset;
 import com.wstester.model.TestProject;
 import com.wstester.services.definition.IAssetManager;
 import com.wstester.services.impl.AssetManager;
-
-/**
- * 
- * @author lvasile
- * TODO: add java doc
- */
 public class EventHandlerDemoController {
 
 	private Logger logger = Logger.getLogger(this.getClass().getSimpleName());

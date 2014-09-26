@@ -35,8 +35,6 @@ public class RestStep extends Step {
 	}
 	
 	public HashMap<String, String> getQuery() {
-		if (this.query == null)
-			this.query = new HashMap<String, String>();
 		return query;
 	}
 
@@ -45,8 +43,6 @@ public class RestStep extends Step {
 	}
 
 	public HashMap<String, String> getCookie() {
-		if (this.cookie == null)
-			this.cookie = new HashMap<String, String>();
 		return cookie;
 	}
 
@@ -55,8 +51,6 @@ public class RestStep extends Step {
 	}
 
 	public HashMap<String, String> getHeader() {
-		if (this.header == null)
-			this.header = new HashMap<String, String>();
 		return header;
 	}
 
@@ -73,8 +67,6 @@ public class RestStep extends Step {
 	}
 
 	public String getMethod() {
-		if (this.method == null)
-			this.method = "";
 		return method;
 	}
 
@@ -83,8 +75,6 @@ public class RestStep extends Step {
 	}
 
 	public String getPath() {
-		if (this.path == null)
-			this.path = "";
 		return path;
 	}
 

@@ -3,6 +3,7 @@ package com.wstester.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -20,6 +21,7 @@ public class TestProject implements Serializable {
 
 	public TestProject() {
 		uuid = UUID.randomUUID().toString();
+		testSuiteList = new ArrayList<TestSuite>();
 	}
 
 	public String getID() {
@@ -27,9 +29,6 @@ public class TestProject implements Serializable {
 	}
 
 	public List<TestSuite> getTestSuiteList() {
-		if(this.testSuiteList == null){
-			this.testSuiteList = new ArrayList<TestSuite>();
-		}
 		return testSuiteList;
 	}
 
@@ -38,9 +37,6 @@ public class TestProject implements Serializable {
 	}
 
 	public List<Asset> getAssetList() {
-		if(this.assetList == null){
-			this.assetList = new ArrayList<Asset>();
-		}
 		return assetList;
 	}
 
@@ -48,18 +44,15 @@ public class TestProject implements Serializable {
 		this.assetList = assetList;
 	}
 
-	public void addAsset(Asset asset){
-		if(this.assetList == null){
+	public void addAsset(Asset asset) {
+		if (this.assetList == null) {
 			this.assetList = new ArrayList<Asset>();
 		}
-		
+
 		this.assetList.add(asset);
 	}
-	
+
 	public List<Environment> getEnvironmentList() {
-		if(this.environmentList == null){
-			this.environmentList = new ArrayList<Environment>();
-		}
 		return environmentList;
 	}
 
@@ -68,8 +61,6 @@ public class TestProject implements Serializable {
 	}
 
 	public String getName() {
-		if (this.name == null)
-			this.name = "";
 		return name;
 	}
 
@@ -84,58 +75,154 @@ public class TestProject implements Serializable {
 	public void setVariableList(List<Variable> variableList) {
 		this.variableList = variableList;
 	}
+	
+	public TestSuite getTestSuite(String uID) {
+		for (TestSuite testSuite : testSuiteList) {
+			if (testSuite.getID().equals(uID)) {
+				return testSuite;
+			}
+		}
+		return null;
+	}
+
+	public void addTestSuite(TestSuite testSuite) {
+		if (testSuiteList == null) {
+			testSuiteList = new ArrayList<TestSuite>();
+		}
+		testSuiteList.add(testSuite);
+	}
+	
+	public void addStepForTestCase(Step step, String id) {
+		for (TestSuite testSuite : testSuiteList) {
+			if (testSuite.getTestCaseList() != null && !testSuite.getTestCaseList().isEmpty()) {
+				for (TestCase testCase : testSuite.getTestCaseList()) {
+					if (testCase.getID().equals(id)) {
+						testCase.addStep(step);
+					}
+				}
+			}
+		}
+		
+	}
+
+	public void addTestCaseForTestSuite( TestCase testCase, String tsUID) {
+		for(TestSuite testSuite : testSuiteList) {
+			if(testSuite.getID().equals(tsUID)){
+				testSuite.getTestCaseList().add(testCase);
+			}
+		}
+	}
+
+	public void removeTestCase(String tcUID) {
+		for (TestSuite testSuite : testSuiteList) {
+			if (testSuite != null) {
+				for (TestCase testCase : testSuite.getTestCaseList()) {
+					if (testCase.getID().equals(tcUID)) {
+						testSuite.getTestCaseList().remove(testCase);
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	public Step getStep(String stepUID) {
+		if (testSuiteList != null && !testSuiteList.isEmpty()){
+			for (TestSuite testSuite : testSuiteList) {
+				
+				if (testSuite.getTestCaseList() != null && !testSuite.getTestCaseList().isEmpty()){
+					for (TestCase testCase : testSuite.getTestCaseList()) {
+						
+						if (testCase.getStepList() != null && !testCase.getStepList().isEmpty()){
+							for (Step step : testCase.getStepList())
+								
+								if (step.getID().equals(stepUID)){
+									return step;
+								}
+						}
+					}	
+				}
+			}
+		}
+		return null;
+	}
+	
+	public void setStepByUID(Step source, String stepUID) {
+		for (TestSuite testSuite : testSuiteList) {
+			
+			if (testSuite.getTestCaseList() != null && !testSuite.getTestCaseList().isEmpty()) {
+				for (TestCase testCase : testSuite.getTestCaseList()) {
+					
+					if (testCase.getStepList() != null && !testCase.getStepList().isEmpty()) {
+						for (Step step : testCase.getStepList()) {
+						
+							if (step.getID().equals(stepUID)) {
+								step = source;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	
 
 	@Override
 	public String toString() {
-		return "TestProject [name=" + name + ", testSuiteList=" + toStringSuite(testSuiteList) + ", assetList=" + assetList + ", environmentList=" + toStringEnv(environmentList) + ", variableList=" + variableList + ", uuid="
-				+ uuid + "]";
+		return "TestProject [name=" + name + ", testSuiteList=" + toStringSuite(testSuiteList) + ", assetList=" + assetList+ ", environmentList=" + toStringEnv(environmentList)
+				+ ", variableList=" + variableList + ", uuid=" + uuid + "]";
 	}
-	
+
 	private String toStringEnv(List<Environment> environmentList) {
-		
-		if(environmentList == null){
+
+		if (environmentList == null) {
 			return "null";
 		}
-		
+
 		StringBuilder sb = new StringBuilder("[");
-		for(Environment environment : environmentList){
-			if(environmentList.indexOf(environment) != 0){
+		for (Environment environment : environmentList) {
+			if (environmentList.indexOf(environment) != 0) {
 				sb.append(", ");
 			}
 			sb.append(environment.detailedToString());
 		}
 		sb.append("]");
-		
+
 		return sb.toString();
 	}
 
 	private String toStringSuite(List<TestSuite> testSuiteList) {
-		
-		if(testSuiteList == null){
+
+		if (testSuiteList == null) {
 			return "null";
 		}
-		
+
 		StringBuilder sb = new StringBuilder("[");
-		for(TestSuite testSuite : testSuiteList){
-			if(testSuiteList.indexOf(testSuite) != 0){
+		for (TestSuite testSuite : testSuiteList) {
+			if (testSuiteList.indexOf(testSuite) != 0) {
 				sb.append(", ");
 			}
 			sb.append(testSuite.detailedToString());
 		}
 		sb.append("]");
-		
+
 		return sb.toString();
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((assetList == null) ? 0 : assetList.hashCode());
-		result = prime * result + ((environmentList == null) ? 0 : environmentList.hashCode());
+		result = prime * result
+				+ ((assetList == null) ? 0 : assetList.hashCode());
+		result = prime * result
+				+ ((environmentList == null) ? 0 : environmentList.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((testSuiteList == null) ? 0 : testSuiteList.hashCode());
-		result = prime * result + ((variableList == null) ? 0 : variableList.hashCode());
+		result = prime * result
+				+ ((testSuiteList == null) ? 0 : testSuiteList.hashCode());
+		result = prime * result
+				+ ((variableList == null) ? 0 : variableList.hashCode());
 		return result;
 	}
 
@@ -175,4 +262,7 @@ public class TestProject implements Serializable {
 			return false;
 		return true;
 	}
+
+	
+
 }

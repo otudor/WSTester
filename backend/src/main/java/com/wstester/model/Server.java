@@ -33,9 +33,6 @@ public class Server implements Serializable {
 	}
 
 	public List<Service> getServices() {
-		if ( this.serviceList == null){
-			this.serviceList = new ArrayList<Service>();
-		}
 		return serviceList;
 	}
 
@@ -44,8 +41,6 @@ public class Server implements Serializable {
 	}
 
 	public String getName() {
-		if (this.name == null)
-			this.name = "";
 		return name;
 	}
 
@@ -54,8 +49,6 @@ public class Server implements Serializable {
 	}
 
 	public String getIp() {
-		if (this.ip == null)
-			this.ip = "";
 		return ip;
 	}
 
@@ -64,8 +57,6 @@ public class Server implements Serializable {
 	}
 
 	public String getDescription() {
-		if (this.description == null)
-			this.description = "";
 		return description;
 	}
 

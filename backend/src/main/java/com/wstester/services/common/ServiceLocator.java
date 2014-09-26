@@ -49,7 +49,7 @@ public final class ServiceLocator {
 				for(Constructor<?> ctor : declaredConstructors) {
 					Parameter[] params = ctor.getParameters();
 					if(params.length == 0) {
-						obj = ctor.newInstance(null);
+						obj = ctor.newInstance();
 					}
 				}
 				implementations.put(clazz.getInterfaceName().getSimpleName(), obj);

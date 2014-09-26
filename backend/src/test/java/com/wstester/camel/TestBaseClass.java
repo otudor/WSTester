@@ -23,6 +23,7 @@ public class TestBaseClass {
 		
 		contextManager.startCamelContext();
 	}
+	
 	@AfterClass
 	public static void after() throws InterruptedException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
 		

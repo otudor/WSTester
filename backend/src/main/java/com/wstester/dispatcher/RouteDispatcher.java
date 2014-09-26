@@ -17,6 +17,8 @@ public class RouteDispatcher extends RouteBuilder{
 	public void configure() throws Exception {
 	    
 		from("jms:startQueue?concurrentConsumers=20&asyncConsumer=true")
+		.log("[${body.getID}] Sent message to assert queue")
+		.wireTap("jms:assertQueue")
 		.choice()
 			.when(new Predicate() {				
 				@Override
@@ -45,7 +47,6 @@ public class RouteDispatcher extends RouteBuilder{
 				.log("[${body.getID}] Sent message to soap queue")
 				.to("jms:soapQueue")
 		.endChoice();
-		
 	}
 }
 
