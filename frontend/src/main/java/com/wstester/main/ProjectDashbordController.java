@@ -133,14 +133,16 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 
 				@Override
 				public void handle(MouseEvent event) {
+					
+			    	TestProject t = new TestProject();
+			    	UtilityTool.addEntity(MainConstants.TESTPROJECT, t);
+			    	ICamelContextManager manager;
+					manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
+					manager.startCamelContext();
 					myController.setScreen(MainLauncher.screen2ID);
-			    	 TestProject t = new TestProject();
-			    	 UtilityTool.addEntity(MainConstants.TESTPROJECT, t);
-			
-		}
+				}
 			});
-			
-	    }
+	}
 	 
 	 
 	 private void loadExistingProject() {

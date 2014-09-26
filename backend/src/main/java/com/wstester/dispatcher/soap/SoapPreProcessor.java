@@ -14,6 +14,7 @@ public class SoapPreProcessor implements Processor {
 		exchange.setProperty("step", step);
 		
 		exchange.getIn().setBody(step.getRequest());
+		
+		
 	}
-
 }

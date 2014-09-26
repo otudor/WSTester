@@ -1,5 +1,7 @@
 package com.wstester.main;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,6 +30,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -36,9 +40,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
+import com.wstester.RightClickMenu.DemoUtil;
+import com.wstester.RightClickMenu.RadialGlobalMenu;
 import com.wstester.environment.Delta;
 import com.wstester.environment.EnvironmentsAppFactory;
 import com.wstester.environment.MainPresenter;
@@ -75,6 +82,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	private VBox newIcoM6= new VBox(); //ENV
 	private VBox newIcoM7= new VBox(); //v
 	private Stage stage = new Stage();
+	private Stage stageRightClickMenu = new Stage();
 	private Stage stageSoap = new Stage();
 	private Stage stageRest = new Stage();
 	private Stage stageRnd = new Stage();
@@ -89,6 +97,10 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	boolean isDisplayed5 =false;
 	boolean isDisplayed6 =false; //v
 	private int poz = 200;
+	public Group container;
+	public RadialGlobalMenu radialMenu;
+	public boolean visible = false;
+	public boolean visible2 = false;
 	MenuBar menuBar ;
 	Menu menu;
 	private Menu menuRnd = new Menu("CreateRnd");
@@ -111,13 +123,14 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		this.createEnvWindow();
 		this.createSOAPWindow();
 		//this.createTaskbar();
+		this.createRightClickMenu();
 		this.createRESTWindow();
 		this.createTestFactoryWindow();
 		this.createVarWindow(); //v
 		this.saveProject();
 		this.goToLoad();
 		stage.initOwner(WsTesterMain.stage);
-
+		stage.initOwner(MainLauncher.stage);
 
 		//pane.setRightAnchor(bar, 10d);
 		//topPane.setLeftAnchor(child, value);
@@ -254,7 +267,6 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 
 
-
 		System.out.println(stage.getHeight());
 		//VBox.setVgrow(newIco6, Priority.ALWAYS);
 
@@ -382,6 +394,110 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		});
 
 	};
+	
+	private void createRightClickMenu() {
+		topPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			
+			@Override
+			public void handle(MouseEvent event) {
+				if (event.getButton() == MouseButton.SECONDARY && visible2 == false){
+				stageRightClickMenu = new Stage();
+				visible2=true;	
+				container = new Group();
+				final Scene scene = new Scene(container, Color.TRANSPARENT);
+//				stageRightClickMenu.setOnCloseRequest(new EventHandler<WindowEvent>() {
+//				    @Override
+//				    public void handle(final WindowEvent event) {
+//					System.exit(0);
+//				    }
+//				});
+				stageRightClickMenu.initOwner(pane.getScene().getWindow());
+				stageRightClickMenu.initStyle(StageStyle.TRANSPARENT);
+				stageRightClickMenu.setResizable(false);
+				stageRightClickMenu.setScene(scene);
+				stageRightClickMenu.centerOnScreen();
+				final Dimension screenSize = Toolkit.getDefaultToolkit()
+					.getScreenSize();
+				stageRightClickMenu.setWidth(MainLauncher.stage.getWidth());
+				stageRightClickMenu.setHeight(MainLauncher.stage.getHeight());
+				stageRightClickMenu.setX(MainLauncher.stage.getX());;
+				stageRightClickMenu.setY(MainLauncher.stage.getY());
+//				stageRightClickMenu.setY(scene.getY());
+				stageRightClickMenu.toFront();
+				radialMenu = new RadialGlobalMenu();
+//				System.out.println(getClass().getClassLoader().);
+				radialMenu.addMenuItem("C:/Users/gvasile/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.computeItemsStartAngle();
+				radialMenu.addMenuItem("C:/Users/gvasile/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.computeItemsStartAngle();
+				radialMenu.addMenuItem("C:/Users/gvasile/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.computeItemsStartAngle();
+				radialMenu.addMenuItem("C:/Users/gvasile/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.computeItemsStartAngle();
+				radialMenu.addMenuItem("C:/Users/gvasile/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.computeItemsStartAngle();
+				radialMenu.addMenuItem("C:/Users/gvasile/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.computeItemsStartAngle();
+				
+				radialMenu.translateXProperty().bind(scene.widthProperty().divide(2.0));
+				radialMenu.translateYProperty()
+					.bind(scene.heightProperty().divide(2.0));
+				radialMenu.widthProperty().bind(scene.widthProperty());
+				radialMenu.heightProperty().bind(scene.heightProperty());
+				stageRightClickMenu.isIconified();
+				
+				radialMenu.transitionVisible(true);
+				
+				
+//				radialMenu.setVisible(visible);
+				
+				radialMenu.setOnMouseClicked(new EventHandler<MouseEvent>() {
+					
+					@Override
+					public void handle(MouseEvent e) {
+						if (e.getButton() == MouseButton.SECONDARY) {
+							
+							radialMenu.transitionVisible(false);						
+							stageRightClickMenu.isIconified();
+//							stageRightClickMenu=null;
+							visible2=false;
+							
+//							stageRightClickMenu=null;
+							
+						}
+					}
+				});
+				
+//				stageRightClickMenu.setOnCloseRequest(new EventHandler<WindowEvent>() {
+//					public void handle(WindowEvent we) {
+//						
+//										        	 
+//						System.out.println("Inchid stage'ul");
+//						
+//						stageRightClickMenu=null;
+////						visible2=false;
+//						
+//					}
+//				}); 
+				
+				container.getChildren().addAll(radialMenu); 
+			
+				DemoUtil demoUtil = new DemoUtil();
+				demoUtil.setTranslateX(100);
+				demoUtil.setTranslateY(300);
+				
+				stageRightClickMenu.show();
+				}
+				
+			}
+			private void setRadialMenuVisible( boolean b) {
+				radialMenu.transitionVisible(visible);
+				
+			}
+			
+		});
+	}
+	
 	private void createSOAPWindow(){
 		newIco3.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -873,7 +989,8 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/assets/Assets.fxml"));
 						Scene second = new Scene(root);
-						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
+						String cssPath="/styles/asset.css";     //    the css path for assets
+						second.getStylesheets().addAll(cssPath); //	   the css add 			
 						root.getStyleClass().add("mainWind");
 
 						newIcoM5 = (VBox) CreateIcon("/images/task_img_open.png","Assets");	
@@ -973,9 +1090,8 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						root = mainPresenter.getView();
 						Scene second = new Scene(root, 600, 550);
 						stage.setTitle("Environments window");
-						String cssPath = "/styles/Envwindows.css";
-						//second.getStylesheets().addAll(WsTesterMain.class.getResource(cssPath).toExternalForm());		
-						second.getStylesheets().addAll(cssPath);
+						String cssPath = "/styles/Envwindows.css"; // the css path for enviroment window	
+						second.getStylesheets().addAll(cssPath);   // the css add
 						root.getStyleClass().add("mainWind");
 						newIcoM6 = (VBox) CreateIcon("/images/task_img_open.png","Env");	
 						newIcoM6.setLayoutX(poz);

@@ -1,0 +1,68 @@
+.background {
+    -fx-background-color: #1d1d1d;
+}
+
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+    -fx-background-color:#1d1d1d;
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 5.0, 0.0 , 0.0 , 1.0 );
+ }
+ 
+.button:hover {
+-fx-background-color: #C0CCCC;
+}
+ 
+ .buttonpanel {
+ 	-fx-background-color: linear-gradient(to top, -fx-base, derive(-fx-base,30.0%));
+ 	-fx-background-color:#1d1d1d;
+ }
+ 
+ .split-pane *.split-pane-divider {
+   -fx-background-color: darkgray;
+}
+
+.split-pane {
+	-fx-background-color:#1d1d1d;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #0093ff;
+    -fx-text-fill: white;
+}
+
+.list-cell {
+	-fx-background-color:AntiqueWhite;
+}
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica";
+}
+
+.table-view {
+    -fx-base: #1d1d1d;
+    -fx-control-inner-background: #1d1d1d;
+    -fx-background-color: #1d1d1d;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica";
+}
+
+.table-view:filled:hover {
+    -fx-background-color: #0093ff;
+}
+
+
