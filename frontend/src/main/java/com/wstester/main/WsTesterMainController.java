@@ -873,7 +873,8 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/assets/Assets.fxml"));
 						Scene second = new Scene(root);
-						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
+						String cssPath="/styles/asset.css";     //    the css path for assets
+						second.getStylesheets().addAll(cssPath); //	   the css add 			
 						root.getStyleClass().add("mainWind");
 
 						newIcoM5 = (VBox) CreateIcon("/images/task_img_open.png","Assets");	
@@ -973,9 +974,8 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						root = mainPresenter.getView();
 						Scene second = new Scene(root, 600, 550);
 						stage.setTitle("Environments window");
-						String cssPath = "/styles/Envwindows.css";
-						//second.getStylesheets().addAll(WsTesterMain.class.getResource(cssPath).toExternalForm());		
-						second.getStylesheets().addAll(cssPath);
+						String cssPath = "/styles/Envwindows.css"; // the css path for enviroment window	
+						second.getStylesheets().addAll(cssPath);   // the css add
 						root.getStyleClass().add("mainWind");
 						newIcoM6 = (VBox) CreateIcon("/images/task_img_open.png","Env");	
 						newIcoM6.setLayoutX(poz);
