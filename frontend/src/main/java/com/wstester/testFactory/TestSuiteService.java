@@ -65,7 +65,11 @@ public class TestSuiteService {
 		Step result = testProject.getStep(stepUID);
 		return result;
 	}
-
+	
+	public void setTestSuiteByUID(TestSuite testSuite, String testUID) {
+		testProject.setTestSuiteByUID(testSuite, testUID);
+	}
+	
 	public void setStepByUID(Step src, String stepUID) {
 		testProject.setStepByUID(src, stepUID);
 	}
