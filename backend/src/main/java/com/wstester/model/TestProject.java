@@ -21,6 +21,7 @@ public class TestProject implements Serializable {
 	public TestProject() {
 		uuid = UUID.randomUUID().toString();
 		testSuiteList = new ArrayList<TestSuite>();
+		environmentList = new ArrayList<Environment>();
 	}
 
 	public String getID() {
@@ -194,6 +195,15 @@ public class TestProject implements Serializable {
 						}
 					}
 				}
+			}
+		}
+	}
+	
+	public void setTestSuiteByUID(TestSuite ts, String testUID) {
+		for (TestSuite testSuite : testSuiteList) {
+
+			if (testSuite.getID().equals(testUID)) {
+				testSuite = ts;
 			}
 		}
 	}

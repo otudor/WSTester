@@ -121,12 +121,6 @@ public class MySQLStepController
         			}
         }
         });
-//        serverBox.getSelectionModel().selectedItemProperty().addListener( new
-//        		ChangeListener<Server>() {
-//        	public void changed(ObservableValue ov, Server value, Server new_value) {
-//        			serviceBox.setItems(FXCollections.observableArrayList(tsService.getServiceList(new_value.getID())));
-//        }
-//        });
         stepName.setText(step.getName());
         sqlField.setText(step.getOperation());
         Execution execution = step.getLastExecution();
