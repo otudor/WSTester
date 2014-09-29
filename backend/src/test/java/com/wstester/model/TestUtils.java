@@ -1285,7 +1285,7 @@ public class TestUtils {
 		mysqlStep.setName("Step");
 		mysqlStep.setServer(server);
 		mysqlStep.setService(mysqlService);
-		mysqlStep.setOperation("SELECT detalii from angajati where id = 1");
+		mysqlStep.setOperation("SELECT detalii from angajati where detalii = 'popescu'");
 		Assert azzert = new Assert();
 		azzert.setExpected("[{detalii=popescu}]");
 		List<Assert> assertList = new ArrayList<Assert>();
