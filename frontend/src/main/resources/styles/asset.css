@@ -1,5 +1,5 @@
 .background {
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: white;
 }
 
 .button {
@@ -23,6 +23,7 @@
  
  .split-pane *.split-pane-divider {
    -fx-background-color: darkgray;
+   -fx-background-insets: 0, 0 1 0 1;
 }
 
 .split-pane {
@@ -35,7 +36,7 @@
 }
 
 .list-cell {
-	-fx-background-color:AntiqueWhite;
+	-fx-background-color:white;
 }
 
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
@@ -64,5 +65,4 @@
 .table-view:filled:hover {
     -fx-background-color: #0093ff;
 }
-
 
