@@ -426,17 +426,17 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 				stageRightClickMenu.toFront();
 				radialMenu = new RadialGlobalMenu();
 //				System.out.println(getClass().getClassLoader().);
-				radialMenu.addMenuItem("C:/Users/sdinescu/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.addMenuItem("/images/asset2.png", null);
 				radialMenu.computeItemsStartAngle();
-				radialMenu.addMenuItem("C:/Users/sdinescu/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.addMenuItem("/images/asset2.png", null);
 				radialMenu.computeItemsStartAngle();
-				radialMenu.addMenuItem("C:/Users/sdinescu/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.addMenuItem("/images/asset2.png", null);
 				radialMenu.computeItemsStartAngle();
-				radialMenu.addMenuItem("C:/Users/sdinescu/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.addMenuItem("/images/asset2.png", null);
 				radialMenu.computeItemsStartAngle();
-				radialMenu.addMenuItem("C:/Users/sdinescu/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.addMenuItem("/images/asset2.png", null);
 				radialMenu.computeItemsStartAngle();
-				radialMenu.addMenuItem("C:/Users/sdinescu/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.addMenuItem("/images/asset2.png", null);
 				radialMenu.computeItemsStartAngle();
 				
 				radialMenu.translateXProperty().bind(scene.widthProperty().divide(2.0));
