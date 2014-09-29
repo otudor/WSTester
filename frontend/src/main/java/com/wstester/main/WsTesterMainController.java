@@ -203,8 +203,8 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					poz=poz-100;
 				}
 				if (isDisplayed6==true) {
-					stageRnd.close();
-					bar.getChildren().remove(newIco6);
+					stageVar.close();
+					bar.getChildren().remove(newIcoM7);
 					isDisplayed6=false;
 					poz=poz-100;
 				}
@@ -551,8 +551,9 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 						//Menu menu2 = new Menu("CreateSOAP");
 						//menuBar.getMenus().add(menu2);
-
-						stageSoap.initOwner(pane.getScene().getWindow());
+						
+						stageSoap.initOwner(MainLauncher.stage);
+						
 						stageSoap.setScene(second);
 
 						stageSoap.setTitle("SOAP Window");

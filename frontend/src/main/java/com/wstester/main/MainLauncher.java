@@ -35,6 +35,7 @@ public class MainLauncher extends Application {
     public void start(Stage primaryStage) {
         
     	MainLauncher.stage=primaryStage;
+    
         ScreensController mainContainer = new ScreensController();
         mainContainer.loadScreen(MainLauncher.screen1ID, MainLauncher.screen1File);
         mainContainer.loadScreen(MainLauncher.screen2ID, MainLauncher.screen2File);
@@ -62,14 +63,14 @@ public class MainLauncher extends Application {
         AnchorPane.setLeftAnchor(mainContainer, (double) 0);
         ancor.getChildren().addAll(mainContainer);
         Scene scene = new Scene(ancor);
+        
         primaryStage.setMinHeight(825);
         primaryStage.setMinWidth(825);
-        if (screen2ID.contains("maineaa")){
-        	
+//        primaryStage.setFullScreen(true);
         
-       scene.getStylesheets().add(getClass().getResource("/styles/application.css").toExternalForm());
-       //mainContainer.getChildrenUnmodifiable().get(0).getStyleClass().add("mainWindow");
-      // mainContainer.getChildrenUnmodifiable().get(1).getStyleClass().add("bar");
+        
+        if (screen2ID.contains("maineaa")){
+        	scene.getStylesheets().add(getClass().getResource("/styles/application.css").toExternalForm()); 
         }
        
         
