@@ -65,6 +65,7 @@ public class MainLauncher extends Application {
        
         
         primaryStage.setScene(scene);
+//        primaryStage.setFullScreen(true);
         if(mainContainer.getScreen(screen2ID)!=null){
         	primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
     			public void handle(WindowEvent we) {
