@@ -10,20 +10,20 @@
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="740.0" styleClass="buttonpanel" stylesheets="styles/asset.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.assets.EventHandlerDemoController">
    <children>
-      <SplitPane dividerPositions="0.29797979797979796" layoutX="246.0" layoutY="141.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane cacheHint="QUALITY" dividerPositions="0.3" layoutX="246.0" layoutY="141.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="500.0" prefWidth="220.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <VBox layoutY="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="398.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <ListView fx:id="listView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="1000.0" prefWidth="220.0" />
+                        <ListView fx:id="listView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="1100.0" prefWidth="220.0" />
                      </children>
                   </VBox>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="buttonpanel" stylesheets="styles/asset.css">
                <children>
-                  <SplitPane dividerPositions="0.13131313131313133" layoutX="101.0" layoutY="157.0" orientation="VERTICAL" prefHeight="398.0" prefWidth="417.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane centerShape="false" dividerPositions="0.13131313131313133" layoutX="101.0" layoutY="157.0" orientation="VERTICAL" prefHeight="398.0" prefWidth="417.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="buttonpanel" stylesheets="styles/asset.css">
                            <children>
@@ -68,7 +68,7 @@
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="buttonpanel" stylesheets="styles/asset.css">
                            <children>
-                              <TableView fx:id="tableView" layoutX="14.0" layoutY="14.0" maxWidth="1000.0" prefHeight="341.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="tableView" layoutX="14.0" layoutY="14.0" maxWidth="1000.0" prefHeight="341.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
                                   <TableColumn fx:id="tableName" maxWidth="200.0" prefWidth="100.0" text="Name">
  								  </TableColumn>
@@ -80,6 +80,9 @@
  								  </TableColumn>
                                     <TableColumn fx:id="tableProgress" maxWidth="200.0" prefWidth="100.0" text="Progress" />
                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
                               </TableView>
                            </children>
                         </AnchorPane>
