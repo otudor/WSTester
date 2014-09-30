@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="470.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <bottom>
+        <fx:include source="actionBar.fxml" />
+    </bottom>
+    <center>
+        <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+            <children>
+            <BorderPane prefHeight="344.0" prefWidth="600.0">
+               <center>
+                  <GridPane prefHeight="245.0" prefWidth="441.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                           <children>
+                              <StackPane id="StackPane">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="202.0" text="Add Endpoint Parameter">
+                                       <StackPane.margin>
+                                          <Insets bottom="4.0" top="10.0" fx:id="x1" />
+                                       </StackPane.margin>
+                                    </Button>
+                                 </children>
+                              </StackPane>
+                              <StackPane id="StackPane">
+                                 <children>
+                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                       <columns>
+                                          <TableColumn prefWidth="75.0" text="name" />
+                                          <TableColumn prefWidth="75.0" text="value" />
+                                       </columns>
+                                       <StackPane.margin>
+                                          <Insets right="2.0" fx:id="x2" />
+                                       </StackPane.margin>
+                                    </TableView>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                           <children>
+                              <StackPane id="StackPane">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefWidth="202.0" text="Add Request Parameter" StackPane.margin="$x1" />
+                                 </children>
+                              </StackPane>
+                              <StackPane id="StackPane">
+                                 <children>
+                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                       <columns>
+                                          <TableColumn prefWidth="75.0" text="name" />
+                                          <TableColumn prefWidth="75.0" text="value" />
+                                       </columns>
+                                       <StackPane.margin>
+                                          <Insets left="2.0" fx:id="x3" />
+                                       </StackPane.margin>
+                                    </TableView>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                           <children>
+                              <StackPane id="StackPane">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefWidth="156.0" text="Add Cookie" StackPane.margin="$x1" />
+                                 </children>
+                              </StackPane>
+                              <StackPane id="StackPane">
+                                 <children>
+                                    <TableView prefHeight="200.0" prefWidth="200.0" StackPane.margin="$x2">
+                                       <columns>
+                                          <TableColumn prefWidth="75.0" text="name" />
+                                          <TableColumn prefWidth="75.0" text="value" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <StackPane id="StackPane">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefWidth="145.0" text="Add Header" StackPane.margin="$x1" />
+                                 </children>
+                              </StackPane>
+                              <StackPane id="StackPane">
+                                 <children>
+                                    <TableView prefHeight="200.0" prefWidth="200.0" StackPane.margin="$x3">
+                                       <columns>
+                                          <TableColumn prefWidth="75.0" text="name" />
+                                          <TableColumn prefWidth="75.0" text="value" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </VBox>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </center>
+               <top>
+                  <VBox id="idTopHbox" fx:id="idTopVbox" prefHeight="108.0" prefWidth="580.0">
+                     <children>
+                        <HBox id="idTopHbox" prefHeight="33.0" prefWidth="600.0">
+                           <children>
+                              <StackPane id="StackPane">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                              </StackPane>
+                              <StackPane id="StackPane" prefHeight="33.0" prefWidth="173.0">
+                                 <children>
+                                    <Label prefWidth="127.0" text="Endpoint Parameter:" />
+                                 </children>
+                              </StackPane>
+                              <StackPane id="StackPane" />
+                              <StackPane id="StackPane" prefHeight="33.0" prefWidth="296.0">
+                                 <children>
+                                    <TextField prefWidth="200.0" />
+                                 </children>
+                              </StackPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="4.0" top="4.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="33.0" prefWidth="600.0">
+                           <children>
+                              <StackPane id="StackPane" />
+                              <StackPane id="StackPane" prefHeight="33.0" prefWidth="116.0">
+                                 <children>
+                                    <Label prefWidth="76.0" text="Type:" />
+                                 </children>
+                              </StackPane>
+                              <StackPane id="StackPane">
+                                 <children>
+                                    <MenuButton mnemonicParsing="false" text="MenuButton">
+                                       <items>
+                                          <MenuItem mnemonicParsing="false" text="Action 1" />
+                                          <MenuItem mnemonicParsing="false" text="Action 2" />
+                                       </items>
+                                    </MenuButton>
+                                 </children>
+                              </StackPane>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="4.0" fx:id="x4" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="33.0" prefWidth="600.0" VBox.margin="$x4">
+                           <children>
+                              <StackPane id="StackPane" />
+                              <StackPane id="StackPane" prefHeight="33.0" prefWidth="116.0">
+                                 <children>
+                                    <Label text="Content Type:" />
+                                 </children>
+                              </StackPane>
+                              <StackPane id="StackPane">
+                                 <children>
+                                    <MenuButton mnemonicParsing="false" text="MenuButton">
+                                       <items>
+                                          <MenuItem mnemonicParsing="false" text="Action 1" />
+                                          <MenuItem mnemonicParsing="false" text="Action 2" />
+                                       </items>
+                                    </MenuButton>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="idTopHbox" prefHeight="66.0" prefWidth="600.0" VBox.margin="$x4">
+                           <children>
+                              <StackPane id="StackPane" />
+                              <StackPane id="StackPane" prefHeight="33.0" prefWidth="116.0">
+                                 <children>
+                                    <Label prefWidth="74.0" text="Body:" />
+                                 </children>
+                              </StackPane>
+                              <StackPane id="StackPane" />
+                              <StackPane id="StackPane" prefHeight="73.0" prefWidth="353.0">
+                                 <children>
+                                    <TextArea prefWidth="200.0" wrapText="true" />
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </top>
+            </BorderPane>
+                
+            </children>
+        </StackPane>
+    </center>
+</BorderPane>

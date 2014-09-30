@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="470.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <bottom>
+        <fx:include source="actionBar.fxml" />
+    </bottom>
+    <center>
+        <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Done! :)">
+                    <StackPane.margin>
+                        <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+                    </StackPane.margin>
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Label>
+            <BorderPane prefHeight="344.0" prefWidth="600.0">
+               <bottom>
+                  <TextArea prefHeight="291.0" prefWidth="580.0" wrapText="true" />
+               </bottom>
+               <top>
+                  <VBox prefHeight="88.0" prefWidth="600.0">
+                     <children>
+                        <HBox prefHeight="31.0" prefWidth="600.0">
+                           <children>
+                              <StackPane id="StackPane" prefHeight="31.0" prefWidth="102.0">
+                                 <children>
+                                    <Label prefWidth="77.0" text="Label:" />
+                                 </children>
+                              </StackPane>
+                              <StackPane id="StackPane" prefHeight="31.0" prefWidth="222.0">
+                                 <children>
+                                    <MenuButton mnemonicParsing="false" prefWidth="128.0" text="MenuButton">
+                                       <items>
+                                          <MenuItem mnemonicParsing="false" text="Action 1" />
+                                          <MenuItem mnemonicParsing="false" text="Action 2" />
+                                       </items>
+                                    </MenuButton>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="31.0" prefWidth="600.0">
+                           <children>
+                              <StackPane id="StackPane" prefHeight="31.0" prefWidth="102.0">
+                                 <children>
+                                    <Label text="Content Type:" />
+                                 </children>
+                              </StackPane>
+                              <StackPane id="StackPane" prefHeight="31.0" prefWidth="222.0">
+                                 <children>
+                                    <MenuButton mnemonicParsing="false" prefWidth="128.0" text="MenuButton">
+                                       <items>
+                                          <MenuItem mnemonicParsing="false" text="Action 1" />
+                                          <MenuItem mnemonicParsing="false" text="Action 2" />
+                                       </items>
+                                    </MenuButton>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="31.0" prefWidth="600.0">
+                           <children>
+                              <StackPane id="StackPane" prefHeight="31.0" prefWidth="102.0">
+                                 <children>
+                                    <Label prefWidth="70.0" text="Body:" />
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </top>
+            </BorderPane>
+            </children>
+        </StackPane>
+    </center>
+</BorderPane>
