@@ -1,15 +1,16 @@
 package com.wstester.testFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import com.wstester.model.Environment;
-import com.wstester.model.MySQLStep;
-import com.wstester.model.Server;
-import com.wstester.model.Service;
-import com.wstester.model.Execution;
-import com.wstester.model.ExecutionStatus;
+
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -20,13 +21,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
+
+import com.wstester.model.Asset;
+import com.wstester.model.Environment;
+import com.wstester.model.Execution;
+import com.wstester.model.ExecutionStatus;
+import com.wstester.model.MySQLStep;
+import com.wstester.model.Server;
+import com.wstester.model.Service;
 
 public class MySQLStepController
 {
@@ -212,7 +216,7 @@ public class MySQLStepController
 		sql.setServer(step.getServer());
 		sql.setExecutionList(step.getExecutionList());
 		sql.setAssertList(step.getAssertList());
-		sql.setAssetList(step.getAssetList());
+		sql.setAssetMap((HashMap<Asset, String>)step.getAssetMap());
 		sql.setDependsOn(step.getDependsOn());
 		sql.setVariableList(step.getVariableList());
 		tsService.setStepByUID(sql, uid);

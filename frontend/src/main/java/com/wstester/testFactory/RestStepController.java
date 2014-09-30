@@ -1,10 +1,14 @@
 package com.wstester.testFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import com.wstester.model.Asset;
 import com.wstester.model.RestStep;
 import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -169,7 +173,7 @@ public class RestStepController
 
 		RestStep rest = new RestStep();
 		rest.setAssertList(step.getAssertList());
-		rest.setAssetList(step.getAssetList());
+		rest.setAssetMap((HashMap<Asset, String>)step.getAssetMap());
 		rest.setContentType(step.getContentType());
 		rest.setCookie(step.getCookie());
 		rest.setDependsOn(step.getDependsOn());

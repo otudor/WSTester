@@ -1,10 +1,14 @@
 package com.wstester.testFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import com.wstester.model.Asset;
 import com.wstester.model.SoapStep;
 import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -132,7 +136,7 @@ public class SoapStepController
     public void saveSoap(ActionEvent e) {
     	SoapStep soap = new SoapStep();
 		soap.setAssertList(step.getAssertList());
-		soap.setAssetList(step.getAssetList());
+		soap.setAssetMap((HashMap<Asset, String>)step.getAssetMap());
 		soap.setDependsOn(step.getDependsOn());
 		soap.setExecutionList(step.getExecutionList());
 		soap.setName(step.getName());
