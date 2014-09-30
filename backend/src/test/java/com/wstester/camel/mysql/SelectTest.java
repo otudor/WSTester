@@ -39,7 +39,7 @@ public class SelectTest extends TestBaseClass{
 
 		TestProject testProject = TestUtils.getMySQLTestPlan();
 		MySQLStep step = (MySQLStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
-		step.setOperation("SELECT detalii from angajati where id = 1");
+		step.setOperation("SELECT detalii from angajati where detalii = 'popescu'");
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);

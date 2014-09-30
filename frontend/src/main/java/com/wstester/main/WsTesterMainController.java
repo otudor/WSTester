@@ -1087,7 +1087,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						mainPresenter.loadEnvironments();
 						//                        mainPresenter.setTestProject(testProject);
 						root = mainPresenter.getView();
-						Scene second = new Scene(root, 600, 550);
+						Scene second = new Scene(root, 650, 550);
 						stage.setTitle("Environments window");
 						String cssPath = "/styles/Envwindows.css"; // the css path for enviroment window	
 						second.getStylesheets().addAll(cssPath);   // the css add

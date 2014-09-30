@@ -9,26 +9,27 @@ import com.wstester.model.Step;
 
 public class AssertRoute extends RouteBuilder {
 
-	private HashSet<Step> stepList = new HashSet<Step>();
+	private volatile HashSet<Step> stepList = new HashSet<Step>();
 	
 	@Override
 	public void configure() throws Exception {
 		
-//		interceptSendToEndpoint("jms:topic:responseTopic")
-//		.log("[${body.getStepID}] Response before running asserts: ${body}")
-//		.bean(new AssertProcessor(stepList), "process");
-//		
-//		from("jms:assertQueue")
-//		.process(new Processor() {
-//			
-//			@Override
-//			public void process(Exchange exchange) throws Exception {
-//				
-//				Step step = exchange.getIn().getBody(Step.class);
-//				stepList.add(step);
-//				System.out.println("Added step");
-//			}
-//		});
+		interceptSendToEndpoint("jms:topic:responseTopic")
+		.log("[${body.getStepID}] Response before running asserts: ${body}")
+		.setProperty("stepList", constant(stepList))
+		.bean(AssertProcessor.class, "process")
+		.removeProperty("stepList");
+		
+		from("jms:assertQueue")
+		.process(new Processor() {
+			
+			@Override
+			public void process(Exchange exchange) throws Exception {
+				
+				Step step = exchange.getIn().getBody(Step.class);
+				stepList.add(step);
+			}
+		});
 		
 		from("jms:topic:finishTopic")
 		.process(new Processor() {
