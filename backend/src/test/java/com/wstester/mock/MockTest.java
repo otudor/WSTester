@@ -89,7 +89,7 @@ public class MockTest extends TestBaseClass{
 		AssetManager assetManager = new AssetManager();
 
 		Asset asset = new Asset();
-		asset.setName("AssetFile.xml");
+		asset.setName("AssetFile.txt");
 		asset.setPath("src/test/resources");
 		assetManager.addAsset(asset);
 
@@ -105,7 +105,7 @@ public class MockTest extends TestBaseClass{
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("Mocked Asset", response.getContent());
 		
-		File file = new File("assets/AssetFile.xml");
+		File file = new File("assets/AssetFile.txt");
 		file.delete();
 	}
 }

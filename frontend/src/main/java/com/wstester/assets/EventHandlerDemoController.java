@@ -1,7 +1,6 @@
 package com.wstester.assets;
 
 import java.io.File;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
@@ -33,8 +32,9 @@ import org.controlsfx.dialog.Dialogs;
 
 import com.wstester.model.Asset;
 import com.wstester.model.TestProject;
+import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IAssetManager;
-import com.wstester.services.impl.AssetManager;
+
 public class EventHandlerDemoController {
 
 	private Logger logger = Logger.getLogger(this.getClass().getSimpleName());
@@ -280,7 +280,7 @@ public class EventHandlerDemoController {
 								extension = fileName.substring(i + 1);
 							}
 
-							IAssetManager assetManager= new AssetManager();
+							IAssetManager assetManager= ServiceLocator.getInstance().lookup(IAssetManager.class);
 							Asset asset = new Asset();
 							asset.setName(fileName);
 							asset.setPath(path);

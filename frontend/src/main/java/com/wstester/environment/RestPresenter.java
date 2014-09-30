@@ -1,6 +1,5 @@
 package com.wstester.environment;
 
-
 import com.wstester.model.RestService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;

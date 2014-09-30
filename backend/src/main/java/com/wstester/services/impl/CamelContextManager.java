@@ -7,8 +7,9 @@ import com.wstester.services.definition.ICamelContextManager;
 
 public class CamelContextManager implements ICamelContextManager {
 
-	private static ClassPathXmlApplicationContext camelContext ;
+	private ClassPathXmlApplicationContext camelContext ;
 	private CustomLogger log = new CustomLogger(CamelContextManager.class);
+	
 	@Override
 	public void startCamelContext() {
 		

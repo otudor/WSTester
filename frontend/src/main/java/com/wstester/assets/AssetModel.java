@@ -1,6 +1,5 @@
 package com.wstester.assets;
 
-
 public class AssetModel {
 	private String type;
 	

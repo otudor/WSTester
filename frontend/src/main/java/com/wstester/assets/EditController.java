@@ -2,8 +2,6 @@ package com.wstester.assets;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,20 +9,13 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -43,17 +34,12 @@ import org.xml.sax.SAXException;
 
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
-import com.wstester.main.WsTesterMain;
 import com.wstester.model.Asset;
+import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IAssetManager;
-import com.wstester.services.impl.AssetManager;
-import com.wstester.util.MainConstants;
 import com.wstester.util.MainWindowListener;
-import com.wstester.util.UtilityTool;
 
 public class EditController implements MainWindowListener {
-	
-	
 	
 	private Logger logger = Logger.getLogger(this.getClass().getSimpleName());
 	
@@ -76,9 +62,16 @@ public class EditController implements MainWindowListener {
 		this.asset = asset;
 	}
 	
-	public void updatePage(String fileName){
+	public void updatePage(String fileName) {
 	    //textarea.setText(text);
-		IAssetManager assetManager= new AssetManager();
+		IAssetManager assetManager = null;
+		try {
+			assetManager = ServiceLocator.getInstance().lookup(IAssetManager.class);
+		} catch (Exception e) {
+			// Inform the user that the content could not be loaded
+			e.printStackTrace();
+		}
+		
 		textarea.setText(assetManager.getAssetContent(fileName));
 		//assetManager.close();
 	    
@@ -235,7 +228,7 @@ public class EditController implements MainWindowListener {
 		//System.out.println(file);
 	}
 
-	private void handleLoad() throws IOException {
+	private void handleLoad() throws Exception {
 //		String editorPath = System.getProperty("editor.path");
 	//	String propr = Util.getPropertyValue(MainConstants.EDITORPATH.name());
 //		processBuilder = new ProcessBuilder(editorPath);
@@ -256,7 +249,7 @@ public class EditController implements MainWindowListener {
 		File file = fileChooser.showOpenDialog(stageEditor);
 		if(file != null){
 
-		IAssetManager assetManager = new AssetManager();
+		IAssetManager assetManager = ServiceLocator.getInstance().lookup(IAssetManager.class);
 		//TODO: get asset from the list in the EventHandlerDemoController
 		//String content = assetManager.getAssetContent(asset);
 		//textarea.setText(content);

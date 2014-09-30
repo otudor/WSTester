@@ -35,7 +35,7 @@ public class MockSystemTest extends CamelTestSupport{
     	
     	RouteDispatcher routeDispatcher = new RouteDispatcher();
     	routeDispatcher.from("jms:restQueue").to("mock:rest");
-    	routeDispatcher.from("jms:mockingQueue").to("mock:mocking");
+    	routeDispatcher.from("jms:mockQueue").to("mock:mocking");
     	
     	return new RouteBuilder[] {routeDispatcher};
     }

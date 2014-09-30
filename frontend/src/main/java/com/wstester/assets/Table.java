@@ -1,12 +1,11 @@
 package com.wstester.assets;
 
 import com.wstester.model.Asset;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.control.ProgressBar;
 
 public class Table {
+	
 	private final StringProperty name;
 	private final StringProperty date;
 	private final StringProperty path;

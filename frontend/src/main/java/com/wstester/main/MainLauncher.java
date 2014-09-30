@@ -1,21 +1,13 @@
 package com.wstester.main;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
 import com.wstester.RightClickMenu.RadialGlobalMenu;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ICamelContextManager;
-
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 public class MainLauncher extends Application {
@@ -80,10 +72,15 @@ public class MainLauncher extends Application {
         	primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
     			public void handle(WindowEvent we) {
     				
-    				ServiceLocator serviceLocator = ServiceLocator.getInstance();
-    	    		ICamelContextManager manager = serviceLocator.lookup(ICamelContextManager.class);
+    	    		ICamelContextManager manager = null;
+					try {
+						manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
+					} catch (Exception e) {
+						// TODO Make an exception screen to the user when he is notified that we can't close the camel context
+						e.printStackTrace();
+					}
+					
     	    		manager.closeCamelContext();
-    	    		
     			}
     		});  
         	

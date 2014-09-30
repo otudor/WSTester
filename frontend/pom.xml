@@ -74,6 +74,8 @@
 			<groupId>com.wstester</groupId>
 			<artifactId>backend</artifactId>
 			<version>${project.version}</version>
+			<scope>compile</scope>
+			<type>jar</type>
 		</dependency>
 	</dependencies>
 	<build>

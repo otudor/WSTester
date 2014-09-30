@@ -1,19 +1,10 @@
 package com.wstester.testFactory;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.sun.prism.paint.Color;
-import com.wstester.model.MongoService;
-import com.wstester.model.MySQLStep;
-import com.wstester.model.Response;
-import com.wstester.model.Server;
-import com.wstester.model.Service;
 import com.wstester.model.SoapStep;
-import com.wstester.model.Step;
 import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
-import com.wstester.services.impl.TestRunner;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,10 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class SoapStepController
 {

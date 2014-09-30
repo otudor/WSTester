@@ -1,11 +1,7 @@
 package com.wstester.testFactory;
 
 import com.wstester.model.Environment;
-import com.wstester.model.MySQLStep;
-import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
-import com.wstester.services.impl.TestRunner;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -13,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
 
 public class TestSuiteController 
@@ -57,29 +52,7 @@ public class TestSuiteController
         			}
         });
 	}
-	
-    public void runTestSuite( ActionEvent event) throws Exception
-    {
-    	//tsService.getFirstTestSuite();
-		TestProject testProject = new TestProject();
-		testProject.setTestSuiteList(tsService.getTestSuites());
-		TestRunner testRunner = new TestRunner(testProject);
-//		testRunner.setTestProject(testProject);
-		
-//		testRunner.run();
-		
-		//TestSuiteListController.updateRunStatus();
-		
-//		ExecutionUpdate execUpd = new ExecutionUpdate();
-//		execUpd.updateRunStatus();
-		
-		//Response mysqlResponse = 
-		
-		//JSONArray result = new JSONArray(mysqlResponse.getContent());
-
-		//System.out.println(result);
-	}
-    
+	    
     public void saveTestSuite(ActionEvent e) {
     	TestSuite testSuite = new TestSuite();
     	testSuite.setName(tsName.getText());

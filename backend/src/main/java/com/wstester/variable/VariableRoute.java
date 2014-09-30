@@ -37,7 +37,7 @@ public class VariableRoute extends RouteBuilder {
 		});
 	}
 
-	public Variable getVariable (String variableId) {
+	public Variable getVariable(String variableId) {
 
 		for (Variable variable : variableSet){
 				if(variable.getID().equals(variableId)){

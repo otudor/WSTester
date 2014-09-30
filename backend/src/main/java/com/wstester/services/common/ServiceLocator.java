@@ -2,64 +2,18 @@ package com.wstester.services.common;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
-import com.wstester.log.CustomLogger;
+import org.reflections.Reflections;
+
 import com.wstester.services.definition.IService;
 
 public final class ServiceLocator {
 
-	private static enum Classes {
-		ICAMEL(com.wstester.services.definition.ICamelContextManager.class, com.wstester.services.impl.CamelContextManager.class),
-		ITestRunner(com.wstester.services.definition.ITestRunner.class, com.wstester.services.impl.TestRunner.class);
-		
-		private Class<?> classPath;
-		private Class<?> interfaceName;
-		
-		Classes(Class<?> interf, Class<?> path) {
-			this.classPath = path;
-			this.interfaceName = interf;
-		};
-		
-		public Class<?> getClassPath() {
-			return classPath;
-		}
-		
-		public Class<?> getInterfaceName() {
-			return interfaceName;
-		}
-	}
-	
-	private CustomLogger LOGGER = new CustomLogger(ServiceLocator.class);
-
 	private static Map<Class<? extends IService>, Object> cache = null;
-	
-	private Map<String, Object> implementations = null;
-	
 	private static ServiceLocator instance = null;
-	
-	private ServiceLocator() {
-		implementations = new HashMap<>();
-		try {
-			Object obj = null;
-			for(Classes clazz : Classes.values()) {
-				Constructor<?>[] declaredConstructors = clazz.getClassPath().getDeclaredConstructors();
-				for(Constructor<?> ctor : declaredConstructors) {
-					Parameter[] params = ctor.getParameters();
-					if(params.length == 0) {
-						obj = ctor.newInstance();
-					}
-				}
-				implementations.put(clazz.getInterfaceName().getSimpleName(), obj);
-			}
-		} catch (InstantiationException | IllegalAccessException
-				| IllegalArgumentException | InvocationTargetException
-				| SecurityException e) {
-			LOGGER.error(this.getClass().getName() + ": Exception occured while instantiating service class. " + e);
-		}
-	}
 	
 	public static ServiceLocator getInstance() {
 		if(instance == null) {
@@ -72,20 +26,24 @@ public final class ServiceLocator {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public synchronized <T> T lookup(Class<? extends IService> clazz) {
+	public synchronized <T> T lookup(Class<? extends IService> clazz) throws Exception {
 		Object service = null;
+		
 		if(clazz.isAnnotationPresent(Stateful.class)) {
 			if(!cache.containsKey(clazz)) {
-					cache.put(clazz, implementations.get(clazz.getSimpleName()));
+					cache.put(clazz, getImplementation(clazz));
 			}
 			service = cache.get(clazz);
 		}
+		
 		else if(clazz.isAnnotationPresent(Stateless.class)) {
-			implementations.get(clazz.getSimpleName());
+			service = getImplementation(clazz);
 		}
+		
 		else {
 			//nothing happens
 		}
+		
 		if(service != null) {
 			return (T) service;
 		}
@@ -93,4 +51,54 @@ public final class ServiceLocator {
 		return null;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public synchronized <T> T lookup(Class<? extends IService> clazz, Object constructorParameter) throws Exception {
+		Object service = null;
+		
+		if(clazz.isAnnotationPresent(Stateful.class)) {
+			if(!cache.containsKey(clazz)) {
+					cache.put(clazz, getImplementation(clazz, constructorParameter));
+			}
+			service = cache.get(clazz);
+		}
+		
+		else if(clazz.isAnnotationPresent(Stateless.class)) {
+			service = getImplementation(clazz, constructorParameter);
+		}
+		
+		else {
+			//nothing happens
+		}
+		
+		if(service != null) {
+			return (T) service;
+		}
+		
+		return null;
+	}
+	
+	private Object getImplementation(Class<? extends IService> clazz, Object... constructorParameter) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
+		
+		Set<?> classes = new Reflections("com.wstester.services.impl").getSubTypesOf(clazz);
+		
+		if(classes.size() != 1){
+			throw new ClassNotFoundException("Two or more implementations for class: " + clazz + " were found: " + classes);
+		}
+		
+		Class<?> cla= (Class<?>) classes.iterator().next();
+		
+		if(constructorParameter.length == 0) {
+			return cla.newInstance();
+		}
+		
+		else {
+			Class<?>[] parameterClasses = new Class<?>[constructorParameter.length];
+			for(int i = 0; i < constructorParameter.length; i++){
+				parameterClasses[i] = constructorParameter[i].getClass();
+			}
+			
+			Constructor<?> contructor = cla.getDeclaredConstructor(parameterClasses);
+			return contructor.newInstance(constructorParameter);
+		}
+	}
 }

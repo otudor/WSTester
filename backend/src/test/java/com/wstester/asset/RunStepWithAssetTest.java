@@ -19,7 +19,7 @@ import com.wstester.model.TestUtils;
 import com.wstester.services.impl.AssetManager;
 import com.wstester.services.impl.TestRunner;
 
-public class RunStepWithAsset extends RestTestBaseClass{
+public class RunStepWithAssetTest extends RestTestBaseClass{
 
 	@Test
 	public void runStep() throws Exception{
@@ -27,7 +27,7 @@ public class RunStepWithAsset extends RestTestBaseClass{
 		AssetManager assetManager = new AssetManager();
 
 		Asset asset = new Asset();
-		asset.setName("AssetFile.xml");
+		asset.setName("AssetFile.txt");
 		asset.setPath("src/test/resources");
 		assetManager.addAsset(asset);
 
@@ -50,7 +50,7 @@ public class RunStepWithAsset extends RestTestBaseClass{
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("Harap Alb", entry);
 		
-		File file = new File("assets/AssetFile.xml");
+		File file = new File("assets/AssetFile.txt");
 		file.delete();
 	}
 }

@@ -13,8 +13,8 @@ import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 import com.wstester.model.Execution;
-import com.wstester.model.ExecutionStatus;
-import com.wstester.services.impl.TestRunner;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.ITestRunner;
 
 public class ExecutionUpdate {
 
@@ -63,7 +63,13 @@ class UpdateStatusThread implements Runnable{
     						Step step = (Step)stepItem.getValue();
     						if( step instanceof MySQLStep)
     						{
-    							TestRunner testRunner = new TestRunner(null);
+    							ITestRunner testRunner = null;
+								try {
+									testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class);
+								} catch (Exception e) {
+									// TODO Make a pop up window to inform the user that we can't get the step responses
+									e.printStackTrace();
+								}
     							Response rsp = testRunner.getResponse(step.getID(), 25000L);
     							//step.setName( step.getName());
     							

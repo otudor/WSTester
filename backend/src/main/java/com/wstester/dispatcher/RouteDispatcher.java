@@ -32,7 +32,7 @@ public class RouteDispatcher extends RouteBuilder{
 				}
 			})
 				.log("[${body.getID}] Sent message to mock queue")
-				.to("jms:mockingQueue")
+				.to("jms:mockQueue")
 			.when(body().isInstanceOf(RestStep.class))
 				.log("[${body.getID}] Sent message to rest queue")
 				.to("jms:restQueue")

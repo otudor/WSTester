@@ -10,12 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import com.wstester.model.Execution;
 import com.wstester.model.MongoStep;
-import com.wstester.model.MySQLStep;
 import com.wstester.model.ExecutionStatus;
-import com.wstester.testFactory.MySQLStepController.Execut;
 
 public class MongoStepController
 {

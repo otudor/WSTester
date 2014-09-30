@@ -209,8 +209,14 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					poz=poz-100;
 				}
 				
-				ServiceLocator serviceLocator = ServiceLocator.getInstance();
-	    		ICamelContextManager manager = serviceLocator.lookup(ICamelContextManager.class);
+	    		ICamelContextManager manager = null;
+				try {
+					manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
+				} catch (Exception e) {
+					// TODO Make an exception window that informs the user we could not close the project
+					// he should retry again the same operation
+					e.printStackTrace();
+				}
 	    		manager.closeCamelContext();
 				
 				myController.setScreen(MainLauncher.screen1ID);
