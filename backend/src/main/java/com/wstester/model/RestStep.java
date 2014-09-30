@@ -85,7 +85,7 @@ public class RestStep extends Step {
 	@Override
 	public String detailedToString() {
 		return "RestStep [path=" + path + ", query=" + query + ", cookie=" + cookie + ", header=" + header + ", contentType=" + contentType + ", method=" + method + ", request=" + request
-				+ ", getID()=" + getID() + ", getServer()=" + getServer() + ", getAssertList()=" + getAssertList() + ", getService()=" + getService() + ", getAssetList()=" + getAssetList()
+				+ ", getID()=" + getID() + ", getServer()=" + getServer() + ", getAssertList()=" + getAssertList() + ", getService()=" + getService() + ", getAssetList()=" + getAssetMap()
 				+ ", getName()=" + getName() + ", getVariableList()=" + getVariableList() + ", getExecutionList()=" + getExecutionList() + ", getDependsOn()=" + getDependsOn() + "]";
 	}	
 	

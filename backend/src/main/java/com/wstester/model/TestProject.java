@@ -2,7 +2,9 @@ package com.wstester.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -14,7 +16,7 @@ public class TestProject implements Serializable {
 	private String uuid;
 	private String name;
 	private List<TestSuite> testSuiteList;
-	private List<Asset> assetList;
+	private Map<Asset, String> assetMap;
 	private List<Environment> environmentList;
 	private List<Variable> variableList;
 
@@ -36,20 +38,20 @@ public class TestProject implements Serializable {
 		this.testSuiteList = testSuiteList;
 	}
 
-	public List<Asset> getAssetList() {
-		return assetList;
+	public Map<Asset, String> getAssetMap() {
+		return assetMap;
 	}
 
-	public void setAssetList(List<Asset> assetList) {
-		this.assetList = assetList;
+	public void setAssetMap(HashMap<Asset, String> assetMap) {
+		this.assetMap = assetMap;
 	}
 
-	public void addAsset(Asset asset) {
-		if (this.assetList == null) {
-			this.assetList = new ArrayList<Asset>();
+	public void addAsset(Asset asset){
+		if(this.assetMap == null){
+			this.assetMap = new HashMap<Asset, String>();
 		}
-
-		this.assetList.add(asset);
+		
+		assetMap.put(asset, asset.getType());
 	}
 
 	public List<Environment> getEnvironmentList() {
@@ -212,7 +214,7 @@ public class TestProject implements Serializable {
 
 	@Override
 	public String toString() {
-		return "TestProject [name=" + name + ", testSuiteList=" + toStringSuite(testSuiteList) + ", assetList=" + assetList+ ", environmentList=" + toStringEnv(environmentList)
+		return "TestProject [name=" + name + ", testSuiteList=" + toStringSuite(testSuiteList) + ", assetMap= " + assetMap + ", environmentList=" + toStringEnv(environmentList)
 				+ ", variableList=" + variableList + ", uuid=" + uuid + "]";
 	}
 
@@ -257,7 +259,7 @@ public class TestProject implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((assetList == null) ? 0 : assetList.hashCode());
+				+ ((assetMap == null) ? 0 : assetMap.hashCode());
 		result = prime * result
 				+ ((environmentList == null) ? 0 : environmentList.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -277,10 +279,10 @@ public class TestProject implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		TestProject other = (TestProject) obj;
-		if (assetList == null) {
-			if (other.assetList != null)
+		if (assetMap == null) {
+			if (other.assetMap != null)
 				return false;
-		} else if (!assetList.equals(other.assetList))
+		} else if (!assetMap.equals(other.assetMap))
 			return false;
 		if (environmentList == null) {
 			if (other.environmentList != null)
@@ -304,5 +306,4 @@ public class TestProject implements Serializable {
 			return false;
 		return true;
 	}
-
 }

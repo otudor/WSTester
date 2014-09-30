@@ -1,9 +1,8 @@
 package com.wstester.services.definition;
 
-import com.wstester.model.Asset;
-import com.wstester.services.common.Stateless;
 
-@Stateless
+import com.wstester.model.Asset;
+
 public interface IAssetManager extends IService {
 
 	void addAsset(Asset asset);
