@@ -1,18 +1,10 @@
 package com.wstester.authentication;
 
-import java.util.UUID;
-
 
 public class SimpleAuthentication {
 
 	private String username;
 	private String password;
-	protected String uuid;
-	
-	public SimpleAuthentication(){
-		
-		uuid = UUID.randomUUID().toString();
-	}
 	
 	public String getUsername() {
 		return username;

@@ -578,10 +578,17 @@ public class TestUtils {
 		// Service 3
 		List<Service> serviceList3 = new ArrayList<Service>();
 		SoapService service3 = new SoapService();
+		List<Authentication> authenticationList = new ArrayList<Authentication>();  
+		Authentication auth = new Authentication();
+		auth.setUsername("test");
+		auth.setPassword("test");
+		auth.setRole("test");
+		authenticationList.add(auth);
 		service3.setName("Service SOAP");
 		service3.setPort("80");
 		service3.setPath("/data/info.wso");
 		service3.setWsdlURL("http://footballpool.dataaccess.eu/data/info.wso?wsdl");
+		service3.setAuthenticationList(authenticationList);
 		serviceList3.add(service3);
 		
 		// construct server list
