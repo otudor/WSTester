@@ -99,6 +99,7 @@ public class AssertTest extends TestBaseClass{
 
 		AssetManager manager = new AssetManager();
 		manager.addAsset(expectedOutput);
+		manager.waitUntilFileCopied(expectedOutput);
 		
 		TestProject testProject = TestUtils.getAssertTestProject();
 		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().get(0).setExpected(expectedOutput);

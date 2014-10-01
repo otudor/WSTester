@@ -3,7 +3,9 @@ package com.wstester.services.definition;
 import java.util.List;
 
 import com.wstester.model.Variable;
+import com.wstester.services.common.Stateless;
 
+@Stateless
 public interface IVariableManager {
 
 	void setVariableContent(Variable variable, String content);

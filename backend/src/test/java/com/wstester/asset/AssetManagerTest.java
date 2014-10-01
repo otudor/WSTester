@@ -57,13 +57,13 @@ public class AssetManagerTest extends TestBaseClass{
 		AssetManager assetManager = new AssetManager();
 		
 		Asset asset = new Asset();
-		asset.setName("AssetFile.xml");
+		asset.setName("AssetFile.txt");
 		asset.setPath("src/test/resources");
 		assetManager.addAsset(asset);
 		
 		assetManager.waitUntilFileCopied(asset);
 		
-		File file = new File("assets/AssetFile.xml");
+		File file = new File("assets/AssetFile.txt");
 		assertTrue(file.exists());
 		
 		String content = assetManager.getAssetContent(asset.getName());

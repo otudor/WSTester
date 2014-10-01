@@ -1,14 +1,11 @@
 package com.wstester.testFactory;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -19,38 +16,22 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
-import javafx.collections.ObservableList;
-
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import org.apache.camel.util.CaseInsensitiveMap;
-
-import com.wstester.model.Environment;
-import com.wstester.model.MongoService;
 import com.wstester.model.MongoStep;
-import com.wstester.model.MySQLService;
 import com.wstester.model.MySQLStep;
-import com.wstester.model.Response;
 import com.wstester.model.RestStep;
-import com.wstester.model.Server;
-import com.wstester.model.Service;
 import com.wstester.model.SoapStep;
 import com.wstester.model.Step;
 import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestSuite;
-import com.wstester.services.impl.TestRunner;
 
 public class TestSuiteListController implements Initializable
 {

@@ -35,6 +35,7 @@ import javafx.util.Duration;
 
 import com.wstester.RightClickMenu.RadialMenuItem;
 import com.wstester.RightClickMenu.RadialMenuItemBuilder;
+import com.wstester.main.WsTesterMainController;
 
 public class RadialGlobalMenu extends Group {
 
@@ -129,15 +130,10 @@ public class RadialGlobalMenu extends Group {
     
     
 
-    private ImageView getImageView(final String path) {
-	ImageView imageView = null;
-	try {
-	    imageView = ImageViewBuilder.create()
-		    .image(new Image(new FileInputStream(path))).build();
-	} catch (final FileNotFoundException e) {
-	    e.printStackTrace();
-	}
-	assert (imageView != null);
+    public ImageView getImageView(final String path) {
+    	ImageView imageView = new ImageView(new Image(
+				WsTesterMainController.class.getResourceAsStream(path)));
+	//assert (imageView != null);
 	return imageView;
 
     }

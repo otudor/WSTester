@@ -203,14 +203,20 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					poz=poz-100;
 				}
 				if (isDisplayed6==true) {
-					stageRnd.close();
-					bar.getChildren().remove(newIco6);
+					stageVar.close();
+					bar.getChildren().remove(newIcoM7);
 					isDisplayed6=false;
 					poz=poz-100;
 				}
 				
-				ServiceLocator serviceLocator = ServiceLocator.getInstance();
-	    		ICamelContextManager manager = serviceLocator.lookup(ICamelContextManager.class);
+	    		ICamelContextManager manager = null;
+				try {
+					manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
+				} catch (Exception e) {
+					// TODO Make an exception window that informs the user we could not close the project
+					// he should retry again the same operation
+					e.printStackTrace();
+				}
 	    		manager.closeCamelContext();
 				
 				myController.setScreen(MainLauncher.screen1ID);
@@ -232,28 +238,26 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	}
 	//method to create+add the icons
 	private void createIcons(){		
-		newIco = (VBox) CreateIcon("/images/asset2.png","Assets");
-		newIco.setLayoutX(40);
+		newIco = (VBox) CreateIcon("/images/Applications-Folder.png","Assets");
+		newIco.setLayoutX(10);
 		newIco.setLayoutY(20);
-		newIco.setScaleX(1.3);
-		newIco.setScaleY(1.3);
-		newIco2 = (VBox) CreateIcon("/images/envirorment.png","   Environments Definition");
+		newIco2 = (VBox) CreateIcon("/images/Globe-Folder.png","   Environments Definition");
 		newIco2.setLayoutX(10);
 		newIco2.setLayoutY(120);
-		newIco3 = (VBox) CreateIcon("/images/document-open-remote.png","Import SOAP Definitions");
+		newIco3 = (VBox) CreateIcon("/images/DropBox-Folder.png","Import SOAP Definitions");
 		newIco3.setLayoutX(10);
-		newIco3.setLayoutY(300);
-		newIco4 = (VBox) CreateIcon("/images/document-open-remote.png","Import REST Definitions");
+		newIco3.setLayoutY(220);
+		newIco4 = (VBox) CreateIcon("/images/Downloads-Folder.png","Import REST Definitions");
 		newIco4.setLayoutX(10);
-		newIco4.setLayoutY(400);
-		newIco5 = (VBox) CreateIcon("/images/document-open-remote.png","Generate random JSON");
+		newIco4.setLayoutY(320);
+		newIco5 = (VBox) CreateIcon("/images/Smart-Folder.png","Test Factory");
 		newIco5.setLayoutX(10);
-		newIco5.setLayoutY(500);
-		newIco6 = (VBox) CreateIcon("/images/document-open-remote.png","Variables"); //v
+		newIco5.setLayoutY(420);
+		newIco6 = (VBox) CreateIcon("/images/Documents-Folder.png","Variables"); //v
 		newIco6.setLayoutX(10); //v
-		newIco6.setLayoutY(600); //v
+		newIco6.setLayoutY(520); //v
 
-		newIcoM1 = (VBox) CreateIcon("/images/start.png","Start");
+		newIcoM1 = (VBox) CreateIcon("/images/VLC.png","Start");
 		newIcoM1.setLayoutX(1);
 		newIcoM1.setLayoutY(1);
 
@@ -426,17 +430,17 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 				stageRightClickMenu.toFront();
 				radialMenu = new RadialGlobalMenu();
 //				System.out.println(getClass().getClassLoader().);
-				radialMenu.addMenuItem("C:/Users/sdinescu/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.addMenuItem("/images/asset2.png", null);
 				radialMenu.computeItemsStartAngle();
-				radialMenu.addMenuItem("C:/Users/sdinescu/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.addMenuItem("/images/asset2.png", null);
 				radialMenu.computeItemsStartAngle();
-				radialMenu.addMenuItem("C:/Users/sdinescu/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.addMenuItem("/images/asset2.png", null);
 				radialMenu.computeItemsStartAngle();
-				radialMenu.addMenuItem("C:/Users/sdinescu/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.addMenuItem("/images/asset2.png", null);
 				radialMenu.computeItemsStartAngle();
-				radialMenu.addMenuItem("C:/Users/sdinescu/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.addMenuItem("/images/asset2.png", null);
 				radialMenu.computeItemsStartAngle();
-				radialMenu.addMenuItem("C:/Users/sdinescu/Documents/GitHub/WSTester/frontend/src/main/resources/images/asset2.png", null);
+				radialMenu.addMenuItem("/images/asset2.png", null);
 				radialMenu.computeItemsStartAngle();
 				
 				radialMenu.translateXProperty().bind(scene.widthProperty().divide(2.0));
@@ -517,7 +521,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
 						root.getStyleClass().add("mainWind");
 
-						newIcoM2 = (VBox) CreateIcon("/images/task_img_open.png","Soap");	
+						newIcoM2 = (VBox) CreateIcon("/images/DropBox-Folder.png","Soap");	
 						newIcoM2.setLayoutX(poz);
 						newIcoM2.setLayoutY(1);
 						lista.add(newIcoM2);
@@ -551,8 +555,9 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 						//Menu menu2 = new Menu("CreateSOAP");
 						//menuBar.getMenus().add(menu2);
-
-						stageSoap.initOwner(pane.getScene().getWindow());
+						
+						stageSoap.initOwner(MainLauncher.stage);
+						
 						stageSoap.setScene(second);
 
 						stageSoap.setTitle("SOAP Window");
@@ -632,7 +637,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						//stageRest.initStyle(StageStyle.TRANSPARENT);
 						root.getStyleClass().add("mainWind");
 
-						newIcoM3 = (VBox) CreateIcon("/images/task_img_open.png","Rest");	
+						newIcoM3 = (VBox) CreateIcon("/images/Downloads-Folder.png","Rest");	
 						newIcoM3.setLayoutX(poz);
 						newIcoM3.setLayoutY(1);
 						lista.add(newIcoM3);
@@ -765,7 +770,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						//stageRest.initStyle(StageStyle.TRANSPARENT);
 						root.getStyleClass().add("mainWind");
 
-						newIcoM7 = (VBox) CreateIcon("/images/task_img_open.png","Variables");	
+						newIcoM7 = (VBox) CreateIcon("/images/Documents-Folder.png","Variables");	
 						newIcoM7.setLayoutX(poz);
 						newIcoM7.setLayoutY(1);
 						lista.add(newIcoM7);
@@ -897,7 +902,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						//second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
 						//root.getStyleClass().add("mainWind");
 
-						newIcoM4 = (VBox) CreateIcon("/images/task_img_open.png","RND");	
+						newIcoM4 = (VBox) CreateIcon("/images/Smart-Folder.png","Test Factory");	
 						newIcoM4.setLayoutX(poz);
 						newIcoM4.setLayoutY(1);
 						lista.add(newIcoM4);
@@ -993,7 +998,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						second.getStylesheets().addAll(cssPath); //	   the css add 			
 						root.getStyleClass().add("mainWind");
 
-						newIcoM5 = (VBox) CreateIcon("/images/task_img_open.png","Assets");	
+						newIcoM5 = (VBox) CreateIcon("/images/Applications-Folder.png","Assets");	
 						newIcoM5.setLayoutX(poz);
 						newIcoM5.setLayoutY(1);
 						lista.add(newIcoM5);
@@ -1088,12 +1093,12 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						mainPresenter.loadEnvironments();
 						//                        mainPresenter.setTestProject(testProject);
 						root = mainPresenter.getView();
-						Scene second = new Scene(root, 600, 550);
+						Scene second = new Scene(root, 650, 550);
 						stage.setTitle("Environments window");
 						String cssPath = "/styles/Envwindows.css"; // the css path for enviroment window	
 						second.getStylesheets().addAll(cssPath);   // the css add
 						root.getStyleClass().add("mainWind");
-						newIcoM6 = (VBox) CreateIcon("/images/task_img_open.png","Env");	
+						newIcoM6 = (VBox) CreateIcon("/images/Globe-Folder.png","Env");	
 						newIcoM6.setLayoutX(poz);
 						newIcoM6.setLayoutY(1);
 						lista.add(newIcoM6);

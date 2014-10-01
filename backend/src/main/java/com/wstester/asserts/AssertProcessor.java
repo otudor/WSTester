@@ -17,22 +17,19 @@ import com.wstester.services.impl.AssetManager;
 
 public class AssertProcessor {
 
-	private HashSet<Step> stepList = new HashSet<Step>();
 	CustomLogger log = new CustomLogger(AssertProcessor.class);
 	
-	public AssertProcessor(HashSet<Step> stepList) {
-		this.stepList = stepList;
-	}
-
 	public void process(Exchange exchange) throws Exception {
 
-		Response response = exchange.getIn().getBody(Response.class); 
-		
+		Response response = exchange.getIn().getBody(Response.class);		
+		@SuppressWarnings("unchecked")
+		HashSet<Step> stepList = (HashSet<Step>) exchange.getProperty("stepList");
+	
 		if(!response.getStatus().equals(ExecutionStatus.ERROR)){
-			Step step = getStep(response.getStepID());
+			Step step = getStep(response.getStepID(), stepList);
 			
 			List<Assert> assertList = null;
-			if(step.getAssertList() != null || !step.getAssertList().isEmpty()) {
+			if(step.getAssertList() != null) {
 				assertList = step.getAssertList();
 			}
 			
@@ -100,7 +97,7 @@ public class AssertProcessor {
 		return evaluateStringAssert(azzert, response);
 	}
 	
-	private Step getStep(String id){
+	private Step getStep(String id, HashSet<Step> stepList){
 		
 		log.info(id, toString(stepList));
 		for (Step step : stepList){

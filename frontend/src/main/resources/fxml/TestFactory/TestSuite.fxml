@@ -1,26 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="rootEnvDetails"
-          hgap="10" vgap="10"
-          fx:controller="com.wstester.testFactory.TestSuiteController"
-          xmlns:fx="http://javafx.com/fxml">
 
-    <children>
-        <Label text="Test suite name" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <TextField fx:id="tsName" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-
-        <Label text="Environment:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtEnvName" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-        
-		<!--  Label text="" GridPane.rowIndex="2" GridPane.columnIndex="0">
-			<padding>
-	            <Insets right="200.0"/>
-	         </padding>
-         </Label> -->
-        <!--  <Button fx:id="btnRun" layoutX="30.0" layoutY="40.0" onAction="#runTestSuite" text="Run" GridPane.rowIndex="2" GridPane.columnIndex="1"/> -->
-    </children>
-</GridPane>
+<AnchorPane fx:id="rootEnvDetails" prefHeight="105.0" prefWidth="242.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.TestSuiteController">
+   <children>
+      <GridPane hgap="10" vgap="10">
+      
+          <children>
+              <Label text="Test suite name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+              <TextField fx:id="tsName" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      
+              <Label text="Environment:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="envBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#saveTestSuite" prefWidth="75.0" text="Save" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </Button>
+              
+      		<!--  Label text="" GridPane.rowIndex="2" GridPane.columnIndex="0">
+      			<padding>
+      	            <Insets right="200.0"/>
+      	         </padding>
+               </Label> -->
+              <!--  <Button fx:id="btnRun" layoutX="30.0" layoutY="40.0" onAction="#runTestSuite" text="Run" GridPane.rowIndex="2" GridPane.columnIndex="1"/> -->
+          </children>
+         <columnConstraints>
+            <ColumnConstraints maxWidth="120.0" prefWidth="120.0" />
+            <ColumnConstraints maxWidth="200.0" prefWidth="200.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="25.0" prefHeight="25.0" />
+            <RowConstraints maxHeight="25.0" prefHeight="25.0" />
+            <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" />
+         </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>

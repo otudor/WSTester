@@ -1,6 +1,5 @@
 package com.wstester.services.definition;
 
-import java.io.IOException;
 
 import com.wstester.model.Asset;
 

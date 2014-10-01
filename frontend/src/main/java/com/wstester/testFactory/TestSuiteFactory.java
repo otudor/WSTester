@@ -1,6 +1,6 @@
 package com.wstester.testFactory;
-import java.io.IOException;
 
+import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 
 public class TestSuiteFactory

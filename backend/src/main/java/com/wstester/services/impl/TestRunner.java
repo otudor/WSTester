@@ -32,7 +32,9 @@ public class TestRunner implements ITestRunner{
 	private TestProject testProject;
 	private CustomLogger log = new CustomLogger(TestRunner.class);
 	
-	public TestRunner() {}
+	public TestRunner() {
+		log.info("mesaj");
+	}
 	
 	public TestRunner(TestProject testProject){
 		

@@ -1,5 +1,4 @@
 package com.wstester.testFactory;
-import com.wstester.model.Server;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;

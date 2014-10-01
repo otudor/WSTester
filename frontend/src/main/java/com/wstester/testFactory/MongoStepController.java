@@ -1,5 +1,8 @@
 package com.wstester.testFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,11 +14,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import com.wstester.model.Asset;
 import com.wstester.model.Execution;
 import com.wstester.model.MongoStep;
-import com.wstester.model.MySQLStep;
 import com.wstester.model.ExecutionStatus;
-import com.wstester.testFactory.MySQLStepController.Execut;
 
 public class MongoStepController
 {
@@ -138,7 +140,7 @@ public class MongoStepController
 		
 		mongo.setAction(step.getAction());
 		mongo.setAssertList(step.getAssertList());
-		mongo.setAssetList(step.getAssetList());
+		mongo.setAssetMap((HashMap<Asset, String>)step.getAssetMap());
 		mongo.setCollection(step.getCollection());
 		mongo.setDependsOn(step.getDependsOn());
 		mongo.setExecutionList(step.getExecutionList());

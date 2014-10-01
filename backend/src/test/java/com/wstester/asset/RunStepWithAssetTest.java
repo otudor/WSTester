@@ -2,13 +2,9 @@ package com.wstester.asset;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashMap;
 import org.junit.Test;
-
 import com.wstester.camel.rest.RestTestBaseClass;
 import com.wstester.model.Asset;
 import com.wstester.model.ExecutionStatus;
@@ -19,7 +15,7 @@ import com.wstester.model.TestUtils;
 import com.wstester.services.impl.AssetManager;
 import com.wstester.services.impl.TestRunner;
 
-public class RunStepWithAsset extends RestTestBaseClass{
+public class RunStepWithAssetTest extends RestTestBaseClass{
 
 	@Test
 	public void runStep() throws Exception{
@@ -27,7 +23,7 @@ public class RunStepWithAsset extends RestTestBaseClass{
 		AssetManager assetManager = new AssetManager();
 
 		Asset asset = new Asset();
-		asset.setName("AssetFile.xml");
+		asset.setName("AssetFile.txt");
 		asset.setPath("src/test/resources");
 		assetManager.addAsset(asset);
 
@@ -37,9 +33,10 @@ public class RunStepWithAsset extends RestTestBaseClass{
 		RestStep step = (RestStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
 		step.setPath("/customer/insertCustomer");
 		step.setMethod("POST");
-		List<Asset> assetList = new ArrayList<Asset>();
-		assetList.add(asset);
-		step.setAssetList(assetList);
+		
+		HashMap<Asset, String> assetMap = new HashMap<Asset, String>();
+		assetMap.put(asset, "Boddy");
+		step.setAssetMap(assetMap);
 		
 		testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);
@@ -49,8 +46,9 @@ public class RunStepWithAsset extends RestTestBaseClass{
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("Harap Alb", entry);
+		assertEquals("Boddy", step.getAssetMap().get(step.getAssetMap().keySet().toArray()[0]));
 		
-		File file = new File("assets/AssetFile.xml");
+		File file = new File("assets/AssetFile.txt");
 		file.delete();
 	}
 }

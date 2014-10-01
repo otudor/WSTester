@@ -8,11 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-
-import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
+
 public class MongoDBPresenter {
 	@FXML private Node rootMongoDB;
 	@FXML private HBox hbox1;

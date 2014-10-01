@@ -18,7 +18,8 @@ public class TestCase implements Serializable {
 
 	public TestCase() {
 		uuid = UUID.randomUUID().toString();
-		stepList = new ArrayList<>();
+		stepList = new ArrayList<Step>();
+		variableList = new ArrayList<Variable>();
 	}
 
 	public String getID() {

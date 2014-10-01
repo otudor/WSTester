@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<BorderPane prefHeight="470.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+      <bottom>
+          <fx:include source="actionBar.fxml" />
+      </bottom>
+      <center>
+          <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+              <children>
+                  <Label text="Welcome!">
+                      <StackPane.margin>
+                          <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+                      </StackPane.margin>
+                      <font>
+                          <Font size="24.0" />
+                      </font>
+                  </Label>
+                  <HBox layoutX="0.0" layoutY="7.0" prefHeight="100.0" prefWidth="600.0">
+                     <children>
+                       <StackPane id="StackPane" prefHeight="100.0" prefWidth="102.0">
+                         <children>
+                           <Label prefWidth="81.0" text="Description:" StackPane.alignment="CENTER_RIGHT" />
+                         </children>
+                       </StackPane>
+                       <StackPane id="StackPane">
+                         <children>
+                           <TextField prefWidth="200.0" />
+                         </children>
+                       </StackPane>
+                     </children>
+                   </HBox>
+              </children>
+          </StackPane>
+      </center>
+</BorderPane>

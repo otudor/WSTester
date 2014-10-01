@@ -3,7 +3,6 @@ package com.wstester.model;
 public class MysqlRule extends Rule {
 
 	private static final long serialVersionUID = 1L;
-
 	public enum InputType {OPERATION};
 	private InputType inputType;
 	

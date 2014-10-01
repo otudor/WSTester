@@ -38,11 +38,12 @@
     -fx-background-color:#1d1d1d;
     -fx-border-color: #e2e2e2;
     -fx-border-width: 2;
-    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 5.0, 0.0 , 0.0 , 1.0 );
  }
  
 .button:hover{
 -fx-background-color: #C0CCCC;
+-fx-font-weight: bold;
+-fx-text-fill: black;
 }
  
  #gridpane{
@@ -83,7 +84,7 @@
 }
 
 .tree-cell {
-	-fx-background-color:AntiqueWhite;
+	-fx-background-color:white;
 }
 
 

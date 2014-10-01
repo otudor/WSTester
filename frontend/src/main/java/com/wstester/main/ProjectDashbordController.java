@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ICamelContextManager;
-import com.wstester.services.impl.TestProjectActions;
+import com.wstester.services.definition.ITestProjectActions;
 import com.wstester.util.MainConstants;
 import com.wstester.util.UtilityTool;
 
@@ -31,7 +31,7 @@ import com.wstester.util.UtilityTool;
  */
 public class ProjectDashbordController implements Initializable, ControlledScreen {
 	
-	TestProjectActions actions = new TestProjectActions();
+	ITestProjectActions actions;
     ScreensController myController;
     public TestProject testproject;
     public static boolean loadState = false;
@@ -136,9 +136,17 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 					
 			    	TestProject t = new TestProject();
 			    	UtilityTool.addEntity(MainConstants.TESTPROJECT, t);
-			    	ICamelContextManager manager;
-					manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
+			    	
+			    	ICamelContextManager manager = null;
+					try {
+						manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
+					} catch (Exception e) {
+						// TODO Make an exception window that informs the user we could not open a new project
+						// he should retry again the same operation
+						e.printStackTrace();
+					}
 					manager.startCamelContext();
+					
 					myController.setScreen(MainLauncher.screen2ID);
 				}
 			});
@@ -160,11 +168,19 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 			    		
 			    		if(file != null){
 			    			
-			    			testproject=actions.open(file.getCanonicalPath());
+			    			actions = ServiceLocator.getInstance().lookup(ITestProjectActions.class);
+			    			testproject = actions.open(file.getCanonicalPath());
 			    			UtilityTool.addEntity(MainConstants.TESTPROJECT, testproject);
 			    			
-				    		ICamelContextManager manager;
-							manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
+				    		ICamelContextManager manager = null;
+							try {
+								manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
+							} catch (Exception e) {
+								// TODO Make an exception window that informs the user we could not open a new project
+								// he should retry again the same operation
+								e.printStackTrace();
+							}
+							
 							manager.startCamelContext();
 							while (!manager.isStarted()){
 								Thread.sleep(1000);
@@ -178,13 +194,8 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 			    			loadState = false;
 			    		}
 			    		
-			    		}
-			    		
-			    		
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (InterruptedException e) {
+			    		}		    					    		
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

@@ -1,21 +1,12 @@
 package com.wstester.testFactory;
 
-import com.wstester.model.Environment;
 import com.wstester.model.TestProject;
-import com.wstester.services.impl.TestRunner;
-
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.ITestRunner;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.event.EventTarget;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.TreeItem;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 public class TestSuiteManagerController
@@ -126,9 +117,8 @@ public class TestSuiteManagerController
     {
 		TestProject testProject = new TestProject();
 		testProject.setTestSuiteList(tsListController.getTestSuiteList());
-		TestRunner testRunner = new TestRunner(testProject);
+		ITestRunner testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class, testProject);
 		testRunner.run(testProject);
-		//testRunner.run();
 		
 		ExecutionUpdate execUpd = new ExecutionUpdate(tsListController);
 		
