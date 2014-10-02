@@ -5,16 +5,23 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.wstester.model.Asset;
+import com.wstester.model.Environment;
+import com.wstester.model.RestStep;
+import com.wstester.model.Server;
+import com.wstester.model.Service;
 import com.wstester.model.SoapStep;
 import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -32,6 +39,8 @@ public class SoapStepController
     @FXML private TableColumn<Execut, String> columnDate;
     @FXML private TableColumn<Execut, String> columnStatus;
     @FXML private TableColumn<Execut, String> columnResponse;
+    @FXML private ComboBox<Server> serverBox;
+    @FXML private ComboBox<Service> serviceBox;
     
     private SoapStep step;    
     private TestSuiteService tsService;
@@ -67,6 +76,26 @@ public class SoapStepController
         lblResponse.setText("Not run");
         
         step = (SoapStep) tsService.getStep( stepUID);
+        Environment environment = tsService.getTestSuiteByStepUID(stepUID).getEnvironment();
+        if(environment != null) {        	
+        	serverBox.setItems(FXCollections.observableArrayList(environment.getServers()));
+        	serverBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Server>() {
+					public void changed(ObservableValue ov, Server value, Server new_value) {
+						if(new_value !=null) {
+							step.setServer(new_value);
+							serviceBox.setItems(FXCollections.observableArrayList(tsService.getServiceList(step.getServer().getID())));
+							serviceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Service>() {
+									public void changed(ObservableValue ov, Service value,Service new_value) {
+										step.setService(new_value);
+									}
+								});
+							step.setServer(new_value);
+							tsService.setStepByUID(step, uid);
+							tsService.saveTestSuite();
+						}
+					}
+        	});
+        }
         lblName.setText(step.getName());
         Execution execution = step.getLastExecution();
         uid = stepUID;
