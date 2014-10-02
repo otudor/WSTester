@@ -4,33 +4,34 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javafx.beans.property.SimpleBooleanProperty;
+import com.wstester.model.Asset;
+import com.wstester.model.Environment;
+import com.wstester.model.MySQLStep;
+import com.wstester.model.Server;
+import com.wstester.model.Service;
+import com.wstester.model.Execution;
+import com.wstester.model.ExecutionStatus;
+
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
-
-import com.wstester.model.Asset;
-import com.wstester.model.Environment;
-import com.wstester.model.Execution;
-import com.wstester.model.ExecutionStatus;
-import com.wstester.model.MySQLStep;
-import com.wstester.model.Server;
-import com.wstester.model.Service;
 
 public class MySQLStepController
 {
@@ -44,9 +45,8 @@ public class MySQLStepController
     @FXML private TableColumn<Execut, String> columnStatus;
     @FXML private GridPane gridPane;
     @FXML private Button cellButton;
-    @FXML private ChoiceBox<Environment> envBox;
-    @FXML private ChoiceBox<Server> serverBox;
-    @FXML private ChoiceBox<Service> serviceBox;
+    @FXML private ComboBox<Server> serverBox;
+    @FXML private ComboBox<Service> serviceBox;
     
     private MySQLStep step;    
     private TestSuiteService tsService;
@@ -78,16 +78,25 @@ public class MySQLStepController
     {
           
         step = (MySQLStep) tsService.getStep(stepUID);
-        envBox.setItems(FXCollections.observableArrayList(tsService.getEnvironmentList()));
-        envBox.getSelectionModel().selectedItemProperty().addListener( new
-        		ChangeListener<Environment>() {
-        	public void changed(ObservableValue ov, Environment value, Environment new_value) {
-        			serverBox.setItems(FXCollections.observableArrayList(tsService.getServerList(new_value.getID())));
-        			if(!serviceBox.getItems().isEmpty()) {
-        				serviceBox.setItems(null);
-        			}
+        Environment environment = tsService.getTestSuiteByStepUID(stepUID).getEnvironment();
+        if(environment != null) {        	
+        	serverBox.setItems(FXCollections.observableArrayList(environment.getServers()));
+        	serverBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Server>() {
+					public void changed(ObservableValue ov, Server value, Server new_value) {
+						if(new_value !=null) {
+							serviceBox.setItems(FXCollections.observableArrayList(tsService.getServiceList(new_value.getID())));
+							serviceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Service>() {
+									public void changed(ObservableValue ov, Service value,Service new_value) {
+										step.setService(new_value);
+									}
+								});
+							step.setServer(new_value);
+							tsService.setStepByUID(step, uid);
+							tsService.saveTestSuite();
+						}
+					}
+        	});
         }
-        });
         stepName.setText(step.getName());
         sqlField.setText(step.getOperation());
         Execution execution = step.getLastExecution();
@@ -216,7 +225,7 @@ public class MySQLStepController
 		sql.setServer(step.getServer());
 		sql.setExecutionList(step.getExecutionList());
 		sql.setAssertList(step.getAssertList());
-		sql.setAssetMap((HashMap<Asset, String>)step.getAssetMap());
+		sql.setAssetMap((HashMap<Asset, String>) step.getAssetMap());
 		sql.setDependsOn(step.getDependsOn());
 		sql.setVariableList(step.getVariableList());
 		tsService.setStepByUID(sql, uid);

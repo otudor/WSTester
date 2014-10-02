@@ -19,6 +19,7 @@ public class Server implements Serializable {
 
 	public Server() {
 		uuid = UUID.randomUUID().toString();
+		serviceList = new ArrayList<Service>();
 	}
 	
 	public Server( String name, String ip, String description) {

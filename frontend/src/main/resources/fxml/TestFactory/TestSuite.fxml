@@ -5,7 +5,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane fx:id="rootEnvDetails" prefHeight="105.0" prefWidth="242.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.TestSuiteController">
    <children>
       <GridPane hgap="10" vgap="10">
@@ -15,12 +14,12 @@
               <TextField fx:id="tsName" GridPane.columnIndex="1" GridPane.rowIndex="0" />
       
               <Label text="Environment:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <ChoiceBox fx:id="envBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" onAction="#saveTestSuite" prefWidth="75.0" text="Save" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>
             </Button>
+            <ComboBox fx:id="envBox" prefWidth="150.0" promptText="Environment..." GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
               
       		<!--  Label text="" GridPane.rowIndex="2" GridPane.columnIndex="0">
       			<padding>

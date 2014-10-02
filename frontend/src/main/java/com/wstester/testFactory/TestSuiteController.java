@@ -2,6 +2,7 @@ package com.wstester.testFactory;
 
 import com.wstester.model.Environment;
 import com.wstester.model.TestSuite;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -9,13 +10,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 public class TestSuiteController 
 {
 	@FXML private Node rootEnvDetails;
 	@FXML private TextField tsName;
-	@FXML private ChoiceBox<Environment> envBox;
+	@FXML private ComboBox<Environment> envBox;
 		
 	private TestSuiteService tsService;
 	

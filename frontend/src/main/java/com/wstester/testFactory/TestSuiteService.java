@@ -1,9 +1,23 @@
 package com.wstester.testFactory;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
+import javafx.scene.control.ChoiceBox;
+import javafx.util.Callback;
+
 import com.wstester.model.Environment;
+import com.wstester.model.MongoService;
+import com.wstester.model.MongoStep;
+import com.wstester.model.MySQLService;
+import com.wstester.model.MySQLStep;
+import com.wstester.model.RestStep;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
+import com.wstester.model.SoapStep;
 import com.wstester.model.Step;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestProject;
@@ -51,11 +65,7 @@ public class TestSuiteService {
 		Step result = testProject.getStep(stepUID);
 		return result;
 	}
-	
-	public void setTestSuiteByUID(TestSuite testSuite, String testUID) {
-		testProject.setTestSuiteByUID(testSuite, testUID);
-	}
-	
+
 	public void setStepByUID(Step src, String stepUID) {
 		testProject.setStepByUID(src, stepUID);
 	}
@@ -74,6 +84,14 @@ public class TestSuiteService {
 
 	public List<Service> getServiceList(String id) {
 		return testProject.getServer(id).getServices();
+	}
+
+	public TestSuite getTestSuiteByStepUID(String stepUID) {
+		return testProject.getTestSuiteByStepUID(stepUID);
+	}
+
+	public void setTestSuiteByUID(TestSuite testSuite, String uid) {
+		testProject.setTestSuiteByUID(testSuite, uid);		
 	}
 
 	

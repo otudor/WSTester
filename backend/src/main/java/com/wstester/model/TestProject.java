@@ -37,7 +37,7 @@ public class TestProject implements Serializable {
 	public void setTestSuiteList(List<TestSuite> testSuiteList) {
 		this.testSuiteList = testSuiteList;
 	}
-
+	
 	public Map<Asset, String> getAssetMap() {
 		return assetMap;
 	}
@@ -153,8 +153,7 @@ public class TestProject implements Serializable {
 		if (environmentList != null && !environmentList.isEmpty()) {
 			for (Environment environment : environmentList) {
 
-				if (environment.getServers() != null
-						&& !environment.getServers().isEmpty()) {
+				if (environment.getServers() != null && !environment.getServers().isEmpty()) {
 					for (Server server : environment.getServers()) {
 
 						if (server.getID().equals(serverUID)) {
@@ -192,7 +191,61 @@ public class TestProject implements Serializable {
 						for (Step step : testCase.getStepList()) {
 						
 							if (step.getID().equals(stepUID)) {
-								step = source;
+								if(step instanceof MySQLStep) {
+									((MySQLStep) step).setOperation(((MySQLStep) source).getOperation());
+									step.setName(source.getName());
+									step.setService(source.getService());
+									step.setServer(source.getServer());
+									step.setExecutionList(source.getExecutionList());
+									step.setAssertList(source.getAssertList());
+									step.setAssetMap((HashMap<Asset, String>) ((MySQLStep) source).getAssetMap());
+									step.setDependsOn(source.getDependsOn());
+									step.setVariableList(source.getVariableList());
+								}
+								if (step instanceof MongoStep) 
+								{
+									((MongoStep) step).setAction(((MongoStep) source).getAction());
+									step.setAssertList(source.getAssertList());
+									step.setAssetMap((HashMap<Asset, String>) ((MongoStep) source).getAssetMap());
+									((MongoStep) step).setCollection(((MongoStep) source).getCollection());
+									step.setDependsOn(source.getDependsOn());
+									step.setExecutionList(source.getExecutionList());
+									step.setName(source.getName());
+									((MongoStep) step).setQuery(((MongoStep) source).getQuery());
+									step.setServer(source.getServer());
+									step.setService(source.getService());
+									step.setVariableList(source.getVariableList());
+								}
+								if (step instanceof RestStep) 
+								{
+									step.setAssertList(source.getAssertList());
+									step.setAssetMap((HashMap<Asset, String>) source.getAssetMap());
+									((RestStep) step).setContentType(((RestStep) source).getContentType());
+									((RestStep) step).setCookie(((RestStep) source).getCookie());
+									step.setDependsOn(source.getDependsOn());
+									step.setExecutionList(source.getExecutionList());
+									((RestStep) step).setHeader(((RestStep) source).getHeader());
+									((RestStep) step).setMethod(((RestStep) source).getMethod());
+									step.setName(source.getName());
+									((RestStep) step).setPath(((RestStep) source).getPath());
+									((MongoStep) step).setQuery(((MongoStep) source).getQuery());
+									((RestStep) step).setRequest(((RestStep) source).getRequest());
+									step.setServer(source.getServer());
+									step.setService(source.getService());
+									step.setVariableList(source.getVariableList());
+								}
+								if (step instanceof SoapStep) 
+								{
+									step.setAssertList(source.getAssertList());
+									step.setAssetMap((HashMap<Asset, String>) source.getAssetMap());
+									step.setDependsOn(source.getDependsOn());
+									step.setExecutionList(source.getExecutionList());
+									step.setName(source.getName());
+									((RestStep) step).setRequest(((RestStep) source).getRequest());
+									step.setServer(source.getServer());
+									step.setService(source.getService());
+									step.setVariableList(source.getVariableList());
+								}
 							}
 						}
 					}
@@ -203,18 +256,37 @@ public class TestProject implements Serializable {
 	
 	public void setTestSuiteByUID(TestSuite ts, String testUID) {
 		for (TestSuite testSuite : testSuiteList) {
-
+			
 			if (testSuite.getID().equals(testUID)) {
-				testSuite = ts;
+				testSuite.setName(ts.getName());
+				testSuite.setEnvironment(ts.getEnvironment());
 			}
 		}
 	}
 	
-	
+	public TestSuite getTestSuiteByStepUID(String stepUID) {
+		for (TestSuite testSuite : testSuiteList) {
+			
+			if (testSuite.getTestCaseList() != null && !testSuite.getTestCaseList().isEmpty()) {
+				for (TestCase testCase : testSuite.getTestCaseList()) {
+					
+					if (testCase.getStepList() != null && !testCase.getStepList().isEmpty()) {
+						for (Step step : testCase.getStepList()) {
+						
+							if (step.getID().equals(stepUID)) {
+								return testSuite;
+							}
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}	
 
 	@Override
 	public String toString() {
-		return "TestProject [name=" + name + ", testSuiteList=" + toStringSuite(testSuiteList) + ", assetMap= " + assetMap + ", environmentList=" + toStringEnv(environmentList)
+		return "TestProject [name=" + name + ", testSuiteList=" + toStringSuite(testSuiteList) + ", assetList=" + assetMap+ ", environmentList=" + toStringEnv(environmentList)
 				+ ", variableList=" + variableList + ", uuid=" + uuid + "]";
 	}
 
@@ -265,6 +337,7 @@ public class TestProject implements Serializable {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
 				+ ((testSuiteList == null) ? 0 : testSuiteList.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		result = prime * result
 				+ ((variableList == null) ? 0 : variableList.hashCode());
 		return result;
@@ -299,6 +372,11 @@ public class TestProject implements Serializable {
 				return false;
 		} else if (!testSuiteList.equals(other.testSuiteList))
 			return false;
+		if (uuid == null) {
+			if (other.uuid != null)
+				return false;
+		} else if (!uuid.equals(other.uuid))
+			return false;
 		if (variableList == null) {
 			if (other.variableList != null)
 				return false;
@@ -306,4 +384,5 @@ public class TestProject implements Serializable {
 			return false;
 		return true;
 	}
+
 }
