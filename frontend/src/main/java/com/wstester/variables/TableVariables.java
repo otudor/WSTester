@@ -1,9 +1,5 @@
 package com.wstester.variables;
 
-import java.util.ArrayList;
-
-import com.wstester.model.Variable;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
