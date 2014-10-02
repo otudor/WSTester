@@ -79,13 +79,23 @@ public class MySQLStepController
           
         step = (MySQLStep) tsService.getStep(stepUID);
         Environment environment = tsService.getTestSuiteByStepUID(stepUID).getEnvironment();
-        if(environment != null) {        	
-        	serverBox.setItems(FXCollections.observableArrayList(environment.getServers()));
+        if(environment != null) {
+        	serverBox.getItems().clear();
+        	serverBox.getItems().addAll(environment.getServers());
+        	if(step.getServer() != null) {
+        		serverBox.setValue(step.getServer());
+        		serviceBox.getItems().clear();
+        		serviceBox.getItems().addAll(step.getServer().getServices());
+        	}
         	serverBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Server>() {
 					public void changed(ObservableValue ov, Server value, Server new_value) {
 						if(new_value !=null) {
 							step.setServer(new_value);
-							serviceBox.setItems(FXCollections.observableArrayList(tsService.getServiceList(step.getServer().getID())));
+							serviceBox.getItems().clear();
+							serviceBox.getItems().addAll(step.getServer().getServices());
+							if(step.getService() != null) {
+								serviceBox.setValue(step.getService());
+							}
 							serviceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Service>() {
 									public void changed(ObservableValue ov, Service value,Service new_value) {
 										step.setService(new_value);

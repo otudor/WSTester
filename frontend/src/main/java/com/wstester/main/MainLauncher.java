@@ -12,7 +12,7 @@ import javafx.stage.WindowEvent;
 
 public class MainLauncher extends Application {
 	
-	public static Stage stage;
+	public static Stage stage; 
     public static String screen1ID = "screen1";
     public static String screen1File = "/fxml/main/screen1.fxml";
     public static String screen2ID = "maineaa";

@@ -156,7 +156,7 @@ public class TestProject implements Serializable {
 				if (environment.getServers() != null && !environment.getServers().isEmpty()) {
 					for (Server server : environment.getServers()) {
 
-						if (server.getID().contains(serverUID)) {
+						if (server.getID().equals(serverUID)) {
 							return server;
 						}
 					}
@@ -198,7 +198,7 @@ public class TestProject implements Serializable {
 									step.setServer(source.getServer());
 									step.setExecutionList(source.getExecutionList());
 									step.setAssertList(source.getAssertList());
-									step.setAssetMap((HashMap<Asset, String>) ((MySQLStep) source).getAssetMap());
+									step.setAssetMap((HashMap<Asset, String>) ((MySQLStep) source).getAssetMap()); 
 									step.setDependsOn(source.getDependsOn());
 									step.setVariableList(source.getVariableList());
 								}

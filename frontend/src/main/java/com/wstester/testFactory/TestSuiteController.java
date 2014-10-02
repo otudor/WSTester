@@ -45,13 +45,14 @@ public class TestSuiteController
 		TestSuite ts = tsService.getTestSuite( tsUID);
 		tsName.setText( ts.getName());
 		environment = ts.getEnvironment();
-		envBox.setItems(FXCollections.observableArrayList(tsService.getEnvironmentList()));
+		envBox.getItems().clear();
+		envBox.getItems().addAll(tsService.getEnvironmentList());
 		envBox.setValue(ts.getEnvironment());
 		envBox.getSelectionModel().selectedItemProperty().addListener( new
         		ChangeListener<Environment>() {
         	public void changed(ObservableValue ov, Environment value, Environment new_value) {        		
         		  ts.setEnvironment(new_value); 
-        		  environment = new_value;
+        		  tsService.setTestSuiteByUID(ts, uid);
         			}
         });
 	}
