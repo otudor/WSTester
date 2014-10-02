@@ -156,7 +156,7 @@ public class TestProject implements Serializable {
 				if (environment.getServers() != null && !environment.getServers().isEmpty()) {
 					for (Server server : environment.getServers()) {
 
-						if (server.getID().equals(serverUID)) {
+						if (server.getID().contains(serverUID)) {
 							return server;
 						}
 					}
@@ -228,7 +228,7 @@ public class TestProject implements Serializable {
 									((RestStep) step).setMethod(((RestStep) source).getMethod());
 									step.setName(source.getName());
 									((RestStep) step).setPath(((RestStep) source).getPath());
-									((MongoStep) step).setQuery(((MongoStep) source).getQuery());
+									((RestStep) step).setQuery(((RestStep) source).getQuery());
 									((RestStep) step).setRequest(((RestStep) source).getRequest());
 									step.setServer(source.getServer());
 									step.setService(source.getService());
@@ -241,7 +241,7 @@ public class TestProject implements Serializable {
 									step.setDependsOn(source.getDependsOn());
 									step.setExecutionList(source.getExecutionList());
 									step.setName(source.getName());
-									((RestStep) step).setRequest(((RestStep) source).getRequest());
+									((SoapStep) step).setRequest(((SoapStep) source).getRequest());
 									step.setServer(source.getServer());
 									step.setService(source.getService());
 									step.setVariableList(source.getVariableList());

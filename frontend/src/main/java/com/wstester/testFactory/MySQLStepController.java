@@ -84,7 +84,8 @@ public class MySQLStepController
         	serverBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Server>() {
 					public void changed(ObservableValue ov, Server value, Server new_value) {
 						if(new_value !=null) {
-							serviceBox.setItems(FXCollections.observableArrayList(tsService.getServiceList(new_value.getID())));
+							step.setServer(new_value);
+							serviceBox.setItems(FXCollections.observableArrayList(tsService.getServiceList(step.getServer().getID())));
 							serviceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Service>() {
 									public void changed(ObservableValue ov, Service value,Service new_value) {
 										step.setService(new_value);
