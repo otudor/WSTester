@@ -115,6 +115,17 @@ public class TestProject implements Serializable {
 		}
 	}
 
+	public void removeTestSuite(String id) {
+		for (TestSuite testSuite : testSuiteList) {
+			
+			if (testSuite.getID().equals(id)) {
+				testSuite.getTestCaseList().remove(testSuite);
+				break;
+			}
+		}
+		
+	}
+	
 	public void removeTestCase(String tcUID) {
 		for (TestSuite testSuite : testSuiteList) {
 			if (testSuite != null) {
@@ -384,5 +395,7 @@ public class TestProject implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 
 }

@@ -14,6 +14,8 @@ public class TestSuiteFactory
     private SoapStepController soapStepController;
     private RestStepController restStepController;
     private TestSuiteService tsService;
+    private ResponseTabController responseTabController;
+    private EmptyTabController emptyTabController;
     
     public void scrie(String scrie)
 	 {
@@ -39,6 +41,8 @@ public class TestSuiteFactory
                 tsManagerController.setMongoStepController(getMongoStepController());
                 tsManagerController.setSoapStepController(getSoapStepController());
                 tsManagerController.setRestStepController(getRestStepController());
+                tsManagerController.setResponseTabController(getResponseTabController());
+                tsManagerController.setEmptyTabController(getEmptyTabController());
             }
             catch (IOException e)
             {
@@ -46,6 +50,26 @@ public class TestSuiteFactory
             }
         }
         return tsManagerController;
+    }
+    
+    public EmptyTabController getEmptyTabController()
+    {
+        if (emptyTabController == null)
+        {
+            try
+            {
+                FXMLLoader loader = new FXMLLoader();
+                loader.load(getClass().getResourceAsStream("/fxml/TestFactory/TestSuiteBlank.fxml"));
+                emptyTabController = (EmptyTabController) loader.getController();
+                emptyTabController.setTestSuiteService( getTestSuiteService());
+                emptyTabController.setTestSuiteManagerController( getManagerController());
+            }
+            catch (IOException e)
+            {
+                throw new RuntimeException("Unable to load TestSuiteList.fxml", e);
+            }
+        }
+        return emptyTabController;
     }
 
     public TestSuiteListController getTestSuiteListController()
@@ -68,6 +92,26 @@ public class TestSuiteFactory
         return tsListController;
     }
 
+    public ResponseTabController getResponseTabController()
+    {
+        if (responseTabController == null)
+        {
+            try
+            {
+                FXMLLoader loader = new FXMLLoader();
+                loader.load(getClass().getResourceAsStream("/fxml/TestFactory/Response.fxml"));
+                responseTabController = (ResponseTabController) loader.getController();
+                responseTabController.setTestSuiteService( getTestSuiteService());
+                responseTabController.setTestSuiteManagerController( getManagerController());
+            }
+            catch (IOException e)
+            {
+                throw new RuntimeException("Unable to load TestSuiteList.fxml", e);
+            }
+        }
+        return responseTabController;
+    }
+    
     public TestCaseController getTestCaseController()
     {
         if (tCaseController == null)

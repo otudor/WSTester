@@ -168,7 +168,8 @@ public class TestSuiteListController implements Initializable
     {
     	final ContextMenu contextMenu = new ContextMenu();
     	MenuItem addTCMenu = new MenuItem("Add Test Case");
-    	contextMenu.getItems().addAll(addTCMenu);
+    	MenuItem removeTS = new MenuItem("Remove Test Suite");
+    	contextMenu.getItems().addAll(addTCMenu,removeTS);
     	
     	addTCMenu.setOnAction(new EventHandler<ActionEvent>() 
     	{
@@ -190,16 +191,23 @@ public class TestSuiteListController implements Initializable
     	    }
     	});
     	
-    	// rename
-    	/*rename.setOnAction(new EventHandler<ActionEvent>() 
-    	{
-    	    @Override
-    	    public void handle(ActionEvent event) 
-    	    {
-    	    	treeView.setEditable( true);
-    	    	treeView.edit( (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem());
-    	    }
-    	});*/
+    	removeTS.setOnAction(new EventHandler<ActionEvent>() 
+    	    	{
+    	    	    @Override
+    	    	    public void handle( ActionEvent event) 
+    	    	    {
+    	    	    	TreeItem<Object> c = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
+    	    	    	int idx = treeView.getSelectionModel().getSelectedIndex();
+    	    	    	if( c == null ) return;    	    	
+    	    	    	
+    	    	    	tsService.removeTestSuite( testSuite.getID());
+    	                c.getParent().getChildren().remove(c);
+    	                               
+    	                treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
+    	                
+    	    	    }
+    	    	});
+    	
     	
     	return contextMenu;
     }

@@ -78,4 +78,7 @@
         </content>
       </Tab>
    </tabs>
+   <padding>
+      <Insets top="1.0" />
+   </padding>
 </TabPane>

@@ -94,6 +94,10 @@ public class TestSuiteService {
 		testProject.setTestSuiteByUID(testSuite, uid);		
 	}
 
+	public void removeTestSuite(String id) {
+		testProject.removeTestSuite(id);
+	}
+
 	
 
 }
