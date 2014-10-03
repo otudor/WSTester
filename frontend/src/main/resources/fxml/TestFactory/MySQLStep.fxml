@@ -57,7 +57,7 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                    <TableView fx:id="tblExecutions" maxWidth="450.0" prefHeight="400.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="0.0">
+                    <TableView fx:id="tblExecutions" maxWidth="450.0" prefHeight="400.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             		     <columns>
             		          <TableColumn fx:id="columnDate" maxWidth="200.0" prefWidth="200.0" text="Date">
 		          </TableColumn>
@@ -65,6 +65,7 @@
 		          </TableColumn>
             		     </columns>
             		</TableView>
+                  <StackPane fx:id="treePane" layoutX="450.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
         </content>
