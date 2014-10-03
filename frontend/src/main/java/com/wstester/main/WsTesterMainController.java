@@ -370,34 +370,34 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 
 		});
-		/*icon.setOnMouseExited(new EventHandler<MouseEvent>() {
+		icon.setOnMouseExited(new EventHandler<MouseEvent>() {
 			   @Override public void handle(MouseEvent mouseEvent) {
 				icon.setScaleX(1);
 				icon.setScaleY(1);
 			    icon.setCursor(Cursor.HAND);	
 
 			   }	  
-			  });*/	
+			  });
 
 
 	}
 
-	public void expandIcons(VBox icon){
-		icon.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent e) {
-				icon.setScaleX(1.2);
-				icon.setScaleY(1.2);
-			}
-		});
-
-		icon.setOnMouseExited(new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent e) {
-				icon.setScaleX(1);
-				icon.setScaleY(1);
-			}
-		});
-
-	};
+//	public void expandIcons(VBox icon){
+//		icon.setOnMouseEntered(new EventHandler<MouseEvent>() {
+//			@Override public void handle(MouseEvent e) {
+//				icon.setScaleX(1.2);
+//				icon.setScaleY(1.2);
+//			}
+//		});
+//
+//		icon.setOnMouseExited(new EventHandler<MouseEvent>() {
+//			@Override public void handle(MouseEvent e) {
+//				icon.setScaleX(1);
+//				icon.setScaleY(1);
+//			}
+//		});
+//
+//	};
 	
 	private void createRightClickMenu() {
 		topPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -527,7 +527,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						lista.add(newIcoM2);
 						bar.getChildren().add(newIcoM2);
 						poz=poz+100;										
-						expandIcons(newIcoM2);
+//						expandIcons(newIcoM2);
 
 
 
@@ -644,7 +644,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						//AfiseazaIcons("/images/task_img_open.png","RestWindow");
 						bar.getChildren().add(newIcoM3);
 						poz=poz+100;
-						expandIcons(newIcoM3);
+//						expandIcons(newIcoM3);
 
 
 						newIcoM3.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -777,7 +777,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						//AfiseazaIcons("/images/task_img_open.png","RestWindow");
 						bar.getChildren().add(newIcoM7);
 						poz=poz+100;
-						expandIcons(newIcoM7);
+//						expandIcons(newIcoM7);
 
 
 						newIcoM7.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -908,7 +908,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						lista.add(newIcoM4);
 						bar.getChildren().add(newIcoM4);
 						poz=poz+100;
-						expandIcons(newIcoM4);
+//						expandIcons(newIcoM4);
 
 
 						newIcoM4.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -1004,7 +1004,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						lista.add(newIcoM5);
 						bar.getChildren().add(newIcoM5);
 						poz=poz+100;
-						expandIcons(newIcoM5);
+//						expandIcons(newIcoM5);
 						newIcoM5.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 							@Override
@@ -1104,7 +1104,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						lista.add(newIcoM6);
 						bar.getChildren().addAll(newIcoM6);
 						poz=poz+100;
-						expandIcons(newIcoM6);
+//						expandIcons(newIcoM6);
 
 						newIcoM6.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -1188,64 +1188,64 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		Timeline bouncer=new Timeline();
 		//boolean mouseIn = false;
 		boolean mouseIn = false;  
-		imageComp.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent mouseEvent) {
-				// mouseIn = true;
-
+//		imageComp.setOnMouseEntered(new EventHandler<MouseEvent>() {
+//			@Override public void handle(MouseEvent mouseEvent) {
+//				// mouseIn = true;
+//
 				imageComp.setCursor(Cursor.HAND);	
-
-				bouncer.getKeyFrames().addAll(
-						makeKeyFrame(0,0,1.2,1),
-						makeKeyFrame(0,0,1,1.2),
-						makeKeyFrame(300,-20,1,1),
-						makeKeyFrame(0,0,1,1.2),
-						makeKeyFrame(600,0,1.2,1.0)
-
-
-						//makeKeyFrame(0,100,0.8,0.8)
-
-						);
-
-
-				//	  new KeyFrame(new Duration(0),new KeyValue(icon.translateYProperty(),0.0)),
-				//  new KeyFrame(new Duration(3000),new KeyValue(icon.translateYProperty(),-20.0)),
-				//  new KeyFrame(new Duration(6000),new KeyValue(icon.translateYProperty(),0.0))
-
-
-
-				bouncer.setCycleCount(1);			 		  		  
-				// bouncer.play();
-				bouncer.setOnFinished(new EventHandler<ActionEvent>(){
-
-					@Override
-					public void handle (ActionEvent arg0){
-
-						//new KeyValue(image.c)
-						// imageComp.setX(1);
-						// imageComp.setY(1);
-
-					}
-
-				});
-
-				bouncer.play();  
-
-			}		
-
-			private KeyFrame makeKeyFrame(int d, double y, double sx, double sy){
-				return new KeyFrame(
-						new Duration(d),
-						new KeyValue(imageComp.translateYProperty(),y),
-						new KeyValue(imageComp.scaleXProperty(), sx),
-						new KeyValue(imageComp.scaleYProperty(), sy)
-
-						);
-			}
-
-
-		});
-
-
+//
+//				bouncer.getKeyFrames().addAll(
+//						makeKeyFrame(0,0,1.2,1),
+//						makeKeyFrame(0,0,1,1.2),
+//						makeKeyFrame(300,-20,1,1),
+//						makeKeyFrame(0,0,1,1.2),
+//						makeKeyFrame(600,0,1.2,1.0)
+//
+//
+//						//makeKeyFrame(0,100,0.8,0.8)
+//
+//						);
+//
+//
+//				//	  new KeyFrame(new Duration(0),new KeyValue(icon.translateYProperty(),0.0)),
+//				//  new KeyFrame(new Duration(3000),new KeyValue(icon.translateYProperty(),-20.0)),
+//				//  new KeyFrame(new Duration(6000),new KeyValue(icon.translateYProperty(),0.0))
+//
+//
+//
+//				bouncer.setCycleCount(1);			 		  		  
+//				// bouncer.play();
+//				bouncer.setOnFinished(new EventHandler<ActionEvent>(){
+//
+//					@Override
+//					public void handle (ActionEvent arg0){
+//
+//						//new KeyValue(image.c)
+//						// imageComp.setX(1);
+//						// imageComp.setY(1);
+//
+//					}
+//
+//				});
+//
+//				bouncer.play();  
+//
+//			}		
+//
+//			private KeyFrame makeKeyFrame(int d, double y, double sx, double sy){
+//				return new KeyFrame(
+//						new Duration(d),
+//						new KeyValue(imageComp.translateYProperty(),y),
+//						new KeyValue(imageComp.scaleXProperty(), sx),
+//						new KeyValue(imageComp.scaleYProperty(), sy)
+//
+//						);
+//			}
+//
+//
+//		});
+//
+//
 		imageComp.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override public void handle(MouseEvent mouseEvent) {
 				bouncer.play();
@@ -1340,62 +1340,62 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		Timeline bouncer=new Timeline();
 		//boolean mouseIn = false;
 		boolean mouseIn = false;  
-		imageComp.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override public void handle(MouseEvent mouseEvent) {
-				// mouseIn = true;
-
+//		imageComp.setOnMouseEntered(new EventHandler<MouseEvent>() {
+//			@Override public void handle(MouseEvent mouseEvent) {
+//				// mouseIn = true;
+//
 				imageComp.setCursor(Cursor.HAND);	
-
-				bouncer.getKeyFrames().addAll(
-						makeKeyFrame(0,0,1.2,1),
-						makeKeyFrame(0,0,1,1.2),
-						makeKeyFrame(300,-20,1,1),
-						makeKeyFrame(0,0,1,1.2),
-						makeKeyFrame(600,0,1.2,1.0),
-						makeKeyFrame(0,100,0.8,0.8)
-
-						);
-
-
-				//	  new KeyFrame(new Duration(0),new KeyValue(icon.translateYProperty(),0.0)),
-				//  new KeyFrame(new Duration(3000),new KeyValue(icon.translateYProperty(),-20.0)),
-				//  new KeyFrame(new Duration(6000),new KeyValue(icon.translateYProperty(),0.0))
-
-
-
-				bouncer.setCycleCount(1);			 		  		  
-				// bouncer.play();
-				bouncer.setOnFinished(new EventHandler<ActionEvent>(){
-
-					@Override
-					public void handle (ActionEvent arg0){
-
-						//new KeyValue(image.c)
-						// imageComp.setX(1);
-						// imageComp.setY(1);
-
-					}
-
-				});
-
-				bouncer.play();  
-
-			}		
-
-			private KeyFrame makeKeyFrame(int d, double y, double sx, double sy){
-				return new KeyFrame(
-						new Duration(d),
-						new KeyValue(imageComp.translateYProperty(),y),
-						new KeyValue(imageComp.scaleXProperty(), sx),
-						new KeyValue(imageComp.scaleYProperty(), sy)
-
-						);
-			}
-
-
-		});
-
-
+//
+//				bouncer.getKeyFrames().addAll(
+//						makeKeyFrame(0,0,1.2,1),
+//						makeKeyFrame(0,0,1,1.2),
+//						makeKeyFrame(300,-20,1,1),
+//						makeKeyFrame(0,0,1,1.2),
+//						makeKeyFrame(600,0,1.2,1.0),
+//						makeKeyFrame(0,100,0.8,0.8)
+//
+//						);
+//
+//
+//				//	  new KeyFrame(new Duration(0),new KeyValue(icon.translateYProperty(),0.0)),
+//				//  new KeyFrame(new Duration(3000),new KeyValue(icon.translateYProperty(),-20.0)),
+//				//  new KeyFrame(new Duration(6000),new KeyValue(icon.translateYProperty(),0.0))
+//
+//
+//
+//				bouncer.setCycleCount(1);			 		  		  
+//				// bouncer.play();
+//				bouncer.setOnFinished(new EventHandler<ActionEvent>(){
+//
+//					@Override
+//					public void handle (ActionEvent arg0){
+//
+//						//new KeyValue(image.c)
+//						// imageComp.setX(1);
+//						// imageComp.setY(1);
+//
+//					}
+//
+//				});
+//
+//				bouncer.play();  
+//
+//			}		
+//
+//			private KeyFrame makeKeyFrame(int d, double y, double sx, double sy){
+//				return new KeyFrame(
+//						new Duration(d),
+//						new KeyValue(imageComp.translateYProperty(),y),
+//						new KeyValue(imageComp.scaleXProperty(), sx),
+//						new KeyValue(imageComp.scaleYProperty(), sy)
+//
+//						);
+//			}
+//
+//
+//		});
+//
+//
 		imageComp.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override public void handle(MouseEvent mouseEvent) {
 				bouncer.play();

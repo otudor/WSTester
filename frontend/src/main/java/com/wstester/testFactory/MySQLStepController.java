@@ -86,7 +86,7 @@ public class MySQLStepController implements Initializable {
 
 		try {
 			
-			FileInputStream file = new FileInputStream(new File("C:/Users/sdinescu/Documents/GitHub/WSTester/backend/pom.xml"));
+			FileInputStream file = new FileInputStream(new File("C:/Users/gvasile/Documents/GitHub/WSTester/backend/pom.xml"));
 			treePane.getChildren().clear();
 			treePane.getChildren().add((Node)xmlParser.getTreeViewOfXml(file));
 		} catch (XPathExpressionException e) {

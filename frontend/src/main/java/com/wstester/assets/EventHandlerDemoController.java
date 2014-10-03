@@ -3,6 +3,7 @@ package com.wstester.assets;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import javafx.beans.value.ChangeListener;
@@ -284,8 +285,9 @@ public class EventHandlerDemoController {
 							if (i > 0) {
 								extension = fileName.substring(i + 1);
 							}
-
+							
 							IAssetManager assetManager= ServiceLocator.getInstance().lookup(IAssetManager.class);
+							
 							Asset asset = new Asset();
 							asset.setName(fileName);
 							asset.setPath(path);
@@ -293,10 +295,10 @@ public class EventHandlerDemoController {
 							asset.setSize(file.length());
 							asset.setType(extension);
 							assetManager.addAsset(asset);
-							assetManager.waitUntilFileCopied(asset);
+							assetManager.waitUntilFileCopied(asset);			
 							TestProject testProject = new TestProject();
 							testProject.addAsset(asset);
-
+							
 							if (newValue.toString().toLowerCase()
 									.equals(extension.toString().toLowerCase())) {
 								if (newValue

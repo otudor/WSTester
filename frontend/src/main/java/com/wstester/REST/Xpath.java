@@ -42,7 +42,7 @@ public class Xpath extends Application {
 	@Override
 	public void start(Stage primaryStage) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException  {
 		
-		FileInputStream file = new FileInputStream(new File("C:/Users/sdinescu/Documents/GitHub/WSTester/backend/pom.xml"));
+		FileInputStream file = new FileInputStream(new File("C:/Users/gvasile/Documents/GitHub/WSTester/backend/pom.xml"));
 		
         DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder =  builderFactory.newDocumentBuilder();
