@@ -96,6 +96,15 @@
 			<artifactId>jaxp-api</artifactId>
 			<version>${javaxp-api.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
