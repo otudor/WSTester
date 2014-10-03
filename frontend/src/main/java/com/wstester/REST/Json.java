@@ -25,7 +25,7 @@ public class Json extends Application {
 	public void start(Stage primaryStage) throws Exception {
 
 		String file = new String(Files.readAllBytes(Paths
-				.get("C:/Users/gvasile/Desktop/json3.txt")));
+				.get("C:/Users/gvasile/Desktop/json.txt")));
 
 		Object json;
 		try{

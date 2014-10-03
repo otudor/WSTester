@@ -7,6 +7,10 @@ public class RestRule extends Rule{
 	public enum InputType {PATH, METHOD};
 	private InputType inputType;
 	
+	public RestRule(){
+		
+	}
+	
 	public RestRule(InputType inputType, String input, String output){
 		
 		this.inputType = inputType;

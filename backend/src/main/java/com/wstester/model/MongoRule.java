@@ -6,6 +6,10 @@ public class MongoRule extends Rule {
 	public enum InputType {QUERY};
 	private InputType inputType;
 	
+	public MongoRule () {
+		
+	}
+	
 	public MongoRule(InputType inputType, String input, String output){
 		
 		this.inputType = inputType;

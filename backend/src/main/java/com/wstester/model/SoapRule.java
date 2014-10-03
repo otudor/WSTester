@@ -10,6 +10,9 @@ public class SoapRule extends Rule{
 	public enum InputType {REQUEST};
 	private InputType inputType;
 	
+	public SoapRule () {
+		
+	}
 	public SoapRule(InputType inputType, String input, String output){
 		
 		this.inputType = inputType;
