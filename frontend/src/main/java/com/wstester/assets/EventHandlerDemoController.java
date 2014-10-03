@@ -35,6 +35,12 @@ import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IAssetManager;
 
+/**
+ * 
+ * @author vdumitrache
+ *
+ */
+
 public class EventHandlerDemoController {
 
 	private Logger logger = Logger.getLogger(this.getClass().getSimpleName());
@@ -96,7 +102,6 @@ public class EventHandlerDemoController {
 			assetModel = new AssetModel(TypeInterface.types[i]);
 			listViewData.add(assetModel);
 		}
-
 	}
 
 	public ObservableList<Table> getTableDataXml() {
@@ -561,8 +566,7 @@ public class EventHandlerDemoController {
 							.getSelectionModel();
 					ObservableList<?> selectedCells = selectionModel
 							.getSelectedCells();
-					TablePosition<Object, ?> tablePosition = (TablePosition<Object, ?>) selectedCells
-							.get(0);
+					TablePosition<Object, ?> tablePosition = (TablePosition<Object, ?>) selectedCells.get(0);
 					Object val = tablePosition.getTableColumn()
 							.getCellData(newValue);
 					System.out.println("Selected value IS :" + val);

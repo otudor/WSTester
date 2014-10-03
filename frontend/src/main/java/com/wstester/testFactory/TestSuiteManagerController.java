@@ -3,6 +3,9 @@ package com.wstester.testFactory;
 import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ITestRunner;
+import com.wstester.util.MainConstants;
+import com.wstester.util.UtilityTool;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -115,8 +118,9 @@ public class TestSuiteManagerController
         
     public void runTestSuite( ActionEvent event) throws Exception
     {
-		TestProject testProject = new TestProject();
+    	TestProject testProject = new TestProject();
 		testProject.setTestSuiteList(tsListController.getTestSuiteList());
+	
 		ITestRunner testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class, testProject);
 		testRunner.run(testProject);
 		

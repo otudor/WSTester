@@ -4,34 +4,43 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import com.wstester.model.Asset;
+import com.wstester.model.Environment;
 import com.wstester.model.Execution;
 import com.wstester.model.MongoStep;
 import com.wstester.model.ExecutionStatus;
+import com.wstester.model.Server;
+import com.wstester.model.Service;
 
 public class MongoStepController
 {
     @FXML private Node rootMongoStep;
-    @FXML private Label lblName;
-    @FXML private Label mongoCollection;
-    @FXML private Label mongoAction;
-    @FXML private Label mongoQuery;
+    @FXML private TextField lblName;
+    @FXML private TextField mongoCollection;
+    @FXML private TextField mongoAction;
+    @FXML private TextField mongoQuery;
     @FXML private Label lblStatus;
     @FXML private Label lblResponse;
     @FXML private TableView<Execut> tblExecutions;
     @FXML private TableColumn<Execut, String> columnDate;
     @FXML private TableColumn<Execut, String> columnStatus;
     @FXML private TableColumn<Execut, String> columnResponse;
+    @FXML private ComboBox<Server> serverBox;
+    @FXML private ComboBox<Service> serviceBox;
     
     private MongoStep step;    
     private TestSuiteService tsService;
@@ -60,15 +69,44 @@ public class MongoStepController
     }
 
     public void setMongoStep(final String stepUID)
-    {
-    	lblName.setText("");
+    {        
+        step = (MongoStep) tsService.getStep( stepUID);
+        lblName.setText(step.getName());
     	mongoQuery.setText("");
         mongoAction.setText("");
         mongoCollection.setText("");
         lblStatus.setText("Not run");
         lblResponse.setText("Not run");
-        
-        step = (MongoStep) tsService.getStep( stepUID);
+        Environment environment = tsService.getTestSuiteByStepUID(stepUID).getEnvironment();
+        if(environment != null) {        	
+        	serverBox.getItems().clear();
+        	serverBox.getItems().addAll(environment.getServers());
+        	if(step.getServer() != null) {
+        		serverBox.setValue(step.getServer());
+        		serviceBox.getItems().clear();
+        		serviceBox.getItems().addAll(step.getServer().getServices());
+        	}
+        	serverBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Server>() {
+					public void changed(ObservableValue ov, Server value, Server new_value) {
+						if(new_value !=null) {
+							step.setServer(new_value);
+							serviceBox.getItems().clear();
+							serviceBox.getItems().addAll(step.getServer().getServices());
+							if(step.getService() != null) {
+								serviceBox.setValue(step.getService());
+							}
+							serviceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Service>() {
+									public void changed(ObservableValue ov, Service value,Service new_value) {
+										step.setService(new_value);
+									}
+								});
+							step.setServer(new_value);
+							tsService.setStepByUID(step, uid);
+							tsService.saveTestSuite();
+						}
+					}
+        	});
+        }
         lblName.setText(step.getName());
         if(step.getAction()!=null){
         	mongoAction.setText(step.getAction().toString());
@@ -137,7 +175,7 @@ public class MongoStepController
     public void saveMongo(ActionEvent e) {
 
 		MongoStep mongo = new MongoStep();
-		
+
 		mongo.setAction(step.getAction());
 		mongo.setAssertList(step.getAssertList());
 		mongo.setAssetMap((HashMap<Asset, String>)step.getAssetMap());

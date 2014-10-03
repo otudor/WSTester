@@ -47,9 +47,8 @@
                         <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" />
                      </rowConstraints>
                   </GridPane>
-                  <ChoiceBox fx:id="serverBox" layoutX="89.0" layoutY="214.0" prefHeight="25.0" prefWidth="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="220.0" />
-                  <ChoiceBox fx:id="serviceBox" layoutX="242.0" layoutY="220.0" prefHeight="25.0" prefWidth="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="220.0" />
-                  <ChoiceBox fx:id="envBox" layoutX="468.0" layoutY="220.0" prefWidth="150.0" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="220.0" />
+                  <ComboBox fx:id="serviceBox" layoutX="250.0" layoutY="220.0" prefWidth="150.0" promptText="Service..." AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="220.0" />
+                  <ComboBox fx:id="serverBox" layoutX="50.0" layoutY="220.0" prefWidth="150.0" promptText="Server..." AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="220.0" />
                </children>
             </AnchorPane>
          </content>
