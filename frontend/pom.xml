@@ -17,6 +17,7 @@
 		<mainClass>com.wstester.main.MainLauncher</mainClass>
 		<jfx.version>8.0-r1</jfx.version>
 		<controlsfx.version>8.0.2</controlsfx.version>
+		<javaxp-api.version>1.4</javaxp-api.version>
 	</properties>
 
 	<dependencies>
@@ -74,8 +75,6 @@
 			<groupId>com.wstester</groupId>
 			<artifactId>backend</artifactId>
 			<version>${project.version}</version>
-			<scope>compile</scope>
-			<type>jar</type>
 		</dependency>
 		<dependency>
 			<groupId>org.javafxdata</groupId>
@@ -91,6 +90,11 @@
 			<groupId>org.javafxdata</groupId>
 			<artifactId>datafx-controller</artifactId>
 			<version>2.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml</groupId>
+			<artifactId>jaxp-api</artifactId>
+			<version>${javaxp-api.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
