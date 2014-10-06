@@ -6,6 +6,9 @@ public class MysqlRule extends Rule {
 	public enum InputType {OPERATION};
 	private InputType inputType;
 	
+	public MysqlRule () {
+		
+	}
 	public MysqlRule(InputType inputType, String input, String output){
 		
 		this.inputType = inputType;

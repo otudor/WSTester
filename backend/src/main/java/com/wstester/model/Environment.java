@@ -18,6 +18,7 @@ public class Environment implements Serializable{
 	public Environment() {
 		uuid = UUID.randomUUID().toString();
 		name = "";
+		serverList = new ArrayList<Server>();
 	}
 	
 	public Environment(String name) {

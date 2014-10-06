@@ -3,6 +3,9 @@ package com.wstester.testFactory;
 import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ITestRunner;
+import com.wstester.util.MainConstants;
+import com.wstester.util.UtilityTool;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -22,6 +25,8 @@ public class TestSuiteManagerController
     private MongoStepController mongoStepController;
     private SoapStepController soapStepController;
     private RestStepController restStepController;
+    private ResponseTabController responseTabController;
+    private EmptyTabController emptyTabController;
     
 	@FXML
 	private void initialize() 
@@ -33,6 +38,11 @@ public class TestSuiteManagerController
     public void setTestSuiteListController( TestSuiteListController tsListController)
     {
         this.tsListController = tsListController;
+    }
+    
+    public void setResponseTabController( ResponseTabController responseTabController)
+    {
+        this.responseTabController = responseTabController;
     }
 
     public void setTestSuiteDetailController( TestSuiteController tsDetailController)
@@ -65,6 +75,10 @@ public class TestSuiteManagerController
         this.restStepController = restStepController;
     }
     
+    public void setEmptyTabController(EmptyTabController emptyTabController) {
+    	this.emptyTabController = emptyTabController;
+	}
+    
     public Parent getView()
     {
         return root;
@@ -74,13 +88,25 @@ public class TestSuiteManagerController
     {
     	tsListController.loadSuites();
     	tsListController.loadTreeItems();
-        contentArea.setLeft( tsListController.getView());        
+        contentArea.setLeft( tsListController.getView());
     }
 
     public void showTestSuite( String tsUID)
     {
     	testSuiteController.setTestSuite( tsUID);
         contentArea.setCenter( testSuiteController.getView());
+    }
+    
+    public void showResponseTab()
+    {
+    	responseTabController.setResponseTabController();
+        contentArea.setRight( responseTabController.getView());
+    }
+    
+    public void showEmptyTabController()
+    {
+    	emptyTabController.setEmptyTabController();
+        contentArea.setCenter( emptyTabController.getView());
     }
     
     public void showTestCase( String tcUID)
@@ -115,8 +141,9 @@ public class TestSuiteManagerController
         
     public void runTestSuite( ActionEvent event) throws Exception
     {
-		TestProject testProject = new TestProject();
+    	TestProject testProject = new TestProject();
 		testProject.setTestSuiteList(tsListController.getTestSuiteList());
+	
 		ITestRunner testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class, testProject);
 		testRunner.run(testProject);
 		
@@ -130,6 +157,8 @@ public class TestSuiteManagerController
 		
 //		btnRun.setDisable(false);
 	}
+
+	
 }
 
 

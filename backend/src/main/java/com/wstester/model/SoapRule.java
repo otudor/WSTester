@@ -10,6 +10,9 @@ public class SoapRule extends Rule{
 	public enum InputType {REQUEST};
 	private InputType inputType;
 	
+	public SoapRule () {
+		
+	}
 	public SoapRule(InputType inputType, String input, String output){
 		
 		this.inputType = inputType;
@@ -33,13 +36,15 @@ public class SoapRule extends Rule{
 				if((inputString != null) && ((SoapStep)step).getRequest().equals(inputString)){
 					return output;
 				}
-				
 				//TODO: now only the first asset will be set to the body of the request
 				//TODO: in the future, send a request for every asset in the list
+				
+				Asset stepAsset = (Asset) step.getAssetMap().keySet().toArray()[0];
 				IAssetManager assetManager = new AssetManager();
-				if((inputAsset != null) && step.getAssetList() != null && step.getAssetList().get(0) !=null &&
-						(step.getAssetList().get(0).getName().equals(inputAsset.getName()) ||
-						(assetManager.getAssetContent(step.getAssetList().get(0).getName()).equals(assetManager.getAssetContent(inputAsset.getName())))))		
+				
+				if((inputAsset != null) && step.getAssetMap() != null && step.getAssetMap().get(0) !=null &&
+						(stepAsset.getName().equals(inputAsset.getName()) ||
+						(assetManager.getAssetContent(stepAsset.getName()).equals(assetManager.getAssetContent(inputAsset.getName())))))		
 					return output;
 			}
 		}

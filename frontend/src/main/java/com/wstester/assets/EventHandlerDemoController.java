@@ -3,6 +3,7 @@ package com.wstester.assets;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import javafx.beans.value.ChangeListener;
@@ -34,6 +35,12 @@ import com.wstester.model.Asset;
 import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IAssetManager;
+
+/**
+ * 
+ * @author vdumitrache
+ *
+ */
 
 public class EventHandlerDemoController {
 
@@ -96,7 +103,6 @@ public class EventHandlerDemoController {
 			assetModel = new AssetModel(TypeInterface.types[i]);
 			listViewData.add(assetModel);
 		}
-
 	}
 
 	public ObservableList<Table> getTableDataXml() {
@@ -279,8 +285,9 @@ public class EventHandlerDemoController {
 							if (i > 0) {
 								extension = fileName.substring(i + 1);
 							}
-
+							
 							IAssetManager assetManager= ServiceLocator.getInstance().lookup(IAssetManager.class);
+							
 							Asset asset = new Asset();
 							asset.setName(fileName);
 							asset.setPath(path);
@@ -288,10 +295,10 @@ public class EventHandlerDemoController {
 							asset.setSize(file.length());
 							asset.setType(extension);
 							assetManager.addAsset(asset);
-							assetManager.waitUntilFileCopied(asset);
+							assetManager.waitUntilFileCopied(asset);			
 							TestProject testProject = new TestProject();
 							testProject.addAsset(asset);
-
+							
 							if (newValue.toString().toLowerCase()
 									.equals(extension.toString().toLowerCase())) {
 								if (newValue
@@ -561,8 +568,7 @@ public class EventHandlerDemoController {
 							.getSelectionModel();
 					ObservableList<?> selectedCells = selectionModel
 							.getSelectedCells();
-					TablePosition<Object, ?> tablePosition = (TablePosition<Object, ?>) selectedCells
-							.get(0);
+					TablePosition<Object, ?> tablePosition = (TablePosition<Object, ?>) selectedCells.get(0);
 					Object val = tablePosition.getTableColumn()
 							.getCellData(newValue);
 					System.out.println("Selected value IS :" + val);

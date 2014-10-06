@@ -13,7 +13,6 @@
 	</parent>
 
 	<properties>
-		<jersey.version>1.18.1</jersey.version>
 		<junit.version>4.11</junit.version>
 		<mysql.version>5.1.31</mysql.version>
 		<wsdl.name>info.wsdl</wsdl.name>
@@ -153,7 +152,6 @@
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-json</artifactId>
-			<version>${jersey.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

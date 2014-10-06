@@ -1,35 +1,60 @@
 package com.wstester.testFactory;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.ResourceBundle;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
+import com.wstester.main.ControlledScreen;
+import com.wstester.model.Asset;
 import com.wstester.model.Environment;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 
-public class MySQLStepController
-{
+public class MySQLStepController implements Initializable {
+
     @FXML private Node rootMySQLStep;
     @FXML private TextField stepName;
     @FXML private TextField sqlField;
@@ -40,22 +65,47 @@ public class MySQLStepController
     @FXML private TableColumn<Execut, String> columnStatus;
     @FXML private GridPane gridPane;
     @FXML private Button cellButton;
-    @FXML private ChoiceBox<Environment> envBox;
-    @FXML private ChoiceBox<Server> serverBox;
-    @FXML private ChoiceBox<Service> serviceBox;
+    @FXML private ComboBox<Server> serverBox;
+    @FXML private ComboBox<Service> serviceBox;
+    @FXML private StackPane treePane;
     
     private MySQLStep step;    
     private TestSuiteService tsService;
     private TestSuiteManagerController tsMainController;
     private String uid = null;
-    
-	@FXML
-	private void initialize() 
-	{
-		
-	}
+    private XmlParser xmlParser;
+
+    @Override
+    public void initialize (URL location, ResourceBundle resources) {
+    	this.xmlParser = new XmlParser();
+    	this.showTreeView();
+    }
 	
-    public void setTestSuiteService( TestSuiteService tsService)
+
+	private void showTreeView() {
+
+		try {
+			
+			FileInputStream file = new FileInputStream(new File("../backend/pom.xml"));
+			treePane.getChildren().clear();
+			treePane.getChildren().add((Node)xmlParser.getTreeViewOfXml(file));
+		} catch (XPathExpressionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+	public void setTestSuiteService( TestSuiteService tsService)
     {
         this.tsService = tsService;
     }
@@ -74,16 +124,36 @@ public class MySQLStepController
     {
           
         step = (MySQLStep) tsService.getStep(stepUID);
-        envBox.setItems(FXCollections.observableArrayList(tsService.getEnvironmentList()));
-        envBox.getSelectionModel().selectedItemProperty().addListener( new
-        		ChangeListener<Environment>() {
-        	public void changed(ObservableValue ov, Environment value, Environment new_value) {
-        			serverBox.setItems(FXCollections.observableArrayList(tsService.getServerList(new_value.getID())));
-        			if(!serviceBox.getItems().isEmpty()) {
-        				serviceBox.setItems(null);
-        			}
+        Environment environment = tsService.getTestSuiteByStepUID(stepUID).getEnvironment();
+        if(environment != null) {
+        	serverBox.getItems().clear();
+        	serverBox.getItems().addAll(environment.getServers());
+        	if(step.getServer() != null) {
+        		serverBox.setValue(step.getServer());
+        		serviceBox.getItems().clear();
+        		serviceBox.getItems().addAll(step.getServer().getServices());
+        	}
+        	serverBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Server>() {
+					public void changed(ObservableValue ov, Server value, Server new_value) {
+						if(new_value !=null) {
+							step.setServer(new_value);
+							serviceBox.getItems().clear();
+							serviceBox.getItems().addAll(step.getServer().getServices());
+							if(step.getService() != null) {
+								serviceBox.setValue(step.getService());
+							}
+							serviceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Service>() {
+									public void changed(ObservableValue ov, Service value,Service new_value) {
+										step.setService(new_value);
+									}
+								});
+							step.setServer(new_value);
+							tsService.setStepByUID(step, uid);
+							tsService.saveTestSuite();
+						}
+					}
+        	});
         }
-        });
         stepName.setText(step.getName());
         sqlField.setText(step.getOperation());
         Execution execution = step.getLastExecution();
@@ -144,7 +214,11 @@ public class MySQLStepController
             }
             tblExecutions.setItems(null);
         	tblExecutions.setItems(FXCollections.observableArrayList(lista));
-                      
+        	FileInputStream file = null;
+        	treePane.getChildren().clear();
+//        	showTreeView();
+
+        	 
         }
           
         
@@ -212,7 +286,7 @@ public class MySQLStepController
 		sql.setServer(step.getServer());
 		sql.setExecutionList(step.getExecutionList());
 		sql.setAssertList(step.getAssertList());
-		sql.setAssetList(step.getAssetList());
+		sql.setAssetMap((HashMap<Asset, String>) step.getAssetMap());
 		sql.setDependsOn(step.getDependsOn());
 		sql.setVariableList(step.getVariableList());
 		tsService.setStepByUID(sql, uid);

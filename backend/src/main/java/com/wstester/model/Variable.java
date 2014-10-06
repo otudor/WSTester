@@ -1,7 +1,10 @@
 package com.wstester.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.UUID;
+
+import javafx.beans.value.ObservableValue;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -12,7 +15,7 @@ public class Variable implements Serializable {
 	private String uuid;
 	private String name;
 	private VariableType type;
-	private Object content;
+	private String content;
 	private String selector;
 	
 	public Variable(){
@@ -25,11 +28,10 @@ public class Variable implements Serializable {
 	 * @param type The type of the variable
 	 * @param selector How the content will be populated
 	 */
-	public Variable(String name, VariableType type, String selector) {
-		uuid = UUID.randomUUID().toString();
-		setName(name);
-		setType(type);
-		setSelector(selector);
+	
+	public Variable(String content, String name) {
+		this.content = content;
+		this.name = name;
 	}
 
 	/**
@@ -38,7 +40,7 @@ public class Variable implements Serializable {
 	 * @param type The type of the variable
 	 * @param content The content of the variable(this content should not change between tests)
 	 */
-	public Variable(String name, VariableType type, Object content){
+	public Variable(String name, VariableType type, String content){
 		uuid = UUID.randomUUID().toString();
 		setName(name);
 		setType(type);
@@ -65,11 +67,11 @@ public class Variable implements Serializable {
 		this.type = type;
 	}
 
-	public Object getContent() {
+	public String getContent() {
 		return content;
 	}
 
-	public void setContent(Object content) {
+	public void setContent(String content) {
 		this.content = content;
 	}
 

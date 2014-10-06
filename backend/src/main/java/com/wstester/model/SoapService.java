@@ -1,5 +1,6 @@
 package com.wstester.model;
 
+import java.util.List;
 import java.util.UUID;
 
 public class SoapService extends Service {
@@ -8,12 +9,8 @@ public class SoapService extends Service {
 	private String port;
 	private String path;
 	private String wsdlURL;
-	private String username;
-	private String password;
-	private String role;
+	private List<Authentication> authenticationList;
 	
-
-
 	public SoapService() {
 		uuid = UUID.randomUUID().toString();
 	}
@@ -45,28 +42,12 @@ public class SoapService extends Service {
 	public void setWsdlURL(String wsdlURL) {
 		this.wsdlURL = wsdlURL;
 	}
-	public String getUsername() {
-		return username;
+	public List<Authentication> getAuthenticationList() {
+		return authenticationList;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
+	public void setAuthenticationList(List<Authentication> authenticationList) {
+		this.authenticationList = authenticationList;
 	}
 	@Override
 	public String detailedToString() {
@@ -78,16 +59,17 @@ public class SoapService extends Service {
     public String toString() { 
     	return this.name; 
     }
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		result = prime * result
-				+ ((username == null) ? 0 : username.hashCode());
+		result = prime
+				* result
+				+ ((authenticationList == null) ? 0 : authenticationList
+						.hashCode());
+		result = prime * result + ((path == null) ? 0 : path.hashCode());
+		result = prime * result + ((port == null) ? 0 : port.hashCode());
+		result = prime * result + ((wsdlURL == null) ? 0 : wsdlURL.hashCode());
 		return result;
 	}
 
@@ -100,21 +82,27 @@ public class SoapService extends Service {
 		if (getClass() != obj.getClass())
 			return false;
 		SoapService other = (SoapService) obj;
-		if (password == null) {
-			if (other.password != null)
+		if (authenticationList == null) {
+			if (other.authenticationList != null)
 				return false;
-		} else if (!password.equals(other.password))
+		} else if (!authenticationList.equals(other.authenticationList))
 			return false;
-		if (role == null) {
-			if (other.role != null)
+		if (path == null) {
+			if (other.path != null)
 				return false;
-		} else if (!role.equals(other.role))
+		} else if (!path.equals(other.path))
 			return false;
-		if (username == null) {
-			if (other.username != null)
+		if (port == null) {
+			if (other.port != null)
 				return false;
-		} else if (!username.equals(other.username))
+		} else if (!port.equals(other.port))
+			return false;
+		if (wsdlURL == null) {
+			if (other.wsdlURL != null)
+				return false;
+		} else if (!wsdlURL.equals(other.wsdlURL))
 			return false;
 		return true;
 	}
+
 }

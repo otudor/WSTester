@@ -2,7 +2,9 @@ package com.wstester.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -14,7 +16,7 @@ public class TestProject implements Serializable {
 	private String uuid;
 	private String name;
 	private List<TestSuite> testSuiteList;
-	private List<Asset> assetList;
+	private Map<Asset, String> assetMap;
 	private List<Environment> environmentList;
 	private List<Variable> variableList;
 
@@ -35,21 +37,21 @@ public class TestProject implements Serializable {
 	public void setTestSuiteList(List<TestSuite> testSuiteList) {
 		this.testSuiteList = testSuiteList;
 	}
-
-	public List<Asset> getAssetList() {
-		return assetList;
+	
+	public Map<Asset, String> getAssetMap() {
+		return assetMap;
 	}
 
-	public void setAssetList(List<Asset> assetList) {
-		this.assetList = assetList;
+	public void setAssetMap(HashMap<Asset, String> assetMap) {
+		this.assetMap = assetMap;
 	}
 
-	public void addAsset(Asset asset) {
-		if (this.assetList == null) {
-			this.assetList = new ArrayList<Asset>();
+	public void addAsset(Asset asset){
+		if(this.assetMap == null){
+			this.assetMap = new HashMap<Asset, String>();
 		}
-
-		this.assetList.add(asset);
+		
+		assetMap.put(asset, asset.getType());
 	}
 
 	public List<Environment> getEnvironmentList() {
@@ -113,6 +115,17 @@ public class TestProject implements Serializable {
 		}
 	}
 
+	public void removeTestSuite(String id) {
+		for (TestSuite testSuite : testSuiteList) {
+			
+			if (testSuite.getID().equals(id)) {
+				testSuite.getTestCaseList().remove(testSuite);
+				break;
+			}
+		}
+		
+	}
+	
 	public void removeTestCase(String tcUID) {
 		for (TestSuite testSuite : testSuiteList) {
 			if (testSuite != null) {
@@ -151,8 +164,7 @@ public class TestProject implements Serializable {
 		if (environmentList != null && !environmentList.isEmpty()) {
 			for (Environment environment : environmentList) {
 
-				if (environment.getServers() != null
-						&& !environment.getServers().isEmpty()) {
+				if (environment.getServers() != null && !environment.getServers().isEmpty()) {
 					for (Server server : environment.getServers()) {
 
 						if (server.getID().equals(serverUID)) {
@@ -190,7 +202,61 @@ public class TestProject implements Serializable {
 						for (Step step : testCase.getStepList()) {
 						
 							if (step.getID().equals(stepUID)) {
-								step = source;
+								if(step instanceof MySQLStep) {
+									((MySQLStep) step).setOperation(((MySQLStep) source).getOperation());
+									step.setName(source.getName());
+									step.setService(source.getService());
+									step.setServer(source.getServer());
+									step.setExecutionList(source.getExecutionList());
+									step.setAssertList(source.getAssertList());
+									step.setAssetMap((HashMap<Asset, String>) ((MySQLStep) source).getAssetMap()); 
+									step.setDependsOn(source.getDependsOn());
+									step.setVariableList(source.getVariableList());
+								}
+								if (step instanceof MongoStep) 
+								{
+									((MongoStep) step).setAction(((MongoStep) source).getAction());
+									step.setAssertList(source.getAssertList());
+									step.setAssetMap((HashMap<Asset, String>) ((MongoStep) source).getAssetMap());
+									((MongoStep) step).setCollection(((MongoStep) source).getCollection());
+									step.setDependsOn(source.getDependsOn());
+									step.setExecutionList(source.getExecutionList());
+									step.setName(source.getName());
+									((MongoStep) step).setQuery(((MongoStep) source).getQuery());
+									step.setServer(source.getServer());
+									step.setService(source.getService());
+									step.setVariableList(source.getVariableList());
+								}
+								if (step instanceof RestStep) 
+								{
+									step.setAssertList(source.getAssertList());
+									step.setAssetMap((HashMap<Asset, String>) source.getAssetMap());
+									((RestStep) step).setContentType(((RestStep) source).getContentType());
+									((RestStep) step).setCookie(((RestStep) source).getCookie());
+									step.setDependsOn(source.getDependsOn());
+									step.setExecutionList(source.getExecutionList());
+									((RestStep) step).setHeader(((RestStep) source).getHeader());
+									((RestStep) step).setMethod(((RestStep) source).getMethod());
+									step.setName(source.getName());
+									((RestStep) step).setPath(((RestStep) source).getPath());
+									((RestStep) step).setQuery(((RestStep) source).getQuery());
+									((RestStep) step).setRequest(((RestStep) source).getRequest());
+									step.setServer(source.getServer());
+									step.setService(source.getService());
+									step.setVariableList(source.getVariableList());
+								}
+								if (step instanceof SoapStep) 
+								{
+									step.setAssertList(source.getAssertList());
+									step.setAssetMap((HashMap<Asset, String>) source.getAssetMap());
+									step.setDependsOn(source.getDependsOn());
+									step.setExecutionList(source.getExecutionList());
+									step.setName(source.getName());
+									((SoapStep) step).setRequest(((SoapStep) source).getRequest());
+									step.setServer(source.getServer());
+									step.setService(source.getService());
+									step.setVariableList(source.getVariableList());
+								}
 							}
 						}
 					}
@@ -201,18 +267,37 @@ public class TestProject implements Serializable {
 	
 	public void setTestSuiteByUID(TestSuite ts, String testUID) {
 		for (TestSuite testSuite : testSuiteList) {
-
+			
 			if (testSuite.getID().equals(testUID)) {
-				testSuite = ts;
+				testSuite.setName(ts.getName());
+				testSuite.setEnvironment(ts.getEnvironment());
 			}
 		}
 	}
 	
-	
+	public TestSuite getTestSuiteByStepUID(String stepUID) {
+		for (TestSuite testSuite : testSuiteList) {
+			
+			if (testSuite.getTestCaseList() != null && !testSuite.getTestCaseList().isEmpty()) {
+				for (TestCase testCase : testSuite.getTestCaseList()) {
+					
+					if (testCase.getStepList() != null && !testCase.getStepList().isEmpty()) {
+						for (Step step : testCase.getStepList()) {
+						
+							if (step.getID().equals(stepUID)) {
+								return testSuite;
+							}
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}	
 
 	@Override
 	public String toString() {
-		return "TestProject [name=" + name + ", testSuiteList=" + toStringSuite(testSuiteList) + ", assetList=" + assetList+ ", environmentList=" + toStringEnv(environmentList)
+		return "TestProject [name=" + name + ", testSuiteList=" + toStringSuite(testSuiteList) + ", assetList=" + assetMap+ ", environmentList=" + toStringEnv(environmentList)
 				+ ", variableList=" + variableList + ", uuid=" + uuid + "]";
 	}
 
@@ -257,12 +342,13 @@ public class TestProject implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((assetList == null) ? 0 : assetList.hashCode());
+				+ ((assetMap == null) ? 0 : assetMap.hashCode());
 		result = prime * result
 				+ ((environmentList == null) ? 0 : environmentList.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
 				+ ((testSuiteList == null) ? 0 : testSuiteList.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		result = prime * result
 				+ ((variableList == null) ? 0 : variableList.hashCode());
 		return result;
@@ -277,10 +363,10 @@ public class TestProject implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		TestProject other = (TestProject) obj;
-		if (assetList == null) {
-			if (other.assetList != null)
+		if (assetMap == null) {
+			if (other.assetMap != null)
 				return false;
-		} else if (!assetList.equals(other.assetList))
+		} else if (!assetMap.equals(other.assetMap))
 			return false;
 		if (environmentList == null) {
 			if (other.environmentList != null)
@@ -297,6 +383,11 @@ public class TestProject implements Serializable {
 				return false;
 		} else if (!testSuiteList.equals(other.testSuiteList))
 			return false;
+		if (uuid == null) {
+			if (other.uuid != null)
+				return false;
+		} else if (!uuid.equals(other.uuid))
+			return false;
 		if (variableList == null) {
 			if (other.variableList != null)
 				return false;
@@ -304,5 +395,7 @@ public class TestProject implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 
 }

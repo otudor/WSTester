@@ -4,23 +4,22 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="376.0" prefWidth="557.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.variables.VariablesController">
    <children>
       <TableView fx:id="tableViewVars" layoutX="70.0" layoutY="120.0" prefHeight="187.0" prefWidth="200.0">
         <columns>
-          <TableColumn fx:id="tableColumnVarName" prefWidth="105.0" text="Nume variabila" />
-          <TableColumn fx:id="tableColumnValue" prefWidth="94.0" text="Valoare" />
+          <TableColumn fx:id="tableColumnVarName" prefWidth="105.0" text="Variable name" />
+          <TableColumn fx:id="tableColumnValue" prefWidth="94.0" text="Value" />
         </columns>
       </TableView>
       <TreeView fx:id="treeViewLocal" layoutX="332.0" layoutY="116.0" prefHeight="193.0" prefWidth="200.0" />
       <Button fx:id="addGlobal" layoutX="70.0" layoutY="319.0" mnemonicParsing="false" text="Add" />
       <Button fx:id="editGlobal" layoutX="143.0" layoutY="319.0" mnemonicParsing="false" text="Edit" />
       <Button fx:id="deleteGlobal" layoutX="218.0" layoutY="319.0" mnemonicParsing="false" text="Delete" />
-      <Button fx:id="editLocal" layoutX="332.0" layoutY="319.0" mnemonicParsing="false" text="Edit" />
-      <Button fx:id="saveLocal" layoutX="401.0" layoutY="319.0" mnemonicParsing="false" text="Save" />
-      <TextField layoutX="96.0" layoutY="63.0" text="       Variabile globale" />
-      <TextField layoutX="347.0" layoutY="63.0" text="         Variabile locale" />
-      <Button fx:id="deleteLocal" layoutX="462.0" layoutY="319.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="editLocal" layoutX="332.0" layoutY="319.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="41.0" text="Edit" />
+      <Button fx:id="saveLocal" layoutX="412.0" layoutY="319.0" mnemonicParsing="false" text="Save" />
+      <Button fx:id="deleteLocal" layoutX="481.0" layoutY="319.0" mnemonicParsing="false" text="Delete" />
+      <Label layoutX="122.0" layoutY="73.0" prefHeight="17.0" prefWidth="114.0" text="Global Variables" />
+      <Label layoutX="385.0" layoutY="73.0" prefHeight="17.0" prefWidth="114.0" text="Local Variables" />
    </children>
 </Pane>

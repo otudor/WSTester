@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml " prefHeight="231.0" prefWidth="444.0">
-	<!-- TODO Add Nodes -->
+<AnchorPane prefHeight="231.0" prefWidth="444.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.SOAP.SOAPcontroller">
+   <children>
+      <Button fx:id="imp" layoutX="170.0" layoutY="103.0" mnemonicParsing="false" text="Import" />
+   </children>
 </AnchorPane>
-
