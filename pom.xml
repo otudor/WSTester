@@ -34,32 +34,90 @@
 	</dependencyManagement>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven.compliler.version}</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jxr-plugin</artifactId>
-				<version>2.4</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<rulesets>
-						<ruleset>../pmd-rule-sets/pmd-ruleset.xml</ruleset>
-					</rulesets>
-				</configuration>
-				<goals></goals>
-			</plugin>
-		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven.compliler.version}</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+				<!-- pmd plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jxr-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<rulesets>
+							<ruleset>../pmd-rule-sets/pmd-ruleset.xml</ruleset>
+						</rulesets>
+					</configuration>
+				</plugin>
+				<!-- end pmd plugin -->
+				<!-- find bugs plugin -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>findbugs-maven-plugin</artifactId>
+					<version>3.0.0</version>
+					<configuration>
+						<!-- Enables analysis which takes more memory but finds more bugs. 
+							If you run out of memory, changes the value of the effort element to 'Low'. -->
+						<effort>Max</effort>
+						<!-- Build doesn't fail if problems are found -->
+						<failOnError>false</failOnError>
+						<!-- Reports all bugs (other values are medium and max) -->
+						<threshold>Low</threshold>
+						<!-- Produces XML report -->
+						<xmlOutput>true</xmlOutput>
+						<!-- Configures the directory in which the XML report is created -->
+						<findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>xml-maven-plugin</artifactId>
+					<version>1.0</version>
+					<configuration>
+						<transformationSets>
+							<transformationSet>
+								<!-- Configures the source directory of XML files. -->
+								<dir>${project.build.directory}/findbugs</dir>
+								<!-- Configures the directory in which the FindBugs report is written. -->
+								<outputDir>${project.build.directory}/findbugs</outputDir>
+								<!-- Selects the used stylesheet. -->
+								<!-- <stylesheet>fancy-hist.xsl</stylesheet> -->
+								<stylesheet>default.xsl</stylesheet>
+								<!--<stylesheet>plain.xsl</stylesheet> -->
+								<!--<stylesheet>fancy.xsl</stylesheet> -->
+								<!--<stylesheet>summary.xsl</stylesheet> -->
+								<fileMappers>
+									<!-- Configures the file extension of the output files. -->
+									<fileMapper
+										implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+										<targetExtension>.html</targetExtension>
+									</fileMapper>
+								</fileMappers>
+							</transformationSet>
+						</transformationSets>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>com.google.code.findbugs</groupId>
+							<artifactId>findbugs</artifactId>
+							<version>3.0.0</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<!-- end find bugs plugin -->
+			</plugins>
+		</pluginManagement>
 	</build>
 </project>
