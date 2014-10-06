@@ -21,6 +21,10 @@
 	<properties>
 		<maven.compliler.version>3.1</maven.compliler.version>
 		<jersey.version>1.18.1</jersey.version>
+		<jxr.plugin.version>2.4</jxr.plugin.version>
+		<pmd.plugin.version>3.1</pmd.plugin.version>
+		<findbugs.vesrion>3.0.0</findbugs.vesrion>
+		<xml.plugin.version>1.0</xml.plugin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -49,15 +53,15 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jxr-plugin</artifactId>
-					<version>2.4</version>
+					<version>${jxr.plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-pmd-plugin</artifactId>
-					<version>3.1</version>
+					<version>${pmd.plugin.version}</version>
 					<configuration>
 						<rulesets>
-							<ruleset>../pmd-rule-sets/pmd-ruleset.xml</ruleset>
+							<ruleset>../pmd-rule-set/pmd-ruleset.xml</ruleset>
 						</rulesets>
 					</configuration>
 				</plugin>
@@ -66,7 +70,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>findbugs-maven-plugin</artifactId>
-					<version>3.0.0</version>
+					<version>${findbugs.vesrion}</version>
 					<configuration>
 						<!-- Enables analysis which takes more memory but finds more bugs. 
 							If you run out of memory, changes the value of the effort element to 'Low'. -->
@@ -84,7 +88,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>xml-maven-plugin</artifactId>
-					<version>1.0</version>
+					<version>${xml.plugin.version}</version>
 					<configuration>
 						<transformationSets>
 							<transformationSet>
@@ -112,7 +116,7 @@
 						<dependency>
 							<groupId>com.google.code.findbugs</groupId>
 							<artifactId>findbugs</artifactId>
-							<version>3.0.0</version>
+							<version>${findbugs.vesrion}</version>
 						</dependency>
 					</dependencies>
 				</plugin>
