@@ -2,10 +2,7 @@ package com.wstester.model;
 
 import java.util.HashMap;
 import java.util.UUID;
-
 import javax.xml.bind.annotation.XmlRootElement;
-
-import com.wstester.model.Action;
 
 @XmlRootElement
 public class MongoStep extends Step{

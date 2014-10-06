@@ -2,6 +2,7 @@ package com.wstester.asserts;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.camel.Exchange;
 
@@ -21,7 +22,8 @@ public class AssertProcessor {
 	
 	public void process(Exchange exchange) throws Exception {
 
-		Response response = exchange.getIn().getBody(Response.class);		
+		Response response = exchange.getIn().getBody(Response.class);	
+		
 		@SuppressWarnings("unchecked")
 		HashSet<Step> stepList = (HashSet<Step>) exchange.getProperty("stepList");
 	
@@ -97,7 +99,7 @@ public class AssertProcessor {
 		return evaluateStringAssert(azzert, response);
 	}
 	
-	private Step getStep(String id, HashSet<Step> stepList){
+	private Step getStep(String id, Set<Step> stepList){
 		
 		log.info(id, toString(stepList));
 		for (Step step : stepList){
@@ -109,7 +111,7 @@ public class AssertProcessor {
 		return null;
 	}
 	
-	private String toString(HashSet<Step> stepList) {
+	private String toString(Set<Step> stepList) {
 
 		if(stepList == null){
 			return "null";

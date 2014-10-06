@@ -1,11 +1,7 @@
 package com.wstester.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.UUID;
-
-import javafx.beans.value.ObservableValue;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
