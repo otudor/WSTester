@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.apache.cxf.jaxws.javaee.EnvEntryType;
+
 import com.wstester.assets.Table;
 import com.wstester.main.MainLauncher;
 import com.wstester.main.WsTesterMain;
@@ -40,6 +42,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -65,8 +69,7 @@ public class RestStepController
 	private TableView<Table> tableView = new TableView<>();
     @FXML
 	private TableColumn<Table, String> nameQuerry;
-//    @FXML
-//	private TableColumn<Table, String> nameQuerry;
+    @FXML private ComboBox<String> editableBox;
     
     
     private RestStep step;    
@@ -95,9 +98,17 @@ public class RestStepController
 	private void initialize() 
 	{
 		this.addQuerryMethod();
+//		this.addToComboBox();
+		//this.editableBox.setItems((ObservableList<String>)new ArrayList<String>());
 	}
 	
    
+
+	
+	   
+	
+
+
 
 	private void addQuerryMethod() {
 		addQuerry.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -132,7 +143,7 @@ public class RestStepController
 			}
 			});
 	
-}
+	}
 
 
 
@@ -259,6 +270,7 @@ public class RestStepController
 		});          
         
         
+        
     }
     public static class Execut{
     	private final SimpleStringProperty date;
@@ -313,5 +325,6 @@ public class RestStepController
 		tsService.saveTestSuite();
 	} 
     
+   
     
 }
