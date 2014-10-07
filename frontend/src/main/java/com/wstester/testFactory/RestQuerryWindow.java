@@ -72,5 +72,11 @@ public String valueName, valueContent;
 					}
 			}
 		});
+		cancel.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				RestStepController.stageQuerry.close();
+			}
+		});
+			}
 	}
-}
