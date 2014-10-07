@@ -26,7 +26,7 @@ public class ResponseCallback extends RouteBuilder {
 				totalResponses++;
 			}
 		})
-		.log("[${body.getStepID}] ResponseCallback Received response");
+		.log("[${body.getStepID}] ResponseCallback Received response: ${body}");
 		
 		from("jms:topic:finishTopic")
 		.log("[${body.getID}] ResponseCallback received finish message")
