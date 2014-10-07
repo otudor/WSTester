@@ -56,6 +56,10 @@ public class MockSystem implements Processor{
 			}
 		}
 		
+		if(response == null) {
+			log.info(step.getID(), "No rule found for this request");
+		}
+		
 		return response;
 	}
 }

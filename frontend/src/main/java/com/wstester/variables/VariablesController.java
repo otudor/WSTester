@@ -1,8 +1,7 @@
 package com.wstester.variables;
 
-import com.wstester.model.Variable;
-
 import java.util.ArrayList;
+
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +18,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import com.wstester.model.Variable;
+
 
 /**
  * 
@@ -29,27 +30,20 @@ import javafx.util.Callback;
 public class VariablesController {
 	//list of variables
 	private ArrayList<Variable> variablesList = new ArrayList<>();
+	public static Stage stageAddVariables;
 	
-	@FXML
-	private TableView<TableVariables> tableViewVars = new TableView<>();
+	@FXML private TableView<TableVariables> tableViewVars;
+	@FXML private TableColumn<TableVariables, String> tableColumnVarName;
+	@FXML private TableColumn<TableVariables, String> tableColumnValue;
+	@FXML private Button addGlobal;
 	
-	@FXML
-	private TableColumn<TableVariables, String> tableColumnVarName;
+	//public static variables on order to pass references to table view and table columns, and use them in AddWindowController class
+	public static TableView<TableVariables> tableViewVarsPassed;
+	public static TableColumn<TableVariables, String> tableColumnVarNamePassed = new TableColumn<TableVariables, String>();
+	public static TableColumn<TableVariables, String> tableColumnValuePassed = new TableColumn<TableVariables, String>();
 	
-	@FXML
-	private TableColumn<TableVariables, String> tableColumnValue;
-	
-	//Add button for global 
-	@FXML
-	private Button addGlobal;
-	
-	private ObservableList<TableVariables> tableViewVarData = FXCollections
+	public static ObservableList<TableVariables> tableViewVarData = FXCollections
 			.observableArrayList();
-	
-	public ObservableList<TableVariables> getTableViewVarData(){
-		return tableViewVarData;
-	}
-	
 	
 	@FXML
 	public void initialize(){
@@ -60,20 +54,25 @@ public class VariablesController {
 		variablesList.add(new Variable("asb", "wqeqwe"));
 		
 		for(int i=0; i<variablesList.size(); i++){
-			getTableViewVarData().add(
+			tableViewVarData.add(
 					new TableVariables(variablesList.get(i).getName(), variablesList.get(i).getContent()));
 		}
 		
 		//add vars to table view
-		tableViewVars.setItems(getTableViewVarData());
-		populateTable(tableColumnValue, tableColumnVarName);
+		tableViewVars.setItems(tableViewVarData);
+		tableViewVars = tableViewVarsPassed;
+		populateTable();
+		
+		//passing the values from columns to static variables
+		tableColumnVarName = tableColumnVarNamePassed;
+		tableColumnValue = tableColumnValuePassed;
 		
 		//event on click Add button from Global
 		addGlobal.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				//adding addVariables fxml for Global
-				Stage stageAddVariables = new Stage();
+				stageAddVariables = new Stage();
 				try{
 					AnchorPane page = (AnchorPane) FXMLLoader.load(getClass().getResource("/fxml/var/addVariables.fxml"));
 					Scene scene = new Scene(page);
@@ -88,10 +87,7 @@ public class VariablesController {
 	}
 	
 	//fill the columns with data
-	public void populateTable(TableColumn<TableVariables, String> tableColumnValue, TableColumn<TableVariables, String> tableColumnVarName){
-		this.tableColumnValue = tableColumnValue;
-		this.tableColumnVarName = tableColumnVarName;
-		
+	public void populateTable(){
 		tableColumnVarName.setCellValueFactory(new Callback<CellDataFeatures<TableVariables, String>, ObservableValue<String>>() {
 		     public ObservableValue<String> call(CellDataFeatures<TableVariables, String> p) {
 		         return p.getValue().getName();
@@ -105,4 +101,17 @@ public class VariablesController {
 		  });
 	}
 	
+	public static void populateTableStatic(){
+		tableColumnVarNamePassed.setCellValueFactory(new Callback<CellDataFeatures<TableVariables, String>, ObservableValue<String>>() {
+		     public ObservableValue<String> call(CellDataFeatures<TableVariables, String> p) {
+		         return p.getValue().getName();
+		     }
+		  });
+		
+		tableColumnValuePassed.setCellValueFactory(new Callback<CellDataFeatures<TableVariables, String>, ObservableValue<String>>() {
+		     public ObservableValue<String> call(CellDataFeatures<TableVariables, String> p) {
+		         return p.getValue().getContent();
+		     }
+		  });
+	}
 }

@@ -31,7 +31,6 @@ public class VariableRoute extends RouteBuilder {
 			public void process(Exchange exchange) throws Exception {
 				
 				variableSet.clear();
-				variableSet = null;
 				variableSet = new HashSet<Variable>(); 
 			}
 		});

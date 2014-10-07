@@ -1,0 +1,1578 @@
+.root {
+    /***************************************************************************
+     *                                                                         *
+     * The main color palette from which the rest of the colors are derived.   *
+     *                                                                         *
+     **************************************************************************/
+ 
+    /* A light grey that is the base color for objects.  Instead of using
+     * -fx-base directly, the sections in this file will typically use -fx-color.
+     */
+    -fx-base: #1d1d1d;
+ 
+    /* A very light grey used for the background of windows.  See also
+     * -fx-text-background-color, which should be used as the -fx-text-fill
+     * value for text painted on top of backgrounds colored with -fx-background.
+     */
+    -fx-background: darkgray;
+ 
+    /* Used for the inside of text boxes, password boxes, lists, trees, and
+     * tables.  See also -fx-text-inner-color, which should be used as the
+     * -fx-text-fill value for text painted on top of backgrounds colored
+     * with -fx-control-inner-background.
+     */
+    -fx-control-inner-background: #1d1d1d;
+ 
+    /* One of these colors will be chosen based upon a ladder calculation
+     * that uses the brightness of a background color.  Instead of using these
+     * colors directly as -fx-text-fill values, the sections in this file should
+     * use a derived color to match the background in use.  See also:
+     *
+     * -fx-text-base-color for text on top of -fx-base, -fx-color, and -fx-body-color
+     * -fx-text-background-color for text on top of -fx-background
+     * -fx-text-inner-color for text on top of -fx-control-inner-color
+     * -fx-selection-bar-text for text on top of -fx-selection-bar
+     */
+    -fx-dark-text-color: black;
+    -fx-mid-text-color: yellow;
+    -fx-light-text-color: white;
+ 
+    /* A bright blue for highlighting/accenting objects.  For example: selected
+     * text; selected items in menus, lists, trees, and tables; progress bars;
+     * default buttons.
+     */
+    -fx-accent: #0093ff;
+ 
+    /* A bright blue for the focus indicator of objects. Typically used as the
+     * first color in -fx-background-color for the "focused" pseudo-class. Also
+     * typically used with insets of -1.4 to provide a glowing effect.
+     *
+     * TODO: should this be derived from -fx-accent?
+     */
+    -fx-focus-color: #0093ff;
+ 
+    /* The color that is used in styling controls. The default value is based
+     * on -fx-base, but is changed by pseudoclasses to change the base color.
+     * For example, the "hover" pseudoclass will typically set -fx-color to
+     * -fx-hover-base (see below) and the "armed" pseudoclass will typically
+     * set -fx-color to -fx-pressed-base.
+     */
+    -fx-color: -fx-base;
+ 
+    /* The opacity level to use for the "disabled" pseudoclass.
+     */
+    -fx-disabled-opacity: 0.4;
+ 
+    /***************************************************************************
+     *                                                                         *
+     * Colors that are derived from the main color palette.                    *
+     *                                                                         *
+     **************************************************************************/
+ 
+    /* A little lighter than -fx-base and used as the -fx-color for the
+     * "hovered" pseudoclass state.
+     */
+    -fx-hover-base: ladder(
+        -fx-base,
+        derive(-fx-base,20%) 20%,
+        derive(-fx-base,30%) 35%,
+        derive(-fx-base,40%) 50%
+     );
+ 
+    /* A little darker than -fx-base and used as the -fx-color for the
+     * "armed" pseudoclass state.
+     *
+     * TODO: should this be renamed to -fx-armed-base?
+     */
+    -fx-pressed-base: derive(-fx-base,-20%);
+ 
+    /* Used to specify the body color for focused objects.  By default, it's
+     * the same as -fx-base (i.e., the body color doesn't change when a control
+     * gets focus).
+     */
+    -fx-focused-base: -fx-base;
+ 
+    /* The color to use for -fx-text-fill when text is to be painted on top of
+     * a background filled with the -fx-background color.
+     */
+    -fx-text-background-color: ladder(
+        -fx-background,
+        -fx-light-text-color 45%,
+        -fx-dark-text-color  46%,
+        -fx-dark-text-color  59%,
+        -fx-mid-text-color   60%
+     );
+ 
+    /* The default color for all text.  Sections should change the -fx-text-fill
+     * property if change the background color to something else.  See also:
+     *
+     * -fx-text-base-color for text on top of -fx-base, -fx-color, and -fx-body-color
+     * -fx-text-background-color for text on top of -fx-background
+     * -fx-text-inner-color for text on top of -fx-control-inner-color
+     * -fx-selection-bar-text for text on top of -fx-selection-bar
+     */
+    -fx-text-fill: -fx-text-background-color;
+ 
+    /* A little darker than -fx-color and used to draw boxes around objects such
+     * as progress bars, scroll bars, scroll panes, trees, tables, and lists.
+     */
+    -fx-box-border: ladder(
+        -fx-color,
+        black 20%,
+        derive(-fx-color,-30%) 30%
+    );
+ 
+    /* Darker than -fx-background and used to draw boxes around text boxes and
+     * password boxes.
+     */
+    -fx-text-box-border: ladder(
+        -fx-background,
+        black 10%,
+        derive(-fx-background, -15%) 30%
+    );
+ 
+    /* Typically lighter than -fx-background and used to provide a small
+     * highlight under controls and tick marks for checkboxes and radio buttons.
+     * Often used with an insets of 0 0 -1 0, and is also often the first
+     * color in a -fx-background-color list.  Also is typically replaced by
+     * -fx-focus-color with an insets of -1.4 in the "focused" pseudoclass.
+     */
+    -fx-shadow-highlight-color: ladder(
+        -fx-background,
+        transparent 0%,
+        derive(-fx-background,40%)   5%,
+        derive(-fx-background,60%)  70%,
+        derive(-fx-background,100%) 85%,
+        derive(-fx-background,100%) 97%,
+        derive(-fx-background,-10%) 97.5%
+      );
+ 
+    /* A gradient that goes from a little darker than -fx-color on the top to
+     * even more darker than -fx-color on the bottom.  Typically is the second
+     * color in the -fx-background-color list as the small thin border around
+     * a control. It is typically the same size as the control (i.e., insets
+     * are 0).
+     */
+    -fx-outer-border: linear-gradient(
+        to bottom,
+        derive(-fx-color,-9%) 0%,
+        derive(-fx-color,-33%) 100%
+    );
+ 
+    /* A gradient that goes from a bit lighter than -fx-color on the top to
+     * a little darker at the bottom.  Typically is the third color in the
+     * -fx-background-color list as a thin highlight inside the outer border.
+     * Insets are typically 1.
+     */
+    -fx-inner-border: linear-gradient(
+        to bottom,
+        ladder(-fx-color,
+               derive(-fx-color,80%) 60%,
+               white 82%) 0%,
+        ladder(-fx-color,
+               derive(-fx-color,20%) 10%,
+               derive(-fx-color,-10%) 80%) 100%
+    );
+ 
+    -fx-inner-border-horizontal: linear-gradient(
+        to right,
+        ladder(-fx-color,
+               derive(-fx-color,80%) 60%,
+               white 82%) 0%,
+        ladder(-fx-color,
+               derive(-fx-color,20%) 10%,
+               derive(-fx-color,-10%) 80%) 100%
+    );
+ 
+    -fx-inner-border-bottomup: linear-gradient(
+        to top,
+        ladder(-fx-color,
+               derive(-fx-color,80%) 60%,
+               white 82%) 0%,
+        ladder(-fx-color,
+               derive(-fx-color,20%) 10%,
+               derive(-fx-color,-10%) 80%) 100%);
+ 
+    /* A gradient that goes from a little lighter than -fx-color at the top to
+     * a little darker than -fx-color at the bottom and is used to fill the
+     * body of many controls such as buttons.  Typically is the fourth color
+     * in the -fx-background-color list and represents main body of the control.
+     * Insets are typically 2.
+     */
+    -fx-body-color: linear-gradient(
+        to bottom,
+        derive(-fx-color,34%) 0%,
+        derive(-fx-color,-18%) 100%
+    );
+       
+    -fx-body-color-bottomup:  linear-gradient(
+        to top,
+        derive(-fx-color,34%) 0%,
+        derive(-fx-color,-18%) 100%
+    );
+ 
+    /* The color to use as -fx-text-fill when painting text on top of
+     * backgrounds filled with -fx-base, -fx-color, and -fx-body-color.
+     */
+    -fx-text-base-color: ladder(
+        -fx-color,
+        -fx-light-text-color 45%,
+        -fx-dark-text-color  46%,
+        -fx-dark-text-color  59%,
+        -fx-mid-text-color   60%
+    );
+    
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+	-fx-font-family: "Helvetica";
+ 
+    /* The color to use as -fx-text-fill when painting text on top of
+     * backgrounds filled with -fx-control-inner-background.
+     */
+    -fx-text-inner-color: ladder(
+        -fx-control-inner-background,
+        -fx-light-text-color 45%,
+        -fx-dark-text-color  46%,
+        -fx-dark-text-color  59%,
+        -fx-mid-text-color   60%
+    );
+ 
+    /* The color to use for small mark-like objects such as checks on check
+     * boxes, filled in circles in radio buttons, arrows on scroll bars, etc.
+     */
+    -fx-mark-color: ladder(
+        -fx-color,
+        white 30%,
+        derive(-fx-color,-63%) 31%
+    );
+ 
+    /* The small thin light "shadow" for mark-like objects. Typically used in
+     * conjunction with -fx-mark-color with an insets of 1 0 -1 0.
+     */
+    -fx-mark-highlight-color: ladder(
+        -fx-color,
+        derive(-fx-color,80%) 60%,
+        white 70%
+    );
+ 
+    /* Background for items in list like things such as menus, lists, trees,
+     * and tables.
+     *
+     * TODO: it seems like this should be based upon -fx-accent and we should
+     * remove the setting -fx-background in all the sections that use
+     * -fx-selection-bar.
+     */
+    -fx-selection-bar: linear-gradient(
+        to bottom,
+        derive(-fx-background,-7%) 0%,
+        derive(-fx-background,-34%) 100%
+    );
+ 
+    /* The color to use as -fx-text-fill when painting text on top of
+     * backgrounds filled with -fx-selection-bar.
+     *
+     * TODO: it seems like this should be derived from -fx-selection-bar.
+     */
+    -fx-selection-bar-text: ladder(
+        -fx-background,
+        -fx-light-text-color 50%,
+        -fx-mid-text-color   51%
+    );
+ 
+    /* The default border color for a tab.
+     *
+     * TODO: should this be -fx-box-border or derived from some other color?
+     */
+    -fx-tab-border-color: -fx-box-border;
+ 
+    /* These are needed for Popup */
+    -fx-background-color: inherit;
+    -fx-background-radius: inherit;
+    -fx-background-insets: inherit;
+    -fx-padding: inherit;
+   
+    /* The color to use in ListView/TreeView/TableView to indicate hover. */
+    -fx-cell-hover-color: darkgray;
+   
+    -fx-cell-focus-inner-border: blue;
+   
+    /* The colors to use in Pagination */
+    -fx-page-bullet-border: #acacac;    
+    -fx-page-indicator-hover-border: darkgray;
+}
+ 
+.mnemonic-underline {
+    -fx-stroke: transparent;
+}
+ 
+.text {
+    -fx-font-smoothing-type: lcd;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Label                                                                       *
+ *                                                                             *
+ ******************************************************************************/
+ 
+.label {
+    -fx-skin: "com.sun.javafx.scene.control.skin.LabelSkin";
+    -fx-text-fill: -fx-text-background-color;
+}
+ 
+.label:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+.label:show-mnemonics .mnemonic-underline {
+    -fx-stroke: -fx-text-fill;
+}
+ 
+/* The opacity of the parent is applied to the children.  So we make the
+ * opacity 1.0 here to avoid double translucency.
+ */
+/*:disabled > * > .label {
+    -fx-opacity: 1.0;
+}*/
+/*******************************************************************************
+ *                                                                             *
+ * Button                                                                      *
+ *                                                                             *
+ ******************************************************************************/
+ 
+.button {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ButtonSkin";
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 5, 5, 4, 3;
+    -fx-padding: 0.166667em 0.833333em 0.25em 0.833333em; /* 2 10 3 10 */
+    -fx-text-fill: -fx-text-base-color;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+}
+ 
+.button:focused {
+    -fx-color: -fx-focused-base;
+    -fx-background-color: -fx-focus-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: -1.4, 0, 1, 2;
+    -fx-background-radius:  6.4, 5, 4, 3;
+}
+ 
+.button:hover {
+    -fx-color: -fx-hover-base;
+}
+ 
+.button:armed {
+    -fx-color: -fx-pressed-base;
+}
+ 
+.button:default {
+    -fx-base: -fx-accent;
+}
+ 
+.button:cancel {
+}
+ 
+.button:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+.button:show-mnemonics .mnemonic-underline {
+    -fx-stroke: -fx-text-fill;
+}
+/*******************************************************************************
+ *                                                                             *
+ * CheckBox                                                                    *
+ *                                                                             *
+ ******************************************************************************/
+ 
+.check-box {
+    -fx-skin: "com.sun.javafx.scene.control.skin.CheckBoxSkin";
+    -fx-label-padding: 0.0em 0.0em 0.0em 0.416667em; /* 0 0 0 5 */
+    -fx-text-fill: -fx-text-background-color;
+}
+ 
+.check-box:focused {
+    -fx-color: -fx-focused-base;
+}
+ 
+.check-box .box {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 2, 2, 1, 1;
+    -fx-padding: 0.25em; /* 3 -- padding from the outside edge to the mark */
+}
+ 
+.check-box:focused .box {
+    -fx-background-color: -fx-focus-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: -1.4, 0, 1, 2;
+    -fx-background-radius: 3.4, 2, 1, 1;
+}
+ 
+.check-box:hover .box {
+    -fx-color: -fx-hover-base;
+}
+ 
+.check-box:armed .box {
+    -fx-color: -fx-pressed-base;
+}
+ 
+.check-box .mark {
+    -fx-background-color: transparent;
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-padding: 0.333333em; /* 4 -- this is half the size of the mark */
+    -fx-shape: "M0,4H2L3,6L6,0H8L4,8H2Z";
+}
+ 
+.check-box:indeterminate .mark {
+    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+    -fx-shape: "M0,0H8V2H0Z";
+    -fx-scale-shape: false;
+}
+ 
+.check-box:selected .mark {
+    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+}
+ 
+.check-box:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+.check-box:show-mnemonics .mnemonic-underline {
+    -fx-stroke: -fx-text-fill;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * TextField                                                                   *
+ *                                                                             *
+ ******************************************************************************/
+ 
+.text-field {
+    -fx-skin: "com.sun.javafx.scene.control.skin.TextFieldSkin";
+    -fx-background-color: -fx-shadow-highlight-color, -fx-text-box-border, -fx-control-inner-background;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 3, 2, 2;
+    -fx-padding: 3 5 3 5;
+    -fx-text-fill: -fx-text-inner-color;
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+    -fx-cursor: text;
+}
+ 
+.text-field:focused {
+    -fx-background-color: -fx-focus-color, -fx-text-box-border, -fx-control-inner-background;
+    -fx-background-insets: -0.4, 1, 2;
+    -fx-background-radius: 3.4, 2, 2;
+    -fx-prompt-text-fill: transparent;
+}
+ 
+.text-field:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+ /*******************************************************************************
+ *                                                                             *
+ * Customised CSS for controls placed directly within cells                    *
+ *                                                                             *
+ ******************************************************************************/
+ 
+.cell .choice-box {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0.0em 0.5em 0.0em 0.0em; /* 0 6 0 0 */
+    -fx-alignment: CENTER_LEFT;
+    -fx-content-display: LEFT;
+}
+ 
+.cell .choice-box .label {
+    -fx-padding: 0em 0.333333em 0.0em 0.333333; /* 2 4 3 6 */
+}
+ 
+.cell:focused:selected .choice-box .label {
+    -fx-text-fill: white;
+}
+ 
+.cell:focused:selected .choice-box .arrow {
+    -fx-background-color: -fx-mark-highlight-color, white;
+}
+ 
+
+/*******************************************************************************
+ *                                                                             *
+ * ListView and ListCell                                                       *
+ *                                                                             *
+ ******************************************************************************/
+ 
+.list-view {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ListViewSkin";
+    -fx-background-color: -fx-box-border, -fx-control-inner-background;
+    -fx-background-insets: 0, 1;
+ 
+     /* There is some oddness if padding is in em values rather than pixels,
+        in particular, the left border of the control doesn't show. */
+    -fx-padding: 1; /* 0.083333em; */
+}
+ 
+.list-view:focused {
+    -fx-background-color: -fx-focus-color,-fx-box-border,-fx-control-inner-background;
+    -fx-background-insets: -1.4, 0, 1;
+    -fx-background-radius: 1.4, 0, 0;
+ 
+    /* There is some oddness if padding is in em values rather than pixels,
+       in particular, the left border of the control doesn't show. */
+    -fx-padding: 1; /* 0.083333em; */
+}
+ 
+.list-view .scroll-bar:vertical{
+    -fx-background-insets: 0, 0 0 0 1;
+    -fx-padding: 0.0 0.0 0.0 0.0;
+}
+ 
+.list-view .scroll-bar:horizontal{
+    -fx-background-insets: 0, 1 0 0 0;
+    -fx-padding: 0.0 0.0 0.0 0.0;
+}
+ 
+.list-view:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+.list-view .corner {
+    -fx-background-color: -fx-box-border, -fx-base;
+    -fx-background-insets: 0, 1 0 0 1;
+}
+ 
+.list-cell {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ListCellSkin";
+    -fx-background-color: -fx-control-inner-background;
+    -fx-padding: 0.25em; /* 3 */
+    -fx-text-fill: -fx-text-inner-color;
+    -fx-opacity: 1;
+}
+ 
+.list-cell:odd {
+    -fx-background-color: derive(-fx-control-inner-background,-5%);
+}
+ 
+.list-view:focused .list-cell:focused {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-control-inner-background;
+    -fx-background-insets: 0, 1, 2;
+}
+ 
+.list-view:focused .list-cell:focused:odd {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, derive(-fx-control-inner-background,-5%);
+    -fx-background-insets: 0, 1, 2;
+}
+ 
+/* When the list-cell is selected and focused */
+.list-view:focused .list-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-selection-bar;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background: -fx-accent;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+.list-view:focused .list-cell:filled:selected, .list-view:focused .list-cell:filled:selected:hover {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+.list-view:focused .list-cell:filled:focused:selected:hover {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-selection-bar;
+    -fx-background-insets: 0, 1, 2;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+/* When the ListView is _not_ focused, we show alternate selection colors */
+.list-cell:filled:selected:focused, .list-cell:filled:selected, .list-view:horizontal .list-cell:filled:selected {
+    -fx-background-color: lightgray;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+.list-cell:filled:selected:focused:disabled, .list-cell:filled:selected:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+.list-cell:filled:hover {
+    -fx-background-color: -fx-cell-hover-color;
+    -fx-text-fill: -fx-text-inner-color;
+}
+ 
+.list-view:focused .list-cell:filled:focused:hover {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-cell-hover-color;
+    -fx-background-insets: 0, 1, 2;
+    -fx-text-fill: -fx-text-inner-color;
+}
+ 
+.list-view:horizontal .list-cell:filled:selected, .list-view:horizontal .list-cell:filled:selected:hover {
+    -fx-background-color: linear-gradient(to right, derive(-fx-accent,-7%), derive(-fx-accent,-25%));
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * TreeView and TreeCell                                                       *
+ *                                                                             *
+ ******************************************************************************/
+ 
+.tree-view {
+    -fx-skin: "com.sun.javafx.scene.control.skin.TreeViewSkin";
+    -fx-background-color: -fx-box-border, -fx-control-inner-background;
+    -fx-background-insets: 0, 1;
+ 
+    /* There is some oddness if padding is in em values rather than pixels,
+       in particular, the left border of the control doesn't show. */
+    -fx-padding: 1; /* 0.083333em; */
+}
+ 
+.tree-view:focused {
+    -fx-background-color: -fx-focus-color,-fx-box-border,-fx-control-inner-background;
+    -fx-background-insets: -1.4, 0, 1;
+    -fx-background-radius: 1.4, 0, 0;
+ 
+    /* There is some oddness if padding is in em values rather than pixels,
+       in particular, the left border of the control doesn't show. */
+    -fx-padding: 1; /* 0.083333em; */
+}
+ 
+.tree-view .scroll-bar:vertical{
+    -fx-background-insets: 0, 0 0 0 1;
+    -fx-padding: 0.0 0.0 0.0 0.0;
+}
+ 
+.tree-view .scroll-bar:horizontal{
+    -fx-background-insets: 0, 1 0 0 0;
+    -fx-padding: 0.0 0.0 0.0 0.0;
+}
+ 
+.tree-view:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+.tree-view .corner {
+    -fx-background-color: -fx-box-border, -fx-base;
+    -fx-background-insets: 0, 1 0 0 1;
+}
+ 
+.tree-cell {
+    -fx-skin: "com.sun.javafx.scene.control.skin.TreeCellSkin";
+    -fx-background-color: -fx-control-inner-background;
+    -fx-padding: 0.25em; /* 3 */
+    -fx-text-fill: -fx-text-inner-color;
+    -fx-indent: 10;
+}
+ 
+.tree-cell .label {
+    -fx-padding: 0.0em 0.0em 0.0em 0.25em; /* 0 0 0 3 */
+}
+ 
+ 
+ 
+.tree-view:focused .tree-cell:focused {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-control-inner-background;
+    -fx-background-insets: 0, 1, 2;
+}
+ 
+.tree-view:focused .tree-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-selection-bar;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background: -fx-accent;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+.tree-view:focused .tree-cell:filled:selected, .tree-view:focused .tree-cell:filled:selected:hover {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+.tree-view:focused .tree-cell:filled:focused:selected:hover {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-selection-bar;
+    -fx-background-insets: 0, 1, 2;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+/* When the TreeView is _not_ focused, we show alternate selection colors */
+.tree-cell:filled:selected:focused, .tree-cell:filled:selected {
+    -fx-background-color: lightgray;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+.tree-cell:filled:selected:focused:disabled, .tree-cell:filled:selected:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+.tree-cell .tree-disclosure-node {
+    /** put a bit of padding around the disclosure node to make the clicking region larger */
+    -fx-padding: 4 2 4 8;
+    -fx-background-color: transparent;
+}
+ 
+.tree-cell .tree-disclosure-node:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+.tree-cell .tree-disclosure-node .arrow {
+    -fx-background-color: -fx-mark-color;
+    -fx-padding: 0.333333em; /* 4 */
+    -fx-shape: "M 0 -4 L 8 0 L 0 4 z";
+}
+ 
+.tree-cell:expanded .tree-disclosure-node .arrow {
+    -fx-rotate: 90;
+}
+ 
+.tree-cell:filled:selected .tree-disclosure-node .arrow {
+    -fx-background-color: -fx-selection-bar-text;
+}
+ 
+.tree-cell:filled:hover {
+    -fx-background-color: -fx-cell-hover-color;
+    -fx-text-fill: -fx-text-inner-color;
+}
+ 
+.tree-cell:filled:hover .tree-disclosure-node .arrow {
+    -fx-background-color: -fx-mark-color;
+}
+ 
+.tree-view:focused .tree-cell:filled:focused:hover {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-cell-hover-color;
+    -fx-background-insets: 0, 1, 2;
+    -fx-text-fill: -fx-text-inner-color;
+}
+ 
+.tree-cell:filled:selected:hover .tree-disclosure-node .arrow {
+    -fx-background-color: -fx-selection-bar-text;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * MenuButton                                                                  *
+ *                                                                             *
+ ******************************************************************************/
+ 
+.menu-button {
+    -fx-skin: "com.sun.javafx.scene.control.skin.MenuButtonSkin";
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 5, 5, 4, 3;
+    -fx-padding: 0.0em; /* 0 */
+    -fx-text-fill: -fx-text-base-color;
+}
+ 
+/* TODO workaround for RT-19062 */
+.menu-button .label { -fx-text-fill: -fx-text-base-color; }
+ 
+.menu-button:focused {
+    -fx-color: -fx-focused-base;
+    -fx-background-color: -fx-focus-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: -1.4, 0, 1, 2;
+    -fx-background-radius: 6.4, 4, 5, 3;
+}
+ 
+.menu-button:hover {
+    -fx-color: -fx-hover-base;
+}
+ 
+.menu-button:armed {
+    -fx-color: -fx-pressed-base;
+}
+ 
+/* The MenuButton skin uses an inner Label part */
+.menu-button .label {
+    -fx-padding: 0.166667em 1.5em 0.25em 0.833333em; /* 2 18 3 10 */
+}
+ 
+.menu-button .arrow-button {
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0.5em 0.416667em 0.5em 0.0em; /* 6 5 6 0 */
+}
+ 
+.menu-button .arrow {
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+    -fx-padding: 0.25em; /* 3 */
+    -fx-shape: "M 0 -3.5 v 7 l 4 -3.5 z";
+}
+ 
+.menu-button:openvertically .arrow {
+    -fx-padding: 0.166667em 0.333333em 0.166667em 0.333333em; /* 2 4 2 4 */
+    -fx-shape: "M 0 0 h 7 l -3.5 4 z";
+}
+ 
+.menu-button:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+.menu-button:show-mnemonics .mnemonic-underline {
+    -fx-stroke: -fx-text-fill;
+}
+ 
+ 
+/*******************************************************************************
+ *                                                                             *
+ * Menu                                                                        *
+ *                                                                             *
+ ******************************************************************************/
+ 
+.menu {
+/*    -fx-skin: "com.sun.javafx.scene.control.skin.MenuSkin";*/
+    -fx-background-color: transparent;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+}
+ 
+.menu:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+.menu:show-mnemonics .mnemonic-underline {
+    -fx-stroke: -fx-text-fill;
+}
+ 
+/* This hides the down arrow that would show on a menu placed in a menubar */
+.menu-bar .menu .arrow {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-shape: null;
+}
+ 
+.menu-bar .menu .arrow-button {
+    -fx-padding: 0;
+}
+ 
+.menu .arrow {
+    -fx-background-color: -fx-mark-color;
+    -fx-shape: "M0,-4L4,0L0,4Z";
+    -fx-scale-shape: false;
+}
+ 
+.menu:focused:showing .arrow, .menu:hover:showing .arrow, .menu:focused .arrow, .menu:showing .arrow {
+    -fx-background-color: white;
+}
+ 
+.menu-up-arrow {
+    -fx-padding: 0.666667em 0.416667em 0.0em 0.416667em;  /* 8 5 0 5 */
+    -fx-background-color: derive(-fx-color,-2%);
+    -fx-shape: "M0 1 L1 1 L.5 0 Z";
+    -fx-effect: innershadow( two-pass-box , rgba(0,0,0,0.6) , 4, 0.0 , 0 , 1 );
+}
+ 
+.menu-down-arrow {
+    -fx-background-color: derive(-fx-color,-2%);
+    -fx-padding: 0.666667em 0.416667em 0.0em 0.416667em;  /* 8 5 0 5 */
+    -fx-shape: "M0 0 L1 0 L.5 1 Z";
+    -fx-effect: innershadow( two-pass-box , rgba(0,0,0,0.6) , 4, 0.0 , 0 , 1 );
+}
+ 
+ 
+/*******************************************************************************
+ *                                                                             *
+ * MenuBar                                                                     *
+ *                                                                             *
+ ******************************************************************************/
+ 
+/* Corresponding hex values for the color derivations used below are: *
+ * derive(-fx-base,-30%); #929292                                     *
+ * derive(-fx-base,-50%); #686868                                     *
+ * derive(-fx-base,-70%); #3e3e3e                                     */
+ 
+.menu-bar {
+    -fx-skin: "com.sun.javafx.scene.control.skin.MenuBarSkin";
+    -fx-padding: 0.0em 0.666667em 0.0em 0.666667em; /* 0 8 0 8 */
+    -fx-spacing: 0.166667em; /* 2 */
+    -fx-base: derive(#d0d0d0,-70%);
+    -fx-background-color: linear-gradient(to bottom, derive(-fx-color,50%), derive(-fx-color,-30%)), -fx-body-color;
+    -fx-background-insets: 0, 1 0 1 0;
+    -fx-background-radius: 0, 0 ;
+}
+ 
+/* Show nothing for background of normal menu button in a menu bar */
+.menu-bar .menu-button {
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+/* Change padding of menu buttons when in menu bar */
+.menu-bar .menu-button .label {
+    -fx-padding: 0.333em 0.5em 0.333em 0.5em; /* 4 6 4 6*/
+}
+ 
+.menu-bar .menu-button:hover, .menu-bar .menu-button:focused, .menu-bar .menu-button:showing {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+/*.menu-bar .menu:focused:showing, .menu-bar .menu:showing, .menu-bar .menu:focused, .menu:focused:showing, .menu:showing, .menu:focused {*/
+/*.menu-bar .menu-button:showing, .menu-button:showing {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-text-fill: -fx-selection-bar-text;
+}*/
+ 
+.menu-bar .menu-button:hover {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+.menu-bar:show-mnemonics .mnemonic-underline {
+    -fx-stroke: -fx-text-fill;
+}
+ 
+/*******************************************************************************
+ *                                                                             *
+ * MenuItem                                                                    *
+ *                                                                             *
+ ******************************************************************************/
+ 
+.menu-item {
+/*    -fx-skin: "com.sun.javafx.scene.control.skin.MenuItemSkin";*/
+    -fx-background-color: transparent;
+    -fx-padding: 0.333333em 0.41777em 0.333333em 0.41777em;  /* 4 5 4 5 */
+}
+ 
+.menu-item .left-container {
+    -fx-padding: 0.458em 0.791em 0.458em 0.458em;
+}
+ 
+.menu-item .graphic-container {
+    -fx-padding: 0em 0.333em 0em 0em;
+}
+ 
+.menu-item .label {
+    -fx-padding: 0em 0.5em 0em 0em;
+    -fx-text-fill: -fx-text-base-color;
+}
+ 
+.menu-item:disabled .label {
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+.menu-item:focused {
+     -fx-background: -fx-accent;
+     -fx-background-color: -fx-selection-bar;
+     -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+.menu-item:focused .label {
+    -fx-text-fill: white;
+}
+.menu-item .right-container {
+    -fx-padding: 0em 0em 0em 0.5em;
+}
+ 
+.menu-item:show-mnemonics .mnemonic-underline {
+    -fx-stroke: -fx-text-fill;
+}
+ 
+ 
+.radio-menu-item:checked .radio {
+    -fx-background-color: -fx-mark-color;
+    -fx-shape: "M0,5H2L4,8L8,0H10L5,10H3Z";
+    -fx-scale-shape: false;
+}
+ 
+.radio-menu-item:focused:checked .radio {
+    -fx-background-color: white;
+}
+ 
+.check-menu-item:checked .check {
+    -fx-background-color: -fx-mark-color;
+    -fx-shape: "M0,5H2L4,8L8,0H10L5,10H3Z";
+    -fx-scale-shape: false;
+}
+ 
+.check-menu-item:focused:checked .check {
+    -fx-background-color: white;
+}
+ 
+.menu .arrow {
+    -fx-padding: 0.458em 0.167em 0.458em 0.167em; /* 4.5 2 4.5 2 */
+    -fx-background-color: -fx-mark-color;
+    -fx-shape: "M0,-4L4,0L0,4Z";
+    -fx-scale-shape: false;
+}
+ 
+.menu:selected .arrow {
+    -fx-background-color: white;
+}
+/*.radio.selected {
+    -fx-background-color: -fx-mark-color;
+    -fx-padding: 0.666667em;  8
+    -fx-shape: "M7,3.5C7,5.433,5.433,7,3.5,7C1.567,7,0,5.433,0,3.5C0,1.567,1.63,0,3.5,0C5.433,0,7,1.567,7,3.5z";
+    -fx-scale-shape: false;
+}*/
+ 
+/*.check.checked {
+    -fx-background-color: -fx-mark-color;
+    -fx-padding: 0.666667em;  8
+    -fx-shape: "M0,5H2L4,8L8,0H10L5,10H3Z";
+    -fx-scale-shape: false;
+}*/
+ 
+/*
+.menu-item:hover:selected .menu-item-check, .menu-item:focused:selected .menu-item-check,.menu-item:hover:selected .menu-item-radio, .menu-item:focused:selected .menu-item-radio {
+    -fx-background-color: -fx-selection-bar-text;
+}
+*/
+.menu-item:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * TabPane                                                                     *
+ *                                                                             *
+ ******************************************************************************/
+ 
+.tab-pane {
+    -fx-skin: "com.sun.javafx.scene.control.skin.TabPaneSkin";
+    /* -fx-tab-min-width: 4.583em;  55 */
+    /* -fx-tab-max-width: 4.583em; 55 */
+    -fx-tab-min-height: 2em; /* 24 */
+    -fx-tab-max-height: 2em; /* 24 */
+}
+ 
+.tab .tab-label {
+    -fx-skin: "com.sun.javafx.scene.control.skin.LabelSkin";
+    -fx-background-color: transparent;    
+    -fx-alignment: CENTER;
+    -fx-text-fill: -fx-text-base-color;
+}
+/*
+.tab *.tab-label Text {
+    -fx-effect: dropshadow(two-pass-box , rgba(255, 255, 255, 0.4), 1, 0.0 , 0, 1);
+}*/
+ 
+.tab-content-area {
+    -fx-background-color: -fx-control-inner-background;
+    -fx-padding: 0.0em; /* 0 */
+    /* -fx-opacity: -fx-disabled-opacity;*/
+}
+ 
+.tab {
+    /* This is how it is done in Button, but the -1 inset caused a white line  */
+    /* to appear beneath the tab, which looks bad, so it's taken out below.    */
+/*    -fx-background-color: -fx-shadow-highlight-color, -fx-tab-border-color, -fx-inner-border, -fx-body-color;
+    -fx-background-radius: 5 5 0 0, 5 5 0 0, 4 4 0 0, 3 3 0 0;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;*/
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5 5 0 0, 4 4 0 0, 3 3 0 0;
+    -fx-padding: 0.083333em 0.5em 0.083333em 0.5em; /* 1 6 1 6 */
+/*    -fx-text-fill: -fx-text-base-color;*/
+}
+ 
+.tab:top {
+    -fx-background-color: -fx-tab-border-color, -fx-inner-border, -fx-body-color;
+}
+ 
+.tab:right {
+    -fx-background-color: -fx-tab-border-color, -fx-inner-border-bottomup, -fx-body-color-bottomup;
+}
+ 
+.tab:bottom {
+    -fx-background-color: -fx-tab-border-color, -fx-inner-border-bottomup, -fx-body-color-bottomup;
+}
+ 
+.tab:left {
+    -fx-background-color: -fx-tab-border-color, -fx-inner-border, -fx-body-color;
+}
+ 
+.tab:hover {
+    -fx-color: -fx-hover-base;
+}
+ 
+.tab:selected {
+/*    -fx-background-color: white;*/
+ 
+/*    -fx-background-color: -fx-tab-border-color, -fx-inner-border, -fx-body-color;
+    -fx-background-radius: 5 5 0 0, 4 4 0 0, 3 3 0 0;
+    -fx-background-insets: 0, 1 1 0 1, 2 2 0 2;*/
+    -fx-background-color: -fx-tab-border-color, -fx-control-inner-background;
+    -fx-background-insets: 0, 1 1 0 1;
+    -fx-background-radius: 5 5 0 0, 4 4 0 0;
+}
+ 
+.tab:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+.tab:disabled:hover {
+    -fx-color: -fx-base;
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+.tab-pane *.tab-header-background {
+    -fx-background-color: -fx-outer-border, -fx-inner-border, derive(-fx-color, -20%);
+    -fx-effect: innershadow(two-pass-box , rgba(0,0,0,0.6) , 4, 0.0 , 0 , 0);
+}
+ 
+/*.tab-pane *.tab-header-area {*/
+    /* I would like to use -fx-tab-border-color here, but for some reason it */
+    /* just isn't the correct color, even though it works in :top above */
+/*    -fx-background-color: -fx-tab-border-color, lightgray;*/
+/*}*/
+ 
+.tab-pane:top *.tab-header-area {
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.416667em 0.166667em 0.0em 0.833em; /* 5 2 0 10 */
+}
+ 
+.tab-pane:bottom *.tab-header-area {
+    -fx-background-insets: 0, 1 0 0 0;
+    -fx-padding: 0 0.166667em 0.416667em 0.833em; /* 0 2 5 0 */
+}
+ 
+.tab-pane:left *.tab-header-area {
+    -fx-background-insets: 0, 0 1 0 0;
+    -fx-padding: 0.833em 0.0em 0.166667em 0.416667em; /* 10 0 2 5 */
+}
+ 
+.tab-pane:right *.tab-header-area {
+    -fx-background-insets: 0, 0 0 0 1;
+    -fx-padding: 0.833em 0.416667em 0.166667em 0.0em; /* 10 5 2 0 */
+}
+ 
+.tab-pane .headers-region {
+    -fx-effect: dropshadow(two-pass-box , rgba(0,0,0,0.6) , 4, 0.0 , 0, 0);
+}
+ 
+/* TODO: scaling the shape seems to make it way too large */
+.tab-close-button {
+    -fx-background-color: -fx-mark-color;
+    -fx-shape: "M 0,0 H1 L 4,3 7,0 H8 V1 L 5,4 8,7 V8 H7 L 4,5 1,8 H0 V7 L 3,4 0,1 Z";
+    -fx-scale-shape: false;
+    -fx-effect: dropshadow(two-pass-box , rgba(255, 255, 255, 0.4), 1, 0.0 , 0, 1);
+}
+ 
+.tab-close-button:hover {
+    -fx-background-color: derive(-fx-mark-color, -30%);
+}
+ 
+/* CONTROL BUTTONS */
+.control-buttons-tab {
+    -fx-background-color: -fx-tab-border-color, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5 5 0 0, 4 4 0 0, 3 3 0 0;
+    -fx-padding: 0.083333em 0.25em 0.083333em 0.25em; /* 1 3 1 3 */
+}
+ 
+.tab-down-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0.0em 0.416667em 0.0em 0.416667em; /* 0 5 0 5 */
+}
+ 
+.tab-down-button:hover {
+    -fx-background-color: -fx-body-color;
+    -fx-color: -fx-hover-base;
+}
+ 
+.tab-down-button .arrow {
+    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-padding: 0.238083em 0.416667em 0.238083em 0.416667em; /* 2.857 5 2.857 5 */
+    -fx-shape: "M 0 0 H 7 L 3.5 4 z";
+}
+ 
+/* FLOATING TABS CUSTOMISATION */
+.tab-pane.floating *.tab-header-background {
+    -fx-background-color: null;
+}
+ 
+.tab-pane.floating *.tab-header-area {
+    -fx-background-color: null;
+}
+ 
+.tab-pane.floating *.tab-content-area {
+    -fx-background-color: -fx-tab-border-color, -fx-control-inner-background;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 5, 4;
+}
+ 
+.tab-pane.floating *.tab {
+    -fx-background-color: -fx-tab-border-color, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5 5 0 0, 4 4 0 0, 3 3 0 0;
+}
+ 
+.tab-pane.floating *.tab:selected {
+    -fx-background-color: -fx-tab-border-color, -fx-control-inner-background;
+    -fx-background-insets: 0 0 -1 0, 1 1 -1 1;
+    -fx-background-radius: 5 5 0 0, 4 4 0 0;
+}
+ 
+/*.tab-pane:floating *.control-buttons-tab {
+    -fx-padding: 0.083333em 0.25em 0.083333em 0.25em;
+    -fx-background-color: -fx-tab-border-color, -fx-inner-border, -fx-body-color;
+    -fx-background-radius: 5 5 0 0, 4 4 0 0, 3 3 0 0;
+    -fx-background-insets: 0, 1 1 0 1, 2 2 0 2;
+}*/
+ /*******************************************************************************
+ *                                                                             *
+ * TableView                                                                   *
+ *                                                                             *
+ ******************************************************************************/
+ 
+.table-view {
+    -fx-skin: "com.sun.javafx.scene.control.skin.TableViewSkin";
+    -fx-background-color: -fx-box-border, -fx-control-inner-background;
+    -fx-background-insets: 0,1;
+ 
+    /* There is some oddness if padding is in em values rather than pixels,
+       in particular, the left border of the control doesn't show. */
+    -fx-padding: 1; /* 0.083333em; */
+ 
+    /* Constants used throughout the tableview.
+     * TODO: Should these be derived from the palette in .scene?
+     */
+    -fx-table-header-border-color: #959595;
+/*    -fx-table-header-background-color: linear (0%,0%) to (0%,100%) stops (80%, #bbbbbb) (10%, #f6f6f6);*/
+    -fx-table-cell-border-color: #bbbbbb;
+}
+ 
+/** Draws focus border around tableview */
+.table-view:focused {
+    -fx-background-color: -fx-focus-color,-fx-box-border,-fx-control-inner-background;
+    -fx-background-insets: -1.4, 0, 1;
+    -fx-background-radius: 1.4, 0, 0;
+ 
+    /* There is some oddness if padding is in em values rather than pixels,
+       in particular, the left border of the control doesn't show. */
+    -fx-padding: 1; /* 0.083333em; */
+}
+ 
+.table-view:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+.table-view .scroll-bar:vertical{
+    -fx-background-insets: 0, 0 0 0 1;
+    -fx-padding: 0.0 0.0 0.0 0.0;
+}
+ 
+.table-view .scroll-bar:horizontal{
+    -fx-background-insets: 0, 1 0 0 0;
+    -fx-padding: 0.0 0.0 0.0 0.0;
+}
+ 
+.table-view .corner {
+    -fx-background-color: -fx-box-border, -fx-base;
+    -fx-background-insets: 0, 1 0 0 1;
+}
+ 
+/* Each row in the table is a table-row-cell. Inside a table-row-cell is any
+   number of table-cell. */
+.table-row-cell {
+    -fx-skin: "com.sun.javafx.scene.control.skin.TableRowSkin";
+    -fx-background-color: -fx-table-cell-border-color, -fx-control-inner-background;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */
+    -fx-text-fill: -fx-text-inner-color;
+}
+ 
+.table-row-cell:odd {
+    -fx-background-color: -fx-table-cell-border-color, derive(-fx-control-inner-background,-5%);
+    -fx-background-insets: 0, 0 0 1 0;
+}
+ 
+.table-row-cell:focused {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-control-inner-background;
+    -fx-background-insets: 0, 1, 2;
+}
+ 
+.table-row-cell:focused:odd {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, derive(-fx-control-inner-background,-5%);
+    -fx-background-insets: 0, 1, 2;
+}
+ 
+/* When the table-row-cell is selected and focused */
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-selection-bar;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background: -fx-accent;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+.table-view:focused .table-row-cell:filled:selected .table-cell {
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+.table-view:focused .table-row-cell:filled:selected, .table-view:row-selection .table-row-cell:filled:hover:selected {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+.table-view:focused .table-row-cell:filled:focused:selected:hover {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-selection-bar;
+    -fx-background-insets: 0, 1, 2;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+/* When the TableView is _not_ focused, we show alternate selection colors */
+.table-row-cell:filled:selected:focused, .table-row-cell:filled:selected {
+    -fx-background-color: lightgray;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+.table-row-cell:selected:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+.table-view:row-selection .table-row-cell:filled:hover {
+    -fx-background-color: -fx-table-cell-border-color, -fx-cell-hover-color;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-text-fill: -fx-text-inner-color;
+}
+ 
+.table-view:row-selection .table-row-cell:filled:focused:hover {
+    -fx-background-color: -fx-table-cell-border-color, -fx-focus-color, -fx-cell-focus-inner-border, -fx-cell-hover-color;
+    -fx-background-insets: 0, 0 0 1 0, 1 1 2 1, 2 2 3 2, 3 3 4 3;
+    -fx-text-fill: -fx-text-inner-color;
+}
+ 
+.table-cell {
+    -fx-skin: "com.sun.javafx.scene.control.skin.TableCellSkin";
+    -fx-padding: 0.166667em; /* 2px, plus border adds 1px */
+ 
+    -fx-background-color: transparent;
+    -fx-border-color: transparent -fx-table-cell-border-color transparent transparent;
+    -fx-border-width: 0.083333em; /* 1 */
+    -fx-cell-size: 2.0em; /* 24 */
+    -fx-text-fill: -fx-text-inner-color;
+}
+ 
+/* When in constrained resize mode, the right-most visible cell should not have
+   a right-border, as it is not possible to get this cleanly out of view without
+   introducing horizontal scrollbars (see RT-14886). */
+.table-view:constrained-resize .table-cell:last-visible {
+    -fx-border-color: transparent;
+}
+.table-view:constrained-resize .column-header:last-visible {
+    -fx-border-width: 0.083333em 0.0em 0.083333em 0.083333em, 0.083333em 0.0em 0.083333em 0.083333em;
+}
+.table-view:constrained-resize .filler {
+    -fx-border-color:
+        derive(-fx-base, 80%)
+        linear-gradient(to bottom, derive(-fx-base,80%) 20%, derive(-fx-base,-10%) 90%)
+        derive(-fx-base, 10%)
+        linear-gradient(to bottom, derive(-fx-base,80%) 20%, derive(-fx-base,-10%) 90%),
+        /* Outer border: */
+        transparent -fx-table-header-border-color -fx-table-header-border-color -fx-table-header-border-color;
+    -fx-border-insets: 0 1 1 1, 0 0 0 0;
+}
+ 
+.table-view:focused .table-cell:focused {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-control-inner-background;
+    -fx-background-insets: 0 1 0 0, 1 2 1 1, 2 3 2 2;
+}
+ 
+.table-view:focused .table-row-cell:filled .table-cell:focused:selected {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-selection-bar;
+    -fx-background-insets: 0 1 0 0, 1 2 1 1, 2 3 2 2;
+    -fx-background: -fx-accent;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+.table-view:focused .table-row-cell:filled .table-cell:selected, .table-view:cell-selection .table-row-cell:filled .table-cell:hover:selected {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-text-fill: -fx-selection-bar-text;
+    -fx-background-insets: 0 0 1 0;
+}
+ 
+.table-view:focused .table-row-cell:filled .table-cell:focused:selected:hover {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-selection-bar;
+    -fx-background-insets: 0 1 0 0, 1 2 1 1, 2 3 2 2;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+/* When the TableView is _not_ focused, we show alternate selection colors */
+ .table-row-cell:filled .table-cell:selected:focused,  .table-row-cell:filled .table-cell:selected {
+    -fx-background-color: lightgray;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+ 
+.table-cell:selected:disabled {
+    -fx-opacity: -fx-disabled-opacity;
+}
+ 
+/*.table-cell:focused {
+    -fx-background-color: -fx-focus-color, -fx-control-inner-background;
+    -fx-background-insets: 0, 1.4;
+}*/
+ 
+.table-view:cell-selection  .table-row-cell:filled .table-cell:hover {
+    -fx-background-color: -fx-cell-hover-color;
+    -fx-text-fill: -fx-text-inner-color;
+    -fx-background-insets: 0 0 1 0;
+}
+ 
+.table-view:cell-selection .table-row-cell:filled .table-cell:focused:hover {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-cell-hover-color;
+    -fx-background-insets: 0 1 0 0, 1 2 1 1, 2 3 2 2;
+    -fx-text-fill: -fx-text-inner-color;
+}
+ 
+/* The column-resize-line is shown when the user is attempting to resize a column. */
+.table-view .column-resize-line {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-padding: 0.0em 0.0416667em 0.0em 0.0416667em; /* 0 0.571429 0 0.571429 */
+}
+ 
+/* This is the area behind the column headers. An ideal place to specify background
+   and border colors for the whole area (not individual column-header's). */
+.table-view .column-header-background {
+    -fx-background-color: -fx-body-color;
+    -fx-padding: 0;
+}
+ 
+/* The column header row is made up of a number of column-header, one for each
+   TableColumn, and a 'filler' area that extends from the right-most column
+   to the edge of the tableview, or up to the 'column control' button. */
+.table-view .column-header, .table-view .filler {
+    -fx-text-fill: -fx-selection-bar-text;
+ 
+    /* TODO: for some reason, this doesn't scale. */
+    -fx-font-size: 1.083333em; /* 13pt - 1 more than the default font */
+    -fx-size: 25;
+    -fx-border-style: solid;
+    -fx-border-color:
+        /*
+          Inner border: we have different colours along the top, right, bottom and left.
+          Refer to RT-12298 for the spec.
+        */
+        derive(-fx-base, 80%)
+        linear-gradient(to bottom, derive(-fx-base,80%) 20%, derive(-fx-base,-10%) 90%)
+        derive(-fx-base, 10%)
+        linear-gradient(to bottom, derive(-fx-base,80%) 20%, derive(-fx-base,-10%) 90%),
+        /* Outer border: */
+        transparent -fx-table-header-border-color -fx-table-header-border-color transparent;
+    -fx-border-insets: 0 1 1 0, 0 0 0 0;
+    -fx-border-width: 0.083333em, 0.083333em;
+}
+ 
+.table-view .column-header .sort-order {
+    -fx-font-size: 0.916667em; /* 11pt - 1 less than the default font */
+}
+ 
+.table-view .show-hide-columns-button {
+    -fx-background-color: -fx-body-color;
+ 
+    -fx-border-color:
+        /* inner border: A copy of the inner border used above in the general column header area. */
+        derive(-fx-base, 80%)
+        linear-gradient(to bottom, derive(-fx-base,80%) 20%, derive(-fx-base,-10%) 90%),
+        derive(-fx-base, 10%)
+        linear-gradient(to bottom, derive(-fx-base,80%) 20%, derive(-fx-base,-10%) 90%),
+        /* outer border: Slightly different to the above*/
+        transparent transparent -fx-table-header-border-color -fx-table-header-border-color;
+    -fx-border-insets: 0 0 1 1, 0 0 0 0;
+}
+ 
+.table-view .show-hide-column-image {
+    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+    -fx-background-insets: 1 0 -1 0, 0;
+ 
+    -fx-padding: 0.25em; /* 3px */
+    -fx-shape: "M398.902,298.045c0.667,0,1.333,0,2,0c0,0.667,0,1.333,0,2c0.667,0,1.333,0,2,0c0,0.667,0,1.333,0,2c-0.667,0-1.333,0-2,0c0,0.666,0,1.332,0,1.999c-0.667,0-1.333,0-2,0c0-0.667,0-1.333,0-1.999c-0.666,0-1.333,0-1.999,0c0-0.667,0-1.334,0-2c0.666,0,1.333,0,1.999,0C398.902,299.378,398.902,298.711,398.902,298.045z";
+}
+ 
+/*.nested-column-header .column-header {
+    -fx-background-color: transparent;
+}*/
+ 
+/* When a column is being 'dragged' to be placed in a different position, there
+   is a region that follows along the column header area to indicate where the
+   column will be dropped. This region can be styled using the .column-drag-header
+   name. */
+.table-view .column-drag-header {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-border-color: transparent;
+    -fx-opacity: 0.6;
+}
+ 
+/* Semi-transparent overlay to indicate the column that is currently being moved */
+.table-view .column-overlay {
+    -fx-background-color: darkgray;
+    -fx-opacity: 0.3;
+}
+ 
+.table-view .arrow {
+    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-padding: 0.25em 0.3125em 0.25em 0.3125em; /* 3 3.75 3 3.75 */
+    -fx-shape: "M 0 0 h 7 l -3.5 4 z";
+}
+ 
+/* This is shown when the table has no rows and/or no columns. */
+.table-view .empty-table {
+    -fx-background-color: white;
+    -fx-font-size: 1.166667em; /* 14pt - 2 more than the default font */
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * SplitPane                                                                   *
+ *                                                                             *
+ ******************************************************************************/
+ 
+.split-pane > * > * > .table-view { -fx-padding: 0px; }
+.split-pane > * > * > .list-view { -fx-padding: 0px; }
+.split-pane > * > * > .tree-view { -fx-padding: 0px; }
+.split-pane > * > * > .scroll-pane { -fx-padding: 0px; }
+.split-pane > * > * > .split-pane {
+    -fx-background-insets: 0, 0;
+    -fx-padding: 0;
+ }
+ 
+.split-pane {
+    -fx-skin: "com.sun.javafx.scene.control.skin.SplitPaneSkin";
+    -fx-background-color: -fx-box-border, -fx-control-inner-background;
+    -fx-background-insets: 0, 1;
+    -fx-padding: 1;
+}
+ 
+.split-pane *.split-pane-divider {
+    -fx-padding: 0 2 0 2; /* 0 3 0 3 */
+}
+ 
+/* horizontal the two nodes are placed to the left/right of each other. */
+.split-pane:horizontal > * > .split-pane-divider {
+   -fx-border-color: transparent -fx-box-border transparent #BBBBBB;
+   -fx-background-color: transparent, -fx-inner-border-horizontal;
+   -fx-background-insets: 0, 0 1 0 1;
+}
+ 
+/* vertical the two nodes are placed on top of each other. */
+.split-pane:vertical > * > .split-pane-divider {
+   -fx-border-color:  #BBBBBB transparent -fx-box-border transparent;
+   -fx-background-color: transparent, -fx-inner-border;
+   -fx-background-insets: 0, 1 0 1 0;
+}
+ 
+.split-pane *.horizontal-grabber {
+    -fx-padding: 5 1 5 1;
+    -fx-background-color: #FFFFFF, -fx-box-border;
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-shape: "M0 0 L0 0 L2 0 L2 2 L0 2 Z M0 4 L0 4 L2 4 L2 6 L0 6 Z M0 8 L0 8 L2 8 L2 10 L0 10 Z";
+}
+ 
+.split-pane *.vertical-grabber {
+    -fx-padding: 1 5 1 5;
+    -fx-background-color: #FFFFFF, -fx-box-border;
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-shape: "M0 0 L0 0 L2 0 L2 2 L0 2 Z M4 0 L4 0 L4 2 L6 2 L6 0 Z M8 0 L8 0 L8 2 L10 2 L10 0 Z";
+}
+
+
+ 

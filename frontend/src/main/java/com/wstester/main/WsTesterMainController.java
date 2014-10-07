@@ -895,7 +895,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						mainPresenter.showEmptyTabController();
 						root = mainPresenter.getView();
 						Scene second = new Scene(root,1280, 720);
-						root.getStylesheets().add("/styles/Styles.css");
+						root.getStylesheets().addAll("/styles/testFactory.css");
 						stage.setTitle("Test Suites window");
 
 
