@@ -45,7 +45,7 @@ public class UnitTestUtils {
 		step.setServer(getServer());
 		step.setService(getRestService());
 		step.setPath("/customer/getCustomers");
-		step.setMethod("GET");
+		step.setMethod(RestMethod.GET);
 		return step;
 	}
 }

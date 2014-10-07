@@ -48,9 +48,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.VBoxBuilder;
 import javafx.util.Callback;
 
 public class MySQLStepController implements Initializable {
@@ -79,8 +83,53 @@ public class MySQLStepController implements Initializable {
     public void initialize (URL location, ResourceBundle resources) {
     	this.xmlParser = new XmlParser();
     	this.showTreeView();
+    	this.createSlide();
     }
 	
+
+	private void createSlide() {
+		final Pane lyricPane = new Pane();
+		lyricPane.getChildren().add(treePane);
+	    SideBar sidebar = new SideBar(250, lyricPane);
+	    VBox.setVgrow(lyricPane, Priority.ALWAYS);
+	    
+	    Pane A = new Pane();
+	    A.getChildren().add(getView());
+	    final BorderPane layout = new BorderPane();
+	    Pane mainPane = VBoxBuilder.create().spacing(10)
+	      .children(
+	        sidebar.getControlButton(),
+	        A
+	      ).build();
+	    layout.setLeft(sidebar);   //sidebar
+	    layout.setCenter(mainPane);   //mainpane
+		
+	}
+	
+	public Node getNew(){
+		final Pane lyricPane = new Pane();
+	    SideBar sidebar = new SideBar(300, lyricPane);
+	    sidebar.setLayoutY(getView().getLayoutY());
+	    AnchorPane ancor = new AnchorPane();
+	    ancor.setTopAnchor(sidebar, (double) 0);
+	    ancor.setLeftAnchor(sidebar, (double) 0);
+	    ancor.getChildren().add(sidebar);
+	    sidebar.getChildren().add(treePane);
+	    VBox.setVgrow(lyricPane, Priority.ALWAYS);
+	    
+	    Pane A = new Pane();
+	    A.getChildren().add(getView());
+	    final BorderPane layout = new BorderPane();
+	    Pane mainPane = VBoxBuilder.create().spacing(10)
+	      .children(
+	        sidebar.getControlButton(),
+	        A
+	      ).build();
+	    layout.setLeft(ancor);   //sidebar
+	    layout.setCenter(mainPane);   //mainpane
+	    return layout;
+	}
+
 
 	private void showTreeView() {
 
@@ -104,7 +153,9 @@ public class MySQLStepController implements Initializable {
 		}
 	}
 
-
+	
+	
+	
 	public void setTestSuiteService( TestSuiteService tsService)
     {
         this.tsService = tsService;
@@ -276,6 +327,7 @@ public class MySQLStepController implements Initializable {
                 setGraphic(cellButton);
             }
         }
+        
     }
     public void saveMySQL(ActionEvent e) {
 
@@ -292,6 +344,9 @@ public class MySQLStepController implements Initializable {
 		tsService.setStepByUID(sql, uid);
 		tsService.saveTestSuite();
 	} 
+    
+    
+    
     
     
     

@@ -14,7 +14,7 @@ public class RestStep extends Step {
 	private HashMap<String,String> cookie;
 	private HashMap<String,String> header;
 	private String contentType = "text/plain";
-	private String method;
+	private RestMethod method;
 	private Object request;
 	
 	public RestStep() {
@@ -66,11 +66,11 @@ public class RestStep extends Step {
 		this.request = request;
 	}
 
-	public String getMethod() {
+	public RestMethod getMethod() {
 		return method;
 	}
 
-	public void setMethod(String method) {
+	public void setMethod(RestMethod method) {
 		this.method = method;
 	}
 
@@ -87,19 +87,20 @@ public class RestStep extends Step {
 		return "RestStep [path=" + path + ", query=" + query + ", cookie=" + cookie + ", header=" + header + ", contentType=" + contentType + ", method=" + method + ", request=" + request
 				+ ", getID()=" + getID() + ", getServer()=" + getServer() + ", getAssertList()=" + getAssertList() + ", getService()=" + getService() + ", getAssetMap()=" + getAssetMap()
 				+ ", getName()=" + getName() + ", getVariableList()=" + getVariableList() + ", getExecutionList()=" + getExecutionList() + ", getDependsOn()=" + getDependsOn() + "]";
-	}	
-	
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((request == null) ? 0 : request.hashCode());
-		result = prime * result	+ ((contentType == null) ? 0 : contentType.hashCode());
+		result = prime * result
+				+ ((contentType == null) ? 0 : contentType.hashCode());
 		result = prime * result + ((cookie == null) ? 0 : cookie.hashCode());
 		result = prime * result + ((header == null) ? 0 : header.hashCode());
 		result = prime * result + ((method == null) ? 0 : method.hashCode());
 		result = prime * result + ((path == null) ? 0 : path.hashCode());
 		result = prime * result + ((query == null) ? 0 : query.hashCode());
+		result = prime * result + ((request == null) ? 0 : request.hashCode());
 		return result;
 	}
 
@@ -112,11 +113,6 @@ public class RestStep extends Step {
 		if (getClass() != obj.getClass())
 			return false;
 		RestStep other = (RestStep) obj;
-		if (request == null) {
-			if (other.request != null)
-				return false;
-		} else if (!request.equals(other.request))
-			return false;
 		if (contentType == null) {
 			if (other.contentType != null)
 				return false;
@@ -132,10 +128,7 @@ public class RestStep extends Step {
 				return false;
 		} else if (!header.equals(other.header))
 			return false;
-		if (method == null) {
-			if (other.method != null)
-				return false;
-		} else if (!method.equals(other.method))
+		if (method != other.method)
 			return false;
 		if (path == null) {
 			if (other.path != null)
@@ -147,6 +140,11 @@ public class RestStep extends Step {
 				return false;
 		} else if (!query.equals(other.query))
 			return false;
+		if (request == null) {
+			if (other.request != null)
+				return false;
+		} else if (!request.equals(other.request))
+			return false;
 		return true;
-	}
+	}	
 }

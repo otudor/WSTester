@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
+import com.wstester.model.RestMethod;
 import com.wstester.model.RestStep;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
@@ -21,7 +22,7 @@ public class PostRequestTest extends RestTestBaseClass {
 		TestProject testProject = TestUtils.getRestTestPlan();
 		RestStep step = (RestStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
 		step.setPath("/customer/insertCustomer");
-		step.setMethod("POST");
+		step.setMethod(RestMethod.POST);
 		step.setRequest("Inovation");
 		testRunner = new TestRunner(testProject);
 		
@@ -40,7 +41,7 @@ public class PostRequestTest extends RestTestBaseClass {
 		TestProject testProject = TestUtils.getRestTestPlan();
 		RestStep step = (RestStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
 		step.setPath("/customer/insertCustomerByJson");
-		step.setMethod("POST");
+		step.setMethod(RestMethod.POST);
 		step.setContentType("application/json");
 		
 		JSONObject name = new JSONObject();

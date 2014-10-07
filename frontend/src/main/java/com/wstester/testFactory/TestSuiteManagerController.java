@@ -33,6 +33,7 @@ public class TestSuiteManagerController
 	{
 		//btnRun.addEventHandler(ActionEvent.ANY, new BtnHandler());
 		//btnRun.addEventHandler(MyEvent.CEVA, new MyEventHandler());
+		
 	}
 	
     public void setTestSuiteListController( TestSuiteListController tsListController)
@@ -118,7 +119,8 @@ public class TestSuiteManagerController
     public void showMySQLStep( String sUID)
     {
     	mysqlStepController.setMySQLStep(sUID);
-        contentArea.setCenter( mysqlStepController.getView());
+//        contentArea.setCenter( mysqlStepController.getView());
+    	contentArea.setCenter(mysqlStepController.getNew());
     }
     
     public void showMongoStep( String sUID)

@@ -2,13 +2,17 @@ package com.wstester.asset;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.util.HashMap;
+
 import org.junit.Test;
+
 import com.wstester.camel.rest.RestTestBaseClass;
 import com.wstester.model.Asset;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
+import com.wstester.model.RestMethod;
 import com.wstester.model.RestStep;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
@@ -32,7 +36,7 @@ public class RunStepWithAssetTest extends RestTestBaseClass{
 		TestProject testProject = TestUtils.getRestTestPlan();
 		RestStep step = (RestStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
 		step.setPath("/customer/insertCustomer");
-		step.setMethod("POST");
+		step.setMethod(RestMethod.POST);
 		
 		HashMap<Asset, String> assetMap = new HashMap<Asset, String>();
 		assetMap.put(asset, "Boddy");

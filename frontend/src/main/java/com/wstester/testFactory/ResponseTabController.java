@@ -1,5 +1,14 @@
 package com.wstester.testFactory;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+
+import org.xml.sax.SAXException;
+
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -27,8 +36,27 @@ public class ResponseTabController {
         return rootPane;
     }
 
-    public void setResponseTabController()
-    {
-    	
-    }
+    
+    public void setResponseTabController() {
+
+		try {
+			
+			XmlParser xmlParser = new XmlParser();
+			FileInputStream file = new FileInputStream(new File("../backend/pom.xml"));
+			treePane.getChildren().clear();
+			treePane.getChildren().add((Node)xmlParser.getTreeViewOfXml(file));
+		} catch (XPathExpressionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

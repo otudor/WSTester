@@ -125,7 +125,7 @@ public class TestUtils {
 		assertList.add(oneAssert);
 		restStep.setAssertList(assertList);
 		restStep.setPath("/customer/getCustomers");
-		restStep.setMethod("GET");
+		restStep.setMethod(RestMethod.GET);
 		stepList1.add(restStep);
 		// test 2
 		MongoStep step2 = new MongoStep();
@@ -242,7 +242,7 @@ public class TestUtils {
 		restStep.setServer(server11);
 		restStep.setService(restService);
 		restStep.setPath("/customer/getCustomers");
-		restStep.setMethod("GET");
+		restStep.setMethod(RestMethod.GET);
 		stepList1.add(restStep);
 		
 		// construct test case list
@@ -713,7 +713,7 @@ public class TestUtils {
 		restStep.setServer(server11);
 		restStep.setService(restService);
 		restStep.setPath("/customer/getCustomers");
-		restStep.setMethod("GET");
+		restStep.setMethod(RestMethod.GET);
 		stepList1.add(restStep);
 		// test 2
 		MongoStep mongoStep = new MongoStep();
@@ -808,7 +808,7 @@ public class TestUtils {
 		restStep.setServer(server11);
 		restStep.setService(restService);
 		restStep.setPath("/customer/getCustomers");
-		restStep.setMethod("GET");
+		restStep.setMethod(RestMethod.GET);
 		stepList1.add(restStep);
 		// test 2
 		MongoStep mongoStep = new MongoStep();
@@ -1012,7 +1012,7 @@ public class TestUtils {
 		restStep.setServer(server11);
 		restStep.setService(restService);
 		restStep.setPath("/customer/getCustomers");
-		restStep.setMethod("GET");
+		restStep.setMethod(RestMethod.GET);
 		stepList1.add(restStep);
 		
 		// construct test case list
@@ -1115,7 +1115,7 @@ public class TestUtils {
 		restStep.setServer(server11);
 		restStep.setService(restService);
 		restStep.setPath("/customer/getCustomers");
-		restStep.setMethod("GET");
+		restStep.setMethod(RestMethod.GET);
 		stepList1.add(restStep);
 		// test 4
 		SoapStep step4 = new SoapStep();

@@ -8,6 +8,7 @@ import com.wstester.camel.TestBaseClass;
 import com.wstester.model.Asset;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
+import com.wstester.model.RestMethod;
 import com.wstester.model.RestStep;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestProject;
@@ -42,7 +43,7 @@ public class MockTest extends TestBaseClass{
 		TestCase testCase = testProject.getTestSuiteList().get(0).getTestCaseList().get(0);
 		RestStep restStep = new RestStep();
 		restStep.setService(testCase.getStepList().get(0).getService());
-		restStep.setMethod("PUT");
+		restStep.setMethod(RestMethod.PUT);
 		restStep.setPath("/customer/isAlive");
 		testCase.addStep(restStep);
 		
