@@ -10,7 +10,7 @@
    <children>
       <TabPane prefHeight="670.0" prefWidth="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
-            <Tab text="Rest Definition">
+            <Tab closable="false" text="Rest Definition">
                <content>
                   <AnchorPane>
                      <children>
@@ -94,7 +94,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Past Executions">
+            <Tab closable="false" text="Past Executions">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -110,7 +110,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Variables">
+            <Tab closable="false" text="Variables">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>

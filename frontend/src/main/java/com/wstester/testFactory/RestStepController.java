@@ -249,7 +249,9 @@ public class RestStepController
            
         }
         
-        restMethod.getItems().addAll(RestMethod.values());
+        if(!restMethod.getItems().contains(RestMethod.POST)) {
+        	restMethod.getItems().addAll(RestMethod.values());
+        }
         restMethod.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RestMethod>() {
 			public void changed(ObservableValue ov, RestMethod value,RestMethod new_value) {
 				step.setMethod(new_value);
