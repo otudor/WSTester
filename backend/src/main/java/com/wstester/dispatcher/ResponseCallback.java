@@ -47,6 +47,8 @@ public class ResponseCallback extends RouteBuilder {
 			public void process(Exchange exchange) throws Exception {
 				
 				finished = false;
+				responseList.clear();
+				responseList = new HashSet<Response>();
 			}
 		});
 	}
