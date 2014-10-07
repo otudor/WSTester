@@ -16,31 +16,31 @@ public class CustomLogger extends Logger {
 		logger.debug(message);
 	}
 	
-	public void debug(String stepID, String logMessage){
-		logger.debug("[" + stepID + "] " + logMessage);
+	public void debug(String stepId, String logMessage){
+		logger.debug("[" + stepId + "] " + logMessage);
 	}
 	
 	public void error(Object message){
 		logger.error(message);
 	}
 
-	public void error(String stepID, String logMessage){
-		logger.error("[" + stepID + "] " + logMessage);
+	public void error(String stepId, String logMessage){
+		logger.error("[" + stepId + "] " + logMessage);
 	}
 
 	public void info(Object message){
 		logger.info(message);
 	}
 	
-	public void info(String stepID, String logMessage){
-		logger.info("[" + stepID + "] " + logMessage);
+	public void info(String stepId, String logMessage){
+		logger.info("[" + stepId + "] " + logMessage);
 	}
 	
 	public void warn(Object message){
 		logger.warn(message);
 	}
 	
-	public void warn(String stepID, String logMessage){
-		logger.warn("[" + stepID + "] " + logMessage);
+	public void warn(String stepId, String logMessage){
+		logger.warn("[" + stepId + "] " + logMessage);
 	}
 }

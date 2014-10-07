@@ -97,6 +97,10 @@ public class TestRunner implements ITestRunner{
 			timeout-=1000;
 		} 
 		
+		if(timeout < 0){
+			log.info(stepId, "The timeout expired!");
+		}
+		
 		if(response != null){
 			log.info(stepId, response.toString());
 		}
