@@ -109,7 +109,6 @@ public class Server implements Serializable {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
 				+ ((serviceList == null) ? 0 : serviceList.hashCode());
-		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		return result;
 	}
 
@@ -141,11 +140,6 @@ public class Server implements Serializable {
 			if (other.serviceList != null)
 				return false;
 		} else if (!serviceList.equals(other.serviceList))
-			return false;
-		if (uuid == null) {
-			if (other.uuid != null)
-				return false;
-		} else if (!uuid.equals(other.uuid))
 			return false;
 		return true;
 	}

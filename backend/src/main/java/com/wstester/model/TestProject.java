@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -16,7 +15,7 @@ public class TestProject implements Serializable {
 	private String uuid;
 	private String name;
 	private List<TestSuite> testSuiteList;
-	private Map<Asset, String> assetMap;
+	private List<Asset> assetList;
 	private List<Environment> environmentList;
 	private List<Variable> variableList;
 
@@ -38,20 +37,20 @@ public class TestProject implements Serializable {
 		this.testSuiteList = testSuiteList;
 	}
 	
-	public Map<Asset, String> getAssetMap() {
-		return assetMap;
+	public List<Asset> getAssetList() {
+		return assetList;
 	}
 
-	public void setAssetMap(HashMap<Asset, String> assetMap) {
-		this.assetMap = assetMap;
+	public void setAssetList(List<Asset> assetList) {
+		this.assetList = assetList;
 	}
 
 	public void addAsset(Asset asset){
-		if(this.assetMap == null){
-			this.assetMap = new HashMap<Asset, String>();
+		if (this.assetList == null) {
+				this.assetList = new ArrayList<Asset>();
 		}
 		
-		assetMap.put(asset, asset.getType());
+		this.assetList.add(asset);
 	}
 
 	public List<Environment> getEnvironmentList() {
@@ -190,8 +189,6 @@ public class TestProject implements Serializable {
 		return null;
 	}
 	
-	
-	
 	public void setStepByUID(Step source, String stepUID) {
 		for (TestSuite testSuite : testSuiteList) {
 			
@@ -209,7 +206,7 @@ public class TestProject implements Serializable {
 									step.setServer(source.getServer());
 									step.setExecutionList(source.getExecutionList());
 									step.setAssertList(source.getAssertList());
-									step.setAssetMap((HashMap<Asset, String>) ((MySQLStep) source).getAssetMap()); 
+									step.setAssetMap((HashMap<Asset, AssetType>) ((MySQLStep) source).getAssetMap()); 
 									step.setDependsOn(source.getDependsOn());
 									step.setVariableList(source.getVariableList());
 								}
@@ -217,7 +214,7 @@ public class TestProject implements Serializable {
 								{
 									((MongoStep) step).setAction(((MongoStep) source).getAction());
 									step.setAssertList(source.getAssertList());
-									step.setAssetMap((HashMap<Asset, String>) ((MongoStep) source).getAssetMap());
+									step.setAssetMap((HashMap<Asset, AssetType>) ((MongoStep) source).getAssetMap());
 									((MongoStep) step).setCollection(((MongoStep) source).getCollection());
 									step.setDependsOn(source.getDependsOn());
 									step.setExecutionList(source.getExecutionList());
@@ -230,7 +227,7 @@ public class TestProject implements Serializable {
 								if (step instanceof RestStep) 
 								{
 									step.setAssertList(source.getAssertList());
-									step.setAssetMap((HashMap<Asset, String>) source.getAssetMap());
+									step.setAssetMap((HashMap<Asset, AssetType>) source.getAssetMap());
 									((RestStep) step).setContentType(((RestStep) source).getContentType());
 									((RestStep) step).setCookie(((RestStep) source).getCookie());
 									step.setDependsOn(source.getDependsOn());
@@ -248,7 +245,7 @@ public class TestProject implements Serializable {
 								if (step instanceof SoapStep) 
 								{
 									step.setAssertList(source.getAssertList());
-									step.setAssetMap((HashMap<Asset, String>) source.getAssetMap());
+									step.setAssetMap((HashMap<Asset, AssetType>) source.getAssetMap());
 									step.setDependsOn(source.getDependsOn());
 									step.setExecutionList(source.getExecutionList());
 									step.setName(source.getName());
@@ -297,7 +294,7 @@ public class TestProject implements Serializable {
 
 	@Override
 	public String toString() {
-		return "TestProject [name=" + name + ", testSuiteList=" + toStringSuite(testSuiteList) + ", assetList=" + assetMap+ ", environmentList=" + toStringEnv(environmentList)
+		return "TestProject [name=" + name + ", testSuiteList=" + toStringSuite(testSuiteList) + ", assetList=" + assetList+ ", environmentList=" + toStringEnv(environmentList)
 				+ ", variableList=" + variableList + ", uuid=" + uuid + "]";
 	}
 
@@ -342,13 +339,12 @@ public class TestProject implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((assetMap == null) ? 0 : assetMap.hashCode());
+				+ ((assetList == null) ? 0 : assetList.hashCode());
 		result = prime * result
 				+ ((environmentList == null) ? 0 : environmentList.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
 				+ ((testSuiteList == null) ? 0 : testSuiteList.hashCode());
-		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		result = prime * result
 				+ ((variableList == null) ? 0 : variableList.hashCode());
 		return result;
@@ -363,10 +359,10 @@ public class TestProject implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		TestProject other = (TestProject) obj;
-		if (assetMap == null) {
-			if (other.assetMap != null)
+		if (assetList == null) {
+			if (other.assetList != null)
 				return false;
-		} else if (!assetMap.equals(other.assetMap))
+		} else if (!assetList.equals(other.assetList))
 			return false;
 		if (environmentList == null) {
 			if (other.environmentList != null)
@@ -383,11 +379,6 @@ public class TestProject implements Serializable {
 				return false;
 		} else if (!testSuiteList.equals(other.testSuiteList))
 			return false;
-		if (uuid == null) {
-			if (other.uuid != null)
-				return false;
-		} else if (!uuid.equals(other.uuid))
-			return false;
 		if (variableList == null) {
 			if (other.variableList != null)
 				return false;
@@ -395,7 +386,4 @@ public class TestProject implements Serializable {
 			return false;
 		return true;
 	}
-
-	
-
 }

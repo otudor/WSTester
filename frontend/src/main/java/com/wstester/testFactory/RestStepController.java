@@ -293,7 +293,7 @@ public class RestStepController
 
 		RestStep rest = new RestStep();
 		rest.setAssertList(step.getAssertList());
-		rest.setAssetMap((HashMap<Asset, String>)step.getAssetMap());
+		rest.setAssetMap(step.getAssetMap());
 		rest.setContentType(step.getContentType());
 		rest.setCookie(step.getCookie());
 		rest.setDependsOn(step.getDependsOn());

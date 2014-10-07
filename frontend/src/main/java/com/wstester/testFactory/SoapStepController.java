@@ -176,7 +176,7 @@ public class SoapStepController
     public void saveSoap(ActionEvent e) {
     	SoapStep soap = new SoapStep();
 		soap.setAssertList(step.getAssertList());
-		soap.setAssetMap((HashMap<Asset, String>)step.getAssetMap());
+		soap.setAssetMap(step.getAssetMap());
 		soap.setDependsOn(step.getDependsOn());
 		soap.setExecutionList(step.getExecutionList());
 		soap.setName(step.getName());

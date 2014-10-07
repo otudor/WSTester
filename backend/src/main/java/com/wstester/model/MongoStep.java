@@ -3,6 +3,7 @@ package com.wstester.model;
 import java.util.HashMap;
 import java.util.UUID;
 import javax.xml.bind.annotation.XmlRootElement;
+import com.wstester.model.Action;
 
 @XmlRootElement
 public class MongoStep extends Step{
@@ -52,7 +53,8 @@ public class MongoStep extends Step{
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((action == null) ? 0 : action.hashCode());
-		result = prime * result + ((collection == null) ? 0 : collection.hashCode());
+		result = prime * result
+				+ ((collection == null) ? 0 : collection.hashCode());
 		result = prime * result + ((query == null) ? 0 : query.hashCode());
 		return result;
 	}
