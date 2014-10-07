@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
@@ -19,7 +18,7 @@ public abstract class Step implements Serializable {
 	private Server server;
 	private Service service;
 	private List<Assert> assertList;
-	private Map<Asset, String> assetMap;
+	private HashMap<Asset, AssetType> assetMap;
 	private List<Variable> variableList;
 	private List<Execution> executionList;
 	private String dependsOn;
@@ -51,11 +50,11 @@ public abstract class Step implements Serializable {
 		this.service = service;
 	}
 
-	public Map<Asset, String> getAssetMap() {
+	public HashMap<Asset, AssetType> getAssetMap() {
 		return assetMap;
 	}
 	
-	public void setAssetMap(HashMap<Asset, String> assetMap) {
+	public void setAssetMap(HashMap<Asset, AssetType> assetMap) {
 		this.assetMap = assetMap;
 	}
 	
@@ -130,7 +129,6 @@ public abstract class Step implements Serializable {
 	}
 	
 	public abstract String detailedToString();
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -146,7 +144,6 @@ public abstract class Step implements Serializable {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((server == null) ? 0 : server.hashCode());
 		result = prime * result + ((service == null) ? 0 : service.hashCode());
-		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		result = prime * result
 				+ ((variableList == null) ? 0 : variableList.hashCode());
 		return result;
@@ -195,11 +192,6 @@ public abstract class Step implements Serializable {
 			if (other.service != null)
 				return false;
 		} else if (!service.equals(other.service))
-			return false;
-		if (uuid == null) {
-			if (other.uuid != null)
-				return false;
-		} else if (!uuid.equals(other.uuid))
 			return false;
 		if (variableList == null) {
 			if (other.variableList != null)

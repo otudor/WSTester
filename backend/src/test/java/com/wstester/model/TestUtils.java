@@ -17,16 +17,16 @@ public class TestUtils {
 		testProject.setName("Test Project");
 		
 		// construct asset list
-		HashMap<Asset, String> assetMap = new HashMap<Asset, String>();
+		List<Asset> assetList = new ArrayList<Asset>();
 		Asset asset1 = new Asset();
 		Asset asset2 = new Asset();
 		Asset asset3 = new Asset();
 		Asset asset4 = new Asset();
-		assetMap.put(asset1, asset1.getType());
-		assetMap.put(asset2, asset2.getType());
-		assetMap.put(asset3, asset3.getType());
-		assetMap.put(asset4, asset4.getType());
-		testProject.setAssetMap(assetMap);
+		assetList.add(asset1);
+		assetList.add(asset2);
+		assetList.add(asset3);
+		assetList.add(asset4);
+		testProject.setAssetList(assetList);
 
 		// construct service list
 		// Service 1
@@ -196,16 +196,16 @@ public class TestUtils {
 		testPlan.setName("Rest Test Plan");
 		
 		// construct asset list
-		HashMap<Asset, String> assetMap = new HashMap<Asset, String>();
+		List<Asset> assetList = new ArrayList<Asset>();
 		Asset asset1 = new Asset();
 		Asset asset2 = new Asset();
 		Asset asset3 = new Asset();
 		Asset asset4 = new Asset();
-		assetMap.put(asset1, asset1.getType());
-		assetMap.put(asset2, asset2.getType());
-		assetMap.put(asset3, asset3.getType());
-		assetMap.put(asset4, asset4.getType());
-		testPlan.setAssetMap(assetMap);
+		assetList.add(asset1);
+		assetList.add(asset2);
+		assetList.add(asset3);
+		assetList.add(asset4);
+		testPlan.setAssetList(assetList);
 
 		// construct service list
 		// Service 1
@@ -272,16 +272,16 @@ public class TestUtils {
 		testProject.setName("Test Project");
 		
 		// construct asset list
-		HashMap<Asset, String> assetMap = new HashMap<Asset, String>();
+		List<Asset> assetList = new ArrayList<Asset>();
 		Asset asset1 = new Asset();
 		Asset asset2 = new Asset();
 		Asset asset3 = new Asset();
 		Asset asset4 = new Asset();
-		assetMap.put(asset1, asset1.getType());
-		assetMap.put(asset2, asset2.getType());
-		assetMap.put(asset3, asset3.getType());
-		assetMap.put(asset4, asset4.getType());
-		testProject.setAssetMap(assetMap);
+		assetList.add(asset1);
+		assetList.add(asset2);
+		assetList.add(asset3);
+		assetList.add(asset4);
+		testProject.setAssetList(assetList);
 
 		// construct service list		
 		// Service 2
@@ -357,16 +357,16 @@ public class TestUtils {
 		testProject.setName("Test Project");
 		
 		// construct asset list
-		HashMap<Asset, String> assetMap = new HashMap<Asset, String>();
+		List<Asset> assetList = new ArrayList<Asset>();
 		Asset asset1 = new Asset();
 		Asset asset2 = new Asset();
 		Asset asset3 = new Asset();
 		Asset asset4 = new Asset();
-		assetMap.put(asset1, asset1.getType());
-		assetMap.put(asset2, asset2.getType());
-		assetMap.put(asset3, asset3.getType());
-		assetMap.put(asset4, asset4.getType());
-		testProject.setAssetMap(assetMap);
+		assetList.add(asset1);
+		assetList.add(asset2);
+		assetList.add(asset3);
+		assetList.add(asset4);
+		testProject.setAssetList(assetList);
 
 		// construct service list		
 		// Service 2
@@ -471,16 +471,16 @@ public class TestUtils {
 		testProject.setName("Test Project");
 		
 		// construct asset list
-		HashMap<Asset, String> assetMap = new HashMap<Asset, String>();
+		List<Asset> assetList = new ArrayList<Asset>();
 		Asset asset1 = new Asset();
 		Asset asset2 = new Asset();
 		Asset asset3 = new Asset();
 		Asset asset4 = new Asset();
-		assetMap.put(asset1, asset1.getType());
-		assetMap.put(asset2, asset2.getType());
-		assetMap.put(asset3, asset3.getType());
-		assetMap.put(asset4, asset4.getType());
-		testProject.setAssetMap(assetMap);
+		assetList.add(asset1);
+		assetList.add(asset2);
+		assetList.add(asset3);
+		assetList.add(asset4);
+		testProject.setAssetList(assetList);
 
 		// construct service list
 		
@@ -556,16 +556,16 @@ public class TestUtils {
 		testProject.setName("Test Project");
 		
 		// construct asset list
-		HashMap<Asset, String> assetMap = new HashMap<Asset, String>();
+		List<Asset> assetList = new ArrayList<Asset>();
 		Asset asset1 = new Asset();
 		Asset asset2 = new Asset();
 		Asset asset3 = new Asset();
 		Asset asset4 = new Asset();
-		assetMap.put(asset1, asset1.getType());
-		assetMap.put(asset2, asset2.getType());
-		assetMap.put(asset3, asset3.getType());
-		assetMap.put(asset4, asset4.getType());
-		testProject.setAssetMap(assetMap);
+		assetList.add(asset1);
+		assetList.add(asset2);
+		assetList.add(asset3);
+		assetList.add(asset4);
+		testProject.setAssetList(assetList);
 		
 		// set the variable list
 		Variable variable = new Variable("projectVar", VariableType.STRING, "selector");
@@ -859,16 +859,16 @@ public class TestUtils {
 		testProject.setName("Test Project");
 		
 		// construct asset list
-		HashMap<Asset, String> assetMap = new HashMap<Asset, String>();
+		List<Asset> assetList = new ArrayList<Asset>();
 		Asset asset1 = new Asset();
 		Asset asset2 = new Asset();
 		Asset asset3 = new Asset();
 		Asset asset4 = new Asset();
-		assetMap.put(asset1, asset1.getType());
-		assetMap.put(asset2, asset2.getType());
-		assetMap.put(asset3, asset3.getType());
-		assetMap.put(asset4, asset4.getType());
-		testProject.setAssetMap(assetMap);
+		assetList.add(asset1);
+		assetList.add(asset2);
+		assetList.add(asset3);
+		assetList.add(asset4);
+		testProject.setAssetList(assetList);
 		
 		// set the variable list
 		Variable variable = new Variable("projectVar", VariableType.STRING, "selector");
@@ -956,17 +956,16 @@ public class TestUtils {
 		TestProject testPlan = new TestProject();
 		testPlan.setName("Rest Test Plan");
 		
-		// construct asset list
-		HashMap<Asset, String> assetMap = new HashMap<Asset, String>();
+		List<Asset> assetList = new ArrayList<Asset>();
 		Asset asset1 = new Asset();
 		Asset asset2 = new Asset();
 		Asset asset3 = new Asset();
 		Asset asset4 = new Asset();
-		assetMap.put(asset1, asset1.getType());
-		assetMap.put(asset2, asset2.getType());
-		assetMap.put(asset3, asset3.getType());
-		assetMap.put(asset4, asset4.getType());
-		testPlan.setAssetMap(assetMap);
+		assetList.add(asset1);
+		assetList.add(asset2);
+		assetList.add(asset3);
+		assetList.add(asset4);
+		testPlan.setAssetList(assetList);
 
 		// construct service list
 		// Service 1
@@ -1042,16 +1041,16 @@ public class TestUtils {
 		testPlan.setName("Mocked Test Plan");
 		
 		// construct asset list
-		HashMap<Asset, String> assetMap = new HashMap<Asset, String>();
+		List<Asset> assetList = new ArrayList<Asset>();
 		Asset asset1 = new Asset();
 		Asset asset2 = new Asset();
 		Asset asset3 = new Asset();
 		Asset asset4 = new Asset();
-		assetMap.put(asset1, asset1.getType());
-		assetMap.put(asset2, asset2.getType());
-		assetMap.put(asset3, asset3.getType());
-		assetMap.put(asset4, asset4.getType());
-		testPlan.setAssetMap(assetMap);
+		assetList.add(asset1);
+		assetList.add(asset2);
+		assetList.add(asset3);
+		assetList.add(asset4);
+		testPlan.setAssetList(assetList);
 
 		// construct service list
 		// Service 1
@@ -1157,12 +1156,14 @@ public class TestUtils {
 		testProject.setName("Test Project");
 		
 		// construct asset list
-		HashMap<Asset, String> assetMap = new HashMap<Asset, String>();
+		List<Asset> assetList = new ArrayList<Asset>();
+		HashMap<Asset, AssetType> assetMap = new HashMap<Asset, AssetType>();
 		Asset asset = new Asset();
 		asset.setName("AssetFile.xml");
 		asset.setPath("src/test/resources");
-		assetMap.put(asset, asset.getType());
-		testProject.setAssetMap(assetMap);
+		assetList.add(asset);
+		assetMap.put(asset, AssetType.BODY);
+		testProject.setAssetList(assetList);
 		
 		// set the variable list
 		Variable variable = new Variable("projectVar", VariableType.STRING, "selector");
@@ -1216,6 +1217,7 @@ public class TestUtils {
 		step4.setServer(server22);
 		step4.setService(service3);
 		step4.setAssetMap(assetMap);
+		
 		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
 		List<Variable> stepVariableList = new ArrayList<Variable>();
 		stepVariableList.add(stepVariable);

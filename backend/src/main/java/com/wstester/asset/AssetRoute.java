@@ -1,7 +1,6 @@
 package com.wstester.asset;
 
 import java.io.FileNotFoundException;
-
 import org.apache.camel.Endpoint;
 import org.apache.camel.Exchange;
 import org.apache.camel.PollingConsumer;

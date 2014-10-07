@@ -30,13 +30,10 @@ public class AssertProcessor {
 		if(!response.getStatus().equals(ExecutionStatus.ERROR)){
 			Step step = getStep(response.getStepID(), stepList);
 			
-			List<Assert> assertList = null;
-			if(step.getAssertList() != null) {
-				assertList = step.getAssertList();
-			}
-			
-			boolean failed = false;
-			if(assertList != null){
+			if(step.getAssertList() != null){
+				List<Assert> assertList = step.getAssertList();
+				boolean failed = false;
+				
 				for(Assert azzert : assertList) {
 					
 					if(azzert.getExpected() instanceof String){
@@ -56,12 +53,14 @@ public class AssertProcessor {
 				}
 			}
 			else {
-				log.info(response.getStepID(), "The step failed so no asserts were run");
+				log.info(response.getStepID(), "No asserts found on the step");
 			}
 		}
 		else {
-			log.info(response.getStepID(), "No asserts found on the step");
+			log.info(response.getStepID(), "The step failed so no asserts were run");
 		}
+		
+		exchange.getIn().setBody(response);
 	}
 
 	private boolean evaluateStringAssert(Assert azzert, Response response) {

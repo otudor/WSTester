@@ -1,5 +1,7 @@
 package com.wstester.model;
 
+import java.util.HashMap;
+
 import com.wstester.services.definition.IAssetManager;
 import com.wstester.services.impl.AssetManager;
 
@@ -30,6 +32,8 @@ public class SoapRule extends Rule{
 	@Override
 	public String run(Step step) {
 
+		HashMap<Asset, AssetType> assetMap;
+		
 		if(step instanceof SoapStep){
 			
 			if(inputType.equals(InputType.REQUEST)){
@@ -38,14 +42,16 @@ public class SoapRule extends Rule{
 				}
 				//TODO: now only the first asset will be set to the body of the request
 				//TODO: in the future, send a request for every asset in the list
-				
-				Asset stepAsset = (Asset) step.getAssetMap().keySet().toArray()[0];
 				IAssetManager assetManager = new AssetManager();
+				assetMap = step.getAssetMap();
 				
-				if((inputAsset != null) && step.getAssetMap() != null && step.getAssetMap().get(0) !=null &&
-						(stepAsset.getName().equals(inputAsset.getName()) ||
-						(assetManager.getAssetContent(stepAsset.getName()).equals(assetManager.getAssetContent(inputAsset.getName())))))		
-					return output;
+				for(Asset asset : assetMap.keySet()){
+				
+					if((inputAsset != null) && step.getAssetMap() != null && asset !=null &&
+							(asset.getName().equals(inputAsset.getName()) ||
+							(assetManager.getAssetContent(asset.getName()).equals(assetManager.getAssetContent(inputAsset.getName())))))		
+						return output;
+				}
 			}
 		}
 		return null;

@@ -2,14 +2,12 @@ package com.wstester.asset;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.util.HashMap;
-
 import org.junit.Test;
-
 import com.wstester.camel.rest.RestTestBaseClass;
 import com.wstester.model.Asset;
+import com.wstester.model.AssetType;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
 import com.wstester.model.RestMethod;
@@ -38,8 +36,8 @@ public class RunStepWithAssetTest extends RestTestBaseClass{
 		step.setPath("/customer/insertCustomer");
 		step.setMethod(RestMethod.POST);
 		
-		HashMap<Asset, String> assetMap = new HashMap<Asset, String>();
-		assetMap.put(asset, "Boddy");
+		HashMap<Asset, AssetType> assetMap = new HashMap<Asset, AssetType>();
+		assetMap.put(asset, AssetType.BODY);
 		step.setAssetMap(assetMap);
 		
 		testRunner = new TestRunner(testProject);
@@ -50,7 +48,6 @@ public class RunStepWithAssetTest extends RestTestBaseClass{
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("Harap Alb", entry);
-		assertEquals("Boddy", step.getAssetMap().get(step.getAssetMap().keySet().toArray()[0]));
 		
 		File file = new File("assets/AssetFile.txt");
 		file.delete();

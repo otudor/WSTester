@@ -30,7 +30,7 @@ public class RestRule extends Rule{
 			}
 			
 			if(inputType.equals(InputType.METHOD)){
-				if(inputString != null && ((RestStep)step).getMethod().equals(inputString)){
+				if(inputString != null && ((RestStep)step).getMethod().toString().equalsIgnoreCase(inputString)){
 					return output;
 				}
 			}

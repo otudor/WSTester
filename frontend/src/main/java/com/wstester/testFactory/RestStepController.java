@@ -260,7 +260,9 @@ public class RestStepController
            
         }
         
-        restMethod.getItems().addAll(RestMethod.values());
+        if(!restMethod.getItems().contains(RestMethod.POST)) {
+        	restMethod.getItems().addAll(RestMethod.values());
+        }
         restMethod.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RestMethod>() {
 			public void changed(ObservableValue ov, RestMethod value,RestMethod new_value) {
 				step.setMethod(new_value);
@@ -305,7 +307,7 @@ public class RestStepController
 
 		RestStep rest = new RestStep();
 		rest.setAssertList(step.getAssertList());
-		rest.setAssetMap((HashMap<Asset, String>)step.getAssetMap());
+		rest.setAssetMap(step.getAssetMap());
 		rest.setContentType(step.getContentType());
 		rest.setCookie(step.getCookie());
 		rest.setDependsOn(step.getDependsOn());

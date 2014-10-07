@@ -3,9 +3,7 @@ package com.wstester.assets;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.logging.Logger;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,17 +18,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import org.apache.commons.io.FileUtils;
 import org.controlsfx.dialog.Dialogs;
-
 import com.wstester.model.Asset;
 import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
@@ -53,7 +47,7 @@ public class EventHandlerDemoController {
 	public TextArea primaryTextArea;
 
 	@FXML
-	private TableView<Table> tableView = new TableView<>();
+	private TableView<Table> tableView;
 	@FXML
 	private TableColumn<Table, String> tableName;
 	@FXML
@@ -524,15 +518,6 @@ public class EventHandlerDemoController {
 
 		});
 
-
-
-
-
-
-
-
-
-
 		deleteButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -554,26 +539,6 @@ public class EventHandlerDemoController {
 						e.printStackTrace();
 					}
 				}
-			}
-		});
-
-		// get the selected item value 
-		tableView.getSelectionModel().selectedItemProperty()
-		.addListener(new ChangeListener<Object>() {
-			@Override
-			public void changed(ObservableValue<?> observableValue,
-					Object oldValue, Object newValue) {
-				if (tableView.getSelectionModel().getSelectedItem() != null) {
-					TableViewSelectionModel<Table> selectionModel = tableView
-							.getSelectionModel();
-					ObservableList<?> selectedCells = selectionModel
-							.getSelectedCells();
-					TablePosition<Object, ?> tablePosition = (TablePosition<Object, ?>) selectedCells.get(0);
-					Object val = tablePosition.getTableColumn()
-							.getCellData(newValue);
-					System.out.println("Selected value IS :" + val);
-				}
-
 			}
 		});
 	}

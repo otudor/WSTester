@@ -338,16 +338,10 @@ public class MySQLStepController implements Initializable {
 		sql.setServer(step.getServer());
 		sql.setExecutionList(step.getExecutionList());
 		sql.setAssertList(step.getAssertList());
-		sql.setAssetMap((HashMap<Asset, String>) step.getAssetMap());
+		sql.setAssetMap(step.getAssetMap());
 		sql.setDependsOn(step.getDependsOn());
 		sql.setVariableList(step.getVariableList());
 		tsService.setStepByUID(sql, uid);
 		tsService.saveTestSuite();
 	} 
-    
-    
-    
-    
-    
-    
 }

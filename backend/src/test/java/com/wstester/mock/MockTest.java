@@ -1,5 +1,8 @@
 package com.wstester.mock;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 
 import org.junit.Test;
@@ -15,9 +18,6 @@ import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
 import com.wstester.services.impl.AssetManager;
 import com.wstester.services.impl.TestRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class MockTest extends TestBaseClass{
 

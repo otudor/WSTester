@@ -178,7 +178,7 @@ public class MongoStepController
 
 		mongo.setAction(step.getAction());
 		mongo.setAssertList(step.getAssertList());
-		mongo.setAssetMap((HashMap<Asset, String>)step.getAssetMap());
+		mongo.setAssetMap(step.getAssetMap());
 		mongo.setCollection(step.getCollection());
 		mongo.setDependsOn(step.getDependsOn());
 		mongo.setExecutionList(step.getExecutionList());

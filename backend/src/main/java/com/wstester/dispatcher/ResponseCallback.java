@@ -29,7 +29,7 @@ public class ResponseCallback extends RouteBuilder {
 		.log("[${body.getStepID}] ResponseCallback Received response");
 		
 		from("jms:topic:finishTopic")
-		.log("[${body.getID}] received finish message")
+		.log("[${body.getID}] ResponseCallback received finish message")
 		.process(new Processor() {
 			
 			@Override
