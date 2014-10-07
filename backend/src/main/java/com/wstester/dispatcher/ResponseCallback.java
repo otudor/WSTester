@@ -60,7 +60,7 @@ public class ResponseCallback extends RouteBuilder {
 				return response;
 			}
 			else {
-				log.info(stepId, "Response was not found this time!");
+				log.info(stepId, "Response was not found this time! Found: " + response.getStepID());
 			}
 		}
 		return null;
