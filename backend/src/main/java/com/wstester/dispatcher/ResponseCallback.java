@@ -26,7 +26,7 @@ public class ResponseCallback extends RouteBuilder {
 				totalResponses++;
 			}
 		})
-		.log("[${body.getStepID}] ResponseCallback Received response");
+		.log("[${body.getStepID}] ResponseCallback Received response: ${body}");
 		
 		from("jms:topic:finishTopic")
 		.log("[${body.getID}] ResponseCallback received finish message")
@@ -40,13 +40,15 @@ public class ResponseCallback extends RouteBuilder {
 		});
 	
 		from("jms:topic:startTopic")
-		.log("[${body.getID}] received start message")
+		.log("[${body.getID}] ResponseCallback received start message")
 		.process(new Processor() {
 			
 			@Override
 			public void process(Exchange exchange) throws Exception {
 				
 				finished = false;
+				responseList.clear();
+				responseList = new HashSet<Response>();
 			}
 		});
 	}
@@ -58,6 +60,9 @@ public class ResponseCallback extends RouteBuilder {
 				log.info(stepId, "Response sent: " + response);
 				responseList.remove(response);
 				return response;
+			}
+			else {
+				log.info(stepId, "Response was not found this time! Found: " + response.getStepID());
 			}
 		}
 		return null;

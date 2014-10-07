@@ -18,7 +18,8 @@ public class AssertRoute extends RouteBuilder {
 		.log("[${body.getStepID}] Response before running asserts: ${body}")
 		.setProperty("stepList", constant(stepList))
 		.bean(AssertProcessor.class, "process")
-		.removeProperty("stepList");
+		.removeProperty("stepList")
+		.end();
 		
 		from("jms:assertQueue")
 		.process(new Processor() {
