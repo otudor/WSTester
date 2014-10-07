@@ -205,7 +205,7 @@ public class TestSuiteFactory
             }
             catch (IOException e)
             {
-                throw new RuntimeException("Unable to load SoapStep.fxml", e);
+                throw new RuntimeException("Unable to load RestStep.fxml", e);
             }
         }
         return restStepController;
