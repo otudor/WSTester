@@ -71,10 +71,10 @@
                                               <RowConstraints maxHeight="30.0" minHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <TableView prefHeight="200.0" prefWidth="200.0">
+                                                <TableView fx:id="tablePathVars" prefHeight="200.0" prefWidth="200.0">
                                                   <columns>
-                                                    <TableColumn fx:id="nameQuerry" prefWidth="150.0" text="Name" />
-                                                    <TableColumn prefWidth="150.0" text="Value" />
+                                                    <TableColumn fx:id="columnPathName" prefWidth="150.0" text="Name" />
+                                                    <TableColumn fx:id="columnPathValue" prefWidth="150.0" text="Value" />
                                                   </columns>
                                                 </TableView>
                                                 <Button fx:id="addPathButton" mnemonicParsing="false" text="Add Path" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
@@ -116,10 +116,10 @@
                                        <children>
                                           <GridPane hgap="10.0" prefHeight="198.0" prefWidth="529.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <TableView prefHeight="200.0" prefWidth="200.0">
+                                                <TableView fx:id="tableHeaderVars" prefHeight="200.0" prefWidth="200.0">
                                                    <columns>
-                                                      <TableColumn fx:id="nameQuerry11" prefWidth="150.0" text="Name" />
-                                                      <TableColumn prefWidth="150.0" text="Value" />
+                                                      <TableColumn fx:id="columnHeaderName" prefWidth="150.0" text="Name" />
+                                                      <TableColumn fx:id="columnHeaderValue" prefWidth="150.0" text="Value" />
                                                    </columns>
                                                 </TableView>
                                                 <Button fx:id="addHeaderButton" mnemonicParsing="false" text="Add Header" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
@@ -142,10 +142,10 @@
                                        <children>
                                           <GridPane hgap="10.0" prefHeight="198.0" prefWidth="529.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <TableView prefHeight="200.0" prefWidth="200.0">
+                                                <TableView fx:id="tableCookieVars" prefHeight="200.0" prefWidth="200.0">
                                                    <columns>
-                                                      <TableColumn fx:id="nameQuerry111" prefWidth="150.0" text="Name" />
-                                                      <TableColumn prefWidth="150.0" text="Value" />
+                                                      <TableColumn fx:id="columnCookieName" prefWidth="150.0" text="Name" />
+                                                      <TableColumn fx:id="columnCookieValue" prefWidth="150.0" text="Value" />
                                                    </columns>
                                                 </TableView>
                                                 <Button fx:id="addCookieBUtton" mnemonicParsing="false" text="Add Cookie" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />

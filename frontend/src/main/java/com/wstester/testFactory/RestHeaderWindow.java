@@ -15,7 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class RestQuerryWindow {
+public class RestHeaderWindow {
 
 	@FXML 
 	private TextField txtName;
@@ -53,10 +53,10 @@ public String valueName, valueContent;
 			@Override
 			public void handle(ActionEvent event) {
 					if((valueContent != null && valueName != null) && (!valueContent.trim().isEmpty() && !valueName.trim().isEmpty())){
-						RestStepController.stageQuerry.close();
-						RestStepController.tableQuerryVarData.add(
-								new TableQuerry(valueName, valueContent));
-						RestStepController.populateQuerryTableStatic();
+						RestStepController.stageHeader.close();
+						RestStepController.tableHeaderVarData.add(
+								new TableHeader(valueName, valueContent));
+						RestStepController.populateHeaderTableStatic();
 					}else{
 						try {
 							Dialogs.create()
@@ -75,7 +75,7 @@ public String valueName, valueContent;
 		cancel.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				RestStepController.stageQuerry.close();
+				RestStepController.stageHeader.close();
 			}
 		});
 			}
