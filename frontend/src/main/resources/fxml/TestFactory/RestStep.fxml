@@ -41,42 +41,8 @@
                               <RowConstraints />
                            </rowConstraints>
                         </GridPane>
-                        <GridPane hgap="10.0" layoutX="83.0" layoutY="216.0" prefHeight="198.0" prefWidth="529.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="180.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="226.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="226.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="226.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints maxHeight="30.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="132.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Button fx:id="addQuerry" mnemonicParsing="false" prefWidth="150.0" text="Add Querry" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
-                              <Button mnemonicParsing="false" prefWidth="150.0" text="Add Cookie" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
-                              <Button mnemonicParsing="false" prefWidth="160.0" text="Add Header" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
-                              <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                                <columns>
-                                  <TableColumn fx:id="nameQuerry" prefWidth="113.0" text="Name" />
-                                  <TableColumn prefWidth="113.0" text="Value" />
-                                </columns>
-                              </TableView>
-                              <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                <columns>
-                                  <TableColumn prefWidth="113.0" text="Name" />
-                                  <TableColumn prefWidth="113.0" text="Value" />
-                                </columns>
-                              </TableView>
-                              <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                <columns>
-                                  <TableColumn maxWidth="1.7976931348623157E308" prefWidth="113.0" text="Name" />
-                                  <TableColumn maxWidth="1.7976931348623157E308" prefWidth="113.0" text="Value" />
-                                </columns>
-                              </TableView>
-                           </children>
-                        </GridPane>
                         <Button alignment="CENTER" contentDisplay="CENTER" layoutX="630.0" layoutY="420.0" mnemonicParsing="false" onAction="#saveRest" prefWidth="50.0" text="Save" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="605.0" />
-                        <GridPane fx:id="gridRestStep1" hgap="7.0" prefHeight="220.0" prefWidth="529.0" vgap="7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="380.0">
+                        <GridPane fx:id="gridRestStep1" hgap="7.0" prefHeight="220.0" prefWidth="529.0" vgap="7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="420.0">
                            <children>
                               <Label text="Request:" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
                               <TextArea prefHeight="220.0" prefWidth="200.0" GridPane.rowIndex="1" />
@@ -90,6 +56,114 @@
                               <RowConstraints />
                            </rowConstraints>
                         </GridPane>
+                        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="410.0" AnchorPane.topAnchor="180.0">
+                          <tabs>
+                            <Tab text="Path">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="300.0">
+                                       <children>
+                                          <GridPane hgap="10.0" prefHeight="198.0" prefWidth="529.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="30.0" minHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <TableView prefHeight="200.0" prefWidth="200.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="nameQuerry" prefWidth="150.0" text="Name" />
+                                                    <TableColumn prefWidth="150.0" text="Value" />
+                                                  </columns>
+                                                </TableView>
+                                                <Button fx:id="addPathButton" mnemonicParsing="false" text="Add Path" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Querry">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="210.0">
+                                       <children>
+                                          <GridPane hgap="10.0" prefHeight="210.0" prefWidth="529.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <TableView fx:id="tableQuerryVars" prefHeight="200.0" prefWidth="200.0">
+                                                   <columns>
+                                                      <TableColumn fx:id="columnQuerryName" prefWidth="150.0" text="Name" />
+                                                      <TableColumn fx:id="columnQuerryValue" prefWidth="150.0" text="Value" />
+                                                   </columns>
+                                                </TableView>
+                                                <Button fx:id="addQuerryButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Add Querry" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                             </children>
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="226.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                              <Tab text="Header">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <GridPane hgap="10.0" prefHeight="198.0" prefWidth="529.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <TableView prefHeight="200.0" prefWidth="200.0">
+                                                   <columns>
+                                                      <TableColumn fx:id="nameQuerry11" prefWidth="150.0" text="Name" />
+                                                      <TableColumn prefWidth="150.0" text="Value" />
+                                                   </columns>
+                                                </TableView>
+                                                <Button fx:id="addHeaderButton" mnemonicParsing="false" text="Add Header" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                             </children>
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="226.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="30.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </Tab>
+                              <Tab text="Cookie">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <GridPane hgap="10.0" prefHeight="198.0" prefWidth="529.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <TableView prefHeight="200.0" prefWidth="200.0">
+                                                   <columns>
+                                                      <TableColumn fx:id="nameQuerry111" prefWidth="150.0" text="Name" />
+                                                      <TableColumn prefWidth="150.0" text="Value" />
+                                                   </columns>
+                                                </TableView>
+                                                <Button fx:id="addCookieBUtton" mnemonicParsing="false" text="Add Cookie" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                             </children>
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="226.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="30.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
                      </children>
                   </AnchorPane>
                </content>

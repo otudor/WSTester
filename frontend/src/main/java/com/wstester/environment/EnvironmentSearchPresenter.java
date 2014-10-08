@@ -286,6 +286,7 @@ public class EnvironmentSearchPresenter implements Initializable {
 				c.getParent().getChildren().remove(c);
 
 				treeView.getSelectionModel().select(idx > 0 ? idx - 1 : 0);
+				
 			}
 		});
 

@@ -20,51 +20,53 @@ public class EnvironmentDetailPresenter {
 	@FXML private Button edit;
 	@FXML private Button save;
 	@FXML private Button cancel;
-	
+
 	private String uid;
 
 	private EnvironmentService environmentService;
 	private MainPresenter mainPresenter;
-	
+
 	public void setEnvironment(final String envUID)	{
-		
+
 		hbox1.getChildren().remove(save);
-    	hbox1.getChildren().remove(cancel);
-    	hbox1.getChildren().remove(edit);
-    	gridpane.getChildren().remove(envNameField);
-    	gridpane.getChildren().remove(labelname);
-    	
-    	hbox1.getChildren().add(edit);
-    	gridpane.getChildren().add(labelname);
+		hbox1.getChildren().remove(cancel);
+		hbox1.getChildren().remove(edit);
+		gridpane.getChildren().remove(envNameField);
+		gridpane.getChildren().remove(labelname);
+
+		hbox1.getChildren().add(edit);
+		gridpane.getChildren().add(labelname);
 		Environment env = environmentService.getEnvironment( envUID);
 		envNameField.setText( env.getName());
 		labelname.setText( env.getName());
 		uid=envUID;
-		
-		
+
+
 	}
 
 	public void editEnv(ActionEvent e){
-		
+
 		gridpane.getChildren().remove(labelname);
 		gridpane.getChildren().add(envNameField);
 		hbox1.getChildren().remove(edit);
-    	
-    	hbox1.getChildren().add(save);
-    	hbox1.getChildren().add(cancel);
-		}
+
+		hbox1.getChildren().add(save);
+		hbox1.getChildren().add(cancel);
+	}
+
 	public void saveEnv(ActionEvent e){
-		
+
 		Environment env = new Environment();
 		env.setName(envNameField.getText());
 		environmentService.setEnvNameByUID(env.getName(),uid);
 		hbox1.getChildren().add(edit);
-    	hbox1.getChildren().remove(save);
-    	hbox1.getChildren().remove(cancel);
-    	gridpane.getChildren().add(labelname);
-    	gridpane.getChildren().remove(envNameField);
-    	labelname.setText(envNameField.getText());
-    	environmentService.saveEnv();
+		hbox1.getChildren().remove(save);
+		hbox1.getChildren().remove(cancel);
+		gridpane.getChildren().add(labelname);
+		gridpane.getChildren().remove(envNameField);
+		labelname.setText(envNameField.getText());
+		environmentService.saveEnv();
+		mainPresenter.loadEnvironments();
 	}
 
 	public void setEnvironmentService(EnvironmentService environmentService)	{
@@ -78,16 +80,16 @@ public class EnvironmentDetailPresenter {
 	public Node getView()	{
 		return rootEnvDetails;
 	}
-	
+
 	public void cancelEdit(ActionEvent event)
 	{
 		envNameField.setText(labelname.getText());
-	    hbox1.getChildren().remove(cancel);
-	    hbox1.getChildren().remove(save);
-	    hbox1.getChildren().add(edit);
-	    gridpane.getChildren().remove(envNameField);
-	    gridpane.getChildren().add(labelname);
+		hbox1.getChildren().remove(cancel);
+		hbox1.getChildren().remove(save);
+		hbox1.getChildren().add(edit);
+		gridpane.getChildren().remove(envNameField);
+		gridpane.getChildren().add(labelname);
 	}
 
-	
+
 }

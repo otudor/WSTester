@@ -22,6 +22,9 @@ import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
+import com.wstester.model.Variable;
+import com.wstester.testFactory.TableQuerry;
+import com.wstester.variables.TableVariables;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -41,11 +44,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class RestStepController
 {
@@ -64,14 +69,44 @@ public class RestStepController
     @FXML private TableColumn<Execut, String> columnResponse;
     @FXML private ComboBox<Server> serverBox;
     @FXML private ComboBox<Service> serviceBox;
-    @FXML private Button addQuerry = new Button();
+    @FXML private Button addQuerryButton;
+    @FXML private Button addPathButton;
+    @FXML private Button addHeaderButton;
+    @FXML private Button addCookieBUtton;
     @FXML
 	private TableView<Table> tableView = new TableView<>();
     @FXML
 	private TableColumn<Table, String> nameQuerry;
     @FXML private ComboBox<String> editableBox;
     
+    // addul de variabile in tabel
     
+    private ArrayList<Variable> variablesList = new ArrayList<>();
+	public static Stage stageQuerry;
+	
+	@FXML private TableView<TableQuerry> tableQuerryVars;
+	@FXML private TableColumn<TableQuerry, String> columnQuerryName;
+	@FXML private TableColumn<TableQuerry, String> columnQuerryValue;
+//	@FXML private Button addGlobal;
+	
+	//public static variables on order to pass references to table view and table columns, and use them in AddWindowController class
+	public static TableView<TableQuerry> tableViewVarsPassed;
+	public static TableColumn<TableQuerry, String> tableColumnVarNamePassed = new TableColumn<TableQuerry, String>();
+	public static TableColumn<TableQuerry, String> tableColumnValuePassed = new TableColumn<TableQuerry, String>();
+	
+	public static ObservableList<TableQuerry> tableViewVarData = FXCollections
+			.observableArrayList();
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //
     private RestStep step;    
     private TestSuiteService tsService;
     private TestSuiteManagerController tsMainController;
@@ -81,7 +116,6 @@ public class RestStepController
     private String uid = null;
     public boolean querryVisible = false;
     Parent root;
-    private Stage stageQuerry = new Stage();
     private String querry;
 	
    
@@ -98,6 +132,15 @@ public class RestStepController
 	private void initialize() 
 	{
 		this.addQuerryMethod();
+		for(int i=0; i<variablesList.size(); i++) {
+			tableViewVarData.add(
+					new TableQuerry(variablesList.get(i).getName(), variablesList.get(i).getContent()));
+		}
+		tableQuerryVars.setItems(tableViewVarData);
+		tableQuerryVars = tableViewVarsPassed;
+		populateTable();
+//		this.populateTable();
+//		this.populateTableStatic();
 //		this.addToComboBox();
 		//this.editableBox.setItems((ObservableList<String>)new ArrayList<String>());
 	}
@@ -106,19 +149,16 @@ public class RestStepController
 
 	
 	   
-	
-
-
-
 	private void addQuerryMethod() {
-		addQuerry.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		addQuerryButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {
-
+				stageQuerry = new Stage();
 				// TODO Auto-generated method stub	
 				if(event.getClickCount() == 1 && querryVisible == false ) {
-					querryVisible = true;
+					stageQuerry = new Stage();
+//					querryVisible = true;
 					try {
 						root = FXMLLoader.load(getClass().getResource("/fxml/testFactory/AddNameValue.fxml"));
 					} catch (IOException e) {
@@ -128,7 +168,7 @@ public class RestStepController
 
 					Scene second = new Scene(root);
 
-					second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());	
+	
 					stageQuerry.initOwner(MainLauncher.stage);
 					
 					stageQuerry.setScene(second);
@@ -143,6 +183,34 @@ public class RestStepController
 			}
 			});
 	
+	}
+	
+	public void populateTable(){
+		columnQuerryName.setCellValueFactory(new Callback<CellDataFeatures<TableQuerry, String>, ObservableValue<String>>() {
+		     public ObservableValue<String> call(CellDataFeatures<TableQuerry, String> p) {
+		         return p.getValue().getName();
+		     }
+		  });
+		
+		columnQuerryValue.setCellValueFactory(new Callback<CellDataFeatures<TableQuerry, String>, ObservableValue<String>>() {
+		     public ObservableValue<String> call(CellDataFeatures<TableQuerry, String> p) {
+		         return p.getValue().getContent();
+		     }
+		  });
+	}
+	
+	public static void populateTableStatic(){
+		tableColumnVarNamePassed.setCellValueFactory(new Callback<CellDataFeatures<TableQuerry, String>, ObservableValue<String>>() {
+		     public ObservableValue<String> call(CellDataFeatures<TableQuerry, String> p) {
+		         return p.getValue().getName();
+		     }
+		  });
+		
+		tableColumnValuePassed.setCellValueFactory(new Callback<CellDataFeatures<TableQuerry, String>, ObservableValue<String>>() {
+		     public ObservableValue<String> call(CellDataFeatures<TableQuerry, String> p) {
+		         return p.getValue().getContent();
+		     }
+		  });
 	}
 
 
