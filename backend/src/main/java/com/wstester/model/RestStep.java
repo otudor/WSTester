@@ -2,6 +2,7 @@ package com.wstester.model;
 
 import java.util.Map;
 import java.util.UUID;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -79,6 +80,21 @@ public class RestStep extends Step {
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+	
+	@Override
+	public void copyFrom(Step source) {
+		
+		super.copyFrom(source);
+		if(source instanceof RestStep){
+			setPath(((RestStep) source).getPath());
+			setQuery(((RestStep) source).getQuery());
+			setCookie(((RestStep) source).getCookie());
+			setHeader(((RestStep) source).getHeader());
+			setContentType(((RestStep) source).getContentType());
+			setMethod(((RestStep) source).getMethod());
+			setRequest(((RestStep) source).getRequest());
+		}
 	}
 	
 	@Override

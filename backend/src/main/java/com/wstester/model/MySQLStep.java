@@ -23,6 +23,15 @@ public class MySQLStep extends Step {
 	}
 	
 	@Override
+	public void copyFrom(Step source) {
+		
+		super.copyFrom(source);
+		if(source instanceof MySQLStep){
+			setOperation(((MySQLStep) source).getOperation());
+		}
+	}
+	
+	@Override
 	public String detailedToString() {
 		return "MySQLStep [operation=" + operation + ", ID=" + getID() + ", Server=" + getServer() + ", AssertList=" + getAssertList() + ", Service=" + getService()
 				+ ", getAssetMap=" + getAssetMap() + ", Name=" + getName() + ", VariableList=" + getVariableList() + ", ExecutionList=" + getExecutionList() + ", DependsOn="

@@ -370,6 +370,8 @@ public class TestSuiteListController implements Initializable
                 	{
                     	if ( getItem() != null)
                     	{
+                    		//TODO: FIX THIS ASAP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    		//TODO: use instanceof
     	                	if ( getItem().getClass() == TestSuite.class)
     	                    	selectTestSuite( ((TestSuite) getItem()).getID());
     	                    else if ( getItem().getClass() == TestCase.class)

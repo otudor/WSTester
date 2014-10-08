@@ -2,7 +2,6 @@ package com.wstester.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -103,32 +102,32 @@ public class TestProject implements Serializable {
 				}
 			}
 		}
-		
 	}
 
 	public void addTestCaseForTestSuite( TestCase testCase, String tsUID) {
 		for(TestSuite testSuite : testSuiteList) {
 			if(testSuite.getID().equals(tsUID)){
 				testSuite.getTestCaseList().add(testCase);
+				break;
 			}
 		}
 	}
 
 	public void removeTestSuite(String id) {
 		for (TestSuite testSuite : testSuiteList) {
-			
 			if (testSuite.getID().equals(id)) {
-				testSuite.getTestCaseList().remove(testSuite);
+				testSuiteList.remove(testSuite);
 				break;
 			}
 		}
-		
 	}
 	
 	public void removeTestCase(String tcUID) {
 		for (TestSuite testSuite : testSuiteList) {
+			
 			if (testSuite != null) {
 				for (TestCase testCase : testSuite.getTestCaseList()) {
+					
 					if (testCase.getID().equals(tcUID)) {
 						testSuite.getTestCaseList().remove(testCase);
 						break;
@@ -220,61 +219,7 @@ public class TestProject implements Serializable {
 						for (Step step : testCase.getStepList()) {
 						
 							if (step.getID().equals(stepUID)) {
-								if(step instanceof MySQLStep) {
-									((MySQLStep) step).setOperation(((MySQLStep) source).getOperation());
-									step.setName(source.getName());
-									step.setService(source.getService());
-									step.setServer(source.getServer());
-									step.setExecutionList(source.getExecutionList());
-									step.setAssertList(source.getAssertList());
-									step.setAssetMap((HashMap<Asset, AssetType>) ((MySQLStep) source).getAssetMap()); 
-									step.setDependsOn(source.getDependsOn());
-									step.setVariableList(source.getVariableList());
-								}
-								if (step instanceof MongoStep) 
-								{
-									((MongoStep) step).setAction(((MongoStep) source).getAction());
-									step.setAssertList(source.getAssertList());
-									step.setAssetMap((HashMap<Asset, AssetType>) ((MongoStep) source).getAssetMap());
-									((MongoStep) step).setCollection(((MongoStep) source).getCollection());
-									step.setDependsOn(source.getDependsOn());
-									step.setExecutionList(source.getExecutionList());
-									step.setName(source.getName());
-									((MongoStep) step).setQuery(((MongoStep) source).getQuery());
-									step.setServer(source.getServer());
-									step.setService(source.getService());
-									step.setVariableList(source.getVariableList());
-								}
-								if (step instanceof RestStep) 
-								{
-									step.setAssertList(source.getAssertList());
-									step.setAssetMap((HashMap<Asset, AssetType>) source.getAssetMap());
-									((RestStep) step).setContentType(((RestStep) source).getContentType());
-									((RestStep) step).setCookie(((RestStep) source).getCookie());
-									step.setDependsOn(source.getDependsOn());
-									step.setExecutionList(source.getExecutionList());
-									((RestStep) step).setHeader(((RestStep) source).getHeader());
-									((RestStep) step).setMethod(((RestStep) source).getMethod());
-									step.setName(source.getName());
-									((RestStep) step).setPath(((RestStep) source).getPath());
-									((RestStep) step).setQuery(((RestStep) source).getQuery());
-									((RestStep) step).setRequest(((RestStep) source).getRequest());
-									step.setServer(source.getServer());
-									step.setService(source.getService());
-									step.setVariableList(source.getVariableList());
-								}
-								if (step instanceof SoapStep) 
-								{
-									step.setAssertList(source.getAssertList());
-									step.setAssetMap((HashMap<Asset, AssetType>) source.getAssetMap());
-									step.setDependsOn(source.getDependsOn());
-									step.setExecutionList(source.getExecutionList());
-									step.setName(source.getName());
-									((SoapStep) step).setRequest(((SoapStep) source).getRequest());
-									step.setServer(source.getServer());
-									step.setService(source.getService());
-									step.setVariableList(source.getVariableList());
-								}
+								step.copyFrom(source);
 							}
 						}
 					}

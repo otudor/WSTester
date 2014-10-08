@@ -23,6 +23,15 @@ public class SoapStep extends Step{
 	}
 
 	@Override
+	public void copyFrom(Step source) {
+		
+		super.copyFrom(source);
+		if(source instanceof SoapStep){
+			setRequest(((SoapStep) source).getRequest());
+		}
+	}
+	
+	@Override
 	public String detailedToString() {
 		return "SoapStep [request=" + request + ", getID()=" + getID() + ", getServer()=" + getServer() + ", getAssertList()=" + getAssertList() + ", getService()=" + getService()
 				+ ", getAssetMap()=" + getAssetMap() + ", getName()=" + getName() + ", getVariableList()=" + getVariableList() + ", getExecutionList()=" + getExecutionList() + ", getDependsOn()="
