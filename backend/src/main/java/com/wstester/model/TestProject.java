@@ -137,6 +137,27 @@ public class TestProject implements Serializable {
 			}
 		}
 	}
+	
+	public void removeTestStep(String id) {
+		for (TestSuite testSuite : testSuiteList) {
+			
+			if (testSuite != null) {
+				for (TestCase testCase : testSuite.getTestCaseList()) {
+		
+						if (testCase.getStepList() != null && !testCase.getStepList().isEmpty()){
+							for (Step step : testCase.getStepList())
+								
+								if (step.getID().equals(id)){
+									testCase.getStepList().remove(step);
+									break;
+								}
+						}
+					}
+				
+			}
+		}
+		
+	}
 
 	public Step getStep(String stepUID) {
 		if (testSuiteList != null && !testSuiteList.isEmpty()){

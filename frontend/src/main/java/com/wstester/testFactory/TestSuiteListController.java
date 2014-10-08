@@ -20,9 +20,13 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import org.apache.commons.io.output.TeeOutputStream;
+
 import com.wstester.model.MongoStep;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.RestStep;
@@ -209,6 +213,30 @@ public class TestSuiteListController implements Initializable
     	    	});
     	
     	
+    	return contextMenu;
+    }
+    
+    public ContextMenu createTestStepContextMenu( TestCase tc, Step ts)
+    {
+    	final ContextMenu contextMenu = new ContextMenu();
+    	MenuItem removeStep = new MenuItem("Remove");
+    	contextMenu.getItems().addAll(removeStep);
+    	
+    	removeStep.setOnAction(new EventHandler<ActionEvent>() {
+    		@Override
+    		public void handle(ActionEvent event) {
+    			TreeItem<Object> c = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
+    			int idx = treeView.getSelectionModel().getSelectedIndex();
+    			if(c == null) {
+    				return;
+    			}
+    			tsService.removeTestStep(ts.getID());
+    			c.getParent().getChildren().remove(c);
+    			treeView.getSelectionModel().select(idx> 0 ? idx-1 : 0);
+    		}
+    	
+    			
+    	});
     	return contextMenu;
     }
     
@@ -406,6 +434,30 @@ public class TestSuiteListController implements Initializable
 	                	TestSuite ts = (TestSuite)getTreeItem().getParent().getValue();
 	                	TestCase tc = (TestCase) getItem();
 	                	this.setContextMenu( createTestCaseContextMenu(ts, tc));
+	                }
+                    else if ( getItem().getClass() == MySQLStep.class)
+	                {
+                    	TestCase tc = (TestCase)getTreeItem().getParent().getValue();
+	                	Step step = (Step) getItem();
+	                	this.setContextMenu( createTestStepContextMenu(tc, step));
+	                }
+                    else if ( getItem().getClass() == MongoStep.class)
+	                {
+                    	TestCase tc = (TestCase)getTreeItem().getParent().getValue();
+	                	Step step = (Step) getItem();
+	                	this.setContextMenu( createTestStepContextMenu(tc, step));
+	                }
+                    else if ( getItem().getClass() == RestStep.class)
+	                {
+                    	TestCase tc = (TestCase)getTreeItem().getParent().getValue();
+	                	Step step = (Step) getItem();
+	                	this.setContextMenu( createTestStepContextMenu(tc, step));
+	                }
+                    else if ( getItem().getClass() == SoapStep.class)
+	                {
+                    	TestCase tc = (TestCase)getTreeItem().getParent().getValue();
+	                	Step step = (Step) getItem();
+	                	this.setContextMenu( createTestStepContextMenu(tc, step));
 	                }
                 
 

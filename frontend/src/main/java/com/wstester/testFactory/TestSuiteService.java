@@ -98,6 +98,11 @@ public class TestSuiteService {
 		testProject.removeTestSuite(id);
 	}
 
+	public void removeTestStep(String id) {
+		testProject.removeTestStep(id);
+		
+	}
+
 	
 
 }
