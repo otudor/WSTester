@@ -1,9 +1,9 @@
 package com.wstester.model;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
+
 import javax.xml.bind.annotation.XmlRootElement;
-import com.wstester.model.Action;
 
 @XmlRootElement
 public class MongoStep extends Step{
@@ -11,7 +11,7 @@ public class MongoStep extends Step{
 	private static final long serialVersionUID = 1L;
 	private Action action;
 	private String collection;
-	private HashMap<String, String> query;
+	private Map<String, String> query;
 	
 	public MongoStep() {
 		uuid = UUID.randomUUID().toString();
@@ -25,11 +25,11 @@ public class MongoStep extends Step{
 		this.collection = collection;
 	}
 
-	public HashMap<String, String> getQuery() {
+	public Map<String, String> getQuery() {
 		return query;
 	}
 
-	public void setQuery(HashMap<String, String> query) {
+	public void setQuery(Map<String, String> query) {
 		this.query = query;
 	}
 

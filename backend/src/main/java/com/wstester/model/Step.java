@@ -2,8 +2,8 @@ package com.wstester.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
@@ -18,7 +18,7 @@ public abstract class Step implements Serializable {
 	private Server server;
 	private Service service;
 	private List<Assert> assertList;
-	private HashMap<Asset, AssetType> assetMap;
+	private Map<Asset, AssetType> assetMap;
 	private List<Variable> variableList;
 	private List<Execution> executionList;
 	private String dependsOn;
@@ -50,11 +50,11 @@ public abstract class Step implements Serializable {
 		this.service = service;
 	}
 
-	public HashMap<Asset, AssetType> getAssetMap() {
+	public Map<Asset, AssetType> getAssetMap() {
 		return assetMap;
 	}
 	
-	public void setAssetMap(HashMap<Asset, AssetType> assetMap) {
+	public void setAssetMap(Map<Asset, AssetType> assetMap) {
 		this.assetMap = assetMap;
 	}
 	

@@ -1,6 +1,7 @@
 package com.wstester.dispatcher;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -13,7 +14,7 @@ import com.wstester.util.ProjectProperties;
 
 public class ExchangeDelayer extends RouteBuilder{
 
-	private static HashSet<String> stepsFinished = new HashSet<String>();
+	private static Set<String> stepsFinished = new HashSet<String>();
 	private CustomLogger log = new CustomLogger(ExchangeDelayer.class);
 	
 	public void delay(Step step) throws InterruptedException{
@@ -52,7 +53,6 @@ public class ExchangeDelayer extends RouteBuilder{
 			public void process(Exchange exchange) throws Exception {
 				
 				stepsFinished.clear();
-				stepsFinished = null;
 				stepsFinished = new HashSet<String>();
 			}
 		});

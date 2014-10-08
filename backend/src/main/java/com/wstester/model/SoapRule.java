@@ -1,6 +1,6 @@
 package com.wstester.model;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import com.wstester.services.definition.IAssetManager;
 import com.wstester.services.impl.AssetManager;
@@ -32,7 +32,7 @@ public class SoapRule extends Rule{
 	@Override
 	public String run(Step step) {
 
-		HashMap<Asset, AssetType> assetMap;
+		Map<Asset, AssetType> assetMap;
 		
 		if(step instanceof SoapStep){
 			

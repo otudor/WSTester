@@ -13,6 +13,7 @@ import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
 import com.wstester.model.RestMethod;
 import com.wstester.model.RestStep;
+import com.wstester.model.ServiceStatus;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
@@ -108,5 +109,37 @@ public class MockTest extends TestBaseClass{
 		
 		File file = new File("assets/AssetFile.txt");
 		file.delete();
+	}
+	
+	@Test
+	public void noRulesFoundToMatchTheRequest() throws Exception{
+		
+		TestProject testProject = TestUtils.getMockedRestProject();
+		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setPath("findByCookie");
+		String output = "No rule was found to match this request";
+		
+		testRunner = new TestRunner(testProject);
+		testRunner.run(testProject);
+		
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 112500l);
+		
+		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
+		assertEquals(output, response.getContent());
+	}
+	
+	@Test
+	public void noRulesWereDefinedForTheService() throws Exception{
+		
+		TestProject testProject = TestUtils.getRestTestPlan();
+		testProject.getEnvironmentList().get(0).getServers().get(0).getServices().get(0).setStatus(ServiceStatus.MOCKED);
+		String output = "No rules were defined for the service although the status of the service is MOCKED!";
+		
+		testRunner = new TestRunner(testProject);
+		testRunner.run(testProject);
+		
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 112500l);
+		
+		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
+		assertEquals(output, response.getContent());
 	}
 }

@@ -1,5 +1,7 @@
 package com.wstester.asserts;
+
 import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -9,7 +11,7 @@ import com.wstester.model.Step;
 
 public class AssertRoute extends RouteBuilder {
 
-	private volatile HashSet<Step> stepList = new HashSet<Step>();
+	private volatile Set<Step> stepList = new HashSet<Step>();
 	
 	@Override
 	public void configure() throws Exception {

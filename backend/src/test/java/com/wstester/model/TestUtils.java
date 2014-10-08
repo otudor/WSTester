@@ -1251,6 +1251,80 @@ public class TestUtils {
 		return testProject;
 	}
 
+	public static TestProject getMockedMongoProject(){
+		
+		TestProject testProject = new TestProject();
+		testProject.setName("Test Project");
+		
+		// construct service list		
+		// Service 2
+		List<Service> serviceList2 = new ArrayList<Service>();
+		MongoService service2 = new MongoService();
+		service2.setName("Service Mongo");
+		service2.setPort("27017");
+		service2.setDbName("test");
+		service2.setUser("appuser");
+		service2.setPassword("apppass");
+		service2.setStatus(ServiceStatus.MOCKED);
+		serviceList2.add(service2);
+		
+		// construct server list
+		List<Server> serverList1 = new ArrayList<Server>();
+		// Server 2
+		Server server12 = new Server();
+		server12.setDescription("This is the second server of the first env");
+		server12.setIp("localhost");
+		server12.setName("Server 12");
+		server12.setServices(serviceList2);
+		serverList1.add(server12);
+		
+		// construct environment list
+		List<Environment> environmentList = new ArrayList<Environment>();
+		// Environment 1
+		Environment env1 = new Environment();
+		env1.setName("Env 1");
+		env1.setServers(serverList1);
+		environmentList.add(env1);
+
+		testProject.setEnvironmentList(environmentList);
+
+		// construct test steps
+
+		List<Step> stepList1 = new ArrayList<Step>();
+		// test 2
+		MongoStep step2 = new MongoStep();
+		step2.setName("Step 2");
+		step2.setServer(server12);
+		step2.setService(service2);
+		String collection = "customer";
+		HashMap<String, String> query = new HashMap<String, String>();
+		query.put("name", "HAC");
+		step2.setAction(Action.SELECT);
+		step2.setCollection(collection);
+		step2.setQuery(query);
+		stepList1.add(step2);
+		
+		// construct test case list
+		// test case 1
+		List<TestCase> testCaseList1 = new ArrayList<TestCase>();
+		TestCase testCase = new TestCase();
+		testCase.setName("TC 1");
+		testCase.setStepList(stepList1);
+		testCaseList1.add(testCase);
+		
+		// construct test suite list
+		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
+		TestSuite testSuite1 = new TestSuite();
+		testSuite1.setName("Test Suite 1");
+		testSuite1.setEnvironment(env1);
+		testSuite1.setTestCaseList(testCaseList1);
+		testSuiteList.add(testSuite1);
+		
+		testProject.setTestSuiteList(testSuiteList);
+		
+		return testProject;
+	}
+	
 	public static TestProject getAssertTestProject() {
 		
 		TestProject testProject = new TestProject();

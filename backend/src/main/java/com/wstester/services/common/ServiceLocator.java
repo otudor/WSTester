@@ -38,13 +38,8 @@ public final class ServiceLocator {
 		
 		else if(clazz.isAnnotationPresent(Stateless.class)) {
 			service = getImplementation(clazz);
-		}
-		
-		else {
-			//TODO: do something here
-			//nothing happens
-		}
-		
+		}		
+	
 		if(service != null) {
 			return (T) service;
 		}
@@ -66,12 +61,7 @@ public final class ServiceLocator {
 		else if(clazz.isAnnotationPresent(Stateless.class)) {
 			service = getImplementation(clazz, constructorParameter);
 		}
-		
-		else {
-			//TODO: do something here
-			//nothing happens
-		}
-		
+				
 		if(service != null) {
 			return (T) service;
 		}

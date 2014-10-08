@@ -1,6 +1,7 @@
 package com.wstester.mock;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -13,7 +14,7 @@ import com.wstester.model.Step;
 
 public class MockSystem implements Processor{
 
-	private ArrayList<Rule> ruleList;
+	private List<Rule> ruleList;
 	private CustomLogger log = new CustomLogger(MockSystem.class);		
 	
 	@Override
@@ -35,17 +36,22 @@ public class MockSystem implements Processor{
 		exchange.getIn().setBody(response);
 	}
 	
-	private void addRules(ArrayList<Rule> ruleList){
+	private void addRules(List<Rule> ruleList){
 		
-		for(Rule rule : ruleList){
-			this.ruleList.add(rule);
-			log.info("Adding rule: " + rule);
+		if(ruleList != null){
+			for(Rule rule : ruleList){
+				this.ruleList.add(rule);
+				log.info("Adding rule: " + rule);
+			}
+		}
+		else{
+			log.info("No rules were added because the ruleList is null");
 		}
 	}
 	
 	private String runRules(Step step){
 		
-		log.info(step.getID(), "Running mocking rules");
+		log.info(step.getID(), "Running mock rules");
 		String response = null;
 		
 		for(Rule rule : this.ruleList){
@@ -57,7 +63,14 @@ public class MockSystem implements Processor{
 		}
 		
 		if(response == null) {
-			log.info(step.getID(), "No rule found for this request");
+			if(ruleList.size() == 0){
+				response = "No rules were defined for the service although the status of the service is MOCKED!";
+				log.info(step.getID(), "No rules were defined for the service although the status of the service is MOCKED!");
+			}
+			else{
+				response = "No rule was found to match this request";
+				log.info(step.getID(), "No rule was found to match this request");
+			}
 		}
 		
 		return response;

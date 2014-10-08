@@ -1,7 +1,7 @@
 package com.wstester.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
@@ -14,7 +14,7 @@ public abstract class Service implements Serializable{
 	protected String uuid;
 	protected String name;
 	protected ServiceStatus status;
-	protected ArrayList<Rule> ruleList;
+	protected List<Rule> ruleList;
 	
 	public String getID() {
 		return this.uuid;
@@ -36,11 +36,11 @@ public abstract class Service implements Serializable{
 		this.status = status;
 	}
 
-	public ArrayList<Rule> getRuleList() {
+	public List<Rule> getRuleList() {
 		return ruleList;
 	}
 			
-	public void setRuleList(ArrayList<Rule> ruleList) {
+	public void setRuleList(List<Rule> ruleList) {
 		this.ruleList = ruleList;
 	}
 

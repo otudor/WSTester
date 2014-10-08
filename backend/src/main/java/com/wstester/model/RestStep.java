@@ -1,8 +1,7 @@
 package com.wstester.model;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -10,9 +9,9 @@ public class RestStep extends Step {
 
 	private static final long serialVersionUID = 1L;
 	private String path;
-	private HashMap<String,String> query;
-	private HashMap<String,String> cookie;
-	private HashMap<String,String> header;
+	private Map<String,String> query;
+	private Map<String,String> cookie;
+	private Map<String,String> header;
 	private String contentType = "text/plain";
 	private RestMethod method;
 	private Object request;
@@ -34,27 +33,27 @@ public class RestStep extends Step {
 		this.contentType = contentType;
 	}
 	
-	public HashMap<String, String> getQuery() {
+	public Map<String, String> getQuery() {
 		return query;
 	}
 
-	public void setQuery(HashMap<String, String> query) {
+	public void setQuery(Map<String, String> query) {
 		this.query = query;
 	}
 
-	public HashMap<String, String> getCookie() {
+	public Map<String, String> getCookie() {
 		return cookie;
 	}
 
-	public void setCookie(HashMap<String, String> cookie) {
+	public void setCookie(Map<String, String> cookie) {
 		this.cookie = cookie;
 	}
 
-	public HashMap<String, String> getHeader() {
+	public Map<String, String> getHeader() {
 		return header;
 	}
 
-	public void setHeader(HashMap<String, String> header) {
+	public void setHeader(Map<String, String> header) {
 		this.header = header;
 	}
 

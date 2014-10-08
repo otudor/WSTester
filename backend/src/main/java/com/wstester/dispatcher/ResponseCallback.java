@@ -1,15 +1,18 @@
 package com.wstester.dispatcher;
 
 import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Response;
 
 public class ResponseCallback extends RouteBuilder {
 
-	private static HashSet<Response> responseList = new HashSet<Response>();
+	private static Set<Response> responseList = new HashSet<Response>();
 	private static int totalResponses = 0;
 	private static boolean finished = false;
 	private static CustomLogger log = new CustomLogger(ResponseCallback.class);
