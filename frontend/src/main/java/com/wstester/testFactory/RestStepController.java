@@ -638,7 +638,7 @@ public class RestStepController
 		rest.setHeader(step.getHeader());
 		rest.setMethod(step.getMethod());
 		rest.setName(step.getName());
-		rest.setPath(step.getPath());
+		rest.setPath(restPath.getText());
 		rest.setQuery(step.getQuery());
 		rest.setRequest(step.getRequest());
 		rest.setServer(step.getServer());
