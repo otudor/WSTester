@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import org.apache.cxf.jaxws.javaee.EnvEntryType;
 
+import com.sun.javafx.collections.MappingChange.Map;
 import com.wstester.assets.Table;
 import com.wstester.main.MainLauncher;
 import com.wstester.main.WsTesterMain;
@@ -94,6 +95,8 @@ public class RestStepController
 	@FXML private TableColumn<TableQuerry, String> columnQuerryName;
 	@FXML private TableColumn<TableQuerry, String> columnQuerryValue;
 
+	
+	
 	//public static variables on order to pass references to table view and table columns, and use them in AddWindowController class
 	public static TableView<TableQuerry> tableQuerryVarsPassed;
 	public static TableColumn<TableQuerry, String> tableColumnVarNamePassed = new TableColumn<TableQuerry, String>();
@@ -212,7 +215,9 @@ public class RestStepController
 		for(int i=0; i<variablesCookieList.size(); i++) {
 			tableCookieVarData.add(
 					new TableCookie(variablesCookieList.get(i).getName(), variablesCookieList.get(i).getContent()));
+			
 		}
+		
 		tableCookieVars.setItems(tableCookieVarData);
 		tableCookieVars = tableCookieVarsPassed;
 		populateCookieTable();
@@ -634,9 +639,13 @@ public class RestStepController
 		rest.setAssertList(step.getAssertList());
 		rest.setAssetMap(step.getAssetMap());
 		rest.setContentType(step.getContentType());
-		rest.setCookie(step.getCookie());
-		
-//		rest.setCookie(cookie);;
+//		rest.setCookie(step.getCookie());
+		HashMap<String, String> cookieMap = new HashMap<String, String>();
+		for (int i= 0;i<tableCookieVarData.size();i++){
+			System.out.println(columnCookieName.getCellData(i));
+			cookieMap.put(columnCookieName.getCellData(i), columnCookieValue.getCellData(i));
+		}
+		rest.setCookie(cookieMap);
 		rest.setDependsOn(step.getDependsOn());
 		rest.setExecutionList(step.getExecutionList());
 		rest.setHeader(step.getHeader());
