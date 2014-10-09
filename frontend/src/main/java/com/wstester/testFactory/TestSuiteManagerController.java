@@ -1,5 +1,7 @@
 package com.wstester.testFactory;
 
+import org.apache.cxf.wsdl.TService;
+
 import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ITestRunner;
@@ -17,7 +19,8 @@ public class TestSuiteManagerController
     @FXML private Parent root;
     @FXML private BorderPane contentArea;
     @FXML public Button btnRun;
-
+    
+    private TestSuiteService tsService;
     private TestSuiteListController tsListController;
     private TestSuiteController testSuiteController;
     private TestCaseController testCaseController;
@@ -148,6 +151,7 @@ public class TestSuiteManagerController
 	
 		ITestRunner testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class, testProject);
 		testRunner.run(testProject);
+//		testRunner.getResponse(tsService.getStep(), timeout);
 		
 		ExecutionUpdate execUpd = new ExecutionUpdate(tsListController);
 		

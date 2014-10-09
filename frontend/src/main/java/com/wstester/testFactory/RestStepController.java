@@ -22,6 +22,7 @@ import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
+import com.wstester.model.TestProject;
 import com.wstester.model.Variable;
 import com.wstester.testFactory.TableQuerry;
 import com.wstester.variables.TableVariables;
@@ -51,6 +52,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import junit.framework.Test;
 
 public class RestStepController
 {
@@ -112,7 +114,7 @@ public class RestStepController
 		public static TableView<TablePath> tablePathVarsPassed;
 		public static TableColumn<TablePath, String> tableColumnPathNamePassed = new TableColumn<TablePath, String>();
 		public static TableColumn<TablePath, String> tableColumnPathPassed = new TableColumn<TablePath, String>();
-		
+	
 		public static ObservableList<TablePath> tablePathVarData = FXCollections
 				.observableArrayList();
         
@@ -540,8 +542,8 @@ public class RestStepController
 									}
 								});
 							step.setServer(new_value);
-							tsService.setStepByUID(step, uid);
-							tsService.saveTestSuite();
+//							tsService.setStepByUID(step, uid);
+//							tsService.saveTestSuite();
 						}
 					}
         	});
@@ -633,20 +635,26 @@ public class RestStepController
 		rest.setAssetMap(step.getAssetMap());
 		rest.setContentType(step.getContentType());
 		rest.setCookie(step.getCookie());
+		
+//		rest.setCookie(cookie);;
 		rest.setDependsOn(step.getDependsOn());
 		rest.setExecutionList(step.getExecutionList());
 		rest.setHeader(step.getHeader());
 		rest.setMethod(step.getMethod());
-		rest.setName(step.getName());
+		rest.setName(lblName.getText());
 		rest.setPath(restPath.getText());
 		rest.setQuery(step.getQuery());
 		rest.setRequest(step.getRequest());
-		rest.setServer(step.getServer());
-		rest.setService(step.getService());
+		rest.setServer(serverBox.getValue());
+		rest.setService(serviceBox.getValue());
 		rest.setVariableList(step.getVariableList());
 		tsService.setStepByUID(rest, uid);
 		tsService.saveTestSuite();
+		
+		
+		
 	} 
+    	
     
    
     
