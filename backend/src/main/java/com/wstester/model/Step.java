@@ -123,6 +123,18 @@ public abstract class Step implements Serializable {
 		this.dependsOn = dependsOn;
 	}
 	
+	public void copyFrom(Step source){
+		
+		setAssertList(source.getAssertList());
+		setAssetMap(source.getAssetMap());
+		setDependsOn(source.getDependsOn());
+		setExecutionList(source.getExecutionList());
+		setName(source.getName());
+		setServer(source.getServer());
+		setService(source.getService());
+		setVariableList(source.getVariableList());
+	}
+	
 	@Override
 	public String toString(){
 		return this.name;

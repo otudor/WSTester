@@ -27,4 +27,12 @@ public class Main {
         
         return server;
     }
+    
+    public static void main(String[] args) throws IOException{
+    	
+    	startRestServer();
+    		
+    		while(true)
+    			;
+    }
 }

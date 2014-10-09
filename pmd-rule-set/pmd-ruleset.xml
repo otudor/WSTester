@@ -8,7 +8,6 @@
   
   
   <rule ref="rulesets/java/basic.xml/BooleanInstantiation">						<priority>5</priority></rule> 
-  <rule ref="rulesets/java/basic.xml/CollapsibleIfStatements">					<priority>5</priority></rule> 
   <rule ref="rulesets/java/basic.xml/DoubleCheckedLocking">						<priority>5</priority></rule> 
   <rule ref="rulesets/java/basic.xml/EmptyCatchBlock">							<priority>1</priority></rule> 
   <rule ref="rulesets/java/basic.xml/EmptyFinallyBlock">							<priority>5</priority></rule> 

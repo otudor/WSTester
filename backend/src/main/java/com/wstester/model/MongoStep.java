@@ -2,7 +2,6 @@ package com.wstester.model;
 
 import java.util.Map;
 import java.util.UUID;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -39,6 +38,17 @@ public class MongoStep extends Step{
 	
 	public void setAction(Action action) {
 		this.action = action;
+	}
+	
+	@Override
+	public void copyFrom(Step source) {
+		
+		super.copyFrom(source);
+		if(source instanceof MongoStep){
+			setAction(((MongoStep) source).getAction());
+			setCollection(((MongoStep) source).getCollection());
+			setQuery(((MongoStep) source).getQuery());
+		}
 	}
 	
 	@Override
