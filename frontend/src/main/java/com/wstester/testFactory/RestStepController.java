@@ -639,24 +639,39 @@ public class RestStepController
 		rest.setAssertList(step.getAssertList());
 		rest.setAssetMap(step.getAssetMap());
 		rest.setContentType(step.getContentType());
-//		rest.setCookie(step.getCookie());
-		HashMap<String, String> cookieMap = new HashMap<String, String>();
-		for (int i= 0;i<tableCookieVarData.size();i++){
-			System.out.println(columnCookieName.getCellData(i));
-			cookieMap.put(columnCookieName.getCellData(i), columnCookieValue.getCellData(i));
-		}
-		rest.setCookie(cookieMap);
 		rest.setDependsOn(step.getDependsOn());
 		rest.setExecutionList(step.getExecutionList());
-		rest.setHeader(step.getHeader());
 		rest.setMethod(step.getMethod());
 		rest.setName(lblName.getText());
-		rest.setPath(restPath.getText());
-		rest.setQuery(step.getQuery());
 		rest.setRequest(step.getRequest());
 		rest.setServer(serverBox.getValue());
 		rest.setService(serviceBox.getValue());
 		rest.setVariableList(step.getVariableList());
+		
+		HashMap<String, String> cookieMap = new HashMap<String, String>();
+		for (int i= 0;i<tableCookieVarData.size();i++){
+			cookieMap.put(columnCookieName.getCellData(i), columnCookieValue.getCellData(i));
+		}
+		rest.setCookie(cookieMap);
+		
+		HashMap<String, String> headerMap = new HashMap<String, String>();
+		for (int i= 0;i<tableHeaderVarData.size();i++){
+			headerMap.put(columnHeaderName.getCellData(i), columnHeaderValue.getCellData(i));
+		}
+		rest.setHeader(headerMap);
+		
+		HashMap<String, String> queryMap = new HashMap<String, String>();
+		for (int i= 0;i<tableQuerryVarData.size();i++){
+			queryMap.put(columnQuerryName.getCellData(i), columnQuerryValue.getCellData(i));
+		}
+		rest.setQuery(queryMap);
+		
+		StringBuilder path = new StringBuilder(restPath.getText());
+		for (int i= 0;i<tablePathVarData.size();i++){
+			path.append("/" + columnPathName.getCellData(i) + "/" + columnPathValue.getCellData(i));
+		}
+		rest.setPath(path.toString());
+		
 		tsService.setStepByUID(rest, uid);
 		tsService.saveTestSuite();
 		
