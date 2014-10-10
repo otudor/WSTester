@@ -81,6 +81,7 @@ public class MainLauncher extends Application {
 					}
 					
     	    		manager.closeCamelContext();
+    	    		
     			}
     		});  
         	

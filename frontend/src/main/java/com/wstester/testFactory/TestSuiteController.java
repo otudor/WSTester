@@ -2,66 +2,59 @@ package com.wstester.testFactory;
 
 import com.wstester.model.Environment;
 import com.wstester.model.TestSuite;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-public class TestSuiteController 
-{
-	@FXML private Node rootEnvDetails;
-	@FXML private TextField tsName;
-	@FXML private ComboBox<Environment> envBox;
-		
-	private TestSuiteService tsService;
+public class TestSuiteController {
 	
-	private TestSuiteManagerController tsManagerController;
+	@FXML
+	private Node rootEnvDetails;
+	@FXML 
+	private TextField tsName;
+	@FXML 
+	private ComboBox<Environment> envBox;
+		
+	private TestProjectService testProjectService;
 	private Environment environment;
 	private String uid;
 
-	public void setTestSuiteService(TestSuiteService tsService)	{
-		this.tsService = tsService;
-	}
-
-	public void setMainPresenter(TestSuiteManagerController tsManagerController)	
-	{
-		this.tsManagerController = tsManagerController;
-	}
-
-	public Node getView()	
-	{
+	public Node getView() {
 		return rootEnvDetails;
 	}
 
-	public void setTestSuite(final String tsUID)	{
-		tsName.setText("");
-		uid = tsUID;
-		TestSuite ts = tsService.getTestSuite( tsUID);
-		tsName.setText( ts.getName());
-		environment = ts.getEnvironment();
+	public void setTestSuite(final String tsUID) {
+		
+		testProjectService = new TestProjectService();
+		this.uid = tsUID;
+		TestSuite testSuite = testProjectService.getTestSuite(tsUID);
+		tsName.clear();
+		tsName.setText(testSuite.getName());
+		environment = testSuite.getEnvironment();
+		
 		envBox.getItems().clear();
-		envBox.getItems().addAll(tsService.getEnvironmentList());
-		envBox.setValue(ts.getEnvironment());
-		envBox.getSelectionModel().selectedItemProperty().addListener( new
-        		ChangeListener<Environment>() {
-        	public void changed(ObservableValue ov, Environment value, Environment new_value) {        		
-        		  ts.setEnvironment(new_value); 
-        		  tsService.setTestSuiteByUID(ts, uid);
-        			}
-        });
+		envBox.getItems().addAll(testProjectService.getEnvironmentList());
+//		envBox.setValue(environment);	
+		envBox.getSelectionModel().select(environment);
 	}
-	    
+	
+	@FXML
+	public void handleEnvironmentChangeAction(){
+		
+		Environment selectedEnvironment = envBox.getSelectionModel().getSelectedItem();
+		this.environment = selectedEnvironment; 
+	}
+	
     public void saveTestSuite(ActionEvent e) {
-    	TestSuite testSuite = new TestSuite();
+    	
+    	
+    	TestSuite testSuite = testProjectService.getTestSuite(uid);
     	testSuite.setName(tsName.getText());
     	testSuite.setEnvironment(environment);
-    	tsService.setTestSuiteByUID(testSuite, uid);
-		tsService.saveTestSuite();
+    	testProjectService.setTestSuiteByUID(testSuite, uid);
 	}
 }

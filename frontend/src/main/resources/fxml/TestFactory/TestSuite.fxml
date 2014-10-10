@@ -25,7 +25,7 @@
                                     <Insets />
                                  </GridPane.margin>
                               </Button>
-                              <ComboBox fx:id="envBox" prefWidth="200.0" promptText="Environment..." GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="envBox" onAction="#handleEnvironmentChangeAction" prefWidth="200.0" promptText="Select Environment" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                                 
                               		<!--  Label text="" GridPane.rowIndex="2" GridPane.columnIndex="0">
                         			<padding>

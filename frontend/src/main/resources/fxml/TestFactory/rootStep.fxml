@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="rootStep" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.StepController">
+	<children>
+								<GridPane fx:id="gridStep" hgap="7.0" prefHeight="94.0" prefWidth="700.0" vgap="7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+
+									<children>
+										<Label text="Step Name:" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+										<TextField fx:id="stepName" prefHeight="25.0" prefWidth="570.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+										<ComboBox fx:id="serviceBox" prefWidth="150.0" promptText="Add Service..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+										<ComboBox fx:id="serverBox" prefWidth="150.0" promptText="Add Server..." GridPane.columnIndex="1" />
+										<Label text="Server:" />
+										<Label text="Service:" GridPane.rowIndex="1" />
+									</children>
+									<columnConstraints>
+										<ColumnConstraints minWidth="80.0" prefWidth="100.0" />
+										<ColumnConstraints minWidth="570.0" prefWidth="570.0" />
+									</columnConstraints>
+									<rowConstraints>
+										<RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="30.0" />
+										<RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="30.0" />
+										<RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" />
+										<RowConstraints />
+									</rowConstraints>
+								</GridPane>
+	</children>
+</AnchorPane>

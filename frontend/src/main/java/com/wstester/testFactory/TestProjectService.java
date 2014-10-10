@@ -1,23 +1,10 @@
 package com.wstester.testFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
-import javafx.scene.control.ChoiceBox;
-import javafx.util.Callback;
 
 import com.wstester.model.Environment;
-import com.wstester.model.MongoService;
-import com.wstester.model.MongoStep;
-import com.wstester.model.MySQLService;
-import com.wstester.model.MySQLStep;
-import com.wstester.model.RestStep;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
-import com.wstester.model.SoapStep;
 import com.wstester.model.Step;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestProject;
@@ -25,20 +12,18 @@ import com.wstester.model.TestSuite;
 import com.wstester.util.MainConstants;
 import com.wstester.util.UtilityTool;
 
-public class TestSuiteService {
+public class TestProjectService {
+	
 	private TestProject testProject;
 
-	public TestSuiteService() {
+	public TestProjectService() {
 		testProject = (TestProject) UtilityTool
 				.getEntity(MainConstants.TESTPROJECT);
 		
 	}
 
-	public TestSuite createTestSuite(String name) {
-		TestSuite ts = new TestSuite();
-		ts.setName(name);
-		testProject.addTestSuite(ts);
-		return ts;
+	public void addTestSuite(TestSuite testSuite) {
+		testProject.addTestSuite(testSuite);
 	}
 	
 	public List<TestSuite> getTestSuites(){
@@ -102,7 +87,4 @@ public class TestSuiteService {
 		testProject.removeTestStep(id);
 		
 	}
-
-	
-
 }

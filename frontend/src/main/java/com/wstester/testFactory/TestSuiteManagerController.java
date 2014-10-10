@@ -1,7 +1,15 @@
 package com.wstester.testFactory;
 
-import org.apache.cxf.wsdl.TService;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import org.apache.cxf.wsdl.TService;
+import org.datafx.controller.FXMLController;
+import org.springframework.beans.propertyeditors.ResourceBundleEditor;
+
+import com.javafx.main.Main;
 import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ITestRunner;
@@ -10,33 +18,36 @@ import com.wstester.util.UtilityTool;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
-public class TestSuiteManagerController
-{
+public class TestSuiteManagerController implements Initializable{
     @FXML private Parent root;
     @FXML private BorderPane contentArea;
     @FXML public Button btnRun;
     
-    private TestSuiteService tsService;
+    private TestProjectService tsService;
     private TestSuiteListController tsListController;
     private TestSuiteController testSuiteController;
     private TestCaseController testCaseController;
-    private MySQLStepController mysqlStepController;
+    private StepController stepController;
+    
+    @FXML
+    private MySQLStepController mysqlController;
+    
     private MongoStepController mongoStepController;
     private SoapStepController soapStepController;
     private RestStepController restStepController;
-    private ResponseTabController responseTabController;
     private EmptyTabController emptyTabController;
     
-	@FXML
-	private void initialize() 
-	{
-		//btnRun.addEventHandler(ActionEvent.ANY, new BtnHandler());
-		//btnRun.addEventHandler(MyEvent.CEVA, new MyEventHandler());
-		
+    private ResourceBundle resources;
+    
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		this.resources = resources;
 	}
 	
     public void setTestSuiteListController( TestSuiteListController tsListController)
@@ -44,11 +55,6 @@ public class TestSuiteManagerController
         this.tsListController = tsListController;
     }
     
-    public void setResponseTabController( ResponseTabController responseTabController)
-    {
-        this.responseTabController = responseTabController;
-    }
-
     public void setTestSuiteDetailController( TestSuiteController tsDetailController)
     {
         this.testSuiteController = tsDetailController;
@@ -57,11 +63,6 @@ public class TestSuiteManagerController
     public void setTestCaseDetailController( TestCaseController tcDetailController)
     {
         this.testCaseController = tcDetailController;
-    }
-    
-    public void setMySQLStepController( MySQLStepController mysqlStepController)
-    {
-        this.mysqlStepController = mysqlStepController;
     }
     
     public void setMongoStepController( MongoStepController mongoStepController)
@@ -100,13 +101,7 @@ public class TestSuiteManagerController
     	testSuiteController.setTestSuite( tsUID);
         contentArea.setCenter( testSuiteController.getView());
     }
-    
-    public void showResponseTab()
-    {
-    	responseTabController.setResponseTabController();
-        contentArea.setRight( responseTabController.getView());
-    }
-    
+        
     public void showEmptyTabController()
     {
     	emptyTabController.setEmptyTabController();
@@ -119,11 +114,19 @@ public class TestSuiteManagerController
         contentArea.setCenter( testCaseController.getView());
     }
     
-    public void showMySQLStep( String sUID)
-    {
-    	mysqlStepController.setMySQLStep(sUID);
-//        contentArea.setCenter( mysqlStepController.getView());
-    	contentArea.setCenter(mysqlStepController.getNew());
+    public void showStep(String stepId) {
+    	
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("/fxml/TestFactory/MySQLStep.fxml"));
+        try {
+			loader.load(getClass().getResourceAsStream("/fxml/TestFactory/MySQLStep.fxml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        mysqlController = (MySQLStepController) loader.getController();
+    	mysqlController.setStep(stepId);
+    	contentArea.setCenter(mysqlController.getNode());
     }
     
     public void showMongoStep( String sUID)

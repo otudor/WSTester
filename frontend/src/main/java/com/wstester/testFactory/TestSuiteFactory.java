@@ -13,7 +13,7 @@ public class TestSuiteFactory
     private MongoStepController mongoStepController;
     private SoapStepController soapStepController;
     private RestStepController restStepController;
-    private TestSuiteService tsService;
+    private TestProjectService tsService;
     private ResponseTabController responseTabController;
     private EmptyTabController emptyTabController;
     
@@ -37,11 +37,11 @@ public class TestSuiteFactory
                 tsManagerController.setTestSuiteDetailController( getTestSuiteController());
                 tsManagerController.setTestSuiteListController( getTestSuiteListController());
                 tsManagerController.setTestCaseDetailController( getTestCaseController());
-                tsManagerController.setMySQLStepController( getMySQLStepController());
+//                tsManagerController.setStepController( getMySQLStepController());
                 tsManagerController.setMongoStepController(getMongoStepController());
                 tsManagerController.setSoapStepController(getSoapStepController());
                 tsManagerController.setRestStepController(getRestStepController());
-                tsManagerController.setResponseTabController(getResponseTabController());
+//                tsManagerController.setResponseTabController(getResponseTabController());
                 tsManagerController.setEmptyTabController(getEmptyTabController());
             }
             catch (IOException e)
@@ -81,7 +81,7 @@ public class TestSuiteFactory
                 FXMLLoader loader = new FXMLLoader();
                 loader.load(getClass().getResourceAsStream("/fxml/TestFactory/TestSuiteList.fxml"));
                 tsListController = (TestSuiteListController) loader.getController();
-                tsListController.setTestSuiteService( getTestSuiteService());
+//                tsListController.setTestSuiteService( getTestSuiteService());
                 tsListController.setTestSuiteManagerController( getManagerController());
             }
             catch (IOException e)
@@ -101,8 +101,8 @@ public class TestSuiteFactory
                 FXMLLoader loader = new FXMLLoader();
                 loader.load(getClass().getResourceAsStream("/fxml/TestFactory/Response.fxml"));
                 responseTabController = (ResponseTabController) loader.getController();
-                responseTabController.setTestSuiteService( getTestSuiteService());
-                responseTabController.setTestSuiteManagerController( getManagerController());
+//                responseTabController.setTestSuiteService( getTestSuiteService());
+//                responseTabController.setTestSuiteManagerController( getManagerController());
             }
             catch (IOException e)
             {
@@ -141,8 +141,8 @@ public class TestSuiteFactory
                 FXMLLoader loader = new FXMLLoader();
                 loader.load(getClass().getResourceAsStream("/fxml/TestFactory/MySQLStep.fxml"));
                 mySQLStepController = (MySQLStepController) loader.getController();
-                mySQLStepController.setTestSuiteService( getTestSuiteService());
-                mySQLStepController.setTestSuiteManagerController( getManagerController());
+//                mySQLStepController.setTestSuiteService( getTestSuiteService());
+//                mySQLStepController.setTestSuiteManagerController( getManagerController());
             }
             catch (IOException e)
             {
@@ -220,8 +220,6 @@ public class TestSuiteFactory
                 FXMLLoader loader = new FXMLLoader();
                 loader.load(getClass().getResourceAsStream("/fxml/TestFactory/TestSuite.fxml"));
                 tSuiteController = (TestSuiteController) loader.getController();
-                tSuiteController.setTestSuiteService( getTestSuiteService());
-                tSuiteController.setMainPresenter(getManagerController());
             }
             catch (IOException e)
             {
@@ -231,11 +229,11 @@ public class TestSuiteFactory
         return tSuiteController;
     }
     
-    public TestSuiteService getTestSuiteService()
+    public TestProjectService getTestSuiteService()
     {
         if (tsService == null)
         {
-        	tsService = new TestSuiteService();
+        	tsService = new TestProjectService();
         }
         return tsService;
     }

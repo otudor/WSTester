@@ -24,9 +24,6 @@ import javafx.util.Callback;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import org.apache.commons.io.output.TeeOutputStream;
-
 import com.wstester.model.MongoStep;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.RestStep;
@@ -37,8 +34,7 @@ import com.wstester.model.ExecutionStatus;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestSuite;
 
-public class TestSuiteListController implements Initializable
-{
+public class TestSuiteListController implements Initializable {
     @FXML private Node root;
     //@FXML private TextField searchField;
    // @FXML private ListView<Old> resultsList;
@@ -46,10 +42,11 @@ public class TestSuiteListController implements Initializable
     @FXML private TreeView<Object> treeView;
     
     private TestSuiteManagerController tsManagerController;
-    private TestSuiteService tsService;
+    private TestProjectService testProjectService;
     
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    	testProjectService = new TestProjectService();
     }
 
     public Node getView()
@@ -62,14 +59,9 @@ public class TestSuiteListController implements Initializable
         this.tsManagerController = tsManagerController;
     }
     
-    public void setTestSuiteService(TestSuiteService tsService)
-    {
-        this.tsService = tsService;
-    }
-
     public void loadSuites()
     {
-    	tsList = tsService.getTestSuites();    
+    	tsList = testProjectService.getTestSuites();    
     }
     
     public void selectTestSuite( String tsUID)
@@ -82,9 +74,9 @@ public class TestSuiteListController implements Initializable
     	tsManagerController.showTestCase( tsUID);
     }
 
-    public void selectMySQLStep( String sUID)
+    public void selectStep( String sUID)
     {
-    	tsManagerController.showMySQLStep( sUID);
+    	tsManagerController.showStep( sUID);
     }
     
     public void selectMongoStep( String sUID)
@@ -185,7 +177,7 @@ public class TestSuiteListController implements Initializable
     	    	
     	    	TestCase testCase = new TestCase();
     	    	testCase.setName("New Test Case");
-    	    	tsService.addTestCaseForTestSuite(testCase, testSuite.getID());    	    	
+    	    	testProjectService.addTestCaseForTestSuite(testCase, testSuite.getID());    	    	
     	    	    	    	
     	    	Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestCase.png")));
     	    	TreeItem<Object> tcNode = new TreeItem<>(testCase, icon);
@@ -204,7 +196,7 @@ public class TestSuiteListController implements Initializable
     	    	    	int idx = treeView.getSelectionModel().getSelectedIndex();
     	    	    	if( c == null ) return;    	    	
     	    	    	
-    	    	    	tsService.removeTestSuite( testSuite.getID());
+    	    	    	testProjectService.removeTestSuite( testSuite.getID());
     	                c.getParent().getChildren().remove(c);
     	                               
     	                treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
@@ -230,7 +222,7 @@ public class TestSuiteListController implements Initializable
     			if(c == null) {
     				return;
     			}
-    			tsService.removeTestStep(ts.getID());
+    			testProjectService.removeTestStep(ts.getID());
     			c.getParent().getChildren().remove(c);
     			treeView.getSelectionModel().select(idx> 0 ? idx-1 : 0);
     		}
@@ -260,7 +252,7 @@ public class TestSuiteListController implements Initializable
     	    	int idx = treeView.getSelectionModel().getSelectedIndex();
     	    	if( c == null ) return;    	    	
     	    	
-    	    	tsService.removeTestCase( tc.getID());
+    	    	testProjectService.removeTestCase( tc.getID());
                 c.getParent().getChildren().remove(c);
                                
                 treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
@@ -273,18 +265,20 @@ public class TestSuiteListController implements Initializable
     	    	    public void handle(ActionEvent event) 
     	    	    {
     	    	    	TreeItem<Object> item = (TreeItem<Object>)treeView.getSelectionModel().getSelectedItem();
-    	    	    	if( item == null ) return;
+    	    	    	
+    	    	    	if( item == null ){ 
+    	    	    		return;
+    	    	    	}
     	    	    	
     	    	    	MySQLStep mySQLStep = new MySQLStep();
     	    	    	mySQLStep.setName("New MySQL Step");
-    	    	    	tsService.addStepForTestCase( mySQLStep, tc.getID());
+    	    	    	testProjectService.addStepForTestCase( mySQLStep, tc.getID());
     	    	    	
     	    	    	Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
     	    	    	TreeItem<Object> stepNode = new TreeItem<>(mySQLStep, icon);
     	    	    	item.getChildren().add( stepNode);
-    	    	    	treeView.getSelectionModel().select( stepNode);
-    	    	    	selectMySQLStep(mySQLStep.getID());
-    	    	    	
+    	    	    	treeView.getSelectionModel().select(stepNode);
+    	    	    	selectStep(mySQLStep.getID());
     	    	    }
     	    	});
     	
@@ -298,7 +292,7 @@ public class TestSuiteListController implements Initializable
 
     	    	    	MongoStep mongoStep = new MongoStep();
     	    	    	mongoStep.setName("New Mongo Step");
-    	    	    	tsService.addStepForTestCase( mongoStep, tc.getID());
+    	    	    	testProjectService.addStepForTestCase( mongoStep, tc.getID());
     	    	   
     	    	    	Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
     	    	    	TreeItem<Object> stepNode = new TreeItem<>(mongoStep, icon);
@@ -318,7 +312,7 @@ public class TestSuiteListController implements Initializable
     	    	    	  	    	    	
     	    	    	SoapStep soapStep = new SoapStep();
     	    	    	soapStep.setName("New Soap Step");
-    	    	    	tsService.addStepForTestCase( soapStep, tc.getID());
+    	    	    	testProjectService.addStepForTestCase( soapStep, tc.getID());
     	    	    	
     	    	    	Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
     	    	    	TreeItem<Object> stepNode = new TreeItem<>(soapStep, icon);
@@ -338,7 +332,7 @@ public class TestSuiteListController implements Initializable
     	    	    	
     	    	    	RestStep restStep = new RestStep();
     	    	    	restStep.setName("New Rest Step");
-    	    	    	tsService.addStepForTestCase( restStep, tc.getID());
+    	    	    	testProjectService.addStepForTestCase( restStep, tc.getID());
 						
     	    	    	Node icon = new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_TestStep.png")));
 						TreeItem<Object> stepNode = new TreeItem<>(restStep, icon);
@@ -370,20 +364,15 @@ public class TestSuiteListController implements Initializable
                 	{
                     	if ( getItem() != null)
                     	{
-                    		//TODO: FIX THIS ASAP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    		//TODO: use instanceof
-    	                	if ( getItem().getClass() == TestSuite.class)
+    	                	if ( getItem() instanceof TestSuite) {
     	                    	selectTestSuite( ((TestSuite) getItem()).getID());
-    	                    else if ( getItem().getClass() == TestCase.class)
+    	                	}
+    	                    else if ( getItem() instanceof TestCase) {
     	                    	selectTestCase(  ((TestCase) getItem()).getID());
-    	                    else if ( getItem().getClass() == MySQLStep.class)
-    	                    	selectMySQLStep(  ((MySQLStep) getItem()).getID());
-    	                    else if ( getItem().getClass() == MongoStep.class)
-    	                    	selectMongoStep(  ((MongoStep) getItem()).getID());
-    	                    else if ( getItem().getClass() == SoapStep.class)
-    	                    	selectSoapStep(  ((SoapStep) getItem()).getID());
-    	                    else if ( getItem().getClass() == RestStep.class)
-    	                    	selectRestStep(  ((RestStep) getItem()).getID());
+    	                    }
+    	                    else if ( getItem() instanceof Step) {
+    	                    	selectStep(  ((Step) getItem()).getID());
+    	                    }
                     	}
                 	}
                 }
@@ -488,9 +477,12 @@ public class TestSuiteListController implements Initializable
     	}
     }
     
-    public void createTestSuite( ActionEvent event)
-    {
-    	TestSuite testSuite = tsService.createTestSuite("New TestSuite");
+    public void createTestSuite(ActionEvent event) {
+    	
+    	TestSuite testSuite = new TestSuite();
+    	testSuite.setName("New TestSuite");
+    	testProjectService.addTestSuite(testSuite);
+    	
     	Node icon =  new ImageView(new Image(getClass().getResourceAsStream("/images/treeIcon_environment.png")));
     	TreeItem<Object> node = new TreeItem<>( testSuite, icon);
         treeView.getRoot().getChildren().add(node);

@@ -1,5 +1,8 @@
 package com.wstester.util;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -17,8 +20,42 @@ public final class UtilityTool {
 
 	private static Map<MainConstants, Object> cache = new HashMap<>();
 	
-	private UtilityTool() {}
+	public UtilityTool() {
+		
+		Properties prop = new Properties();
+		InputStream input = null;
 
+		try {
+			String filename = "fxml/FXMLLocation";
+			input = getClass().getClassLoader().getResourceAsStream(filename);
+
+			prop.load(input);
+
+			Enumeration<?> e = prop.propertyNames();
+			while (e.hasMoreElements()) {
+				String key = (String) e.nextElement();
+				String value = prop.getProperty(key);
+				properties.put(key, value);
+			}
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public String getProperty(MainConstants key){
+		
+		return properties.getProperty(key.toString());
+	}
+	
 	/**
 	 * Add a property(Key with Value) in Application cache
 	 * @param key the key

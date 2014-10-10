@@ -84,6 +84,8 @@ class UpdateStatusThread implements Runnable{
     							TreeItem<Object> newStepItem = new TreeItem<>(updatedStep);
     							Event.fireEvent( stepItem, new TreeItem.TreeModificationEvent<Object>(TreeItem.valueChangedEvent(), stepItem, newStepItem));
     						}
+    					   
+    					  
     					}
     	    		}
     			}

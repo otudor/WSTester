@@ -43,7 +43,7 @@ public class MongoStepController
     @FXML private ComboBox<Service> serviceBox;
     
     private MongoStep step;    
-    private TestSuiteService tsService;
+    private TestProjectService tsService;
     private TestSuiteManagerController tsMainController;
     final ObservableList<Execut> lista = FXCollections.observableArrayList();
     private String uid = null;
@@ -53,7 +53,7 @@ public class MongoStepController
 		
 	}
 	
-	public void setTestSuiteService( TestSuiteService tsService)
+	public void setTestSuiteService( TestProjectService tsService)
     {
         this.tsService = tsService;
     }

@@ -891,7 +891,6 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						TestSuiteFactory factory = new TestSuiteFactory();
 						TestSuiteManagerController mainPresenter = factory.getManagerController();
 						mainPresenter.loadTestSuites();
-						mainPresenter.showResponseTab();
 						mainPresenter.showEmptyTabController();
 						root = mainPresenter.getView();
 						Scene second = new Scene(root,1280, 720);

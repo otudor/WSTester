@@ -2,10 +2,17 @@ package com.wstester.util;
 
 public enum MainConstants {
 	
-	EDITORPATH("editor.path"),
+	ResponseTabController("ResponseTabController"),
 	TESTPROJECT;
+	
+	private String value;
 	
 	private MainConstants() {}
 	
 	private MainConstants(String value) {}
+	
+	@Override
+	public String toString(){
+		return this.value;
+	}
 }

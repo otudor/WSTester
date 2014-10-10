@@ -4,91 +4,29 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.AnchorPane?>
 
+<AnchorPane fx:id="rootMySQLStep" prefHeight="400.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.MySQLStepController">
+	<children>
 
-<AnchorPane fx:id="rootMySQLStep" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.MySQLStepController">
-   <children>
-      <TabPane prefHeight="400.0" prefWidth="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <tabs>
-            <Tab closable="false" text="SQL Definition">
-               <content>
-                  <AnchorPane>
-                     <children>
-                        <GridPane fx:id="gridPane" hgap="10" prefHeight="180.0" vgap="10" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
-                                  
-                            <children>
-                                <Label text="Step Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                <Label text="SQL" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                                
-                                <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                
-                                <Label text="Response:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                              <TextField fx:id="sqlField" maxHeight="25.0" minHeight="25.0" minWidth="17.0" prefHeight="25.0" prefWidth="570.0" promptText="Name of SQL" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField fx:id="stepName" maxHeight="25.0" minHeight="25.0" minWidth="20.0" prefHeight="25.0" prefWidth="570.0" promptText="The Name of the Step" GridPane.columnIndex="1" />
-                              <Label fx:id="sqlStatus" maxHeight="25.0" maxWidth="570.0" prefHeight="25.0" prefWidth="570.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label fx:id="sqlResponse" maxHeight="25.0" maxWidth="570.0" prefHeight="25.0" prefWidth="570.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Button fx:id="cellButton" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Details" GridPane.rowIndex="5">
-                                 <GridPane.margin>
-                                    <Insets left="20.0" />
-                                 </GridPane.margin>
-                              </Button>
-                              <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveMySQL" prefWidth="50.0" text="Save" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
-                                 <GridPane.margin>
-                                    <Insets right="20.0" />
-                                 </GridPane.margin>
-                              </Button>
-                            </children>
-                           <columnConstraints>
-                              <ColumnConstraints maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
-                              <ColumnConstraints maxWidth="570.0" minWidth="570.0" prefWidth="570.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints maxHeight="25.0" minHeight="17.0" prefHeight="25.0" />
-                              <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" />
-                              <RowConstraints maxHeight="25.0" prefHeight="25.0" />
-                              <RowConstraints maxHeight="25.0" prefHeight="25.0" />
-                              <RowConstraints />
-                              <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" />
-                           </rowConstraints>
-                        </GridPane>
-                        <ComboBox fx:id="serviceBox" layoutX="250.0" layoutY="220.0" prefWidth="150.0" promptText="Service..." AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="220.0" />
-                        <ComboBox fx:id="serverBox" layoutX="50.0" layoutY="220.0" prefWidth="150.0" promptText="Server..." AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="220.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab closable="false" text="Past Executions">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                          <TableView fx:id="tblExecutions" maxWidth="450.0" prefHeight="400.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                  		     <columns>
-                  		          <TableColumn fx:id="columnDate" maxWidth="200.0" prefWidth="200.0" text="Date">
-		          </TableColumn>
-                  		          <TableColumn fx:id="columnStatus" prefWidth="100.0" text="Status">
-		          </TableColumn>
-                  		     </columns>
-                  		</TableView>
-                        <StackPane fx:id="treePane" layoutX="450.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab closable="false" text="Variables">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TreeTableView layoutX="6.0" layoutY="7.0" prefHeight="200.0" prefWidth="200.0">
-                          <columns>
-                            <TreeTableColumn prefWidth="75.0" text="C1" />
-                            <TreeTableColumn prefWidth="75.0" text="C2" />
-                          </columns>
-                        </TreeTableView>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-         </tabs>
-      </TabPane>
-   </children>
+		<TabPane fx:id="tabpane" prefHeight="400.0" prefWidth="720.0" translateX="5" translateY="5" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+			<tabs>
+				<Tab text="Step Definition">
+					<content>
+						<AnchorPane>
+							<children>
+								<fx:include fx:id="step" source="rootStep.fxml" />
+
+								<Label text="Operation" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="110.0" />
+								<TextField fx:id="mysqlOperation" AnchorPane.leftAnchor="117.0" AnchorPane.topAnchor="110.0" />
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab fx:id="aboutTab" closable="false" content="$aboutContent" text="ABOUT" />
+			</tabs>
+		</TabPane>
+	</children>
 </AnchorPane>

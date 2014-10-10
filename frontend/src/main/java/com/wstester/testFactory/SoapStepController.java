@@ -43,7 +43,7 @@ public class SoapStepController
     @FXML private ComboBox<Service> serviceBox;
     
     private SoapStep step;    
-    private TestSuiteService tsService;
+    private TestProjectService tsService;
     private TestSuiteManagerController tsMainController;
     private String uid = null;
     
@@ -53,7 +53,7 @@ public class SoapStepController
 		
 	}
 	
-    public void setTestSuiteService( TestSuiteService tsService)
+    public void setTestSuiteService( TestProjectService tsService)
     {
         this.tsService = tsService;
     }

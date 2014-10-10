@@ -7,10 +7,10 @@ public class EmptyTabController {
 	
 	@FXML public Node rootEmptyTab;
 	
-	private TestSuiteService tsService;
+	private TestProjectService tsService;
     private TestSuiteManagerController tsMainController;
 	
-	   public void setTestSuiteService( TestSuiteService tsService)
+	   public void setTestSuiteService( TestProjectService tsService)
 	    {
 	        this.tsService = tsService;
 	    }

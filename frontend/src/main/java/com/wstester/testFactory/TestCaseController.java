@@ -9,10 +9,10 @@ public class TestCaseController
     @FXML private Node rootTCDetails;
     @FXML private TextField txtTCName;
 
-    private TestSuiteService tsService;
+    private TestProjectService tsService;
     private TestSuiteManagerController tsMainController;
 
-    public void setTestSuiteService( TestSuiteService tsService)
+    public void setTestSuiteService( TestProjectService tsService)
     {
         this.tsService = tsService;
     }

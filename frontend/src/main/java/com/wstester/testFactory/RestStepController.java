@@ -56,14 +56,14 @@ import javafx.util.Callback;
 import junit.framework.Test;
 
 public class RestStepController
-{
+{	
     @FXML private Node rootRestStep;
     @FXML private TextField lblName;
     @FXML private TextField restPath;
-   
+    @FXML private Label restResponse;
    
     @FXML private ComboBox<RestMethod> restMethod;
-   
+    public static String aa= "dasad";
    
     
     @FXML private TableView<Execut> tblExecutions;
@@ -85,6 +85,8 @@ public class RestStepController
 	public static Stage stagePath;
 	public static Stage stageHeader;
 	public static Stage stageCookie;
+	
+	
     // addul de variabile in tabel
     
 	//querry
@@ -159,7 +161,7 @@ public class RestStepController
 		
 		
     private RestStep step;    
-    private TestSuiteService tsService;
+    private TestProjectService tsService;
     private TestSuiteManagerController tsMainController;
     private String query;
     private String cookie;
@@ -476,8 +478,8 @@ public class RestStepController
 	  });
 	}
 
-
-	public void setTestSuiteService( TestSuiteService tsService)
+	
+	public void setTestSuiteService( TestProjectService tsService)
     {
         this.tsService = tsService;
     }
@@ -502,6 +504,7 @@ public class RestStepController
 //        restMethod.setText("");
         
         step = (RestStep) tsService.getStep( stepUID);
+        step.getLastExecution().getResponse().getContent();
         lblName.setText(step.getName());
         restPath.setText(step.getPath());
         if (step.getQuery() != null) {
@@ -522,6 +525,8 @@ public class RestStepController
 //			}
 //		}
     	step = (RestStep) tsService.getStep(stepUID);
+    	
+//    	step.getLastExecution().getResponse().getContent();
         Environment environment = tsService.getTestSuiteByStepUID(stepUID).getEnvironment();
         if(environment != null) {        	
         	serverBox.getItems().clear();
@@ -558,6 +563,7 @@ public class RestStepController
 //        restMethod.setText(step.getMethod());
 //        restRequest.setText((String) step.getRequest());
         Execution execution = step.getLastExecution();
+        
         uid = stepUID;
         if( execution != null)
         {
