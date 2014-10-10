@@ -61,7 +61,7 @@
 					<version>${pmd.plugin.version}</version>
 					<configuration>
 						<rulesets>
-							<ruleset>../pmd-rule-set/pmd-ruleset.xml</ruleset>
+							<ruleset>../pmd-findbugs/pmd-ruleset.xml</ruleset>
 						</rulesets>
 					</configuration>
 				</plugin>
@@ -83,7 +83,7 @@
 						<xmlOutput>true</xmlOutput>
 						<!-- Configures the directory in which the XML report is created -->
 						<findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
-						<excludeFilterFile>SIC_ANON_SHOULD_BE_STATIC_INNER</excludeFilterFile>
+						<excludeFilterFile>../pmd-findbugs/findbugs-exclude.xml</excludeFilterFile>
 					</configuration>
 				</plugin>
 				<plugin>
