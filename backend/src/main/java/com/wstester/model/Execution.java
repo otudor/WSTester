@@ -23,7 +23,7 @@ public class Execution implements Serializable {
 	}
 	
 	public Response getResponse() {
-		return this.response;
+		return response;
 	}
 
 	public void setResponse(Response response) {
@@ -31,11 +31,11 @@ public class Execution implements Serializable {
 	}
 	
 	public Date getRunDate() {
-		return this.runDate;
+		return runDate == null ? null : (Date) runDate.clone();
 	}
 
 	public void setRunDate(Date date) {
-		this.runDate = date;
+		this.runDate = (date == null ? null : (Date) date.clone());
 	}
 
 	@Override

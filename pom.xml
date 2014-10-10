@@ -83,6 +83,7 @@
 						<xmlOutput>true</xmlOutput>
 						<!-- Configures the directory in which the XML report is created -->
 						<findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
+						<excludeFilterFile>SIC_ANON_SHOULD_BE_STATIC_INNER</excludeFilterFile>
 					</configuration>
 				</plugin>
 				<plugin>

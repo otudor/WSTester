@@ -53,8 +53,9 @@ public class MongoStep extends Step{
 	
 	@Override
 	public String detailedToString() {
-		return "MongoStep [action=" + action + ", collection=" + collection + ", query=" + query + ", getID()=" + getID() + ", getServer()=" + getServer() + ", getAssertList()=" + getAssertList()
-				+ ", getService()=" + getService() + ", getAssetMap()=" + getAssetMap() + ", getName()=" + getName() + ", getVariableList()=" + getVariableList() + ", getExecutionList()="
+		return "MongoStep [action=" + action + ", collection=" + collection + ", query=" + query + ", getID()=" + getID() + ", getServer()=" 
+				+ (getServer() == null ? "null" : getServer().detailedToString()) + ", getAssertList()=" + getAssertList() + ", getService()=" + (getService() == null ? "null" :getService().detailedToString()) 
+				+ ", getAssetMap()=" + getAssetMap() + ", getName()=" + getName() + ", getVariableList()=" + getVariableList() + ", getExecutionList()="
 				+ getExecutionList() + ", getDependsOn()=" + getDependsOn() + "]";
 	}
 
