@@ -16,8 +16,8 @@ public final class ServiceLocator {
 	private static ServiceLocator instance = null;
 	
 	public static ServiceLocator getInstance() {
-		if(instance == null) {
-			synchronized(ServiceLocator.class) {
+		synchronized(ServiceLocator.class) {
+			if(instance == null) {
 				instance = new ServiceLocator();
 				cache = new HashMap<>();
 			}

@@ -1,6 +1,7 @@
 package com.wstester.services.impl;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import javax.jms.Connection;
@@ -9,7 +10,9 @@ import javax.jms.Destination;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
+
 import org.apache.activemq.ActiveMQConnectionFactory;
+
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Asset;
 import com.wstester.services.definition.IAssetManager;
@@ -61,7 +64,7 @@ public class AssetManager implements IAssetManager {
 	public void saveAsset(Asset asset, String content) {
 		
 		try {
-			Files.write(Paths.get("assets/" + asset.getName()), content.getBytes());
+			Files.write(Paths.get("assets/" + asset.getName()), content.getBytes(StandardCharsets.UTF_8));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			log.error("File does not exist");
@@ -75,7 +78,7 @@ public class AssetManager implements IAssetManager {
 		String content = null;
 		
 		try {
-			content = new String(Files.readAllBytes(Paths.get("assets/" + fileName)));
+			content = new String(Files.readAllBytes(Paths.get("assets/" + fileName)), StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

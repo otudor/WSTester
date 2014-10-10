@@ -1,5 +1,7 @@
 package com.wstester.exceptions;
 
-public interface WsErrorCode {
+import java.io.Serializable;
+
+public interface WsErrorCode extends Serializable{
 
 }

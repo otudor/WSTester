@@ -141,6 +141,7 @@ public abstract class Step implements Serializable {
 	}
 	
 	public abstract String detailedToString();
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -151,6 +151,9 @@ public class TestRunner implements ITestRunner{
 
 				// Run the tests
 				runSteps(session, entityToRun);
+			} catch(RuntimeException e){
+				//TODO: auto generated block
+				e.printStackTrace();
 			} catch (Exception e){
 				//TODO: auto generated block
 				e.printStackTrace();
@@ -158,8 +161,12 @@ public class TestRunner implements ITestRunner{
 				
 				// Clean up
 				try {
-					session.close();
-					connection.stop();
+					if(session != null){
+						session.close();
+					}
+					if(connection != null){
+						connection.stop();
+					}
 				} catch (JMSException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

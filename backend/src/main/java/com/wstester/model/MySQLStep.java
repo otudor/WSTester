@@ -33,9 +33,9 @@ public class MySQLStep extends Step {
 	
 	@Override
 	public String detailedToString() {
-		return "MySQLStep [operation=" + operation + ", ID=" + getID() + ", Server=" + getServer() + ", AssertList=" + getAssertList() + ", Service=" + getService()
-				+ ", getAssetMap=" + getAssetMap() + ", Name=" + getName() + ", VariableList=" + getVariableList() + ", ExecutionList=" + getExecutionList() + ", DependsOn="
-				+ getDependsOn() + "]";
+		return "MySQLStep [operation=" + operation + ", ID=" + getID() + ", Server=" + (getServer() == null ? "null" : getServer().detailedToString()) + ", AssertList=" + getAssertList() 
+				+ ", Service=" + (getService() == null ? "null" : getService().detailedToString()) + ", getAssetMap=" + getAssetMap() + ", Name=" + getName() + ", VariableList=" + getVariableList() 
+				+ ", ExecutionList=" + getExecutionList() + ", DependsOn=" + getDependsOn() + "]";
 	}
 
 	@Override

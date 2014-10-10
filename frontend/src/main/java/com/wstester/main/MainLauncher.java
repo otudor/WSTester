@@ -81,7 +81,11 @@ public class MainLauncher extends Application {
 					}
 					
     	    		manager.closeCamelContext();
+<<<<<<< HEAD
     	    		
+=======
+    	    		System.exit(0);
+>>>>>>> branch 'master' of https://github.com/otudor/WSTester.git
     			}
     		});  
         	

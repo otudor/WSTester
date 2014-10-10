@@ -43,6 +43,7 @@ public class MockTest extends TestBaseClass{
 		TestProject testProject = TestUtils.getMockedRestProject();
 		TestCase testCase = testProject.getTestSuiteList().get(0).getTestCaseList().get(0);
 		RestStep restStep = new RestStep();
+		restStep.setServer(testCase.getStepList().get(0).getServer());
 		restStep.setService(testCase.getStepList().get(0).getService());
 		restStep.setMethod(RestMethod.PUT);
 		restStep.setPath("/customer/isAlive");
