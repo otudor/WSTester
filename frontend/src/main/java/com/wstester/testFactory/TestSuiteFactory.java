@@ -142,7 +142,7 @@ public class TestSuiteFactory
             try
             {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(Main.class.getResource("/fxml/TestFactory/MySQLStep.fxml"));
+                loader.setLocation(this.getClass().getResource("/fxml/TestFactory/MySQLStep.fxml"));
                 loader.load(getClass().getResourceAsStream("/fxml/TestFactory/MySQLStep.fxml"));
                 mySQLStepController = (MySQLStepController) loader.getController();
                 mySQLStepController.setTestSuiteService( getTestSuiteService());
@@ -202,7 +202,7 @@ public class TestSuiteFactory
             try
             {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(Main.class.getResource("/fxml/TestFactory/RestStep.fxml"));
+                loader.setLocation(this.getClass().getResource("/fxml/TestFactory/RestStep.fxml"));
                 loader.load(getClass().getResourceAsStream("/fxml/TestFactory/RestStep.fxml"));
                 restStepController = (RestStepController) loader.getController();
                 restStepController.setTestSuiteService( getTestSuiteService());
