@@ -508,14 +508,30 @@ public class RestStepController
         
     	Step step = testProjectService.getStep(stepId);
     	
-//    	if(step instanceof MySQLStep){
-//    		if(((MySQLStep) step).getOperation() != null){
-//    			mysqlOperation.setText(((MySQLStep) step).getOperation());
-//    		}
-//    	}
+    	if(step instanceof RestStep){
+    		
+    		
+    			
+    			if(!restMethod.getItems().contains(RestMethod.POST)) {
+    	        	restMethod.getItems().addAll(RestMethod.values());
+    	        }
+    	        restMethod.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RestMethod>() {
+    				public void changed(ObservableValue ov, RestMethod value,RestMethod new_value) {
+    					
+    					((RestStep) step).setMethod(new_value);
+    				}
+    			});  
+    		
+    	}
+    	
+    	
+    	        
+
     	
 		return rootRestStep;
 	}
+    
+    
 
     public void setRestStep(final String stepUID)
     {
