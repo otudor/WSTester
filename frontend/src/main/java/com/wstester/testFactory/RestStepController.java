@@ -507,7 +507,7 @@ public class RestStepController
         
         
     	Step step = testProjectService.getStep(stepId);
-
+    	
 //    	if(step instanceof MySQLStep){
 //    		if(((MySQLStep) step).getOperation() != null){
 //    			mysqlOperation.setText(((MySQLStep) step).getOperation());
@@ -522,36 +522,6 @@ public class RestStepController
          
         
     }
-//    public static class Execut{
-//    	private final SimpleStringProperty date;
-//    	private final SimpleStringProperty status;
-//    	private final SimpleStringProperty response;
-//		
-//    	private Execut(String Date, String Status, String Response){
-//    		this.date = new SimpleStringProperty(Date);
-//    		this.status = new SimpleStringProperty(Status);
-//    		this.response = new SimpleStringProperty(Response);
-//     	}
-//    	
-//    	public String getDate(){
-//    		return date.get();
-//    	}
-//    	public String getStatus(){
-//    		return status.get();
-//    	}
-//    	public String getResponse(){
-//    		return response.get();
-//    	}
-//    	public void setDate(String Date){
-//    		date.set(Date);
-//    	}
-//    	public void setStatus(String Status){
-//    		status.set(Status);
-//    	}
-//    	public void setResponse(String Response){
-//    		response.set(Response);
-//    	}
-//    }
     
     public void saveRest(ActionEvent e) {
 
