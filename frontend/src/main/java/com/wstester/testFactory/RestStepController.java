@@ -23,6 +23,7 @@ import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
+import com.wstester.model.Step;
 import com.wstester.model.TestProject;
 import com.wstester.model.Variable;
 import com.wstester.testFactory.TableQuerry;
@@ -57,7 +58,13 @@ import junit.framework.Test;
 
 public class RestStepController
 {	
-    @FXML private Node rootRestStep;
+	 private TestSuiteManagerController tsMainController;
+	private TestProjectService testProjectService;
+	private String stepId;
+	@FXML
+	private StepController stepController;
+    @FXML 
+    private Node rootRestStep;
     @FXML private TextField lblName;
     @FXML private TextField restPath;
     @FXML private Label restResponse;
@@ -66,10 +73,12 @@ public class RestStepController
     public static String aa= "dasad";
    
     
-    @FXML private TableView<Execut> tblExecutions;
-    @FXML private TableColumn<Execut, String> columnDate;
-    @FXML private TableColumn<Execut, String> columnStatus;
-    @FXML private TableColumn<Execut, String> columnResponse;
+//    @FXML private TableView<Execut> tblExecutions;
+//    @FXML private TableColumn<Execut, String> columnDate;
+//    @FXML private TableColumn<Execut, String> columnStatus;
+//    @FXML private TableColumn<Execut, String> columnResponse;
+    
+    
     @FXML private ComboBox<Server> serverBox;
     @FXML private ComboBox<Service> serviceBox;
     @FXML private Button addQuerryButton;
@@ -160,16 +169,12 @@ public class RestStepController
 			
 		
 		
-    private RestStep step;    
-    private TestProjectService tsService;
-    private TestSuiteManagerController tsMainController;
-    private String query;
-    private String cookie;
-    private String header;
-    private String uid = null;
-    public boolean querryVisible = false;
-    Parent root;
-    private String querry;
+			private RestStep step;    
+			private TestProjectService tsService;
+			private String uid = null;
+			public boolean querryVisible = false;
+			Parent root;
+
 	
    
     
@@ -181,6 +186,10 @@ public class RestStepController
 //    	this.showTreeView();
 //    	this.createSlide();
 //    }
+    
+    public void setStep(String stepId){
+		this.stepId = stepId;
+	}
 	@FXML
 	private void initialize() 
 	{
@@ -489,155 +498,60 @@ public class RestStepController
         this.tsMainController = tsMainController;
     }
 
-    public Node getView()
-    {
-        return rootRestStep;
-    }
+    public Node getView() {
+		
+		testProjectService = new TestProjectService();
+        
+        stepController.setStep(stepId);
+        stepController.setCommonFields();
+        
+        
+    	Step step = testProjectService.getStep(stepId);
+
+//    	if(step instanceof MySQLStep){
+//    		if(((MySQLStep) step).getOperation() != null){
+//    			mysqlOperation.setText(((MySQLStep) step).getOperation());
+//    		}
+//    	}
+    	
+		return rootRestStep;
+	}
 
     public void setRestStep(final String stepUID)
     {
-    
-    	lblName.setText("");
-        restPath.setText("");
-        
-        
-//        restMethod.setText("");
-        
-        step = (RestStep) tsService.getStep( stepUID);
-        step.getLastExecution().getResponse().getContent();
-        lblName.setText(step.getName());
-        restPath.setText(step.getPath());
-        if (step.getQuery() != null) {
-			for (String key : step.getQuery().keySet()) {
-				query = query + step.getQuery().get(key);
-			}
-		}
-//        restQuery.setText(query);
-//        if (step.getCookie() != null) {
-//			for (String key : step.getCookie().keySet()) {
-//				cookie = cookie + step.getCookie().get(key);
-//			}
-//		}
-//        restCookie.setText(cookie);
-//        if (step.getHeader() != null) {
-//			for (String key : step.getHeader().keySet()) {
-//				header = header + step.getHeader().get(key);
-//			}
-//		}
-    	step = (RestStep) tsService.getStep(stepUID);
-    	
-//    	step.getLastExecution().getResponse().getContent();
-        Environment environment = tsService.getTestSuiteByStepUID(stepUID).getEnvironment();
-        if(environment != null) {        	
-        	serverBox.getItems().clear();
-        	serverBox.getItems().addAll(environment.getServers());
-        	if(step.getServer() != null) {
-        		serverBox.setValue(step.getServer());
-        		serviceBox.getItems().clear();
-        		serviceBox.getItems().addAll(step.getServer().getServices());
-        	}
-        	serverBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Server>() {
-					public void changed(ObservableValue ov, Server value, Server new_value) {
-						if(new_value !=null) {
-							step.setServer(new_value);
-							step.setServer(new_value);
-							serviceBox.getItems().clear();
-							serviceBox.getItems().addAll(step.getServer().getServices());
-							if(step.getService() != null) {
-								serviceBox.setValue(step.getService());
-							}
-							serviceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Service>() {
-									public void changed(ObservableValue ov, Service value,Service new_value) {
-										step.setService(new_value);
-									}
-								});
-							step.setServer(new_value);
-//							tsService.setStepByUID(step, uid);
-//							tsService.saveTestSuite();
-						}
-					}
-        	});
-        }
-//        restHeader.setText(header);
-//        restContentType.setText(step.getContentType());
-//        restMethod.setText(step.getMethod());
-//        restRequest.setText((String) step.getRequest());
-        Execution execution = step.getLastExecution();
-        
-        uid = stepUID;
-        if( execution != null)
-        {
-        	if (execution.getResponse().getStatus() == ExecutionStatus.PASSED){
-//        		lblStatus.setText("PASSED");
-        	}
-
-        	//else ....
-        		//FAILED
-//        	lblResponse.setText(execution.getResponse().getContent());
-        	List<Execution> list = new ArrayList<>();
-        	ObservableList<Execut> lista = FXCollections.observableArrayList();
-        	list = step.getExecutionList();
-        	for(Execution exec : list)
-        	{
-        	Execut exemplu = new Execut(exec.getRunDate().toString(),exec.getResponse().getStatus().toString(),exec.getResponse().getContent());
-            lista.add(exemplu);
-        	}
-            tblExecutions.setItems(lista);
-            columnDate.setCellValueFactory(
-            		new PropertyValueFactory<Execut,String>("Date")
-            		);
-            
-            columnStatus.setCellValueFactory(
-            		new PropertyValueFactory<Execut,String>("Status")
-            		);
-            columnResponse.setCellValueFactory(
-            		new PropertyValueFactory<Execut,String>("Response")
-            		);
-           
-        }
-        
-        if(!restMethod.getItems().contains(RestMethod.POST)) {
-        	restMethod.getItems().addAll(RestMethod.values());
-        }
-        restMethod.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RestMethod>() {
-			public void changed(ObservableValue ov, RestMethod value,RestMethod new_value) {
-				step.setMethod(new_value);
-			}
-		});          
-        
-        
+         
         
     }
-    public static class Execut{
-    	private final SimpleStringProperty date;
-    	private final SimpleStringProperty status;
-    	private final SimpleStringProperty response;
-		
-    	private Execut(String Date, String Status, String Response){
-    		this.date = new SimpleStringProperty(Date);
-    		this.status = new SimpleStringProperty(Status);
-    		this.response = new SimpleStringProperty(Response);
-     	}
-    	
-    	public String getDate(){
-    		return date.get();
-    	}
-    	public String getStatus(){
-    		return status.get();
-    	}
-    	public String getResponse(){
-    		return response.get();
-    	}
-    	public void setDate(String Date){
-    		date.set(Date);
-    	}
-    	public void setStatus(String Status){
-    		status.set(Status);
-    	}
-    	public void setResponse(String Response){
-    		response.set(Response);
-    	}
-    }
+//    public static class Execut{
+//    	private final SimpleStringProperty date;
+//    	private final SimpleStringProperty status;
+//    	private final SimpleStringProperty response;
+//		
+//    	private Execut(String Date, String Status, String Response){
+//    		this.date = new SimpleStringProperty(Date);
+//    		this.status = new SimpleStringProperty(Status);
+//    		this.response = new SimpleStringProperty(Response);
+//     	}
+//    	
+//    	public String getDate(){
+//    		return date.get();
+//    	}
+//    	public String getStatus(){
+//    		return status.get();
+//    	}
+//    	public String getResponse(){
+//    		return response.get();
+//    	}
+//    	public void setDate(String Date){
+//    		date.set(Date);
+//    	}
+//    	public void setStatus(String Status){
+//    		status.set(Status);
+//    	}
+//    	public void setResponse(String Response){
+//    		response.set(Response);
+//    	}
+//    }
     
     public void saveRest(ActionEvent e) {
 

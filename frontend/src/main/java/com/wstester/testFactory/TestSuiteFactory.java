@@ -1,6 +1,9 @@
 package com.wstester.testFactory;
 
 import java.io.IOException;
+
+import com.javafx.main.Main;
+
 import javafx.fxml.FXMLLoader;
 
 public class TestSuiteFactory
@@ -37,7 +40,7 @@ public class TestSuiteFactory
                 tsManagerController.setTestSuiteDetailController( getTestSuiteController());
                 tsManagerController.setTestSuiteListController( getTestSuiteListController());
                 tsManagerController.setTestCaseDetailController( getTestCaseController());
-//                tsManagerController.setStepController( getMySQLStepController());
+                tsManagerController.setMySQLStepController( getMySQLStepController());
                 tsManagerController.setMongoStepController(getMongoStepController());
                 tsManagerController.setSoapStepController(getSoapStepController());
                 tsManagerController.setRestStepController(getRestStepController());
@@ -139,10 +142,11 @@ public class TestSuiteFactory
             try
             {
                 FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(Main.class.getResource("/fxml/TestFactory/MySQLStep.fxml"));
                 loader.load(getClass().getResourceAsStream("/fxml/TestFactory/MySQLStep.fxml"));
                 mySQLStepController = (MySQLStepController) loader.getController();
-//                mySQLStepController.setTestSuiteService( getTestSuiteService());
-//                mySQLStepController.setTestSuiteManagerController( getManagerController());
+                mySQLStepController.setTestSuiteService( getTestSuiteService());
+                mySQLStepController.setTestSuiteManagerController( getManagerController());
             }
             catch (IOException e)
             {
@@ -198,6 +202,7 @@ public class TestSuiteFactory
             try
             {
                 FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(Main.class.getResource("/fxml/TestFactory/RestStep.fxml"));
                 loader.load(getClass().getResourceAsStream("/fxml/TestFactory/RestStep.fxml"));
                 restStepController = (RestStepController) loader.getController();
                 restStepController.setTestSuiteService( getTestSuiteService());

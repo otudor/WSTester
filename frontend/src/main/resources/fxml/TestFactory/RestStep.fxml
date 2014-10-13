@@ -14,28 +14,21 @@
                <content>
                   <AnchorPane>
                      <children>
-                        <GridPane fx:id="gridRestStep" hgap="7.0" prefHeight="120.0" prefWidth="529.0" vgap="7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                     <fx:include fx:id="step" source="rootStep.fxml" />
+                        <GridPane fx:id="gridRestStep" hgap="7.0" prefHeight="40.0" prefWidth="529.0" vgap="7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="110.0">
                                   
                                   <children>
-                                <Label text="Step Name:" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
-                                <Label text="Rest method:" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
-                              <Label text="Path:" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
-                              <TextField fx:id="lblName" prefHeight="25.0" prefWidth="570.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField fx:id="restPath" prefHeight="25.0" prefWidth="570.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <ComboBox fx:id="serviceBox" prefWidth="150.0" promptText="Add Service..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <ComboBox fx:id="serverBox" prefWidth="150.0" promptText="Add Server..." GridPane.columnIndex="1" />
-                              <Label text="Server:" />
-                              <Label text="Service:" GridPane.rowIndex="1" />
-                              <ComboBox fx:id="restMethod" prefWidth="150.0" promptText="Select Rest method" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                  
+                                <Label text="Rest method:" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+                              <Label text="Path:" GridPane.halignment="LEFT" />
+                              <TextField fx:id="restPath" prefHeight="25.0" prefWidth="570.0" GridPane.columnIndex="1" />
+                              <ComboBox fx:id="restMethod" prefWidth="150.0" promptText="Select Rest method" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                             </children>
                            <columnConstraints>
                               <ColumnConstraints minWidth="80.0" prefWidth="100.0" />
                               <ColumnConstraints minWidth="570.0" prefWidth="570.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="30.0" />
-                              <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="30.0" />
-                              <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" />
                               <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" />
                               <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" />
                               <RowConstraints />
@@ -56,7 +49,7 @@
                               <RowConstraints />
                            </rowConstraints>
                         </GridPane>
-                        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="410.0" AnchorPane.topAnchor="180.0">
+                        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="410.0" AnchorPane.topAnchor="220.0">
                           <tabs>
                             <Tab text="Path">
                               <content>

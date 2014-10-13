@@ -74,10 +74,10 @@ public class TestSuiteListController implements Initializable {
     	tsManagerController.showTestCase( tsUID);
     }
 
-    public void selectStep( String sUID)
-    {
-    	tsManagerController.showStep( sUID);
-    }
+//    public void selectStep( String sUID)
+//    {
+//    	tsManagerController.showMySQLStep( sUID);
+//    }
     
     public void selectMongoStep( String sUID)
     {
@@ -92,6 +92,10 @@ public class TestSuiteListController implements Initializable {
     public void selectRestStep( String sUID)
     {
     	tsManagerController.showRestStep( sUID);
+    }
+    
+    public void selectMySQLStep (String sUID) {
+    	tsManagerController.showMySQLStep(sUID);
     }
     
     public List<TestSuite> getTestSuiteList()
@@ -278,7 +282,7 @@ public class TestSuiteListController implements Initializable {
     	    	    	TreeItem<Object> stepNode = new TreeItem<>(mySQLStep, icon);
     	    	    	item.getChildren().add( stepNode);
     	    	    	treeView.getSelectionModel().select(stepNode);
-    	    	    	selectStep(mySQLStep.getID());
+    	    	    	selectMySQLStep(mySQLStep.getID());
     	    	    }
     	    	});
     	
@@ -370,8 +374,17 @@ public class TestSuiteListController implements Initializable {
     	                    else if ( getItem() instanceof TestCase) {
     	                    	selectTestCase(  ((TestCase) getItem()).getID());
     	                    }
-    	                    else if ( getItem() instanceof Step) {
-    	                    	selectStep(  ((Step) getItem()).getID());
+    	                    else if ( getItem() instanceof MySQLStep) {
+    	                    	selectMySQLStep(  ((Step) getItem()).getID());
+    	                    }
+    	                    else if ( getItem() instanceof RestStep) {
+    	                    	selectRestStep(  ((Step) getItem()).getID());
+    	                    }
+    	                    else if ( getItem() instanceof SoapStep) {
+    	                    	selectSoapStep(  ((Step) getItem()).getID());
+    	                    }
+    	                    else if ( getItem() instanceof MongoStep) {
+    	                    	selectMongoStep(  ((Step) getItem()).getID());
     	                    }
                     	}
                 	}

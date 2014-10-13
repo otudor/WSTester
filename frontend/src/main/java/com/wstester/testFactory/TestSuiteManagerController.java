@@ -35,7 +35,7 @@ public class TestSuiteManagerController implements Initializable{
     private TestCaseController testCaseController;
     private StepController stepController;
     
-    @FXML
+
     private MySQLStepController mysqlController;
     
     private MongoStepController mongoStepController;
@@ -80,6 +80,9 @@ public class TestSuiteManagerController implements Initializable{
         this.restStepController = restStepController;
     }
     
+    public void setMySQLStepController (MySQLStepController mySQLStepController){
+    	this.mysqlController = mySQLStepController;
+    }
     public void setEmptyTabController(EmptyTabController emptyTabController) {
     	this.emptyTabController = emptyTabController;
 	}
@@ -114,18 +117,20 @@ public class TestSuiteManagerController implements Initializable{
         contentArea.setCenter( testCaseController.getView());
     }
     
-    public void showStep(String stepId) {
+    public void showMySQLStep(String stepId) {
     	
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("/fxml/TestFactory/MySQLStep.fxml"));
-        try {
-			loader.load(getClass().getResourceAsStream("/fxml/TestFactory/MySQLStep.fxml"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        mysqlController = (MySQLStepController) loader.getController();
+//        FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(Main.class.getResource("/fxml/TestFactory/MySQLStep.fxml"));
+//        try {
+//			loader.load(getClass().getResourceAsStream("/fxml/TestFactory/MySQLStep.fxml"));
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//        
+//        mysqlController = (MySQLStepController) loader.getController();
     	mysqlController.setStep(stepId);
+    
     	contentArea.setCenter(mysqlController.getNode());
     }
     
@@ -143,7 +148,17 @@ public class TestSuiteManagerController implements Initializable{
     
     public void showRestStep( String sUID)
     {
-    	restStepController.setRestStep(sUID);
+//    	 FXMLLoader loader = new FXMLLoader();
+//         loader.setLocation(Main.class.getResource("/fxml/TestFactory/RestStep.fxml"));
+//         try {
+// 			loader.load(getClass().getResourceAsStream("/fxml/TestFactory/RestStep.fxml"));
+// 		} catch (IOException e) {
+// 			// TODO Auto-generated catch block
+// 			e.printStackTrace();
+// 		}
+//        
+//        restStepController = (RestStepController)loader.getController();
+    	restStepController.setStep(sUID);
         contentArea.setCenter( restStepController.getView());
     }
         
