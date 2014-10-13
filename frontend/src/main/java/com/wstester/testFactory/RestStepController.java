@@ -512,13 +512,19 @@ public class RestStepController
     		
     		
     			
-    			if(!restMethod.getItems().contains(RestMethod.POST)) {
+//    			if(!restMethod.getItems().contains(RestMethod.POST)) {
+    			//	restMethod.getPromptText();
+    				restMethod.getItems().clear();
     	        	restMethod.getItems().addAll(RestMethod.values());
-    	        }
+    	        	
+//    	        }
     	        restMethod.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RestMethod>() {
     				public void changed(ObservableValue ov, RestMethod value,RestMethod new_value) {
     					
     					((RestStep) step).setMethod(new_value);
+    					// TO do : find a way to refresh 
+    					restMethod.setValue(new_value);
+    					
     				}
     			});  
     		
@@ -540,18 +546,19 @@ public class RestStepController
     }
     
     public void saveRest(ActionEvent e) {
-
+    	
 		RestStep rest = new RestStep();
+		step = (RestStep) testProjectService.getStep(stepId);
 		rest.setAssertList(step.getAssertList());
 		rest.setAssetMap(step.getAssetMap());
 		rest.setContentType(step.getContentType());
 		rest.setDependsOn(step.getDependsOn());
 		rest.setExecutionList(step.getExecutionList());
 		rest.setMethod(step.getMethod());
-		rest.setName(lblName.getText());
+		//rest.setName(lblName.getText());
 		rest.setRequest(step.getRequest());
-		rest.setServer(serverBox.getValue());
-		rest.setService(serviceBox.getValue());
+		//rest.setServer(serverBox.getValue());
+		//rest.setService(serviceBox.getValue());
 		rest.setVariableList(step.getVariableList());
 		
 		HashMap<String, String> cookieMap = new HashMap<String, String>();
@@ -572,13 +579,15 @@ public class RestStepController
 		}
 		rest.setQuery(queryMap);
 		
-		StringBuilder path = new StringBuilder(restPath.getText());
-		for (int i= 0;i<tablePathVarData.size();i++){
-			path.append("/" + columnPathName.getCellData(i) + "/" + columnPathValue.getCellData(i));
-		}
-		rest.setPath(path.toString());
+//		StringBuilder path = new StringBuilder(restPath.getText());
+//		for (int i= 0;i<tablePathVarData.size();i++){
+//			path.append("/" + columnPathName.getCellData(i) + "/" + columnPathValue.getCellData(i));
+//		}
+//		rest.setPath(path.toString());
+		rest.setPath(restPath.getText());
+		System.out.println(restPath.getText());
 		
-		tsService.setStepByUID(rest, uid);
+		tsService.setStepByUID(rest, stepId);
 		tsService.saveTestSuite();
 		
 		
