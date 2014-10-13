@@ -9,7 +9,7 @@ import org.apache.cxf.wsdl.TService;
 import org.datafx.controller.FXMLController;
 import org.springframework.beans.propertyeditors.ResourceBundleEditor;
 
-import com.javafx.main.Main;
+
 import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ITestRunner;
@@ -119,16 +119,7 @@ public class TestSuiteManagerController implements Initializable{
     
     public void showMySQLStep(String stepId) {
     	
-//        FXMLLoader loader = new FXMLLoader();
-//        loader.setLocation(Main.class.getResource("/fxml/TestFactory/MySQLStep.fxml"));
-//        try {
-//			loader.load(getClass().getResourceAsStream("/fxml/TestFactory/MySQLStep.fxml"));
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//        
-//        mysqlController = (MySQLStepController) loader.getController();
+
     	mysqlController.setStep(stepId);
     
     	contentArea.setCenter(mysqlController.getNode());
@@ -148,16 +139,7 @@ public class TestSuiteManagerController implements Initializable{
     
     public void showRestStep( String sUID)
     {
-//    	 FXMLLoader loader = new FXMLLoader();
-//         loader.setLocation(Main.class.getResource("/fxml/TestFactory/RestStep.fxml"));
-//         try {
-// 			loader.load(getClass().getResourceAsStream("/fxml/TestFactory/RestStep.fxml"));
-// 		} catch (IOException e) {
-// 			// TODO Auto-generated catch block
-// 			e.printStackTrace();
-// 		}
-//        
-//        restStepController = (RestStepController)loader.getController();
+
     	restStepController.setStep(sUID);
         contentArea.setCenter( restStepController.getView());
     }

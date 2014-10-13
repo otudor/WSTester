@@ -7,8 +7,8 @@ import com.wstester.util.UtilityTool;
 
 public class ClassTest {
 
-	public static void main(String[] args) throws IOException {
-		UtilityTool.addOrReplaceProperty(MainConstants.EDITORPATH.name(), "askudfhbaJCHSRFGHASAHJFGASD");
-	}
+//	public static void main(String[] args) throws IOException {
+//		UtilityTool.addOrReplaceProperty(MainConstants.EDITORPATH.name(), "askudfhbaJCHSRFGHASAHJFGASD");
+//	}
 
 }
