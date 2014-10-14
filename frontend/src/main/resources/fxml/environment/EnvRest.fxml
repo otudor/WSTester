@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="restPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="350.0" styleClass="primepanel" stylesheets="styles/Envwindows.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.RestPresenter">
+<AnchorPane fx:id="restPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="350.0" styleClass="primepanel" stylesheets="styles/Envwindows.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.environment.RestPresenter">
    <children>
       <GridPane fx:id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="60.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
         <columnConstraints>
@@ -16,21 +16,23 @@
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="250.0" />
         </columnConstraints>
         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="restLabel" alignment="CENTER" prefHeight="49.0" prefWidth="100.0" styleClass="insidelabel" stylesheets="styles/Envwindows.css" text="Port:">
+            <Label fx:id="restLabel" alignment="CENTER" prefHeight="49.0" prefWidth="100.0" styleClass="insidelabel" stylesheets="styles/Envwindows.css" text="Port:" GridPane.rowIndex="1">
                <font>
                   <Font name="Times New Roman" size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="restField" prefHeight="25.0" prefWidth="280.0" GridPane.columnIndex="1">
+            <TextField fx:id="restField" prefHeight="25.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </TextField>
-            <HBox fx:id="hbox1" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <HBox fx:id="hbox1" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
                   <Button fx:id="save" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveRest" prefHeight="25.0" prefWidth="75.0" text="Save">
                      <HBox.margin>
@@ -49,7 +51,7 @@
                   </Button>
                </children>
             </HBox>
-            <Label fx:id="labelport" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="240.0" styleClass="insidelabel" stylesheets="styles/Envwindows.css" text="Label" GridPane.columnIndex="1">
+            <Label fx:id="labelport" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="240.0" styleClass="insidelabel" stylesheets="styles/Envwindows.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -57,8 +59,37 @@
                   <Insets left="8.0" />
                </padding>
             </Label>
+            <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <padding>
+                  <Insets left="2.0" />
+               </padding>
+            </CheckBox>
+            <Label fx:id="restLabel1" alignment="CENTER" prefHeight="49.0" prefWidth="100.0" styleClass="insidelabel" stylesheets="styles/Envwindows.css" text="Name:">
+               <font>
+                  <Font name="Times New Roman" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="restLabel2" alignment="CENTER" prefHeight="49.0" prefWidth="100.0" styleClass="insidelabel" stylesheets="styles/Envwindows.css" text="Mocked:" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Times New Roman" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="restName" prefHeight="25.0" prefWidth="240.0" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label fx:id="labelname" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="240.0" styleClass="insidelabel" stylesheets="styles/Envwindows.css" text="Label" GridPane.columnIndex="1">
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
+            </Label>
          </children>
       </GridPane>
-      <Label alignment="CENTER" layoutX="144.0" layoutY="14.0" prefHeight="25.0" prefWidth="75.0" styleClass="titlenviroment" stylesheets="styles/Envwindows.css" text="Rest" />
+      <Label fx:id="restLabel3" layoutX="161.0" layoutY="14.0" text="Rest Service" AnchorPane.bottomAnchor="209.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="Times New Roman" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -19,11 +19,14 @@ public class RestPresenter {
 	@FXML
 	private TextField restField;
 	@FXML
+	private TextField restName;
+	@FXML
 	private Button save;
 	@FXML
 	private Button edit;
 	@FXML Button cancel;
 	@FXML Label labelport;
+	@FXML Label labelname;
 	@FXML HBox hbox1;
 	@FXML GridPane gridpane;
 	
@@ -38,15 +41,20 @@ public void setRest( final String serverUID, final String serviceUID)
 		hbox1.getChildren().remove(edit);
 		gridpane.getChildren().remove(restField);
 		gridpane.getChildren().remove(labelport);
+		gridpane.getChildren().remove(restName);
+		gridpane.getChildren().remove(labelname);
 		
 		hbox1.getChildren().add(edit);
 		gridpane.getChildren().add(labelport);
+		gridpane.getChildren().add(labelname);
 		Server server = envService.getServerByUID( serverUID);
 		Service service = envService.getServiceByUID( server.getID(), serviceUID );
 		RestService srv = (RestService) service;
 		uid = serviceUID;
 		restField.setText(srv.getPort());
 		labelport.setText(srv.getPort());
+		restName.setText(srv.getName());
+		labelname.setText(srv.getName());
 		
 	}
 
@@ -54,13 +62,17 @@ public void setRest( final String serverUID, final String serviceUID)
 		
 		RestService rst = new RestService();
 		rst.setPort(restField.getText());
+		rst.setName(restName.getText());
 		envService.setRestServiceByUID(rst,uid);
     	hbox1.getChildren().add(edit);
     	hbox1.getChildren().remove(save);
     	hbox1.getChildren().remove(cancel);
     	gridpane.getChildren().remove(restField);
     	gridpane.getChildren().add(labelport);
+    	gridpane.getChildren().remove(restName);
+    	gridpane.getChildren().add(labelname);
     	labelport.setText(restField.getText());
+    	labelname.setText(restField.getText());
     	envService.saveEnv();
 	}
 	
@@ -68,6 +80,8 @@ public void setRest( final String serverUID, final String serviceUID)
 		
 		gridpane.getChildren().add(restField);
 		gridpane.getChildren().remove(labelport);
+		gridpane.getChildren().add(restName);
+		gridpane.getChildren().remove(labelname);
 		hbox1.getChildren().remove(edit);
     	
     	hbox1.getChildren().add(save);
@@ -77,11 +91,14 @@ public void setRest( final String serverUID, final String serviceUID)
 	public void cancelEdit(ActionEvent e)
 	{
 		restField.setText(labelport.getText());
+		restName.setText(labelname.getText());
 		hbox1.getChildren().remove(cancel);
     	hbox1.getChildren().remove(save);
     	hbox1.getChildren().add(edit);
     	gridpane.getChildren().remove(restField);
     	gridpane.getChildren().add(labelport);
+    	gridpane.getChildren().remove(restName);
+    	gridpane.getChildren().add(labelname);
 	}
 
 	public void setEnvironmentService(EnvironmentService envService) {

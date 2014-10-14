@@ -101,6 +101,8 @@ public class StepController implements Initializable{
 			
 			if(response.getStatus() == ExecutionStatus.PASSED){
 				responseTab.setResponseContent(response.getContent());
+				System.out.println("am trecuttttttttttttttttttttttttttttttttttttttttttttttttttt");
+				System.out.println("am trecuttttttttttttttttttttttttttttttttttttttttttttttttttt");
 			}
 		}
 	}
