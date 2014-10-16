@@ -1,8 +1,11 @@
 package com.wstester.model;
 
+import javax.xml.bind.annotation.XmlType;
+
 public class MysqlRule extends Rule {
 
 	private static final long serialVersionUID = 1L;
+	@XmlType(name="mysqlInputType")
 	public enum InputType {OPERATION};
 	private InputType inputType;
 	
@@ -14,6 +17,14 @@ public class MysqlRule extends Rule {
 		this.inputType = inputType;
 		this.inputString = input;
 		this.output = output;
+	}
+	
+	public InputType getInputType() {
+		return inputType;
+	}
+	
+	public void setInputType(InputType inputType) {
+		this.inputType = inputType;
 	}
 	
 	@Override

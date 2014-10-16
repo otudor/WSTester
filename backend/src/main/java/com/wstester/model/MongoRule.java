@@ -2,9 +2,12 @@ package com.wstester.model;
 
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlType;
+
 public class MongoRule extends Rule {
 
 	private static final long serialVersionUID = 1L;
+	@XmlType(name="mongoInputType")
 	public enum InputType {QUERY, COLLECTION};
 	private InputType inputType;
 	private Map<String, String> inputQuery;
@@ -26,6 +29,22 @@ public class MongoRule extends Rule {
 		this.output = output;
 	}
 	
+	public InputType getInputType() {
+		return inputType;
+	}
+
+	public void setInputType(InputType inputType) {
+		this.inputType = inputType;
+	}
+
+	public Map<String, String> getInputQuery() {
+		return inputQuery;
+	}
+
+	public void setInputQuery(Map<String, String> inputQuery) {
+		this.inputQuery = inputQuery;
+	}
+
 	@Override
 	public String run(Step step) {
 		

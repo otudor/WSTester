@@ -48,6 +48,7 @@ public class Authentication implements Serializable {
 				+ ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -14,7 +14,6 @@ import org.apache.cxf.headers.Header.Direction;
 import org.apache.cxf.helpers.CastUtils;
 import org.apache.cxf.jaxb.JAXBDataBinding;
 
-import com.wstester.authentication.SimpleAuthentication;
 import com.wstester.model.Authentication;
 import com.wstester.model.SoapStep;
 
@@ -27,16 +26,16 @@ public class SoapPreProcessor implements Processor {
 		exchange.setProperty("step", step);
 		
 		exchange.getIn().setBody(step.getRequest());
-		setHeader(exchange);
+		setAuthenticationHeader(exchange);
 	}
 	
-	public void setHeader(Exchange exchange){
+	public void setAuthenticationHeader(Exchange exchange){
 		
 		List<SoapHeader> soapHeaders = CastUtils.cast((List<?>)exchange.getIn().getHeader(Header.HEADER_LIST));
         if (soapHeaders == null) {
-
         	soapHeaders = new ArrayList<SoapHeader>();
         }
+        
         Authentication auth1 = new Authentication();
         
         SimpleAuthentication auth = new SimpleAuthentication();
@@ -44,22 +43,13 @@ public class SoapPreProcessor implements Processor {
         auth.setPassword(auth1.getPassword());
         
 	    try {
-	    	SoapHeader header = new SoapHeader(new QName("http://xsoap.iccs.de/v1", "simpleAuth"),
-	                auth, new JAXBDataBinding(SimpleAuthentication.class));
+	    	SoapHeader header = new SoapHeader(new QName("http://xsoap.iccs.de/v1", "simpleAuth"), auth, new JAXBDataBinding(SimpleAuthentication.class));
 	        header.setDirection(Direction.DIRECTION_OUT);
 	        header.setMustUnderstand(true);
 	        soapHeaders.add(header);        
-	        System.out.println(soapHeaders);
 	        
 	    } catch (JAXBException e) {
-	    e.printStackTrace();
+	    	e.printStackTrace();
 	    }
-	}
-	public SoapHeader getHeader (Authentication getRole ) {
-		
-				
-		
-		return null;
-		
 	}
 }

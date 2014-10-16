@@ -42,6 +42,7 @@ public class SoapService extends Service {
 	public void setWsdlURL(String wsdlURL) {
 		this.wsdlURL = wsdlURL;
 	}
+	
 	public List<Authentication> getAuthenticationList() {
 		return authenticationList;
 	}
@@ -49,24 +50,23 @@ public class SoapService extends Service {
 	public void setAuthenticationList(List<Authentication> authenticationList) {
 		this.authenticationList = authenticationList;
 	}
+	
 	@Override
 	public String detailedToString() {
-		return "SoapService [port=" + port + ", path=" + path + ", wsdlURL=" + wsdlURL + ", uuid=" + uuid + ", name=" + name + ", status=" + status + ", ruleList=" 
-				+ ruleList + "]";
+		return "SoapService [uuid=" + uuid + ", port=" + port + ", path=" + path + ", wsdlURL=" + wsdlURL + ", authenticationList" + authenticationList + ", name=" + name + ", status=" + status +
+				", ruleList=" + ruleList + "]";
 	}
 	
 	@Override
     public String toString() { 
     	return this.name; 
     }
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime
-				* result
-				+ ((authenticationList == null) ? 0 : authenticationList
-						.hashCode());
+		result = prime * result + ((authenticationList == null) ? 0 : authenticationList.hashCode());
 		result = prime * result + ((path == null) ? 0 : path.hashCode());
 		result = prime * result + ((port == null) ? 0 : port.hashCode());
 		result = prime * result + ((wsdlURL == null) ? 0 : wsdlURL.hashCode());

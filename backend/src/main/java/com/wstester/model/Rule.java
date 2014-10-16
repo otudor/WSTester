@@ -16,6 +16,30 @@ public abstract class Rule implements Serializable{
 	
 	public abstract String run(Step step);
 
+	public String getInputString() {
+		return inputString;
+	}
+
+	public void setInputString(String inputString) {
+		this.inputString = inputString;
+	}
+
+	public Asset getInputAsset() {
+		return inputAsset;
+	}
+
+	public void setInputAsset(Asset inputAsset) {
+		this.inputAsset = inputAsset;
+	}
+
+	public String getOutput() {
+		return output;
+	}
+
+	public void setOutput(String output) {
+		this.output = output;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
