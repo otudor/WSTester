@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.codehaus.jettison.json.JSONException;
+import org.xml.sax.SAXException;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -11,8 +14,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
+import com.wstester.assets.EditController;
 import com.wstester.model.Environment;
 import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
@@ -41,6 +49,8 @@ public class StepController implements Initializable{
 	private TextField stepName;
 	@FXML
 	private Button saveBtn; 
+	@FXML 
+	private Pane treePane;
 	
 	private String stepId;
 	private TestProjectService testProjectService;
@@ -49,10 +59,27 @@ public class StepController implements Initializable{
 		this.stepId = stepID;
 	}
 	
+	
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.serverChangedEvent();
 		this.serviceChangedEvent();
+		
+		
+		
+	}
+	
+	
+
+
+
+	public Server getServer(){
+		return serverBox.getValue();
+	}
+	
+	public Service getService(){
+		return serviceBox.getValue();
 	}
 	
 	public void setCommonFields() {
@@ -60,6 +87,7 @@ public class StepController implements Initializable{
 		
     	Step step = testProjectService.getStep(stepId);
 		Environment environment = testProjectService.getTestSuiteByStepUID(stepId).getEnvironment();
+	
 		if (environment != null) {
 			// clear the server list and populate it with the servers from the current environment
 			serverBox.getItems().clear();
@@ -72,11 +100,14 @@ public class StepController implements Initializable{
 				
 				// clear the service list and add the services from the current server
 				serviceBox.getItems().clear();
+				//serviceBox.getItems().addAll(server.getServices());
 				serviceBox.getItems().addAll(server.getServices());
-				serviceBox.setValue(step.getService());
+				Service service = step.getService();
+				if(service != null){
+					serviceBox.setValue(service);
+					
+				}
 			}
-
-
 		}
 		
 		// set the step name
@@ -90,22 +121,72 @@ public class StepController implements Initializable{
 		}
 	}
 	
-	private void setResponse(Step step) throws IOException {
-		
-		if(step.getLastExecution() != null) {
-			Execution execution = step.getLastExecution();
-			Response response = execution.getResponse();
+	public void setResponseContent(String response) {
+    	
+    	
+		try {
+			XmlParser xmlParser = new XmlParser();
 			
-			UtilityTool util = new UtilityTool();
-			ResponseTabController responseTab = (ResponseTabController) FXMLLoader.load(getClass().getResource(util.getProperty(MainConstants.ResponseTabController)));
+			treePane.getChildren().clear();
+			treePane.getChildren().add(xmlParser.getTreeViewOfXml(response));
+		} catch (SAXException xmlException) {
 			
-			if(response.getStatus() == ExecutionStatus.PASSED){
-				responseTab.setResponseContent(response.getContent());
-				System.out.println("am trecuttttttttttttttttttttttttttttttttttttttttttttttttttt");
-				System.out.println("am trecuttttttttttttttttttttttttttttttttttttttttttttttttttt");
-			}
+//			try{
+			// TODO: parse the JSON
+			//treePane.getChildren().add(jsonParser
+//			} catch (JSONException jsonException) {
+				Label label = new Label(response);
+				treePane.getChildren().add(label);
+//			}
+		} catch (Exception e){
+			// TODO: auto-generated catch 
+			e.printStackTrace();
 		}
 	}
+	
+	 private void setResponse(Step step) throws IOException {
+	    	
+			if(step.getLastExecution() != null) {
+				Execution execution = step.getLastExecution();
+				Response response = execution.getResponse();
+				
+				
+				
+				if(response.getStatus() == ExecutionStatus.PASSED){
+				setResponseContent(response.getContent());
+				}
+				}
+	  
+	    }
+	
+	
+	
+	
+//	private void setResponse(Step step) throws IOException {
+//		
+//		if(step.getLastExecution() != null) {
+//			Execution execution = step.getLastExecution();
+//			Response response = execution.getResponse();
+//			
+//					
+//			if(response.getStatus() == ExecutionStatus.PASSED){
+//			setResponseContent("<data><employee><name>A</name></employee></data>");
+//			
+////			StackPane.getChildren().add(responseTabController.getTree());
+//			
+//			}
+////			
+////			
+//////			FXMLLoader loader = new FXMLLoader();
+////////			loader.setLocation(this.getClass().getResource("/fxml/TestFactory/RestStep.fxml"));
+////////            loader.load(getClass().getResourceAsStream("/fxml/TestFactory/RestStep.fxml"));
+//////			loader.setLocation(getClass().getResource(MainConstants.ResponseTabController.toString()));
+//////			ResponseTabController responseTabController = loader.getController();
+//////			if(response.getStatus() == ExecutionStatus.PASSED){
+//////				responseTabController.setResponseContent(response.getcontent);
+//////			}
+//		}
+//	}
 
 	public void serverChangedEvent(){
 		

@@ -68,7 +68,7 @@ public class RestStepController
     @FXML private TextField lblName;
     @FXML private TextField restPath;
     @FXML private Label restResponse;
-   
+    
     @FXML private ComboBox<RestMethod> restMethod;
     public static String aa= "dasad";
    
@@ -77,10 +77,7 @@ public class RestStepController
 //    @FXML private TableColumn<Execut, String> columnDate;
 //    @FXML private TableColumn<Execut, String> columnStatus;
 //    @FXML private TableColumn<Execut, String> columnResponse;
-    
-    
-    @FXML private ComboBox<Server> serverBox;
-    @FXML private ComboBox<Service> serviceBox;
+
     @FXML private Button addQuerryButton;
     @FXML private Button addPathButton;
     @FXML private Button addHeaderButton;
@@ -505,34 +502,19 @@ public class RestStepController
         stepController.setStep(stepId);
         stepController.setCommonFields();
         
-        
     	Step step = testProjectService.getStep(stepId);
-    	
     	if(step instanceof RestStep){
-    		
-    		
-    			
-//    			if(!restMethod.getItems().contains(RestMethod.POST)) {
-    			//	restMethod.getPromptText();
-    				restMethod.getItems().clear();
-    	        	restMethod.getItems().addAll(RestMethod.values());
-    	        	
-//    	        }
-    	        restMethod.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RestMethod>() {
-    				public void changed(ObservableValue ov, RestMethod value,RestMethod new_value) {
-    					
-    					((RestStep) step).setMethod(new_value);
-    					// TO do : find a way to refresh 
-    					restMethod.setValue(new_value);
-    					
-    				}
-    			});  
-    		
-    	}
-    	
-    	
-    	        
 
+			restMethod.getItems().clear();
+			restMethod.getItems().addAll(RestMethod.values());
+
+			restMethod.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RestMethod>() {
+						public void changed(ObservableValue<? extends RestMethod> ov, RestMethod oldValue, RestMethod newValue) {
+
+							((RestStep) step).setMethod(newValue);
+						}
+					});
+    	}
     	
 		return rootRestStep;
 	}
@@ -557,8 +539,8 @@ public class RestStepController
 		rest.setMethod(step.getMethod());
 		//rest.setName(lblName.getText());
 		rest.setRequest(step.getRequest());
-		//rest.setServer(serverBox.getValue());
-		//rest.setService(serviceBox.getValue());
+		rest.setServer(stepController.getServer());
+		rest.setService(stepController.getService());
 		rest.setVariableList(step.getVariableList());
 		
 		HashMap<String, String> cookieMap = new HashMap<String, String>();
@@ -585,7 +567,6 @@ public class RestStepController
 //		}
 //		rest.setPath(path.toString());
 		rest.setPath(restPath.getText());
-		System.out.println(restPath.getText());
 		
 		tsService.setStepByUID(rest, stepId);
 		tsService.saveTestSuite();

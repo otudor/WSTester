@@ -2,14 +2,16 @@ package com.wstester.util;
 
 public enum MainConstants {
 	
-	ResponseTabController("ResponseTabController"),
+	ResponseTabController("/fxml/TestFactory/Response.fxml"),
 	TESTPROJECT;
 	
 	private String value;
 	
 	private MainConstants() {}
 	
-	private MainConstants(String value) {}
+	private MainConstants(String value) {
+		this.value = value;
+	}
 	
 	@Override
 	public String toString(){

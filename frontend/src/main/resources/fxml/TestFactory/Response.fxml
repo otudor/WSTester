@@ -17,9 +17,9 @@
                     <tabs>
                       <Tab closable="false" text="Response">
                            <content>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                              <AnchorPane fx:id="treePane" prefHeight="689.0" prefWidth="142.0">
                                  <children>
-                                    <StackPane fx:id="treePane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <Pane prefHeight="663.0" prefWidth="166.0" />
                                  </children>
                               </AnchorPane>
                            </content>

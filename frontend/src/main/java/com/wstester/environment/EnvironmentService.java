@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
 import com.wstester.model.RestService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
+import com.wstester.model.ServiceStatus;
 import com.wstester.model.SoapService;
 import com.wstester.model.TestProject;
 import com.wstester.util.*;
@@ -156,8 +158,10 @@ public class EnvironmentService {
 	}
 
 	public RestService addRestServiceforServ(String srvUID) {
-		RestService result = null;
+		RestService restService = null;
 		Server srv = null;
+		
+		//TODO: Use a method from testproject
 		for (Map.Entry<String, Environment> entry : environments.entrySet()) {
 			// System.out.println(entry.getKey() + "/" + entry.getValue());
 			List<Server> serverList = ((Environment) entry.getValue())
@@ -172,11 +176,12 @@ public class EnvironmentService {
 		}
 
 		if (srv != null) {
-			result = new RestService();
-			srv.addService((Service) result);
+			restService = new RestService();
+			restService.setStatus(ServiceStatus.AVAILABLE);
+			srv.addService((Service) restService);
 		}
 
-		return result;
+		return restService;
 	}
 
 	public void removeEnvironmentById(String uId) {

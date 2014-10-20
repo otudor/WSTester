@@ -58,35 +58,37 @@ class UpdateStatusThread implements Runnable{
     				List<TreeItem<Object>> tcItems = caseItem.getChildren();
     				if ( tcItems!= null && !tcItems.isEmpty())
     	    		{
-    					for( TreeItem<Object> stepItem : tcItems)
-    					{
+    					for( TreeItem<Object> stepItem : tcItems) {
     						Step step = (Step)stepItem.getValue();
-    						if( step instanceof MySQLStep)
-    						{
-    							ITestRunner testRunner = null;
-								try {
-									testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class);
-								} catch (Exception e) {
-									// TODO Make a pop up window to inform the user that we can't get the step responses
-									e.printStackTrace();
-								}
-    							Response rsp = testRunner.getResponse(step.getID(), 25000L);
-    							//step.setName( step.getName());
-    							
-    							Execution execution = new Execution();
-    							Date date= new Date();
-    							execution.setRunDate(date);
-    							execution.setResponse(rsp);
-    							step.addExecution( execution);
-    							
-    							Step updatedStep = new MySQLStep();
-    							updatedStep.setName("");
-    							TreeItem<Object> newStepItem = new TreeItem<>(updatedStep);
-    							Event.fireEvent( stepItem, new TreeItem.TreeModificationEvent<Object>(TreeItem.valueChangedEvent(), stepItem, newStepItem));
-    						}
-    					   
-    					  
-    					}
+
+							ITestRunner testRunner = null;
+							try {
+								testRunner = ServiceLocator.getInstance()
+										.lookup(ITestRunner.class);
+							} catch (Exception e) {
+								// TODO Make a pop up window to inform the user
+								// that we can't get the step responses
+								e.printStackTrace();
+							}
+							
+							Response rsp = testRunner.getResponse(step.getID(),	25000L);
+							TestProjectService testProjectService = new TestProjectService();
+
+							Execution execution = new Execution();
+							Date date = new Date();
+							execution.setRunDate(date);
+							execution.setResponse(rsp);
+							step.addExecution(execution);
+
+							testProjectService.setStepByUID(step, step.getID());
+							testProjectService.saveTestSuite();
+
+							Step updatedStep = new MySQLStep();
+							updatedStep.setName("");
+							TreeItem<Object> newStepItem = new TreeItem<>(
+									updatedStep);
+							Event.fireEvent(stepItem, new TreeItem.TreeModificationEvent<Object>(TreeItem.valueChangedEvent(), stepItem, newStepItem));
+						}
     	    		}
     			}
     		}

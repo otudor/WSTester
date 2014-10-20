@@ -87,4 +87,8 @@ public class TestProjectService {
 		testProject.removeTestStep(id);
 		
 	}
+	
+	public TestProject getTestProject(){
+		return this.testProject;
+	}
 }
