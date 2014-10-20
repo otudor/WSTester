@@ -1,14 +1,15 @@
 package com.wstester.model;
 
+import javax.xml.bind.annotation.XmlType;
+
 public class RestRule extends Rule{
 
 	private static final long serialVersionUID = 1L;
-
+	@XmlType(name="restInputType")
 	public enum InputType {PATH, METHOD};
 	private InputType inputType;
 	
 	public RestRule(){
-		
 	}
 	
 	public RestRule(InputType inputType, String input, String output){
@@ -18,6 +19,14 @@ public class RestRule extends Rule{
 		this.output = output;
 	}
 	
+	public InputType getInputType() {
+		return inputType;
+	}
+
+	public void setInputType(InputType inputType) {
+		this.inputType = inputType;
+	}
+
 	@Override
 	public String run(Step step){
 		

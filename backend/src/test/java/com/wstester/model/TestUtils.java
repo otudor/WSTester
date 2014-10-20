@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.wstester.model.RestRule.InputType;
 
@@ -19,51 +21,92 @@ public class TestUtils {
 		// construct asset list
 		List<Asset> assetList = new ArrayList<Asset>();
 		Asset asset1 = new Asset();
+		asset1.setLastmodified(100122155);
+		asset1.setName("asset1");
+		asset1.setPath("C:/a/b/c");
+		asset1.setSize(200);
+		asset1.setType("PDF");
 		Asset asset2 = new Asset();
-		Asset asset3 = new Asset();
-		Asset asset4 = new Asset();
+		asset2.setLastmodified(1100223344);
+		asset2.setName("asset2");
+		asset2.setPath("D:/path/to/file");
+		asset2.setSize(500);
+		asset2.setType("TXT");
 		assetList.add(asset1);
 		assetList.add(asset2);
-		assetList.add(asset3);
-		assetList.add(asset4);
 		testProject.setAssetList(assetList);
 
+		// construct the variable list
+		List<Variable> variableList = new ArrayList<Variable>();
+		Variable globalVariable = new Variable("content", "name");
+		Variable localVariable = new Variable("name", VariableType.INTEGER, "2");
+		variableList.add(globalVariable);
+		variableList.add(localVariable);
+		testProject.setVariableList(variableList);
+		
 		// construct service list
 		// Service 1
 		List<Service> serviceList1 = new ArrayList<Service>();
 		RestService restService = new RestService();
 		restService.setName("Service Rest");
 		restService.setPort("9997");
+		List<Rule> restRuleList = new ArrayList<Rule>();
+		Rule restRule = new RestRule(InputType.METHOD, "input", "output");
+		restRuleList.add(restRule);
+		restService.setRuleList(restRuleList);
+		restService.setStatus(ServiceStatus.AVAILABLE);
 		serviceList1.add(restService);
 		
 		// Service 2
 		List<Service> serviceList2 = new ArrayList<Service>();
-		MongoService service2 = new MongoService();
-		service2.setName("Service Mongo");
-		service2.setPort("27017");
-		service2.setDbName("test");
-		service2.setUser("appuser");
-		service2.setPassword("apppass");
-		serviceList2.add(service2);
+		MongoService mongoService = new MongoService();
+		mongoService.setName("Service Mongo");
+		mongoService.setPort("27017");
+		mongoService.setDbName("test");
+		mongoService.setUser("appuser");
+		mongoService.setPassword("apppass");
+		List<Rule> mongoRuleList = new ArrayList<Rule>();
+		Rule mongoRule = new MongoRule(com.wstester.model.MongoRule.InputType.COLLECTION, "input", "output");
+		mongoRuleList.add(mongoRule );
+		mongoService.setRuleList(mongoRuleList);
+		mongoService.setStatus(ServiceStatus.AVAILABLE);
+		serviceList2.add(mongoService);
 		
 		// Service 3
 		List<Service> serviceList3 = new ArrayList<Service>();
-		SoapService service3 = new SoapService();
-		service3.setName("Service SOAP");
-		service3.setPort("80");
-		service3.setPath("/data/info.wso");
-		service3.setWsdlURL("http://footballpool.dataaccess.eu/data/info.wso?wsdl");
-		serviceList3.add(service3);
+		SoapService soapService = new SoapService();
+		soapService.setName("Service SOAP");
+		soapService.setPort("80");
+		soapService.setPath("/data/info.wso");
+		soapService.setWsdlURL("http://footballpool.dataaccess.eu/data/info.wso?wsdl");
+		List<Rule> soapRuleList = new ArrayList<Rule>();
+		Rule soapRule = new SoapRule(com.wstester.model.SoapRule.InputType.REQUEST, "input", "output");
+		soapRuleList.add(soapRule);
+		soapService.setRuleList(soapRuleList);
+		soapService.setStatus(ServiceStatus.AVAILABLE);
+		List<Authentication> authenticationList = new ArrayList<Authentication>();
+		Authentication authentication = new Authentication();
+		authentication.setPassword("pass");
+		authentication.setRole("role");
+		authentication.setUsername("username");
+		authenticationList.add(authentication );
+		soapService.setAuthenticationList(authenticationList );
+		serviceList3.add(soapService);
 		
 		// Service 4
 		List<Service> serviceList4 = new ArrayList<Service>();
-		MySQLService service4 = new MySQLService();
-		service4.setName("Service MYSQL");
-		service4.setPort("3306");
-		service4.setDbName("test");
-		service4.setUser("appuser");
-		service4.setPassword("apppass");
-		serviceList4.add(service4);
+		MySQLService mysqlService = new MySQLService();
+		mysqlService.setName("Service MYSQL");
+		mysqlService.setPort("3306");
+		mysqlService.setDbName("test");
+		mysqlService.setUser("appuser");
+		mysqlService.setPassword("apppass");
+		List<Rule> mysqlRuleList = new ArrayList<Rule>();
+		Rule mysqlRule = new MysqlRule(com.wstester.model.MysqlRule.InputType.OPERATION, "input", "output");
+		mysqlRuleList.add(mysqlRule );
+		mysqlService.setRuleList(mysqlRuleList );
+		mysqlService.setStatus(ServiceStatus.AVAILABLE);
+		serviceList4.add(mysqlService);
 		
 		// construct server list
 		List<Server> serverList1 = new ArrayList<Server>();
@@ -126,18 +169,23 @@ public class TestUtils {
 		restStep.setAssertList(assertList);
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
+		Map<Asset, AssetType> assetMap = new HashMap<Asset, AssetType>();
+		assetMap.put(asset1, AssetType.BODY);
+		restStep.setAssetMap(assetMap );
 		stepList1.add(restStep);
 		// test 2
 		MongoStep step2 = new MongoStep();
 		step2.setName("Step 2");
 		step2.setServer(server12);
-		step2.setService(service2);
+		step2.setService(mongoService);
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		query.put("name", "HAC");
 		step2.setAction(Action.SELECT);
 		step2.setCollection(collection);
 		step2.setQuery(query);
+		step2.setDependsOn(restStep.getID());
+		step2.setVariableList(variableList);
 		stepList1.add(step2);
 		
 		// test 3
@@ -145,16 +193,26 @@ public class TestUtils {
 		MySQLStep step3 = new MySQLStep();
 		step3.setName("Step 3");
 		step3.setServer(server21);
-		step3.setService(service4);
+		step3.setService(mysqlService);
 		step3.setOperation("SELECT * FROM angajati");
 		stepList2.add(step3);
 		// test 4
 		SoapStep step4 = new SoapStep();
 		step4.setName("Step 4");
 		step4.setServer(server22);
-		step4.setService(service3);
+		step4.setService(soapService);
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
+		List<Execution> executionList = new ArrayList<Execution>();
+		Execution execution = new Execution();
+		Response response = new Response();
+		response.setStepID(step4.getID());
+		response.setStatus(ExecutionStatus.PASSED);
+		response.setContent("content");
+		execution.setResponse(response);
+		execution.setRunDate(new GregorianCalendar().getTime());
+		executionList.add(execution );
+		step4.setExecutionList(executionList );
 		stepList2.add(step4);
 		
 		// construct test case list

@@ -2,19 +2,21 @@ package com.wstester.model;
 
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlType;
+
 import com.wstester.services.definition.IAssetManager;
 import com.wstester.services.impl.AssetManager;
 
 public class SoapRule extends Rule{
 
 	private static final long serialVersionUID = 1L;
-	
+	@XmlType(name="soapInputType")
 	public enum InputType {REQUEST};
 	private InputType inputType;
 	
 	public SoapRule () {
-		
 	}
+	
 	public SoapRule(InputType inputType, String input, String output){
 		
 		this.inputType = inputType;
@@ -29,6 +31,14 @@ public class SoapRule extends Rule{
 		this.output = output;
 	}
 	
+	public InputType getInputType() {
+		return inputType;
+	}
+
+	public void setInputType(InputType inputType) {
+		this.inputType = inputType;
+	}
+
 	@Override
 	public String run(Step step) {
 
