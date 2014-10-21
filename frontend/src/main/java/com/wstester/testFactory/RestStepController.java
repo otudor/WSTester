@@ -512,9 +512,9 @@ public class RestStepController
 			restMethod.setValue(((RestStep) step).getMethod());
 			restMethod.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RestMethod>() {
 						public void changed(ObservableValue<? extends RestMethod> ov, RestMethod oldValue, RestMethod newValue) {
-
+							if(newValue != null && (oldValue==null || !oldValue.equals(newValue))) {
 							((RestStep) step).setMethod(newValue);
-						}
+						}}
 					});
 			restPath.setText(((RestStep) step).getPath());
     	}

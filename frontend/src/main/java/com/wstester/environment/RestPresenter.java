@@ -161,6 +161,7 @@ public void setRest( final String serverUID, final String serviceUID)
 		RestService rst = new RestService();
 		rst.setPort(restField.getText());
 		rst.setName(restName.getText());
+		
 		envService.setRestServiceByUID(rst,uid);
     	hbox1.getChildren().add(edit);
     	hbox1.getChildren().remove(save);
