@@ -96,17 +96,18 @@ public class StepController implements Initializable{
 			// set the current server
 			Server server = step.getServer();
 			if (server != null) {
-				serverBox.setValue(server);
+//				serverBox.setValue(server);
 				
 				// clear the service list and add the services from the current server
 				serviceBox.getItems().clear();
-				//serviceBox.getItems().addAll(server.getServices());
 				serviceBox.getItems().addAll(server.getServices());
+			//	serviceBox.getItems().addAll(step.getService());
 				Service service = step.getService();
-				if(service != null){
+				//if(service != null){
+					serverBox.setValue(server);
 					serviceBox.setValue(service);
 					
-				}
+				//}
 			}
 		}
 		
@@ -159,34 +160,7 @@ public class StepController implements Initializable{
 	  
 	    }
 	
-	
-	
-	
-//	private void setResponse(Step step) throws IOException {
-//		
-//		if(step.getLastExecution() != null) {
-//			Execution execution = step.getLastExecution();
-//			Response response = execution.getResponse();
-//			
-//					
-//			if(response.getStatus() == ExecutionStatus.PASSED){
-//			setResponseContent("<data><employee><name>A</name></employee></data>");
-//			
-////			StackPane.getChildren().add(responseTabController.getTree());
-//			
-//			}
-////			
-////			
-//////			FXMLLoader loader = new FXMLLoader();
-////////			loader.setLocation(this.getClass().getResource("/fxml/TestFactory/RestStep.fxml"));
-////////            loader.load(getClass().getResourceAsStream("/fxml/TestFactory/RestStep.fxml"));
-//////			loader.setLocation(getClass().getResource(MainConstants.ResponseTabController.toString()));
-//////			ResponseTabController responseTabController = loader.getController();
-//////			if(response.getStatus() == ExecutionStatus.PASSED){
-//////				responseTabController.setResponseContent(response.getcontent);
-//////			}
-//		}
-//	}
+
 
 	public void serverChangedEvent(){
 		
