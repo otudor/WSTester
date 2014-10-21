@@ -502,19 +502,24 @@ public class RestStepController
         stepController.setStep(stepId);
         stepController.setCommonFields();
         
+        
     	Step step = testProjectService.getStep(stepId);
+    	
     	if(step instanceof RestStep){
 
 			restMethod.getItems().clear();
 			restMethod.getItems().addAll(RestMethod.values());
-
+			restMethod.setValue(((RestStep) step).getMethod());
 			restMethod.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RestMethod>() {
 						public void changed(ObservableValue<? extends RestMethod> ov, RestMethod oldValue, RestMethod newValue) {
 
 							((RestStep) step).setMethod(newValue);
 						}
 					});
+			restPath.setText(((RestStep) step).getPath());
     	}
+    	
+    	
     	
 		return rootRestStep;
 	}

@@ -87,7 +87,7 @@ public class StepController implements Initializable{
 		
     	Step step = testProjectService.getStep(stepId);
 		Environment environment = testProjectService.getTestSuiteByStepUID(stepId).getEnvironment();
-	
+		
 		if (environment != null) {
 			// clear the server list and populate it with the servers from the current environment
 			serverBox.getItems().clear();
