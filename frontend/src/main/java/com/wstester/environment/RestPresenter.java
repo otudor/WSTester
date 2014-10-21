@@ -170,7 +170,7 @@ public void setRest( final String serverUID, final String serviceUID)
     	gridpane.getChildren().remove(restName);
     	gridpane.getChildren().add(labelname);
     	labelport.setText(restField.getText());
-    	labelname.setText(restField.getText());
+    	labelname.setText(restName.getText());
     	envService.saveEnv();
 	}
 	

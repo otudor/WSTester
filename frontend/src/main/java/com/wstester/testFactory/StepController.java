@@ -171,7 +171,7 @@ public class StepController implements Initializable{
 				
 				if(newServer != null && (oldServer==null || !oldServer.equals(newServer))) {
 					step.setServer(newServer);
-					step.setService(null);
+					//step.setService(null);
 					
 					//get the new services declared on the server
 					serviceBox.getItems().clear();
