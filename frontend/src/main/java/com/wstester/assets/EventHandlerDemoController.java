@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -23,8 +24,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import org.apache.commons.io.FileUtils;
 import org.controlsfx.dialog.Dialogs;
+
+import com.wstester.main.WsTesterMain;
 import com.wstester.model.Asset;
 import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
@@ -38,10 +42,10 @@ import com.wstester.services.definition.IAssetManager;
 
 public class EventHandlerDemoController {
 
-	private Logger logger = Logger.getLogger(this.getClass().getSimpleName());
+	private Logger LOGGER = Logger.getLogger(this.getClass().getSimpleName());
 
 	private AssetModel assetModel;
-	private AssetModel newValue, oldValue;
+	private AssetModel newValue;
 
 	private Process process;
 	public TextArea primaryTextArea;
@@ -128,7 +132,6 @@ public class EventHandlerDemoController {
 	 * after the fxml file has been loaded.
 	 */
 	private void linkValues(AssetModel oldValue, AssetModel newValue) {
-		this.oldValue = oldValue;
 		this.newValue = newValue;
 	}
 
@@ -171,7 +174,7 @@ public class EventHandlerDemoController {
 		});
 
 		//de sters dupa ce termin de facut load + set text area 
-		/*editButton.setOnAction(new EventHandler<ActionEvent>() {
+		editButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("apasat buton edit");
@@ -198,10 +201,10 @@ public class EventHandlerDemoController {
 
 
 			}
-			});  */
+			});  
 
 
-		/*pathButton.setOnAction(new EventHandler<ActionEvent>() {
+		pathButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("apasat buton edit");
@@ -223,12 +226,12 @@ public class EventHandlerDemoController {
 
 
 			}
-			});*/
+			});
 
 
 
 
-		/*pathButton.setOnAction(new EventHandler<ActionEvent>() {
+		pathButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("lalal");
@@ -238,7 +241,7 @@ public class EventHandlerDemoController {
 
 				File file = fileChooser.showSaveDialog(stageEditor);
 			}
-			}); */
+			}); 
 
 		addButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -377,7 +380,7 @@ public class EventHandlerDemoController {
 		});
 
 
-		/*editButton.setOnAction(new EventHandler<ActionEvent>() {
+		editButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("apasat buton edit");
@@ -423,7 +426,7 @@ public class EventHandlerDemoController {
 					 }
 				}
 			}
-			});*/
+			});
 
 		ed.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -433,25 +436,11 @@ public class EventHandlerDemoController {
 
 						String tableNamee = tableName.getCellData(tableView.getSelectionModel().getSelectedItem());
 						try {
-
-
-							/*root = FXMLLoader.load(getClass().getResource("/fxml/assets/editor.fxml"));
-							Scene second = new Scene(root);
-							second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
-							stageEditor.setScene(second);
-							stageEditor.setTitle("editor");
-							stageEditor.show();
-							FXMLLoader fxmlLoader = new FXMLLoader();
-							Pane p = fxmlLoader.load(getClass().getResource("/fxml/assets/editor.fxml").openStream());
-							EditController editController = (EditController) fxmlLoader.getController();
-
-							editController.updatePage();*/
-
 							Group root = new Group();
 							Stage stage = new Stage();
 
 							FXMLLoader fxmlLoader = new FXMLLoader();	        
-							AnchorPane frame = fxmlLoader.load(getClass().getResource("/fxml/assets/editor.fxml").openStream());
+							AnchorPane frame = (AnchorPane) fxmlLoader.load(getClass().getResource("/fxml/assets/editor.fxml").openStream());
 							EditController editController = (EditController) fxmlLoader.getController();
 							editController.updatePage(tableNamee);
 							root.getChildren().add(frame);
@@ -459,43 +448,9 @@ public class EventHandlerDemoController {
 
 							stage.setScene(scene);
 							stage.show();
-
-
-
-
-
-
-
-
-
-
-
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							LOGGER.log(java.util.logging.Level.SEVERE, this.getClass().getSimpleName() + ": Exception on system: " + e);
 						} 
-
-
-
-
-
-
-						//						FileChooser fileChooser = new FileChooser();
-						//
-						//						//Set extension filter
-						//						FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.xml)", "*.xml");
-						//						fileChooser.getExtensionFilters().add(extFilter);
-						//
-						//						//Show save file dialog
-						//
-						//
-						//						File file = fileChooser.showOpenDialog(stageEditor);
-						//						if(file != null){
-						//
-						//							textarea.setText(readFile(file));
-						//						}
-						//}
-
 					}
 					else {
 						try {
@@ -543,7 +498,7 @@ public class EventHandlerDemoController {
 		});
 	}
 
-	private void setCellValueFactory() {
+	private void setCellValueFactory() {/*
 		tableName.setCellValueFactory(cellData -> cellData.getValue()
 				.nameProperty());
 		tableDate.setCellValueFactory(cellData -> cellData.getValue()
@@ -554,7 +509,7 @@ public class EventHandlerDemoController {
 				.sizeProperty());
 		tableProgress.setCellValueFactory(cellData -> cellData.getValue()
 				.progressProperty());
-	}
+	*/}
 
 	private Process openSelectedFile(String editorPath, String filePath) throws IOException {
 		Runtime runtime = Runtime.getRuntime();
