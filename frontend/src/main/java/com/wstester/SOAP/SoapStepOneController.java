@@ -18,7 +18,7 @@ import org.datafx.controller.flow.action.LinkAction;
 import javax.annotation.PostConstruct;
 
 @FXMLController(value="/fxml/SOAP/stepOne.fxml", title = "Wizard: Step 1")
-public class RestStepOneController extends RestAbstractWizardController {
+public class SoapStepOneController extends SoapAbstractWizardController {
     
 	@FXML
 	private ComboBox<String> importType;
@@ -27,7 +27,7 @@ public class RestStepOneController extends RestAbstractWizardController {
 	
 	
 	@FXML
-    @LinkAction(RestStepTwoController.class)
+    @LinkAction(SoapStepTwoController.class)
     private Button nextButton;
 	
 

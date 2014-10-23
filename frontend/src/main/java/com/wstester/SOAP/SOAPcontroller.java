@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import org.datafx.controller.flow.Flow;
 import org.datafx.controller.flow.FlowException;
 
-import com.wstester.SOAP.RestStepOneController;
+import com.wstester.SOAP.SoapStepOneController;
 import com.wstester.main.MainLauncher;
 import com.wstester.main.WsTesterMain;
 
@@ -51,7 +51,7 @@ public class SOAPcontroller implements Initializable {
 					stageImport = new Stage();
 					stageImport.initOwner(MainLauncher.stage);
 					 try {
-						new Flow(RestStepOneController.class).startInStage(stageImport);
+						new Flow(SoapStepOneController.class).startInStage(stageImport);
 					} catch (FlowException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
