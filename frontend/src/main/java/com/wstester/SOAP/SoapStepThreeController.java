@@ -10,7 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 @FXMLController(value="/fxml/SOAP/stepThree.fxml", title = "Wizard: Step 3 final")
-public class RestStepThreeController extends RestAbstractWizardController {
+public class SoapStepThreeController extends SoapAbstractWizardController {
 	@FXML
     private Button nextButton;
 

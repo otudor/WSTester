@@ -8,15 +8,15 @@ import org.datafx.controller.flow.action.LinkAction;
 
 
 @FXMLController(value="/fxml/SOAP/stepTwo.fxml", title = "Wizard: Step 2")
-public class RestStepTwoController extends RestAbstractWizardController {
+public class SoapStepTwoController extends SoapAbstractWizardController {
 	@FXML
-	@LinkAction(RestStepOneController.class)
+	@LinkAction(SoapStepOneController.class)
     private Button backButton;
 	@FXML
-    @LinkAction(RestStepThreeController.class)
+    @LinkAction(SoapStepThreeController.class)
     private Button nextButton;
 	@FXML
-    @LinkAction(RestStepThreeController.class)
+    @LinkAction(SoapStepThreeController.class)
     private Button finishButton;
     
 }

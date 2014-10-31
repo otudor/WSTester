@@ -8,19 +8,15 @@
 
 <AnchorPane fx:id="rootRestStep" prefHeight="720.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.RestStepController">
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="720.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <fx:include fx:id="response" source="Response.fxml" />
-         </children>
-      </AnchorPane>
-      <TabPane prefHeight="670.0" prefWidth="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="341.0" AnchorPane.topAnchor="0.0">
+      
+      <TabPane prefHeight="720.0" prefWidth="1061.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
             <Tab closable="false" text="Rest Definition">
                <content>
-                  <AnchorPane>
+                  <AnchorPane prefHeight="691.0" prefWidth="994.0">
                      <children>
                      <fx:include fx:id="step" source="rootStep.fxml" />
-                        <GridPane fx:id="gridRestStep" hgap="7.0" prefHeight="40.0" prefWidth="529.0" vgap="7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="110.0">
+                        <GridPane fx:id="gridRestStep" hgap="7.0" prefHeight="64.0" prefWidth="683.0" vgap="7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="368.0" AnchorPane.topAnchor="110.0">
                                   
                                   <children>
                                   
@@ -39,8 +35,8 @@
                               <RowConstraints />
                            </rowConstraints>
                         </GridPane>
-                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="630.0" layoutY="420.0" mnemonicParsing="false" onAction="#saveRest" prefWidth="75.0" text="Save" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="605.0" />
-                        <GridPane fx:id="gridRestStep1" hgap="7.0" prefHeight="180.0" prefWidth="529.0" vgap="7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="420.0">
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="630.0" layoutY="420.0" mnemonicParsing="false" onAction="#saveRest" prefWidth="75.0" text="Save" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="605.0" />
+                        <GridPane fx:id="gridRestStep1" hgap="7.0" prefHeight="180.0" prefWidth="697.0" vgap="7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="354.0" AnchorPane.topAnchor="420.0">
                            <children>
                               <Label text="Request:" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
                               <TextArea prefHeight="180.0" prefWidth="200.0" GridPane.rowIndex="1" />

@@ -1,24 +1,19 @@
 package com.wstester.SOAP;
 
-import java.awt.Label;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
-
-import org.datafx.controller.FXMLController;
-import org.datafx.controller.flow.Flow;
-import org.datafx.controller.flow.action.FXMLFlowAction;
-import org.datafx.controller.flow.action.LinkAction;
 
 import javax.annotation.PostConstruct;
 
+import org.datafx.controller.FXMLController;
+import org.datafx.controller.flow.action.LinkAction;
+
 @FXMLController(value="/fxml/SOAP/stepOne.fxml", title = "Wizard: Step 1")
-public class RestStepOneController extends RestAbstractWizardController {
+public class SoapStepOneController extends SoapAbstractWizardController {
     
 	@FXML
 	private ComboBox<String> importType;
@@ -27,7 +22,7 @@ public class RestStepOneController extends RestAbstractWizardController {
 	
 	
 	@FXML
-    @LinkAction(RestStepTwoController.class)
+    @LinkAction(SoapStepTwoController.class)
     private Button nextButton;
 	
 

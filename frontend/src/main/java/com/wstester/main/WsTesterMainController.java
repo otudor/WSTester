@@ -110,6 +110,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	private int ind=0;
 	Menu menu2 = new Menu("Environments definition");
 	ScreensController myController;
+	public static Stage stageEnvironment;
 
 	public void setScreenParent(ScreensController screenParent){
 		myController = screenParent;
@@ -1088,13 +1089,15 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					stageEnv = new Stage();
 					isDisplayed2 = true;
 					try {
+						 
+						WsTesterMainController.stageEnvironment=stageEnv;
 						root = FXMLLoader.load(getClass().getResource("/fxml/environment/EnvironmentManager.fxml"));
 						EnvironmentsAppFactory factory = new EnvironmentsAppFactory();
 						MainPresenter mainPresenter = factory.getMainPresenter();
 						mainPresenter.loadEnvironments();
 						//                        mainPresenter.setTestProject(testProject);
 						root = mainPresenter.getView();
-						Scene second = new Scene(root, 650, 550);
+						Scene second = new Scene(root, 950, 550);
 						stage.setTitle("Environments window");
 						String cssPath = "/styles/Envwindows.css"; // the css path for enviroment window	
 						second.getStylesheets().addAll(cssPath);   // the css add

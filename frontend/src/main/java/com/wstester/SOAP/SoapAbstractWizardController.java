@@ -4,14 +4,14 @@ import javafx.scene.control.Button;
 import org.datafx.controller.flow.action.BackAction;
 import org.datafx.controller.flow.action.LinkAction;
 
-public class RestAbstractWizardController {
+public class SoapAbstractWizardController {
 
     @FXML
     @BackAction
     private Button backButton;
 
     @FXML
-    @LinkAction(RestStepThreeController.class)
+    @LinkAction(SoapStepThreeController.class)
     private Button finishButton;
 
     public Button getBackButton() {

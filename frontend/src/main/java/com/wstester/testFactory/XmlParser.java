@@ -1,31 +1,39 @@
 package com.wstester.testFactory;
 
 import java.io.IOException;
+import java.io.StringReader;
+
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class XmlParser {
 	
 	public TreeView<Object> getTreeViewOfXml(String content) throws XPathExpressionException, SAXException, IOException, ParserConfigurationException {
 		      
-//		 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-//		    InputSource is = new InputSource();
-//		    is.setCharacterStream(new StringReader(content));
-//
-//		    Document xmlDocument = db.parse(is);
+		 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		    InputSource is = new InputSource();
+		    is.setCharacterStream(new StringReader(content));
+
+		    Document xmlDocument = db.parse(is);
 		
         XPath xPath =  XPathFactory.newInstance().newXPath();
         
         String expression = ".";
-        Node node = (Node) xPath.compile(expression).evaluate(content, XPathConstants.NODE);
+        Node node = (Node) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODE);
         
         TreeItem<Object> treeItem = new TreeItem<>();
         TreeView<Object> treeView = new TreeView<>(treeItem);
