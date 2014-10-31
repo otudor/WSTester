@@ -27,19 +27,18 @@ public class MysqlRule extends Rule {
 		this.inputType = inputType;
 	}
 	
-	@Override
-	public String run(Step step) {
 
+	@Override
+	protected Object getStepInput(Step step) {
+		
 		if(step instanceof MySQLStep){
 			if(inputType.equals(InputType.OPERATION)){
-				if(inputString != null && ((MySQLStep)step).getOperation().equals(inputString)){
-					return output;
-				}
+				return ((MySQLStep)step).getOperation();
 			}
 		}
 		return null;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "MysqlRule [inputType=" + inputType + ", inputString=" + inputString + ", inputAsset=" + inputAsset + ", output=" + output + "]";

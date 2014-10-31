@@ -1,12 +1,17 @@
 package com.wstester.model;
 
+import java.util.Map;
+
 import javax.xml.bind.annotation.XmlType;
+
+import com.wstester.services.definition.IAssetManager;
+import com.wstester.services.impl.AssetManager;
 
 public class RestRule extends Rule{
 
 	private static final long serialVersionUID = 1L;
 	@XmlType(name="restInputType")
-	public enum InputType {PATH, METHOD};
+	public enum InputType {PATH, METHOD, BODY};
 	private InputType inputType;
 	
 	public RestRule(){
@@ -16,6 +21,13 @@ public class RestRule extends Rule{
 		
 		this.inputType = inputType;
 		this.inputString = input;
+		this.output = output;
+	}
+			
+	public RestRule(InputType inputType, Asset input, String output){
+		
+		this.inputType = inputType;
+		this.inputAsset = input;
 		this.output = output;
 	}
 	
@@ -28,24 +40,38 @@ public class RestRule extends Rule{
 	}
 
 	@Override
-	public String run(Step step){
+	protected Object getStepInput(Step step) {
+		IAssetManager assetManager = new AssetManager();
 		
 		if(step instanceof RestStep){
 			
 			if(inputType.equals(InputType.PATH)){
-				if(inputString != null && ((RestStep)step).getPath().contains(inputString)){
-					return output;
-				}
+				return ((RestStep) step).getPath();
 			}
 			
 			if(inputType.equals(InputType.METHOD)){
-				if(inputString != null && ((RestStep)step).getMethod().toString().equalsIgnoreCase(inputString)){
-					return output;
+				return ((RestStep) step).getMethod().toString();
+			}
+			
+			if(inputType.equals(InputType.BODY)){
+				
+				
+				if(((RestStep) step).getRequest() != null){
+					return ((RestStep) step).getRequest();
+				}
+				else if(step.getAssetMap() != null){
+					Map<Asset, AssetType> assetMap = step.getAssetMap();
+					
+					for(Asset asset : assetMap.keySet()){
+						if(assetMap.get(asset).equals(AssetType.BODY)){
+							return assetManager.getAssetContent(asset.getName());
+						}
+					}
 				}
 			}
 		}
-		
 		return null;
+		
 	}
 
 	@Override

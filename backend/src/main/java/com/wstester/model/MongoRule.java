@@ -1,7 +1,6 @@
 package com.wstester.model;
 
 import java.util.Map;
-
 import javax.xml.bind.annotation.XmlType;
 
 public class MongoRule extends Rule {
@@ -46,23 +45,31 @@ public class MongoRule extends Rule {
 	}
 
 	@Override
-	public String run(Step step) {
+	protected Object getStepInput(Step step) {
 		
 		if(step instanceof MongoStep){
 			if(inputType.equals(InputType.QUERY)){
-				if(inputQuery != null && ((MongoStep) step).getQuery().equals(inputQuery)){
-					return output;
-				}
+				return ((MongoStep) step).getQuery();
 			}
+			
 			else if(inputType.equals(InputType.COLLECTION)){
-				if(inputString != null && ((MongoStep) step).getCollection().equals(inputString)){
-					return output;
-				}
+				return ((MongoStep) step).getCollection();
 			}
 		}
 		return null;
 	}
-
+	
+	@Override
+	protected Object getRuleInput() {
+		
+		if(inputQuery != null){
+			return inputQuery;
+		}
+		else{
+			return super.getRuleInput();
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return "MongoRule [inputType=" + inputType + ", inputQuery=" + inputQuery + ", inputString=" + inputString + ", output=" + output + "]";

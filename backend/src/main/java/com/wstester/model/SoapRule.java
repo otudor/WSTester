@@ -40,30 +40,30 @@ public class SoapRule extends Rule{
 	}
 
 	@Override
-	public String run(Step step) {
-
-		Map<Asset, AssetType> assetMap;
+	protected Object getStepInput(Step step) {
+		IAssetManager assetManager = new AssetManager();
 		
 		if(step instanceof SoapStep){
 			
 			if(inputType.equals(InputType.REQUEST)){
-				if((inputString != null) && ((SoapStep)step).getRequest().equals(inputString)){
-					return output;
+				
+				if(inputString != null){
+					return ((SoapStep)step).getRequest();
 				}
-				//TODO: now only the first asset will be set to the body of the request
-				//TODO: in the future, send a request for every asset in the list
-				IAssetManager assetManager = new AssetManager();
-				assetMap = step.getAssetMap();
 				
-				for(Asset asset : assetMap.keySet()){
-				
-					if((inputAsset != null) && step.getAssetMap() != null && asset !=null &&
-							(asset.getName().equals(inputAsset.getName()) ||
-							(assetManager.getAssetContent(asset.getName()).equals(assetManager.getAssetContent(inputAsset.getName())))))		
-						return output;
+				else if(inputAsset != null){
+					
+					Map<Asset, AssetType> assetMap = step.getAssetMap();
+					
+					for(Asset asset : assetMap.keySet()){
+						if(assetMap.get(asset).equals(AssetType.BODY)){
+							
+							return assetManager.getAssetContent(asset.getName());
+							}
+						}
+					}
 				}
 			}
-		}
 		return null;
 	}
 

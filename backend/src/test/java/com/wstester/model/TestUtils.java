@@ -1032,7 +1032,7 @@ public class TestUtils {
 		restService.setName("Service Rest");
 		restService.setPort("9997");
 		restService.setStatus(ServiceStatus.MOCKED);
-		String output = "mockedOutput";
+		String output = "mockedPath";
 		Rule rule = new RestRule(InputType.PATH, "getCustomers", output);
 		String output2 = "mockedMethod";
 		Rule rule2 = new RestRule(InputType.METHOD, "PUT", output2);
@@ -1217,7 +1217,7 @@ public class TestUtils {
 		List<Asset> assetList = new ArrayList<Asset>();
 		HashMap<Asset, AssetType> assetMap = new HashMap<Asset, AssetType>();
 		Asset asset = new Asset();
-		asset.setName("AssetFile.xml");
+		asset.setName("AssetFile.txt");
 		asset.setPath("src/test/resources");
 		assetList.add(asset);
 		assetMap.put(asset, AssetType.BODY);
@@ -1377,6 +1377,82 @@ public class TestUtils {
 		testSuite1.setEnvironment(env1);
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
+		
+		testProject.setTestSuiteList(testSuiteList);
+		
+		return testProject;
+	}
+	
+	public static TestProject getMockedMySQLProject(){
+		
+		TestProject testProject = new TestProject();
+		testProject.setName("Test Project");	
+
+		// construct service list
+		// Service 4
+		List<Service> serviceList4 = new ArrayList<Service>();
+		MySQLService mysqlService = new MySQLService();
+		mysqlService.setName("Service MYSQL");
+		mysqlService.setPort("3306");
+		mysqlService.setDbName("test");
+		mysqlService.setUser("appuser");
+		mysqlService.setPassword("apppass");
+		mysqlService.setStatus(ServiceStatus.MOCKED);
+		List<Rule> ruleList = new ArrayList<Rule>();
+		Rule rule = new MysqlRule(com.wstester.model.MysqlRule.InputType.OPERATION, "inputOperation", "mockedOperation");
+		ruleList.add(rule );
+		mysqlService.setRuleList(ruleList );
+		serviceList4.add(mysqlService);
+		
+		// construct server list
+		
+
+		// Server 3
+		List<Server> serverList2 = new ArrayList<Server>();
+		Server server21 = new Server();
+		server21.setDescription("This is the first server of the second env");
+		server21.setIp("localhost");
+		server21.setName("Server 21");
+		server21.setServices(serviceList4);
+		serverList2.add(server21);
+		
+		
+		// construct environment list
+		List<Environment> environmentList = new ArrayList<Environment>();
+	
+		// Environment 2
+		Environment env2 = new Environment();
+		env2.setName("Env 2");
+		env2.setServers(serverList2);
+		environmentList.add(env2);
+		testProject.setEnvironmentList(environmentList);
+
+		// construct test steps
+		// test 3
+		List<Step> stepList2 = new ArrayList<Step>();
+		MySQLStep step3 = new MySQLStep();
+		step3.setName("Step 3");
+		step3.setServer(server21);
+		step3.setService(mysqlService);
+		stepList2.add(step3);
+		
+		
+		// construct test case list
+		// test case 2		
+		List<TestCase> testCaseList2 = new ArrayList<TestCase>();
+		TestCase testCase2 = new TestCase();
+		testCase2.setName("TC 1");
+		testCase2.setStepList(stepList2);
+		testCaseList2.add(testCase2);
+		
+		// construct test suite list
+		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
+
+		TestSuite testSuite2 = new TestSuite();
+		testSuite2.setName("Test Suite 2");
+		testSuite2.setEnvironment(env2);
+		testSuite2.setTestCaseList(testCaseList2);
+		testSuiteList.add(testSuite2);
 		
 		testProject.setTestSuiteList(testSuiteList);
 		

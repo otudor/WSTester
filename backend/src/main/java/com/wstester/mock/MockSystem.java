@@ -21,7 +21,7 @@ public class MockSystem implements Processor{
 	public void process(Exchange exchange) throws Exception {
 		
 		ruleList = new ArrayList<Rule>();
-		Step step = exchange.getIn().getBody(Step.class);
+		Step step = exchange.getProperty("step", Step.class);
 		addRules(step.getService().getRuleList());
 
 		

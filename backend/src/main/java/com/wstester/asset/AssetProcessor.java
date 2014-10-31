@@ -26,7 +26,7 @@ public class AssetProcessor implements Processor{
 			for(Asset asset : assetMap.keySet()){
 				if(assetMap.get(asset).equals(AssetType.BODY)){
 					
-					if(bodyCount==0){
+					if(bodyCount == 0){
 						exchange.getIn().setBody(assetManager.getAssetContent(asset.getName()));
 						bodyCount++;
 					}
