@@ -101,8 +101,7 @@ public class SoapStepController
 									}
 								});
 							step.setServer(new_value);
-							tsService.setStepByUID(step, uid);
-							tsService.saveTestSuite();
+							tsService.setStepByUID(step, step.getID());
 						}
 					}
         	});
@@ -185,8 +184,7 @@ public class SoapStepController
 		soap.setService(step.getService());
 		soap.setVariableList(step.getVariableList());
 		
-		tsService.setStepByUID(soap, uid);
-		tsService.saveTestSuite();
+		tsService.setStepByUID(soap, soap.getID());
 	} 
     
     

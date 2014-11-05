@@ -25,12 +25,10 @@ public class ExecutionUpdate {
 		this.testSuiteListController = tsListController;
 	}
 
-	public void updateRunStatus()
-    {
+	public void updateRunStatus() {
+		
 		ExecutorService executor = Executors.newFixedThreadPool(1);
-		
 		executor.execute(new UpdateStatusThread(testSuiteListController.getTreeView()));
-		
 		executor.shutdown();
     }
 }
@@ -63,8 +61,7 @@ class UpdateStatusThread implements Runnable{
 
 							ITestRunner testRunner = null;
 							try {
-								testRunner = ServiceLocator.getInstance()
-										.lookup(ITestRunner.class);
+								testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class);
 							} catch (Exception e) {
 								// TODO Make a pop up window to inform the user
 								// that we can't get the step responses
@@ -81,13 +78,6 @@ class UpdateStatusThread implements Runnable{
 							step.addExecution(execution);
 
 							testProjectService.setStepByUID(step, step.getID());
-							testProjectService.saveTestSuite();
-
-							Step updatedStep = new MySQLStep();
-							updatedStep.setName("");
-							TreeItem<Object> newStepItem = new TreeItem<>(
-									updatedStep);
-							Event.fireEvent(stepItem, new TreeItem.TreeModificationEvent<Object>(TreeItem.valueChangedEvent(), stepItem, newStepItem));
 						}
     	    		}
     			}

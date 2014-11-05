@@ -104,15 +104,6 @@ public class TestProject implements Serializable {
 		}
 	}
 
-	public void addTestCaseForTestSuite( TestCase testCase, String tsUID) {
-		for(TestSuite testSuite : testSuiteList) {
-			if(testSuite.getID().equals(tsUID)){
-				testSuite.getTestCaseList().add(testCase);
-				break;
-			}
-		}
-	}
-
 	public void removeTestSuite(String id) {
 		for (TestSuite testSuite : testSuiteList) {
 			if (testSuite.getID().equals(id)) {

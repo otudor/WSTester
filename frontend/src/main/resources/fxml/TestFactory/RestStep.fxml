@@ -39,7 +39,7 @@
                         <GridPane fx:id="gridRestStep1" hgap="7.0" prefHeight="180.0" prefWidth="697.0" vgap="7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="354.0" AnchorPane.topAnchor="420.0">
                            <children>
                               <Label text="Request:" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
-                              <TextArea prefHeight="180.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                              <TextArea fx:id="request" prefHeight="180.0" prefWidth="200.0" GridPane.rowIndex="1" />
                            </children>
                            <columnConstraints>
                               <ColumnConstraints minWidth="570.0" prefWidth="700.0" />
@@ -65,10 +65,10 @@
                                               <RowConstraints maxHeight="30.0" minHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <TableView fx:id="tablePathVars" prefHeight="200.0" prefWidth="200.0">
+                                                <TableView fx:id="pathTable" prefHeight="200.0" prefWidth="200.0">
                                                   <columns>
-                                                    <TableColumn fx:id="columnPathName" prefWidth="150.0" text="Name" />
-                                                    <TableColumn fx:id="columnPathValue" prefWidth="150.0" text="Value" />
+                                                    <TableColumn fx:id="pathKey" prefWidth="150.0" text="Name" />
+                                                    <TableColumn fx:id="pathValue" prefWidth="150.0" text="Value" />
                                                   </columns>
                                                 </TableView>
                                                 <Button fx:id="addPathButton" mnemonicParsing="false" text="Add Path" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
@@ -78,19 +78,19 @@
                                     </AnchorPane>
                               </content>
                             </Tab>
-                            <Tab text="Querry">
+                            <Tab text="Query">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="210.0">
                                        <children>
                                           <GridPane hgap="10.0" prefHeight="210.0" prefWidth="529.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <TableView fx:id="tableQuerryVars" prefHeight="200.0" prefWidth="200.0">
+                                                <TableView fx:id="queryTable" prefHeight="200.0" prefWidth="200.0">
                                                    <columns>
-                                                      <TableColumn fx:id="columnQuerryName" prefWidth="150.0" text="Name" />
-                                                      <TableColumn fx:id="columnQuerryValue" prefWidth="150.0" text="Value" />
+                                                      <TableColumn fx:id="queryKey" prefWidth="150.0" text="Name" />
+                                                      <TableColumn fx:id="queryValue" prefWidth="150.0" text="Value" />
                                                    </columns>
                                                 </TableView>
-                                                <Button fx:id="addQuerryButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Add Querry" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                                <Button fx:id="addQueryButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Add Querry" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                                              </children>
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="226.0" />
@@ -110,10 +110,10 @@
                                        <children>
                                           <GridPane hgap="10.0" prefHeight="198.0" prefWidth="529.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <TableView fx:id="tableHeaderVars" prefHeight="200.0" prefWidth="200.0">
+                                                <TableView fx:id="headerTable" prefHeight="200.0" prefWidth="200.0">
                                                    <columns>
-                                                      <TableColumn fx:id="columnHeaderName" prefWidth="150.0" text="Name" />
-                                                      <TableColumn fx:id="columnHeaderValue" prefWidth="150.0" text="Value" />
+                                                      <TableColumn fx:id="headerKey" prefWidth="150.0" text="Name" />
+                                                      <TableColumn fx:id="headerValue" prefWidth="150.0" text="Value" />
                                                    </columns>
                                                 </TableView>
                                                 <Button fx:id="addHeaderButton" mnemonicParsing="false" text="Add Header" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
@@ -136,13 +136,13 @@
                                        <children>
                                           <GridPane hgap="10.0" prefHeight="198.0" prefWidth="529.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <TableView fx:id="tableCookieVars" prefHeight="200.0" prefWidth="200.0">
+                                                <TableView fx:id="cookieTable" prefHeight="200.0" prefWidth="200.0">
                                                    <columns>
-                                                      <TableColumn fx:id="columnCookieName" prefWidth="150.0" text="Name" />
-                                                      <TableColumn fx:id="columnCookieValue" prefWidth="150.0" text="Value" />
+                                                      <TableColumn fx:id="cookieKey" prefWidth="150.0" text="Name" />
+                                                      <TableColumn fx:id="cookieValue" prefWidth="150.0" text="Value" />
                                                    </columns>
                                                 </TableView>
-                                                <Button fx:id="addCookieBUtton" mnemonicParsing="false" text="Add Cookie" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                                <Button fx:id="addCookieButton" mnemonicParsing="false" text="Add Cookie" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                                              </children>
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="226.0" />

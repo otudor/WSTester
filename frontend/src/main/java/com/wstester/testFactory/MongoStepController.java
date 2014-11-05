@@ -1,8 +1,5 @@
 package com.wstester.testFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -17,8 +14,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import com.wstester.model.Asset;
 import com.wstester.model.Environment;
 import com.wstester.model.Execution;
 import com.wstester.model.MongoStep;
@@ -26,51 +21,54 @@ import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 
-public class MongoStepController
-{
-    @FXML private Node rootMongoStep;
-    @FXML private TextField lblName;
-    @FXML private TextField mongoCollection;
-    @FXML private TextField mongoAction;
-    @FXML private TextField mongoQuery;
-    @FXML private Label lblStatus;
-    @FXML private Label lblResponse;
-    @FXML private TableView<Execut> tblExecutions;
-    @FXML private TableColumn<Execut, String> columnDate;
-    @FXML private TableColumn<Execut, String> columnStatus;
-    @FXML private TableColumn<Execut, String> columnResponse;
-    @FXML private ComboBox<Server> serverBox;
-    @FXML private ComboBox<Service> serviceBox;
+public class MongoStepController {
+    @FXML 
+    private Node rootMongoStep;
+    @FXML 
+    private TextField lblName;
+    @FXML 
+    private TextField mongoCollection;
+    @FXML 
+    private TextField mongoAction;
+    @FXML 
+    private TextField mongoQuery;
+    @FXML 
+    private Label lblStatus;
+    @FXML 
+    private Label lblResponse;
+    @FXML 
+    private TableView<Execut> tblExecutions;
+    @FXML 
+    private TableColumn<Execut, String> columnDate;
+    @FXML 
+    private TableColumn<Execut, String> columnStatus;
+    @FXML 
+    private TableColumn<Execut, String> columnResponse;
+    @FXML 
+    private ComboBox<Server> serverBox;
+    @FXML 
+    private ComboBox<Service> serviceBox;
     
     private MongoStep step;    
     private TestProjectService tsService;
-    private TestSuiteManagerController tsMainController;
     final ObservableList<Execut> lista = FXCollections.observableArrayList();
     private String uid = null;
+    
 	@FXML
-	private void initialize() 
-	{
+	private void initialize() {
 		
 	}
 	
-	public void setTestSuiteService( TestProjectService tsService)
-    {
+	public void setTestSuiteService( TestProjectService tsService) {
         this.tsService = tsService;
     }
 
-    public void setTestSuiteManagerController(TestSuiteManagerController tsMainController)
-    {
-        this.tsMainController = tsMainController;
-    }
-
-    public Node getView()
-    {
+    public Node getView() {
         return rootMongoStep;
     }
 
-    public void setMongoStep(final String stepUID)
-    {        
-        step = (MongoStep) tsService.getStep( stepUID);
+    public void setMongoStep(final String stepUID) {        
+        step = (MongoStep) tsService.getStep(stepUID);
         lblName.setText(step.getName());
     	mongoQuery.setText("");
         mongoAction.setText("");
@@ -87,22 +85,21 @@ public class MongoStepController
         		serviceBox.getItems().addAll(step.getServer().getServices());
         	}
         	serverBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Server>() {
-					public void changed(ObservableValue ov, Server value, Server new_value) {
-						if(new_value !=null) {
-							step.setServer(new_value);
+					public void changed(ObservableValue<? extends Server> ov, Server oldServer, Server newServer) {
+						if(newServer !=null) {
+							step.setServer(newServer);
 							serviceBox.getItems().clear();
 							serviceBox.getItems().addAll(step.getServer().getServices());
 							if(step.getService() != null) {
 								serviceBox.setValue(step.getService());
 							}
 							serviceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Service>() {
-									public void changed(ObservableValue ov, Service value,Service new_value) {
-										step.setService(new_value);
+									public void changed(ObservableValue<? extends Service> ov, Service oldServer,Service newServer) {
+										step.setService(newServer);
 									}
 								});
-							step.setServer(new_value);
-							tsService.setStepByUID(step, uid);
-							tsService.saveTestSuite();
+							step.setServer(newServer);
+							tsService.setStepByUID(step, step.getID());
 						}
 					}
         	});
@@ -187,8 +184,7 @@ public class MongoStepController
 		mongo.setServer(step.getServer());
 		mongo.setService(step.getService());
 		mongo.setVariableList(step.getVariableList());
-		tsService.setStepByUID(mongo, uid);
-		tsService.saveTestSuite();
+		tsService.setStepByUID(mongo, mongo.getID());
 	} 
 }
 	

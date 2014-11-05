@@ -1,7 +1,6 @@
 package com.wstester.testFactory;
 
 import java.util.List;
-
 import com.wstester.model.Environment;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
@@ -13,82 +12,112 @@ import com.wstester.util.MainConstants;
 import com.wstester.util.UtilityTool;
 
 public class TestProjectService {
-	
-	private TestProject testProject;
 
-	public TestProjectService() {
-		testProject = (TestProject) UtilityTool
-				.getEntity(MainConstants.TESTPROJECT);
+	public TestProject getTestProject(){
 		
-	}
-
-	public void addTestSuite(TestSuite testSuite) {
-		testProject.addTestSuite(testSuite);
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		return testProject;
 	}
 	
 	public List<TestSuite> getTestSuites(){
+		
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
 		return testProject.getTestSuiteList();
 	}
 	
-	public TestSuite getTestSuite(String uID) {
-		return testProject.getTestSuite(uID);
+	public void addTestSuite(TestSuite testSuite) {
+		
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		testProject.addTestSuite(testSuite);
+		UtilityTool.addEntity(MainConstants.TESTPROJECT, testProject);
 	}
 	
-	public void addTestCaseForTestSuite(TestCase testCase, String tsUID) {
-		testProject.addTestCaseForTestSuite(testCase, tsUID);
+	
+	public TestSuite getTestSuite(String id) {
+		
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		return testProject.getTestSuite(id);
+	}
+	
+	public void removeTestSuite(String id) {
+		
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		testProject.removeTestSuite(id);
+		UtilityTool.addEntity(MainConstants.TESTPROJECT, testProject);
+	}
+	
+	public void addTestCaseForTestSuite(TestCase testCase, String testSuiteId) {
+		
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		TestSuite testSuite = testProject.getTestSuite(testSuiteId);
+		testSuite.addTestCase(testCase);
+		UtilityTool.addEntity(MainConstants.TESTPROJECT, testProject);
 	}
 
-	public void removeTestCase(String tcUID) {
-		testProject.removeTestCase(tcUID);
+	public void removeTestCase(String testCaseId) {
+		
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		testProject.removeTestCase(testCaseId);
+		UtilityTool.addEntity(MainConstants.TESTPROJECT, testProject);
 	}
 	
-	public void addStepForTestCase(Step step, String id) {
-		testProject.addStepForTestCase(step, id);
+	public void addStepForTestCase(Step step, String testCaseId) {
+		
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		testProject.addStepForTestCase(step, testCaseId);
+		UtilityTool.addEntity(MainConstants.TESTPROJECT, testProject);
 	}
 
 	public Step getStep(String stepUID) {
+		
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
 		Step result = testProject.getStep(stepUID);
 		return result;
 	}
 
-	public void setStepByUID(Step src, String stepUID) {
-		testProject.setStepByUID(src, stepUID);
-	}
-
-	public void saveTestSuite() {
-		((TestProject)UtilityTool.getEntity(MainConstants.TESTPROJECT)).setTestSuiteList(testProject.getTestSuiteList());
+	public void setStepByUID(Step step, String stepId) {
+		
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		testProject.setStepByUID(step, stepId);
+		UtilityTool.addEntity(MainConstants.TESTPROJECT, testProject);
 	}
 
 	public List<Environment> getEnvironmentList() {
+		
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
 		return testProject.getEnvironmentList();
 	}
 
-	public List<Server> getServerList(String id) {
-		return testProject.getEnvironment(id).getServers();
+	public List<Server> getServerList(String environmentId) {
+		
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		return testProject.getEnvironment(environmentId).getServers();
 	}
 
-	public List<Service> getServiceList(String id) {
-		return testProject.getServer(id).getServices();
+	public List<Service> getServiceList(String serverId) {
+		
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		return testProject.getServer(serverId).getServices();
 	}
 
-	public TestSuite getTestSuiteByStepUID(String stepUID) {
-		return testProject.getTestSuiteByStepUID(stepUID);
+	public TestSuite getTestSuiteByStepUID(String stepId) {
+		
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		return testProject.getTestSuiteByStepUID(stepId);
 	}
 
 	public void setTestSuiteByUID(TestSuite testSuite, String uid) {
+		
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
 		testProject.setTestSuiteByUID(testSuite, uid);		
-	}
-
-	public void removeTestSuite(String id) {
-		testProject.removeTestSuite(id);
+		UtilityTool.addEntity(MainConstants.TESTPROJECT, testProject);
 	}
 
 	public void removeTestStep(String id) {
-		testProject.removeTestStep(id);
 		
-	}
-	
-	public TestProject getTestProject(){
-		return this.testProject;
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		testProject.removeTestStep(id);
+		UtilityTool.addEntity(MainConstants.TESTPROJECT, testProject);
+		
 	}
 }

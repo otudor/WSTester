@@ -1,22 +1,11 @@
 package com.wstester.testFactory;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import com.wstester.model.Execution;
-import com.wstester.model.ExecutionStatus;
-import com.wstester.model.Response;
-import com.wstester.model.RestStep;
-import com.wstester.model.Step;
-
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 
 public class ResponseTabController implements Initializable {
 	

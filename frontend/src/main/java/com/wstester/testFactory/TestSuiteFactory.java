@@ -165,7 +165,6 @@ public class TestSuiteFactory
                 loader.load(getClass().getResourceAsStream("/fxml/TestFactory/MongoStep.fxml"));
                 mongoStepController = (MongoStepController) loader.getController();
                 mongoStepController.setTestSuiteService( getTestSuiteService());
-                mongoStepController.setTestSuiteManagerController( getManagerController());
             }
             catch (IOException e)
             {
@@ -205,8 +204,6 @@ public class TestSuiteFactory
                 loader.setLocation(this.getClass().getResource("/fxml/TestFactory/RestStep.fxml"));
                 loader.load(getClass().getResourceAsStream("/fxml/TestFactory/RestStep.fxml"));
                 restStepController = (RestStepController) loader.getController();
-                restStepController.setTestSuiteService( getTestSuiteService());
-                restStepController.setTestSuiteManagerController( getManagerController());
             }
             catch (IOException e)
             {

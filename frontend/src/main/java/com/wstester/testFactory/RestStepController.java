@@ -1,586 +1,289 @@
 package com.wstester.testFactory;
 
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import org.apache.cxf.jaxws.javaee.EnvEntryType;
-
-import com.sun.javafx.collections.MappingChange.Map;
-import com.wstester.assets.Table;
+import java.util.Map;
+import com.wstester.elements.Dialog;
 import com.wstester.main.MainLauncher;
-import com.wstester.main.WsTesterMain;
-import com.wstester.model.Asset;
-import com.wstester.model.Environment;
-import com.wstester.model.MySQLStep;
 import com.wstester.model.RestMethod;
 import com.wstester.model.RestStep;
-import com.wstester.model.Execution;
-import com.wstester.model.ExecutionStatus;
-import com.wstester.model.Server;
-import com.wstester.model.Service;
 import com.wstester.model.Step;
-import com.wstester.model.TestProject;
-import com.wstester.model.Variable;
-import com.wstester.testFactory.TableQuerry;
-import com.wstester.variables.TableVariables;
-
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import javafx.util.Callback;
-import junit.framework.Test;
+import javafx.scene.control.TextArea;
 
-public class RestStepController
-{	
-	 private TestSuiteManagerController tsMainController;
-	private TestProjectService testProjectService;
-	private String stepId;
+public class RestStepController {	
+
 	@FXML
 	private StepController stepController;
     @FXML 
     private Node rootRestStep;
-    @FXML private TextField lblName;
-    @FXML private TextField restPath;
-    @FXML private Label restResponse;
-    
-    @FXML private ComboBox<RestMethod> restMethod;
-    public static String aa= "dasad";
-   
-    
-//    @FXML private TableView<Execut> tblExecutions;
-//    @FXML private TableColumn<Execut, String> columnDate;
-//    @FXML private TableColumn<Execut, String> columnStatus;
-//    @FXML private TableColumn<Execut, String> columnResponse;
-
-    @FXML private Button addQuerryButton;
-    @FXML private Button addPathButton;
-    @FXML private Button addHeaderButton;
-    @FXML private Button addCookieBUtton;
+    @FXML 
+    private TextField restPath;
+    @FXML 
+    private ComboBox<RestMethod> restMethod;
     @FXML
-	private TableView<Table> tableView = new TableView<>();
-    @FXML
-	private TableColumn<Table, String> nameQuerry;
-    @FXML private ComboBox<String> editableBox;
-    public static Stage stageQuerry;
-	public static Stage stagePath;
-	public static Stage stageHeader;
-	public static Stage stageCookie;
-	
-	
-    // addul de variabile in tabel
-    
-	//querry
-    private ArrayList<Variable> variablesList = new ArrayList<>();
-	
-	
-	@FXML private TableView<TableQuerry> tableQuerryVars;
-	@FXML private TableColumn<TableQuerry, String> columnQuerryName;
-	@FXML private TableColumn<TableQuerry, String> columnQuerryValue;
+    private TextArea request;
 
-	
-	
-	//public static variables on order to pass references to table view and table columns, and use them in AddWindowController class
-	public static TableView<TableQuerry> tableQuerryVarsPassed;
-	public static TableColumn<TableQuerry, String> tableColumnVarNamePassed = new TableColumn<TableQuerry, String>();
-	public static TableColumn<TableQuerry, String> tableColumnValuePassed = new TableColumn<TableQuerry, String>();
-	
-	public static ObservableList<TableQuerry> tableQuerryVarData = FXCollections
-			.observableArrayList();
-    
-    //path
-	 private ArrayList<Variable> variablesPathList = new ArrayList<>();
-		
-		
-		@FXML private TableView<TablePath> tablePathVars;
-		@FXML private TableColumn<TablePath, String> columnPathName;
-		@FXML private TableColumn<TablePath, String> columnPathValue;
+	// query
+    @FXML 
+    private Button addQueryButton;
+	@FXML 
+	private TableView<Pair> queryTable;
+	@FXML 
+	private TableColumn<Pair, String> queryKey;
+	@FXML 
+	private TableColumn<Pair, String> queryValue;
 
-		//public static variables on order to pass references to table view and table columns, and use them in AddWindowController class
-		public static TableView<TablePath> tablePathVarsPassed;
-		public static TableColumn<TablePath, String> tableColumnPathNamePassed = new TableColumn<TablePath, String>();
-		public static TableColumn<TablePath, String> tableColumnPathPassed = new TableColumn<TablePath, String>();
-	
-		public static ObservableList<TablePath> tablePathVarData = FXCollections
-				.observableArrayList();
-        
-    
-    //header
-		
-		 private ArrayList<Variable> variablesHeaderList = new ArrayList<>();
-			
-			
-			@FXML private TableView<TableHeader> tableHeaderVars;
-			@FXML private TableColumn<TableHeader, String> columnHeaderName;
-			@FXML private TableColumn<TableHeader, String> columnHeaderValue;
+	// path
+    @FXML 
+    private Button addPathButton;
+	@FXML
+	private TableView<Pair> pathTable;
+	@FXML
+	private TableColumn<Pair, String> pathKey;
+	@FXML
+	private TableColumn<Pair, String> pathValue;
 
-			//public static variables on order to pass references to table view and table columns, and use them in AddWindowController class
-			public static TableView<TableHeader> tableHeaderVarsPassed;
-			public static TableColumn<TableHeader, String> tableColumnHeaderNamePassed = new TableColumn<TableHeader, String>();
-			public static TableColumn<TableHeader, String> tableColumnHeaderPassed = new TableColumn<TableHeader, String>();
-			
-			public static ObservableList<TableHeader> tableHeaderVarData = FXCollections
-					.observableArrayList();
-			
-	//cookie
-			
-			private ArrayList<Variable> variablesCookieList = new ArrayList<>();
-			
-			
-			@FXML private TableView<TableCookie> tableCookieVars;
-			@FXML private TableColumn<TableCookie, String> columnCookieName;
-			@FXML private TableColumn<TableCookie, String> columnCookieValue;
+	// header
+    @FXML 
+    private Button addHeaderButton;
+	@FXML
+	private TableView<Pair> headerTable;
+	@FXML
+	private TableColumn<Pair, String> headerKey;
+	@FXML
+	private TableColumn<Pair, String> headerValue;
 
-			//public static variables on order to pass references to table view and table columns, and use them in AddWindowController class
-			public static TableView<TableCookie> tableCookieVarsPassed;
-			public static TableColumn<TableCookie, String> tableColumnCookieNamePassed = new TableColumn<TableCookie, String>();
-			public static TableColumn<TableCookie, String> tableColumnCookiePassed = new TableColumn<TableCookie, String>();
-			
-			public static ObservableList<TableCookie> tableCookieVarData = FXCollections
-					.observableArrayList();
-			
-		
-		
-			private RestStep step;    
-			private TestProjectService tsService;
-			private String uid = null;
-			public boolean querryVisible = false;
-			Parent root;
+	// cookie
+    @FXML 
+    private Button addCookieButton;
+	@FXML
+	private TableView<Pair> cookieTable;
+	@FXML 
+	private TableColumn<Pair, String> cookieKey;
+	@FXML 
+	private TableColumn<Pair, String> cookieValue;
 
-	
-   
-    
-	
-    
-//    @Override
-//    public void initialize (URL location, ResourceBundle resources) {
-//    	this.xmlParser = new XmlParser();
-//    	this.showTreeView();
-//    	this.createSlide();
-//    }
+    private String stepId;
     
     public void setStep(String stepId){
 		this.stepId = stepId;
 	}
+    
 	@FXML
-	private void initialize() 
-	{
-		this.addQuerryMethod();
+	private void initialize() {
 		
-		for(int i=0; i<variablesList.size(); i++) {
-			tableQuerryVarData.add(
-					new TableQuerry(variablesList.get(i).getName(), variablesList.get(i).getContent()));
-		}
-		tableQuerryVars.setItems(tableQuerryVarData);
-		tableQuerryVars = tableQuerryVarsPassed;
-		populateQuerryTable();
-		//path
+		this.pathKey.setCellValueFactory(new PropertyValueFactory<Pair, String>("key"));
+		this.pathValue.setCellValueFactory(new PropertyValueFactory<Pair, String>("value"));
 		this.addPathMethod();
-		for(int i=0; i<variablesPathList.size(); i++) {
-			tablePathVarData.add(
-					new TablePath(variablesPathList.get(i).getName(), variablesPathList.get(i).getContent()));
-		}
-		tablePathVars.setItems(tablePathVarData);
-		tablePathVars = tablePathVarsPassed;
-		populatePathTable();
 		
-		//header
+		this.queryKey.setCellValueFactory(new PropertyValueFactory<Pair, String>("key"));
+		this.queryValue.setCellValueFactory(new PropertyValueFactory<Pair, String>("value"));
+		this.addQueryMethod();
+		
+		this.headerKey.setCellValueFactory(new PropertyValueFactory<Pair, String>("key"));
+		this.headerValue.setCellValueFactory(new PropertyValueFactory<Pair, String>("value"));
 		this.addHeaderMethod();
-		for(int i=0; i<variablesHeaderList.size(); i++) {
-			tableHeaderVarData.add(
-					new TableHeader(variablesHeaderList.get(i).getName(), variablesHeaderList.get(i).getContent()));
-		}
-		tableHeaderVars.setItems(tableHeaderVarData);
-		tableHeaderVars = tableHeaderVarsPassed;
-		populateHeaderTable();
 		
+		this.cookieKey.setCellValueFactory(new PropertyValueFactory<Pair, String>("key"));
+		this.cookieValue.setCellValueFactory(new PropertyValueFactory<Pair, String>("value"));
 		this.addCookieMethod();
-		for(int i=0; i<variablesCookieList.size(); i++) {
-			tableCookieVarData.add(
-					new TableCookie(variablesCookieList.get(i).getName(), variablesCookieList.get(i).getContent()));
-			
-		}
-		
-		tableCookieVars.setItems(tableCookieVarData);
-		tableCookieVars = tableCookieVarsPassed;
-		populateCookieTable();
-
 	}
 	
-   
-
-	
-	   
 	private void addCookieMethod() {
-		
-		addCookieBUtton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		addCookieButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {
-				stageCookie = new Stage();
-				// TODO Auto-generated method stub	
-				if(event.getClickCount() == 1 && querryVisible == false ) {
-					stageHeader = new Stage();
-//					querryVisible = true;
-					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/testFactory/AddCookieNameValue.fxml"));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+				
+				if(event.getClickCount() == 1) {
+					
+					Pair pair = Dialog.twoTextBoxDialog("Key", "Value", MainLauncher.stage);
+					
+					if (pair != null){
+						ObservableList<Pair> cookieData = FXCollections.observableArrayList();
+						cookieData.addAll(cookieTable.getItems());
+						cookieData.add(pair);
+						cookieTable.setItems(cookieData);
 					}
-
-					Scene second = new Scene(root);
-
-					stageCookie.initOwner(MainLauncher.stage);
-					stageCookie.setScene(second);
-					stageCookie.setTitle("Add Path");
-					stageCookie.show();
 				} 
 			}
-			});
-	
+		});
 	}
-
-
-
-
 
 	private void addHeaderMethod() {
 		addHeaderButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {
-				stageHeader = new Stage();
-				// TODO Auto-generated method stub	
-				if(event.getClickCount() == 1 && querryVisible == false ) {
-					stageHeader = new Stage();
-//					querryVisible = true;
-					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/testFactory/AddHeaderNameValue.fxml"));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+				if(event.getClickCount() == 1) {
+					
+					Pair pair = Dialog.twoTextBoxDialog("Key", "Value", MainLauncher.stage);
+					
+					if (pair != null){
+						ObservableList<Pair> headerData = FXCollections.observableArrayList();
+						headerData.addAll(headerTable.getItems());
+						headerData.add(pair);
+						headerTable.setItems(headerData);
 					}
-
-					Scene second = new Scene(root);
-
-					stageHeader.initOwner(MainLauncher.stage);
-					stageHeader.setScene(second);
-					stageHeader.setTitle("Add Path");
-					stageHeader.show();
 				} 
 			}
-			});
-	
+		});
 	}
-		
-	
-
-
-
-
 
 	private void addPathMethod() {
 		addPathButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {
-				stagePath = new Stage();
-				// TODO Auto-generated method stub	
-				if(event.getClickCount() == 1 && querryVisible == false ) {
-					stagePath = new Stage();
-//					querryVisible = true;
-					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/testFactory/AddPathNameValue.fxml"));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+				if(event.getClickCount() == 1) {
+					
+					Pair pair = Dialog.twoTextBoxDialog("Key", "Value", MainLauncher.stage);
+					if (pair != null){
+						ObservableList<Pair> pathData = FXCollections.observableArrayList();
+						pathData.addAll(pathTable.getItems());
+						pathData.add(pair);
+						pathTable.setItems(pathData);
 					}
-
-					Scene second = new Scene(root);
-
-					stagePath.initOwner(MainLauncher.stage);
-					stagePath.setScene(second);
-					stagePath.setTitle("Add Path");
-					stagePath.show();
 				} 
 			}
-			});
-	
+		});
 	}
-		
-	
 
-
-
-
-
-	private void addQuerryMethod() {
-		addQuerryButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	private void addQueryMethod() {
+		addQueryButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {
-				stageQuerry = new Stage();
-				// TODO Auto-generated method stub	
-				if(event.getClickCount() == 1 && querryVisible == false ) {
-					stageQuerry = new Stage();
-//					querryVisible = true;
-					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/testFactory/AddNameValue.fxml"));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+				if(event.getClickCount() == 1) {
+					
+					Pair pair = Dialog.twoTextBoxDialog("Key", "Value", MainLauncher.stage);
+					
+					if (pair != null){
+						ObservableList<Pair> queryData = FXCollections.observableArrayList();
+						queryData.addAll(queryTable.getItems());
+						queryData.add(pair);
+						queryTable.setItems(queryData);
 					}
-
-					Scene second = new Scene(root);
-
-	
-					stageQuerry.initOwner(MainLauncher.stage);
-					
-					stageQuerry.setScene(second);
-
-					stageQuerry.setTitle("Add Querry");
-					
-					//stageSoap.initModality(Modality.WINDOW_MODAL);
-
-					
-					stageQuerry.show();
 				} 
 			}
-			});
-	
+		});
 	}
 	
-	public void populateQuerryTable(){
-		columnQuerryName.setCellValueFactory(new Callback<CellDataFeatures<TableQuerry, String>, ObservableValue<String>>() {
-		     public ObservableValue<String> call(CellDataFeatures<TableQuerry, String> p) {
-		         return p.getValue().getName();
-		     }
-		  });
-		
-		columnQuerryValue.setCellValueFactory(new Callback<CellDataFeatures<TableQuerry, String>, ObservableValue<String>>() {
-		     public ObservableValue<String> call(CellDataFeatures<TableQuerry, String> p) {
-		         return p.getValue().getContent();
-		     }
-		  });
-	}
-	
-	public static void populateQuerryTableStatic(){
-		tableColumnVarNamePassed.setCellValueFactory(new Callback<CellDataFeatures<TableQuerry, String>, ObservableValue<String>>() {
-		     public ObservableValue<String> call(CellDataFeatures<TableQuerry, String> p) {
-		         return p.getValue().getName();
-		     }
-		  });
-		
-		
-	}
-	public void populatePathTable(){
-		columnPathName.setCellValueFactory(new Callback<CellDataFeatures<TablePath, String>, ObservableValue<String>>() {
-		     public ObservableValue<String> call(CellDataFeatures<TablePath, String> p) {
-		         return p.getValue().getName();
-		     }
-		  });
-		
-		columnPathValue.setCellValueFactory(new Callback<CellDataFeatures<TablePath, String>, ObservableValue<String>>() {
-		     public ObservableValue<String> call(CellDataFeatures<TablePath, String> p) {
-		         return p.getValue().getContent();
-		     }
-		  });
-	}
-	
-	public static void populatePathTableStatic(){
-		tableColumnPathNamePassed.setCellValueFactory(new Callback<CellDataFeatures<TablePath, String>, ObservableValue<String>>() {
-		     public ObservableValue<String> call(CellDataFeatures<TablePath, String> p) {
-		         return p.getValue().getName();
-		     }
-		  });
-	
-	tableColumnPathPassed.setCellValueFactory(new Callback<CellDataFeatures<TablePath, String>, ObservableValue<String>>() {
-	     public ObservableValue<String> call(CellDataFeatures<TablePath, String> p) {
-	         return p.getValue().getContent();
-	     }
-	  });
-	}
-	
-	
-	public void populateHeaderTable(){
-		columnHeaderName.setCellValueFactory(new Callback<CellDataFeatures<TableHeader, String>, ObservableValue<String>>() {
-		     public ObservableValue<String> call(CellDataFeatures<TableHeader, String> p) {
-		         return p.getValue().getName();
-		     }
-		  });
-		
-		columnHeaderValue.setCellValueFactory(new Callback<CellDataFeatures<TableHeader, String>, ObservableValue<String>>() {
-		     public ObservableValue<String> call(CellDataFeatures<TableHeader, String> p) {
-		         return p.getValue().getContent();
-		     }
-		  });
-	}
-	
-	public static void populateHeaderTableStatic(){
-		tableColumnHeaderNamePassed.setCellValueFactory(new Callback<CellDataFeatures<TableHeader, String>, ObservableValue<String>>() {
-		     public ObservableValue<String> call(CellDataFeatures<TableHeader, String> p) {
-		         return p.getValue().getName();
-		     }
-		  });
-	
-	tableColumnHeaderPassed.setCellValueFactory(new Callback<CellDataFeatures<TableHeader, String>, ObservableValue<String>>() {
-	     public ObservableValue<String> call(CellDataFeatures<TableHeader, String> p) {
-	         return p.getValue().getContent();
-	     }
-	  });
-	}
-	
-	public void populateCookieTable(){
-		columnCookieName.setCellValueFactory(new Callback<CellDataFeatures<TableCookie, String>, ObservableValue<String>>() {
-		     public ObservableValue<String> call(CellDataFeatures<TableCookie, String> p) {
-		         return p.getValue().getName();
-		     }
-		  });
-		
-		columnCookieValue.setCellValueFactory(new Callback<CellDataFeatures<TableCookie, String>, ObservableValue<String>>() {
-		     public ObservableValue<String> call(CellDataFeatures<TableCookie, String> p) {
-		         return p.getValue().getContent();
-		     }
-		  });
-	}
-	
-	public static void populateCookieTableStatic(){
-		tableColumnCookieNamePassed.setCellValueFactory(new Callback<CellDataFeatures<TableCookie, String>, ObservableValue<String>>() {
-		     public ObservableValue<String> call(CellDataFeatures<TableCookie, String> p) {
-		         return p.getValue().getName();
-		     }
-		  });
-	
-	tableColumnCookiePassed.setCellValueFactory(new Callback<CellDataFeatures<TableCookie, String>, ObservableValue<String>>() {
-	     public ObservableValue<String> call(CellDataFeatures<TableCookie, String> p) {
-	         return p.getValue().getContent();
-	     }
-	  });
-	}
-
-	
-	public void setTestSuiteService( TestProjectService tsService)
-    {
-        this.tsService = tsService;
-    }
-
-    public void setTestSuiteManagerController(TestSuiteManagerController tsMainController)
-    {
-        this.tsMainController = tsMainController;
-    }
-
     public Node getView() {
 		
-		testProjectService = new TestProjectService();
+    	clearFields();
+		TestProjectService testProjectService = new TestProjectService();
         
         stepController.setStep(stepId);
         stepController.setCommonFields();
-        
         
     	Step step = testProjectService.getStep(stepId);
     	
     	if(step instanceof RestStep){
 
-			restMethod.getItems().clear();
 			restMethod.getItems().addAll(RestMethod.values());
 			restMethod.setValue(((RestStep) step).getMethod());
-			restMethod.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RestMethod>() {
-						public void changed(ObservableValue<? extends RestMethod> ov, RestMethod oldValue, RestMethod newValue) {
-							if(newValue != null && (oldValue==null || !oldValue.equals(newValue))) {
-							((RestStep) step).setMethod(newValue);
-						}}
-					});
-			restPath.setText(((RestStep) step).getPath());
+			
+			if (((RestStep) step).getPath() != null) {
+				restPath.setText(((RestStep) step).getPath());
+			}
+			
+			if (((RestStep) step).getRequest() != null) {
+				request.setText(((RestStep) step).getRequest().toString());
+			}
+			
+			ObservableList<Pair> queryData = FXCollections.observableArrayList();
+			if (((RestStep) step).getQuery() != null) {
+				Map<String, String> queryMap = ((RestStep) step).getQuery();
+				for (String key : queryMap.keySet()){
+					queryData.add(new Pair(key, queryMap.get(key)));
+				}
+			}
+			queryTable.setItems(queryData);
+			
+			ObservableList<Pair> headerData = FXCollections.observableArrayList();
+			if (((RestStep) step).getHeader() != null) {
+				Map<String, String> hederMap = ((RestStep) step).getHeader();
+				for (String key : hederMap.keySet()){
+					headerData.add(new Pair(key, hederMap.get(key)));
+				}
+			}
+			headerTable.setItems(headerData);
+			
+			ObservableList<Pair> cookieData = FXCollections.observableArrayList();
+			if (((RestStep) step).getCookie() != null) {
+				Map<String, String> cookieMap = ((RestStep) step).getCookie();
+				for (String key : cookieMap.keySet()){
+					cookieData.add(new Pair(key, cookieMap.get(key)));
+				}
+			}
+			cookieTable.setItems(cookieData);
     	}
-    	
-    	
     	
 		return rootRestStep;
 	}
     
-    
+    private void clearFields() {
+		
+    	restMethod.getItems().clear();
+		restMethod.setValue(null);
+		
+		restPath.setText("");
+		request.setText("");
+		pathTable.getItems().clear();
+		queryTable.getItems().clear();
+		headerTable.getItems().clear();
+		cookieTable.getItems().clear();
+	}
 
-    public void setRestStep(final String stepUID)
-    {
-         
-        
-    }
-    
-    public void saveRest(ActionEvent e) {
+	public void saveRest(ActionEvent e) {
     	
-		RestStep rest = new RestStep();
-		step = (RestStep) testProjectService.getStep(stepId);
-		rest.setAssertList(step.getAssertList());
-		rest.setAssetMap(step.getAssetMap());
-		rest.setContentType(step.getContentType());
-		rest.setDependsOn(step.getDependsOn());
-		rest.setExecutionList(step.getExecutionList());
-		rest.setMethod(step.getMethod());
-		//rest.setName(lblName.getText());
-		rest.setRequest(step.getRequest());
-		rest.setServer(stepController.getServer());
-		rest.setService(stepController.getService());
-		rest.setVariableList(step.getVariableList());
-		
-		HashMap<String, String> cookieMap = new HashMap<String, String>();
-		for (int i= 0;i<tableCookieVarData.size();i++){
-			cookieMap.put(columnCookieName.getCellData(i), columnCookieValue.getCellData(i));
-		}
-		rest.setCookie(cookieMap);
-		
-		HashMap<String, String> headerMap = new HashMap<String, String>();
-		for (int i= 0;i<tableHeaderVarData.size();i++){
-			headerMap.put(columnHeaderName.getCellData(i), columnHeaderValue.getCellData(i));
-		}
-		rest.setHeader(headerMap);
-		
-		HashMap<String, String> queryMap = new HashMap<String, String>();
-		for (int i= 0;i<tableQuerryVarData.size();i++){
-			queryMap.put(columnQuerryName.getCellData(i), columnQuerryValue.getCellData(i));
-		}
-		rest.setQuery(queryMap);
-		
-//		StringBuilder path = new StringBuilder(restPath.getText());
-//		for (int i= 0;i<tablePathVarData.size();i++){
-//			path.append("/" + columnPathName.getCellData(i) + "/" + columnPathValue.getCellData(i));
-//		}
-//		rest.setPath(path.toString());
-		rest.setPath(restPath.getText());
-		
-		tsService.setStepByUID(rest, stepId);
-		tsService.saveTestSuite();
-		
-		
-		
-	} 
+    	TestProjectService testProjectService = new TestProjectService();
+    	RestStep step = new RestStep();
     	
-    
-   
-    
+    	step.setServer(stepController.getServer());
+    	step.setService(stepController.getService());
+    	step.setName(stepController.getName());
+    	step.setMethod(restMethod.getValue());
+    	
+    	StringBuilder pathBuilder = new StringBuilder(restPath.getText() + "/");
+    	for (Pair pair: pathTable.getItems()) {
+    		pathBuilder.append(pair.getKey() + "/" + pair.getValue());
+    	}
+    	step.setPath(pathBuilder.toString());
+    	
+    	Map<String, String> queryMap = new HashMap<String, String>();
+    	for (Pair pair : queryTable.getItems()) {
+    		queryMap.put(pair.getKey(), pair.getValue());
+    	}
+		step.setQuery(queryMap);
+		
+		Map<String, String> headerMap = new HashMap<String, String>();
+		for (Pair pair : headerTable.getItems()) {
+			headerMap.put(pair.getKey(), pair.getValue());
+		}
+		step.setHeader(headerMap);
+		
+		Map<String, String> cookieMap = new HashMap<String, String>();
+		for (Pair pair : cookieTable.getItems()) {
+			cookieMap.put(pair.getKey(), pair.getValue());
+		}
+		step.setCookie(cookieMap);
+		
+		step.setRequest(request.getText());
+		
+    	testProjectService.setStepByUID(step, stepId);
+	}    
 }

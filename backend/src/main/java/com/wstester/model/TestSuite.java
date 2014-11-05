@@ -52,6 +52,14 @@ public class TestSuite implements Serializable {
 		this.testCaseList = testCaseList;
 	}
 
+	public void addTestCase(TestCase testCase){
+		if(this.testCaseList == null){
+			this.testCaseList = new ArrayList<TestCase>();
+		}
+		
+		this.testCaseList.add(testCase);
+	}
+	
 	public List<Variable> getVariableList() {
 		return variableList;
 	}

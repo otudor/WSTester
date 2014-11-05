@@ -112,10 +112,10 @@ public class TestSuiteManagerController implements Initializable{
         contentArea.setCenter( soapStepController.getView());
     }
     
-    public void showRestStep( String sUID) {
+    public void showRestStep(String sUID) {
 
     	restStepController.setStep(sUID);
-        contentArea.setCenter( restStepController.getView());
+        contentArea.setCenter(restStepController.getView());
     }
         
     public void runTestSuite( ActionEvent event) throws Exception {
