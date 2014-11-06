@@ -2,7 +2,6 @@ package com.wstester.camel.rest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
 
@@ -57,5 +56,28 @@ public class PostRequestTest extends RestTestBaseClass {
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals(name.toString(), entry);
+	}
+	
+	@Test
+	public void throw415Error() throws Exception {
+		
+		TestProject testProject = TestUtils.getRestTestPlan();
+		RestStep step = (RestStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
+		step.setPath("/customer/insertCustomerByJson");
+		step.setMethod(RestMethod.POST);
+		
+		JSONObject name = new JSONObject();
+		name.put("name", "Crix");
+		
+		step.setRequest(name.toString());
+		testRunner = new TestRunner(testProject);
+		
+		testRunner.run(testProject);
+		
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		String entry =  response.getContent();
+		
+		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
+		assertEquals("", entry);
 	}
 }

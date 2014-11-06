@@ -1,13 +1,14 @@
 package com.wstester.dispatcher.rest;
 
-import org.apache.camel.builder.RouteBuilder;
 import com.wstester.asset.AssetProcessor;
 import com.wstester.dispatcher.ExchangeDelayer;
 
-public class RestRoute extends RouteBuilder{
+public class RestRoute extends RestExceptionRoute{
 
 	@Override
 	public void configure() throws Exception {
+		
+		super.configure();
 		
 		from("jms:restQueue?concurrentConsumers=20&asyncConsumer=true")
 		
@@ -15,7 +16,7 @@ public class RestRoute extends RouteBuilder{
 		.process(new RestPreProcessor())
 		.process(new AssetProcessor())
 		
-		.recipientList(simple("http://none.none"))
+		.recipientList(simple("http://none.none?throwExceptionOnFailure=false"))
 		
 		.process(new RestPostProcessor())
 		.to("jms:topic:responseTopic");

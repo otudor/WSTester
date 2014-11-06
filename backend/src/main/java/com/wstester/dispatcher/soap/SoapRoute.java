@@ -1,11 +1,9 @@
 package com.wstester.dispatcher.soap;
 
-import org.apache.camel.builder.RouteBuilder;
-
 import com.wstester.asset.AssetProcessor;
 import com.wstester.dispatcher.ExchangeDelayer;
 
-public class SoapRoute extends RouteBuilder {
+public class SoapRoute extends SoapExceptionRoute {
 
 	@Override
 	public void configure() throws Exception {

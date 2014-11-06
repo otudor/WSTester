@@ -7,45 +7,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="rootPane" prefHeight="720.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.ResponseTabController">
+<AnchorPane fx:id="rootPane" prefHeight="691.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.ResponseController">
    <children>
-      <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <tabs>
-                      <Tab closable="false" text="Response">
-                           <content>
-                              <AnchorPane fx:id="treePane" prefHeight="689.0" prefWidth="142.0">
-                                 <children>
-                                    <Pane prefHeight="663.0" prefWidth="166.0" />
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                      </Tab>
-                    </tabs>
-                  </TabPane>
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <tabs>
-                      <Tab closable="false" text="Header">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <StackPane fx:id="headerPane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                 </children>
-                              </AnchorPane>
-                        </content>
-                      </Tab>
-                    </tabs>
-                  </TabPane>
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+      <Pane prefHeight="691.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="39.0" layoutY="33.0" text="Status" />
+            <Label fx:id="status" layoutX="117.0" layoutY="33.0" text="Not Runned" />
+            <Label layoutX="39.0" layoutY="67.0" text="Response" />
+            <Pane fx:id="responsePane" layoutX="39.0" layoutY="104.0" prefHeight="300.0" prefWidth="900.0" />
+            <Label fx:id="headerLabel" layoutX="39.0" layoutY="419.0" text="Headers" />
+            <TableView fx:id="headerTable" layoutX="39.0" layoutY="442.0" prefHeight="200.0" prefWidth="399.0">
+              <columns>
+                <TableColumn fx:id="key" editable="false" prefWidth="200.0" resizable="false" sortable="false" />
+                <TableColumn fx:id="value" editable="false" prefWidth="200.0" resizable="false" sortable="false" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

@@ -10,58 +10,8 @@
 
 	<children>
 	
-		<AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="720.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <tabs>
-                      <Tab closable="false" text="Response">
-                           <content>
-                              <AnchorPane fx:id="treePane" prefHeight="689.0" prefWidth="142.0">
-                                 <children>
-                                    <Pane prefHeight="663.0" prefWidth="166.0" />
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                      </Tab>
-                    </tabs>
-                  </TabPane>
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="718.0" prefWidth="122.0">
-               <children>
-                  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <tabs>
-                      <Tab closable="false" text="Header">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <StackPane fx:id="headerPane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                 </children>
-                              </AnchorPane>
-                        </content>
-                      </Tab>
-                    </tabs>
-                  </TabPane>
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
-         </children>
-      </AnchorPane>
+		<AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="720.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 								<GridPane fx:id="gridStep" hgap="7.0" prefHeight="96.0" prefWidth="711.0" vgap="7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="340.0" AnchorPane.topAnchor="10.0">
-
-									<children>
-										<Label text="Step Name:" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
-										<TextField fx:id="stepName" prefHeight="25.0" prefWidth="570.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-										<ComboBox fx:id="serviceBox" prefWidth="150.0" promptText="Add Service..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
-										<ComboBox fx:id="serverBox" prefWidth="150.0" promptText="Add Server..." GridPane.columnIndex="1" />
-										<Label text="Server:" />
-										<Label text="Service:" GridPane.rowIndex="1" />
-									</children>
 									<columnConstraints>
 										<ColumnConstraints minWidth="80.0" prefWidth="100.0" />
 										<ColumnConstraints minWidth="570.0" prefWidth="570.0" />
@@ -72,6 +22,14 @@
 										<RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" />
 										<RowConstraints />
 									</rowConstraints>
+         <children>
+      										<Label text="Step Name:" GridPane.rowIndex="2" />
+      										<Label text="Service:" GridPane.rowIndex="1" />
+      										<Label text="Server:" />
+      										<ComboBox fx:id="serverBox" prefWidth="150.0" promptText="Add Server..." GridPane.columnIndex="1" />
+      										<ComboBox fx:id="serviceBox" prefWidth="150.0" promptText="Add Service..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      										<TextField fx:id="stepName" prefHeight="25.0" prefWidth="570.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
 								</GridPane>
 	</children>
 </AnchorPane>

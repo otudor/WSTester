@@ -1,10 +1,10 @@
 package com.wstester.dispatcher.mysql;
 
-import org.apache.camel.builder.RouteBuilder;
 import com.wstester.asset.AssetProcessor;
 import com.wstester.dispatcher.ExchangeDelayer;
+import com.wstester.dispatcher.mongo.MongoExceptionRoute;
 
-public class MysqlRoute extends RouteBuilder  {
+public class MysqlRoute extends MongoExceptionRoute {
 
 	@Override
 	public void configure() throws Exception {

@@ -7,6 +7,6 @@ public class RestExceptionRoute extends GeneralExceptionRoute {
 	@Override
 	public void configure() throws Exception {
 
-		super.configure();
+		super.configure();		
 	}
 }

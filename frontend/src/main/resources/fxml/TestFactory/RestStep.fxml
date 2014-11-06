@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
@@ -15,15 +16,15 @@
                <content>
                   <AnchorPane prefHeight="691.0" prefWidth="994.0">
                      <children>
-                     <fx:include fx:id="step" source="rootStep.fxml" />
+                    	<fx:include fx:id="step" source="rootStep.fxml" />
                         <GridPane fx:id="gridRestStep" hgap="7.0" prefHeight="64.0" prefWidth="683.0" vgap="7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="368.0" AnchorPane.topAnchor="110.0">
-                                  
-                                  <children>
-                                  
-                                <Label text="Rest method:" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+                            <children>  
+                              <Label text="Rest method:" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
                               <Label text="Path:" GridPane.halignment="LEFT" />
                               <TextField fx:id="restPath" prefHeight="25.0" prefWidth="570.0" GridPane.columnIndex="1" />
                               <ComboBox fx:id="restMethod" prefWidth="150.0" promptText="Select Rest method" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label text="Content type:" GridPane.rowIndex="2" />
+                              <TextField fx:id="contentType" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                             </children>
                            <columnConstraints>
                               <ColumnConstraints minWidth="80.0" prefWidth="100.0" />
@@ -33,21 +34,7 @@
                               <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" />
                               <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" />
                               <RowConstraints />
-                           </rowConstraints>
-                        </GridPane>
-                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="630.0" layoutY="420.0" mnemonicParsing="false" onAction="#saveRest" prefWidth="75.0" text="Save" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="605.0" />
-                        <GridPane fx:id="gridRestStep1" hgap="7.0" prefHeight="180.0" prefWidth="697.0" vgap="7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="354.0" AnchorPane.topAnchor="420.0">
-                           <children>
-                              <Label text="Request:" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
-                              <TextArea fx:id="request" prefHeight="180.0" prefWidth="200.0" GridPane.rowIndex="1" />
-                           </children>
-                           <columnConstraints>
-                              <ColumnConstraints minWidth="570.0" prefWidth="700.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="25.0" prefHeight="25.0" />
-                              <RowConstraints minHeight="25.0" prefHeight="150.0" />
-                              <RowConstraints />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" />
                            </rowConstraints>
                         </GridPane>
                         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="410.0" AnchorPane.topAnchor="220.0">
@@ -65,10 +52,10 @@
                                               <RowConstraints maxHeight="30.0" minHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <TableView fx:id="pathTable" prefHeight="200.0" prefWidth="200.0">
+                                                <TableView fx:id="pathTable" prefHeight="200.0" prefWidth="200.0" style="-fx-selection-bar-text: black; -fx-selection-bar: -fx-box-border;">
                                                   <columns>
-                                                    <TableColumn fx:id="pathKey" prefWidth="150.0" text="Name" />
-                                                    <TableColumn fx:id="pathValue" prefWidth="150.0" text="Value" />
+                                                    <TableColumn fx:id="pathKey" prefWidth="320.0" text="Name" />
+                                                    <TableColumn fx:id="pathValue" prefWidth="320.0" text="Value" />
                                                   </columns>
                                                 </TableView>
                                                 <Button fx:id="addPathButton" mnemonicParsing="false" text="Add Path" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
@@ -84,10 +71,10 @@
                                        <children>
                                           <GridPane hgap="10.0" prefHeight="210.0" prefWidth="529.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <TableView fx:id="queryTable" prefHeight="200.0" prefWidth="200.0">
+                                                <TableView fx:id="queryTable" prefHeight="200.0" prefWidth="200.0" style="-fx-selection-bar-text: black; -fx-selection-bar: -fx-box-border;">
                                                    <columns>
-                                                      <TableColumn fx:id="queryKey" prefWidth="150.0" text="Name" />
-                                                      <TableColumn fx:id="queryValue" prefWidth="150.0" text="Value" />
+                                                      <TableColumn fx:id="queryKey" prefWidth="320.0" text="Name" />
+                                                      <TableColumn fx:id="queryValue" prefWidth="320.0" text="Value" />
                                                    </columns>
                                                 </TableView>
                                                 <Button fx:id="addQueryButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Add Querry" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
@@ -110,10 +97,10 @@
                                        <children>
                                           <GridPane hgap="10.0" prefHeight="198.0" prefWidth="529.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <TableView fx:id="headerTable" prefHeight="200.0" prefWidth="200.0">
+                                                <TableView fx:id="headerTable" prefHeight="200.0" prefWidth="200.0" style="-fx-selection-bar-text: black; -fx-selection-bar: -fx-box-border;">
                                                    <columns>
-                                                      <TableColumn fx:id="headerKey" prefWidth="150.0" text="Name" />
-                                                      <TableColumn fx:id="headerValue" prefWidth="150.0" text="Value" />
+                                                      <TableColumn fx:id="headerKey" prefWidth="320.0" text="Name" />
+                                                      <TableColumn fx:id="headerValue" prefWidth="320.0" text="Value" />
                                                    </columns>
                                                 </TableView>
                                                 <Button fx:id="addHeaderButton" mnemonicParsing="false" text="Add Header" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
@@ -136,10 +123,10 @@
                                        <children>
                                           <GridPane hgap="10.0" prefHeight="198.0" prefWidth="529.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <TableView fx:id="cookieTable" prefHeight="200.0" prefWidth="200.0">
+                                                <TableView fx:id="cookieTable" prefHeight="200.0" prefWidth="200.0" style="-fx-selection-bar-text: black; -fx-selection-bar: -fx-box-border;">
                                                    <columns>
-                                                      <TableColumn fx:id="cookieKey" prefWidth="150.0" text="Name" />
-                                                      <TableColumn fx:id="cookieValue" prefWidth="150.0" text="Value" />
+                                                      <TableColumn fx:id="cookieKey" prefWidth="320.0" text="Name" />
+                                                      <TableColumn fx:id="cookieValue" prefWidth="320.0" text="Value" />
                                                    </columns>
                                                 </TableView>
                                                 <Button fx:id="addCookieButton" mnemonicParsing="false" text="Add Cookie" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
@@ -158,30 +145,28 @@
                               </Tab>
                           </tabs>
                         </TabPane>
-                        <Label fx:id="restResponse" layoutX="422.0" layoutY="218.0" />
+                        <GridPane fx:id="gridRestStep1" hgap="7.0" prefHeight="180.0" prefWidth="697.0" vgap="7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="354.0" AnchorPane.topAnchor="420.0">
+                           <children>
+                              <Label text="Request:" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+                              <TextArea fx:id="request" prefHeight="180.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints minWidth="570.0" prefWidth="700.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="25.0" prefHeight="25.0" />
+                              <RowConstraints minHeight="25.0" prefHeight="150.0" />
+                              <RowConstraints />
+                           </rowConstraints>
+                        </GridPane>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveRest" prefWidth="75.0" text="Save" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="605.0" />
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab closable="false" text="Past Executions">
+            <Tab text="Response">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                          <TableView fx:id="tblExecutions" prefHeight="400.0" prefWidth="266.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="0.0">
-                  		     <columns>
-                  		          <TableColumn fx:id="columnDate" maxWidth="200.0" prefWidth="200.0" text="Date">
-		          </TableColumn>
-                  		          <TableColumn fx:id="columnStatus" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Status">
-		          </TableColumn>
-                  		     </columns>
-                  		</TableView>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab closable="false" text="Variables">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <fx:include fx:id="response" source="Response.fxml" />
               </content>
             </Tab>
          </tabs>

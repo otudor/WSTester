@@ -2,20 +2,14 @@ package com.wstester.testFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import org.xml.sax.SAXException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import com.wstester.model.Environment;
-import com.wstester.model.Execution;
-import com.wstester.model.ExecutionStatus;
-import com.wstester.model.Response;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.Step;
@@ -38,8 +32,6 @@ public class StepController implements Initializable{
 	private TextField stepName;
 	@FXML
 	private Button saveBtn; 
-	@FXML 
-	private Pane treePane;
 	
 	private String stepId;
 	private TestProjectService testProjectService;
@@ -110,44 +102,6 @@ public class StepController implements Initializable{
 		
 		// set the step name
 		stepName.setText(step.getName());		
-		setResponse(step);
-	}
-
-	public void setResponseContent(String response) {
-    	
-    	
-		try {
-			XmlParser xmlParser = new XmlParser();
-			
-			treePane.getChildren().clear();
-			treePane.getChildren().add(xmlParser.getTreeViewOfXml(response));
-		} catch (SAXException xmlException) {
-			
-//			try{
-			// TODO: parse the JSON
-			//treePane.getChildren().add(jsonParser
-//			} catch (JSONException jsonException) {
-				Label label = new Label(response);
-				treePane.getChildren().add(label);
-//			}
-		} catch (Exception e){
-			// TODO: auto-generated catch 
-			e.printStackTrace();
-		}
-	}
-	
-	private void setResponse(Step step) {
-
-		if (step.getLastExecution() != null) {
-
-			Execution execution = step.getLastExecution();
-			Response response = execution.getResponse();
-
-			if (response.getStatus() == ExecutionStatus.PASSED) {
-				setResponseContent(response.getContent());
-			}
-		}
-
 	}
 
 	public void serverChangedEvent(){

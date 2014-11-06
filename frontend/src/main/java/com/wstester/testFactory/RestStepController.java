@@ -26,12 +26,16 @@ public class RestStepController {
 
 	@FXML
 	private StepController stepController;
+	@FXML
+	private ResponseController responseController;
     @FXML 
     private Node rootRestStep;
     @FXML 
     private TextField restPath;
     @FXML 
     private ComboBox<RestMethod> restMethod;
+	@FXML
+	private TextField contentType;
     @FXML
     private TextArea request;
 
@@ -185,16 +189,18 @@ public class RestStepController {
 		
     	clearFields();
 		TestProjectService testProjectService = new TestProjectService();
-        
+		Step step = testProjectService.getStep(stepId);
+		
         stepController.setStep(stepId);
         stepController.setCommonFields();
+        responseController.setResponse(step);
         
-    	Step step = testProjectService.getStep(stepId);
-    	
     	if(step instanceof RestStep){
 
 			restMethod.getItems().addAll(RestMethod.values());
 			restMethod.setValue(((RestStep) step).getMethod());
+			
+			contentType.setText(((RestStep) step).getContentType());
 			
 			if (((RestStep) step).getPath() != null) {
 				restPath.setText(((RestStep) step).getPath());
@@ -239,7 +245,7 @@ public class RestStepController {
 		
     	restMethod.getItems().clear();
 		restMethod.setValue(null);
-		
+		contentType.clear();
 		restPath.setText("");
 		request.setText("");
 		pathTable.getItems().clear();
@@ -257,10 +263,11 @@ public class RestStepController {
     	step.setService(stepController.getService());
     	step.setName(stepController.getName());
     	step.setMethod(restMethod.getValue());
+    	step.setContentType(contentType.getText());
     	
-    	StringBuilder pathBuilder = new StringBuilder(restPath.getText() + "/");
+    	StringBuilder pathBuilder = new StringBuilder(restPath.getText());
     	for (Pair pair: pathTable.getItems()) {
-    		pathBuilder.append(pair.getKey() + "/" + pair.getValue());
+    		pathBuilder.append("/" + pair.getKey() + "/" + pair.getValue());
     	}
     	step.setPath(pathBuilder.toString());
     	

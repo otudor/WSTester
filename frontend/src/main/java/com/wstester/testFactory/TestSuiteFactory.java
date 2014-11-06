@@ -17,7 +17,7 @@ public class TestSuiteFactory
     private SoapStepController soapStepController;
     private RestStepController restStepController;
     private TestProjectService tsService;
-    private ResponseTabController responseTabController;
+    private ResponseController responseController;
     private EmptyTabController emptyTabController;
     
     public void scrie(String scrie)
@@ -95,15 +95,15 @@ public class TestSuiteFactory
         return tsListController;
     }
 
-    public ResponseTabController getResponseTabController()
+    public ResponseController getResponseTabController()
     {
-        if (responseTabController == null)
+        if (responseController == null)
         {
             try
             {
                 FXMLLoader loader = new FXMLLoader();
                 loader.load(getClass().getResourceAsStream("/fxml/TestFactory/Response.fxml"));
-                responseTabController = (ResponseTabController) loader.getController();
+                responseController = (ResponseController) loader.getController();
 //                responseTabController.setTestSuiteService( getTestSuiteService());
 //                responseTabController.setTestSuiteManagerController( getManagerController());
             }
@@ -112,7 +112,7 @@ public class TestSuiteFactory
                 throw new RuntimeException("Unable to load TestSuiteList.fxml", e);
             }
         }
-        return responseTabController;
+        return responseController;
     }
     
     public TestCaseController getTestCaseController()
