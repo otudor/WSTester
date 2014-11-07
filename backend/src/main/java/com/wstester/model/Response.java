@@ -3,6 +3,7 @@ package com.wstester.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Response implements Serializable{
 
@@ -12,6 +13,7 @@ public class Response implements Serializable{
 	private ExecutionStatus status;
 	private String errorMessage;
 	private List<AssertResponse> assertResponseList;
+	private Map<String, String> headerMap;
 	
 	public String getStepID() {
 		return stepID;
@@ -58,22 +60,28 @@ public class Response implements Serializable{
 		this.assertResponseList.add(assertResponse);
 	}
 	
+	public Map<String, String> getHeaderMap() {
+		return headerMap;
+	}
+
+	public void setHeaderMap(Map<String, String> headerMap) {
+		this.headerMap = headerMap;
+	}
+
 	@Override
 	public String toString() {
-		return "Response [stepID=" + stepID + ", content=" + content + ", status=" + status + ", errorMessage=" + errorMessage + ", assertResponseList=" + assertResponseList + "]";
+		return "Response [stepID=" + stepID + ", content=" + content + ", status=" + status + ", errorMessage=" + errorMessage + ", assertResponseList=" + assertResponseList + ", headerMap="
+				+ headerMap + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-				* result
-				+ ((assertResponseList == null) ? 0 : assertResponseList
-						.hashCode());
+		result = prime * result + ((assertResponseList == null) ? 0 : assertResponseList.hashCode());
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result
-				+ ((errorMessage == null) ? 0 : errorMessage.hashCode());
+		result = prime * result + ((errorMessage == null) ? 0 : errorMessage.hashCode());
+		result = prime * result + ((headerMap == null) ? 0 : headerMap.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
@@ -101,6 +109,11 @@ public class Response implements Serializable{
 			if (other.errorMessage != null)
 				return false;
 		} else if (!errorMessage.equals(other.errorMessage))
+			return false;
+		if (headerMap == null) {
+			if (other.headerMap != null)
+				return false;
+		} else if (!headerMap.equals(other.headerMap))
 			return false;
 		if (status != other.status)
 			return false;

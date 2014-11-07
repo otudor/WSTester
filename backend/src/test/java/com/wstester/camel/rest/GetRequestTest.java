@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -26,8 +27,10 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
+		Map<String, String> headers = response.getHeaderMap();
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
+		assertEquals("200", headers.get("Response Code"));
 		assertEquals("All customers", entry);
 	}
 	
@@ -48,8 +51,10 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
+		Map<String, String> headers = response.getHeaderMap();
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
+		assertEquals("200", headers.get("Response Code"));
 		assertEquals("Alex", entry);
 	}
 	
@@ -70,8 +75,10 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
+		Map<String, String> headers = response.getHeaderMap();
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
+		assertEquals("200", headers.get("Response Code"));
 		assertEquals("Vlad", entry);
 	}
 	
@@ -92,8 +99,10 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
+		Map<String, String> headers = response.getHeaderMap();
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
+		assertEquals("200", headers.get("Response Code"));
 		assertEquals("Popa", entry);
 	}
 	
@@ -121,8 +130,10 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
+		Map<String, String> headers = response.getHeaderMap();
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
+		assertEquals("200", headers.get("Response Code"));
 		assertEquals("Goku" + "," + "Aladin" + "," + "Popa", entry);
 	}
 }

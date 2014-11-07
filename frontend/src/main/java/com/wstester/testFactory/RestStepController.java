@@ -2,11 +2,14 @@ package com.wstester.testFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import com.wstester.elements.Dialog;
+import com.wstester.elements.Pair;
 import com.wstester.main.MainLauncher;
 import com.wstester.model.RestMethod;
 import com.wstester.model.RestStep;
 import com.wstester.model.Step;
+
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

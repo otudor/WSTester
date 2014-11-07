@@ -2,8 +2,6 @@ package com.wstester.elements;
 
 import java.util.Optional;
 
-import com.wstester.testFactory.Pair;
-
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;

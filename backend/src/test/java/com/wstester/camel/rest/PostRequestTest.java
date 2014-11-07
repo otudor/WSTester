@@ -2,6 +2,9 @@ package com.wstester.camel.rest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.util.Map;
+
 import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
 
@@ -29,8 +32,10 @@ public class PostRequestTest extends RestTestBaseClass {
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
+		Map<String, String> headers = response.getHeaderMap();
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
+		assertEquals("200", headers.get("Response Code"));
 		assertEquals("Inovation", entry);
 	}
 	
@@ -53,8 +58,12 @@ public class PostRequestTest extends RestTestBaseClass {
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
+		Map<String, String> headers = response.getHeaderMap();
+		System.out.println(headers);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
+		assertEquals("200", headers.get("Response Code"));
+		assertEquals("application/json", headers.get("Response content type"));
 		assertEquals(name.toString(), entry);
 	}
 	
@@ -76,8 +85,10 @@ public class PostRequestTest extends RestTestBaseClass {
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
+		Map<String, String> headers = response.getHeaderMap();
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
+		assertEquals("415", headers.get("Response Code"));
 		assertEquals("", entry);
 	}
 }

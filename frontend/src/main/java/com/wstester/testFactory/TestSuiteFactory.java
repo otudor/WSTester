@@ -44,8 +44,7 @@ public class TestSuiteFactory
                 tsManagerController.setMongoStepController(getMongoStepController());
                 tsManagerController.setSoapStepController(getSoapStepController());
                 tsManagerController.setRestStepController(getRestStepController());
-//                tsManagerController.setResponseTabController(getResponseTabController());
-                tsManagerController.setEmptyTabController(getEmptyTabController());
+//                tsManagerController.setEmptyTabController(getEmptyTabController());
             }
             catch (IOException e)
             {

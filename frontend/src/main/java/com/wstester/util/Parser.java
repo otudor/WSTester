@@ -1,4 +1,4 @@
-package com.wstester.testFactory;
+package com.wstester.util;
 
 import java.io.IOException;
 import java.io.StringReader;

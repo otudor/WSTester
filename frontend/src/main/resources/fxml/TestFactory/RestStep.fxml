@@ -164,7 +164,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Response">
+            <Tab closable="false" text="Response">
               <content>
                 <fx:include fx:id="response" source="Response.fxml" />
               </content>

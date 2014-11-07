@@ -37,9 +37,8 @@ import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 import com.wstester.model.Asset;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IAssetManager;
-import com.wstester.util.MainWindowListener;
 
-public class EditController implements MainWindowListener {
+public class EditController {
 	
 	private Logger logger = Logger.getLogger(this.getClass().getSimpleName());
 	
@@ -326,12 +325,4 @@ public class EditController implements MainWindowListener {
 		
 		}
 	}
-	
-
-	@Override
-	public void shutDown() {
-		
-	}
-	
-
 }

@@ -1,5 +1,6 @@
-package com.wstester.testFactory;
+package com.wstester.elements;
 
+// This class is used to map a table view with 2 columns
 public class Pair {
 	
 	private final String key;

@@ -892,7 +892,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						TestSuiteFactory factory = new TestSuiteFactory();
 						TestSuiteManagerController mainPresenter = factory.getManagerController();
 						mainPresenter.loadTestSuites();
-						mainPresenter.showEmptyTabController();
+//						mainPresenter.showEmptyTabController();
 						root = mainPresenter.getView();
 						Scene second = new Scene(root,1280, 720);
 						root.getStylesheets().addAll("/styles/testFactory.css");
