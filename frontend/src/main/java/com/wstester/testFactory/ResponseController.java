@@ -7,7 +7,9 @@ import java.util.ResourceBundle;
 import org.codehaus.jettison.json.JSONException;
 import org.xml.sax.SAXException;
 
+import com.wstester.elements.Dialog;
 import com.wstester.elements.Pair;
+import com.wstester.main.MainLauncher;
 import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
@@ -43,7 +45,7 @@ public class ResponseController implements Initializable{
 	private TableColumn<Pair, String> value;
 	
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL url, ResourceBundle resourceBundle) {
 		this.key.setCellValueFactory(new PropertyValueFactory<Pair, String>("key"));
 		this.value.setCellValueFactory(new PropertyValueFactory<Pair, String>("value"));
 	}
@@ -62,6 +64,16 @@ public class ResponseController implements Initializable{
 				status.setStyle("-fx-text-fill: green");
 				setResponseContent(response.getContent());
 				setHeaders(response.getHeaderMap());
+			}
+			else if (response.getStatus() == ExecutionStatus.ERROR) {
+				status.setText(response.getStatus().toString());
+				status.setStyle("-fx-text-fill: firebrick");
+				setResponseContent(response.getErrorMessage());
+			}
+			else if (response.getStatus() == ExecutionStatus.FAILED) {
+				status.setText(response.getStatus().toString());
+				status.setStyle("-fx-text-fill: blue");
+				setResponseContent(response.getAssertResponseList().toString());
 			}
 		}
 	}
@@ -91,8 +103,8 @@ public class ResponseController implements Initializable{
 				responsePane.getChildren().add(label);
 			}
 		} catch (Exception e){
-			// TODO: auto-generated catch 
 			e.printStackTrace();
+			Dialog.errorDialog("Response couldn't be displayed. Please try again!", MainLauncher.stage);
 		}
 	}
 	
@@ -107,6 +119,5 @@ public class ResponseController implements Initializable{
 			}
 			headerTable.setItems(headerData);
 		}
-		
 	}
 }

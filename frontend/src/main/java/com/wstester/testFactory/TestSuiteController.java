@@ -2,8 +2,6 @@ package com.wstester.testFactory;
 
 import com.wstester.model.Environment;
 import com.wstester.model.TestSuite;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;

@@ -118,6 +118,5 @@ public class TestProjectService {
 		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
 		testProject.removeTestStep(id);
 		UtilityTool.addEntity(MainConstants.TESTPROJECT, testProject);
-		
 	}
 }
