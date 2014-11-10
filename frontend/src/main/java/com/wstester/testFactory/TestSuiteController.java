@@ -2,6 +2,8 @@ package com.wstester.testFactory;
 
 import com.wstester.model.Environment;
 import com.wstester.model.TestSuite;
+import com.wstester.util.TestProjectService;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -11,48 +13,40 @@ import javafx.scene.control.TextField;
 public class TestSuiteController {
 	
 	@FXML
-	private Node rootEnvDetails;
+	private Node rootTestSuite;
 	@FXML 
-	private TextField tsName;
+	private TextField name;
 	@FXML 
-	private ComboBox<Environment> envBox;
+	private ComboBox<Environment> environmentBox;
 		
-	private TestProjectService testProjectService;
-	private Environment environment;
-	private String uid;
+	private String testSuiteId;
 
 	public Node getView() {
-		return rootEnvDetails;
+		return rootTestSuite;
 	}
 
-	public void setTestSuite(final String tsUID) {
+	public void setTestSuite(String testSuiteId) {
 		
-		testProjectService = new TestProjectService();
-		this.uid = tsUID;
-		TestSuite testSuite = testProjectService.getTestSuite(tsUID);
-		tsName.clear();
-		tsName.setText(testSuite.getName());
-		environment = testSuite.getEnvironment();
+		this.testSuiteId = testSuiteId;
 		
-		envBox.getItems().clear();
-		envBox.getItems().addAll(testProjectService.getEnvironmentList());
-//		envBox.setValue(environment);	
-		envBox.getSelectionModel().select(environment);
-	}
-	
-	@FXML
-	public void handleEnvironmentChangeAction(){
+		TestProjectService testProjectService = new TestProjectService();
+		TestSuite testSuite = testProjectService.getTestSuite(testSuiteId);
 		
-		Environment selectedEnvironment = envBox.getSelectionModel().getSelectedItem();
-		this.environment = selectedEnvironment; 
+		name.clear();
+		name.setText(testSuite.getName());
+		
+		environmentBox.getItems().clear();
+		environmentBox.getItems().addAll(testProjectService.getEnvironmentList());
+		environmentBox.getSelectionModel().select(testSuite.getEnvironment());
 	}
 	
     public void saveTestSuite(ActionEvent e) {
     	
+    	TestSuite testSuite = new TestSuite();
+    	testSuite.setName(name.getText());
+    	testSuite.setEnvironment(environmentBox.getValue());
     	
-    	TestSuite testSuite = testProjectService.getTestSuite(uid);
-    	testSuite.setName(tsName.getText());
-    	testSuite.setEnvironment(environment);
-    	testProjectService.setTestSuiteByUID(testSuite, uid);
+    	TestProjectService testProjectService = new TestProjectService();
+    	testProjectService.setTestSuiteById(testSuite, testSuiteId);
 	}
 }

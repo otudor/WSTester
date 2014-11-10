@@ -2,9 +2,12 @@ package com.wstester.testFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ITestRunner;
+import com.wstester.util.TestProjectService;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,7 +34,6 @@ public class TestSuiteManagerController implements Initializable{
     private MongoStepController mongoStepController;
     private SoapStepController soapStepController;
     private RestStepController restStepController;
-    private EmptyTabController emptyTabController;
     
     private ResourceBundle resources;
     
@@ -68,10 +70,6 @@ public class TestSuiteManagerController implements Initializable{
     	this.mysqlController = mySQLStepController;
     }
     
-    public void setEmptyTabController(EmptyTabController emptyTabController) {
-    	this.emptyTabController = emptyTabController;
-	}
-    
     public Parent getView() {
         return root;
     }
@@ -82,16 +80,11 @@ public class TestSuiteManagerController implements Initializable{
         contentArea.setLeft( tsListController.getView());
     }
 
-    public void showTestSuite( String tsUID) {
-    	testSuiteController.setTestSuite( tsUID);
-        contentArea.setCenter( testSuiteController.getView());
+    public void showTestSuite(String tsUID) {
+    	testSuiteController.setTestSuite(tsUID);
+        contentArea.setCenter(testSuiteController.getView());
     }
         
-    public void showEmptyTabController() {
-    	emptyTabController.setEmptyTabController();
-        contentArea.setCenter( emptyTabController.getView());
-    }
-    
     public void showTestCase( String tcUID) {
     	testCaseController.setTestCase( tcUID);
         contentArea.setCenter( testCaseController.getView());

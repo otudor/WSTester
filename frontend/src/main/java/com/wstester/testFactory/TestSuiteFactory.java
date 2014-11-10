@@ -4,6 +4,9 @@ import java.io.IOException;
 
 
 
+
+import com.wstester.util.TestProjectService;
+
 import javafx.fxml.FXMLLoader;
 
 public class TestSuiteFactory
@@ -18,7 +21,6 @@ public class TestSuiteFactory
     private RestStepController restStepController;
     private TestProjectService tsService;
     private ResponseController responseController;
-    private EmptyTabController emptyTabController;
     
     public void scrie(String scrie)
 	 {
@@ -52,26 +54,6 @@ public class TestSuiteFactory
             }
         }
         return tsManagerController;
-    }
-    
-    public EmptyTabController getEmptyTabController()
-    {
-        if (emptyTabController == null)
-        {
-            try
-            {
-                FXMLLoader loader = new FXMLLoader();
-                loader.load(getClass().getResourceAsStream("/fxml/TestFactory/TestSuiteBlank.fxml"));
-                emptyTabController = (EmptyTabController) loader.getController();
-                emptyTabController.setTestSuiteService( getTestSuiteService());
-                emptyTabController.setTestSuiteManagerController( getManagerController());
-            }
-            catch (IOException e)
-            {
-                throw new RuntimeException("Unable to load TestSuiteList.fxml", e);
-            }
-        }
-        return emptyTabController;
     }
 
     public TestSuiteListController getTestSuiteListController()
@@ -123,8 +105,6 @@ public class TestSuiteFactory
                 FXMLLoader loader = new FXMLLoader();
                 loader.load(getClass().getResourceAsStream("/fxml/TestFactory/TestCase.fxml"));
                 tCaseController = ( TestCaseController) loader.getController();
-                tCaseController.setTestSuiteService( getTestSuiteService());
-                tCaseController.setTestSuiteManagerController( getManagerController());
             }
             catch (IOException e)
             {

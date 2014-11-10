@@ -1,6 +1,7 @@
-package com.wstester.testFactory;
+package com.wstester.util;
 
 import java.util.List;
+
 import com.wstester.model.Environment;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
@@ -8,8 +9,6 @@ import com.wstester.model.Step;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
-import com.wstester.util.MainConstants;
-import com.wstester.util.UtilityTool;
 
 public class TestProjectService {
 
@@ -46,6 +45,12 @@ public class TestProjectService {
 		UtilityTool.addEntity(MainConstants.TESTPROJECT, testProject);
 	}
 	
+	public TestCase getTestCase(String id) {
+		
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		return testProject.getTestCase(id);
+	}
+	
 	public void addTestCaseForTestSuite(TestCase testCase, String testSuiteId) {
 		
 		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
@@ -58,6 +63,13 @@ public class TestProjectService {
 		
 		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
 		testProject.removeTestCase(testCaseId);
+		UtilityTool.addEntity(MainConstants.TESTPROJECT, testProject);
+	}
+	
+	public void setTestCaseById(TestCase testCase, String testCaseId) {
+	
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		testProject.setTestCaseById(testCase, testCaseId);
 		UtilityTool.addEntity(MainConstants.TESTPROJECT, testProject);
 	}
 	
@@ -106,10 +118,10 @@ public class TestProjectService {
 		return testProject.getTestSuiteByStepUID(stepId);
 	}
 
-	public void setTestSuiteByUID(TestSuite testSuite, String uid) {
+	public void setTestSuiteById(TestSuite testSuite, String id) {
 		
 		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
-		testProject.setTestSuiteByUID(testSuite, uid);		
+		testProject.setTestSuiteById(testSuite, id);		
 		UtilityTool.addEntity(MainConstants.TESTPROJECT, testProject);
 	}
 

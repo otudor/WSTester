@@ -12,6 +12,7 @@ import com.wstester.model.Service;
 import com.wstester.model.SoapStep;
 import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
+import com.wstester.util.TestProjectService;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;

@@ -113,13 +113,39 @@ public class TestProject implements Serializable {
 		}
 	}
 	
-	public void removeTestCase(String tcUID) {
+	public TestCase getTestCase(String id) {
+		
 		for (TestSuite testSuite : testSuiteList) {
-			
+			for (TestCase testCase : testSuite.getTestCaseList()) {
+				
+				if (testCase.getID().equals(id)) {
+					return testCase;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public void setTestCaseById(TestCase sourceTestCase, String id){
+		
+		for (TestSuite testSuite : testSuiteList) {
+			for (TestCase testCase : testSuite.getTestCaseList()) {
+				
+				if (testCase.getID().equals(id)) {
+					testCase.setName(sourceTestCase.getName());
+				}
+			}
+		}
+	}
+	
+	public void removeTestCase(String tcUID) {
+		
+		for (TestSuite testSuite : testSuiteList) {
 			if (testSuite != null) {
+				
 				for (TestCase testCase : testSuite.getTestCaseList()) {
-					
 					if (testCase.getID().equals(tcUID)) {
+						
 						testSuite.getTestCaseList().remove(testCase);
 						break;
 					}
@@ -143,7 +169,6 @@ public class TestProject implements Serializable {
 								}
 						}
 					}
-				
 			}
 		}
 		
@@ -219,12 +244,13 @@ public class TestProject implements Serializable {
 		}
 	}
 	
-	public void setTestSuiteByUID(TestSuite ts, String testUID) {
+	public void setTestSuiteById(TestSuite sourceTestSuite, String testSuiteId) {
+		
 		for (TestSuite testSuite : testSuiteList) {
-			
-			if (testSuite.getID().equals(testUID)) {
-				testSuite.setName(ts.getName());
-				testSuite.setEnvironment(ts.getEnvironment());
+			if (testSuite.getID().equals(testSuiteId)) {
+				
+				testSuite.setName(sourceTestSuite.getName());
+				testSuite.setEnvironment(sourceTestSuite.getEnvironment());
 			}
 		}
 	}

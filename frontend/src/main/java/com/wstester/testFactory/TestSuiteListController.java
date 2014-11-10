@@ -24,6 +24,7 @@ import javafx.util.Callback;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import com.wstester.model.MongoStep;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.RestStep;
@@ -33,6 +34,7 @@ import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestSuite;
+import com.wstester.util.TestProjectService;
 
 public class TestSuiteListController implements Initializable {
     @FXML private Node root;
@@ -375,7 +377,7 @@ public class TestSuiteListController implements Initializable {
     	                    	selectTestCase(  ((TestCase) getItem()).getID());
     	                    }
     	                    else if ( getItem() instanceof MySQLStep) {
-    	                    	selectMySQLStep(  ((Step) getItem()).getID());
+    	                    	selectMySQLStep(((Step) getItem()).getID());
     	                    }
     	                    else if (getItem() instanceof RestStep) {
     	                    	selectRestStep(((Step) getItem()).getID());

@@ -2,6 +2,7 @@ package com.wstester.testFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -9,10 +10,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+
 import com.wstester.model.Environment;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.Step;
+import com.wstester.util.TestProjectService;
 
 /**
  * Template class which supports fx inclusion in different views

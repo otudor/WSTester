@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="rootTCDetails" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.TestCaseController">
+<AnchorPane fx:id="rootTestCase" prefHeight="174.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.TestCaseController">
    <children>
       <TabPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
@@ -16,7 +16,7 @@
                                   
                             <children>
                                 <Label text="Test Case name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                <TextField fx:id="txtTCName" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                                 <!--  <Label text="IP" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
                                 <TextField fx:id="ftpIPField" GridPane.rowIndex = "1" GridPane.columnIndex="1"/> -->
                             </children>
@@ -28,6 +28,7 @@
                               <RowConstraints />
                            </rowConstraints>
                         </GridPane>
+                        <Button layoutX="600.0" layoutY="106.0" mnemonicParsing="false" onAction="#saveTestCase" text="Save" />
                      </children>
                   </AnchorPane>
                </content>

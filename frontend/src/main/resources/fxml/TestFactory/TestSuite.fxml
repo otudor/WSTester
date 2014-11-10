@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="rootEnvDetails" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.TestSuiteController">
+<AnchorPane fx:id="rootTestSuite" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.TestSuiteController">
    <children>
       <TabPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
@@ -17,7 +17,7 @@
                         
                                   <children>
                                 <Label text="Test suite name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                <TextField fx:id="tsName" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                         
                                       <Label text="Environment:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                               <Button mnemonicParsing="false" onAction="#saveTestSuite" prefWidth="75.0" text="Save" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
@@ -25,7 +25,7 @@
                                     <Insets />
                                  </GridPane.margin>
                               </Button>
-                              <ComboBox fx:id="envBox" onAction="#handleEnvironmentChangeAction" prefWidth="200.0" promptText="Select Environment" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="environmentBox" prefWidth="200.0" promptText="Select Environment" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                                 
                               		<!--  Label text="" GridPane.rowIndex="2" GridPane.columnIndex="0">
                         			<padding>

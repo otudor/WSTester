@@ -15,6 +15,7 @@ import com.wstester.model.Step;
 import com.wstester.model.Execution;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ITestRunner;
+import com.wstester.util.TestProjectService;
 
 public class ExecutionUpdate {
 

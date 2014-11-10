@@ -2,7 +2,6 @@ package com.wstester.util;
 
 public enum MainConstants {
 	
-	ResponseTabController("/fxml/TestFactory/Response.fxml"),
 	TESTPROJECT;
 	
 	private String value;
