@@ -21,7 +21,7 @@
                     </rowConstraints>
                      <children>
                         <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#createTestSuite" text="New Test Suite" GridPane.halignment="CENTER" />
-                        <Button fx:id="runButton" alignment="CENTER" mnemonicParsing="false" text="Run" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                        <Button fx:id="runButton" alignment="CENTER" mnemonicParsing="false" onAction="#runTests" text="Run" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                      </children>
                   </GridPane>
                     <TreeView fx:id="treeView" prefHeight="692.0" prefWidth="224.0" />

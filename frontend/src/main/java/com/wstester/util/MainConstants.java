@@ -15,7 +15,8 @@ public enum MainConstants {
 	MYSQL_STEP("/fxml/TestFactory/MySQLStep.fxml"),
 	MYSQL_STEP_ICON("/images/treeIcon_TestStep.png"),
 	SOAP_STEP("/fxml/TestFactory/SoapStep.fxml"),
-	SOAP_STEP_ICON("/images/treeIcon_TestStep.png");
+	SOAP_STEP_ICON("/images/treeIcon_TestStep.png"),
+	STEP_PASSED_ICON("/images/treeIcon_step_passed.png");
 	
 	private String value;
 	

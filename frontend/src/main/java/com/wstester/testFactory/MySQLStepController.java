@@ -12,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 public class MySQLStepController{
 	
 	private TestProjectService tsService;
-    private TestSuiteManagerController tsMainController;
 	
 	@FXML
 	private AnchorPane rootMySQLStep;
@@ -51,10 +50,5 @@ public class MySQLStepController{
 	public void setTestSuiteService( TestProjectService tsService)
     {
         this.tsService = tsService;
-    }
-
-    public void setTestSuiteManagerController(TestSuiteManagerController tsMainController)
-    {
-        this.tsMainController = tsMainController;
     }
 }

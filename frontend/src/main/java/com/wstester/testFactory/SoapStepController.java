@@ -44,7 +44,6 @@ public class SoapStepController
     @FXML private ComboBox<Service> serviceBox;
     
     private SoapStep step;    
-    private TestSuiteManagerController tsMainController;
     private String uid = null;
     
 	@FXML

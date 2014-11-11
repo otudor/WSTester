@@ -1,91 +1,83 @@
 package com.wstester.testFactory;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
-
+import com.wstester.elements.Dialog;
+import com.wstester.main.MainLauncher;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 import com.wstester.model.Execution;
+import com.wstester.model.TestCase;
+import com.wstester.model.TestSuite;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ITestRunner;
+import com.wstester.util.MainConstants;
 import com.wstester.util.TestProjectService;
 
-public class ExecutionUpdate {
+import javafx.fxml.FXMLLoader;
 
-	TestMachineController testSuiteListController;
-	
-	public ExecutionUpdate(TestMachineController tsListController) {
-		
-		this.testSuiteListController = tsListController;
-	}
+public class ExecutionUpdate {
 
 	public void updateRunStatus() {
 		
 		ExecutorService executor = Executors.newFixedThreadPool(1);
-		executor.execute(new UpdateStatusThread(testSuiteListController.getTreeView()));
+		executor.execute(new UpdateStatusThread());
 		executor.shutdown();
     }
 }
 
 class UpdateStatusThread implements Runnable{
 
-	TreeView<Object> innerTreeView;
-	
-	public UpdateStatusThread(TreeView<Object> treeView) {
-		this.innerTreeView = treeView;
-	}
-
 	@Override
 	public void run() {
 		
-    	List<TreeItem<Object>> lstSuites = innerTreeView.getRoot().getChildren();
-    	for (TreeItem<Object> testSuite : lstSuites)
-    	{
-    		List<TreeItem<Object>> lstTestCases = testSuite.getChildren();
+		TestProjectService testProjectService = new TestProjectService();
+		List<TestSuite> testSuiteList = testProjectService.getTestSuites();
+		
+    	for (TestSuite testSuite : testSuiteList) {
     		
-    		if ( lstTestCases!= null && !lstTestCases.isEmpty())
-    		{
-    			for( TreeItem<Object> caseItem : lstTestCases)
-    			{
-    				List<TreeItem<Object>> tcItems = caseItem.getChildren();
-    				if ( tcItems!= null && !tcItems.isEmpty())
-    	    		{
-    					for( TreeItem<Object> stepItem : tcItems) {
-    						Step step = (Step)stepItem.getValue();
+    		if (testSuite.getTestCaseList() != null) {
+    			for (TestCase testCase : testSuite.getTestCaseList()) {
+    			
+    				if (testCase.getStepList() != null) {
+    					for (Step step : testCase.getStepList()) {
 
 							ITestRunner testRunner = null;
 							try {
 								testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class);
 							} catch (Exception e) {
-								// TODO Make a pop up window to inform the user
-								// that we can't get the step responses
 								e.printStackTrace();
+								Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
 							}
 							
-							Response rsp = testRunner.getResponse(step.getID(),	25000L);
-							TestProjectService testProjectService = new TestProjectService();
+							Response response = testRunner.getResponse(step.getID(),25000L);
 
 							Execution execution = new Execution();
 							Date date = new Date();
 							execution.setRunDate(date);
-							execution.setResponse(rsp);
+							execution.setResponse(response);
 							step.addExecution(execution);
 
 							testProjectService.setStepByUID(step, step.getID());
+							
+							// update the tree view from the TestMachineController
+							FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.TEST_MACHINE.toString()));
+							try {
+								loader.load();
+							} catch (IOException e) {
+								Dialog.errorDialog("Couldn't update the tree view. Please do a manual click!", MainLauncher.stage);
+								e.printStackTrace();
+							}
+							TestMachineController testMachineController = loader.<TestMachineController>getController();
+							testMachineController.updateTree();
 						}
     	    		}
     			}
     		}
     	}
-    	
-    	//re enable the button
-    	//TestSuiteManagerController.btnRun.setDisable(false);
-    	//Event.fireEvent( TestSuiteManagerController.btnRun, new MyEvent());
-    	//TestSuiteManagerController.btnRun.fireEvent( new );
 	}
 }

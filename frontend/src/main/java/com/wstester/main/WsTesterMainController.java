@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -42,7 +40,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import javafx.util.Duration;
 
 import com.wstester.RightClickMenu.DemoUtil;
 import com.wstester.RightClickMenu.RadialGlobalMenu;
@@ -51,9 +48,6 @@ import com.wstester.environment.EnvironmentsAppFactory;
 import com.wstester.environment.MainPresenter;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ICamelContextManager;
-import com.wstester.testFactory.TestMachineController;
-import com.wstester.testFactory.TestSuiteFactory;
-import com.wstester.testFactory.TestSuiteManagerController;
 import com.wstester.util.MainConstants;
 
 public class WsTesterMainController implements Initializable, ControlledScreen {
@@ -848,10 +842,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					try {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.TEST_MACHINE.toString()));
 						Scene second = new Scene(loader.load(), 1280, 720);
-						TestMachineController testMachineController = loader.<TestMachineController>getController();
-						
-						Node rootNode = testMachineController.getView();
-						rootNode.getStyleClass().addAll("/styles/testFactory.css");
+						((Node)loader.getRoot()).getStyleClass().addAll("/styles/testFactory.css");
 						stage.setTitle("Test Suites window");
 
 
