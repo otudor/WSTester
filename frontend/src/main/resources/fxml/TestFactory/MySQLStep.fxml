@@ -8,10 +8,15 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="rootMySQLStep" prefHeight="400.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.MySQLStepController">
+<AnchorPane fx:id="rootMySQLStep" prefHeight="400.0"
+	prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.wstester.testFactory.MySQLStepController">
 	<children>
 
-		<TabPane fx:id="tabpane" prefHeight="400.0" prefWidth="720.0" translateX="5" translateY="5" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+		<TabPane fx:id="tabpane" prefHeight="400.0" prefWidth="720.0"
+			translateX="5" translateY="5" AnchorPane.bottomAnchor="20.0"
+			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0"
+			AnchorPane.topAnchor="0.0">
 			<tabs>
 				<Tab text="Step Definition">
 					<content>
@@ -19,13 +24,19 @@
 							<children>
 								<fx:include fx:id="step" source="rootStep.fxml" />
 
-								<Label text="Operation" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="110.0" />
-								<TextField fx:id="mysqlOperation" AnchorPane.leftAnchor="117.0" AnchorPane.topAnchor="110.0" />
+								<Label text="Operation" AnchorPane.leftAnchor="7.0"
+									AnchorPane.topAnchor="110.0" />
+								<TextField fx:id="mysqlOperation"
+									AnchorPane.leftAnchor="117.0" AnchorPane.topAnchor="110.0" />
 							</children>
 						</AnchorPane>
 					</content>
 				</Tab>
-				<Tab fx:id="aboutTab" closable="false" content="$aboutContent" text="ABOUT" />
+				<Tab fx:id="Response" text="Response">
+					<content>
+						<fx:include fx:id="response" source="Response.fxml" />
+					</content>
+				</Tab>
 			</tabs>
 		</TabPane>
 	</children>
