@@ -135,7 +135,7 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 				public void handle(MouseEvent event) {
 					
 			    	TestProject t = new TestProject();
-			    	UtilityTool.addEntity(MainConstants.TESTPROJECT, t);
+			    	UtilityTool.addEntity(MainConstants.TEST_PROJECT, t);
 			    	
 			    	ICamelContextManager manager = null;
 					try {
@@ -170,7 +170,7 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 			    			
 			    			actions = ServiceLocator.getInstance().lookup(ITestProjectActions.class);
 			    			testproject = actions.open(file.getCanonicalPath());
-			    			UtilityTool.addEntity(MainConstants.TESTPROJECT, testproject);
+			    			UtilityTool.addEntity(MainConstants.TEST_PROJECT, testproject);
 			    			
 				    		ICamelContextManager manager = null;
 							try {

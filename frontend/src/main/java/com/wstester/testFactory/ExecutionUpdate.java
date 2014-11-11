@@ -5,11 +5,9 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import javafx.event.Event;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
-import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 import com.wstester.model.Execution;
@@ -19,9 +17,9 @@ import com.wstester.util.TestProjectService;
 
 public class ExecutionUpdate {
 
-	TestSuiteListController testSuiteListController;
+	TestMachineController testSuiteListController;
 	
-	public ExecutionUpdate(TestSuiteListController tsListController) {
+	public ExecutionUpdate(TestMachineController tsListController) {
 		
 		this.testSuiteListController = tsListController;
 	}

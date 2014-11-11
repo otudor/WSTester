@@ -24,92 +24,18 @@ public class TestSuiteManagerController implements Initializable{
     @FXML
     public Button btnRun;
     
-    private TestSuiteListController tsListController;
-    private TestSuiteController testSuiteController;
-    private TestCaseController testCaseController;
-    
+    private TestMachineController tsListController;
 
-    private MySQLStepController mysqlController;
-    
-    private MongoStepController mongoStepController;
-    private SoapStepController soapStepController;
-    private RestStepController restStepController;
-    
-    private ResourceBundle resources;
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		this.resources = resources;
+
 	}
 	
-    public void setTestSuiteListController( TestSuiteListController tsListController) {
+    public void setTestSuiteListController( TestMachineController tsListController) {
         this.tsListController = tsListController;
     }
-    
-    public void setTestSuiteDetailController( TestSuiteController tsDetailController) {
-        this.testSuiteController = tsDetailController;
-    }
 
-    public void setTestCaseDetailController( TestCaseController tcDetailController) {
-        this.testCaseController = tcDetailController;
-    }
-    
-    public void setMongoStepController( MongoStepController mongoStepController) {
-        this.mongoStepController = mongoStepController;
-    }
-    
-    public void setSoapStepController( SoapStepController soapStepController) {
-        this.soapStepController = soapStepController;
-    }
-    
-    public void setRestStepController( RestStepController restStepController) {
-        this.restStepController = restStepController;
-    }
-    
-    public void setMySQLStepController (MySQLStepController mySQLStepController) {
-    	this.mysqlController = mySQLStepController;
-    }
-    
-    public Parent getView() {
-        return root;
-    }
-
-    public void loadTestSuites() {
-    	tsListController.loadSuites();
-    	tsListController.loadTreeItems();
-        contentArea.setLeft( tsListController.getView());
-    }
-
-    public void showTestSuite(String tsUID) {
-    	testSuiteController.setTestSuite(tsUID);
-        contentArea.setCenter(testSuiteController.getView());
-    }
-        
-    public void showTestCase( String tcUID) {
-    	testCaseController.setTestCase( tcUID);
-        contentArea.setCenter( testCaseController.getView());
-    }
-    
-    public void showMySQLStep(String stepId) {
-    	mysqlController.setStep(stepId);
-    	contentArea.setCenter(mysqlController.getNode());
-    }
-    
-    public void showMongoStep( String sUID) {
-    	mongoStepController.setMongoStep(sUID);
-        contentArea.setCenter( mongoStepController.getView());
-    }
-    
-    public void showSoapStep( String sUID) {
-    	soapStepController.setSoapStep(sUID);
-        contentArea.setCenter( soapStepController.getView());
-    }
-    
-    public void showRestStep(String sUID) {
-
-    	restStepController.setStep(sUID);
-        contentArea.setCenter(restStepController.getView());
-    }
         
     public void runTestSuite( ActionEvent event) throws Exception {
     	TestProjectService testProjectService = new TestProjectService();

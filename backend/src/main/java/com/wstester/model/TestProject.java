@@ -20,7 +20,7 @@ public class TestProject implements Serializable {
 
 	public TestProject() {
 		uuid = UUID.randomUUID().toString();
-		testSuiteList = new ArrayList<TestSuite>();
+//		testSuiteList = new ArrayList<TestSuite>();
 		environmentList = new ArrayList<Environment>();
 	}
 

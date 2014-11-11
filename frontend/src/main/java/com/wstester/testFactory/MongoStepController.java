@@ -52,7 +52,6 @@ public class MongoStepController {
     private ComboBox<Service> serviceBox;
     
     private MongoStep step;    
-    private TestProjectService tsService;
     final ObservableList<Execut> lista = FXCollections.observableArrayList();
     private String uid = null;
     
@@ -60,24 +59,17 @@ public class MongoStepController {
 	private void initialize() {
 		
 	}
-	
-	public void setTestSuiteService( TestProjectService tsService) {
-        this.tsService = tsService;
-    }
 
-    public Node getView() {
-        return rootMongoStep;
-    }
-
-    public void setMongoStep(final String stepUID) {        
-        step = (MongoStep) tsService.getStep(stepUID);
+    public void setStep(final String stepId) {     
+    	TestProjectService tsService = new TestProjectService();
+        step = (MongoStep) tsService.getStep(stepId);
         lblName.setText(step.getName());
     	mongoQuery.setText("");
         mongoAction.setText("");
         mongoCollection.setText("");
         lblStatus.setText("Not run");
         lblResponse.setText("Not run");
-        Environment environment = tsService.getTestSuiteByStepUID(stepUID).getEnvironment();
+        Environment environment = tsService.getTestSuiteByStepUID(stepId).getEnvironment();
         if(environment != null) {        	
         	serverBox.getItems().clear();
         	serverBox.getItems().addAll(environment.getServers());
@@ -113,7 +105,7 @@ public class MongoStepController {
         //mongoQuery.setText(step.getQuery().toString());
         mongoCollection.setText(step.getCollection());
         Execution execution = step.getLastExecution();
-        uid = stepUID;
+        uid = stepId;
         if( execution != null)
         {
         	if (execution.getResponse().getStatus() == ExecutionStatus.PASSED)
@@ -186,6 +178,8 @@ public class MongoStepController {
 		mongo.setServer(step.getServer());
 		mongo.setService(step.getService());
 		mongo.setVariableList(step.getVariableList());
+		
+		TestProjectService tsService = new TestProjectService();
 		tsService.setStepByUID(mongo, mongo.getID());
 	} 
 }

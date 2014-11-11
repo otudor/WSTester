@@ -44,7 +44,6 @@ public class SoapStepController
     @FXML private ComboBox<Service> serviceBox;
     
     private SoapStep step;    
-    private TestProjectService tsService;
     private TestSuiteManagerController tsMainController;
     private String uid = null;
     
@@ -53,29 +52,16 @@ public class SoapStepController
 	{
 		
 	}
-	
-    public void setTestSuiteService( TestProjectService tsService)
-    {
-        this.tsService = tsService;
-    }
 
-    public void setTestSuiteManagerController(TestSuiteManagerController tsMainController)
-    {
-        this.tsMainController = tsMainController;
-    }
 
-    public Node getView()
-    {
-        return rootSoapStep;
-    }
-
-    public void setSoapStep(final String stepUID)
+    public void setStep(final String stepUID)
     {
     	lblName.setText("");
         soapRequest.setText("request");
         lblStatus.setText("Not run");
         lblResponse.setText("Not run");
         
+        TestProjectService tsService = new TestProjectService();
         step = (SoapStep) tsService.getStep( stepUID);
         Environment environment = tsService.getTestSuiteByStepUID(stepUID).getEnvironment();
         if(environment != null) {        	
@@ -185,6 +171,7 @@ public class SoapStepController
 		soap.setService(step.getService());
 		soap.setVariableList(step.getVariableList());
 		
+		TestProjectService tsService = new TestProjectService();
 		tsService.setStepByUID(soap, soap.getID());
 	} 
     

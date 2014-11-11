@@ -7,14 +7,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="rootRestStep" prefHeight="720.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.RestStepController">
+<AnchorPane fx:id="rootRestStep" prefHeight="720.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.RestStepController">
    <children>
       
-      <TabPane prefHeight="720.0" prefWidth="1061.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TabPane prefHeight="720.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
             <Tab closable="false" text="Rest Definition">
                <content>
-                  <AnchorPane prefHeight="691.0" prefWidth="994.0">
+                  <AnchorPane prefHeight="720.0" prefWidth="1000.0">
                      <children>
                     	<fx:include fx:id="step" source="rootStep.fxml" />
                         <GridPane fx:id="gridRestStep" hgap="7.0" prefHeight="64.0" prefWidth="683.0" vgap="7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="368.0" AnchorPane.topAnchor="110.0">

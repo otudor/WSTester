@@ -28,7 +28,8 @@ public class MySQLStepController{
 		this.stepId = stepId;
 	}
 	
-	public Node getNode() {
+	@Deprecated
+	public Node getView() {
 		
 		testProjectService = new TestProjectService();
         

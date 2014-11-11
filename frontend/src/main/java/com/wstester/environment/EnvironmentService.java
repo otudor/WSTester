@@ -23,7 +23,7 @@ public class EnvironmentService {
 
 	public EnvironmentService() {
 		this.environments = new HashMap<String, Environment>();
-		testProject = (TestProject) UtilityTool.getEntity(MainConstants.TESTPROJECT);
+		testProject = (TestProject) UtilityTool.getEntity(MainConstants.TEST_PROJECT);
 		System.out.println(testProject);
 		if(testProject.getEnvironmentList()!=null)
 		{
@@ -413,6 +413,6 @@ public class EnvironmentService {
 		{
 			list.add(entry);
 		}
-		((TestProject)UtilityTool.getEntity(MainConstants.TESTPROJECT)).setEnvironmentList(list);
+		((TestProject)UtilityTool.getEntity(MainConstants.TEST_PROJECT)).setEnvironmentList(list);
 	}
 }

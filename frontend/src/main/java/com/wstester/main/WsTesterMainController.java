@@ -51,8 +51,10 @@ import com.wstester.environment.EnvironmentsAppFactory;
 import com.wstester.environment.MainPresenter;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ICamelContextManager;
+import com.wstester.testFactory.TestMachineController;
 import com.wstester.testFactory.TestSuiteFactory;
 import com.wstester.testFactory.TestSuiteManagerController;
+import com.wstester.util.MainConstants;
 
 public class WsTesterMainController implements Initializable, ControlledScreen {
 
@@ -72,7 +74,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	private VBox newIco2= new VBox();
 	private VBox newIco3= new VBox(); //SOAP
 	private VBox newIco4= new VBox();  //REST
-	private VBox newIco5= new VBox(); 
+	private VBox testFactoryIcon= new VBox(); 
 	private VBox newIco6 = new VBox();  //v
 	private VBox newIcoM1= new VBox();
 	private VBox newIcoM2= new VBox(); //SOAP
@@ -94,7 +96,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	boolean isDisplayed2 =false;
 	boolean isDisplayed3 =false;
 	boolean isDisplayed4 =false;
-	boolean isDisplayed5 =false;
+	boolean isTestFactoryDisplayed =false;
 	boolean isDisplayed6 =false; //v
 	private int poz = 200;
 	public Group container;
@@ -197,10 +199,10 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					isDisplayed4=false;
 					poz=poz-100;
 				}
-				if (isDisplayed5==true) {
+				if (isTestFactoryDisplayed==true) {
 					stageRnd.close();
 					bar.getChildren().remove(newIcoM4);
-					isDisplayed5=false;
+					isTestFactoryDisplayed=false;
 					poz=poz-100;
 				}
 				if (isDisplayed6==true) {
@@ -251,9 +253,9 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		newIco4 = (VBox) CreateIcon("/images/Downloads-Folder.png","Import REST Definitions");
 		newIco4.setLayoutX(10);
 		newIco4.setLayoutY(320);
-		newIco5 = (VBox) CreateIcon("/images/Smart-Folder.png","Test Factory");
-		newIco5.setLayoutX(10);
-		newIco5.setLayoutY(420);
+		testFactoryIcon = (VBox) CreateIcon("/images/Smart-Folder.png","Test Factory");
+		testFactoryIcon.setLayoutX(10);
+		testFactoryIcon.setLayoutY(420);
 		newIco6 = (VBox) CreateIcon("/images/Documents-Folder.png","Variables"); //v
 		newIco6.setLayoutX(10); //v
 		newIco6.setLayoutY(520); //v
@@ -275,39 +277,9 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		System.out.println(stage.getHeight());
 		//VBox.setVgrow(newIco6, Priority.ALWAYS);
 
-		topPane.getChildren().addAll(newIco,newIco2,newIco3,newIco4,newIco5, newIco6);
+		topPane.getChildren().addAll(newIco,newIco2,newIco3,newIco4,testFactoryIcon, newIco6);
 		bar.getChildren().addAll(newIcoM1);
 	}
-
-
-
-
-
-
-
-
-
-
-	//meniu vechi
-	/*private void createTaskbar(){
-		Label menuLabel = new Label("Startaa");
-		menuLabel.setStyle(" -fx-padding: 0px;");
-		menuLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
-	        @Override
-	        public void handle(MouseEvent event) {
-	            System.out.println("File menu clicked");
-	        }
-	    });
-		Menu startMenu= new Menu();
-		menuBar = new MenuBar();
-		startMenu.setGraphic(menuLabel);
-		menuBar.getMenus().add(startMenu);
-		AnchorPane.setTopAnchor(menuBar, 15.0);
-		bar.getStylesheets().add(WsTesterMainController.class.getResource("/styles/application.css").toExternalForm());
-		bar.getChildren().add(menuBar);
-
-	}*/
-
 
 	public void moveIcons(VBox icon){
 		icon.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -865,61 +837,39 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 
 	private void createTestFactoryWindow(){
-		newIco5.setOnMouseClicked(new EventHandler<MouseEvent>() {			
-
-
+		testFactoryIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {		
+			
 			@Override
 			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
 
-				if(event.getClickCount() == 2 && isDisplayed5 == false) {
+				if (event.getClickCount() == 2 && isTestFactoryDisplayed == false) {
 					stageRnd = new Stage();
-					isDisplayed5 = true;
+					isTestFactoryDisplayed = true;
 					try {
-						/*Parent root = FXMLLoader.load(getClass().getResource("/fxml/TestFactory/TestFactoryManager.fxml"));
-						 Undecorator undecorator = new Undecorator(stageRnd, (Region) root);
-						 undecorator.getStylesheets().add("skin/undecorator.css");
-						 undecorator.setFadeInTransition();
-						 Scene secound = new Scene(undecorator);
-						 secound.setFill(Color.TRANSPARENT);
-						 stageRnd.initStyle(StageStyle.TRANSPARENT);
-						 stageRnd.setMinWidth(500);
-						 stageRnd.setMinHeight(400);
-
-						 stageRnd.setHeight(600);
-						 stageRnd.setWidth(700);*/
-						root = FXMLLoader.load(getClass().getResource("/fxml/TestFactory/TestSuiteManager.fxml"));
-						TestSuiteFactory factory = new TestSuiteFactory();
-						TestSuiteManagerController mainPresenter = factory.getManagerController();
-						mainPresenter.loadTestSuites();
-//						mainPresenter.showEmptyTabController();
-						root = mainPresenter.getView();
-						Scene second = new Scene(root,1280, 720);
-						root.getStylesheets().addAll("/styles/testFactory.css");
+						FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.TEST_MACHINE.toString()));
+						Scene second = new Scene(loader.load(), 1280, 720);
+						TestMachineController testMachineController = loader.<TestMachineController>getController();
+						
+						Node rootNode = testMachineController.getView();
+						rootNode.getStyleClass().addAll("/styles/testFactory.css");
 						stage.setTitle("Test Suites window");
 
 
-						//root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
-						//Scene second = new Scene(root);
-						//second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
-						//root.getStyleClass().add("mainWind");
-
-						newIcoM4 = (VBox) CreateIcon("/images/Smart-Folder.png","Test Factory");	
+						newIcoM4 = (VBox) CreateIcon("/images/Smart-Folder.png", "Test Factory");
 						newIcoM4.setLayoutX(poz);
 						newIcoM4.setLayoutY(1);
 						lista.add(newIcoM4);
 						bar.getChildren().add(newIcoM4);
-						poz=poz+100;
-//						expandIcons(newIcoM4);
-
+						poz = poz + 100;
+						// expandIcons(newIcoM4);
 
 						newIcoM4.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 							@Override
 							public void handle(MouseEvent event2) {
 
-								// TODO Auto-generated method stub	
-								if(event2.getClickCount() == 1 ) {
+								// TODO Auto-generated method stub
+								if (event2.getClickCount() == 1) {
 
 									stageRnd.toFront();
 									stageRnd.centerOnScreen();
@@ -927,34 +877,31 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 									stageRnd.show();
 								}
 
-
-
-
 							}
 						});
 
-						//menuBar.getMenus().add(menuRnd);
+						// menuBar.getMenus().add(menuRnd);
 						stageRnd.initOwner(pane.getScene().getWindow());
-						//stage.initModality(Modality.WINDOW_MODAL);
+						// stage.initModality(Modality.WINDOW_MODAL);
 						stageRnd.setScene(second);
-						//stageRnd.initOwner(WsTesterMain.stage);
+						// stageRnd.initOwner(WsTesterMain.stage);
 						stageRnd.show();
 
-						//modificare laur
+						// modificare laur
 
 						stageRnd.setOnCloseRequest(new EventHandler<WindowEvent>() {
 							public void handle(WindowEvent we) {
-								ind=lista.indexOf(newIcoM4);
+								ind = lista.indexOf(newIcoM4);
 								arrangeIcons(ind);
 								lista.remove(lista.indexOf(newIcoM4));
 
 								System.out.println("Inchid stage'ul");
 								bar.getChildren().remove(newIcoM4);
-								isDisplayed5 = false;
-								stageRnd=null;
-								poz=poz-100;
+								isTestFactoryDisplayed = false;
+								stageRnd = null;
+								poz = poz - 100;
 							}
-						});        
+						});
 						stageRnd.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
 
 							@Override
@@ -963,14 +910,13 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 							}
 						});
 
-						//pana aici
+						// pana aici
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
-				if (isDisplayed5 == true && event.getClickCount() == 2)
-				{
+				if (isTestFactoryDisplayed == true && event.getClickCount() == 2) {
 					stageRnd.toFront();
 					stageRnd.centerOnScreen();
 					stageRnd.setIconified(false);
@@ -979,7 +925,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 			}
 		});
 
-		moveIcons(newIco5);
+		moveIcons(testFactoryIcon);
 	}
 
 	// pana aici

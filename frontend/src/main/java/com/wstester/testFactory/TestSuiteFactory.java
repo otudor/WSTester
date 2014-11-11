@@ -12,7 +12,7 @@ import javafx.fxml.FXMLLoader;
 public class TestSuiteFactory
 {
     private TestSuiteManagerController tsManagerController;
-    private TestSuiteListController tsListController;
+    private TestMachineController tsListController;
     private TestSuiteController tSuiteController;
     private TestCaseController tCaseController;
     private MySQLStepController mySQLStepController;
@@ -39,14 +39,7 @@ public class TestSuiteFactory
                 FXMLLoader loader = new FXMLLoader();
                 loader.load(getClass().getResourceAsStream("/fxml/TestFactory/TestSuiteManager.fxml"));
                 tsManagerController = (TestSuiteManagerController) loader.getController();
-                tsManagerController.setTestSuiteDetailController( getTestSuiteController());
                 tsManagerController.setTestSuiteListController( getTestSuiteListController());
-                tsManagerController.setTestCaseDetailController( getTestCaseController());
-                tsManagerController.setMySQLStepController( getMySQLStepController());
-                tsManagerController.setMongoStepController(getMongoStepController());
-                tsManagerController.setSoapStepController(getSoapStepController());
-                tsManagerController.setRestStepController(getRestStepController());
-//                tsManagerController.setEmptyTabController(getEmptyTabController());
             }
             catch (IOException e)
             {
@@ -56,7 +49,7 @@ public class TestSuiteFactory
         return tsManagerController;
     }
 
-    public TestSuiteListController getTestSuiteListController()
+    public TestMachineController getTestSuiteListController()
     {
         if (tsListController == null)
         {
@@ -64,9 +57,9 @@ public class TestSuiteFactory
             {
                 FXMLLoader loader = new FXMLLoader();
                 loader.load(getClass().getResourceAsStream("/fxml/TestFactory/TestSuiteList.fxml"));
-                tsListController = (TestSuiteListController) loader.getController();
+                tsListController = (TestMachineController) loader.getController();
 //                tsListController.setTestSuiteService( getTestSuiteService());
-                tsListController.setTestSuiteManagerController( getManagerController());
+//                tsListController.setTestSuiteManagerController( getManagerController());
             }
             catch (IOException e)
             {
@@ -143,7 +136,7 @@ public class TestSuiteFactory
                 FXMLLoader loader = new FXMLLoader();
                 loader.load(getClass().getResourceAsStream("/fxml/TestFactory/MongoStep.fxml"));
                 mongoStepController = (MongoStepController) loader.getController();
-                mongoStepController.setTestSuiteService( getTestSuiteService());
+//                mongoStepController.setTestSuiteService( getTestSuiteService());
             }
             catch (IOException e)
             {
@@ -162,8 +155,8 @@ public class TestSuiteFactory
                 FXMLLoader loader = new FXMLLoader();
                 loader.load(getClass().getResourceAsStream("/fxml/TestFactory/SoapStep.fxml"));
                 soapStepController = (SoapStepController) loader.getController();
-                soapStepController.setTestSuiteService( getTestSuiteService());
-                soapStepController.setTestSuiteManagerController( getManagerController());
+//                soapStepController.setTestSuiteService( getTestSuiteService());
+//                soapStepController.setTestSuiteManagerController( getManagerController());
             }
             catch (IOException e)
             {

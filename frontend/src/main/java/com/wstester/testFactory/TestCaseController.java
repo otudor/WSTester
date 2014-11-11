@@ -15,12 +15,8 @@ public class TestCaseController {
     @FXML
     private TextField name;
     private String testCaseId;
-    
-    public Node getView() {
-        return rootTestCase;
-    }
 
-    public void setTestCase(String id) {
+    public void setTestCaseId(String id) {
     
     	this.testCaseId = id;
     	TestProjectService service = new TestProjectService();

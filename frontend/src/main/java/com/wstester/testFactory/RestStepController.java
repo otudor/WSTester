@@ -85,10 +85,6 @@ public class RestStepController {
 
     private String stepId;
     
-    public void setStep(String stepId){
-		this.stepId = stepId;
-	}
-    
 	@FXML
 	private void initialize() {
 		
@@ -107,6 +103,61 @@ public class RestStepController {
 		this.cookieKey.setCellValueFactory(new PropertyValueFactory<Pair, String>("key"));
 		this.cookieValue.setCellValueFactory(new PropertyValueFactory<Pair, String>("value"));
 		this.addCookieMethod();
+	}
+	
+	public void setStep(String stepId){
+		this.stepId = stepId;
+		
+    	clearFields();
+		TestProjectService testProjectService = new TestProjectService();
+		Step step = testProjectService.getStep(stepId);
+		
+        stepController.setStep(stepId);
+        stepController.setCommonFields();
+        responseController.setResponse(step);
+        
+    	if(step instanceof RestStep){
+
+			restMethod.getItems().addAll(RestMethod.values());
+			restMethod.setValue(((RestStep) step).getMethod());
+			
+			contentType.setText(((RestStep) step).getContentType());
+			
+			if (((RestStep) step).getPath() != null) {
+				restPath.setText(((RestStep) step).getPath());
+			}
+			
+			if (((RestStep) step).getRequest() != null) {
+				request.setText(((RestStep) step).getRequest().toString());
+			}
+			
+			ObservableList<Pair> queryData = FXCollections.observableArrayList();
+			if (((RestStep) step).getQuery() != null) {
+				Map<String, String> queryMap = ((RestStep) step).getQuery();
+				for (String key : queryMap.keySet()){
+					queryData.add(new Pair(key, queryMap.get(key)));
+				}
+			}
+			queryTable.setItems(queryData);
+			
+			ObservableList<Pair> headerData = FXCollections.observableArrayList();
+			if (((RestStep) step).getHeader() != null) {
+				Map<String, String> hederMap = ((RestStep) step).getHeader();
+				for (String key : hederMap.keySet()){
+					headerData.add(new Pair(key, hederMap.get(key)));
+				}
+			}
+			headerTable.setItems(headerData);
+			
+			ObservableList<Pair> cookieData = FXCollections.observableArrayList();
+			if (((RestStep) step).getCookie() != null) {
+				Map<String, String> cookieMap = ((RestStep) step).getCookie();
+				for (String key : cookieMap.keySet()){
+					cookieData.add(new Pair(key, cookieMap.get(key)));
+				}
+			}
+			cookieTable.setItems(cookieData);
+    	}
 	}
 	
 	private void addCookieMethod() {
@@ -187,62 +238,6 @@ public class RestStepController {
 				} 
 			}
 		});
-	}
-	
-    public Node getView() {
-		
-    	clearFields();
-		TestProjectService testProjectService = new TestProjectService();
-		Step step = testProjectService.getStep(stepId);
-		
-        stepController.setStep(stepId);
-        stepController.setCommonFields();
-        responseController.setResponse(step);
-        
-    	if(step instanceof RestStep){
-
-			restMethod.getItems().addAll(RestMethod.values());
-			restMethod.setValue(((RestStep) step).getMethod());
-			
-			contentType.setText(((RestStep) step).getContentType());
-			
-			if (((RestStep) step).getPath() != null) {
-				restPath.setText(((RestStep) step).getPath());
-			}
-			
-			if (((RestStep) step).getRequest() != null) {
-				request.setText(((RestStep) step).getRequest().toString());
-			}
-			
-			ObservableList<Pair> queryData = FXCollections.observableArrayList();
-			if (((RestStep) step).getQuery() != null) {
-				Map<String, String> queryMap = ((RestStep) step).getQuery();
-				for (String key : queryMap.keySet()){
-					queryData.add(new Pair(key, queryMap.get(key)));
-				}
-			}
-			queryTable.setItems(queryData);
-			
-			ObservableList<Pair> headerData = FXCollections.observableArrayList();
-			if (((RestStep) step).getHeader() != null) {
-				Map<String, String> hederMap = ((RestStep) step).getHeader();
-				for (String key : hederMap.keySet()){
-					headerData.add(new Pair(key, hederMap.get(key)));
-				}
-			}
-			headerTable.setItems(headerData);
-			
-			ObservableList<Pair> cookieData = FXCollections.observableArrayList();
-			if (((RestStep) step).getCookie() != null) {
-				Map<String, String> cookieMap = ((RestStep) step).getCookie();
-				for (String key : cookieMap.keySet()){
-					cookieData.add(new Pair(key, cookieMap.get(key)));
-				}
-			}
-			cookieTable.setItems(cookieData);
-    	}
-    	
-		return rootRestStep;
 	}
     
     private void clearFields() {
