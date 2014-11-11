@@ -4,6 +4,17 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+
 import org.codehaus.jettison.json.JSONException;
 import org.xml.sax.SAXException;
 
@@ -15,17 +26,6 @@ import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 import com.wstester.util.Parser;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
-import javafx.fxml.Initializable;
 
 public class ResponseController implements Initializable{
 	
@@ -50,6 +50,7 @@ public class ResponseController implements Initializable{
 		this.value.setCellValueFactory(new PropertyValueFactory<Pair, String>("value"));
 	}
 	
+	//TODO: please update/'call setResponse' when test finishes running 
 	public void setResponse(Step step) {
 
 		clearFields();
@@ -95,7 +96,6 @@ public class ResponseController implements Initializable{
 			responsePane.getChildren().clear();
 			responsePane.getChildren().add(parser.parseXML(response));
 		} catch (SAXException xmlException) {
-			
 			try{
 				responsePane.getChildren().add(parser.parseJSON(response));
 			} catch (JSONException jsonException) {
