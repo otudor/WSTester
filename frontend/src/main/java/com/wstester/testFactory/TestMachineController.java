@@ -155,7 +155,7 @@ public class TestMachineController implements Initializable {
 		MySQLStepController mysqlStepController = loader.<MySQLStepController>getController();
 		
 		mysqlStepController.setStep(stepId);
-		contentArea.setCenter(mysqlStepController.getView());
+		contentArea.setCenter(loader.getRoot());
 	}
 	
 	private void setSoapStep(String stepId) {

@@ -14,13 +14,10 @@ public class MySQLStepController{
 	@FXML
 	private ResponseController responseController;
 	@FXML
-	private AnchorPane rootMySQLStep;
-	@FXML
 	private StepController stepController;
 	@FXML
 	private TextField mysqlOperation;
 	
-	private TestProjectService testProjectService;
 	private String stepId;
 		
 	public void setStep(String stepId){
@@ -33,30 +30,15 @@ public class MySQLStepController{
         stepController.setStep(stepId);
         stepController.setCommonFields();
         responseController.setResponse(step);
-	}
-	
-    private void clearFields() {
-    	mysqlOperation.setText("");
-	}
-
-	@Deprecated
-	public Node getView() {
-		
-		testProjectService = new TestProjectService();
         
-        stepController.setStep(stepId);
-        stepController.setCommonFields();
-        
-        
-    	Step step = testProjectService.getStep(stepId);
-
-    	if(step instanceof MySQLStep){
+        if(step instanceof MySQLStep){
     		if(((MySQLStep) step).getOperation() != null){
     			mysqlOperation.setText(((MySQLStep) step).getOperation());
     		}
     	}
-    	
-		return rootMySQLStep;
 	}
 	
+    private void clearFields() {
+    	mysqlOperation.setText("");
+	}	
 }

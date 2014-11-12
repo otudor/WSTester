@@ -2,6 +2,7 @@ package com.wstester.testFactory;
 
 import java.net.URL;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -29,8 +30,6 @@ import com.wstester.util.Parser;
 
 public class ResponseController implements Initializable{
 	
-	@FXML 
-	private AnchorPane rootPane;
 	@FXML
 	private Label status;
 	@FXML 
@@ -114,8 +113,8 @@ public class ResponseController implements Initializable{
 			headerTable.setVisible(true);
 			
 			ObservableList<Pair> headerData = FXCollections.observableArrayList();
-			for (String key : headerMap.keySet()) {
-				headerData.add(new Pair(key, headerMap.get(key)));
+			for (Entry<String, String> entry : headerMap.entrySet()) {
+				headerData.add(new Pair(entry.getKey(), entry.getValue()));
 			}
 			headerTable.setItems(headerData);
 		}

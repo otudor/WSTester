@@ -1,7 +1,10 @@
 package com.wstester.testFactory;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.ResourceBundle;
 
 import com.wstester.elements.Dialog;
 import com.wstester.elements.Pair;
@@ -17,7 +20,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -25,15 +27,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TextArea;
+import javafx.fxml.Initializable;
 
-public class RestStepController {	
+public class RestStepController implements Initializable {	
 
 	@FXML
 	private StepController stepController;
 	@FXML
 	private ResponseController responseController;
-    @FXML 
-    private Node rootRestStep;
     @FXML 
     private TextField restPath;
     @FXML 
@@ -86,7 +87,7 @@ public class RestStepController {
     private String stepId;
     
 	@FXML
-	private void initialize() {
+	public void initialize(URL url, ResourceBundle resource) {
 		
 		this.pathKey.setCellValueFactory(new PropertyValueFactory<Pair, String>("key"));
 		this.pathValue.setCellValueFactory(new PropertyValueFactory<Pair, String>("value"));
@@ -134,8 +135,8 @@ public class RestStepController {
 			ObservableList<Pair> queryData = FXCollections.observableArrayList();
 			if (((RestStep) step).getQuery() != null) {
 				Map<String, String> queryMap = ((RestStep) step).getQuery();
-				for (String key : queryMap.keySet()){
-					queryData.add(new Pair(key, queryMap.get(key)));
+				for (Entry<String, String> entry : queryMap.entrySet()){
+					queryData.add(new Pair(entry.getKey(), entry.getValue()));
 				}
 			}
 			queryTable.setItems(queryData);
@@ -143,8 +144,8 @@ public class RestStepController {
 			ObservableList<Pair> headerData = FXCollections.observableArrayList();
 			if (((RestStep) step).getHeader() != null) {
 				Map<String, String> hederMap = ((RestStep) step).getHeader();
-				for (String key : hederMap.keySet()){
-					headerData.add(new Pair(key, hederMap.get(key)));
+				for (Entry<String, String> entry : hederMap.entrySet()){
+					headerData.add(new Pair(entry.getKey(), entry.getValue()));
 				}
 			}
 			headerTable.setItems(headerData);
@@ -152,8 +153,8 @@ public class RestStepController {
 			ObservableList<Pair> cookieData = FXCollections.observableArrayList();
 			if (((RestStep) step).getCookie() != null) {
 				Map<String, String> cookieMap = ((RestStep) step).getCookie();
-				for (String key : cookieMap.keySet()){
-					cookieData.add(new Pair(key, cookieMap.get(key)));
+				for (Entry<String, String> entry : cookieMap.entrySet()){
+					cookieData.add(new Pair(entry.getKey(), entry.getValue()));
 				}
 			}
 			cookieTable.setItems(cookieData);
@@ -291,5 +292,5 @@ public class RestStepController {
 		step.setRequest(request.getText());
 		
     	testProjectService.setStepByUID(step, stepId);
-	}    
+	}  
 }
