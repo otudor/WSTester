@@ -5,50 +5,34 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="rootTestSuite" prefWidth="760.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.TestSuiteController">
+<AnchorPane fx:id="rootTestSuite" prefHeight="127.0" prefWidth="762.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.TestSuiteController">
    <children>
-      <TabPane prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <tabs>
-            <Tab closable="false" text="Test Suite">
-               <content>
-                  <AnchorPane prefWidth="760.0">
-                     <children>
-                        <GridPane hgap="10" vgap="10" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="20.0">
-                        
+      <GridPane hgap="10" vgap="10" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="20.0">
+      
                                   <children>
-                                <Label text="Test suite name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                        
+              <Label text="Test suite name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+              <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      
                                       <Label text="Environment:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" onAction="#saveTestSuite" prefWidth="75.0" text="Save" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-                                 <GridPane.margin>
-                                    <Insets />
-                                 </GridPane.margin>
-                              </Button>
-                              <ComboBox fx:id="environmentBox" prefWidth="200.0" promptText="Select Environment" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                                
+            <ComboBox fx:id="environmentBox" prefWidth="200.0" promptText="Select Environment" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+              
                               		<!--  Label text="" GridPane.rowIndex="2" GridPane.columnIndex="0">
-                        			<padding>
+      			<padding>
                               	            <Insets right="200.0"/>
                               	         </padding>
                                        </Label> -->
-                                <!--  <Button fx:id="btnRun" layoutX="30.0" layoutY="40.0" onAction="#runTestSuite" text="Run" GridPane.rowIndex="2" GridPane.columnIndex="1"/> -->
-                            </children>
-                           <columnConstraints>
-                              <ColumnConstraints maxWidth="120.0" prefWidth="120.0" />
-                              <ColumnConstraints maxWidth="200.0" prefWidth="200.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints maxHeight="25.0" prefHeight="25.0" />
-                              <RowConstraints maxHeight="25.0" prefHeight="25.0" />
-                              <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" />
-                           </rowConstraints>
-                        </GridPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-         </tabs>
-      </TabPane>
+              <!--  <Button fx:id="btnRun" layoutX="30.0" layoutY="40.0" onAction="#runTestSuite" text="Run" GridPane.rowIndex="2" GridPane.columnIndex="1"/> -->
+          </children>
+         <columnConstraints>
+            <ColumnConstraints maxWidth="120.0" prefWidth="120.0" />
+            <ColumnConstraints maxWidth="200.0" prefWidth="200.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="25.0" prefHeight="25.0" />
+            <RowConstraints maxHeight="25.0" prefHeight="25.0" />
+            <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" />
+         </rowConstraints>
+      </GridPane>
+      <Button layoutX="552.0" layoutY="88.0" mnemonicParsing="false" onAction="#saveTestSuite" prefWidth="75.0" text="Save" />
    </children>
 </AnchorPane>

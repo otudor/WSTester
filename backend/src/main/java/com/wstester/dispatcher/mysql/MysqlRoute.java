@@ -2,13 +2,14 @@ package com.wstester.dispatcher.mysql;
 
 import com.wstester.asset.AssetProcessor;
 import com.wstester.dispatcher.ExchangeDelayer;
-import com.wstester.dispatcher.mongo.MongoExceptionRoute;
 
-public class MysqlRoute extends MongoExceptionRoute {
+public class MysqlRoute extends MysqlExceptionRoute {
 
 	@Override
 	public void configure() throws Exception {
 
+		super.configure();
+		
 		from("jms:mySQLQueue?concurrentConsumers=20&asyncConsumer=true")
 		
 		.bean(ExchangeDelayer.class, "delay")

@@ -3,10 +3,10 @@ package com.wstester.testFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeCell;
@@ -14,25 +14,28 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.concurrent.Task;
 
 import java.io.IOException;
-import java.net.URL;
+import java.util.Date;
 import java.util.List;
-import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.wstester.elements.Dialog;
+import com.wstester.log.CustomLogger;
 import com.wstester.main.MainLauncher;
 import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.MongoStep;
 import com.wstester.model.MySQLStep;
+import com.wstester.model.Response;
 import com.wstester.model.RestStep;
 import com.wstester.model.SoapStep;
 import com.wstester.model.Step;
@@ -44,137 +47,28 @@ import com.wstester.services.definition.ITestRunner;
 import com.wstester.util.MainConstants;
 import com.wstester.util.TestProjectService;
 
-public class TestMachineController implements Initializable {
+public class TestMachineController {
 
-	@FXML
-	private Node root;
+	CustomLogger logger = new CustomLogger(TestMachineController.class);
 	@FXML
 	private TreeView<Object> treeView;
 	@FXML
-	private BorderPane contentArea;
+	private Tab definitionTab;
+	@FXML
+	private Tab responseTab;
+	@FXML
+	private ResponseController responseController;
+	
+	public void initialize() {
 
-	private List<TestSuite> testSuiteList;
-
-	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
-
-		TestProjectService testProjectService = new TestProjectService();
-		testSuiteList = testProjectService.getTestSuites();
 		loadTreeItems();
-	}
-	
-	public TreeView<Object> getTreeView() {
-		return this.treeView;
-	}
-
-	private void selectTestSuite(String testSuiteId) {
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.TEST_SUITE.toString()));
-		try {
-			loader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-			Dialog.errorDialog("Can't open the test factory window. Please try again!", MainLauncher.stage);
-		}
-		TestSuiteController testSuiteController = loader.<TestSuiteController> getController();
-
-		testSuiteController.setTestSuite(testSuiteId);
-		contentArea.setCenter(testSuiteController.getView());
-	}
-
-	private void selectTestCase(String testCaseId) {
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.TEST_CASE.toString()));
-		try {
-			loader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-			Dialog.errorDialog("Can't open the test factory window. Please try again!", MainLauncher.stage);
-		}
-		TestCaseController testCaseController = loader.<TestCaseController> getController();
-
-		testCaseController.setTestCaseId(testCaseId);
-		contentArea.setCenter(loader.getRoot());
-	}
-
-	private void selectStep(String stepId) {
-
-		TestProjectService testProjectService = new TestProjectService();
-		Step step = testProjectService.getStep(stepId);
-
-		if (step instanceof MongoStep) {
-			setMongoStep(stepId);
-		} else if (step instanceof RestStep) {
-			setRestStep(stepId);
-		} else if (step instanceof MySQLStep) {
-			setMysqlStep(stepId);
-		} else if (step instanceof SoapStep) {
-			setSoapStep(stepId);
-		}
-	}
-
-	private void setMongoStep(String stepId) {
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.MONGO_STEP.toString()));
-		try {
-			loader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-			Dialog.errorDialog("Can't open the test factory window. Please try again!", MainLauncher.stage);
-		}
-		MongoStepController mongoStepController = loader.<MongoStepController> getController();
-
-		mongoStepController.setStep(stepId);
-		contentArea.setCenter(loader.getRoot());
-	}
-
-	private void setRestStep(String stepId) {
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.REST_STEP.toString()));
-		try {
-			loader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-			Dialog.errorDialog("Can't open the test factory window. Please try again!", MainLauncher.stage);
-		}
-		RestStepController restStepController = loader.<RestStepController> getController();
-
-		restStepController.setStep(stepId);
-		contentArea.setCenter(loader.getRoot());
-	}
-
-	private void setMysqlStep(String stepId) {
-		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.MYSQL_STEP.toString()));
-		try {
-			loader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-			Dialog.errorDialog("Can't open the test factory window. Please try again!", MainLauncher.stage);
-		}
-		MySQLStepController mysqlStepController = loader.<MySQLStepController>getController();
-		
-		mysqlStepController.setStep(stepId);
-		contentArea.setCenter(loader.getRoot());
-	}
-	
-	private void setSoapStep(String stepId) {
-		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.SOAP_STEP.toString()));
-		try {
-			loader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-			Dialog.errorDialog("Can't open the test factory window. Please try again!", MainLauncher.stage);
-		}
-		SoapStepController soapStepController = loader.<SoapStepController>getController();
-		
-		soapStepController.setStep(stepId);
-		contentArea.setCenter(loader.getRoot());
 	}
 	
 	private void loadTreeItems() {
 
+		TestProjectService testProjectService = new TestProjectService();
+		List<TestSuite> testSuiteList = testProjectService.getTestSuites();
+		
 		TreeItem<Object> rootItem = new TreeItem<Object>("treeRoot");
 		rootItem.setExpanded(true);
 
@@ -229,6 +123,123 @@ public class TestMachineController implements Initializable {
 		});
 	}
 
+	private void selectTestSuite(String testSuiteId) {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.TEST_SUITE.toString()));
+		try {
+			loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Can't open the test factory window. Please try again!", MainLauncher.stage);
+		}
+		TestSuiteController testSuiteController = loader.<TestSuiteController> getController();
+
+		testSuiteController.setTestSuite(testSuiteId);
+		definitionTab.setContent(loader.getRoot());
+		disableResponseTab();
+		
+	}
+
+	private void selectTestCase(String testCaseId) {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.TEST_CASE.toString()));
+		try {
+			loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Can't open the test factory window. Please try again!", MainLauncher.stage);
+		}
+		TestCaseController testCaseController = loader.<TestCaseController> getController();
+
+		testCaseController.setTestCaseId(testCaseId);
+		disableResponseTab();
+		definitionTab.setContent(loader.getRoot());
+	}
+
+	private void selectStep(String stepId) {
+
+		if (responseTab.isSelected()) {
+			setResponse();
+		}
+		
+		TestProjectService testProjectService = new TestProjectService();
+		Step step = testProjectService.getStep(stepId);
+
+		if (step instanceof MongoStep) {
+			setMongoStep(stepId);
+		} else if (step instanceof RestStep) {
+			setRestStep(stepId);
+		} else if (step instanceof MySQLStep) {
+			setMysqlStep(stepId);
+		} else if (step instanceof SoapStep) {
+			setSoapStep(stepId);
+		}
+	}
+
+	private void setMongoStep(String stepId) {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.MONGO_STEP.toString()));
+		try {
+			loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Can't open the test factory window. Please try again!", MainLauncher.stage);
+		}
+		MongoStepController mongoStepController = loader.<MongoStepController> getController();
+
+		mongoStepController.setStep(stepId);
+		definitionTab.setContent(loader.getRoot());
+		responseTab.setDisable(false);
+	}
+
+	private void setRestStep(String stepId) {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.REST_STEP.toString()));
+		try {
+			loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Can't open the test factory window. Please try again!", MainLauncher.stage);
+		}
+		RestStepController restStepController = loader.<RestStepController> getController();
+
+		restStepController.setStep(stepId);
+		definitionTab.setContent(loader.getRoot());
+		responseTab.setDisable(false);
+	}
+
+	private void setMysqlStep(String stepId) {
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.MYSQL_STEP.toString()));
+		try {
+			loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Can't open the test factory window. Please try again!", MainLauncher.stage);
+		}
+		MySQLStepController mysqlStepController = loader.<MySQLStepController>getController();
+		
+		mysqlStepController.setStep(stepId);
+		definitionTab.setContent(loader.getRoot());
+		responseTab.setDisable(false);
+	}
+	
+	private void setSoapStep(String stepId) {
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.SOAP_STEP.toString()));
+		try {
+			loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Can't open the test factory window. Please try again!", MainLauncher.stage);
+		}
+		SoapStepController soapStepController = loader.<SoapStepController>getController();
+		
+		soapStepController.setStep(stepId);
+		definitionTab.setContent(loader.getRoot());
+		responseTab.setDisable(false);
+	}
+	
 	@FXML
 	public void createTestSuite(ActionEvent event) {
 
@@ -261,12 +272,50 @@ public class TestMachineController implements Initializable {
 			Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
 		}
 		
-		ExecutionUpdate execUpd = new ExecutionUpdate();
-		execUpd.updateRunStatus();
-	}
-	
-	public void updateTree() {
-		
+		Task<Void> task = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				
+				// get the response for all steps
+				for (TreeItem<Object> testSuiteItem : treeView.getRoot().getChildren()) {
+					for (TreeItem<Object> testCaseItem : testSuiteItem.getChildren()) {
+						for (TreeItem<Object> stepItem : testCaseItem.getChildren()) {
+							
+							Step step = (Step) stepItem.getValue();
+							
+							ITestRunner testRunner = null;
+							try {
+								testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class);
+							} catch (Exception e) {
+								e.printStackTrace();
+								Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
+							}
+							
+							Response response = testRunner.getResponse(step.getID(), 25000L);
+
+							Execution execution = new Execution();
+							Date date = new Date();
+							execution.setRunDate(date);
+							execution.setResponse(response);
+							step.addExecution(execution);
+
+							testProjectService.setStepByUID(step, step.getID());
+							
+							// force the stepItem to refresh
+							stepItem.setValue(null);
+							stepItem.setValue(step);
+						}
+					}
+				}
+
+		    	// set the response of the current selected step
+				setResponse();
+				return null;
+			}
+		};
+		ExecutorService executorService = Executors.newFixedThreadPool(1);
+		executorService.execute(task);
+		executorService.shutdown();
 	}
 	
 	private class TestSuiteTreeImplementation extends TreeCell<Object> {
@@ -279,7 +328,7 @@ public class TestMachineController implements Initializable {
 
 					if ((event.getClickCount() == 1) && (event.getButton() == MouseButton.PRIMARY)) {
 						if (getItem() != null) {
-
+							
 							if (getItem() instanceof TestSuite) {
 								selectTestSuite(((TestSuite) getItem()).getID());
 							} else if (getItem() instanceof TestCase) {
@@ -304,7 +353,7 @@ public class TestMachineController implements Initializable {
 			} else {
 				// if the item type is step add a special graphic if the last execution passed
 				if (getItem() instanceof Step) {
-					setGraphic(createStepGraphic(item));
+					setGraphic(createStepGraphic(getTreeItem()));
 				}
 				// else just take the previous graphic
 				else {
@@ -330,23 +379,29 @@ public class TestMachineController implements Initializable {
 		}
 
 		// this method adds to the step cell a special graphic indicating a success/failure
-		// TODO: add a imagine for failure
-		public HBox createStepGraphic(Object item) {
+		// TODO: add a imagine for assert error
+		public HBox createStepGraphic(TreeItem<Object> item) {
+			Step step = (Step) item.getValue();
 			HBox hbox = new HBox();
 			hbox.setPadding(new Insets(0, 0, 0, 0));
 			hbox.setSpacing(5);
 
-			Label lblNodeName = new Label(getItem() == null ? "" : getItem().toString());
-			hbox.getChildren().add(getTreeItem().getGraphic());
+			Label lblNodeName = new Label(step == null ? "" : step.toString());
+			hbox.getChildren().add(item.getGraphic());
 			hbox.getChildren().addAll(lblNodeName);
 
-			Execution execution = ((Step) getItem()).getLastExecution();
-			if (execution != null) {
-				ImageView successImagine = null;
-				if (execution.getResponse().getStatus() == ExecutionStatus.PASSED)
-					successImagine = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_PASSED_ICON.toString())));
-
-				hbox.getChildren().addAll(successImagine);
+			Execution execution = step.getLastExecution();
+			if (execution != null && execution.getResponse() != null) {
+				ImageView image = null;
+				if (execution.getResponse().getStatus() == ExecutionStatus.PASSED) {
+					image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_PASSED_ICON.toString())));
+					logger.info(step.getID(), "Set passed icon");
+				}
+				else if (execution.getResponse().getStatus() == ExecutionStatus.ERROR) {
+					image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_ERROR_ICON.toString())));
+					logger.info(step.getID(), "Set failed icon");
+				}
+				hbox.getChildren().addAll(image);
 			}
 
 			return hbox;
@@ -395,7 +450,7 @@ public class TestMachineController implements Initializable {
 					testProjectService.removeTestSuite(testSuiteId);
 					
 					selectedItem.getParent().getChildren().remove(selectedItem);
-					contentArea.setCenter(null);
+					definitionTab.setContent(null);
 				}
 			});
 
@@ -420,7 +475,7 @@ public class TestMachineController implements Initializable {
 					testProjectService.removeTestStep(stepId);
 					
 					selectedItem.getParent().getChildren().remove(selectedItem);
-					contentArea.setCenter(null);
+					definitionTab.setContent(null);
 				}
 			});
 			return contextMenu;
@@ -448,7 +503,7 @@ public class TestMachineController implements Initializable {
 					testProjectService.removeTestCase(testCaseId);
 					selectedItem.getParent().getChildren().remove(selectedItem);
 
-					contentArea.setCenter(null);
+					definitionTab.setContent(null);
 				}
 			});
 
@@ -542,5 +597,20 @@ public class TestMachineController implements Initializable {
 
 			return contextMenu;
 		}
+	}
+	
+	@FXML
+	public void setResponse(){
+		
+		if (responseTab.isSelected()) {
+			responseController.setResponse((Step) treeView.getSelectionModel().getSelectedItem().getValue());
+		}
+	}
+	
+	private void disableResponseTab() {
+		
+		definitionTab.getTabPane().getSelectionModel().select(definitionTab);
+		responseTab.setDisable(true);
+		
 	}
 }

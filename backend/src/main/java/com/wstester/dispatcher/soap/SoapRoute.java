@@ -8,6 +8,8 @@ public class SoapRoute extends SoapExceptionRoute {
 	@Override
 	public void configure() throws Exception {
 		
+		super.configure();
+		
 		from("jms:soapQueue?concurrentConsumers=20&asyncConsumer=true")
 		
 		.bean(ExchangeDelayer.class, "delay")

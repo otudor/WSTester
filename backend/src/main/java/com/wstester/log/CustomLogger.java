@@ -12,6 +12,7 @@ public class CustomLogger extends Logger {
 		logger = Logger.getLogger(name);
 	}
 
+	@Override
 	public void debug(Object message){
 		logger.debug(message);
 	}
@@ -20,6 +21,7 @@ public class CustomLogger extends Logger {
 		logger.debug("[" + stepId + "] " + logMessage);
 	}
 	
+	@Override
 	public void error(Object message){
 		logger.error(message);
 	}
@@ -28,6 +30,7 @@ public class CustomLogger extends Logger {
 		logger.error("[" + stepId + "] " + logMessage);
 	}
 
+	@Override
 	public void info(Object message){
 		logger.info(message);
 	}
@@ -36,6 +39,7 @@ public class CustomLogger extends Logger {
 		logger.info("[" + stepId + "] " + logMessage);
 	}
 	
+	@Override
 	public void warn(Object message){
 		logger.warn(message);
 	}

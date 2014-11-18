@@ -29,12 +29,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TextArea;
 import javafx.fxml.Initializable;
 
-public class RestStepController implements Initializable {	
+public class RestStepController implements Initializable {
 
 	@FXML
 	private StepController stepController;
-	@FXML
-	private ResponseController responseController;
     @FXML 
     private TextField restPath;
     @FXML 
@@ -115,7 +113,6 @@ public class RestStepController implements Initializable {
 		
         stepController.setStep(stepId);
         stepController.setCommonFields();
-        responseController.setResponse(step);
         
     	if(step instanceof RestStep){
 
@@ -254,6 +251,7 @@ public class RestStepController implements Initializable {
 		cookieTable.getItems().clear();
 	}
 
+    // called when the save button is clicked
 	public void saveRest(ActionEvent e) {
     	
     	TestProjectService testProjectService = new TestProjectService();
@@ -292,5 +290,5 @@ public class RestStepController implements Initializable {
 		step.setRequest(request.getText());
 		
     	testProjectService.setStepByUID(step, stepId);
-	}  
+	}
 }

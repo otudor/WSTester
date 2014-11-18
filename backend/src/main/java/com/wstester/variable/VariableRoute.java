@@ -11,6 +11,7 @@ public class VariableRoute extends RouteBuilder {
 
 	private static Set<Variable> variableSet = new HashSet<Variable>();
 	
+	@Override
 	public void configure() throws Exception{
 		 
 		from("jms:variableQueue")

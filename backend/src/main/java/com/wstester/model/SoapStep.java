@@ -38,8 +38,8 @@ public class SoapStep extends Step{
 				+ getVariableList() + ", getExecutionList()=" + getExecutionList() + ", getDependsOn()=" + getDependsOn() + "]";
 	}
 	
-	public String toString()
-	{
+	@Override
+	public String toString() {
 		return super.getName();
 	}
 

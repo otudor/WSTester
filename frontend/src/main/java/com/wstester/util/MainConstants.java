@@ -4,6 +4,7 @@ public enum MainConstants {
 	
 	TEST_PROJECT,
 	TEST_MACHINE("/fxml/TestFactory/TestMachine.fxml"),
+	RESPONSE("/fxml/TestFactory/Response.fxml"),
 	TEST_SUITE("/fxml/TestFactory/TestSuite.fxml"),
 	TEST_SUITE_ICON("/images/treeIcon_TestSuite.png"),
 	TEST_CASE("/fxml/TestFactory/TestCase.fxml"),
@@ -16,7 +17,8 @@ public enum MainConstants {
 	MYSQL_STEP_ICON("/images/treeIcon_TestStep.png"),
 	SOAP_STEP("/fxml/TestFactory/SoapStep.fxml"),
 	SOAP_STEP_ICON("/images/treeIcon_TestStep.png"),
-	STEP_PASSED_ICON("/images/treeIcon_step_passed.png");
+	STEP_PASSED_ICON("/images/treeIcon_step_passed.png"),
+	STEP_ERROR_ICON("/images/treeIcon_step_error.png");
 	
 	private String value;
 	

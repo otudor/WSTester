@@ -4,36 +4,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="rootTestCase" prefHeight="174.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.TestCaseController">
+<AnchorPane fx:id="rootTestCase" prefHeight="127.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.TestCaseController">
    <children>
-      <TabPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <tabs>
-            <Tab closable="false" text="Test Case">
-               <content>
-                  <AnchorPane>
-                     <children>
-                        <GridPane hgap="10" prefHeight="30.0" prefWidth="300.0" vgap="10" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="410.0" AnchorPane.topAnchor="20.0">
-                                  
+      <GridPane hgap="10" prefHeight="30.0" prefWidth="300.0" vgap="10" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="410.0" AnchorPane.topAnchor="20.0">
+                
                             <children>
-                                <Label text="Test Case name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                                <!--  <Label text="IP" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                                <TextField fx:id="ftpIPField" GridPane.rowIndex = "1" GridPane.columnIndex="1"/> -->
-                            </children>
-                           <columnConstraints>
-                              <ColumnConstraints maxWidth="120.0" prefWidth="120.0" />
-                              <ColumnConstraints maxWidth="200.0" prefWidth="200.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints />
-                           </rowConstraints>
-                        </GridPane>
-                        <Button layoutX="600.0" layoutY="106.0" mnemonicParsing="false" onAction="#saveTestCase" text="Save" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-         </tabs>
-      </TabPane>
+              <Label text="Test Case name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+              <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+              <!--  <Label text="IP" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+              <TextField fx:id="ftpIPField" GridPane.rowIndex = "1" GridPane.columnIndex="1"/> -->
+          </children>
+         <columnConstraints>
+            <ColumnConstraints maxWidth="120.0" prefWidth="120.0" />
+            <ColumnConstraints maxWidth="200.0" prefWidth="200.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
+      </GridPane>
+      <Button layoutX="562.0" layoutY="88.0" mnemonicParsing="false" onAction="#saveTestCase" prefWidth="75.0" text="Save" />
    </children>
 </AnchorPane>

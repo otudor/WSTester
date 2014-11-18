@@ -44,13 +44,15 @@ public class TestBaseClass {
 	
 	@Rule
 	public TestRule watcher = new TestWatcher() {
-	   protected void starting(Description description){
+	   @Override
+	protected void starting(Description description){
 	        log.info("********************************************************************************");
 	        log.info("Testing: " + description.getMethodName() + "(" + description.getClassName() + ")");
 	        log.info("********************************************************************************");
 	   }
 	   
-	   protected void finished(Description description){
+	   @Override
+	protected void finished(Description description){
 	        log.info("********************************************************************************");
 	        log.info("Done testing: " + description.getMethodName() + "(" + description.getClassName() + ")");
 	        log.info("********************************************************************************");

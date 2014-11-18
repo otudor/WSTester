@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import org.codehaus.jettison.json.JSONException;
@@ -54,7 +53,7 @@ public class ResponseController implements Initializable{
 
 		clearFields();
 		
-		if (step.getLastExecution() != null) {
+		if (step.getLastExecution() != null && step.getLastExecution().getResponse() !=null) {
 
 			Execution execution = step.getLastExecution();
 			Response response = execution.getResponse();
@@ -87,7 +86,7 @@ public class ResponseController implements Initializable{
 		headerTable.getItems().clear();
 	}
 
-	public void setResponseContent(String response) {
+	private void setResponseContent(String response) {
 
 		Parser parser = new Parser();
 		

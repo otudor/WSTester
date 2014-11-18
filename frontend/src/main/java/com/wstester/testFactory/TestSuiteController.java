@@ -6,24 +6,17 @@ import com.wstester.util.TestProjectService;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 public class TestSuiteController {
 	
-	@FXML
-	private Node rootTestSuite;
 	@FXML 
 	private TextField name;
 	@FXML 
 	private ComboBox<Environment> environmentBox;
 		
 	private String testSuiteId;
-
-	public Node getView() {
-		return rootTestSuite;
-	}
 
 	public void setTestSuite(String testSuiteId) {
 		

@@ -25,8 +25,8 @@ public class RestStep extends Step {
 		return contentType;
 	}
 	
-	public String toString()
-	{
+	@Override
+	public String toString() {
 		return super.getName();
 	}
 
