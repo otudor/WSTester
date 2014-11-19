@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<testProject>
+    <environmentList>
+        <name>Env 1</name>
+        <servers>
+            <description>This is the first server of the first env</description>
+            <ip>localhost</ip>
+            <name>Server 11</name>
+            <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="restService">
+                <name>Service Rest</name>
+                <port>9997</port>
+            </services>
+        </servers>
+    </environmentList>
+    <name>Rest Test Plan</name>
+    <testSuiteList>
+        <environment>
+            <name>Env 1</name>
+            <servers>
+                <description>This is the first server of the first env</description>
+                <ip>localhost</ip>
+                <name>Server 11</name>
+                <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="restService">
+                    <name>Service Rest</name>
+                    <port>9997</port>
+                </services>
+            </servers>
+        </environment>
+        <name>Test Suite 1</name>
+        <testCaseList>
+            <name>Test Case 1</name>
+            <stepList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="restStep">
+                <contentType>text/plain</contentType>
+                <cookie>
+                    <entry>
+                        <key>cookieName</key>
+                        <value>Aladin</value>
+                    </entry>
+                </cookie>
+                <header>
+                    <entry>
+                        <key>headerName</key>
+                        <value>Popa</value>
+                    </entry>
+                </header>
+                <method>GET</method>
+                <name>Rest Step 1</name>
+                <path>/customer/searchWithAll</path>
+                <query>
+                    <entry>
+                        <key>queryName</key>
+                        <value>Goku</value>
+                    </entry>
+                </query>
+                <server>
+                    <description>This is the first server of the first env</description>
+                    <ip>localhost</ip>
+                    <name>Server 11</name>
+                    <services xsi:type="restService">
+                        <name>Service Rest</name>
+                        <port>9997</port>
+                    </services>
+                </server>
+                <service xsi:type="restService">
+                    <name>Service Rest</name>
+                    <port>9997</port>
+                </service>
+            </stepList>
+            <stepList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="restStep">
+                <contentType>text/plain</contentType>
+                <method>GET</method>
+                <name>Rest Step 2</name>
+                <path>/customer/searchCustomer</path>
+                <query>
+                    <entry>
+                        <key>name</key>
+                        <value>Goku</value>
+                    </entry>
+                </query>
+                <server>
+                    <description>This is the first server of the first env</description>
+                    <ip>localhost</ip>
+                    <name>Server 11</name>
+                    <services xsi:type="restService">
+                        <name>Service Rest</name>
+                        <port>9997</port>
+                    </services>
+                </server>
+                <service xsi:type="restService">
+                    <name>Service Rest</name>
+                    <port>9997</port>
+                </service>
+            </stepList>
+            <stepList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="restStep">
+                <contentType>text/plain</contentType>
+                <cookie>
+                    <entry>
+                        <key>name</key>
+                        <value>Aladin</value>
+                    </entry>
+                </cookie>
+                <method>GET</method>
+                <name>Rest Step 3</name>
+                <path>/customer/searchWithCookie</path>
+                <server>
+                    <description>This is the first server of the first env</description>
+                    <ip>localhost</ip>
+                    <name>Server 11</name>
+                    <services xsi:type="restService">
+                        <name>Service Rest</name>
+                        <port>9997</port>
+                    </services>
+                </server>
+                <service xsi:type="restService">
+                    <name>Service Rest</name>
+                    <port>9997</port>
+                </service>
+            </stepList>
+            <stepList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="restStep">
+                <contentType>text/plain</contentType>
+                <header>
+                    <entry>
+                        <key>name</key>
+                        <value>Popa</value>
+                    </entry>
+                </header>
+                <method>GET</method>
+                <name>Rest Step 4</name>
+                <path>/customer/searchWithHeader</path>
+                <server>
+                    <description>This is the first server of the first env</description>
+                    <ip>localhost</ip>
+                    <name>Server 11</name>
+                    <services xsi:type="restService">
+                        <name>Service Rest</name>
+                        <port>9997</port>
+                    </services>
+                </server>
+                <service xsi:type="restService">
+                    <name>Service Rest</name>
+                    <port>9997</port>
+                </service>
+            </stepList>
+        </testCaseList>
+    </testSuiteList>
+</testProject>

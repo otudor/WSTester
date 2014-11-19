@@ -83,6 +83,7 @@ public class Response implements Serializable{
 		result = prime * result + ((errorMessage == null) ? 0 : errorMessage.hashCode());
 		result = prime * result + ((headerMap == null) ? 0 : headerMap.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((stepID == null) ? 0 : stepID.hashCode());
 		return result;
 	}
 
@@ -116,6 +117,11 @@ public class Response implements Serializable{
 		} else if (!headerMap.equals(other.headerMap))
 			return false;
 		if (status != other.status)
+			return false;
+		if (stepID == null) {
+			if (other.stepID != null)
+				return false;
+		} else if (!stepID.equals(other.stepID))
 			return false;
 		return true;
 	}

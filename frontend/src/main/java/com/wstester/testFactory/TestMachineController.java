@@ -21,12 +21,11 @@ import javafx.geometry.Insets;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.concurrent.Task;
+import javafx.application.Platform;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import com.wstester.elements.Dialog;
 import com.wstester.log.CustomLogger;
@@ -158,6 +157,7 @@ public class TestMachineController {
 
 	private void selectStep(String stepId) {
 
+		// when switching between steps and the response tab is selected
 		if (responseTab.isSelected()) {
 			setResponse();
 		}
@@ -304,18 +304,18 @@ public class TestMachineController {
 							// force the stepItem to refresh
 							stepItem.setValue(null);
 							stepItem.setValue(step);
+							
+							// set the response of the current selected step
+							if (treeView.getSelectionModel().getSelectedItem().equals(stepItem)) {
+								setResponse();
+							}
 						}
 					}
 				}
-
-		    	// set the response of the current selected step
-				setResponse();
 				return null;
 			}
 		};
-		ExecutorService executorService = Executors.newFixedThreadPool(1);
-		executorService.execute(task);
-		executorService.shutdown();
+		Platform.runLater(task);
 	}
 	
 	private class TestSuiteTreeImplementation extends TreeCell<Object> {
