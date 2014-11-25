@@ -3,9 +3,7 @@ package com.wstester.main;
 import com.wstester.RightClickMenu.RadialGlobalMenu;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ICamelContextManager;
-
 import javafx.application.Application;
-import com.sun.javafx.application.PlatformImpl;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
