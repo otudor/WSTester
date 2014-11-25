@@ -44,37 +44,10 @@ public class TestRunner implements ITestRunner{
 	}
 	
 	@Override
-	public void run(TestProject testProject) throws Exception{
+	public void run(Object testToRun) throws Exception{
 	
 		ExecutorService executor = Executors.newFixedThreadPool(10);
-		executor.execute(new ProjectRunThread(testProject));
-		
-		executor.shutdown();
-	}
-	
-	@Override
-	public void run(TestSuite testSuite) throws Exception{
-		
-		ExecutorService executor = Executors.newFixedThreadPool(10);
-		executor.execute(new ProjectRunThread(testSuite));
-		
-		executor.shutdown();
-	}
-	
-	@Override
-	public void run(TestCase testCase) throws Exception{
-		
-		ExecutorService executor = Executors.newFixedThreadPool(10);
-		executor.execute(new ProjectRunThread(testCase));
-		
-		executor.shutdown();
-	}
-
-	@Override
-	public void run(Step testStep) throws Exception{
-		
-		ExecutorService executor = Executors.newFixedThreadPool(10);
-		executor.execute(new ProjectRunThread(testStep));
+		executor.execute(new ProjectRunThread(testToRun));
 		
 		executor.shutdown();
 	}

@@ -241,7 +241,7 @@ public class TestMachineController {
 	}
 	
 	@FXML
-	public void createTestSuite(ActionEvent event) {
+	public void createTestSuite (ActionEvent event) {
 
 		TestSuite testSuite = new TestSuite();
 		testSuite.setName("New TestSuite");
@@ -264,58 +264,84 @@ public class TestMachineController {
     	TestProjectService testProjectService = new TestProjectService();
     	TestProject testProject = testProjectService.getTestProject();
 		
+		run(testProject);
+		
+		updateSteps(treeView.getRoot());
+	}
+	
+	@FXML
+	public void runSpecificTests (ActionEvent event){
+		
+		TreeItem<Object> selectedObject = treeView.getSelectionModel().getSelectedItem();
+		run(selectedObject.getValue());
+		
+		updateSteps(selectedObject);
+	}
+	
+	private void run(Object toRun) {
+	
+	
+    	TestProjectService testProjectService = new TestProjectService();
+    	TestProject testProject = testProjectService.getTestProject();
+    	
 		try {
 			ITestRunner testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class, testProject);
-			testRunner.run(testProject);
+			testRunner.run(toRun);
 		} catch (Exception e) {
 			e.printStackTrace();
 			Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
 		}
+	}
+	
+	private void updateSteps(TreeItem<Object> treeItem) {
 		
-		Task<Void> task = new Task<Void>() {
-			@Override
-			protected Void call() throws Exception {
-				
-				// get the response for all steps
-				for (TreeItem<Object> testSuiteItem : treeView.getRoot().getChildren()) {
-					for (TreeItem<Object> testCaseItem : testSuiteItem.getChildren()) {
-						for (TreeItem<Object> stepItem : testCaseItem.getChildren()) {
-							
-							Step step = (Step) stepItem.getValue();
-							
-							ITestRunner testRunner = null;
-							try {
-								testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class);
-							} catch (Exception e) {
-								e.printStackTrace();
-								Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
-							}
-							
-							Response response = testRunner.getResponse(step.getID(), 25000L);
-
-							Execution execution = new Execution();
-							Date date = new Date();
-							execution.setRunDate(date);
-							execution.setResponse(response);
-							step.addExecution(execution);
-
-							testProjectService.setStepByUID(step, step.getID());
-							
-							// force the stepItem to refresh
-							stepItem.setValue(null);
-							stepItem.setValue(step);
-							
-							// set the response of the current selected step
-							if (treeView.getSelectionModel().getSelectedItem().equals(stepItem)) {
-								setResponse();
-							}
-						}
-					}
-				}
-				return null;
+		// if we didn't reach a step
+		if (!treeItem.getChildren().isEmpty()) {
+			for (TreeItem<Object> children : treeItem.getChildren()) {
+				updateSteps(children);
 			}
-		};
-		Platform.runLater(task);
+		}
+		// we reached a step
+		else {
+			
+			Task<Void> task = new Task<Void>() {
+				@Override
+				protected Void call() throws Exception {
+					
+			    	TestProjectService testProjectService = new TestProjectService();
+					Step step = (Step) treeItem.getValue();
+
+					ITestRunner testRunner = null;
+					try {
+						testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class);
+					} catch (Exception e) {
+						e.printStackTrace();
+						Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
+					}
+
+					Response response = testRunner.getResponse(step.getID(), 25000L);
+
+					Execution execution = new Execution();
+					Date date = new Date();
+					execution.setRunDate(date);
+					execution.setResponse(response);
+					step.addExecution(execution);
+
+					testProjectService.setStepByUID(step, step.getID());
+
+					// force the stepItem to refresh
+					treeItem.setValue(null);
+					treeItem.setValue(step);
+
+					// set the response of the current selected step
+					if (treeView.getSelectionModel().getSelectedItem().equals(treeItem)) {
+						setResponse();
+					}
+					return null;
+				}
+			};
+			Platform.runLater(task);
+		}
 	}
 	
 	private class TestSuiteTreeImplementation extends TreeCell<Object> {
@@ -611,6 +637,5 @@ public class TestMachineController {
 		
 		definitionTab.getTabPane().getSelectionModel().select(definitionTab);
 		responseTab.setDisable(true);
-		
 	}
 }
