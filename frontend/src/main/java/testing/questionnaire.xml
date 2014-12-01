@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<userData>    
+<question id="Q1" type ="desc">
+    <text>Enter the name of the Component</text>
+</question>
+<question id ="Q2" type ="list">
+    <text>Select mechanism type</text>
+    <choices>
+        <choice> Type 1 </choice>
+        <choice> Type 2 </choice>
+        <choice> Type 3 </choice>
+        <choice> Type 4 </choice>
+    </choices>
+</question>
+<question id ="Q5" type="yesNo">
+    <text> Whether the parts have been verified by the supervisor? </text>
+</question>
+<question id ="Q6" type="yesNo">
+    <text> Whether the component is available within the domicile </text>
+</question>
+<question id ="Q7" type="value">
+    <text> Enter the quantity </text>
+</question>
+<question id ="Q8" type="value">
+    <text> Enter the unit price </text>
+</question>
+</userData>
