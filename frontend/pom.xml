@@ -106,6 +106,22 @@
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-json</artifactId>
 		</dependency>
+		<dependency>
+ 			 <groupId>eu.mihosoft.vrl.workflow-8.0</groupId>
+ 			 <artifactId>vworkflows-fx</artifactId>
+ 			 <version>0.1-r2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+  			<groupId>eu.mihosoft.vrl.workflow-8.0</groupId>
+ 			 <artifactId>vworkflows-core</artifactId>
+		     <version>0.1-r2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+	<groupId>org.codehaus.groovy</groupId>
+	<artifactId>groovy-all</artifactId>
+	<version>2.3.7</version>
+</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>

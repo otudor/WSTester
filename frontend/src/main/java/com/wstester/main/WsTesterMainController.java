@@ -595,9 +595,13 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					stageRest = new Stage();
 					isDisplayed4 = true;
 					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/REST/Rest.fxml"));
+						//TODOL:  Make this fxml shorter (doesnt load from : /fxml/....  now)
+						
+						root = FXMLLoader.load(getClass().getResource("/fxml/REST/DragFinalUI.fxml"));
 						Scene second = new Scene(root);
-						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
+//						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
+						 second.getStylesheets().setAll(
+					                "/plot2d/resources/default.css");
 						//second.setFill(Color.TRANSPARENT);
 						//second.setFill(Color.TRANSPARENT);
 						//stageRest.initStyle(StageStyle.TRANSPARENT);
