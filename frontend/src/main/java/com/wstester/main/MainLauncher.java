@@ -68,9 +68,9 @@ public class MainLauncher extends Application {
         
         primaryStage.setScene(scene);
 //        primaryStage.setFullScreen(true);
-        if(mainContainer.getScreen(screen2ID)!=null){
+        if (mainContainer.getScreen(screen2ID)!=null) {
         	primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-    			public void handle(WindowEvent we) {
+    			public void handle(WindowEvent event) {
     				
     	    		ICamelContextManager manager = null;
 					try {
@@ -81,13 +81,12 @@ public class MainLauncher extends Application {
 					}
 					
     	    		manager.closeCamelContext();
-    	    		
+    	    		System.exit(0); //NOPMD
     			}
     		});  
         
         } 
-//        	primaryStage.initStyle(StageStyle.TRANSPARENT);
-        	primaryStage.show();
+        primaryStage.show();
     }
 
     /**

@@ -2,4 +2,9 @@
     <Match>
         <Bug pattern = "SIC_INNER_SHOULD_BE_STATIC_ANON"/>
     </Match>
+    <Match>
+    	<Class name = "com.wstester.main.MainLauncher$1"/>
+    	<Method name = "handle"/>
+        <Bug pattern = "DM_EXIT"/>
+    </Match>
 </FindBugsFilter>

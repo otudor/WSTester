@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+ 
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns:fx="http://javafx.com/fxml" fx:controller="test.MyControllerClass">
+  <TreeView fx:id="locationTreeView" layoutX="0" layoutY="0" prefHeight="193.0" prefWidth="471.0" />
+</AnchorPane>
