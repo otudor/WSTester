@@ -13,7 +13,7 @@
                   <Pane fx:id="toolBar" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="workPlace" layoutX="136.0" prefHeight="606.0" prefWidth="889.0" />
+            <AnchorPane fx:id="workPlace" layoutX="136.0" prefHeight="800.0" prefWidth="889.0" />
          </children>
       </Pane>
    </children>

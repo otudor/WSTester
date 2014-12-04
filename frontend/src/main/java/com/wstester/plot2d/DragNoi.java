@@ -256,7 +256,7 @@ public class DragNoi extends Application {
         FXValueSkinFactory fXSkinFactory = new FXValueSkinFactory(canvas.getContentPane());
 //        fXSkinFactory.addSkinClassForValueType(FunctionInput.class, InputFunctionFlowNodeSkin.class);
         fXSkinFactory.addSkinClassForValueType(Plotter2D.class, Plotter2DFlowNodeSkin.class);
-        fXSkinFactory.addSkinClassForValueType(FunctionInput.class, DataBaseFlowNodeSkin.class);
+//        fXSkinFactory.addSkinClassForValueType(FunctionInput.class, DataBaseFlowNodeSkin.class);
        //        fXSkinFactory.createChild();
         canvas.setOnDragDropped(new EventHandler <DragEvent>() {
       	  

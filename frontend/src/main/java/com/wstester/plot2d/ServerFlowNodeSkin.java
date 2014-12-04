@@ -10,9 +10,9 @@ import eu.mihosoft.vrl.workflow.VFlow;
 import eu.mihosoft.vrl.workflow.VNode;
 import eu.mihosoft.vrl.workflow.fx.FXSkinFactory;
 
-public class DataBaseFlowNodeSkin extends CustomFlowNodeSkinNew {
+public class ServerFlowNodeSkin extends CustomFlowNodeSkinNew {
 
-    public DataBaseFlowNodeSkin(FXSkinFactory skinFactory,
+    public ServerFlowNodeSkin(FXSkinFactory skinFactory,
             VNode model, VFlow controller) {
         super(skinFactory, model, controller);
 
@@ -20,7 +20,7 @@ public class DataBaseFlowNodeSkin extends CustomFlowNodeSkinNew {
 
     @Override
     protected Node createView() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DataBaseUI.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ServerUI.fxml"));
 
         try {
             fxmlLoader.load();
@@ -37,8 +37,6 @@ public class DataBaseFlowNodeSkin extends CustomFlowNodeSkinNew {
         
         return root;
     }
-    
-    
     
     
 }

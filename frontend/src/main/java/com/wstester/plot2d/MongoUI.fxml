@@ -21,10 +21,10 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Port:  " textFill="#eeff00" GridPane.halignment="RIGHT" />
-            <Label text="DBName:  " textFill="#eeff00" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <Label text="Username:  " textFill="#eeff00" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-            <Label text="Password:  " textFill="#eeff00" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label text="Port:  " textFill="#be00ff" GridPane.halignment="RIGHT" />
+            <Label text="DBName:  " textFill="#be00ff" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Label text="Username:  " textFill="#be00ff" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Label text="Password:  " textFill="#be00ff" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
             <TextField GridPane.columnIndex="1" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />

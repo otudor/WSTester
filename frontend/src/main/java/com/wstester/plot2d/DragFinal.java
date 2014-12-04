@@ -92,6 +92,7 @@ public class DragFinal implements Initializable{
 	private VBox newIco2 = new VBox();
 	private VBox newIco3 = new VBox();
 	private VBox newIco4 = new VBox();
+	private VBox newIco5 = new VBox();
 	private VCanvas canvas = new VCanvas();
 	private VFlow flow = FlowFactory.newFlow();
     /**
@@ -144,7 +145,7 @@ public class DragFinal implements Initializable{
 
 
 	private void createTools() {
-		     newIco = (VBox) CreateIcon("Database-icon.png");
+		     newIco = (VBox) CreateIcon("Downloads-2-icon.png");
 	         newIco.setLayoutX(10);
 	         newIco.setLayoutY(10);
 	        
@@ -159,7 +160,11 @@ public class DragFinal implements Initializable{
 	         newIco4 = (VBox) CreateIcon("man-icon.png");
 	         newIco4.setLayoutX(10);
 	         newIco4.setLayoutY(340);
-	         toolBar.getChildren().addAll(newIco, newIco2, newIco3, newIco4);
+	         
+	         newIco5 = (VBox) CreateIcon("Download-icon.png");
+	         newIco5.setLayoutX(10);
+	         newIco5.setLayoutY(450);
+	         toolBar.getChildren().addAll(newIco, newIco2, newIco3, newIco4, newIco5);
 	         
 			
 		
@@ -236,59 +241,67 @@ public class DragFinal implements Initializable{
 	              event.consume();
 	          }
 	      });
+	      newIco5.setOnDragDetected(new EventHandler <MouseEvent>() {
+	          public void handle(MouseEvent event) {
+	              /* drag was detected, start drag-and-drop gesture*/
+	              System.out.println("3onDragDetected");
+	              
+	              /* allow any transfer mode */
+	              Dragboard db = newIco.startDragAndDrop(TransferMode.ANY);
+//	              
+//	              /* put a string on dragboard */
+	              ClipboardContent content = new ClipboardContent();
+	              content.putString("lalala");
+	              db.setContent(content);
+	              Type = "Fifth";
+	              event.consume();
+	          }
+	      });
+	     
 	      
 	      moveIcons(canvas, flow);
 	      
 	      FXValueSkinFactory fXSkinFactory = new FXValueSkinFactory(canvas.getContentPane());
 //        fXSkinFactory.addSkinClassForValueType(FunctionInput.class, InputFunctionFlowNodeSkin.class);
-        fXSkinFactory.addSkinClassForValueType(Plotter2D.class, Plotter2DFlowNodeSkin.class);
+//        fXSkinFactory.addSkinClassForValueType(Plotter2D.class, Plotter2DFlowNodeSkin.class);
+//        fXSkinFactory.addSkinClassForValueType(FunctionInput.class, DataBaseFlowNodeSkin.class);
+	      
+//        fXSkinFactory.addSkinClassForValueType(FunctionInput.class, ServerFlowNodeSkin.class);
         fXSkinFactory.addSkinClassForValueType(FunctionInput.class, DataBaseFlowNodeSkin.class);
-       //        fXSkinFactory.createChild();
+        fXSkinFactory.addSkinClassForValueType(ServerInput.class, ServerFlowNodeSkin.class);
+        fXSkinFactory.addSkinClassForValueType(RestInput.class, RestFlowNodeSkin.class);
+        fXSkinFactory.addSkinClassForValueType(SoapInput.class, SoapFlowNodeSkin.class);
+        fXSkinFactory.addSkinClassForValueType(MongoInput.class, MongoFlowNodeSkin.class);
+                
         canvas.setOnDragDropped(new EventHandler <DragEvent>() {
       	  
             public void handle(DragEvent event) {
                 /* data dropped */
            	 
-            	if (Type.equals("First")) {
+            	if (Type.equals("Fourth")) {
             
                 		
                 System.out.println("asdadsasdada");
                 
-              VNode plotter1 = createPlotterNode(flow, "Plotter");
-              plotter1.setId(Math.random()+"");
-              plotter1.setX(600);
-              plotter1.setY(180);
-             
-             
-               
-              
-//              n1.addInput("data");	
-//              n1.addOutput("data");
-              // make it visible
-//              flow.setVisible(true);
+                VNode n1 = createMongoNode(flow, "Rest",
+                        new MongoInput("x*x+a*sin(x*3)", 80, 1));
+                n1.setId(Math.random()+"");
+                //stilul cu ploter
+//              VNode plotter1 = createPlotterNode(flow, "Plotter");
+//              plotter1.setId(Math.random()+"");
+    
               int numNodesPerRow = 2;
 
               // defines the gap between the nodes
               double gap = 30;
-//
-//              // defines the node dimensions
-              plotter1.setX(gap + (2 % numNodesPerRow) * (plotter1.getWidth() + gap));
-              plotter1.setY(gap + (2 / numNodesPerRow) * (plotter1.getHeight() + gap));
-              
 
-       //       FXValueSkinFactory c = new FXValueSkinFactory(canvas.getContentPane());
-              // register visualizations for Integer, String and Image
-             
-//             fXSkinFactory.addSkinClassForValueType(Plotter2D.class, Plotter2DFlowNodeSkin.class);
-               
+//              // defines the node dimensions
+              n1.setX(gap + (2 % numNodesPerRow) * (n1.getWidth() + gap));
+              n1.setY(gap + (2 / numNodesPerRow) * (n1.getHeight() + gap));
               
               
-              
-			// generate the ui for the flow
-             // flow.removeSkinFactories(c);
-            //  flow.removeSkinFactories(fXSkinFactory);
-          //   flow.addSkinFactories(fXSkinFactory);
-            
+        
+              flow.removeSkinFactories(fXSkinFactory);
               flow.addSkinFactories(fXSkinFactory);
 //              WorkflowIO.saveToXML("D:\test", flow);
 //              WorkflowIO.loadFromXML("D:\test");
@@ -297,8 +310,8 @@ public class DragFinal implements Initializable{
             	if (Type.equals("Secound")) {
             		 System.out.println("adada");
                    
-                   VNode n1 = createInputNode(flow, "Input 1",
-                           new FunctionInput("x*x+a*sin(x*3)", 80, 1));
+                   VNode n1 = createRestNode(flow, "Rest",
+                           new RestInput("x*x+a*sin(x*3)", 80, 1));
                    n1.setId(Math.random()+"");
   
                    
@@ -324,11 +337,12 @@ public class DragFinal implements Initializable{
                  
                  
                  // generate the ui for the flow
+                 flow.removeSkinFactories(fXSkinFactory);
                  flow.addSkinFactories(fXSkinFactory);
              
             	}
             	if (Type.equals("Third")) {
-            		VNode n1 = createDbNode(flow, "Data Base",
+            		VNode n1 = createDbNode(flow, "MySQL",
                             new FunctionInput("x*x+a*sin(x*3)", 80, 1));
                     n1.setId(Math.random()+"");
                     
@@ -341,13 +355,15 @@ public class DragFinal implements Initializable{
                     n1.setX(gap + (2 % numNodesPerRow) * (n1.getWidth() + gap));
                     n1.setY(gap + (2 / numNodesPerRow) * (n1.getHeight() + gap));
                     
+
+                    flow.removeSkinFactories(fXSkinFactory);
                     flow.addSkinFactories(fXSkinFactory);
             	
             	}
             	
-            	if (Type.equals("Fourth")) {
-            		VNode n1 = createServiceNode(flow, "Service",
-                            new FunctionInput("x*x+a*sin(x*3)", 80, 1));
+            	if (Type.equals("First")) {
+            		VNode n1 = createServerNode(flow, "Server",
+                            new ServerInput("x*x+a*sin(x*3)", 80, 1));
                     n1.setId(Math.random()+"");
                     
                     int numNodesPerRow = 2;
@@ -359,6 +375,26 @@ public class DragFinal implements Initializable{
                     n1.setX(gap + (2 % numNodesPerRow) * (n1.getWidth() + gap));
                     n1.setY(gap + (2 / numNodesPerRow) * (n1.getHeight() + gap));
                     
+                    flow.removeSkinFactories(fXSkinFactory);
+                    flow.addSkinFactories(fXSkinFactory);
+            	
+            	}
+            	
+            	if (Type.equals("Fifth")) {
+            		VNode n1 = createSoapNode(flow, "Soap",
+                            new SoapInput("x*x+a*sin(x*3)", 80, 1));
+                    n1.setId(Math.random()+"");
+                    
+                    int numNodesPerRow = 2;
+                    
+                    // defines the gap between the nodes
+                    double gap = 30; 
+      //
+//                    // defines the node dimensions
+                    n1.setX(gap + (2 % numNodesPerRow) * (n1.getWidth() + gap));
+                    n1.setY(gap + (2 / numNodesPerRow) * (n1.getHeight() + gap));
+                    
+                    flow.removeSkinFactories(fXSkinFactory);
                     flow.addSkinFactories(fXSkinFactory);
             	
             	}
@@ -460,646 +496,74 @@ public class DragFinal implements Initializable{
 	         return functionNode;
 	    }
 	    
-	    private static VNode createServiceNode (VFlow flow, String title, FunctionInput input) {
+	    private static VNode createServerNode (VFlow flow, String title, ServerInput input) {
 	   	 VNode functionNode = flow.newNode();
 	        functionNode.setWidth(300);
 	        functionNode.setHeight(380);
 	        functionNode.setTitle(title);
 	       functionNode.getValueObject().setValue(input);
 
-	        Connector output = functionNode.addInput("data");
-
+	        Connector outputMySql = functionNode.addInput("MySql");
+	        Connector outputRest = functionNode.addInput("MySql");
+	        Connector outputSoap = functionNode.addInput("MySql");
+	        Connector outputMongo = functionNode.addInput("data");
+	        
+	        
 	        return functionNode;
 	   }
 	    
-	    private static VNode createPlotterNode(VFlow flow, String title) {
-	        VNode plotterNode = flow.newNode();
-	        plotterNode.setWidth(600);
-	        plotterNode.setHeight(400);
-	        plotterNode.setTitle(title);
-	        plotterNode.getValueObject().setValue(new Plotter2D());
+	    private static VNode createRestNode (VFlow flow, String title, RestInput input) {
+		   	 VNode functionNode = flow.newNode();
+		        functionNode.setWidth(300);
+		        functionNode.setHeight(380);
+		        functionNode.setTitle(title);
+		       functionNode.getValueObject().setValue(input);
 
+		        Connector output = functionNode.addInput("data");
+
+		        return functionNode;
+		   }
 	    
-	        Connector input = plotterNode.addInput("data");
-	        
+	    private static VNode createSoapNode (VFlow flow, String title, SoapInput input) {
+		   	 VNode functionNode = flow.newNode();
+		        functionNode.setWidth(300);
+		        functionNode.setHeight(380);
+		        functionNode.setTitle(title);
+		       functionNode.getValueObject().setValue(input);
 
+		        Connector output = functionNode.addInput("data");
 
-	        return plotterNode;
-	    }
+		        return functionNode;
+		   }
+	    
+	    private static VNode createMongoNode (VFlow flow, String title, MongoInput input) {
+		   	 VNode functionNode = flow.newNode();
+		        functionNode.setWidth(300);
+		        functionNode.setHeight(380);
+		        functionNode.setTitle(title);
+		       functionNode.getValueObject().setValue(input);
+
+		        Connector output = functionNode.addInput("data");
+
+		        return functionNode;
+		   }
+	   
+	    
+	    //plotterul cu imput
+	    
+//	    private static VNode createPlotterNode(VFlow flow, String title) {
+//	        VNode plotterNode = flow.newNode();
+//	        plotterNode.setWidth(600);
+//	        plotterNode.setHeight(400);
+//	        plotterNode.setTitle(title);
+//	        plotterNode.getValueObject().setValue(new Plotter2D());
+//
+//	    
+//	        Connector input = plotterNode.addInput("data");
+//	        
+//
+//
+//	        return plotterNode;
+//	    }
 		
 }
-//	
-//    
-//    	
-//        // create a new flow object
-//        VFlow flow = FlowFactory.newFlow();
-////        VFlow flow = WorkflowIO.loadFromXML(Paths.get("D:\\FileNameToWrite.txt"));
-//       
-//        // make it visible
-//        flow.setVisible(true);
-//        
-//        VCanvas canvas = new VCanvas();
-//        Pane toolBar = new Pane();
-//        Group root = new Group();
-//        
-//        toolBar.setStyle("-fx-background-color: red;");
-//        toolBar.setPrefSize(200,600);
-//        VBox newIco = (VBox) CreateIcon("Database-icon.png");
-//        newIco.setLayoutX(10);
-//        newIco.setLayoutY(10);
-//       
-//        VBox newIco2 = (VBox) CreateIcon("Group-icon.png");
-//        newIco2.setLayoutX(10);
-//        newIco2.setLayoutY(120);
-//        
-//        VBox newIco3 = (VBox) CreateIcon("Database-icon.png");
-//        newIco3.setLayoutX(10);
-//        newIco3.setLayoutY(230);
-//        
-//        VBox newIco4 = (VBox) CreateIcon("man-icon.png");
-//        newIco4.setLayoutX(10);
-//        newIco4.setLayoutY(340);
-//        toolBar.getChildren().addAll(newIco, newIco2, newIco3, newIco4);
-//        
-//        Button saveBtn = new Button();
-//        saveBtn.setLayoutX(10);
-//        saveBtn.setLayoutY(450);
-//        saveBtn.setText("SAVE");
-//        toolBar.getChildren().add(saveBtn);
-//        Button loadBtn = new Button();
-//        loadBtn.setLayoutX(10);
-//        loadBtn.setLayoutY(500);
-//        loadBtn.setText("Load");
-//        toolBar.getChildren().add(loadBtn);
-//        
-//        File a = new File("D:\\FileNameToWrite.txt");
-//        
-//        saveBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//			
-//			@Override
-//			public void handle(MouseEvent event) {
-////			  String xml = WorkflowIO.saveToXML( flow.getModel());
-////				try {
-//////					File a = new File("D:\\FileNameToWrite.txt");
-//////					FileUtils.writeStringToFile(a, xml);
-////				} catch (IOException e) {
-////					// TODO Auto-generated catch block
-////					e.printStackTrace();
-////				}
-//				
-//			
-//				try {
-//					WorkflowIO.saveToXML(Paths.get("D:\\FileNameToWrite.txt"), flow.getModel());
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//        });
-//        
-//        
-//        loadBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//			
-//			@Override
-//			public void handle(MouseEvent event) {
-//			 
-//				try {
-//					VFlow flow = WorkflowIO.loadFromXML(Paths.get("D:\\FileNameToWrite.txt"));
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			
-//			}
-//        });
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        newIco.setOnDragDetected(new EventHandler <MouseEvent>() {
-//            public void handle(MouseEvent event) {
-//                /* drag was detected, start drag-and-drop gesture*/
-//                System.out.println("onDragDetected");
-//                
-//                /* allow any transfer mode */
-//                Dragboard db = newIco.startDragAndDrop(TransferMode.ANY);
-////                
-////                /* put a string on dragboard */
-//                ClipboardContent content = new ClipboardContent();
-//                content.putString("lalala");
-//                db.setContent(content);
-//                Type = "First";
-//                event.consume();
-//            }
-//        });
-//        
-//        
-//        
-//        newIco2.setOnDragDetected(new EventHandler <MouseEvent>() {
-//            public void handle(MouseEvent event) {
-//                /* drag was detected, start drag-and-drop gesture*/
-//                System.out.println("onDragDetected");
-//                
-//                /* allow any transfer mode */
-//                Dragboard db = newIco.startDragAndDrop(TransferMode.ANY);
-////                
-////                /* put a string on dragboard */
-//                ClipboardContent content = new ClipboardContent();
-//                content.putString("lalala");
-//                db.setContent(content);
-//                Type = "Secound";
-//                event.consume();
-//            }
-//        });
-//        
-//        
-//        
-//        newIco3.setOnDragDetected(new EventHandler <MouseEvent>() {
-//            public void handle(MouseEvent event) {
-//                /* drag was detected, start drag-and-drop gesture*/
-//                System.out.println("3onDragDetected");
-//                
-//                /* allow any transfer mode */
-//                Dragboard db = newIco.startDragAndDrop(TransferMode.ANY);
-////                
-////                /* put a string on dragboard */
-//                ClipboardContent content = new ClipboardContent();
-//                content.putString("lalala");
-//                db.setContent(content);
-//                Type = "Third";
-//                event.consume();
-//            }
-//        });
-//        
-//        newIco4.setOnDragDetected(new EventHandler <MouseEvent>() {
-//            public void handle(MouseEvent event) {
-//                /* drag was detected, start drag-and-drop gesture*/
-//                System.out.println("3onDragDetected");
-//                
-//                /* allow any transfer mode */
-//                Dragboard db = newIco.startDragAndDrop(TransferMode.ANY);
-////                
-////                /* put a string on dragboard */
-//                ClipboardContent content = new ClipboardContent();
-//                content.putString("lalala");
-//                db.setContent(content);
-//                Type = "Fourth";
-//                event.consume();
-//            }
-//        });
-//        
-//        
-//        moveIcons(canvas, flow);
-//        
-//        FXValueSkinFactory fXSkinFactory = new FXValueSkinFactory(canvas.getContentPane());
-////        fXSkinFactory.addSkinClassForValueType(FunctionInput.class, InputFunctionFlowNodeSkin.class);
-//        fXSkinFactory.addSkinClassForValueType(Plotter2D.class, Plotter2DFlowNodeSkin.class);
-//        fXSkinFactory.addSkinClassForValueType(FunctionInput.class, DataBaseFlowNodeSkin.class);
-//       //        fXSkinFactory.createChild();
-//        canvas.setOnDragDropped(new EventHandler <DragEvent>() {
-//      	  
-//            public void handle(DragEvent event) {
-//                /* data dropped */
-//           	 
-//            	if (Type.equals("First")) {
-//            
-//                		
-//                System.out.println("asdadsasdada");
-//                
-//              VNode plotter1 = createPlotterNode(flow, "Plotter");
-//              plotter1.setId(Math.random()+"");
-//              plotter1.setX(600);
-//              plotter1.setY(180);
-//             
-//             
-//               
-//              
-////              n1.addInput("data");	
-////              n1.addOutput("data");
-//              // make it visible
-////              flow.setVisible(true);
-//              int numNodesPerRow = 2;
-//
-//              // defines the gap between the nodes
-//              double gap = 30;
-////
-////              // defines the node dimensions
-//              plotter1.setX(gap + (2 % numNodesPerRow) * (plotter1.getWidth() + gap));
-//              plotter1.setY(gap + (2 / numNodesPerRow) * (plotter1.getHeight() + gap));
-//              
-//
-//       //       FXValueSkinFactory c = new FXValueSkinFactory(canvas.getContentPane());
-//              // register visualizations for Integer, String and Image
-//             
-////             fXSkinFactory.addSkinClassForValueType(Plotter2D.class, Plotter2DFlowNodeSkin.class);
-//               
-//              
-//              
-//              
-//			// generate the ui for the flow
-//             // flow.removeSkinFactories(c);
-//            //  flow.removeSkinFactories(fXSkinFactory);
-//          //   flow.addSkinFactories(fXSkinFactory);
-//            
-//              flow.addSkinFactories(fXSkinFactory);
-////              WorkflowIO.saveToXML("D:\test", flow);
-////              WorkflowIO.loadFromXML("D:\test");
-//            	}
-//            	
-//            	if (Type.equals("Secound")) {
-//            		 System.out.println("adada");
-//                   
-//                   VNode n1 = createInputNode(flow, "Input 1",
-//                           new FunctionInput("x*x+a*sin(x*3)", 80, 1));
-//                   n1.setId(Math.random()+"");
-//  
-//                   
-////                 n1.addInput("data");	
-////                 n1.addOutput("data");
-//                 // make it visible
-////                 flow.setVisible(true);
-//                 int numNodesPerRow = 2;
-//  
-//                 // defines the gap between the nodes
-//                 double gap = 30; 
-//   //
-////                 // defines the node dimensions
-//                 n1.setX(gap + (2 % numNodesPerRow) * (n1.getWidth() + gap));
-//                 n1.setY(gap + (2 / numNodesPerRow) * (n1.getHeight() + gap));
-//                 
-//                 
-//                 
-//                 // register visualizations for Integer, String and Image
-//                
-//        //        fXSkinFactory.addSkinClassForValueType(Plotter2D.class, Plotter2DFlowNodeSkin.class);
-//                  
-//                 
-//                 
-//                 // generate the ui for the flow
-//                 flow.addSkinFactories(fXSkinFactory);
-//             
-//            	}
-//            	if (Type.equals("Third")) {
-//            		VNode n1 = createDbNode(flow, "Data Base",
-//                            new FunctionInput("x*x+a*sin(x*3)", 80, 1));
-//                    n1.setId(Math.random()+"");
-//                    
-//                    int numNodesPerRow = 2;
-//                    
-//                    // defines the gap between the nodes
-//                    double gap = 30; 
-//      //
-////                    // defines the node dimensions
-//                    n1.setX(gap + (2 % numNodesPerRow) * (n1.getWidth() + gap));
-//                    n1.setY(gap + (2 / numNodesPerRow) * (n1.getHeight() + gap));
-//                    
-//                    flow.addSkinFactories(fXSkinFactory);
-//            	
-//            	}
-//            	
-//            	if (Type.equals("Fourth")) {
-//            		VNode n1 = createServiceNode(flow, "Service",
-//                            new FunctionInput("x*x+a*sin(x*3)", 80, 1));
-//                    n1.setId(Math.random()+"");
-//                    
-//                    int numNodesPerRow = 2;
-//                    
-//                    // defines the gap between the nodes
-//                    double gap = 30; 
-//      //
-////                    // defines the node dimensions
-//                    n1.setX(gap + (2 % numNodesPerRow) * (n1.getWidth() + gap));
-//                    n1.setY(gap + (2 / numNodesPerRow) * (n1.getHeight() + gap));
-//                    
-//                    flow.addSkinFactories(fXSkinFactory);
-//            	
-//            	}
-//            	 
-//              event.consume();
-//            }
-//               
-//        
-//        });
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        root.getChildren().add(toolBar);
-//        root.getChildren().add(canvas);
-//        
-//        
-////        VNode plotter1 = createPlotterNode(flow, "Plotter");
-////        plotter1.setX(600);
-////        plotter1.setY(180);
-//
-//        // show the main stage/window
-//        showFlow(flow, primaryStage, "VWorkflows Tutorial 05: View 1", canvas, root);
-//      
-////        FXValueSkinFactory fXSkinFactory = new FXValueSkinFactory(canvas.getContentPane());
-//        
-//        // register visualizations for Integer, String and Image
-//       
-////        fXSkinFactory.addSkinClassForValueType(Plotter2D.class, Plotter2DFlowNodeSkin.class);
-////        fXSkinFactory.addSkinClassForValueType(FunctionInput.class, InputFunctionFlowNodeSkin.class); 
-//        
-//        
-//        // generate the ui for the flow
-////        flow.addSkinFactories(fXSkinFactory);
-//        
-//       
-////        moveIcons(newIco2, canvas, flow );
-//        
-//    }
-//
-//    private static VNode createInputNode(VFlow flow, String title, FunctionInput input) {
-//        VNode functionNode = flow.newNode();
-//        functionNode.setWidth(300);
-//        functionNode.setHeight(380);
-//        functionNode.setTitle(title);
-//       functionNode.getValueObject().setValue(input);
-//
-//        Connector output = functionNode.addOutput("data");
-//
-//        return functionNode;
-//    }
-//    
-//    private static VNode createDbNode (VFlow flow, String title, FunctionInput input) {
-//    	 VNode functionNode = flow.newNode();
-//         functionNode.setWidth(300);
-//         functionNode.setHeight(380);
-//         functionNode.setTitle(title);
-//        functionNode.getValueObject().setValue(input);
-//
-//         Connector output = functionNode.addOutput("data");
-//
-//         return functionNode;
-//    }
-//    
-//    private static VNode createServiceNode (VFlow flow, String title, FunctionInput input) {
-//   	 VNode functionNode = flow.newNode();
-//        functionNode.setWidth(300);
-//        functionNode.setHeight(380);
-//        functionNode.setTitle(title);
-//       functionNode.getValueObject().setValue(input);
-//
-//        Connector output = functionNode.addInput("data");
-//
-//        return functionNode;
-//   }
-//    
-//    private static VNode createPlotterNode(VFlow flow, String title) {
-//        VNode plotterNode = flow.newNode();
-//        plotterNode.setWidth(600);
-//        plotterNode.setHeight(400);
-//        plotterNode.setTitle(title);
-//        plotterNode.getValueObject().setValue(new Plotter2D());
-//
-//    
-//        Connector input = plotterNode.addInput("data");
-//        
-//
-//
-//        return plotterNode;
-//    }
-//
-//    private void showFlow(VFlow flow, Stage stage, String title,  VCanvas canvas, Group root ) {
-//
-//        // create scalable root pane
-//       
-//        canvas.setTranslateToMinNodePos(false);
-//        canvas.setMinScaleX(0.5);
-//        canvas.setMinScaleY(0.5);
-//        canvas.setMaxScaleX(1.0);
-//        canvas.setMaxScaleY(1.0);
-//        
-//        
-////        Pane toolBar = new Pane();
-////       
-//       toolBar.setStyle("-fx-background-color: red;");
-//       toolBar.setPrefSize(200,600);
-//       canvas.setPrefSize(824, 600);
-//       canvas.setLayoutX(200);
-//      
-////       VBox newIco2 = (VBox) CreateIcon("Group-icon.png");
-////       newIco2.setLayoutX(10);
-////       newIco2.setLayoutY(120);
-////       VBox newIco3 = (VBox) CreateIcon("man-icon.png");
-////       newIco3.setLayoutX(10);
-////       newIco3.setLayoutY(230);
-//       
-//       
-//      
-//        // define it as background (css class)
-//        canvas.getStyleClass().setAll("vflow-background");
-//
-//        // create skin factory for flow visualization
-//       
-//
-//        // the usual application setup
-//        Scene scene = new Scene(root, 1024, 600);
-////        moveIcons(newIco, canvas, flow );
-//        // add css style
-//        scene.getStylesheets().setAll(
-//                "/plot2d/resources/default.css");
-//
-//       
-//        stage.setTitle("");
-//        stage.setScene(scene);
-//        stage.show();
-//    }
-//
-//    public Node CreateIcon(String iconPath) {
-//		VBox vbox2 = new VBox();
-//		vbox2.setPadding(new Insets(2)); // Set all sides to 10
-//		vbox2.setSpacing(2);
-//		ImageView imageComp = new ImageView(new Image(
-//				DragNoi.class.getResourceAsStream(iconPath)));
-//		imageComp
-//		.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
-//
-//
-//		Reflection reflection = new Reflection();
-//		reflection.setFraction(0.7);
-//		imageComp.setEffect(reflection);
-//
-//		
-//		vbox2.getChildren().addAll(imageComp);
-//		return vbox2;
-//	}
-//    
-////    public void moveIcons(VBox icon, VCanvas canvas, VFlow flow) {
-////    	icon.setOnDragDetected(new EventHandler <MouseEvent>() {
-////            public void handle(MouseEvent event) {
-////                /* drag was detected, start drag-and-drop gesture*/
-////                System.out.println("onDragDetected");
-////                
-////                /* allow any transfer mode */
-////                Dragboard db = icon.startDragAndDrop(TransferMode.ANY);
-//////                
-//////                /* put a string on dragboard */
-////                ClipboardContent content = new ClipboardContent();
-////                content.putString("lalala");
-////                db.setContent(content);
-////                
-////                event.consume();
-////                
-////            }
-////        });
-////    	 canvas.setOnDragOver(new EventHandler <DragEvent>() {
-////             public void handle(DragEvent event) {
-////                 /* data is dragged over the target */
-////                 System.out.println("onDragOver");
-////                 
-////                 /* accept it only if it is  not dragged from the same node 
-////                  * and if it has a string data */
-//////                 if (event.getGestureSource() != canvas &&
-//////                         event.getDragboard().hasString()) {
-////                     /* allow for both copying and moving, whatever user chooses */
-////                     event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-////                    
-//////                 }
-////                 
-////                 event.consume();
-////             }
-////         });
-////         
-////         
-////         canvas.setOnDragEntered(new EventHandler <DragEvent>() {
-////             public void handle(DragEvent event) {
-////                 /* the drag-and-drop gesture entered the target */
-////                 System.out.println("onDragEntered");
-////                 /* show to the user that it is an actual gesture target */
-//////                 if (event.getGestureSource() != target &&
-//////                         event.getDragboard().hasString()) {
-////////                     canvas.setFill(Color.GREEN);
-//////                 }
-////                 
-////                 event.consume();
-////             }
-////         });
-////
-////         canvas.setOnDragExited(new EventHandler <DragEvent>() {
-////             public void handle(DragEvent event) {
-////                 /* mouse moved away, remove the graphical cues */
-//////                 canvas.setFill(Color.BLACK);
-////                 
-////                 event.consume();
-////             }
-////         });
-////        
-////         canvas.setOnDragDropped(new EventHandler <DragEvent>() {
-////        	
-////             public void handle(DragEvent event) {
-////                 /* data dropped */
-////            	 
-////            	 
-////                 System.out.println("adada");
-////                 
-////                 VNode n1 = createInputNode(flow, "Input 1",
-////                         new FunctionInput("x*x+a*sin(x*3)", 80, 1));
-////
-////                 
-//////               n1.addInput("data");	
-//////               n1.addOutput("data");
-////               // make it visible
-//////               flow.setVisible(true);
-////               int numNodesPerRow = 2;
-////
-////               // defines the gap between the nodes
-////               double gap = 30;
-//// //
-//////               // defines the node dimensions
-////               n1.setX(gap + (2 % numNodesPerRow) * (n1.getWidth() + gap));
-////               n1.setY(gap + (2 / numNodesPerRow) * (n1.getHeight() + gap));
-////               
-////               FXValueSkinFactory fXSkinFactory = new FXValueSkinFactory(canvas.getContentPane());
-////
-////               // register visualizations for Integer, String and Image
-////              
-//////               fXSkinFactory.addSkinClassForValueType(Plotter2D.class, Plotter2DFlowNodeSkin.class);
-////               fXSkinFactory.addSkinClassForValueType(FunctionInput.class, InputFunctionFlowNodeSkin.class); 
-////               
-////               
-////               // generate the ui for the flow
-////               flow.addSkinFactories(fXSkinFactory);
-////               event.consume();	
-////            	 }
-////            	 
-////             
-////            
-////                
-////         
-////         });
-////          
-////    }
-////         
-////         
-////         
-////         
-////         
-////         
-//         
-//         
-//         //incercare pentru iconul 2
-//         
-//         
-//         public void moveIcons( VCanvas canvas, VFlow flow) {
-//         	
-//           
-//         	 canvas.setOnDragOver(new EventHandler <DragEvent>() {
-//                  public void handle(DragEvent event) {
-//                      /* data is dragged over the target */
-//                      System.out.println("onDragOver");
-//                      
-//                      /* accept it only if it is  not dragged from the same node 
-//                       * and if it has a string data */
-////                      if (event.getGestureSource() != canvas &&
-////                              event.getDragboard().hasString()) {
-//                          /* allow for both copying and moving, whatever user chooses */
-//                          event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-//                         
-////                      }
-//                      
-//                      event.consume();
-//                  }
-//              });
-//              
-//              
-//              canvas.setOnDragEntered(new EventHandler <DragEvent>() {
-//                  public void handle(DragEvent event) {
-//                      /* the drag-and-drop gesture entered the target */
-//                      System.out.println("onDragEntered");
-//                      /* show to the user that it is an actual gesture target */
-////                      if (event.getGestureSource() != target &&
-////                              event.getDragboard().hasString()) {
-//////                          canvas.setFill(Color.GREEN);
-////                      }
-//                      
-//                      event.consume();
-//                  }
-//              });
-//
-//              canvas.setOnDragExited(new EventHandler <DragEvent>() {
-//                  public void handle(DragEvent event) {
-//                      /* mouse moved away, remove the graphical cues */
-////                      canvas.setFill(Color.BLACK);
-//                      
-//                      event.consume();
-//                  }
-//              });
-//             
-//            
-//    
-//         }
-//
-//
-//
-//
-//
