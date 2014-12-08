@@ -18,7 +18,9 @@ public enum MainConstants {
 	SOAP_STEP("/fxml/TestFactory/SoapStep.fxml"),
 	SOAP_STEP_ICON("/images/treeIcon_TestStep.png"),
 	STEP_PASSED_ICON("/images/treeIcon_step_passed.png"),
-	STEP_ERROR_ICON("/images/treeIcon_step_error.png");
+	STEP_ERROR_ICON("/images/treeIcon_step_error.png"),
+	SAVE_ICON("/images/save.png"),
+	HOMEPAGE_ICON("/images/load.png");
 	
 	private String value;
 	
