@@ -17,10 +17,22 @@ public enum MainConstants {
 	MYSQL_STEP_ICON("/images/treeIcon_TestStep.png"),
 	SOAP_STEP("/fxml/TestFactory/SoapStep.fxml"),
 	SOAP_STEP_ICON("/images/treeIcon_TestStep.png"),
+	SOAP_DEFINITION("/fxml/SOAP/SOAPDefinition.fxml"),
+	SOAP_WINDOW_ICON("/images/DropBox-Folder.png"),
 	STEP_PASSED_ICON("/images/treeIcon_step_passed.png"),
 	STEP_ERROR_ICON("/images/treeIcon_step_error.png"),
 	SAVE_ICON("/images/save.png"),
-	HOMEPAGE_ICON("/images/load.png");
+	HOMEPAGE_ICON("/images/home.png"),
+	START_ICON("/images/VLC.png"),
+	ASSETS_ICON("/images/Applications-Folder.png"), 
+	ENVIRONMENTS_ICON("/images/Globe-Folder.png"),
+	SOAP_ICON("/images/DropBox-Folder.png"),
+	REST_ICON("/images/Downloads-Folder.png"),
+	TEST_FACTORY_ICON("/images/Smart-Folder.png"),
+	VARIABLES_ICON("/images/Documents-Folder.png"),
+	ASSET_MENU_ICON("/images/asset2.png"),
+	APPLICATION_STYLE_CSS("/styles/application.css")
+	;
 	
 	private String value;
 	
