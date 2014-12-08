@@ -83,11 +83,9 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	private VBox variablesIcon = new VBox();  //v
 	private VBox startButton= new VBox();
 	private VBox soapIcon= new VBox(); //SOAP
-	private VBox newIcoM3= new VBox(); //REST
-	private VBox newIcoM4= new VBox();
-	private VBox newIcoM5= new VBox();
-	private VBox newIcoM6= new VBox(); //ENV
-	private VBox newIcoM7= new VBox(); //v
+	private VBox restWindowIcon= new VBox(); //REST
+	private VBox environmentIcon= new VBox(); //ENV
+	private VBox varWindowIcon= new VBox(); //v
 	private Stage stage = new Stage();
 	private Stage stageRightClickMenu = new Stage();
 	private Stage stageSoap = new Stage();
@@ -197,7 +195,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		envIcon = (VBox) CreateIcon(MainConstants.ENVIRONMENTS_ICON.toString(), "Environments Definition");
 		envIcon.setLayoutX(10);
 		envIcon.setLayoutY(120);
-		soapWindowIcon = (VBox) CreateIcon(MainConstants.SOAP_ICON.toString(), "Import SOAP Definitions");
+		soapWindowIcon = (VBox) CreateIcon(MainConstants.SOAP_WINDOW_ICON.toString(), "Import SOAP Definitions");
 		soapWindowIcon.setLayoutX(10);
 		soapWindowIcon.setLayoutY(220);
 		restIcon = (VBox) CreateIcon(MainConstants.REST_ICON.toString(), "Import REST Definitions");
@@ -537,7 +535,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					try {
 						//TODOL:  Make this fxml shorter (doesnt load from : /fxml/....  now)
 						
-						root = FXMLLoader.load(getClass().getResource("/fxml/REST/DragFinalUI.fxml"));
+						root = FXMLLoader.load(getClass().getResource(MainConstants.REST_WINDOW.toString()));
 						Scene second = new Scene(root);
 //						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
 						 second.getStylesheets().setAll(
@@ -547,17 +545,17 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						//stageRest.initStyle(StageStyle.TRANSPARENT);
 						root.getStyleClass().add("mainWind");
 
-						newIcoM3 = (VBox) CreateIcon("/images/Downloads-Folder.png","Rest");	
-						newIcoM3.setLayoutX(poz);
-						newIcoM3.setLayoutY(1);
-						lista.add(newIcoM3);
+						restWindowIcon = (VBox) CreateIcon(MainConstants.REST_WINDOW_ICON.toString(),"Rest");	
+						restWindowIcon.setLayoutX(poz);
+						restWindowIcon.setLayoutY(1);
+						lista.add(restWindowIcon);
 						//AfiseazaIcons("/images/task_img_open.png","RestWindow");
-						bar.getChildren().add(newIcoM3);
+						bar.getChildren().add(restWindowIcon);
 						poz=poz+100;
 //						expandIcons(newIcoM3);
 
 
-						newIcoM3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						restWindowIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 							@Override
 							public void handle(MouseEvent event2) {
@@ -609,12 +607,12 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 						stageRest.setOnCloseRequest(new EventHandler<WindowEvent>() {
 							public void handle(WindowEvent we) {
-								ind=lista.indexOf(newIcoM3);
+								ind=lista.indexOf(restWindowIcon);
 								arrangeIcons(ind);
-								lista.remove(lista.indexOf(newIcoM3));
+								lista.remove(lista.indexOf(restWindowIcon));
 
 								System.out.println("Inchid stage'ul rest");
-								bar.getChildren().remove(newIcoM3);;
+								bar.getChildren().remove(restWindowIcon);;
 								//stageRest.setScene(null);
 								isDisplayed4 = false;
 								stageRest=null;
@@ -672,25 +670,25 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					stageVar = new Stage();
 					isDisplayed6 = true;
 					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/var/variables.fxml"));
+						root = FXMLLoader.load(getClass().getResource(MainConstants.VARIABLES_FXML.toString()));
 						Scene second = new Scene(root);
-						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
+						second.getStylesheets().add(WsTesterMain.class.getResource(MainConstants.APPLICATION_STYLE_CSS.toString()).toExternalForm());
 						//second.setFill(Color.TRANSPARENT);
 						//second.setFill(Color.TRANSPARENT);
 						//stageRest.initStyle(StageStyle.TRANSPARENT);
 						root.getStyleClass().add("mainWind");
 
-						newIcoM7 = (VBox) CreateIcon("/images/Documents-Folder.png","Variables");	
-						newIcoM7.setLayoutX(poz);
-						newIcoM7.setLayoutY(1);
-						lista.add(newIcoM7);
+						varWindowIcon = (VBox) CreateIcon(MainConstants.VARIABLES_ICON.toString(),"Variables");	
+						varWindowIcon.setLayoutX(poz);
+						varWindowIcon.setLayoutY(1);
+						lista.add(varWindowIcon);
 						//AfiseazaIcons("/images/task_img_open.png","RestWindow");
-						bar.getChildren().add(newIcoM7);
+						bar.getChildren().add(varWindowIcon);
 						poz=poz+100;
 //						expandIcons(newIcoM7);
 
 
-						newIcoM7.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						varWindowIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 							@Override
 							public void handle(MouseEvent event2) {
@@ -734,12 +732,12 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 						stageVar.setOnCloseRequest(new EventHandler<WindowEvent>() {
 							public void handle(WindowEvent we) {
-								ind=lista.indexOf(newIcoM7);
+								ind=lista.indexOf(varWindowIcon);
 								arrangeIcons(ind);
-								lista.remove(lista.indexOf(newIcoM7));
+								lista.remove(lista.indexOf(varWindowIcon));
 
 								System.out.println("Inchid stage'ul var");
-								bar.getChildren().remove(newIcoM7);;
+								bar.getChildren().remove(varWindowIcon);;
 								//stageRest.setScene(null);
 								isDisplayed6 = false;
 								stageVar=null;
@@ -785,19 +783,19 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					try {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.TEST_MACHINE.toString()));
 						Scene second = new Scene(loader.load(), 1280, 720);
-						((Node)loader.getRoot()).getStyleClass().addAll("/styles/testFactory.css");
+						((Node)loader.getRoot()).getStyleClass().addAll(MainConstants.TEST_FACTORY_STYLE.toString());
 						stage.setTitle("Test Suites window");
 
 
-						newIcoM4 = (VBox) CreateIcon("/images/Smart-Folder.png", "Test Factory");
-						newIcoM4.setLayoutX(poz);
-						newIcoM4.setLayoutY(1);
-						lista.add(newIcoM4);
-						bar.getChildren().add(newIcoM4);
+						testFactoryIcon = (VBox) CreateIcon(MainConstants.TEST_FACTORY_ICON.toString(), "Test Factory");
+						testFactoryIcon.setLayoutX(poz);
+						testFactoryIcon.setLayoutY(1);
+						lista.add(testFactoryIcon);
+						bar.getChildren().add(testFactoryIcon);
 						poz = poz + 100;
 						// expandIcons(newIcoM4);
 
-						newIcoM4.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						testFactoryIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 							@Override
 							public void handle(MouseEvent event2) {
@@ -825,12 +823,12 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 						stageRnd.setOnCloseRequest(new EventHandler<WindowEvent>() {
 							public void handle(WindowEvent we) {
-								ind = lista.indexOf(newIcoM4);
+								ind = lista.indexOf(testFactoryIcon);
 								arrangeIcons(ind);
-								lista.remove(lista.indexOf(newIcoM4));
+								lista.remove(lista.indexOf(testFactoryIcon));
 
 								System.out.println("Inchid stage'ul");
-								bar.getChildren().remove(newIcoM4);
+								bar.getChildren().remove(testFactoryIcon);
 								isTestFactoryDisplayed = false;
 								stageRnd = null;
 								poz = poz - 100;
@@ -874,20 +872,20 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					isDisplayed = true;
 
 					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/assets/Assets.fxml"));
+						root = FXMLLoader.load(getClass().getResource(MainConstants.ASSETS_FXML.toString()));
 						Scene second = new Scene(root);
 						String cssPath="/styles/asset.css";     //    the css path for assets
 						second.getStylesheets().addAll(cssPath); //	   the css add 			
 						root.getStyleClass().add("mainWind");
 
-						newIcoM5 = (VBox) CreateIcon("/images/Applications-Folder.png","Assets");	
-						newIcoM5.setLayoutX(poz);
-						newIcoM5.setLayoutY(1);
-						lista.add(newIcoM5);
-						bar.getChildren().add(newIcoM5);
+						assetsIcon = (VBox) CreateIcon(MainConstants.ASSETS_ICON.toString(),"Assets");	
+						assetsIcon.setLayoutX(poz);
+						assetsIcon.setLayoutY(1);
+						lista.add(assetsIcon);
+						bar.getChildren().add(assetsIcon);
 						poz=poz+100;
 //						expandIcons(newIcoM5);
-						newIcoM5.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						assetsIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 							@Override
 							public void handle(MouseEvent event2) {
@@ -923,12 +921,12 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						// modificare laur
 						stageAssets.setOnCloseRequest(new EventHandler<WindowEvent>() {
 							public void handle(WindowEvent we) {
-								ind=lista.indexOf(newIcoM5);
+								ind=lista.indexOf(assetsIcon);
 								arrangeIcons(ind);
-								lista.remove(lista.indexOf(newIcoM5));
+								lista.remove(lista.indexOf(assetsIcon));
 
 								System.out.println("Inchid stage'ul");
-								bar.getChildren().remove(newIcoM5);
+								bar.getChildren().remove(assetsIcon);
 								isDisplayed = false;
 								stageAssets=null;
 								poz=poz-100;
@@ -971,7 +969,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					try {
 						 
 						WsTesterMainController.stageEnvironment=stageEnv;
-						root = FXMLLoader.load(getClass().getResource("/fxml/environment/EnvironmentManager.fxml"));
+						root = FXMLLoader.load(getClass().getResource(MainConstants.ENVIRONMENT_MANAGER_FXML.toString()));
 						EnvironmentsAppFactory factory = new EnvironmentsAppFactory();
 						MainPresenter mainPresenter = factory.getMainPresenter();
 						mainPresenter.loadEnvironments();
@@ -982,15 +980,15 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						String cssPath = "/styles/Envwindows.css"; // the css path for enviroment window	
 						second.getStylesheets().addAll(cssPath);   // the css add
 						root.getStyleClass().add("mainWind");
-						newIcoM6 = (VBox) CreateIcon("/images/Globe-Folder.png","Env");	
-						newIcoM6.setLayoutX(poz);
-						newIcoM6.setLayoutY(1);
-						lista.add(newIcoM6);
-						bar.getChildren().addAll(newIcoM6);
+						environmentIcon = (VBox) CreateIcon(MainConstants.ENVIRONMENTS_ICON.toString(),"Env");	
+						environmentIcon.setLayoutX(poz);
+						environmentIcon.setLayoutY(1);
+						lista.add(environmentIcon);
+						bar.getChildren().addAll(environmentIcon);
 						poz=poz+100;
 //						expandIcons(newIcoM6);
 
-						newIcoM6.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						environmentIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 							@Override
 							public void handle(MouseEvent event2) {
@@ -1019,12 +1017,12 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						// stergere din taskbar upon closure
 						stageEnv.setOnCloseRequest(new EventHandler<WindowEvent>() {
 							public void handle(WindowEvent we) {
-								ind=lista.indexOf(newIcoM6);
+								ind=lista.indexOf(environmentIcon);
 								arrangeIcons(ind);
-								lista.remove(lista.indexOf(newIcoM6));
+								lista.remove(lista.indexOf(environmentIcon));
 
 								System.out.println("Inchid stage'ul");
-								bar.getChildren().remove(newIcoM6);;
+								bar.getChildren().remove(environmentIcon);;
 								isDisplayed2 = false;
 								stageEnv=null;
 								poz=poz-100;
@@ -1338,7 +1336,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 				public void handle(ActionEvent event) {
 					if (isDisplayed==true) {
 						stageAssets.close();
-						bar.getChildren().remove(newIcoM5);
+						bar.getChildren().remove(assetsIcon);
 						isDisplayed=false;
 						poz=poz-100;
 					}
@@ -1346,7 +1344,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					if (isDisplayed2==true) {
 						isDisplayed2=false;
 						stageEnv.close();
-						bar.getChildren().remove(newIcoM6);
+						bar.getChildren().remove(environmentIcon);
 						poz=poz-100;
 					}
 					
@@ -1358,19 +1356,19 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					}
 					if (isDisplayed4==true) {
 						stageRest.close();
-						bar.getChildren().remove(newIcoM3);
+						bar.getChildren().remove(restWindowIcon);
 						isDisplayed4=false;
 						poz=poz-100;
 					}
 					if (isTestFactoryDisplayed==true) {
 						stageRnd.close();
-						bar.getChildren().remove(newIcoM4);
+						bar.getChildren().remove(testFactoryIcon);
 						isTestFactoryDisplayed=false;
 						poz=poz-100;
 					}
 					if (isDisplayed6==true) {
 						stageVar.close();
-						bar.getChildren().remove(newIcoM7);
+						bar.getChildren().remove(varWindowIcon);
 						isDisplayed6=false;
 						poz=poz-100;
 					}

@@ -13,6 +13,7 @@ public enum MainConstants {
 	MONGO_STEP_ICON("/images/treeIcon_TestStep.png"),
 	REST_STEP("/fxml/TestFactory/RestStep.fxml"),
 	REST_STEP_ICON("/images/treeIcon_TestStep.png"),
+	REST_ICON("/images/Downloads-Folder.png"),
 	MYSQL_STEP("/fxml/TestFactory/MySQLStep.fxml"),
 	MYSQL_STEP_ICON("/images/treeIcon_TestStep.png"),
 	SOAP_STEP("/fxml/TestFactory/SoapStep.fxml"),
@@ -24,14 +25,18 @@ public enum MainConstants {
 	SAVE_ICON("/images/save.png"),
 	HOMEPAGE_ICON("/images/home.png"),
 	START_ICON("/images/VLC.png"),
-	ASSETS_ICON("/images/Applications-Folder.png"), 
-	ENVIRONMENTS_ICON("/images/Globe-Folder.png"),
-	SOAP_ICON("/images/DropBox-Folder.png"),
-	REST_ICON("/images/Downloads-Folder.png"),
-	TEST_FACTORY_ICON("/images/Smart-Folder.png"),
-	VARIABLES_ICON("/images/Documents-Folder.png"),
+	ASSETS_ICON("/images/Applications-Folder.png"),
+	ASSETS_FXML("/fxml/assets/Assets.fxml"),
 	ASSET_MENU_ICON("/images/asset2.png"),
-	APPLICATION_STYLE_CSS("/styles/application.css")
+	TEST_FACTORY_ICON("/images/Smart-Folder.png"),
+	TEST_FACTORY_STYLE("/styles/testFactory.css"),
+	VARIABLES_ICON("/images/Documents-Folder.png"),
+	VARIABLES_FXML("/fxml/var/variables.fxml"),
+	APPLICATION_STYLE_CSS("/styles/application.css"),
+	REST_WINDOW("/fxml/REST/DragFinalUI.fxml"),
+	REST_WINDOW_ICON("/images/Downloads-Folder.png"),
+	ENVIRONMENTS_ICON("/images/Globe-Folder.png"),
+	ENVIRONMENT_MANAGER_FXML("/fxml/environment/EnvironmentManager.fxml")
 	;
 	
 	private String value;
