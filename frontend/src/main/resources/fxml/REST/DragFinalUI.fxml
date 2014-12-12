@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +14,13 @@
                   <Pane fx:id="toolBar" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="workPlace" layoutX="136.0" prefHeight="800.0" prefWidth="889.0" />
+            <AnchorPane fx:id="workPlace" layoutX="136.0" layoutY="48.0" prefHeight="702.0" prefWidth="890.0" />
+            <AnchorPane layoutX="136.0" prefHeight="50.0" prefWidth="890.0">
+               <children>
+                  <Button fx:id="addEnvButton" layoutX="768.0" layoutY="13.0" mnemonicParsing="false" text="Add Envirorment" />
+                  <ComboBox fx:id="envirormentBox" layoutX="24.0" layoutY="13.0" prefHeight="25.0" prefWidth="698.0" />
+               </children>
+            </AnchorPane>
          </children>
       </Pane>
    </children>

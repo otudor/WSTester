@@ -40,6 +40,9 @@ import org.apache.commons.io.FileUtils;
 
 import com.wstester.main.ControlledScreen;
 import com.wstester.main.ScreensController;
+import com.wstester.model.Environment;
+import com.wstester.model.Service;
+import com.wstester.util.TestProjectService;
 
 import eu.mihosoft.vrl.workflow.Connector;
 import eu.mihosoft.vrl.workflow.FlowFactory;
@@ -65,6 +68,8 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -87,6 +92,10 @@ public class DragFinal implements Initializable{
 	private Pane toolBar;
 	@FXML
 	private AnchorPane workPlace;
+	@FXML
+	private ComboBox<Environment> envirormentBox;
+	@FXML
+	private Button addEnvButton;
 	String Type;
 	private VBox newIco = new VBox();
 	private VBox newIco2 = new VBox();
@@ -95,6 +104,7 @@ public class DragFinal implements Initializable{
 	private VBox newIco5 = new VBox();
 	private VCanvas canvas = new VCanvas();
 	private VFlow flow = FlowFactory.newFlow();
+	private String envId;
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
      * main() serves only as fallback in case the application can not be
@@ -127,9 +137,31 @@ public class DragFinal implements Initializable{
          
          this.createWorkspace();
          this.createTools();
-	
-	
+         this.showEnvirorments();
+//         this.addEnvirorments();
 }
+	
+//	private void addEnvirorments() {
+//		addEnvButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//
+//			@Override
+//			public void handle(MouseEvent event) {
+//				
+//				envirormentBox.getItems().add("adad");
+//				
+//			}
+//		});
+//	}
+//	
+	
+	
+	private void showEnvirorments() {
+		
+		TestProjectService testProjectService = new TestProjectService();
+		List<Environment> environmentList = testProjectService.getEnvironmentList();
+		envirormentBox.getItems().addAll(environmentList);
+	}
+	
 	
 	
 	
@@ -263,14 +295,14 @@ public class DragFinal implements Initializable{
 	      
 	      FXValueSkinFactory fXSkinFactory = new FXValueSkinFactory(canvas.getContentPane());
 //        fXSkinFactory.addSkinClassForValueType(FunctionInput.class, InputFunctionFlowNodeSkin.class);
-//        fXSkinFactory.addSkinClassForValueType(Plotter2D.class, Plotter2DFlowNodeSkin.class);
+        fXSkinFactory.addSkinClassForValueType(Plotter2D.class, Plotter2DFlowNodeSkin.class);
 //        fXSkinFactory.addSkinClassForValueType(FunctionInput.class, DataBaseFlowNodeSkin.class);
 	      
 //        fXSkinFactory.addSkinClassForValueType(FunctionInput.class, ServerFlowNodeSkin.class);
-        fXSkinFactory.addSkinClassForValueType(FunctionInput.class, DataBaseFlowNodeSkin.class);
+        fXSkinFactory.addSkinClassForValueType(MySql.class, DataBaseFlowNodeSkin.class);
         fXSkinFactory.addSkinClassForValueType(ServerInput.class, ServerFlowNodeSkin.class);
-        fXSkinFactory.addSkinClassForValueType(RestInput.class, RestFlowNodeSkin.class);
-        fXSkinFactory.addSkinClassForValueType(SoapInput.class, SoapFlowNodeSkin.class);
+        fXSkinFactory.addSkinClassForValueType(Rest.class, RestFlowNodeSkin.class);
+        fXSkinFactory.addSkinClassForValueType(Soap.class, SoapFlowNodeSkin.class);
         fXSkinFactory.addSkinClassForValueType(MongoInput.class, MongoFlowNodeSkin.class);
                 
         canvas.setOnDragDropped(new EventHandler <DragEvent>() {
@@ -283,12 +315,12 @@ public class DragFinal implements Initializable{
                 		
                 System.out.println("asdadsasdada");
                 
-                VNode n1 = createMongoNode(flow, "Rest",
-                        new MongoInput("x*x+a*sin(x*3)", 80, 1));
-                n1.setId(Math.random()+"");
+//                VNode n1 = createMongoNode(flow, "Rest",
+//                        new MongoInput("x*x+a*sin(x*3)", 80, 1));
+//                n1.setId(Math.random()+"");
                 //stilul cu ploter
-//              VNode plotter1 = createPlotterNode(flow, "Plotter");
-//              plotter1.setId(Math.random()+"");
+              VNode n1 = createPlotterNode(flow, "Mongo");
+              n1.setId(Math.random()+"");
     
               int numNodesPerRow = 2;
 
@@ -310,8 +342,7 @@ public class DragFinal implements Initializable{
             	if (Type.equals("Secound")) {
             		 System.out.println("adada");
                    
-                   VNode n1 = createRestNode(flow, "Rest",
-                           new RestInput("x*x+a*sin(x*3)", 80, 1));
+                   VNode n1 = createRestNode(flow, "Rest");
                    n1.setId(Math.random()+"");
   
                    
@@ -342,8 +373,9 @@ public class DragFinal implements Initializable{
              
             	}
             	if (Type.equals("Third")) {
-            		VNode n1 = createDbNode(flow, "MySQL",
-                            new FunctionInput("x*x+a*sin(x*3)", 80, 1));
+//            		VNode n1 = createDbNode(flow, "MySQL",
+//                            new FunctionInput("x*x+a*sin(x*3)", 80, 1));
+            		 VNode n1 = createMySqlNode(flow,"MySQL");
                     n1.setId(Math.random()+"");
                     
                     int numNodesPerRow = 2;
@@ -381,8 +413,7 @@ public class DragFinal implements Initializable{
             	}
             	
             	if (Type.equals("Fifth")) {
-            		VNode n1 = createSoapNode(flow, "Soap",
-                            new SoapInput("x*x+a*sin(x*3)", 80, 1));
+            		VNode n1 = createSoapNode(flow, "Soap");
                     n1.setId(Math.random()+"");
                     
                     int numNodesPerRow = 2;
@@ -412,7 +443,7 @@ public class DragFinal implements Initializable{
 			vbox2.setPadding(new Insets(2)); // Set all sides to 10
 			vbox2.setSpacing(2);
 			ImageView imageComp = new ImageView(new Image(
-					DragNoi.class.getResourceAsStream(iconPath)));
+					DragFinal.class.getResourceAsStream(iconPath)));
 			imageComp
 			.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
 
@@ -472,7 +503,7 @@ public class DragFinal implements Initializable{
           });
 	 }
 	 
-	  private static VNode createInputNode(VFlow flow, String title, FunctionInput input) {
+	  private static VNode createInputNode(VFlow flow, String title, ServerInput input) {
 	        VNode functionNode = flow.newNode();
 	        functionNode.setWidth(300);
 	        functionNode.setHeight(380);
@@ -484,14 +515,14 @@ public class DragFinal implements Initializable{
 	        return functionNode;
 	    }
 	    
-	    private static VNode createDbNode (VFlow flow, String title, FunctionInput input) {
+	    private static VNode createDbNode (VFlow flow, String title, MySql input) {
 	    	 VNode functionNode = flow.newNode();
 	         functionNode.setWidth(300);
 	         functionNode.setHeight(380);
 	         functionNode.setTitle(title);
 	        functionNode.getValueObject().setValue(input);
 
-	         Connector output = functionNode.addOutput("data");
+	        Connector inputMySql = functionNode.addInput("MySql");
 
 	         return functionNode;
 	    }
@@ -503,38 +534,39 @@ public class DragFinal implements Initializable{
 	        functionNode.setTitle(title);
 	       functionNode.getValueObject().setValue(input);
 
-	        Connector outputMySql = functionNode.addInput("MySql");
-	        Connector outputRest = functionNode.addInput("MySql");
-	        Connector outputSoap = functionNode.addInput("MySql");
-	        Connector outputMongo = functionNode.addInput("data");
+//	        Connector outputMySql = functionNode.addOutput("MySql");
+	        Connector outputRest = functionNode.addOutput("Rest");
+	        Connector outputSoap = functionNode.addOutput("Soap");
+	        Connector outputMongo = functionNode.addOutput("data");
+	        Connector outputMySql = functionNode.addOutput("MySql");
 	        
 	        
 	        return functionNode;
 	   }
 	    
-	    private static VNode createRestNode (VFlow flow, String title, RestInput input) {
-		   	 VNode functionNode = flow.newNode();
-		        functionNode.setWidth(300);
-		        functionNode.setHeight(380);
-		        functionNode.setTitle(title);
-		       functionNode.getValueObject().setValue(input);
-
-		        Connector output = functionNode.addInput("data");
-
-		        return functionNode;
-		   }
+//	    private static VNode createRestNode (VFlow flow, String title, RestInput input) {
+//		   	 VNode functionNode = flow.newNode();
+//		        functionNode.setWidth(300);
+//		        functionNode.setHeight(380);
+//		        functionNode.setTitle(title);
+//		       functionNode.getValueObject().setValue(input);
+//
+//		        Connector output = functionNode.addInput("data");
+//
+//		        return functionNode;
+//		   }
 	    
-	    private static VNode createSoapNode (VFlow flow, String title, SoapInput input) {
-		   	 VNode functionNode = flow.newNode();
-		        functionNode.setWidth(300);
-		        functionNode.setHeight(380);
-		        functionNode.setTitle(title);
-		       functionNode.getValueObject().setValue(input);
-
-		        Connector output = functionNode.addInput("data");
-
-		        return functionNode;
-		   }
+//	    private static VNode createSoapNode (VFlow flow, String title, SoapInput input) {
+//		   	 VNode functionNode = flow.newNode();
+//		        functionNode.setWidth(300);
+//		        functionNode.setHeight(380);
+//		        functionNode.setTitle(title);
+//		       functionNode.getValueObject().setValue(input);
+//
+//		        Connector output = functionNode.addInput("data");
+//
+//		        return functionNode;
+//		   }
 	    
 	    private static VNode createMongoNode (VFlow flow, String title, MongoInput input) {
 		   	 VNode functionNode = flow.newNode();
@@ -551,19 +583,64 @@ public class DragFinal implements Initializable{
 	    
 	    //plotterul cu imput
 	    
-//	    private static VNode createPlotterNode(VFlow flow, String title) {
-//	        VNode plotterNode = flow.newNode();
-//	        plotterNode.setWidth(600);
-//	        plotterNode.setHeight(400);
-//	        plotterNode.setTitle(title);
-//	        plotterNode.getValueObject().setValue(new Plotter2D());
-//
-//	    
-//	        Connector input = plotterNode.addInput("data");
-//	        
-//
-//
-//	        return plotterNode;
-//	    }
+	    private static VNode createPlotterNode(VFlow flow, String title) {
+	        VNode plotterNode = flow.newNode();
+	        plotterNode.setWidth(600);
+	        plotterNode.setHeight(400);
+	        plotterNode.setTitle(title);
+	        plotterNode.getValueObject().setValue(new Plotter2D());
+
+	    
+	        Connector input = plotterNode.addInput("data");
+	        
+
+
+	        return plotterNode;
+	    }
+	    
+	    private static VNode createMySqlNode(VFlow flow, String title) {
+	        VNode MySqlNode = flow.newNode();
+	        MySqlNode.setWidth(600);
+	        MySqlNode.setHeight(400);
+	        MySqlNode.setTitle(title);
+	        MySqlNode.getValueObject().setValue(new MySql());
+
+	    
+	        Connector inputMySql = MySqlNode.addInput("MySql");
+	        
+
+
+	        return MySqlNode;
+	    }
+	    
+	    private static VNode createRestNode(VFlow flow, String title) {
+	        VNode MySqlNode = flow.newNode();
+	        MySqlNode.setWidth(600);
+	        MySqlNode.setHeight(400);
+	        MySqlNode.setTitle(title);
+	        MySqlNode.getValueObject().setValue(new Rest());
+
+	    
+	        Connector inputMySql = MySqlNode.addInput("Rest");
+	        
+
+
+	        return MySqlNode;
+	    }
+	    
+	    private static VNode createSoapNode(VFlow flow, String title) {
+	        VNode MySqlNode = flow.newNode();
+	        MySqlNode.setWidth(600);
+	        MySqlNode.setHeight(400);
+	        MySqlNode.setTitle(title);
+	        MySqlNode.getValueObject().setValue(new Soap());
+
+	    
+	        Connector inputMySql = MySqlNode.addInput("Soap");
+	        
+
+
+	        return MySqlNode;
+	    }
 		
 }

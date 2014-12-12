@@ -129,6 +129,27 @@
         rgb(0,20,0) 100%); 
 }
 
+.vnode-connector-MySql {
+	-fx-fill: radial-gradient(center 50% 25%,
+        radius 75%,
+        rgb(232,212,32) 0%,
+        rgb(0,20,0) 100%); 
+}
+
+.vnode-connector-Rest {
+	-fx-fill: radial-gradient(center 50% 25%,
+        radius 75%,
+        rgb(0,0,225) 0%,
+        rgb(0,20,0) 100%); 
+}
+
+.vnode-connector-Soap {
+	-fx-fill: radial-gradient(center 50% 25%,
+        radius 75%,
+        rgb(255,171,0) 0%,
+        rgb(0,20,0) 100%); 
+}
+
 
 .vnode-connector-control {
     -fx-fill: radial-gradient(center 50% 25%,
@@ -140,6 +161,8 @@
         rgba(0, 0, 0, 0.9),
         7, 0.0, 0, 0);*/
 }
+
+
 
 .vnode-connector-event {
     -fx-fill: radial-gradient(center 50% 25%,

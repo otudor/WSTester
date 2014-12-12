@@ -6,10 +6,10 @@ package com.wstester.plot2d;
 
 import com.wstester.math.MathUtil;
 import com.wstester.model.Environment;
-import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
+import com.wstester.model.SoapService;
 import com.wstester.util.TestProjectService;
 
 import eu.mihosoft.vrl.workflow.ConnectionEvent;
@@ -30,6 +30,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -44,7 +45,7 @@ import javafx.scene.paint.Color;
  *
  * @author Michael Hoffer &lt;info@michaelhoffer.de&gt;
  */
-public class PlotterUIController implements Initializable {
+public class SoapUI2Controller implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -87,7 +88,7 @@ public class PlotterUIController implements Initializable {
             return;
         }
 
-        Plotter2D plotter = (Plotter2D) getNode().getValueObject().getValue();
+        Soap plotter = (Soap) getNode().getValueObject().getValue();
 
          Connector c = getNode().getInputs().get(0);
 
@@ -155,52 +156,45 @@ public class PlotterUIController implements Initializable {
     
     public GridPane createView(){
     	GridPane dataGrid = new GridPane();
+    	Label wsdl = new Label();
+    	wsdl.setText("WSDL URL: ");
+    	wsdl.setTextFill(Color.web("#FFAB00"));
+    	dataGrid.add(wsdl, 0, 0);
     	Label port = new Label();
     	port.setText("Port: ");
-    	port.setTextFill(Color.web("#0076a3"));
-    	dataGrid.add(port, 0, 0);
-    	Label DBName = new Label();
-    	DBName.setText("DBName: ");
-    	DBName.setTextFill(Color.web("#0076a3"));
-    	dataGrid.add(DBName, 0, 1);
-    	Label Username = new Label();
-    	Username.setText("Username: ");
-    	Username.setTextFill(Color.web("#0076a3"));
-    	dataGrid.add(Username, 0, 2);
-    	Label password = new Label();
-    	password.setText("Password: ");
-    	password.setTextFill(Color.web("#0076a3"));
-    	dataGrid.add(password, 0, 3);
-    	
+    	port.setTextFill(Color.web("#FFAB00"));
+    	dataGrid.add(port, 0, 1);
+    	Label path = new Label();
+    	path.setText("Path: ");
+    	path.setTextFill(Color.web("#FFAB00"));
+    	dataGrid.add(path, 0, 2);
+ 
+    	TextField wsdlField = new TextField();
+    	wsdlField.setVisible(true);
+    	wsdlField.setEditable(true);
+    	dataGrid.add(wsdlField, 1, 0);
     	TextField portField = new TextField();
-    	portField.setVisible(true);
-    	portField.setEditable(true);
-    	dataGrid.add(portField, 1, 0);
-    	TextField DBNameField = new TextField();
-    	dataGrid.add(DBNameField, 1, 1);
-    	TextField usernameField = new TextField();
-    	dataGrid.add(usernameField, 1, 2);
-    	TextField passwordField = new TextField();
-    	passwordField.setText("adasda");
-    	dataGrid.add(passwordField, 1, 3);
-    	dataGrid.setDisable(false);
+    	dataGrid.add(portField, 1, 1);
+    	TextField pathField = new TextField();
+    	dataGrid.add(pathField, 1, 2);
     	
     	TestProjectService testProjectService = new TestProjectService();
     	List<Environment> environmentList = testProjectService.getEnvironmentList();
     	
-    	Environment environment = environmentList.get(0);
+    	Environment environment = environmentList.get(1);
     	List<Server> serverList = environment.getServers();
     	for (Server server : serverList){
     		List<Service> serviceList = server.getServices();
     			for (Service service : serviceList) {
-    				if (service instanceof MongoService) {
-    					portField.setText(((MongoService) service).getPort());
-    					DBNameField.setText(((MongoService) service).getDbName());
-    					usernameField.setText(((MongoService) service).getUser());
-    					passwordField.setText(((MongoService) service).getPassword());
+    				if (service instanceof SoapService) {
+    					wsdlField.setText(((SoapService) service).getWsdlURL());
+    					portField.setText(((SoapService) service).getPort());
+    					pathField.setText(((SoapService) service).getPath());
+    					
     				}
     			}
     	}
+    	
     	
 		return dataGrid;
     	

@@ -6,7 +6,6 @@ package com.wstester.plot2d;
 
 import com.wstester.math.MathUtil;
 import com.wstester.model.Environment;
-import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
@@ -44,7 +43,7 @@ import javafx.scene.paint.Color;
  *
  * @author Michael Hoffer &lt;info@michaelhoffer.de&gt;
  */
-public class PlotterUIController implements Initializable {
+public class DataBaseUI2Controller implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -87,7 +86,7 @@ public class PlotterUIController implements Initializable {
             return;
         }
 
-        Plotter2D plotter = (Plotter2D) getNode().getValueObject().getValue();
+        MySql plotter = (MySql) getNode().getValueObject().getValue();
 
          Connector c = getNode().getInputs().get(0);
 
@@ -157,19 +156,19 @@ public class PlotterUIController implements Initializable {
     	GridPane dataGrid = new GridPane();
     	Label port = new Label();
     	port.setText("Port: ");
-    	port.setTextFill(Color.web("#0076a3"));
+    	port.setTextFill(Color.web("#E8D420"));
     	dataGrid.add(port, 0, 0);
     	Label DBName = new Label();
     	DBName.setText("DBName: ");
-    	DBName.setTextFill(Color.web("#0076a3"));
+    	DBName.setTextFill(Color.web("#E8D420"));
     	dataGrid.add(DBName, 0, 1);
     	Label Username = new Label();
     	Username.setText("Username: ");
-    	Username.setTextFill(Color.web("#0076a3"));
+    	Username.setTextFill(Color.web("#E8D420"));
     	dataGrid.add(Username, 0, 2);
     	Label password = new Label();
     	password.setText("Password: ");
-    	password.setTextFill(Color.web("#0076a3"));
+    	password.setTextFill(Color.web("#E8D420"));
     	dataGrid.add(password, 0, 3);
     	
     	TextField portField = new TextField();
@@ -185,22 +184,28 @@ public class PlotterUIController implements Initializable {
     	dataGrid.add(passwordField, 1, 3);
     	dataGrid.setDisable(false);
     	
+    	
+    	
     	TestProjectService testProjectService = new TestProjectService();
     	List<Environment> environmentList = testProjectService.getEnvironmentList();
     	
-    	Environment environment = environmentList.get(0);
+    	Environment environment = environmentList.get(1);
     	List<Server> serverList = environment.getServers();
     	for (Server server : serverList){
     		List<Service> serviceList = server.getServices();
     			for (Service service : serviceList) {
-    				if (service instanceof MongoService) {
-    					portField.setText(((MongoService) service).getPort());
-    					DBNameField.setText(((MongoService) service).getDbName());
-    					usernameField.setText(((MongoService) service).getUser());
-    					passwordField.setText(((MongoService) service).getPassword());
+    				if (service instanceof MySQLService) {
+    					portField.setText(((MySQLService) service).getPort());
+    					DBNameField.setText(((MySQLService) service).getDbName());
+    					usernameField.setText(((MySQLService) service).getUser());
+    					passwordField.setText(((MySQLService) service).getPassword());
     				}
     			}
     	}
+    	
+    	
+    	
+    	
     	
 		return dataGrid;
     	

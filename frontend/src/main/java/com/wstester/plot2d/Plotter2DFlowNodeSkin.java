@@ -65,7 +65,7 @@ public class Plotter2DFlowNodeSkin extends CustomFlowNodeSkinNew {
         contentPane.setMaxScaleY(1.0);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlotterUI.fxml"));
-
+ 
         try {
             fxmlLoader.load();
         } catch (IOException ex) {

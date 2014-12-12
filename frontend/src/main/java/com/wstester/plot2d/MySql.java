@@ -7,15 +7,18 @@ package com.wstester.plot2d;
 import com.wstester.math.GroovyFunction1D;
 import com.wstester.math.MathUtil;
 
+
 import eu.mihosoft.vrl.workflow.VNode;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 
 /**
  *
- * @author Michael Hoffer &lt;info@michaelhoffer.de&gt;
+ * @author Michael Hoffer <info@michaelhoffer.de>
  */
-public class Plotter2D {
+public class MySql {
 
     private VNode node;
 
@@ -45,3 +48,4 @@ public class Plotter2D {
         this.node = node;
     }
 }
+

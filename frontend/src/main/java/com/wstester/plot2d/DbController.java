@@ -20,7 +20,7 @@ public class DbController implements Initializable {
 
 	@FXML
 	private ImageView Db;
-    private FunctionInput input;
+    private MySql input;
 
     
     /**

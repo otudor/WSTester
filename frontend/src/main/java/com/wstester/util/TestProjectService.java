@@ -100,6 +100,12 @@ public class TestProjectService {
 		return testProject.getEnvironmentList();
 	}
 
+	public Environment getEnvironmentById(String id) {
+		
+		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TEST_PROJECT);
+		return testProject.getEnvironment(id);
+	}
+	
 	public List<Server> getServerList(String environmentId) {
 		
 		TestProject testProject = (TestProject) UtilityTool.getEntity(MainConstants.TEST_PROJECT);

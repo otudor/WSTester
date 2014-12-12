@@ -20,8 +20,12 @@ public class RestFlowNodeSkin extends CustomFlowNodeSkinNew {
 
     @Override
     protected Node createView() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RestUI.fxml"));
 
+        contentPane.setMaxScaleX(1.0);
+        contentPane.setMaxScaleY(1.0);
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RestUI2.fxml"));
+ 
         try {
             fxmlLoader.load();
         } catch (IOException ex) {
@@ -29,12 +33,11 @@ public class RestFlowNodeSkin extends CustomFlowNodeSkinNew {
                     log(Level.SEVERE, null, ex);
         }
 
-//        DbController controller = fxmlLoader.getController();
-//        controller.setInput((FunctionInput) getModel().getValueObject().getValue());
-
+        RestUI2Controller controller = fxmlLoader.getController();
+        controller.setNode(getModel());
+        
         Pane root = (Pane) fxmlLoader.getRoot();
-        
-        
+
         return root;
     }
     
