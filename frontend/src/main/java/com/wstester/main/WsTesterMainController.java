@@ -2,12 +2,15 @@ package com.wstester.main;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.stage.FileChooser;
+import javafx.scene.input.MouseButton;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -28,7 +31,6 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -40,15 +42,21 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import jfxtras.scene.menu.CornerMenu;
+import javafx.scene.control.MenuItem;
 
 import com.wstester.RightClickMenu.DemoUtil;
 import com.wstester.RightClickMenu.RadialGlobalMenu;
+import com.wstester.elements.Dialog;
 import com.wstester.environment.Delta;
 import com.wstester.environment.EnvironmentsAppFactory;
 import com.wstester.environment.MainPresenter;
+import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ICamelContextManager;
+import com.wstester.services.definition.ITestProjectActions;
 import com.wstester.util.MainConstants;
+import com.wstester.util.TestProjectService;
 
 public class WsTesterMainController implements Initializable, ControlledScreen {
 
@@ -58,25 +66,26 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	@FXML
 	private AnchorPane topPane;
 	@FXML
-	private VBox newIco;
+	private VBox assetsIcon;
 	@FXML
 	private AnchorPane bar = new AnchorPane();
 	@FXML
 	private Button SaveProject = new Button();
+	
+	@FXML
+	private CornerMenu cornerMenu;
 
 	@FXML
-	private VBox newIco2= new VBox();
-	private VBox newIco3= new VBox(); //SOAP
-	private VBox newIco4= new VBox();  //REST
+	private VBox envIcon= new VBox();
+	private VBox soapWindowIcon= new VBox(); //SOAP
+	private VBox restIcon= new VBox();  //REST
 	private VBox testFactoryIcon= new VBox(); 
-	private VBox newIco6 = new VBox();  //v
-	private VBox newIcoM1= new VBox();
-	private VBox newIcoM2= new VBox(); //SOAP
-	private VBox newIcoM3= new VBox(); //REST
-	private VBox newIcoM4= new VBox();
-	private VBox newIcoM5= new VBox();
-	private VBox newIcoM6= new VBox(); //ENV
-	private VBox newIcoM7= new VBox(); //v
+	private VBox variablesIcon = new VBox();  //v
+	private VBox startButton= new VBox();
+	private VBox soapIcon= new VBox(); //SOAP
+	private VBox restWindowIcon= new VBox(); //REST
+	private VBox environmentIcon= new VBox(); //ENV
+	private VBox varWindowIcon= new VBox(); //v
 	private Stage stage = new Stage();
 	private Stage stageRightClickMenu = new Stage();
 	private Stage stageSoap = new Stage();
@@ -115,6 +124,8 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	//main functionality 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		initializeCornerMenu();
 		this.createIcons();
 		this.createAssetsWindow();
 		this.createEnvWindow();
@@ -125,7 +136,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		this.createTestFactoryWindow();
 		this.createVarWindow(); //v
 		this.saveProject();
-		this.goToLoad();
+		
 		stage.initOwner(WsTesterMain.stage);
 		stage.initOwner(MainLauncher.stage);
 
@@ -150,6 +161,23 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	}
 
 
+	private void initializeCornerMenu() {
+		
+		startButton = (VBox) CreateIcon(MainConstants.START_ICON.toString(),"Start");
+		startButton.setLayoutX(1);
+		startButton.setLayoutY(1);
+		startButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				
+				cornerMenu.show();
+			}
+		});
+		
+		createCornerMenu();
+	}
+
 	private void saveProject() {
 		SaveProject.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -159,119 +187,29 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		});
 	}
 
-
-
-
-	private void goToLoad() {
-		newIcoM1.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if (isDisplayed==true) {
-					stageAssets.close();
-					bar.getChildren().remove(newIcoM5);
-					isDisplayed=false;
-					poz=poz-100;
-				}
-				
-				if (isDisplayed2==true) {
-					isDisplayed2=false;
-					stageEnv.close();
-					bar.getChildren().remove(newIcoM6);
-					poz=poz-100;
-				}
-				
-				if (isDisplayed3==true) {
-					stageSoap.close();
-					bar.getChildren().remove(newIcoM2);
-					isDisplayed3=false;
-					poz=poz-100;
-				}
-				if (isDisplayed4==true) {
-					stageRest.close();
-					bar.getChildren().remove(newIcoM3);
-					isDisplayed4=false;
-					poz=poz-100;
-				}
-				if (isTestFactoryDisplayed==true) {
-					stageRnd.close();
-					bar.getChildren().remove(newIcoM4);
-					isTestFactoryDisplayed=false;
-					poz=poz-100;
-				}
-				if (isDisplayed6==true) {
-					stageVar.close();
-					bar.getChildren().remove(newIcoM7);
-					isDisplayed6=false;
-					poz=poz-100;
-				}
-				
-	    		ICamelContextManager manager = null;
-				try {
-					manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
-				} catch (Exception e) {
-					// TODO Make an exception window that informs the user we could not close the project
-					// he should retry again the same operation
-					e.printStackTrace();
-				}
-	    		manager.closeCamelContext();
-				
-				myController.setScreen(MainLauncher.screen1ID);
-				
-			}
-
-		});
-		
-		
-//		WsTesterMain.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-//			public void handle(WindowEvent we) {
-//				
-//				ServiceLocator serviceLocator = ServiceLocator.getInstance();
-//	    		ICamelContextManager manager = serviceLocator.lookup(ICamelContextManager.class);
-//	    		manager.closeCamelContext();
-//			}
-//		});        
-
-	}
 	//method to create+add the icons
 	private void createIcons(){		
-		newIco = (VBox) CreateIcon("/images/Applications-Folder.png","Assets");
-		newIco.setLayoutX(10);
-		newIco.setLayoutY(20);
-		newIco2 = (VBox) CreateIcon("/images/Globe-Folder.png","   Environments Definition");
-		newIco2.setLayoutX(10);
-		newIco2.setLayoutY(120);
-		newIco3 = (VBox) CreateIcon("/images/DropBox-Folder.png","Import SOAP Definitions");
-		newIco3.setLayoutX(10);
-		newIco3.setLayoutY(220);
-		newIco4 = (VBox) CreateIcon("/images/Downloads-Folder.png","Import REST Definitions");
-		newIco4.setLayoutX(10);
-		newIco4.setLayoutY(320);
-		testFactoryIcon = (VBox) CreateIcon("/images/Smart-Folder.png","Test Factory");
+		assetsIcon = (VBox) CreateIcon(MainConstants.ASSETS_ICON.toString(), "Assets");
+		assetsIcon.setLayoutX(10);
+		assetsIcon.setLayoutY(20);
+		envIcon = (VBox) CreateIcon(MainConstants.ENVIRONMENTS_ICON.toString(), "Environments Definition");
+		envIcon.setLayoutX(10);
+		envIcon.setLayoutY(120);
+		soapWindowIcon = (VBox) CreateIcon(MainConstants.SOAP_WINDOW_ICON.toString(), "Import SOAP Definitions");
+		soapWindowIcon.setLayoutX(10);
+		soapWindowIcon.setLayoutY(220);
+		restIcon = (VBox) CreateIcon(MainConstants.REST_ICON.toString(), "Import REST Definitions");
+		restIcon.setLayoutX(10);
+		restIcon.setLayoutY(320);
+		testFactoryIcon = (VBox) CreateIcon(MainConstants.TEST_FACTORY_ICON.toString(), "Test Factory");
 		testFactoryIcon.setLayoutX(10);
 		testFactoryIcon.setLayoutY(420);
-		newIco6 = (VBox) CreateIcon("/images/Documents-Folder.png","Variables"); //v
-		newIco6.setLayoutX(10); //v
-		newIco6.setLayoutY(520); //v
+		variablesIcon = (VBox) CreateIcon(MainConstants.VARIABLES_ICON.toString(), "Variables"); //v
+		variablesIcon.setLayoutX(10); //v
+		variablesIcon.setLayoutY(520); //v
 
-		newIcoM1 = (VBox) CreateIcon("/images/VLC.png","Start");
-		newIcoM1.setLayoutX(1);
-		newIcoM1.setLayoutY(1);
-
-		//newIcoM2 = (VBox) CreateIcon("/images/task_img_open.png","Soap");	
-		//newIcoM2.setLayoutX(poz);
-		//newIcoM2.setLayoutY(1);
-
-		//newIcoM3 = (VBox) CreateIcon("/images/task_img_open.png","Rest");	
-		//newIcoM3.setLayoutX(poz);
-		//newIcoM3.setLayoutY(1);
-
-
-
-		//VBox.setVgrow(newIco6, Priority.ALWAYS);
-
-		topPane.getChildren().addAll(newIco,newIco2,newIco3,newIco4,testFactoryIcon, newIco6);
-		bar.getChildren().addAll(newIcoM1);
+		topPane.getChildren().addAll(assetsIcon,envIcon,soapWindowIcon,restIcon,testFactoryIcon, variablesIcon);
+		bar.getChildren().addAll(startButton);
 	}
 
 	public void moveIcons(VBox icon){
@@ -396,17 +334,17 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 				stageRightClickMenu.toFront();
 				radialMenu = new RadialGlobalMenu();
 //				System.out.println(getClass().getClassLoader().);
-				radialMenu.addMenuItem("/images/asset2.png", null);
+				radialMenu.addMenuItem(MainConstants.ASSET_MENU_ICON.toString(), null);
 				radialMenu.computeItemsStartAngle();
-				radialMenu.addMenuItem("/images/asset2.png", null);
+				radialMenu.addMenuItem(MainConstants.ASSET_MENU_ICON.toString(), null);
 				radialMenu.computeItemsStartAngle();
-				radialMenu.addMenuItem("/images/asset2.png", null);
+				radialMenu.addMenuItem(MainConstants.ASSET_MENU_ICON.toString(), null);
 				radialMenu.computeItemsStartAngle();
-				radialMenu.addMenuItem("/images/asset2.png", null);
+				radialMenu.addMenuItem(MainConstants.ASSET_MENU_ICON.toString(), null);
 				radialMenu.computeItemsStartAngle();
-				radialMenu.addMenuItem("/images/asset2.png", null);
+				radialMenu.addMenuItem(MainConstants.ASSET_MENU_ICON.toString(), null);
 				radialMenu.computeItemsStartAngle();
-				radialMenu.addMenuItem("/images/asset2.png", null);
+				radialMenu.addMenuItem(MainConstants.ASSET_MENU_ICON.toString(), null);
 				radialMenu.computeItemsStartAngle();
 				
 				radialMenu.translateXProperty().bind(scene.widthProperty().divide(2.0));
@@ -469,7 +407,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	}
 	
 	private void createSOAPWindow(){
-		newIco3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		soapWindowIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {
@@ -480,24 +418,24 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 					isDisplayed3 = true;
 					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/SOAP/SOAPDefinition.fxml"));
+						root = FXMLLoader.load(getClass().getResource(MainConstants.SOAP_DEFINITION.toString()));
 
 						Scene second = new Scene(root);
 
-						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());					
+						second.getStylesheets().add(WsTesterMain.class.getResource(MainConstants.APPLICATION_STYLE_CSS.toString()).toExternalForm());					
 						root.getStyleClass().add("mainWind");
 
-						newIcoM2 = (VBox) CreateIcon("/images/DropBox-Folder.png","Soap");	
-						newIcoM2.setLayoutX(poz);
-						newIcoM2.setLayoutY(1);
-						lista.add(newIcoM2);
-						bar.getChildren().add(newIcoM2);
+						soapWindowIcon = (VBox)CreateIcon(MainConstants.SOAP_WINDOW_ICON.toString(),"Soap");	
+						soapWindowIcon.setLayoutX(poz);
+						soapWindowIcon.setLayoutY(1);
+						lista.add(soapWindowIcon);
+						bar.getChildren().add(soapWindowIcon);
 						poz=poz+100;										
 //						expandIcons(newIcoM2);
 
 
 
-						newIcoM2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						soapWindowIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 							@Override
 							public void handle(MouseEvent event2) {
@@ -538,11 +476,11 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 						stageSoap.setOnCloseRequest(new EventHandler<WindowEvent>() {
 							public void handle(WindowEvent we) {
-								ind=lista.indexOf(newIcoM2);
+								ind=lista.indexOf(soapWindowIcon);
 								arrangeIcons(ind);
-								lista.remove(lista.indexOf(newIcoM2));				        	 
+								lista.remove(lista.indexOf(soapWindowIcon));				        	 
 								System.out.println("Inchid stage'ul");
-								bar.getChildren().remove(newIcoM2);
+								bar.getChildren().remove(soapWindowIcon);
 								isDisplayed3 = false;
 								stageSoap=null;
 								poz=poz-100;
@@ -577,7 +515,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 			}
 		});
-		moveIcons(newIco3);
+		moveIcons(soapWindowIcon);
 
 	}
 
@@ -585,7 +523,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	//pana aici
 
 	private void createRESTWindow(){
-		newIco4.setOnMouseClicked(new EventHandler<MouseEvent>() {			
+		restIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 			@Override
 			public void handle(MouseEvent event) {
 
@@ -597,7 +535,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					try {
 						//TODOL:  Make this fxml shorter (doesnt load from : /fxml/....  now)
 						
-						root = FXMLLoader.load(getClass().getResource("/fxml/REST/DragFinalUI.fxml"));
+						root = FXMLLoader.load(getClass().getResource(MainConstants.REST_WINDOW.toString()));
 						Scene second = new Scene(root);
 //						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
 						 second.getStylesheets().setAll(
@@ -607,17 +545,17 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						//stageRest.initStyle(StageStyle.TRANSPARENT);
 						root.getStyleClass().add("mainWind");
 
-						newIcoM3 = (VBox) CreateIcon("/images/Downloads-Folder.png","Rest");	
-						newIcoM3.setLayoutX(poz);
-						newIcoM3.setLayoutY(1);
-						lista.add(newIcoM3);
+						restWindowIcon = (VBox) CreateIcon(MainConstants.REST_WINDOW_ICON.toString(),"Rest");	
+						restWindowIcon.setLayoutX(poz);
+						restWindowIcon.setLayoutY(1);
+						lista.add(restWindowIcon);
 						//AfiseazaIcons("/images/task_img_open.png","RestWindow");
-						bar.getChildren().add(newIcoM3);
+						bar.getChildren().add(restWindowIcon);
 						poz=poz+100;
 //						expandIcons(newIcoM3);
 
 
-						newIcoM3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						restWindowIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 							@Override
 							public void handle(MouseEvent event2) {
@@ -669,12 +607,12 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 						stageRest.setOnCloseRequest(new EventHandler<WindowEvent>() {
 							public void handle(WindowEvent we) {
-								ind=lista.indexOf(newIcoM3);
+								ind=lista.indexOf(restWindowIcon);
 								arrangeIcons(ind);
-								lista.remove(lista.indexOf(newIcoM3));
+								lista.remove(lista.indexOf(restWindowIcon));
 
 								System.out.println("Inchid stage'ul rest");
-								bar.getChildren().remove(newIcoM3);;
+								bar.getChildren().remove(restWindowIcon);;
 								//stageRest.setScene(null);
 								isDisplayed4 = false;
 								stageRest=null;
@@ -717,12 +655,12 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 			}
 		});
 
-		moveIcons(newIco4);
+		moveIcons(restIcon);
 	}
 	
 	//v
 	private void createVarWindow(){
-		newIco6.setOnMouseClicked(new EventHandler<MouseEvent>() {			
+		variablesIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 			@Override
 			public void handle(MouseEvent event) {
 
@@ -732,25 +670,25 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					stageVar = new Stage();
 					isDisplayed6 = true;
 					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/var/variables.fxml"));
+						root = FXMLLoader.load(getClass().getResource(MainConstants.VARIABLES_FXML.toString()));
 						Scene second = new Scene(root);
-						second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
+						second.getStylesheets().add(WsTesterMain.class.getResource(MainConstants.APPLICATION_STYLE_CSS.toString()).toExternalForm());
 						//second.setFill(Color.TRANSPARENT);
 						//second.setFill(Color.TRANSPARENT);
 						//stageRest.initStyle(StageStyle.TRANSPARENT);
 						root.getStyleClass().add("mainWind");
 
-						newIcoM7 = (VBox) CreateIcon("/images/Documents-Folder.png","Variables");	
-						newIcoM7.setLayoutX(poz);
-						newIcoM7.setLayoutY(1);
-						lista.add(newIcoM7);
+						varWindowIcon = (VBox) CreateIcon(MainConstants.VARIABLES_ICON.toString(),"Variables");	
+						varWindowIcon.setLayoutX(poz);
+						varWindowIcon.setLayoutY(1);
+						lista.add(varWindowIcon);
 						//AfiseazaIcons("/images/task_img_open.png","RestWindow");
-						bar.getChildren().add(newIcoM7);
+						bar.getChildren().add(varWindowIcon);
 						poz=poz+100;
 //						expandIcons(newIcoM7);
 
 
-						newIcoM7.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						varWindowIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 							@Override
 							public void handle(MouseEvent event2) {
@@ -794,12 +732,12 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 						stageVar.setOnCloseRequest(new EventHandler<WindowEvent>() {
 							public void handle(WindowEvent we) {
-								ind=lista.indexOf(newIcoM7);
+								ind=lista.indexOf(varWindowIcon);
 								arrangeIcons(ind);
-								lista.remove(lista.indexOf(newIcoM7));
+								lista.remove(lista.indexOf(varWindowIcon));
 
 								System.out.println("Inchid stage'ul var");
-								bar.getChildren().remove(newIcoM7);;
+								bar.getChildren().remove(varWindowIcon);;
 								//stageRest.setScene(null);
 								isDisplayed6 = false;
 								stageVar=null;
@@ -829,7 +767,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 			}
 		});
 
-		moveIcons(newIco6);
+		moveIcons(variablesIcon);
 	}
 
 
@@ -845,19 +783,19 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					try {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource(MainConstants.TEST_MACHINE.toString()));
 						Scene second = new Scene(loader.load(), 1280, 720);
-						((Node)loader.getRoot()).getStyleClass().addAll("/styles/testFactory.css");
+						((Node)loader.getRoot()).getStyleClass().addAll(MainConstants.TEST_FACTORY_STYLE.toString());
 						stage.setTitle("Test Suites window");
 
 
-						newIcoM4 = (VBox) CreateIcon("/images/Smart-Folder.png", "Test Factory");
-						newIcoM4.setLayoutX(poz);
-						newIcoM4.setLayoutY(1);
-						lista.add(newIcoM4);
-						bar.getChildren().add(newIcoM4);
+						testFactoryIcon = (VBox) CreateIcon(MainConstants.TEST_FACTORY_ICON.toString(), "Test Factory");
+						testFactoryIcon.setLayoutX(poz);
+						testFactoryIcon.setLayoutY(1);
+						lista.add(testFactoryIcon);
+						bar.getChildren().add(testFactoryIcon);
 						poz = poz + 100;
 						// expandIcons(newIcoM4);
 
-						newIcoM4.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						testFactoryIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 							@Override
 							public void handle(MouseEvent event2) {
@@ -885,12 +823,12 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 						stageRnd.setOnCloseRequest(new EventHandler<WindowEvent>() {
 							public void handle(WindowEvent we) {
-								ind = lista.indexOf(newIcoM4);
+								ind = lista.indexOf(testFactoryIcon);
 								arrangeIcons(ind);
-								lista.remove(lista.indexOf(newIcoM4));
+								lista.remove(lista.indexOf(testFactoryIcon));
 
 								System.out.println("Inchid stage'ul");
-								bar.getChildren().remove(newIcoM4);
+								bar.getChildren().remove(testFactoryIcon);
 								isTestFactoryDisplayed = false;
 								stageRnd = null;
 								poz = poz - 100;
@@ -925,7 +863,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	// pana aici
 
 	private void createAssetsWindow(){
-		newIco.setOnMouseClicked(new EventHandler<MouseEvent>() {			
+		assetsIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 			@Override
 			public void handle(MouseEvent event) {
 
@@ -934,20 +872,20 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					isDisplayed = true;
 
 					try {
-						root = FXMLLoader.load(getClass().getResource("/fxml/assets/Assets.fxml"));
+						root = FXMLLoader.load(getClass().getResource(MainConstants.ASSETS_FXML.toString()));
 						Scene second = new Scene(root);
 						String cssPath="/styles/asset.css";     //    the css path for assets
 						second.getStylesheets().addAll(cssPath); //	   the css add 			
 						root.getStyleClass().add("mainWind");
 
-						newIcoM5 = (VBox) CreateIcon("/images/Applications-Folder.png","Assets");	
-						newIcoM5.setLayoutX(poz);
-						newIcoM5.setLayoutY(1);
-						lista.add(newIcoM5);
-						bar.getChildren().add(newIcoM5);
+						assetsIcon = (VBox) CreateIcon(MainConstants.ASSETS_ICON.toString(),"Assets");	
+						assetsIcon.setLayoutX(poz);
+						assetsIcon.setLayoutY(1);
+						lista.add(assetsIcon);
+						bar.getChildren().add(assetsIcon);
 						poz=poz+100;
 //						expandIcons(newIcoM5);
-						newIcoM5.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						assetsIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 							@Override
 							public void handle(MouseEvent event2) {
@@ -983,12 +921,12 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						// modificare laur
 						stageAssets.setOnCloseRequest(new EventHandler<WindowEvent>() {
 							public void handle(WindowEvent we) {
-								ind=lista.indexOf(newIcoM5);
+								ind=lista.indexOf(assetsIcon);
 								arrangeIcons(ind);
-								lista.remove(lista.indexOf(newIcoM5));
+								lista.remove(lista.indexOf(assetsIcon));
 
 								System.out.println("Inchid stage'ul");
-								bar.getChildren().remove(newIcoM5);
+								bar.getChildren().remove(assetsIcon);
 								isDisplayed = false;
 								stageAssets=null;
 								poz=poz-100;
@@ -1012,7 +950,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 				}
 			}
 		});
-		moveIcons(newIco);
+		moveIcons(assetsIcon);
 
 
 
@@ -1020,7 +958,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 	}
 	private void createEnvWindow(){
-		newIco2.setOnMouseClicked(new EventHandler<MouseEvent>() {			
+		envIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {			
 			@Override
 			public void handle(MouseEvent event) {
 
@@ -1031,7 +969,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					try {
 						 
 						WsTesterMainController.stageEnvironment=stageEnv;
-						root = FXMLLoader.load(getClass().getResource("/fxml/environment/EnvironmentManager.fxml"));
+						root = FXMLLoader.load(getClass().getResource(MainConstants.ENVIRONMENT_MANAGER_FXML.toString()));
 						EnvironmentsAppFactory factory = new EnvironmentsAppFactory();
 						MainPresenter mainPresenter = factory.getMainPresenter();
 						mainPresenter.loadEnvironments();
@@ -1042,15 +980,15 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						String cssPath = "/styles/Envwindows.css"; // the css path for enviroment window	
 						second.getStylesheets().addAll(cssPath);   // the css add
 						root.getStyleClass().add("mainWind");
-						newIcoM6 = (VBox) CreateIcon("/images/Globe-Folder.png","Env");	
-						newIcoM6.setLayoutX(poz);
-						newIcoM6.setLayoutY(1);
-						lista.add(newIcoM6);
-						bar.getChildren().addAll(newIcoM6);
+						environmentIcon = (VBox) CreateIcon(MainConstants.ENVIRONMENTS_ICON.toString(),"Env");	
+						environmentIcon.setLayoutX(poz);
+						environmentIcon.setLayoutY(1);
+						lista.add(environmentIcon);
+						bar.getChildren().addAll(environmentIcon);
 						poz=poz+100;
 //						expandIcons(newIcoM6);
 
-						newIcoM6.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						environmentIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 							@Override
 							public void handle(MouseEvent event2) {
@@ -1079,12 +1017,12 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						// stergere din taskbar upon closure
 						stageEnv.setOnCloseRequest(new EventHandler<WindowEvent>() {
 							public void handle(WindowEvent we) {
-								ind=lista.indexOf(newIcoM6);
+								ind=lista.indexOf(environmentIcon);
 								arrangeIcons(ind);
-								lista.remove(lista.indexOf(newIcoM6));
+								lista.remove(lista.indexOf(environmentIcon));
 
 								System.out.println("Inchid stage'ul");
-								bar.getChildren().remove(newIcoM6);;
+								bar.getChildren().remove(environmentIcon);;
 								isDisplayed2 = false;
 								stageEnv=null;
 								poz=poz-100;
@@ -1113,7 +1051,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 				}
 			}
 		});
-		moveIcons(newIco2);
+		moveIcons(envIcon);
 	}
 	// create elements utils functions
 	static Node CreateIcon(String iconPath, String text) {
@@ -1358,5 +1296,93 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		return vbox3;
 
 	}
+	
+	 private void createCornerMenu() {
+	        
+	        // create a new corner menu
+	        cornerMenu = new CornerMenu(CornerMenu.Location.BOTTOM_LEFT,pane,false);
+	    	MenuItem saveMenuItem = new MenuItem("Save", new ImageView(new Image(this.getClass().getResourceAsStream(MainConstants.SAVE_ICON.toString()))));
+	    	MenuItem toHomePageMenuItem = new MenuItem("Go to Home Page", new ImageView(new Image(this.getClass().getResourceAsStream(MainConstants.HOMEPAGE_ICON.toString()))));
+	   
+	        cornerMenu.getItems().addAll(saveMenuItem, toHomePageMenuItem);
+	        
+	        saveMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent arg0) {
+					
+					TestProjectService service = new TestProjectService();
+					TestProject testProject = service.getTestProject();
+					
+		            FileChooser fileChooser = new FileChooser();
+		            fileChooser.setTitle("Save Test Project");
+		    		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("STEP project files (*.step)", "*.step");
+		    		fileChooser.getExtensionFilters().add(extFilter);
+		            File file = fileChooser.showSaveDialog(stage);
+		            if(file != null){
+						try {
+							ITestProjectActions testProjectActions = ServiceLocator.getInstance().lookup(ITestProjectActions.class);
+							testProjectActions.save(file.getPath(), testProject);
+						} catch (Exception e) {
+							Dialog.errorDialog("The project could not be saved. Please try again!", stage);
+						}
+		            }
+				}
+			});
+	        
+	        toHomePageMenuItem.setOnAction(new EventHandler<ActionEvent>() {
 
+				@Override
+				public void handle(ActionEvent event) {
+					if (isDisplayed==true) {
+						stageAssets.close();
+						bar.getChildren().remove(assetsIcon);
+						isDisplayed=false;
+						poz=poz-100;
+					}
+					
+					if (isDisplayed2==true) {
+						isDisplayed2=false;
+						stageEnv.close();
+						bar.getChildren().remove(environmentIcon);
+						poz=poz-100;
+					}
+					
+					if (isDisplayed3==true) {
+						stageSoap.close();
+						bar.getChildren().remove(soapWindowIcon);
+						isDisplayed3=false;
+						poz=poz-100;
+					}
+					if (isDisplayed4==true) {
+						stageRest.close();
+						bar.getChildren().remove(restWindowIcon);
+						isDisplayed4=false;
+						poz=poz-100;
+					}
+					if (isTestFactoryDisplayed==true) {
+						stageRnd.close();
+						bar.getChildren().remove(testFactoryIcon);
+						isTestFactoryDisplayed=false;
+						poz=poz-100;
+					}
+					if (isDisplayed6==true) {
+						stageVar.close();
+						bar.getChildren().remove(varWindowIcon);
+						isDisplayed6=false;
+						poz=poz-100;
+					}
+					
+					try {
+						ICamelContextManager manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
+						manager.closeCamelContext();
+					} catch (Exception e) {
+						Dialog.errorDialog("Could't go back to the home page. Please try again!", stage);
+					}
+					
+					myController.setScreen(MainLauncher.screen1ID);
+				}
+	    	 
+	     });
+	 }
 }

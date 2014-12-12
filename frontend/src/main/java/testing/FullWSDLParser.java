@@ -1,4 +1,4 @@
-package testing;
+/*package testing;
 
 
 
@@ -20,7 +20,7 @@ public class FullWSDLParser {
         }
         out("\n");
  
-        /* For detailed schema information see the FullSchemaParser.java sample.*/
+         For detailed schema information see the FullSchemaParser.java sample.
         out("Schemas: ");
         for (Schema schema : defs.getSchemas()) {
             out("  TargetNamespace: \t" + schema.getTargetNamespace());
@@ -102,4 +102,4 @@ public class FullWSDLParser {
     private static void out(String str) {
         System.out.println(str);
     }
-}
+}*/

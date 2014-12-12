@@ -11,11 +11,6 @@
 			<url>http://repo.reficio.org/maven/</url>
 		</repository>
 		<repository>
-			<id>predic8-releases</id>
-			<url>http://repository.membrane-soa.org/content/groups/public</url>
-		</repository>
-
-		<repository>
 			<id>oss-sonatype</id>
 			<name>oss-sonatype</name>
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
@@ -40,11 +35,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.jfxtras</groupId>
-			<artifactId>jfxtras-labs</artifactId>
-			<version>${jfx.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -78,6 +68,11 @@
 		<dependency>
 			<groupId>org.jfxtras</groupId>
 			<artifactId>jfxtras-window</artifactId>
+			<version>${jfx.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jfxtras</groupId>
+			<artifactId>jfxtras-menu</artifactId>
 			<version>${jfx.version}</version>
 		</dependency>
 		<dependency>
@@ -155,7 +150,7 @@
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 
-		<dependency>
+<!-- 		<dependency>
 			<groupId>com.predic8</groupId>
 			<artifactId>membrane-esb-core</artifactId>
 			<version>4.0.2</version>
@@ -165,7 +160,7 @@
 			<groupId>com.predic8</groupId>
 			<artifactId>soa-model-core</artifactId>
 			<version>1.4.1</version>
-		</dependency>
+		</dependency> -->
 
 	</dependencies>
 	<build>

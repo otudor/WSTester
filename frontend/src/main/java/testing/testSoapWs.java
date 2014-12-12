@@ -9,7 +9,7 @@ import org.reficio.ws.builder.SoapBuilder;
 import org.reficio.ws.builder.SoapOperation;
 import org.reficio.ws.builder.core.Wsdl;
 
-import com.predic8.membrane.core.http.Request;
+
 
 public class testSoapWs {
 
