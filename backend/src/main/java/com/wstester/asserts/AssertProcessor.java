@@ -1,11 +1,7 @@
 package com.wstester.asserts;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import org.apache.camel.Exchange;
-
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Assert;
 import com.wstester.model.AssertResponse;
@@ -14,6 +10,8 @@ import com.wstester.model.Asset;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IStepManager;
 import com.wstester.services.impl.AssetManager;
 
 public class AssertProcessor {
@@ -23,12 +21,9 @@ public class AssertProcessor {
 	public void process(Exchange exchange) throws Exception {
 
 		Response response = exchange.getIn().getBody(Response.class);	
-		
-		@SuppressWarnings("unchecked")
-		HashSet<Step> stepList = (HashSet<Step>) exchange.getProperty("stepList");
 	
 		if(!response.getStatus().equals(ExecutionStatus.ERROR)){
-			Step step = getStep(response.getStepID(), stepList);
+			Step step = getStep(response.getStepId());
 			
 			if(step.getAssertList() != null){
 				List<Assert> assertList = step.getAssertList();
@@ -37,27 +32,27 @@ public class AssertProcessor {
 				for(Assert azzert : assertList) {
 					
 					if(azzert.getExpected() instanceof String){
-						log.info(response.getStepID(), "Expected response is of type String");
+						log.info(response.getStepId(), "Expected response is of type String");
 						failed = evaluateStringAssert(azzert, response);
 					}
 					
 					if(azzert.getExpected() instanceof Asset){
-						log.info(response.getStepID(), "Expected response is of type Asset");
+						log.info(response.getStepId(), "Expected response is of type Asset");
 						failed = evaluateAssetAssert(azzert, response);
 					}
 				}
 				
 				if(failed){
 					response.setStatus(ExecutionStatus.FAILED);
-					log.info(response.getStepID(), "Failing the whole step because one assert failed");
+					log.info(response.getStepId(), "Failing the whole step because one assert failed");
 				}
 			}
 			else {
-				log.info(response.getStepID(), "No asserts found on the step");
+				log.info(response.getStepId(), "No asserts found on the step");
 			}
 		}
 		else {
-			log.info(response.getStepID(), "The step failed so no asserts were run");
+			log.info(response.getStepId(), "The step failed so no asserts were run");
 		}
 		
 		exchange.getIn().setBody(response);
@@ -71,8 +66,9 @@ public class AssertProcessor {
 			assertResponse.setAssertId(azzert.getID());
 			assertResponse.setStatus(AssertStatus.FAILED);
 			assertResponse.setMessage("Expected: " + azzert.getExpected() + " but was: " + response.getContent());
+			
 			response.addAssertResponse(assertResponse);
-			log.info(response.getStepID(), "Assert failed: " + assertResponse);
+			log.info(response.getStepId(), "Assert failed: " + assertResponse);
 			return true;
 		}
 		else {
@@ -80,8 +76,9 @@ public class AssertProcessor {
 			AssertResponse assertResponse = new AssertResponse();
 			assertResponse.setAssertId(azzert.getID());
 			assertResponse.setStatus(AssertStatus.PASSED);
+			
 			response.addAssertResponse(assertResponse);
-			log.info(response.getStepID(), "Assert passed: " + azzert);
+			log.info(response.getStepId(), "Assert passed: " + azzert);
 			return false;
 		}
 	}
@@ -98,30 +95,10 @@ public class AssertProcessor {
 		return evaluateStringAssert(azzert, response);
 	}
 	
-	private Step getStep(String id, Set<Step> stepList){
+	private Step getStep(String id) throws Exception{
 		
-		log.info(id, toString(stepList));
-		for (Step step : stepList){
-			if(step.getID().equals(id)){
-				return step;
-			}
-		}
-		log.info(id, "The step was not found. Step list: " + toString(stepList));
-		return null;
-	}
-	
-	private String toString(Set<Step> stepList) {
-
-		if(stepList == null){
-			return "null";
-		}
-		
-		StringBuilder sb = new StringBuilder("[");
-		for(Step step : stepList){
-			sb.append(step.detailedToString());
-		}
-		sb.append("]");
-		
-		return sb.toString();
+		IStepManager stepManger = ServiceLocator.getInstance().lookup(IStepManager.class, false);
+		Step step = stepManger.getStep(id);
+		return step;
 	}
 }

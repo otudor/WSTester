@@ -1,6 +1,7 @@
 package com.wstester.mock;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.camel.Exchange;
@@ -29,7 +30,8 @@ public class MockSystem implements Processor{
 		String responseContent = runRules(step);
 		
 		Response response = new Response();
-		response.setStepID(step.getID());
+		response.setRunDate(new Date());
+		response.setStepId(step.getID());
 		response.setContent(responseContent);
 		response.setStatus(ExecutionStatus.PASSED);
 

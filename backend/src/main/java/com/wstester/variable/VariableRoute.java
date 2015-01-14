@@ -1,15 +1,18 @@
 package com.wstester.variable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+
 import com.wstester.model.Variable;
 
 
 public class VariableRoute extends RouteBuilder {
 
-	private static Set<Variable> variableSet = new HashSet<Variable>();
+	private static List<Variable> variableSet = new ArrayList<Variable>();
 	
 	@Override
 	public void configure() throws Exception{
@@ -32,7 +35,7 @@ public class VariableRoute extends RouteBuilder {
 			public void process(Exchange exchange) throws Exception {
 				
 				variableSet.clear();
-				variableSet = new HashSet<Variable>(); 
+				variableSet = new ArrayList<Variable>();
 			}
 		});
 	}
@@ -54,7 +57,6 @@ public class VariableRoute extends RouteBuilder {
 		if(variableSet.size() == variableSize){
 			return true;
 		}
-
 		return false;
 	}
 }

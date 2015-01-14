@@ -1,7 +1,6 @@
 package com.wstester.services.common;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -69,7 +68,7 @@ public final class ServiceLocator {
 		return null;
 	}
 	
-	private Object getImplementation(Class<? extends IService> clazz, Object... constructorParameter) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
+	private Object getImplementation(Class<? extends IService> clazz, Object... constructorParameter) throws Exception{
 		
 		Set<?> classes = new Reflections("com.wstester.services.impl").getSubTypesOf(clazz);
 		

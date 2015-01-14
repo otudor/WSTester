@@ -2,13 +2,13 @@ package com.wstester.camel.rest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import org.junit.Test;
 
 import com.wstester.model.ExecutionStatus;
+import com.wstester.model.Header;
 import com.wstester.model.Response;
 import com.wstester.model.RestStep;
 import com.wstester.model.TestProject;
@@ -27,10 +27,15 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
-		Map<String, String> headers = response.getHeaderMap();
+		List<Header> headers = response.getHeaderList();
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
-		assertEquals("200", headers.get("Response Code"));
+		assertEquals(3, headers.size());
+		for (Header header : headers){
+			if (header.getKeyField().equals("Response Code")) {
+				assertEquals("200", header.getValueField());
+			}
+		}
 		assertEquals("All customers", entry);
 	}
 	
@@ -51,10 +56,15 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
-		Map<String, String> headers = response.getHeaderMap();
+		List<Header> headers = response.getHeaderList();
 		
+		assertEquals(3, headers.size());
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
-		assertEquals("200", headers.get("Response Code"));
+		for (Header header : headers){
+			if (header.getKeyField().equals("Response Code")) {
+				assertEquals("200", header.getValueField());
+			}
+		}
 		assertEquals("Alex", entry);
 	}
 	
@@ -75,10 +85,15 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
-		Map<String, String> headers = response.getHeaderMap();
+		List<Header> headers = response.getHeaderList();
 		
+		assertEquals(3, headers.size());
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
-		assertEquals("200", headers.get("Response Code"));
+		for (Header header : headers){
+			if (header.getKeyField().equals("Response Code")) {
+				assertEquals("200", header.getValueField());
+			}
+		}
 		assertEquals("Vlad", entry);
 	}
 	
@@ -99,10 +114,15 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
-		Map<String, String> headers = response.getHeaderMap();
+		List<Header> headers = response.getHeaderList();
 		
+		assertEquals(3, headers.size());
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
-		assertEquals("200", headers.get("Response Code"));
+		for (Header header : headers){
+			if (header.getKeyField().equals("Response Code")) {
+				assertEquals("200", header.getValueField());
+			}
+		}
 		assertEquals("Popa", entry);
 	}
 	
@@ -130,10 +150,15 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
 		String entry =  response.getContent();
-		Map<String, String> headers = response.getHeaderMap();
+		List<Header> headers = response.getHeaderList();
 		
+		assertEquals(3, headers.size());
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
-		assertEquals("200", headers.get("Response Code"));
+		for (Header header : headers){
+			if (header.getKeyField().equals("Response Code")) {
+				assertEquals("200", header.getValueField());
+			}
+		}
 		assertEquals("Goku" + "," + "Aladin" + "," + "Popa", entry);
 	}
 }

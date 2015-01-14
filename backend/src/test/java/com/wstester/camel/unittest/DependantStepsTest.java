@@ -17,6 +17,7 @@ import org.junit.Test;
 
 import com.mongodb.Mongo;
 import com.wstester.dispatcher.ExchangeDelayer;
+import com.wstester.dispatcher.RouteDispatcher;
 import com.wstester.dispatcher.mongo.MongoRoute;
 import com.wstester.dispatcher.rest.RestRoute;
 import com.wstester.model.MongoStep;
@@ -71,8 +72,9 @@ public class DependantStepsTest extends CamelTestSupport{
 		};
     	RestRoute restRoute = new RestRoute();
     	ExchangeDelayer delayer = new ExchangeDelayer();
+    	RouteDispatcher routeDispatcher = new RouteDispatcher();
     	
-    	return new RouteBuilder[] {mongoRoute, restRoute, delayer, mockRoute};
+    	return new RouteBuilder[] {routeDispatcher, mongoRoute, restRoute, delayer, mockRoute};
     }
     
 	@Test
@@ -85,12 +87,12 @@ public class DependantStepsTest extends CamelTestSupport{
 		MongoStep mongoStep = UnitTestUtils.getMongoStep();
 		mongoStep.setDependsOn(restStep.getID());
 		
-		template.asyncSendBody("jms:mongoQueue", mongoStep);
-		template.asyncSendBody("jms:restQueue", restStep);
+		template.asyncSendBody("jms:startQueue", mongoStep);
+		template.asyncSendBody("jms:startQueue", restStep);
 		
 		resultEndpoint.await();
-		assertEquals(resultEndpoint.getReceivedExchanges().get(0).getIn().getBody(Response.class).getStepID(), restStep.getID());
-		assertEquals(resultEndpoint.getReceivedExchanges().get(1).getIn().getBody(Response.class).getStepID(), mongoStep.getID());
+		assertEquals(resultEndpoint.getReceivedExchanges().get(0).getIn().getBody(Response.class).getStepId(), restStep.getID());
+		assertEquals(resultEndpoint.getReceivedExchanges().get(1).getIn().getBody(Response.class).getStepId(), mongoStep.getID());
 		resultEndpoint.assertIsSatisfied();
 	}
 	
@@ -104,20 +106,20 @@ public class DependantStepsTest extends CamelTestSupport{
 		mongoStepDependant.setDependsOn(restStep.getID());
 		MongoStep mongoStep = UnitTestUtils.getMongoStep();
 		
-		template.asyncSendBody("jms:mongoQueue", mongoStepDependant);
+		template.asyncSendBody("jms:startQueue", mongoStepDependant);
 		Thread.sleep(2000);
-		template.asyncSendBody("jms:mongoQueue", mongoStep);
+		template.asyncSendBody("jms:startQueue", mongoStep);
 		
 		resultEndpoint.expectedMessageCount(1);
 		resultEndpoint.await();
-		assertEquals(resultEndpoint.getReceivedExchanges().get(0).getIn().getBody(Response.class).getStepID(), mongoStep.getID());
+		assertEquals(resultEndpoint.getReceivedExchanges().get(0).getIn().getBody(Response.class).getStepId(), mongoStep.getID());
 		resultEndpoint.assertIsSatisfied();
 		
 		resultEndpoint.expectedMinimumMessageCount(2);
 		template.asyncSendBody("jms:restQueue", restStep);
 		resultEndpoint.await();
-		assertEquals(resultEndpoint.getReceivedExchanges().get(1).getIn().getBody(Response.class).getStepID(), restStep.getID());
-		assertEquals(resultEndpoint.getReceivedExchanges().get(2).getIn().getBody(Response.class).getStepID(), mongoStepDependant.getID());
+		assertEquals(resultEndpoint.getReceivedExchanges().get(1).getIn().getBody(Response.class).getStepId(), restStep.getID());
+		assertEquals(resultEndpoint.getReceivedExchanges().get(2).getIn().getBody(Response.class).getStepId(), mongoStepDependant.getID());
 		
 		resultEndpoint.expectedMessageCount(3);
 		resultEndpoint.assertIsSatisfied();

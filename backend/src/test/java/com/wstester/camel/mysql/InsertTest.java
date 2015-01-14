@@ -12,7 +12,7 @@ import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
 import com.wstester.services.impl.TestRunner;
 
-public class InsertTest extends TestBaseClass{
+public class InsertTest extends TestBaseClass {
 
 	@Test
 	public void insertTest() throws Exception {

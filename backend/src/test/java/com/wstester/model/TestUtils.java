@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.wstester.model.RestRule.InputType;
 
@@ -169,9 +167,6 @@ public class TestUtils {
 		restStep.setAssertList(assertList);
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
-		Map<Asset, AssetType> assetMap = new HashMap<Asset, AssetType>();
-		assetMap.put(asset1, AssetType.BODY);
-		restStep.setAssetMap(assetMap );
 		stepList1.add(restStep);
 		// test 2
 		MongoStep step2 = new MongoStep();
@@ -203,16 +198,6 @@ public class TestUtils {
 		step4.setService(soapService);
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
-		List<Execution> executionList = new ArrayList<Execution>();
-		Execution execution = new Execution();
-		Response response = new Response();
-		response.setStepID(step4.getID());
-		response.setStatus(ExecutionStatus.PASSED);
-		response.setContent("content");
-		execution.setResponse(response);
-		execution.setRunDate(new GregorianCalendar().getTime());
-		executionList.add(execution );
-		step4.setExecutionList(executionList );
 		stepList2.add(step4);
 		
 		// construct test case list

@@ -1,5 +1,6 @@
 package com.wstester.services.impl;
 
+import java.io.Serializable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -23,86 +24,81 @@ import com.wstester.model.TestCase;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
 import com.wstester.model.Variable;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IStepManager;
 import com.wstester.services.definition.ITestRunner;
 import com.wstester.util.ProjectProperties;
 import com.wstester.variable.VariableRoute;
 
-public class TestRunner implements ITestRunner{
-	
+public class TestRunner implements ITestRunner {
+
 	private TestProject testProject;
 	private CustomLogger log = new CustomLogger(TestRunner.class);
-	
+
 	public TestRunner() {
 	}
-	
-	public TestRunner(TestProject testProject){
-		
-		if(testProject != null){
+
+	public TestRunner(TestProject testProject) {
+
+		if (testProject != null) {
 			log.info("Received " + testProject);
 			this.testProject = testProject;
 		}
 	}
-	
+
 	@Override
-	public void run(Object testToRun) throws Exception{
-	
+	public void run(Object testToRun) throws Exception {
+
 		ExecutorService executor = Executors.newFixedThreadPool(10);
 		executor.execute(new ProjectRunThread(testToRun));
-		
+
 		executor.shutdown();
 	}
-	
+
 	@Override
-	public Response getResponse(String stepId, Long timeout){
-	
+	public Response getResponse(String stepId, Long timeout) {
+
 		log.info(stepId, "Waiting response");
-		
+
 		Response response = ResponseCallback.getResponse(stepId);
-		
-		while(response == null && timeout > 0){
+
+		while (response == null && timeout > 0) {
 			try {
 				Thread.sleep(1000L);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			response = ResponseCallback.getResponse(stepId);
-			timeout-=1000;
-		} 
-		
-		if(timeout < 0){
+			timeout -= 1000;
+		}
+
+		if (timeout < 0) {
 			log.info(stepId, "The timeout expired!");
 		}
-		
-		if(response != null){
+
+		if (response != null) {
 			log.info(stepId, response.toString());
-		}
-		else{
+		} else {
 			log.info(stepId, "Response is null");
 		}
-		
+
 		return response;
 	}
-	
-	@Override
-	public boolean hasFinished(){
-		
-		return ResponseCallback.hasFinished();
-	}
-	
-	class ProjectRunThread implements Runnable{
+
+	class ProjectRunThread implements Runnable {
 
 		Object entityToRun;
-		
+
 		public ProjectRunThread(Object entityToRun) {
-			
+
 			log.info("Running " + entityToRun);
 			this.entityToRun = entityToRun;
-			
+
 		}
-		
+
 		@Override
 		public void run() {
-			
+
 			Connection connection = null;
 			Session session = null;
 			try {
@@ -115,29 +111,29 @@ public class TestRunner implements ITestRunner{
 
 				// Create a Session
 				session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-				
-				// send a start message to startTopic
-				sendStartMessage(session);
-				
+
 				// Manage the variables
 				manageVariable(session);
 
 				// Run the tests
 				runSteps(session, entityToRun);
-			} catch(RuntimeException e){
-				//TODO: auto generated block
+
+				// send a message to a finishTopic meaning that the current run has finished
+				sendFinishMessage(session, entityToRun);
+			} catch (RuntimeException e) {
+				// TODO: auto generated block
 				e.printStackTrace();
-			} catch (Exception e){
-				//TODO: auto generated block
+			} catch (Exception e) {
+				// TODO: auto generated block
 				e.printStackTrace();
-			} finally{
-				
+			} finally {
+
 				// Clean up
 				try {
-					if(session != null){
+					if (session != null) {
 						session.close();
 					}
-					if(connection != null){
+					if (connection != null) {
 						connection.stop();
 					}
 				} catch (JMSException e) {
@@ -147,32 +143,33 @@ public class TestRunner implements ITestRunner{
 			}
 		}
 	}
-	
-	private void manageVariable(Session session) throws JMSException, InterruptedException{
-		
+
+	private void manageVariable(Session session) throws JMSException, InterruptedException {
+
 		// Create the destination (Topic or Queue)
 		Destination destination = session.createQueue("variableQueue");
 
 		// Create a MessageProducer from the Session to the Topic or Queue
 		MessageProducer producer = session.createProducer(destination);
 		producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-		
+
 		int variableSize = 0;
-		
-		//TODO: we don't have to add all variables, only the ones we use in the current run
-		if(testProject.getVariableList() != null){
-			for(Variable variable : testProject.getVariableList()){
-		
+
+		// TODO: we don't have to add all variables, only the ones we use in the
+		// current run
+		if (testProject.getVariableList() != null) {
+			for (Variable variable : testProject.getVariableList()) {
+
 				ObjectMessage messageProject = session.createObjectMessage(variable);
 				producer.send(messageProject);
 				variableSize++;
 				log.info("Added project variable: " + variable);
 			}
 		}
-		
-		for(TestSuite testSuite : testProject.getTestSuiteList()){
-			if(testSuite.getVariableList() != null){
-				for(Variable variable : testSuite.getVariableList()){
+
+		for (TestSuite testSuite : testProject.getTestSuiteList()) {
+			if (testSuite.getVariableList() != null) {
+				for (Variable variable : testSuite.getVariableList()) {
 
 					ObjectMessage messageSuite = session.createObjectMessage(variable);
 					producer.send(messageSuite);
@@ -180,10 +177,10 @@ public class TestRunner implements ITestRunner{
 					log.info("Added suite variable: " + variable);
 				}
 			}
-			
-			for(TestCase testCase : testSuite.getTestCaseList()){
-				if(testCase.getVariableList() != null){
-					for(Variable variable : testCase.getVariableList()){
+
+			for (TestCase testCase : testSuite.getTestCaseList()) {
+				if (testCase.getVariableList() != null) {
+					for (Variable variable : testCase.getVariableList()) {
 
 						ObjectMessage messageCase = session.createObjectMessage(variable);
 						producer.send(messageCase);
@@ -192,9 +189,9 @@ public class TestRunner implements ITestRunner{
 					}
 				}
 
-				for(Step testStep : testCase.getStepList()){
-					if(testStep.getVariableList() != null){
-						for(Variable variable : testStep.getVariableList()){
+				for (Step testStep : testCase.getStepList()) {
+					if (testStep.getVariableList() != null) {
+						for (Variable variable : testStep.getVariableList()) {
 
 							ObjectMessage message = session.createObjectMessage(variable);
 							producer.send(message);
@@ -207,27 +204,29 @@ public class TestRunner implements ITestRunner{
 		}
 		ProjectProperties properties = new ProjectProperties();
 		Long timeout = properties.getLongProperty("stepFinishTimeout");
-		// TODO: change the source of the allVariablesReceived from VariableRoute to VariableManager
-		while(!VariableRoute.allVariablesReceived(variableSize) && ((timeout -= 1000) > 0)){
+		// TODO: change the source of the allVariablesReceived from
+		// VariableRoute to VariableManager
+		while (!VariableRoute.allVariablesReceived(variableSize) && ((timeout -= 1000) > 0)) {
 			Thread.sleep(1000);
-		}	
+		}
 	}
 
-	private void runSteps(Session session, Object entityToRun) throws JMSException, InterruptedException, WsException{
+	private void runSteps(Session session, Object entityToRun) throws Exception {
 
+		// When the constructor for StepManager is called a new instance of stepList is made
+		ServiceLocator.getInstance().lookup(IStepManager.class, true);
+		
 		// Create the destination (Topic or Queue)
 		Destination destination = session.createQueue("startQueue");
-		
+
 		// Create a MessageProducer from the Session to the Topic or Queue
 		MessageProducer producer = session.createProducer(destination);
 		producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-		
-		int stepSize = 0;
-		
-		if(entityToRun instanceof TestProject){
-			for(TestSuite testSuite : ((TestProject) entityToRun).getTestSuiteList()){
-				for(TestCase testCase : testSuite.getTestCaseList()){
-					for(Step testStep : testCase.getStepList()){
+
+		if (entityToRun instanceof TestProject) {
+			for (TestSuite testSuite : ((TestProject) entityToRun).getTestSuiteList()) {
+				for (TestCase testCase : testSuite.getTestCaseList()) {
+					for (Step testStep : testCase.getStepList()) {
 
 						// Create a messages
 						ObjectMessage message = session.createObjectMessage(testStep);
@@ -235,15 +234,13 @@ public class TestRunner implements ITestRunner{
 						// Tell the producer to send the message
 						log.info(testStep.getID(), "Sent message to startQueue");
 						producer.send(message);
-						stepSize++;
 					}
 				}
 			}
 
-		}
-		else if(entityToRun instanceof TestSuite){
-			for(TestCase testCase : ((TestSuite) entityToRun).getTestCaseList()){
-				for(Step testStep : testCase.getStepList()){
+		} else if (entityToRun instanceof TestSuite) {
+			for (TestCase testCase : ((TestSuite) entityToRun).getTestCaseList()) {
+				for (Step testStep : testCase.getStepList()) {
 
 					// Create a messages
 					ObjectMessage message = session.createObjectMessage(testStep);
@@ -251,72 +248,42 @@ public class TestRunner implements ITestRunner{
 					// Tell the producer to send the message
 					log.info(testStep.getID(), "Sent message to startQueue");
 					producer.send(message);
-					stepSize++;
 				}
 			}
-		}
-		else if(entityToRun instanceof TestCase){
-			for(Step testStep : ((TestCase)entityToRun).getStepList()){
-				
+		} else if (entityToRun instanceof TestCase) {
+			for (Step testStep : ((TestCase) entityToRun).getStepList()) {
+
 				// Create a messages
 				ObjectMessage message = session.createObjectMessage(testStep);
 
 				// Tell the producer to send the message
 				log.info(testStep.getID(), "Sent message to startQueue");
 				producer.send(message);
-				stepSize++;
 			}
-		}
-		else if(entityToRun instanceof Step){
+		} else if (entityToRun instanceof Step) {
 
-			Step testStep = (Step)entityToRun;
+			Step testStep = (Step) entityToRun;
 			// Create a messages
 			ObjectMessage message = session.createObjectMessage(testStep);
 
 			// Tell the producer to send the message
 			log.info(testStep.getID(), "Sent message to startQueue");
 			producer.send(message);
-			stepSize++;
-		}
-		else{
+		} else {
 			throw new WsException("Can't run object: " + entityToRun + "! Please run only instances of TestProject, TestSuite, TestCase or Step", null);
 		}
-		
-		ProjectProperties properties = new ProjectProperties();
-		Long timeout = properties.getLongProperty("stepFinishTimeout");
-		
-		while (!ResponseCallback.allResponsesReceived(stepSize) && ((timeout -= 1000) > 0)) {
-			Thread.sleep(1000);
-		}
-		
-		// send a message to a finishTopic meaning that the current run has finished
-		sendFinishMessage(session);
-
 	}
 
-	private void sendStartMessage(Session session) throws JMSException {
-
-		// Create the destination (Topic or Queue)
-		Destination destination = session.createTopic("startTopic");
-		
-		// Create a MessageProducer from the Session to the Topic or Queue
-		MessageProducer producer = session.createProducer(destination);
-		producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-		
-		Message message = session.createObjectMessage(testProject);
-		producer.send(message);
-	}
-	
-	private void sendFinishMessage(Session session) throws JMSException {
+	private void sendFinishMessage(Session session, Object entityToRun) throws JMSException {
 
 		// Create the destination (Topic or Queue)
 		Destination destination = session.createTopic("finishTopic");
-		
+
 		// Create a MessageProducer from the Session to the Topic or Queue
 		MessageProducer producer = session.createProducer(destination);
 		producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-		
-		Message message = session.createObjectMessage(testProject);
+
+		Message message = session.createObjectMessage((Serializable) entityToRun);
 		producer.send(message);
 	}
 }

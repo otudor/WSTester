@@ -26,6 +26,7 @@ public class Variable implements Serializable {
 	 */
 	
 	public Variable(String content, String name) {
+		uuid = UUID.randomUUID().toString();
 		this.content = content;
 		this.name = name;
 	}

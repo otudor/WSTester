@@ -1,5 +1,7 @@
 package com.wstester.dispatcher.mongo;
 
+import java.util.Date;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
@@ -17,7 +19,8 @@ public class MongoPostProcessor implements Processor{
 		Message in = exchange.getIn();
 		
 		Response response = new Response();
-		response.setStepID(step.getID());
+		response.setRunDate(new Date());
+		response.setStepId(step.getID());
 		response.setContent(in.getBody(String.class));
 		response.setStatus(ExecutionStatus.PASSED);
 

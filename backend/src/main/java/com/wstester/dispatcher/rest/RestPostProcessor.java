@@ -1,12 +1,15 @@
 package com.wstester.dispatcher.rest;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 
 import com.wstester.model.ExecutionStatus;
+import com.wstester.model.Header;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 
@@ -21,16 +24,17 @@ public class RestPostProcessor implements Processor {
 		String contentType = in.getHeader(Exchange.CONTENT_TYPE, String.class);
 		String contentEncoding = in.getHeader(Exchange.CONTENT_ENCODING, String.class);
 		
-		HashMap<String, String> headerMap = new HashMap<String, String>();
-		headerMap.put("Response Code", responseCode.toString());
-		headerMap.put("Response content type", contentType);
-		headerMap.put("Response content encoding", contentEncoding);
+		List<Header> headerList = new ArrayList<Header>();
+		headerList.add(new Header("Response Code", responseCode.toString()));
+		headerList.add(new Header("Response content type", contentType));
+		headerList.add(new Header("Response content encoding", contentEncoding));
 		
 		Response response = new Response();
-		response.setStepID(step.getID());
+		response.setRunDate(new Date());
+		response.setStepId(step.getID());
 		response.setContent(in.getBody(String.class));
 		response.setStatus(ExecutionStatus.PASSED);
-		response.setHeaderMap(headerMap);
+		response.setHeaderList(headerList);
 		
 		
 		exchange.getIn().setBody(response);

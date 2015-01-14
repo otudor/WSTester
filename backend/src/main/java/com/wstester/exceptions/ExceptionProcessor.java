@@ -1,5 +1,7 @@
 package com.wstester.exceptions;
 
+import java.util.Date;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 
@@ -22,7 +24,8 @@ public class ExceptionProcessor implements Processor {
 		}
 		
 		Response response = new Response();
-		response.setStepID(step.getID());
+		response.setRunDate(new Date());
+		response.setStepId(step.getID());
 		response.setStatus(ExecutionStatus.ERROR);
 		
 		Exception exception = exchange.getProperty(Exchange.EXCEPTION_CAUGHT,Exception.class);

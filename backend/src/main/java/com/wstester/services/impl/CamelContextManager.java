@@ -1,5 +1,6 @@
 package com.wstester.services.impl;
 
+import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.wstester.log.CustomLogger;
@@ -7,7 +8,7 @@ import com.wstester.services.definition.ICamelContextManager;
 
 public class CamelContextManager implements ICamelContextManager {
 
-	private ClassPathXmlApplicationContext camelContext ;
+	private static ClassPathXmlApplicationContext camelContext ;
 	private CustomLogger log = new CustomLogger(CamelContextManager.class);
 	
 	@Override
@@ -47,5 +48,10 @@ public class CamelContextManager implements ICamelContextManager {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public AbstractXmlApplicationContext getCamelContext() {
+		return camelContext;
 	}
 }

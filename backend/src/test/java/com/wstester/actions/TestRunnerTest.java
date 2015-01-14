@@ -34,7 +34,7 @@ public class TestRunnerTest extends RestTestBaseClass{
 		assertEquals("All customers", restContent);
 		
 		// mongo check
-		Response mongoResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(1).getID(), 1000L);
+		Response mongoResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(1).getID(), 25000L);
 		JSONArray entry =  new JSONArray(mongoResponse.getContent());
 		
 		assertTrue(mongoResponse.getStatus().equals(ExecutionStatus.PASSED));
@@ -76,7 +76,7 @@ public class TestRunnerTest extends RestTestBaseClass{
 		assertEquals("All customers", restContent);
 		
 		// mongo check
-		Response mongoResponse = testRunner.getResponse(testSuite.getTestCaseList().get(0).getStepList().get(1).getID(), 1000L);
+		Response mongoResponse = testRunner.getResponse(testSuite.getTestCaseList().get(0).getStepList().get(1).getID(), 25000L);
 		JSONArray entry =  new JSONArray(mongoResponse.getContent());
 		
 		assertTrue(mongoResponse.getStatus().equals(ExecutionStatus.PASSED));
@@ -102,7 +102,7 @@ public class TestRunnerTest extends RestTestBaseClass{
 		assertEquals("All customers", restContent);
 		
 		// mongo check
-		Response mongoResponse = testRunner.getResponse(testCase.getStepList().get(1).getID(), 1000L);
+		Response mongoResponse = testRunner.getResponse(testCase.getStepList().get(1).getID(), 25000L);
 		JSONArray entry =  new JSONArray(mongoResponse.getContent());
 		
 		assertTrue(mongoResponse.getStatus().equals(ExecutionStatus.PASSED));

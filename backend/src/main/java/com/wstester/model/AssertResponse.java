@@ -2,15 +2,47 @@ package com.wstester.model;
 
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-@XmlRootElement
+@Entity
+@Table(name = "assertResponse")
 public class AssertResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id")
+    private long id;
+	
+	@Column(name = "assertId")
 	private String assertId;
+	
+	@Column(name = "message", columnDefinition ="Text")
 	private String message;
+	
+	@Column(name = "status")
 	private AssertStatus status;
+	
+	@ManyToOne
+    @JoinColumn(name = "responseId")
+    private Response response;
+	
+	public AssertResponse() {
+		super();
+	}
+	
+	public AssertResponse(String assertId, String message, AssertStatus status) {
+		this.assertId = assertId;
+		this.message = message;
+		this.status = status;
+	}
 	
 	public String getAssertId() {
 		return assertId;
@@ -36,6 +68,13 @@ public class AssertResponse implements Serializable {
 		this.status = status;
 	}
 
+	public Response getResponse() {
+		return response;
+	}
+
+	public void setResponse(Response response) {
+		this.response = response;
+	}
 	
 	@Override
 	public String toString() {

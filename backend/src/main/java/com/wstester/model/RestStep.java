@@ -102,7 +102,7 @@ public class RestStep extends Step {
 		return "RestStep [path=" + path + ", query=" + query + ", cookie=" + cookie + ", header=" + header + ", contentType=" + contentType + ", method=" + method + ", request=" + request
 				+ ", getID()=" + getID() + ", getServer()=" + (getServer() == null ? "null" : getServer().detailedToString()) + ", getAssertList()=" + getAssertList() + ", getService()=" 
 			    + (getService() == null ? "null" : getService().detailedToString()) + ", getAssetMap()=" + getAssetMap()
-				+ ", getName()=" + getName() + ", getVariableList()=" + getVariableList() + ", getExecutionList()=" + getExecutionList() + ", getDependsOn()=" + getDependsOn() + "]";
+				+ ", getName()=" + getName() + ", getVariableList()=" + getVariableList() + ", getDependsOn()=" + getDependsOn() + "]";
 	}
 
 	@Override

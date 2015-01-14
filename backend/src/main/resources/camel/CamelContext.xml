@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:broker="http://activemq.apache.org/schema/core"
+	xmlns:broker="http://activemq.apache.org/schema/core" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="
-       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
        http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
-    ">
+       http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd"
+	default-lazy-init="true">
 
 	<context:annotation-config />
-
+	
 	<!-- set up ActiveMQ broker -->
 	<broker:broker useJmx="false" persistent="false"
 		brokerName="localhost">
@@ -28,15 +34,51 @@
 		</property>
 	</bean>
 
+	<!-- set up the H2 Database -->
+	<!-- set the connection details -->
+	<context:property-placeholder location="h2/jdbc-h2.properties" />
+	<context:component-scan base-package="com.wstester.persistance" />
+ 	
+	<!-- construct the bean -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+    <bean id="persistenceUnitManager" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+        <property name="persistenceXmlLocations">
+            <list>
+                <value>META-INF/persistance.xml</value>
+            </list>
+        </property>
+        <property name="defaultDataSource" ref="dataSource" />
+    </bean>
+    
+    <bean id="entityManagerFactory"
+     	 class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+      	<property name="persistenceUnitName" value="persistanceUnit" />
+      	<property name="persistenceUnitManager" ref="persistenceUnitManager"/>
+   	</bean>
+  
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<bean id="responseDao" class="com.wstester.persistance.ResponseDaoImpl" />
+
+	<!-- Camel Connection to the servers -->
 	<bean id="mongoConnection" class="com.mongodb.Mongo" />
 	<bean id="soapConnection" class="org.apache.camel.component.cxf.CxfEndpoint" />
 	<bean id="mySqlConnection" class="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" />
-
+	
 	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+		<package>com.wstester.asserts</package>
 		<package>com.wstester.dispatcher</package>
 		<package>com.wstester.mock</package>
 		<package>com.wstester.variable</package>
 		<package>com.wstester.asset</package>
-		<package>com.wstester.asserts</package>
 	</camelContext>
 </beans>

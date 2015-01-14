@@ -56,7 +56,7 @@ public class AssertTest extends TestBaseClass{
 		JSONArray result = new JSONArray(response.getContent());
 
 		assertTrue(response.getStatus().equals(ExecutionStatus.FAILED));
-		assertEquals(1, response.getAssertResponseList().size());
+		assertEquals(response.getAssertResponseList().size(), 1);
 		assertEquals(response.getAssertResponseList().get(0).getStatus(), AssertStatus.FAILED);
 		assertEquals(response.getAssertResponseList().get(0).getMessage(), "Expected: [{detalii=ion}] but was: [{detalii=popescu}]");
 		assertEquals("popescu", result.getJSONObject(0).get("detalii"));

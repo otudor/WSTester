@@ -10,6 +10,7 @@ import com.wstester.model.RestStep;
 import com.wstester.model.ServiceStatus;
 import com.wstester.model.SoapStep;
 import com.wstester.model.Step;
+import com.wstester.services.impl.StepManager;
 
 public class RouteDispatcher extends RouteBuilder{
 	
@@ -17,7 +18,7 @@ public class RouteDispatcher extends RouteBuilder{
 	public void configure() throws Exception {
 	    
 		from("jms:startQueue?concurrentConsumers=20&asyncConsumer=true")
-		.to("jms:assertQueue").log("[${body.getID}] Sent message to assert queue")
+		.bean(StepManager.class, "addStep")
 		.choice()
 			.when(new Predicate() {				
 				@Override

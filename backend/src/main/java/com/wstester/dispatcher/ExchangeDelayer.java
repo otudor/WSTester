@@ -10,6 +10,8 @@ import org.apache.camel.builder.RouteBuilder;
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IStepManager;
 import com.wstester.util.ProjectProperties;
 
 public class ExchangeDelayer extends RouteBuilder{
@@ -27,6 +29,7 @@ public class ExchangeDelayer extends RouteBuilder{
 				timeout-=1000;
 				Thread.sleep(1000);
 			}
+			//TODO: make a case where the timeout expired and send a notification to the UI
 			stepsFinished.remove(step.getDependsOn());
 		}
 	}
@@ -40,20 +43,12 @@ public class ExchangeDelayer extends RouteBuilder{
 			@Override
 			public void process(Exchange exchange) throws Exception {
 				
-				String stepID = exchange.getIn().getBody(Response.class).getStepID();
-				stepsFinished.add(stepID);
-			}
-		});
-		
-		from("jms:topic:finishTopic")
-		.log("[${body.getID}] received finish message")
-		.process(new Processor() {
-			
-			@Override
-			public void process(Exchange exchange) throws Exception {
+				IStepManager stepManger = ServiceLocator.getInstance().lookup(IStepManager.class, false);
+				String stepID = exchange.getIn().getBody(Response.class).getStepId();
 				
-				stepsFinished.clear();
-				stepsFinished = new HashSet<String>();
+				if(stepManger.hasDependant(stepID)){
+					stepsFinished.add(stepID);
+				}
 			}
 		});
 	}

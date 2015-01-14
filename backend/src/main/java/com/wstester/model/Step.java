@@ -20,7 +20,6 @@ public abstract class Step implements Serializable {
 	private List<Assert> assertList;
 	private Map<Asset, AssetType> assetMap;
 	private List<Variable> variableList;
-	private List<Execution> executionList;
 	private String dependsOn;
 
 	public String getID() {
@@ -90,31 +89,6 @@ public abstract class Step implements Serializable {
 		this.variableList.add(variable);
 	}
 	
-	public List<Execution> getExecutionList() {
-		return executionList;
-	}
-	
-	public void setExecutionList(List<Execution> executionList) {
-		this.executionList = executionList;
-	}
-	
-	public void addExecution(Execution execution) {
-		if(this.executionList == null){
-			this.executionList = new ArrayList<Execution>();
-		}
-		
-		this.executionList.add(execution);
-
-	}
-	
-	public Execution getLastExecution() {
-		if(this.executionList != null){
-			return executionList.get( this.executionList.size() - 1);
-		}
-		
-		return null;
-	}
-	
 	public String getDependsOn() {
 		return dependsOn;
 	}
@@ -128,7 +102,6 @@ public abstract class Step implements Serializable {
 		setAssertList(source.getAssertList());
 		setAssetMap(source.getAssetMap());
 		setDependsOn(source.getDependsOn());
-		setExecutionList(source.getExecutionList());
 		setName(source.getName());
 		setServer(source.getServer());
 		setService(source.getService());
@@ -152,8 +125,6 @@ public abstract class Step implements Serializable {
 				+ ((assetMap == null) ? 0 : assetMap.hashCode());
 		result = prime * result
 				+ ((dependsOn == null) ? 0 : dependsOn.hashCode());
-		result = prime * result
-				+ ((executionList == null) ? 0 : executionList.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((server == null) ? 0 : server.hashCode());
 		result = prime * result + ((service == null) ? 0 : service.hashCode());
@@ -185,11 +156,6 @@ public abstract class Step implements Serializable {
 			if (other.dependsOn != null)
 				return false;
 		} else if (!dependsOn.equals(other.dependsOn))
-			return false;
-		if (executionList == null) {
-			if (other.executionList != null)
-				return false;
-		} else if (!executionList.equals(other.executionList))
 			return false;
 		if (name == null) {
 			if (other.name != null)
