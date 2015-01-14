@@ -70,6 +70,7 @@ public class TestRunner implements ITestRunner {
 			}
 			response = ResponseCallback.getResponse(stepId);
 			timeout -= 1000;
+			System.out.println(timeout);
 		}
 
 		if (timeout < 0) {

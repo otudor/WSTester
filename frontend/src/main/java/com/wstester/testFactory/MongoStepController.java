@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import com.wstester.model.Environment;
-import com.wstester.model.Execution;
 import com.wstester.model.MongoStep;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Server;
@@ -104,17 +103,17 @@ public class MongoStepController {
         }
         //mongoQuery.setText(step.getQuery().toString());
         mongoCollection.setText(step.getCollection());
-        Execution execution = step.getLastExecution();
+//        Execution execution = step.getLastExecution();
         uid = stepId;
-        if( execution != null)
+//        if( execution != null)
         {
-        	if (execution.getResponse().getStatus() == ExecutionStatus.PASSED)
-        		lblStatus.setText("PASSED");
+//        	if (execution.getResponse().getStatus() == ExecutionStatus.PASSED)
+//        		lblStatus.setText("PASSED");
         	//else ....
         		//FAILED
-        	lblResponse.setText(execution.getResponse().getContent());
-        	Execut exemplu = new Execut(execution.getRunDate().toString(),execution.getResponse().getStatus().toString(),execution.getResponse().getContent());
-            lista.add(exemplu);
+//        	lblResponse.setText(execution.getResponse().getContent());
+//        	Execut exemplu = new Execut(execution.getRunDate().toString(),execution.getResponse().getStatus().toString(),execution.getResponse().getContent());
+//            lista.add(exemplu);
             tblExecutions.setItems(lista);
             columnDate.setCellValueFactory(
             		new PropertyValueFactory<Execut,String>("Date")
@@ -172,7 +171,7 @@ public class MongoStepController {
 		mongo.setAssetMap(step.getAssetMap());
 		mongo.setCollection(step.getCollection());
 		mongo.setDependsOn(step.getDependsOn());
-		mongo.setExecutionList(step.getExecutionList());
+//		mongo.setExecutionList(step.getExecutionList());
 		mongo.setName(step.getName());
 		mongo.setQuery(step.getQuery());
 		mongo.setServer(step.getServer());

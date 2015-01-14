@@ -11,6 +11,10 @@
 			<url>http://repo.reficio.org/maven/</url>
 		</repository>
 		<repository>
+			<id>predic8-releases</id>
+			<url>http://repository.membrane-soa.org/content/groups/public</url>
+		</repository>
+		<repository>
 			<id>oss-sonatype</id>
 			<name>oss-sonatype</name>
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
@@ -49,6 +53,11 @@
 			<groupId>org.controlsfx</groupId>
 			<artifactId>openjfx-dialogs</artifactId>
 			<version>${openjfx-dialogs.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jfxtras</groupId>
+			<artifactId>jfxtras-labs</artifactId>
+			<version>${jfx.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jfxtras</groupId>
@@ -120,6 +129,11 @@
 			<artifactId>jersey-json</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
 			<groupId>eu.mihosoft.vrl.workflow-8.0</groupId>
 			<artifactId>vworkflows-fx</artifactId>
 			<version>0.1-r2-SNAPSHOT</version>
@@ -145,23 +159,37 @@
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>org.reficio</groupId>
-			<artifactId>soap-server</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-
-<!-- 		<dependency>
 			<groupId>com.predic8</groupId>
 			<artifactId>membrane-esb-core</artifactId>
 			<version>4.0.2</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-beans</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-context</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-web</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-expression</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-asm</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-
 		<dependency>
 			<groupId>com.predic8</groupId>
 			<artifactId>soa-model-core</artifactId>
 			<version>1.4.1</version>
-		</dependency> -->
-
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

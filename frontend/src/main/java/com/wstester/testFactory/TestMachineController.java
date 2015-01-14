@@ -24,13 +24,11 @@ import javafx.concurrent.Task;
 import javafx.application.Platform;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import com.wstester.elements.Dialog;
 import com.wstester.log.CustomLogger;
 import com.wstester.main.MainLauncher;
-import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.MongoStep;
 import com.wstester.model.MySQLStep;
@@ -57,6 +55,7 @@ public class TestMachineController {
 	private Tab responseTab;
 	@FXML
 	private ResponseController responseController;
+	private static Boolean hasRun = false;
 	
 	public void initialize() {
 
@@ -266,15 +265,17 @@ public class TestMachineController {
 		
 		run(testProject);
 		
+		hasRun = true;
 		updateSteps(treeView.getRoot());
 	}
 	
 	@FXML
-	public void runSpecificTests (ActionEvent event){
-		
+	public void runSpecificTests(ActionEvent event){
+		//TODO: treat the case when no item is selected
 		TreeItem<Object> selectedObject = treeView.getSelectionModel().getSelectedItem();
 		run(selectedObject.getValue());
 		
+		hasRun = true;
 		updateSteps(selectedObject);
 	}
 	
@@ -308,26 +309,7 @@ public class TestMachineController {
 				@Override
 				protected Void call() throws Exception {
 					
-			    	TestProjectService testProjectService = new TestProjectService();
 					Step step = (Step) treeItem.getValue();
-
-					ITestRunner testRunner = null;
-					try {
-						testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class);
-					} catch (Exception e) {
-						e.printStackTrace();
-						Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
-					}
-
-					Response response = testRunner.getResponse(step.getID(), 25000L);
-
-					Execution execution = new Execution();
-					Date date = new Date();
-					execution.setRunDate(date);
-					execution.setResponse(response);
-					step.addExecution(execution);
-
-					testProjectService.setStepByUID(step, step.getID());
 
 					// force the stepItem to refresh
 					treeItem.setValue(null);
@@ -416,20 +398,32 @@ public class TestMachineController {
 			hbox.getChildren().add(item.getGraphic());
 			hbox.getChildren().addAll(lblNodeName);
 
-			Execution execution = step.getLastExecution();
-			if (execution != null && execution.getResponse() != null) {
-				ImageView image = null;
-				if (execution.getResponse().getStatus() == ExecutionStatus.PASSED) {
-					image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_PASSED_ICON.toString())));
-					logger.info(step.getID(), "Set passed icon");
+			// set the status icon only if the project was ran
+			if(hasRun) {
+				
+				// get the response for the current step
+				ITestRunner testRunner = null;
+				try {
+					testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class);
+				} catch (Exception e) {
+					e.printStackTrace();
+					Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
 				}
-				else if (execution.getResponse().getStatus() == ExecutionStatus.ERROR) {
-					image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_ERROR_ICON.toString())));
-					logger.info(step.getID(), "Set failed icon");
+				Response response = testRunner.getResponse(step.getID(), 10000L);
+				
+				if (response != null) {
+					ImageView image = null;
+					if (response.getStatus() == ExecutionStatus.PASSED) {
+						image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_PASSED_ICON.toString())));
+						logger.info(step.getID(), "Set passed icon");
+					}
+					else if (response.getStatus() == ExecutionStatus.ERROR) {
+						image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_ERROR_ICON.toString())));
+						logger.info(step.getID(), "Set failed icon");
+					}
+					hbox.getChildren().addAll(image);
 				}
-				hbox.getChildren().addAll(image);
 			}
-
 			return hbox;
 		}
 		

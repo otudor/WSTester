@@ -1,8 +1,7 @@
 package com.wstester.testFactory;
 
 import java.net.URL;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -21,10 +20,12 @@ import org.xml.sax.SAXException;
 import com.wstester.elements.Dialog;
 import com.wstester.elements.Pair;
 import com.wstester.main.MainLauncher;
-import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
+import com.wstester.model.Header;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.ITestRunner;
 import com.wstester.util.Parser;
 
 public class ResponseController implements Initializable{
@@ -53,16 +54,23 @@ public class ResponseController implements Initializable{
 
 		clearFields();
 		
-		if (step.getLastExecution() != null && step.getLastExecution().getResponse() !=null) {
-
-			Execution execution = step.getLastExecution();
-			Response response = execution.getResponse();
-
+		// get the response for the current step
+		ITestRunner testRunner = null;
+		try {
+			testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
+		}
+		Response response = testRunner.getResponse(step.getID(), 1000L);
+		
+		if (response != null) {
+			
 			if (response.getStatus() == ExecutionStatus.PASSED) {
 				status.setText(response.getStatus().toString());
 				status.setStyle("-fx-text-fill: green");
 				setResponseContent(response.getContent());
-				setHeaders(response.getHeaderMap());
+				setHeaders(response.getHeaderList());
 			}
 			else if (response.getStatus() == ExecutionStatus.ERROR) {
 				status.setText(response.getStatus().toString());
@@ -106,14 +114,14 @@ public class ResponseController implements Initializable{
 		}
 	}
 	
-	private void setHeaders(Map<String, String> headerMap) {
-		if (headerMap != null) {
+	private void setHeaders(List<Header> headerList) {
+		if (headerList != null && !headerList.isEmpty()) {
 			headerLabel.setVisible(true);
 			headerTable.setVisible(true);
 			
 			ObservableList<Pair> headerData = FXCollections.observableArrayList();
-			for (Entry<String, String> entry : headerMap.entrySet()) {
-				headerData.add(new Pair(entry.getKey(), entry.getValue()));
+			for (Header header : headerList) {
+				headerData.add(new Pair(header.getKeyField(), header.getValueField()));
 			}
 			headerTable.setItems(headerData);
 		}

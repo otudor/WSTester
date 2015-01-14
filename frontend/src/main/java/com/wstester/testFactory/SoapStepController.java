@@ -10,7 +10,6 @@ import com.wstester.model.RestStep;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.SoapStep;
-import com.wstester.model.Execution;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.util.TestProjectService;
 
@@ -36,10 +35,10 @@ public class SoapStepController
     @FXML private TextField soapRequest;
     @FXML private Label lblStatus;
     @FXML private Label lblResponse;
-    @FXML private TableView<Execut> tblExecutions;
-    @FXML private TableColumn<Execut, String> columnDate;
-    @FXML private TableColumn<Execut, String> columnStatus;
-    @FXML private TableColumn<Execut, String> columnResponse;
+//    @FXML private TableView<Execut> tblExecutions;
+//    @FXML private TableColumn<Execut, String> columnDate;
+//    @FXML private TableColumn<Execut, String> columnStatus;
+//    @FXML private TableColumn<Execut, String> columnResponse;
     @FXML private ComboBox<Server> serverBox;
     @FXML private ComboBox<Service> serviceBox;
     
@@ -93,77 +92,77 @@ public class SoapStepController
         	});
         }
         lblName.setText(step.getName());
-        Execution execution = step.getLastExecution();
-        uid = stepUID;
-        if( execution != null)
-        {
-        	if (execution.getResponse().getStatus() == ExecutionStatus.PASSED)
-        		lblStatus.setText("PASSED");
-        	//else ....
-        		//FAILED
-        	lblResponse.setText(execution.getResponse().getContent());
-        	List<Execution> list = new ArrayList<>();
-        	ObservableList<Execut> lista = FXCollections.observableArrayList();
-        	list = step.getExecutionList();
-        	for(Execution exec : list)
-        	{
-        	Execut exemplu = new Execut(exec.getRunDate().toString(),exec.getResponse().getStatus().toString(),exec.getResponse().getContent());
-            lista.add(exemplu);
-        	}
-            tblExecutions.setItems(lista);
-            columnDate.setCellValueFactory(
-            		new PropertyValueFactory<Execut,String>("Date")
-            		);
-            
-            columnStatus.setCellValueFactory(
-            		new PropertyValueFactory<Execut,String>("Status")
-            		);
-            columnResponse.setCellValueFactory(
-            		new PropertyValueFactory<Execut,String>("Response")
-            		);
+//        Execution execution = step.getLastExecution();
+//        uid = stepUID;
+//        if( execution != null)
+//        {
+//        	if (execution.getResponse().getStatus() == ExecutionStatus.PASSED)
+//        		lblStatus.setText("PASSED");
+//        	//else ....
+//        		//FAILED
+//        	lblResponse.setText(execution.getResponse().getContent());
+//        	List<Execution> list = new ArrayList<>();
+//        	ObservableList<Execut> lista = FXCollections.observableArrayList();
+//        	list = step.getExecutionList();
+//        	for(Execution exec : list)
+//        	{
+//        	Execut exemplu = new Execut(exec.getRunDate().toString(),exec.getResponse().getStatus().toString(),exec.getResponse().getContent());
+//            lista.add(exemplu);
+//        	}
+//            tblExecutions.setItems(lista);
+//            columnDate.setCellValueFactory(
+//            		new PropertyValueFactory<Execut,String>("Date")
+//            		);
+//            
+//            columnStatus.setCellValueFactory(
+//            		new PropertyValueFactory<Execut,String>("Status")
+//            		);
+//            columnResponse.setCellValueFactory(
+//            		new PropertyValueFactory<Execut,String>("Response")
+//            		);
            
         }
           
         
         
-    }
-    public static class Execut{
-    	private final SimpleStringProperty date;
-    	private final SimpleStringProperty status;
-    	private final SimpleStringProperty response;
-		
-    	private Execut(String Date, String Status, String Response){
-    		this.date = new SimpleStringProperty(Date);
-    		this.status = new SimpleStringProperty(Status);
-    		this.response = new SimpleStringProperty(Response);
-     	}
-    	
-    	public String getDate(){
-    		return date.get();
-    	}
-    	public String getStatus(){
-    		return status.get();
-    	}
-    	public String getResponse(){
-    		return response.get();
-    	}
-    	public void setDate(String Date){
-    		date.set(Date);
-    	}
-    	public void setStatus(String Status){
-    		status.set(Status);
-    	}
-    	public void setResponse(String Response){
-    		response.set(Response);
-    	}
-    }
+//    }
+//    public static class Execut{
+//    	private final SimpleStringProperty date;
+//    	private final SimpleStringProperty status;
+//    	private final SimpleStringProperty response;
+//		
+//    	private Execut(String Date, String Status, String Response){
+//    		this.date = new SimpleStringProperty(Date);
+//    		this.status = new SimpleStringProperty(Status);
+//    		this.response = new SimpleStringProperty(Response);
+//     	}
+//    	
+//    	public String getDate(){
+//    		return date.get();
+//    	}
+//    	public String getStatus(){
+//    		return status.get();
+//    	}
+//    	public String getResponse(){
+//    		return response.get();
+//    	}
+//    	public void setDate(String Date){
+//    		date.set(Date);
+//    	}
+//    	public void setStatus(String Status){
+//    		status.set(Status);
+//    	}
+//    	public void setResponse(String Response){
+//    		response.set(Response);
+//    	}
+//    }
     
     public void saveSoap(ActionEvent e) {
     	SoapStep soap = new SoapStep();
 		soap.setAssertList(step.getAssertList());
 		soap.setAssetMap(step.getAssetMap());
 		soap.setDependsOn(step.getDependsOn());
-		soap.setExecutionList(step.getExecutionList());
+//		soap.setExecutionList(step.getExecutionList());
 		soap.setName(step.getName());
 		soap.setRequest(step.getRequest());
 		soap.setServer(step.getServer());

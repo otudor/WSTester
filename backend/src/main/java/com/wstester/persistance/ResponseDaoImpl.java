@@ -28,6 +28,7 @@ public class ResponseDaoImpl implements ResponseDao {
     		response = entityManager.createNamedQuery("getLastByStepId", Response.class).setParameter("stepId", stepId).getSingleResult();
     	} catch (NoResultException e) {
     		// Do nothing and return null
+    		return null;
     	}
 		return response;
 	}

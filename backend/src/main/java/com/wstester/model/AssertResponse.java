@@ -19,7 +19,7 @@ public class AssertResponse implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id")
-    private long id;
+    private long id; //NOPMD
 	
 	@Column(name = "assertId")
 	private String assertId;

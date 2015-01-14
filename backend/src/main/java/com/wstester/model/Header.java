@@ -19,7 +19,7 @@ public class Header implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id")
-    private long id;
+    private long id;  //NOPMD
 	
 	@Column(name = "keyField")
 	private String keyField;
