@@ -1,5 +1,7 @@
 package com.wstester.dispatcher;
 
+import java.util.Date;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
@@ -32,7 +34,7 @@ public class ResponseCallback extends RouteBuilder {
 		});
 	}
 	
-	public static Response getResponse(String stepId){
+	public static Response getResponse(String stepId, Date runDate){
 		
 		ICamelContextManager camelContextManager = null;
 		try {
@@ -43,6 +45,6 @@ public class ResponseCallback extends RouteBuilder {
 		AbstractXmlApplicationContext camelContext = camelContextManager.getCamelContext();
 		
 		ResponseService responseService = camelContext.getBean("responseServiceImpl", ResponseService.class);
-		return responseService.getLastResponseForStepId(stepId);
+		return responseService.getLastResponseForStepId(stepId, runDate);
 	}
 }

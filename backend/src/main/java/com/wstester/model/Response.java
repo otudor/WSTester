@@ -22,7 +22,7 @@ import javax.persistence.CascadeType;
 
 @NamedQueries({
 	@NamedQuery(name="getAllByStepId", query="FROM Response r WHERE r.stepId = :stepId"),
-	@NamedQuery(name="getLastByStepId", query="FROM Response r1 WHERE r1.stepId = :stepId AND r1.runDate = (SELECT max(runDate) FROM Response r2 WHERE r2.stepId = :stepId)"),
+	@NamedQuery(name="getLastByStepId", query="FROM Response r1 WHERE r1.stepId = :stepId AND r1.runDate >= :runDate"),
 })
 @Entity
 @Table(name = "response")

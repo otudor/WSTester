@@ -1,5 +1,6 @@
 package com.wstester.persistance;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ public class ResponseServiceImpl implements ResponseService {
 	
 	@Override
 	@Transactional
-	public Response getLastResponseForStepId(String stepId) {
-		return responseDao.getLastResponseForStepId(stepId);
+	public Response getLastResponseForStepId(String stepId, Date runDate) {
+		return responseDao.getLastResponseForStepId(stepId, runDate);
 	}
 
 	@Override

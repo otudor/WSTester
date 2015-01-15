@@ -1,5 +1,6 @@
 package com.wstester.persistance;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -21,11 +22,11 @@ public class ResponseDaoImpl implements ResponseDao {
     
     @SuppressWarnings("unchecked")
 	@Override
-	public Response getLastResponseForStepId(String stepId) {
+	public Response getLastResponseForStepId(String stepId, Date runDate) {
     	
     	Response response = null;
     	try {
-    		response = entityManager.createNamedQuery("getLastByStepId", Response.class).setParameter("stepId", stepId).getSingleResult();
+    		response = entityManager.createNamedQuery("getLastByStepId", Response.class).setParameter("stepId", stepId).setParameter("runDate", runDate).getSingleResult();
     	} catch (NoResultException e) {
     		// Do nothing and return null
     		return null;

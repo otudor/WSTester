@@ -1,6 +1,7 @@
 package com.wstester.services.impl;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -33,6 +34,7 @@ import com.wstester.variable.VariableRoute;
 public class TestRunner implements ITestRunner {
 
 	private TestProject testProject;
+	private static Date runDate;
 	private CustomLogger log = new CustomLogger(TestRunner.class);
 
 	public TestRunner() {
@@ -49,6 +51,7 @@ public class TestRunner implements ITestRunner {
 	@Override
 	public void run(Object testToRun) throws Exception {
 
+		runDate = new Date();
 		ExecutorService executor = Executors.newFixedThreadPool(10);
 		executor.execute(new ProjectRunThread(testToRun));
 
@@ -60,7 +63,7 @@ public class TestRunner implements ITestRunner {
 
 		log.info(stepId, "Waiting response");
 
-		Response response = ResponseCallback.getResponse(stepId);
+		Response response = ResponseCallback.getResponse(stepId, runDate);
 
 		while (response == null && timeout > 0) {
 			try {
@@ -68,7 +71,7 @@ public class TestRunner implements ITestRunner {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			response = ResponseCallback.getResponse(stepId);
+			response = ResponseCallback.getResponse(stepId, runDate);
 			timeout -= 1000;
 			System.out.println(timeout);
 		}
