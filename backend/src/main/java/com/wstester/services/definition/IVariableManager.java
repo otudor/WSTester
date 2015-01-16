@@ -6,7 +6,7 @@ import com.wstester.model.Variable;
 import com.wstester.services.common.Stateless;
 
 @Stateless
-public interface IVariableManager {
+public interface IVariableManager extends IService{
 
 	void setVariableContent(Variable variable, String content);
 	

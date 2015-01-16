@@ -309,6 +309,7 @@ public class TestMachineController {
 				@Override
 				protected Void call() throws Exception {
 					
+					createStepGraphic(treeItem);
 					Step step = (Step) treeItem.getValue();
 
 					// force the stepItem to refresh
@@ -324,6 +325,47 @@ public class TestMachineController {
 			};
 			Platform.runLater(task);
 		}
+	}
+	
+	// this method adds to the step cell a special graphic indicating a success/failure
+	// TODO: add a imagine for assert error
+	public void createStepGraphic(TreeItem<Object> item) {
+		Step step = (Step) item.getValue();
+		HBox hbox = new HBox();
+		hbox.setPadding(new Insets(0, 0, 0, 0));
+		hbox.setSpacing(5);
+
+		Label lblNodeName = new Label(step == null ? "" : step.toString());
+		hbox.getChildren().add(0, item.getGraphic());
+		hbox.getChildren().add(1, lblNodeName);
+
+		// set the status icon only if the project was ran
+		if(hasRun) {
+			
+			// get the response for the current step
+			ITestRunner testRunner = null;
+			try {
+				testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class);
+			} catch (Exception e) {
+				e.printStackTrace();
+				Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
+			}
+			Response response = testRunner.getResponse(step.getID(), 10000L);
+			
+			if (response != null) {
+				ImageView image = null;
+				if (response.getStatus() == ExecutionStatus.PASSED) {
+					image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_PASSED_ICON.toString())));
+					logger.info(step.getID(), "Set passed icon");
+				}
+				else if (response.getStatus() == ExecutionStatus.ERROR) {
+					image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_ERROR_ICON.toString())));
+					logger.info(step.getID(), "Set failed icon");
+				}
+				hbox.getChildren().add(2, image);
+			}
+		}
+		item.setGraphic(hbox);
 	}
 	
 	private class TestSuiteTreeImplementation extends TreeCell<Object> {
@@ -361,7 +403,12 @@ public class TestMachineController {
 			} else {
 				// if the item type is step add a special graphic if the last execution passed
 				if (getItem() instanceof Step) {
-					setGraphic(createStepGraphic(getTreeItem()));
+					if(getTreeItem().getGraphic() instanceof HBox) {
+						setText("");
+					} else {
+						setText(getItem().toString());
+					}
+					setGraphic(getTreeItem().getGraphic());
 				}
 				// else just take the previous graphic
 				else {
@@ -386,47 +433,6 @@ public class TestMachineController {
 			}
 		}
 
-		// this method adds to the step cell a special graphic indicating a success/failure
-		// TODO: add a imagine for assert error
-		public HBox createStepGraphic(TreeItem<Object> item) {
-			Step step = (Step) item.getValue();
-			HBox hbox = new HBox();
-			hbox.setPadding(new Insets(0, 0, 0, 0));
-			hbox.setSpacing(5);
-
-			Label lblNodeName = new Label(step == null ? "" : step.toString());
-			hbox.getChildren().add(item.getGraphic());
-			hbox.getChildren().addAll(lblNodeName);
-
-			// set the status icon only if the project was ran
-			if(hasRun) {
-				
-				// get the response for the current step
-				ITestRunner testRunner = null;
-				try {
-					testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class);
-				} catch (Exception e) {
-					e.printStackTrace();
-					Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
-				}
-				Response response = testRunner.getResponse(step.getID(), 10000L);
-				
-				if (response != null) {
-					ImageView image = null;
-					if (response.getStatus() == ExecutionStatus.PASSED) {
-						image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_PASSED_ICON.toString())));
-						logger.info(step.getID(), "Set passed icon");
-					}
-					else if (response.getStatus() == ExecutionStatus.ERROR) {
-						image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_ERROR_ICON.toString())));
-						logger.info(step.getID(), "Set failed icon");
-					}
-					hbox.getChildren().addAll(image);
-				}
-			}
-			return hbox;
-		}
-		
 		public ContextMenu createTestSuiteContextMenu(String testSuiteId) {
 			
 			final ContextMenu contextMenu = new ContextMenu();

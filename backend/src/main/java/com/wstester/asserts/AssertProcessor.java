@@ -97,7 +97,7 @@ public class AssertProcessor {
 	
 	private Step getStep(String id) throws Exception{
 		
-		IStepManager stepManger = ServiceLocator.getInstance().lookup(IStepManager.class, false);
+		IStepManager stepManger = ServiceLocator.getInstance().lookup(IStepManager.class);
 		Step step = stepManger.getStep(id);
 		return step;
 	}

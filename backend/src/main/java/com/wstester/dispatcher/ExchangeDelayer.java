@@ -16,6 +16,7 @@ import com.wstester.util.ProjectProperties;
 
 public class ExchangeDelayer extends RouteBuilder{
 
+	//TODO: change from Set to List because the same step can be present twice 
 	private static Set<String> stepsFinished = new HashSet<String>();
 	private CustomLogger log = new CustomLogger(ExchangeDelayer.class);
 	
@@ -43,7 +44,7 @@ public class ExchangeDelayer extends RouteBuilder{
 			@Override
 			public void process(Exchange exchange) throws Exception {
 				
-				IStepManager stepManger = ServiceLocator.getInstance().lookup(IStepManager.class, false);
+				IStepManager stepManger = ServiceLocator.getInstance().lookup(IStepManager.class);
 				String stepID = exchange.getIn().getBody(Response.class).getStepId();
 				
 				if(stepManger.hasDependant(stepID)){

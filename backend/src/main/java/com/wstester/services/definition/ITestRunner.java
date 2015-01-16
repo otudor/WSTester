@@ -6,7 +6,7 @@ import com.wstester.services.common.Stateless;
 @Stateless
 public interface ITestRunner extends IService{
 
-	void run(Object testToRun) throws Exception;
+	void run(Object testToRun);
 	
 	Response getResponse(String stepId, Long timeout);
 }

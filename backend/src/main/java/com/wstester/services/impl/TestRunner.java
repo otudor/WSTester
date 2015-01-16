@@ -19,6 +19,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import com.wstester.dispatcher.ResponseCallback;
 import com.wstester.exceptions.WsException;
 import com.wstester.log.CustomLogger;
+import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 import com.wstester.model.TestCase;
@@ -34,7 +35,8 @@ import com.wstester.variable.VariableRoute;
 public class TestRunner implements ITestRunner {
 
 	private TestProject testProject;
-	private static Date runDate;
+	private static Exception exceptionCaught;
+	private static Boolean allStepsAdded;
 	private CustomLogger log = new CustomLogger(TestRunner.class);
 
 	public TestRunner() {
@@ -49,9 +51,10 @@ public class TestRunner implements ITestRunner {
 	}
 
 	@Override
-	public void run(Object testToRun) throws Exception {
+	public void run(Object testToRun) {
 
-		runDate = new Date();
+		exceptionCaught = null;
+		allStepsAdded = false;
 		ExecutorService executor = Executors.newFixedThreadPool(10);
 		executor.execute(new ProjectRunThread(testToRun));
 
@@ -63,9 +66,38 @@ public class TestRunner implements ITestRunner {
 
 		log.info(stepId, "Waiting response");
 
+		// check if all the steps have been send to the camel queues
+		log.info(stepId, "Waiting for all steps to be sent to the camel queues");
+		waitForSteps(stepId);
+		
+		Date runDate = null;
+		try {
+			IStepManager stepManager = ServiceLocator.getInstance().lookup(IStepManager.class);
+			ProjectProperties properties = new ProjectProperties();
+			Long camelStepProcessingTimeout = properties.getLongProperty("camelStepProcessingTimeout");
+			// the steps can have a delay until they are received by the StepManager
+			while(runDate == null && camelStepProcessingTimeout >= 0) {
+				runDate = stepManager.getLastRun(stepId);
+				timeout -= 1000;
+				Thread.sleep(1000);
+			}
+			
+		} catch (Exception e) {
+			exceptionCaught = e;
+			e.printStackTrace();
+		}
+		
+		if (runDate == null) {
+			log.info(stepId, "The step did not previously run");
+			return null;
+		}
+		
 		Response response = ResponseCallback.getResponse(stepId, runDate);
-
-		while (response == null && timeout > 0) {
+		while (response == null && timeout >= 0) {
+			if (exceptionCaught != null) {
+				timeout = 0L;
+				break;
+			}
 			try {
 				Thread.sleep(1000L);
 			} catch (InterruptedException e) {
@@ -73,11 +105,20 @@ public class TestRunner implements ITestRunner {
 			}
 			response = ResponseCallback.getResponse(stepId, runDate);
 			timeout -= 1000;
-			System.out.println(timeout);
 		}
 
-		if (timeout < 0) {
+		if (timeout <= 0) {
 			log.info(stepId, "The timeout expired!");
+			if(exceptionCaught !=null && response == null) {
+				log.info(stepId, "Exception was thrown in the TestRunner");
+				
+				// construct new Response to deliver the message in the UI
+				response = new Response();
+				response.setStepId(stepId);
+				response.setStatus(ExecutionStatus.ERROR);
+				response.setRunDate(new Date());
+				response.setErrorMessage(exceptionCaught.getMessage());
+			}
 		}
 
 		if (response != null) {
@@ -87,6 +128,22 @@ public class TestRunner implements ITestRunner {
 		}
 
 		return response;
+	}
+
+	private void waitForSteps(String stepId) {
+
+		ProjectProperties properties = new ProjectProperties();
+		Long timeout = properties.getLongProperty("stepFinishTimeout");
+		
+		// wait until all steps are sent to the camel queues
+		while(!allStepsAdded && timeout > 0) {
+			timeout -= 1000;
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	class ProjectRunThread implements Runnable {
@@ -122,13 +179,11 @@ public class TestRunner implements ITestRunner {
 				// Run the tests
 				runSteps(session, entityToRun);
 
+				allStepsAdded = true;
 				// send a message to a finishTopic meaning that the current run has finished
 				sendFinishMessage(session, entityToRun);
-			} catch (RuntimeException e) {
-				// TODO: auto generated block
-				e.printStackTrace();
 			} catch (Exception e) {
-				// TODO: auto generated block
+				exceptionCaught = e;
 				e.printStackTrace();
 			} finally {
 
@@ -141,7 +196,7 @@ public class TestRunner implements ITestRunner {
 						connection.stop();
 					}
 				} catch (JMSException e) {
-					// TODO Auto-generated catch block
+					exceptionCaught = e;
 					e.printStackTrace();
 				}
 			}
@@ -218,7 +273,7 @@ public class TestRunner implements ITestRunner {
 	private void runSteps(Session session, Object entityToRun) throws Exception {
 
 		// When the constructor for StepManager is called a new instance of stepList is made
-		ServiceLocator.getInstance().lookup(IStepManager.class, true);
+		ServiceLocator.getInstance().lookup(IStepManager.class);
 		
 		// Create the destination (Topic or Queue)
 		Destination destination = session.createQueue("startQueue");
@@ -278,6 +333,7 @@ public class TestRunner implements ITestRunner {
 		}
 	}
 
+	//TODO: remove this method
 	private void sendFinishMessage(Session session, Object entityToRun) throws JMSException {
 
 		// Create the destination (Topic or Queue)

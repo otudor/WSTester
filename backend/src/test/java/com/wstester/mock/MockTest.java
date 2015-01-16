@@ -2,8 +2,12 @@ package com.wstester.mock;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 import java.io.File;
+import java.io.IOException;
+
 import org.junit.Test;
+
 import com.wstester.camel.TestBaseClass;
 import com.wstester.model.Asset;
 import com.wstester.model.ExecutionStatus;
@@ -23,7 +27,7 @@ import com.wstester.services.impl.TestRunner;
 public class MockTest extends TestBaseClass{
 
 	@Test
-	public void getContentFromMock() throws Exception{
+	public void getContentFromMock() {
 		
 		TestProject testProject = TestUtils.getMockedRestProject();
 		String output = "mockedPath";
@@ -38,7 +42,7 @@ public class MockTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void runTwoConsecutiveMockSteps() throws Exception{
+	public void runTwoConsecutiveMockSteps() {
 		
 		TestProject testProject = TestUtils.getMockedRestProject();
 		TestCase testCase = testProject.getTestSuiteList().get(0).getTestCaseList().get(0);
@@ -68,7 +72,7 @@ public class MockTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void runDifferentTypesOfMockSteps() throws Exception{
+	public void runDifferentTypesOfMockSteps() throws IOException {
 		
 		TestProject testProject = TestUtils.getMockedRestSoapProject();
 		
@@ -87,7 +91,7 @@ public class MockTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void noRulesFoundToMatchTheRequest() throws Exception{
+	public void noRulesFoundToMatchTheRequest() {
 		
 		TestProject testProject = TestUtils.getMockedRestProject();
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setPath("findByCookie");
@@ -103,7 +107,7 @@ public class MockTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void noRulesWereDefinedForTheService() throws Exception{
+	public void noRulesWereDefinedForTheService() {
 		
 		TestProject testProject = TestUtils.getRestTestPlan();
 		testProject.getEnvironmentList().get(0).getServers().get(0).getServices().get(0).setStatus(ServiceStatus.MOCKED);
@@ -119,7 +123,7 @@ public class MockTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void ruleWithAssetStepWithoutAsset() throws Exception{
+	public void ruleWithAssetStepWithoutAsset() {
 		
 		Asset asset = new Asset();
 		asset.setName("AssetFile.txt");
