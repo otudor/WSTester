@@ -18,10 +18,14 @@ public final class ServiceLocator {
 		synchronized(ServiceLocator.class) {
 			if(instance == null) {
 				instance = new ServiceLocator();
-				cache = new HashMap<>();
+				cache = new HashMap<Class<? extends IService>, Object>();
 			}
 		}
 		return instance;
+	}
+	
+	public void clearCache() {
+		ServiceLocator.cache = new HashMap<Class<? extends IService>, Object>();
 	}
 	
 	@SuppressWarnings("unchecked")

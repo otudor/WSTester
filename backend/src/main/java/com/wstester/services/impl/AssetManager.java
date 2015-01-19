@@ -55,7 +55,6 @@ public class AssetManager implements IAssetManager {
 	        session.close();
 			connection.stop();
 		}catch (Exception e){
-			
 			log.error("Can't create ActiveMQ instance: " + e.getMessage());
 		}
 	}
@@ -66,7 +65,6 @@ public class AssetManager implements IAssetManager {
 		try {
 			Files.write(Paths.get("assets/" + asset.getName()), content.getBytes(StandardCharsets.UTF_8));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			log.error("File does not exist");
 			e.printStackTrace();
 		}
@@ -80,7 +78,6 @@ public class AssetManager implements IAssetManager {
 		try {
 			content = new String(Files.readAllBytes(Paths.get("assets/" + fileName)), StandardCharsets.UTF_8);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -97,7 +94,6 @@ public class AssetManager implements IAssetManager {
 				timeout -= 1000;
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -108,7 +104,6 @@ public class AssetManager implements IAssetManager {
 				return true;
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

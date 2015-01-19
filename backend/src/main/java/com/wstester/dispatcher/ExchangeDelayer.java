@@ -1,56 +1,44 @@
 package com.wstester.dispatcher;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
-import org.apache.camel.builder.RouteBuilder;
+import org.springframework.context.support.AbstractXmlApplicationContext;
 
 import com.wstester.log.CustomLogger;
-import com.wstester.model.Response;
 import com.wstester.model.Step;
+import com.wstester.persistance.ResponseService;
 import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.ICamelContextManager;
 import com.wstester.services.definition.IStepManager;
 import com.wstester.util.ProjectProperties;
 
-public class ExchangeDelayer extends RouteBuilder{
+public class ExchangeDelayer {
 
-	//TODO: change from Set to List because the same step can be present twice 
-	private static Set<String> stepsFinished = new HashSet<String>();
 	private CustomLogger log = new CustomLogger(ExchangeDelayer.class);
 	
-	public void delay(Step step) throws InterruptedException{
+	public void delay(Step step) throws Exception{
 		
 		ProjectProperties properties = new ProjectProperties();
 		Long timeout = properties.getLongProperty("stepFinishTimeout");
+		
 		if(step.getDependsOn() != null){
-			while(!stepsFinished.contains(step.getDependsOn()) && timeout > 0){
-				log.info(step.getID(),"Waiting for: " + step.getDependsOn());
+			while(!hasStepFinished(step.getDependsOn()) && timeout > 0){
+				log.info(step.getID(),"Waiting to finish: " + step.getDependsOn());
 				timeout-=1000;
 				Thread.sleep(1000);
 			}
-			//TODO: make a case where the timeout expired and send a notification to the UI
-			stepsFinished.remove(step.getDependsOn());
 		}
 	}
 
-	@Override
-	public void configure() throws Exception {
+	private Boolean hasStepFinished(String stepId) throws Exception{
 		
-		from("jms:topic:responseTopic")
-		.process(new Processor() {
-			
-			@Override
-			public void process(Exchange exchange) throws Exception {
-				
-				IStepManager stepManger = ServiceLocator.getInstance().lookup(IStepManager.class);
-				String stepID = exchange.getIn().getBody(Response.class).getStepId();
-				
-				if(stepManger.hasDependant(stepID)){
-					stepsFinished.add(stepID);
-				}
-			}
-		});
+		// get a instance of ResponseService to get the result from the H2 DB
+		ICamelContextManager camelContextManager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
+		AbstractXmlApplicationContext camelContext = camelContextManager.getCamelContext();
+		ResponseService responseService = camelContext.getBean("responseServiceImpl", ResponseService.class);
+		
+		// Get a instance of IStepManager to check the lastRunDate of the step
+		IStepManager stepManager = ServiceLocator.getInstance().lookup(IStepManager.class);
+		
+		// verify if the step finished for the current run
+		return responseService.hasStepFinished(stepId, stepManager.getLastRun(stepId));
 	}
 }

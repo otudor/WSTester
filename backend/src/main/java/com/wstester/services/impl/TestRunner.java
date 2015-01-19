@@ -1,6 +1,5 @@
 package com.wstester.services.impl;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -9,7 +8,6 @@ import javax.jms.Connection;
 import javax.jms.DeliveryMode;
 import javax.jms.Destination;
 import javax.jms.JMSException;
-import javax.jms.Message;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
@@ -29,8 +27,8 @@ import com.wstester.model.Variable;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IStepManager;
 import com.wstester.services.definition.ITestRunner;
+import com.wstester.services.definition.IVariableManager;
 import com.wstester.util.ProjectProperties;
-import com.wstester.variable.VariableRoute;
 
 public class TestRunner implements ITestRunner {
 
@@ -135,7 +133,7 @@ public class TestRunner implements ITestRunner {
 		ProjectProperties properties = new ProjectProperties();
 		Long timeout = properties.getLongProperty("stepFinishTimeout");
 		
-		// wait until all steps are sent to the camel queues
+		// wait until all steps are sent to the camel queues and are received by the StepManager
 		while(!allStepsAdded && timeout > 0) {
 			timeout -= 1000;
 			try {
@@ -174,14 +172,12 @@ public class TestRunner implements ITestRunner {
 				session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
 				// Manage the variables
-				manageVariable(session);
+				manageVariable();
 
 				// Run the tests
 				runSteps(session, entityToRun);
 
 				allStepsAdded = true;
-				// send a message to a finishTopic meaning that the current run has finished
-				sendFinishMessage(session, entityToRun);
 			} catch (Exception e) {
 				exceptionCaught = e;
 				e.printStackTrace();
@@ -203,25 +199,16 @@ public class TestRunner implements ITestRunner {
 		}
 	}
 
-	private void manageVariable(Session session) throws JMSException, InterruptedException {
+	private void manageVariable() throws Exception {
 
-		// Create the destination (Topic or Queue)
-		Destination destination = session.createQueue("variableQueue");
-
-		// Create a MessageProducer from the Session to the Topic or Queue
-		MessageProducer producer = session.createProducer(destination);
-		producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-
-		int variableSize = 0;
-
+		IVariableManager variableManager = ServiceLocator.getInstance().lookup(IVariableManager.class);
+		
 		// TODO: we don't have to add all variables, only the ones we use in the
 		// current run
 		if (testProject.getVariableList() != null) {
 			for (Variable variable : testProject.getVariableList()) {
-
-				ObjectMessage messageProject = session.createObjectMessage(variable);
-				producer.send(messageProject);
-				variableSize++;
+				
+				variableManager.addVariable(variable);
 				log.info("Added project variable: " + variable);
 			}
 		}
@@ -229,10 +216,8 @@ public class TestRunner implements ITestRunner {
 		for (TestSuite testSuite : testProject.getTestSuiteList()) {
 			if (testSuite.getVariableList() != null) {
 				for (Variable variable : testSuite.getVariableList()) {
-
-					ObjectMessage messageSuite = session.createObjectMessage(variable);
-					producer.send(messageSuite);
-					variableSize++;
+					
+					variableManager.addVariable(variable);
 					log.info("Added suite variable: " + variable);
 				}
 			}
@@ -241,9 +226,7 @@ public class TestRunner implements ITestRunner {
 				if (testCase.getVariableList() != null) {
 					for (Variable variable : testCase.getVariableList()) {
 
-						ObjectMessage messageCase = session.createObjectMessage(variable);
-						producer.send(messageCase);
-						variableSize++;
+						variableManager.addVariable(variable);
 						log.info("Added case variable: " + variable);
 					}
 				}
@@ -252,22 +235,15 @@ public class TestRunner implements ITestRunner {
 					if (testStep.getVariableList() != null) {
 						for (Variable variable : testStep.getVariableList()) {
 
-							ObjectMessage message = session.createObjectMessage(variable);
-							producer.send(message);
-							variableSize++;
+							variableManager.addVariable(variable);
 							log.info("Added step variable: " + variable);
 						}
 					}
 				}
 			}
 		}
-		ProjectProperties properties = new ProjectProperties();
-		Long timeout = properties.getLongProperty("stepFinishTimeout");
-		// TODO: change the source of the allVariablesReceived from
-		// VariableRoute to VariableManager
-		while (!VariableRoute.allVariablesReceived(variableSize) && ((timeout -= 1000) > 0)) {
-			Thread.sleep(1000);
-		}
+		// notify the variableManager that all variables were sent
+		variableManager.allVariablesSent();
 	}
 
 	private void runSteps(Session session, Object entityToRun) throws Exception {
@@ -331,19 +307,5 @@ public class TestRunner implements ITestRunner {
 		} else {
 			throw new WsException("Can't run object: " + entityToRun + "! Please run only instances of TestProject, TestSuite, TestCase or Step", null);
 		}
-	}
-
-	//TODO: remove this method
-	private void sendFinishMessage(Session session, Object entityToRun) throws JMSException {
-
-		// Create the destination (Topic or Queue)
-		Destination destination = session.createTopic("finishTopic");
-
-		// Create a MessageProducer from the Session to the Topic or Queue
-		MessageProducer producer = session.createProducer(destination);
-		producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-
-		Message message = session.createObjectMessage((Serializable) entityToRun);
-		producer.send(message);
 	}
 }

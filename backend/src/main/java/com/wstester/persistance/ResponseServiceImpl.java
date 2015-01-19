@@ -22,6 +22,7 @@ public class ResponseServiceImpl implements ResponseService {
 	}
 
 	@Override
+	@Transactional
 	public List<Response> getAllResponsesForStepId(String stepId) {
 		return responseDao.getAllResponsesForStepId(stepId);
 	}
@@ -30,6 +31,11 @@ public class ResponseServiceImpl implements ResponseService {
 	@Transactional
 	public void persistResponse(Response response) {
 		responseDao.persistResponse(response);
+	}
+
+	@Override
+	public Boolean hasStepFinished(String stepId, Date runDate) {
+		return responseDao.hasStepFinished(stepId, runDate);
 	}
 
 }

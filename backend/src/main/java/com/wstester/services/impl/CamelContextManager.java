@@ -4,6 +4,7 @@ import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.wstester.log.CustomLogger;
+import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ICamelContextManager;
 
 public class CamelContextManager implements ICamelContextManager {
@@ -35,6 +36,10 @@ public class CamelContextManager implements ICamelContextManager {
 	
 	@Override
 	public void closeCamelContext() {
+		
+		// clear the cache from the ServiceLocator
+		ServiceLocator.getInstance().clearCache();
+		
 		if(camelContext == null)
 			return;
 		
@@ -44,7 +49,6 @@ public class CamelContextManager implements ICamelContextManager {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

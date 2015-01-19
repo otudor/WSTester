@@ -38,4 +38,14 @@ public class ServiceLocatorTest {
 		ITestRunner testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class, new TestProject());
 		assertNotNull(testRunner);
 	}
+	
+	@Test
+	public void clearCacheTest() throws Exception{
+		
+		ICamelContextManager firstManager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
+		ServiceLocator.getInstance().clearCache();
+		ICamelContextManager secondmanager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
+		
+		assertNotEquals(firstManager, secondmanager);
+	}
 }

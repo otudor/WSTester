@@ -48,4 +48,18 @@ public class ResponseDaoImpl implements ResponseDao {
 		entityManager.persist(response);
 		log.info(response.getStepId(), "Persisted response: " + response);
 	}
+
+	@Override
+	public Boolean hasStepFinished(String stepId, Date runDate) {
+    	try {
+    		Response response = entityManager.createNamedQuery("getLastByStepId", Response.class).setParameter("stepId", stepId).setParameter("runDate", runDate).getSingleResult();
+    		if(response != null) {
+    			return true;
+    		}
+    	} catch (NoResultException e) {
+    		// Do nothing and return null
+    		return false;
+    	}
+    	return false;
+	}
 }

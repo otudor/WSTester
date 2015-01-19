@@ -15,9 +15,7 @@ public class StepManager implements IStepManager {
 	private static List<StepExecution> stepExecutionList;
 	
 	public StepManager() {
-		if(stepExecutionList == null) {
-			stepExecutionList = new ArrayList<StepExecution>();
-		}
+		stepExecutionList = new ArrayList<StepExecution>();
 	}
 	
 	@Override

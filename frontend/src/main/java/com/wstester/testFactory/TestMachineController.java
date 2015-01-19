@@ -55,7 +55,6 @@ public class TestMachineController {
 	private Tab responseTab;
 	@FXML
 	private ResponseController responseController;
-	private static Boolean hasRun = false;
 	
 	public void initialize() {
 
@@ -85,6 +84,12 @@ public class TestMachineController {
 						if (testCase.getStepList() != null) {
 							for (Step step : testCase.getStepList()) {
 								
+								// put the graphic of the treeItem in a HBox
+								HBox hbox = new HBox();
+								hbox.setPadding(new Insets(0, 0, 0, 0));
+								hbox.setSpacing(5);
+								
+								Label lblNodeName = new Label(step == null ? "" : step.toString());
 								Node stepIcon = null;
 								if (step instanceof MySQLStep) {
 									stepIcon = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.MYSQL_STEP_ICON.toString())));
@@ -98,7 +103,11 @@ public class TestMachineController {
 								else if (step instanceof RestStep) {
 									stepIcon = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.REST_STEP_ICON.toString())));
 								}
-								TreeItem<Object> stepItem = new TreeItem<Object>(step, stepIcon);
+								// Construct the HBox
+								hbox.getChildren().add(0, stepIcon);
+								hbox.getChildren().add(1, lblNodeName);
+								
+								TreeItem<Object> stepItem = new TreeItem<Object>(step, hbox);
 								testCaseItem.getChildren().add(stepItem);
 							}
 						}
@@ -265,7 +274,6 @@ public class TestMachineController {
 		
 		run(testProject);
 		
-		hasRun = true;
 		updateSteps(treeView.getRoot());
 	}
 	
@@ -275,7 +283,6 @@ public class TestMachineController {
 		TreeItem<Object> selectedObject = treeView.getSelectionModel().getSelectedItem();
 		run(selectedObject.getValue());
 		
-		hasRun = true;
 		updateSteps(selectedObject);
 	}
 	
@@ -330,41 +337,40 @@ public class TestMachineController {
 	// this method adds to the step cell a special graphic indicating a success/failure
 	// TODO: add a imagine for assert error
 	public void createStepGraphic(TreeItem<Object> item) {
+		
 		Step step = (Step) item.getValue();
-		HBox hbox = new HBox();
-		hbox.setPadding(new Insets(0, 0, 0, 0));
-		hbox.setSpacing(5);
-
-		Label lblNodeName = new Label(step == null ? "" : step.toString());
-		hbox.getChildren().add(0, item.getGraphic());
-		hbox.getChildren().add(1, lblNodeName);
-
-		// set the status icon only if the project was ran
-		if(hasRun) {
+		// get the previous Graphic
+		HBox hbox = (HBox) item.getGraphic();
 			
-			// get the response for the current step
-			ITestRunner testRunner = null;
-			try {
-				testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class);
-			} catch (Exception e) {
-				e.printStackTrace();
-				Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
-			}
-			Response response = testRunner.getResponse(step.getID(), 10000L);
-			
-			if (response != null) {
-				ImageView image = null;
-				if (response.getStatus() == ExecutionStatus.PASSED) {
-					image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_PASSED_ICON.toString())));
-					logger.info(step.getID(), "Set passed icon");
-				}
-				else if (response.getStatus() == ExecutionStatus.ERROR) {
-					image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_ERROR_ICON.toString())));
-					logger.info(step.getID(), "Set failed icon");
-				}
-				hbox.getChildren().add(2, image);
-			}
+		// get the response for the current step
+		ITestRunner testRunner = null;
+		try {
+			testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
 		}
+		Response response = testRunner.getResponse(step.getID(), 10000L);
+
+		// add a image to indicate the result of the step 
+		if (response != null) {
+			ImageView image = null;
+			if (response.getStatus() == ExecutionStatus.PASSED) {
+				image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_PASSED_ICON.toString())));
+				logger.info(step.getID(), "Set passed icon");
+			} else if (response.getStatus() == ExecutionStatus.ERROR) {
+				image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_ERROR_ICON.toString())));
+				logger.info(step.getID(), "Set failed icon");
+			}
+			
+			// remove the previous set icon if exists
+			if(hbox.getChildren().size() == 3){
+				hbox.getChildren().remove(2);
+			}
+			// add the new image
+			hbox.getChildren().add(2, image);
+		}
+			
 		item.setGraphic(hbox);
 	}
 	
@@ -401,20 +407,16 @@ public class TestMachineController {
 				setGraphic(null);
 				setContextMenu(null);
 			} else {
-				// if the item type is step add a special graphic if the last execution passed
+				// if the item type is step the label is in the Graphic element
 				if (getItem() instanceof Step) {
-					if(getTreeItem().getGraphic() instanceof HBox) {
-						setText("");
-					} else {
-						setText(getItem().toString());
-					}
-					setGraphic(getTreeItem().getGraphic());
+					setText("");
 				}
-				// else just take the previous graphic
+				// the label must be set for testSuite and testCase
 				else {
 					setText(getItem() == null ? "" : getItem().toString());
-					setGraphic(getTreeItem().getGraphic());
 				}
+				// set the Graphic of the step
+				setGraphic(getTreeItem().getGraphic());
 				
 				// construct the context menu for each level
 				if (getItem() != null)
