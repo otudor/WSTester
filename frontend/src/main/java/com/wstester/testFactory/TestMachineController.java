@@ -55,9 +55,11 @@ public class TestMachineController {
 	private Tab responseTab;
 	@FXML
 	private ResponseController responseController;
+	private Boolean hasRun;
 	
 	public void initialize() {
 
+		hasRun = false;
 		loadTreeItems();
 	}
 	
@@ -274,6 +276,7 @@ public class TestMachineController {
 		
 		run(testProject);
 		
+		hasRun = true;
 		updateSteps(treeView.getRoot());
 	}
 	
@@ -283,6 +286,7 @@ public class TestMachineController {
 		TreeItem<Object> selectedObject = treeView.getSelectionModel().getSelectedItem();
 		run(selectedObject.getValue());
 		
+		hasRun = true;
 		updateSteps(selectedObject);
 	}
 	
@@ -630,7 +634,7 @@ public class TestMachineController {
 	@FXML
 	public void setResponse(){
 		
-		if (responseTab.isSelected()) {
+		if (responseTab.isSelected() && hasRun) {
 			responseController.setResponse((Step) treeView.getSelectionModel().getSelectedItem().getValue());
 		}
 	}

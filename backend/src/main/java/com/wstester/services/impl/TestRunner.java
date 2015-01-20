@@ -34,7 +34,7 @@ public class TestRunner implements ITestRunner {
 
 	private TestProject testProject;
 	private static Exception exceptionCaught;
-	private static Boolean allStepsAdded;
+	private static Boolean allStepsAdded = false;
 	private CustomLogger log = new CustomLogger(TestRunner.class);
 
 	public TestRunner() {
@@ -74,9 +74,9 @@ public class TestRunner implements ITestRunner {
 			ProjectProperties properties = new ProjectProperties();
 			Long camelStepProcessingTimeout = properties.getLongProperty("camelStepProcessingTimeout");
 			// the steps can have a delay until they are received by the StepManager
-			while(runDate == null && camelStepProcessingTimeout >= 0) {
+			while(runDate == null && camelStepProcessingTimeout > 0) {
 				runDate = stepManager.getLastRun(stepId);
-				timeout -= 1000;
+				camelStepProcessingTimeout -= 1000;
 				Thread.sleep(1000);
 			}
 			
