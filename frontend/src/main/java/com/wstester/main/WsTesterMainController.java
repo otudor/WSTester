@@ -672,7 +672,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					try {
 						root = FXMLLoader.load(getClass().getResource(MainConstants.VARIABLES_FXML.toString()));
 						Scene second = new Scene(root);
-						second.getStylesheets().add(WsTesterMain.class.getResource(MainConstants.APPLICATION_STYLE_CSS.toString()).toExternalForm());
+//						second.getStylesheets().add(WsTesterMain.class.getResource(MainConstants.APPLICATION_STYLE_CSS.toString()).toExternalForm());
 						//second.setFill(Color.TRANSPARENT);
 						//second.setFill(Color.TRANSPARENT);
 						//stageRest.initStyle(StageStyle.TRANSPARENT);

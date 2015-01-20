@@ -1,117 +1,137 @@
 package com.wstester.variables;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import com.wstester.log.CustomLogger;
+import com.wstester.model.TestProject;
+import com.wstester.model.Variable;
+import com.wstester.util.TestProjectService;
+
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.util.Callback;
-
-import com.wstester.model.Variable;
-
-
-/**
- * 
- * @author vdumitrache
- *
- */
+import javafx.scene.Node;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCode;
 
 public class VariablesController {
-	//list of variables
-	private ArrayList<Variable> variablesList = new ArrayList<>();
-	public static Stage stageAddVariables;
 	
-	@FXML private TableView<TableVariables> tableViewVars;
-	@FXML private TableColumn<TableVariables, String> tableColumnVarName;
-	@FXML private TableColumn<TableVariables, String> tableColumnValue;
-	@FXML private Button addGlobal;
-	
-	//public static variables on order to pass references to table view and table columns, and use them in AddWindowController class
-	public static TableView<TableVariables> tableViewVarsPassed;
-	public static TableColumn<TableVariables, String> tableColumnVarNamePassed = new TableColumn<TableVariables, String>();
-	public static TableColumn<TableVariables, String> tableColumnValuePassed = new TableColumn<TableVariables, String>();
-	
-	public static ObservableList<TableVariables> tableViewVarData = FXCollections
-			.observableArrayList();
+	CustomLogger log = new CustomLogger(VariablesController.class);
+	@FXML
+	private GridPane variablesGrid;
+	@FXML
+	private TextField searchBox;
 	
 	@FXML
 	public void initialize(){
-		//add vars to the list -hard coded 
-		//waiting for the values, in order to retrieve 
-		variablesList.add(new Variable("abc", "def"));
-		variablesList.add(new Variable("test", "test2"));
-		variablesList.add(new Variable("asb", "wqeqwe"));
 		
-		for(int i=0; i<variablesList.size(); i++){
-			tableViewVarData.add(
-					new TableVariables(variablesList.get(i).getName(), variablesList.get(i).getContent()));
-		}
+		loadVariables("");
+		initializeGrid();
+		initializeSearch();
+	}
+
+	// loads the Variables into the list
+	// if text is "" then add all variables
+	private void loadVariables(String text) {
 		
-		//add vars to table view
-		tableViewVars.setItems(tableViewVarData);
-		tableViewVars = tableViewVarsPassed;
-		populateTable();
-		
-		//passing the values from columns to static variables
-		tableColumnVarName = tableColumnVarNamePassed;
-		tableColumnValue = tableColumnValuePassed;
-		
-		//event on click Add button from Global
-		addGlobal.setOnAction(new EventHandler<ActionEvent>() {
+		// remove all the children except the ones that are added from fxml
+		// the ones from fxml have rowIndex == null
+		variablesGrid.getChildren().removeIf(new Predicate<Node>() {
 			@Override
-			public void handle(ActionEvent event) {
-				//adding addVariables fxml for Global
-				stageAddVariables = new Stage();
-				try{
-					AnchorPane page = (AnchorPane) FXMLLoader.load(getClass().getResource("/fxml/var/addVariables.fxml"));
-					Scene scene = new Scene(page);
-					stageAddVariables.setScene(scene);
-					stageAddVariables.setTitle("Add a variable");
-					stageAddVariables.show();
-				}catch(Exception e){
-					e.printStackTrace();
+			public boolean test(Node node) {
+				if(GridPane.getRowIndex(node) == null) {
+					return false;
+				}
+				return true;
+			}
+		});
+		
+		TestProjectService testProjectService = new TestProjectService();
+		TestProject testProject = testProjectService.getTestProject();
+		
+		List<Variable> variableList = testProject.getVariableList();
+		if(variableList != null) {
+			for(Variable variable : variableList) {
+				addGridRow(variable, testProject.getName(), text);
+			}
+		}
+	}
+
+	private void addGridRow(Variable variable, String hierarhy, String text) {
+		
+		if(text.equals("") || containsString(variable.getName(), text) || containsString(variable.getType(), text) 
+				|| containsString(variable.getSelector(), text) || containsString(variable.getContent(), text) || containsString(hierarhy, text)){
+			variablesGrid.addRow(variablesGrid.getChildren().size(), getLabel(variable.getName()), getLabel(variable.getType()), getLabel(variable.getSelector()), getLabel(variable.getContent()), getLabel(hierarhy));
+		}
+	}
+
+	private boolean containsString(Object object, String text) {
+		
+		String string = (object != null ? object.toString() : "");
+		return string.toLowerCase().contains(text.toLowerCase());
+	}
+
+	private Node getLabel(Object string) {
+		
+		Label label = new Label(string != null ? string.toString() : "");
+		label.setFont(Font.font(16));
+		
+		return label;
+	}
+	
+	private void initializeGrid() {
+		
+		for(Node children : variablesGrid.getChildren()) {
+			children.setOnMouseEntered(new EventHandler<Event>() {
+
+				@Override
+				public void handle(Event event) {
+					Integer index = GridPane.getRowIndex(children);
+					if(index != null) {
+						for(Node rowChildren : variablesGrid.getChildren()) {
+							if(GridPane.getRowIndex(rowChildren) != null && GridPane.getRowIndex(rowChildren).equals(index)) {
+								rowChildren.setStyle("-fx-font-weight: bold;");
+							}
+						}
+					}
+				}
+			});
+			
+			children.setOnMouseExited(new EventHandler<Event>() {
+
+				@Override
+				public void handle(Event event) {
+					Integer index = GridPane.getRowIndex(children);
+					if(index != null) {
+						for(Node rowChildren : variablesGrid.getChildren()) {
+							if(GridPane.getRowIndex(rowChildren) != null && GridPane.getRowIndex(rowChildren).equals(index)) {
+								rowChildren.setStyle("");
+							}
+						}
+					}
+				}
+			});
+		}
+	}
+	
+	private void initializeSearch() {
+		
+		searchBox.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent event) {
+				
+				if(event.getCode().equals(KeyCode.ENTER)) {
+					
+					loadVariables(searchBox.getText());
+					initializeGrid();
 				}
 			}
 		});
-	}
-	
-	//fill the columns with data
-	public void populateTable(){
-		tableColumnVarName.setCellValueFactory(new Callback<CellDataFeatures<TableVariables, String>, ObservableValue<String>>() {
-		     public ObservableValue<String> call(CellDataFeatures<TableVariables, String> p) {
-		         return p.getValue().getName();
-		     }
-		  });
-		
-		tableColumnValue.setCellValueFactory(new Callback<CellDataFeatures<TableVariables, String>, ObservableValue<String>>() {
-		     public ObservableValue<String> call(CellDataFeatures<TableVariables, String> p) {
-		         return p.getValue().getContent();
-		     }
-		  });
-	}
-	
-	public static void populateTableStatic(){
-		tableColumnVarNamePassed.setCellValueFactory(new Callback<CellDataFeatures<TableVariables, String>, ObservableValue<String>>() {
-		     public ObservableValue<String> call(CellDataFeatures<TableVariables, String> p) {
-		         return p.getValue().getName();
-		     }
-		  });
-		
-		tableColumnValuePassed.setCellValueFactory(new Callback<CellDataFeatures<TableVariables, String>, ObservableValue<String>>() {
-		     public ObservableValue<String> call(CellDataFeatures<TableVariables, String> p) {
-		         return p.getValue().getContent();
-		     }
-		  });
 	}
 }
