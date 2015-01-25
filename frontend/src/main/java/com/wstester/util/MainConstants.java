@@ -31,7 +31,7 @@ public enum MainConstants {
 	TEST_FACTORY_ICON("/images/Smart-Folder.png"),
 	TEST_FACTORY_STYLE("/styles/testFactory.css"),
 	VARIABLES_ICON("/images/Documents-Folder.png"),
-	VARIABLES_FXML("/fxml/var/variables.fxml"),
+	VARIABLES_FXML("/fxml/variables/variables.fxml"),
 	APPLICATION_STYLE_CSS("/styles/application.css"),
 	REST_WINDOW("/fxml/REST/DragFinalUI.fxml"),
 	REST_WINDOW_ICON("/images/Downloads-Folder.png"),

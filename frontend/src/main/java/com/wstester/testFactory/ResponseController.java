@@ -49,7 +49,6 @@ public class ResponseController implements Initializable{
 		this.value.setCellValueFactory(new PropertyValueFactory<Pair, String>("value"));
 	}
 	
-	//TODO: please update/'call setResponse' when test finishes running 
 	public void setResponse(Step step) {
 
 		clearFields();
