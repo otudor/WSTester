@@ -16,4 +16,9 @@ public enum VariableType {
 	public Class<?> getClas(){
 		return this.clazz;
 	}
+	
+	// Also add the types here as a String
+	public static String toStringAllValues(){
+		return "VariableType [STRING, INTEGER, DOUBLE]";
+	}
 }
