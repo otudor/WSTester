@@ -33,7 +33,7 @@
 			</bean>
 		</property>
 	</bean>
-
+	
 	<!-- set up the H2 Database -->
 	<!-- set the connection details -->
 	<context:property-placeholder location="h2/jdbc-h2.properties" />

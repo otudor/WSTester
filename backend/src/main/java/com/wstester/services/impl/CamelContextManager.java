@@ -10,27 +10,20 @@ import com.wstester.services.definition.ICamelContextManager;
 public class CamelContextManager implements ICamelContextManager {
 
 	private static ClassPathXmlApplicationContext camelContext ;
-	private CustomLogger log = new CustomLogger(CamelContextManager.class);
+	private static CustomLogger LOG = new CustomLogger(CamelContextManager.class);
 	
 	@Override
 	public void startCamelContext() {
-		
-		if(!isStarted()){
-			camelContext = new ClassPathXmlApplicationContext("camel/CamelContext.xml");
-			camelContext.start();
-		}
-		else {
-			log.info("Camel context already started");
-		}
+		camelContext = new ClassPathXmlApplicationContext("camel/CamelContext.xml");
+		camelContext.start();
 	}
 	
 	@Override
 	public boolean isStarted(){
 		
-		if(camelContext != null && camelContext.isRunning()){
+		if(camelContext != null && camelContext.isActive()){
 			return true;
 		}
-		
 		return false;
 	}
 	
