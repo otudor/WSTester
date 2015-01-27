@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import com.wstester.elements.Progress;
 import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ICamelContextManager;
@@ -131,6 +133,8 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 	 private void loadNewProject() {
 			newButtonLed.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
+				Progress p = new Progress();
+				Stage stage1 = new Stage();
 				@Override
 				public void handle(MouseEvent event) {
 					
@@ -145,9 +149,15 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 						// he should retry again the same operation
 						e.printStackTrace();
 					}
-					manager.startCamelContext();
-					
+			    	try {
+						p.start(stage1, manager );
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 					myController.setScreen(MainLauncher.screen2ID);
+
 				}
 			});
 	}
@@ -155,6 +165,9 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 	 
 	 private void loadExistingProject() {
 			loadButtonLed.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				
+				Progress p = new Progress();
+				Stage stage1 = new Stage();
 				
 				@Override
 				public void handle(MouseEvent event) {
@@ -173,17 +186,14 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 			    			UtilityTool.addEntity(MainConstants.TEST_PROJECT, testproject);
 			    			
 				    		ICamelContextManager manager = null;
-							try {
-								manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
-							} catch (Exception e) {
-								// TODO Make an exception window that informs the user we could not open a new project
-								// he should retry again the same operation
-								e.printStackTrace();
-							}
+
+				    		manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
 							
-							manager.startCamelContext();
-							while (!manager.isStarted()){
-								Thread.sleep(1000);
+				    		try {
+								p.start(stage1, manager );
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
 							}
 							
 							myController.setScreen(MainLauncher.screen2ID);
