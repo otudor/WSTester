@@ -25,11 +25,13 @@ public class Progress  {
 	final HBox hbs [] = new HBox [values.length];
 	ICamelContextManager camelContextManager;
 	Boolean started = new Boolean(false);
+	Boolean started1 = new Boolean(false);
+	
 	@FXML
 	private AnchorPane pane;
 	
 	
-	public void start(Stage stage , ICamelContextManager camelContextManager ) throws Exception {
+	public void start(Stage stage , ICamelContextManager camelContextManager  )  {
 
 		Task<Void> task1 = new Task<Void>() {
 			@Override public Void call() {
@@ -51,19 +53,25 @@ public class Progress  {
 
 		final Scene scene = new Scene(layout);
 		
-		stage.setResizable(false);
 		stage.setScene(scene);
 		stage.centerOnScreen();
-
+		
 		stage.setWidth(MainLauncher.stage.getWidth());
 		stage.setHeight(MainLauncher.stage.getHeight());
-
 		stage.toFront();
 		scene.setFill(null);
-
 		stage.setScene(scene);
-		stage.show();
 		
+		
+		if(!started1){
+		
+			stage.initOwner(MainLauncher.stage);
+			stage.initStyle(StageStyle.UNDECORATED);
+			
+			started1=true;
+		
+		}
+		stage.show();
 		Thread th = new Thread(task1);
 		th.setDaemon(true);
 		th.start();
@@ -73,7 +81,7 @@ public class Progress  {
 			@Override
 			public void run() {
 				try {
-					startContext( stage );
+					startContext( stage  );
 				} catch (Exception e) {
 					e.printStackTrace();
 				}	
@@ -92,10 +100,12 @@ public class Progress  {
 			@Override public Void call(){
 
 				stage.close();
+
 				return null;
 			}
 		};
 		Platform.setImplicitExit(false);
 		Platform.runLater((task));
 	}
+
 }

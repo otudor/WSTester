@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -135,6 +136,7 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 
 				Progress p = new Progress();
 				Stage stage1 = new Stage();
+
 				@Override
 				public void handle(MouseEvent event) {
 					
@@ -150,12 +152,12 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 						e.printStackTrace();
 					}
 			    	try {
-						p.start(stage1, manager );
+						p.start(stage1, manager);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
+			    	
 					myController.setScreen(MainLauncher.screen2ID);
 
 				}
@@ -189,8 +191,8 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 
 				    		manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
 							
-				    		try {
-								p.start(stage1, manager );
+					    	try {
+								p.start(stage1, manager);
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
