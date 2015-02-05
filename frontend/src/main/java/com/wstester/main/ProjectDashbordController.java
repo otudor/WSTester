@@ -1,21 +1,25 @@
 package com.wstester.main;
 
+import javafx.scene.control.Button;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -72,21 +76,22 @@ public class ProjectDashbordController implements Initializable, ControlledScree
    
 
 	private void createButtons() {
-		newButton = (VBox) CreateButton("/images/butNew.png");
-		newButton.setLayoutX(100);
-		newButton.setLayoutY(100);
+
+		newButton = (VBox) CreateButton("/images/button.png");
+		newButton.setLayoutX(200);
+		newButton.setLayoutY(400);
+
+		newButtonLed = (VBox) CreateButton("/images/buttonn.png");
+		newButtonLed.setLayoutX(200);
+		newButtonLed.setLayoutY(400);
 		
-		newButtonLed = (VBox) CreateButton("/images/butNewLed.png");
-		newButtonLed.setLayoutX(100);
-		newButtonLed.setLayoutY(100);
+		loadButton = (VBox) CreateButton("/images/button_ini_load.png");
+		loadButton.setLayoutX(600);
+		loadButton.setLayoutY(400);
 		
-		loadButton = (VBox) CreateButton("/images/butLoad.png");
-		loadButton.setLayoutX(500);
-		loadButton.setLayoutY(100);
-		
-		loadButtonLed = (VBox) CreateButton("/images/butLoadLed.png");
-		loadButtonLed.setLayoutX(500);
-		loadButtonLed.setLayoutY(100);
+		loadButtonLed = (VBox) CreateButton("/images/button_hover_load.png");
+		loadButtonLed.setLayoutX(600);
+		loadButtonLed.setLayoutY(400);
 		
 		
 		ancor.getChildren().addAll(newButton,loadButton);
@@ -95,8 +100,6 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 			@Override public void handle(MouseEvent mouseEvent) {
 				ancor.getChildren().add(newButtonLed);
 				ancor.getChildren().remove(newButton);
-				
-				
 		
 	}
 		});
@@ -105,8 +108,7 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 				
 				ancor.getChildren().remove(newButtonLed);
 				ancor.getChildren().add(newButton);
-				
-		
+
 	}
 		});
 		
@@ -132,7 +134,7 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 	
 	
 	 private void loadNewProject() {
-			newButtonLed.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		 newButtonLed.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 				Progress p = new Progress();
 				Stage stage1 = new Stage();
@@ -162,11 +164,13 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 
 				}
 			});
+//	 }
 	}
+	
 	 
 	 
 	 private void loadExistingProject() {
-			loadButtonLed.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		 loadButtonLed.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				
 				Progress p = new Progress();
 				Stage stage1 = new Stage();
@@ -231,11 +235,5 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 	public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
-
-	
-	
-	
-	
-	
      
 }

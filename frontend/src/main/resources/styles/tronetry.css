@@ -1,0 +1,23 @@
+ .insidelabel{
+   -fx-text-fill: #61a2b1;
+   -fx-font-size: 32px;
+   -fx-font-family: "Arial Black";
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+ }
+
+.button{
+   -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+   -fx-border-color: white;
+   -fx-background-radius: 38;
+   -fx-border-radius: 38;
+   -fx-cursor: hand;
+   -fx-font-family: Arial;
+   -fx-text-fill: #ffffff;
+   -fx-font-weight: bold;
+   -fx-padding: 8px 20px 8px 20px;
+   -fx-font-size: 32px;
+   -fx-padding: 8 20 8 20;
+}
+.button:hover{
+   -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}

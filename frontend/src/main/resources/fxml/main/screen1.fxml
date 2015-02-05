@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
@@ -8,11 +9,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="ancor" style="-fx-background-color: black;" styleClass="LoadProject.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.main.ProjectDashbordController">
+<AnchorPane fx:id="ancor" style="-fx-background-color: #dcf3f7;" styleClass="tronetry.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.main.ProjectDashbordController">
    <children>
-      <VBox fx:id="goToScreen3" layoutX="100.0" layoutY="20.0" prefHeight="600.0" prefWidth="600.0">
+      <VBox fx:id="goToScreen3" layoutX="122.0" layoutY="14.0" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #dcf3f7;">
          <children>
-            <Label text="Project Manager">
+            <Label styleClass="insidelabel" stylesheets="@../../styles/tronetry.css" text="Project Manager" textFill="#00CCFF">
                <font>
                   <Font size="18.0" />
                </font>
