@@ -43,6 +43,7 @@ import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ITestRunner;
 import com.wstester.util.MainConstants;
 import com.wstester.util.TestProjectService;
+import com.wstester.variables.StepVariablesController;
 
 public class TestMachineController {
 
@@ -54,7 +55,11 @@ public class TestMachineController {
 	@FXML
 	private Tab responseTab;
 	@FXML
+	private Tab variableTab;
+	@FXML
 	private ResponseController responseController;
+	@FXML
+	private StepVariablesController stepVariablesController;
 	private Boolean hasRun;
 	
 	public void initialize() {
@@ -146,7 +151,7 @@ public class TestMachineController {
 		testSuiteController.setTestSuite(testSuiteId);
 		definitionTab.setContent(loader.getRoot());
 		disableResponseTab();
-		
+		disableVariablesTab();
 	}
 
 	private void selectTestCase(String testCaseId) {
@@ -162,6 +167,7 @@ public class TestMachineController {
 
 		testCaseController.setTestCaseId(testCaseId);
 		disableResponseTab();
+		disableVariablesTab();
 		definitionTab.setContent(loader.getRoot());
 	}
 
@@ -170,6 +176,8 @@ public class TestMachineController {
 		// when switching between steps and the response tab is selected
 		if (responseTab.isSelected()) {
 			setResponse();
+		} else if(variableTab.isSelected()) {
+			setVariables();
 		}
 		
 		TestProjectService testProjectService = new TestProjectService();
@@ -200,6 +208,7 @@ public class TestMachineController {
 		mongoStepController.setStep(stepId);
 		definitionTab.setContent(loader.getRoot());
 		responseTab.setDisable(false);
+		variableTab.setDisable(false);
 	}
 
 	private void setRestStep(String stepId) {
@@ -216,6 +225,7 @@ public class TestMachineController {
 		restStepController.setStep(stepId);
 		definitionTab.setContent(loader.getRoot());
 		responseTab.setDisable(false);
+		variableTab.setDisable(false);
 	}
 
 	private void setMysqlStep(String stepId) {
@@ -232,6 +242,7 @@ public class TestMachineController {
 		mysqlStepController.setStep(stepId);
 		definitionTab.setContent(loader.getRoot());
 		responseTab.setDisable(false);
+		variableTab.setDisable(false);
 	}
 	
 	private void setSoapStep(String stepId) {
@@ -248,6 +259,7 @@ public class TestMachineController {
 		soapStepController.setStep(stepId);
 		definitionTab.setContent(loader.getRoot());
 		responseTab.setDisable(false);
+		variableTab.setDisable(false);
 	}
 	
 	@FXML
@@ -265,7 +277,7 @@ public class TestMachineController {
 		treeView.getSelectionModel().select(node);
 		treeView.getFocusModel().focusNext();
 		treeView.edit(node);
-		selectTestSuite(testSuite.getID());
+		selectTestSuite(testSuite.getId());
 	}
 	
 	@FXML
@@ -354,17 +366,17 @@ public class TestMachineController {
 			e.printStackTrace();
 			Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
 		}
-		Response response = testRunner.getResponse(step.getID(), 10000L);
+		Response response = testRunner.getResponse(step.getId(), 10000L);
 
 		// add a image to indicate the result of the step 
 		if (response != null) {
 			ImageView image = null;
 			if (response.getStatus() == ExecutionStatus.PASSED) {
 				image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_PASSED_ICON.toString())));
-				logger.info(step.getID(), "Set passed icon");
+				logger.info(step.getId(), "Set passed icon");
 			} else if (response.getStatus() == ExecutionStatus.ERROR) {
 				image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_ERROR_ICON.toString())));
-				logger.info(step.getID(), "Set failed icon");
+				logger.info(step.getId(), "Set failed icon");
 			}
 			
 			// remove the previous set icon if exists
@@ -390,11 +402,11 @@ public class TestMachineController {
 						if (getItem() != null) {
 							
 							if (getItem() instanceof TestSuite) {
-								selectTestSuite(((TestSuite) getItem()).getID());
+								selectTestSuite(((TestSuite) getItem()).getId());
 							} else if (getItem() instanceof TestCase) {
-								selectTestCase(((TestCase) getItem()).getID());
+								selectTestCase(((TestCase) getItem()).getId());
 							} else if (getItem() instanceof Step) {
-								selectStep(((Step) getItem()).getID());
+								selectStep(((Step) getItem()).getId());
 							}
 						}
 					}
@@ -426,15 +438,15 @@ public class TestMachineController {
 				if (getItem() != null)
 					if (getItem() instanceof TestSuite) {
 						TestSuite testSuite = (TestSuite) getItem();
-						this.setContextMenu(createTestSuiteContextMenu(testSuite.getID()));
+						this.setContextMenu(createTestSuiteContextMenu(testSuite.getId()));
 					} 
 					else if (getItem() instanceof TestCase) {
 						TestCase testCase = (TestCase) getItem();
-						this.setContextMenu(createTestCaseContextMenu(testCase.getID()));
+						this.setContextMenu(createTestCaseContextMenu(testCase.getId()));
 					} 
 					else if (getItem() instanceof Step) {
 						Step step = (Step) getItem();
-						this.setContextMenu(createTestStepContextMenu(step.getID()));
+						this.setContextMenu(createTestStepContextMenu(step.getId()));
 					}
 			}
 		}
@@ -465,7 +477,7 @@ public class TestMachineController {
 					TreeItem<Object> tcNode = new TreeItem<>(testCase, icon);
 					item.getChildren().add(tcNode);
 					treeView.getSelectionModel().select(tcNode);
-					selectTestCase(testCase.getID());
+					selectTestCase(testCase.getId());
 				}
 			});
 
@@ -558,7 +570,7 @@ public class TestMachineController {
 					TreeItem<Object> stepNode = new TreeItem<>(mySQLStep, icon);
 					item.getChildren().add(stepNode);
 					treeView.getSelectionModel().select(stepNode);
-					selectStep(mySQLStep.getID());
+					selectStep(mySQLStep.getId());
 				}
 			});
 
@@ -579,7 +591,7 @@ public class TestMachineController {
 					TreeItem<Object> stepNode = new TreeItem<>(mongoStep, icon);
 					item.getChildren().add(stepNode);
 					treeView.getSelectionModel().select(stepNode);
-					selectStep(mongoStep.getID());
+					selectStep(mongoStep.getId());
 
 				}
 			});
@@ -600,7 +612,7 @@ public class TestMachineController {
 					TreeItem<Object> stepNode = new TreeItem<>(soapStep, icon);
 					item.getChildren().add(stepNode);
 					treeView.getSelectionModel().select(stepNode);
-					selectStep(soapStep.getID());
+					selectStep(soapStep.getId());
 				}
 			});
 
@@ -623,7 +635,7 @@ public class TestMachineController {
 					TreeItem<Object> stepNode = new TreeItem<>(restStep, icon);
 					item.getChildren().add(stepNode);
 					treeView.getSelectionModel().select(stepNode);
-					selectStep(restStep.getID());
+					selectStep(restStep.getId());
 				}
 			});
 
@@ -632,16 +644,27 @@ public class TestMachineController {
 	}
 	
 	@FXML
-	public void setResponse(){
-		
-		if (responseTab.isSelected() && hasRun) {
+	public void setResponse() {
+		if(responseTab.isSelected() && hasRun) {
 			responseController.setResponse((Step) treeView.getSelectionModel().getSelectedItem().getValue());
 		}
 	}
 	
+	@FXML
+	public void setVariables() {
+		if(variableTab.isSelected()) {
+			String stepId = ((Step) treeView.getSelectionModel().getSelectedItem().getValue()).getId();
+			stepVariablesController.setVariables(stepId);
+		}
+	}
+	
 	private void disableResponseTab() {
-		
 		definitionTab.getTabPane().getSelectionModel().select(definitionTab);
 		responseTab.setDisable(true);
+	}
+	
+	private void disableVariablesTab() {
+		definitionTab.getTabPane().getSelectionModel().select(definitionTab);
+		variableTab.setDisable(true);
 	}
 }

@@ -146,7 +146,7 @@ public void setRest( final String serverUID, final String serviceUID)
 //		inputType.getItems().clear();
 //		inputType.getItems().addAll(InputType.values());
 		Server server = envService.getServerByUID( serverUID);
-		Service service = envService.getServiceByUID( server.getID(), serviceUID );
+		Service service = envService.getServiceByUID( server.getId(), serviceUID );
 		RestService srv = (RestService) service;
 		uid = serviceUID;
 		restField.setText(srv.getPort());

@@ -2,6 +2,7 @@ package com.wstester.model;
 
 import java.io.Serializable;
 import java.util.UUID;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -44,10 +45,14 @@ public class Variable implements Serializable {
 		setContent(content);
 	}
 	
-	public String getID() {
+	public String getId() {
 		return this.uuid;
 	}
 
+	public void setId(String id) {
+		this.uuid = id;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -93,6 +98,7 @@ public class Variable implements Serializable {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((selector == null) ? 0 : selector.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		return result;
 	}
 
@@ -121,6 +127,11 @@ public class Variable implements Serializable {
 		} else if (!selector.equals(other.selector))
 			return false;
 		if (type != other.type)
+			return false;
+		if (uuid == null) {
+			if (other.uuid != null)
+				return false;
+		} else if (!uuid.equals(other.uuid))
 			return false;
 		return true;
 	}

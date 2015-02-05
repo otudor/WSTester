@@ -34,7 +34,7 @@ public class MongoMockTest extends TestBaseClass {
 		testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 2500l);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals(output, response.getContent());
@@ -55,7 +55,7 @@ public class MongoMockTest extends TestBaseClass {
 		testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 2500l);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals(output, response.getContent());

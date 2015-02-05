@@ -92,7 +92,7 @@ public class MongoStepController {
 									}
 								});
 							step.setServer(newServer);
-							tsService.setStepByUID(step, step.getID());
+							tsService.setStepByUID(step, step.getId());
 						}
 					}
         	});
@@ -179,7 +179,7 @@ public class MongoStepController {
 		mongo.setVariableList(step.getVariableList());
 		
 		TestProjectService tsService = new TestProjectService();
-		tsService.setStepByUID(mongo, mongo.getID());
+		tsService.setStepByUID(mongo, mongo.getId());
 	} 
 }
 	

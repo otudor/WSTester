@@ -179,7 +179,7 @@ public class TestUtils {
 		step2.setAction(Action.SELECT);
 		step2.setCollection(collection);
 		step2.setQuery(query);
-		step2.setDependsOn(restStep.getID());
+		step2.setDependsOn(restStep.getId());
 		step2.setVariableList(variableList);
 		stepList1.add(step2);
 		
@@ -473,7 +473,7 @@ public class TestUtils {
 		step2.setAction(Action.INSERT);
 		step2.setCollection(collection);
 		step2.setQuery(insertQuery);
-		step2.setDependsOn(step1.getID());
+		step2.setDependsOn(step1.getId());
 		stepList1.add(step2);
 		
 		// select after
@@ -484,7 +484,7 @@ public class TestUtils {
 		step3.setAction(Action.SELECT);
 		step3.setCollection(collection);
 		step3.setQuery(query);
-		step3.setDependsOn(step2.getID());
+		step3.setDependsOn(step2.getId());
 		stepList1.add(step3);
 		
 		// construct test case list
@@ -769,7 +769,7 @@ public class TestUtils {
 		mongoStep.setAction(Action.SELECT);
 		mongoStep.setCollection(collection);
 		mongoStep.setQuery(query);
-		mongoStep.setDependsOn(restStep.getID());
+		mongoStep.setDependsOn(restStep.getId());
 		stepList1.add(mongoStep);
 		
 		// construct test case list
@@ -864,7 +864,7 @@ public class TestUtils {
 		mongoStep.setAction(Action.SELECT);
 		mongoStep.setCollection(collection);
 		mongoStep.setQuery(query);
-		mongoStep.setDependsOn(restStep.getID());
+		mongoStep.setDependsOn(restStep.getId());
 		stepList1.add(mongoStep);
 		//test3
 		MongoStep mongoStep2 = new MongoStep();

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.variables.StepVariablesController">
+   <children>
+      <Label layoutX="16.0" layoutY="14.0" text="Assigned Variables" />
+      <TableView fx:id="variablesTable" editable="true" layoutX="16.0" layoutY="45.0" prefHeight="316.0" prefWidth="649.0">
+         <columns>
+            <TableColumn fx:id="name" prefWidth="126.0" text="Name" />
+            <TableColumn fx:id="type" prefWidth="96.0" text="Type" />
+            <TableColumn fx:id="selector" minWidth="1.0" prefWidth="285.0" text="Selector" />
+            <TableColumn fx:id="content" minWidth="0.0" prefWidth="141.0" text="Content" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

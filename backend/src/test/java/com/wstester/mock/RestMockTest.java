@@ -34,7 +34,7 @@ public class RestMockTest extends TestBaseClass{
 		testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 2500l);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("mockedPath", response.getContent());
@@ -50,7 +50,7 @@ public class RestMockTest extends TestBaseClass{
 		testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 2500l);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("mockedMethod", response.getContent());
@@ -69,7 +69,7 @@ public class RestMockTest extends TestBaseClass{
 		testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 2500l);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("mockedBody", response.getContent());
@@ -98,7 +98,7 @@ public class RestMockTest extends TestBaseClass{
 		testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 2500l);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("mockedBodyFromAsset", response.getContent());

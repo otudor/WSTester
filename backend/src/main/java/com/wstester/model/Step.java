@@ -22,9 +22,14 @@ public abstract class Step implements Serializable {
 	private List<Variable> variableList;
 	private String dependsOn;
 
-	public String getID() {
+	public String getId() {
 		return this.uuid;
 	}
+	
+	public void setId(String id) {
+		this.uuid = id;
+	}
+	
 	public Server getServer() {
 		return server;
 	}
@@ -119,17 +124,14 @@ public abstract class Step implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((assertList == null) ? 0 : assertList.hashCode());
-		result = prime * result
-				+ ((assetMap == null) ? 0 : assetMap.hashCode());
-		result = prime * result
-				+ ((dependsOn == null) ? 0 : dependsOn.hashCode());
+		result = prime * result + ((assertList == null) ? 0 : assertList.hashCode());
+		result = prime * result + ((assetMap == null) ? 0 : assetMap.hashCode());
+		result = prime * result + ((dependsOn == null) ? 0 : dependsOn.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((server == null) ? 0 : server.hashCode());
 		result = prime * result + ((service == null) ? 0 : service.hashCode());
-		result = prime * result
-				+ ((variableList == null) ? 0 : variableList.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
+		result = prime * result + ((variableList == null) ? 0 : variableList.hashCode());
 		return result;
 	}
 	
@@ -171,6 +173,11 @@ public abstract class Step implements Serializable {
 			if (other.service != null)
 				return false;
 		} else if (!service.equals(other.service))
+			return false;
+		if (uuid == null) {
+			if (other.uuid != null)
+				return false;
+		} else if (!uuid.equals(other.uuid))
 			return false;
 		if (variableList == null) {
 			if (other.variableList != null)

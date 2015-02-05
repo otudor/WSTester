@@ -25,7 +25,7 @@ public class ExceptionProcessor implements Processor {
 		
 		Response response = new Response();
 		response.setRunDate(new Date());
-		response.setStepId(step.getID());
+		response.setStepId(step.getId());
 		response.setStatus(ExecutionStatus.ERROR);
 		
 		Exception exception = exchange.getProperty(Exchange.EXCEPTION_CAUGHT,Exception.class);

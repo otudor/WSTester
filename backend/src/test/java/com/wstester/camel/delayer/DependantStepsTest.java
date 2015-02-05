@@ -26,8 +26,8 @@ public class DependantStepsTest extends RestTestBaseClass {
 		testRunner.run(testProject);
 		long startTime = System.currentTimeMillis();
 		
-		String independantStepId = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID();
-		String dependantStepId = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(1).getID();
+		String independantStepId = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId();
+		String dependantStepId = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(1).getId();
 		
 		ExecutorService service = Executors.newFixedThreadPool(1);
 		
@@ -57,8 +57,8 @@ public class DependantStepsTest extends RestTestBaseClass {
 		testRunner.run(testProject);
 		long startTime = System.currentTimeMillis();
 		
-		String dependantMongoStepId = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(1).getID();
-		String independantMongoStepId = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(2).getID();
+		String dependantMongoStepId = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(1).getId();
+		String independantMongoStepId = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(2).getId();
 		
 		ExecutorService service = Executors.newFixedThreadPool(1);
 		

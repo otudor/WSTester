@@ -16,8 +16,12 @@ public abstract class Service implements Serializable{
 	protected ServiceStatus status;
 	protected List<Rule> ruleList;
 	
-	public String getID() {
+	public String getId() {
 		return this.uuid;
+	}
+	
+	public void setId(String id) {
+		this.uuid = id;
 	}
 	
 	public String getName() {
@@ -58,6 +62,7 @@ public abstract class Service implements Serializable{
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((ruleList == null) ? 0 : ruleList.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		return result;
 	}
 
@@ -81,6 +86,11 @@ public abstract class Service implements Serializable{
 		} else if (!ruleList.equals(other.ruleList))
 			return false;
 		if (status != other.status)
+			return false;
+		if (uuid == null) {
+			if (other.uuid != null)
+				return false;
+		} else if (!uuid.equals(other.uuid))
 			return false;
 		return true;
 	}

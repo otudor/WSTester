@@ -86,7 +86,7 @@ public class SoapStepController
 									}
 								});
 							step.setServer(new_value);
-							tsService.setStepByUID(step, step.getID());
+							tsService.setStepByUID(step, step.getId());
 						}
 					}
         	});
@@ -170,7 +170,7 @@ public class SoapStepController
 		soap.setVariableList(step.getVariableList());
 		
 		TestProjectService tsService = new TestProjectService();
-		tsService.setStepByUID(soap, soap.getID());
+		tsService.setStepByUID(soap, soap.getId());
 	} 
     
     

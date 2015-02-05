@@ -29,14 +29,14 @@ public class EnvironmentService {
 		{
 		for(Environment entry:testProject.getEnvironmentList())
 		{
-			environments.put(entry.getID(), entry);
+			environments.put(entry.getId(), entry);
 		}
 		}
 	}
 
 	public Environment createEnvironment(String name) {
 		Environment env = new Environment(name);
-		environments.put(env.getID(), env);
+		environments.put(env.getId(), env);
 		return env;
 	}
 
@@ -66,7 +66,7 @@ public class EnvironmentService {
 			List<Server> serverList = env.getServers();
 			if (serverList != null && !serverList.isEmpty())
 				for (Server server : serverList)
-					if (server.getID().equals(serverUID)) {
+					if (server.getId().equals(serverUID)) {
 						env.getServers().remove(server);
 						break;
 					}
@@ -94,7 +94,7 @@ public class EnvironmentService {
 					.getServers();
 			if (serverList != null && !serverList.isEmpty()) {
 				for (Server server : serverList)
-					if (server.getID().equals(srvUID)) {
+					if (server.getId().equals(srvUID)) {
 						srv = server;
 						break;
 					}
@@ -118,7 +118,7 @@ public class EnvironmentService {
 					.getServers();
 			if (serverList != null && !serverList.isEmpty()) {
 				for (Server server : serverList)
-					if (server.getID().equals(srvUID)) {
+					if (server.getId().equals(srvUID)) {
 						srv = server;
 						break;
 					}
@@ -142,7 +142,7 @@ public class EnvironmentService {
 					.getServers();
 			if (serverList != null && !serverList.isEmpty()) {
 				for (Server server : serverList)
-					if (server.getID().equals(srvUID)) {
+					if (server.getId().equals(srvUID)) {
 						srv = server;
 						break;
 					}
@@ -168,7 +168,7 @@ public class EnvironmentService {
 					.getServers();
 			if (serverList != null && !serverList.isEmpty()) {
 				for (Server server : serverList)
-					if (server.getID().equals(srvUID)) {
+					if (server.getId().equals(srvUID)) {
 						srv = server;
 						break;
 					}
@@ -197,7 +197,7 @@ public class EnvironmentService {
 					.getServers();
 			if (serverList != null && !serverList.isEmpty()) {
 				for (Server server : serverList)
-					if (server.getID().equals(serverUID)) {
+					if (server.getId().equals(serverUID)) {
 						result = server;
 						break;
 					}
@@ -217,11 +217,11 @@ public class EnvironmentService {
 					.getServers();
 			if (serverList != null && !serverList.isEmpty()) {
 				for (Server server : serverList)
-					if (server.getID().equals(serverUID)) {
+					if (server.getId().equals(serverUID)) {
 						List<Service> serviceList = server.getServices();
 						if (serviceList != null && !serviceList.isEmpty()) {
 							for (Service service : serviceList) {
-								if (service.getID().equals(serviceUID)) {
+								if (service.getId().equals(serviceUID)) {
 									result = service;
 									return result;
 								}
@@ -248,7 +248,7 @@ public class EnvironmentService {
 						{
 							for (Service service : serviceList) 
 							{
-								if (service.getID().equals(serviceUID)) 
+								if (service.getId().equals(serviceUID)) 
 								{
 											MongoService mongo = new MongoService();
 											mongo = (MongoService) service;
@@ -279,7 +279,7 @@ public class EnvironmentService {
 						{
 							for (Service service : serviceList) 
 							{
-								if (service.getID().equals(serviceUID)) 
+								if (service.getId().equals(serviceUID)) 
 								{
 											MySQLService serv = new MySQLService();
 											serv = (MySQLService) service;
@@ -310,7 +310,7 @@ public class EnvironmentService {
 						{
 							for (Service service : serviceList) 
 							{
-								if (service.getID().equals(serviceUID)) 
+								if (service.getId().equals(serviceUID)) 
 								{
 											RestService serv = new RestService();
 											serv = (RestService) service;
@@ -338,7 +338,7 @@ public class EnvironmentService {
 						{
 							for (Service service : serviceList) 
 							{
-								if (service.getID().equals(serviceUID)) 
+								if (service.getId().equals(serviceUID)) 
 								{
 											SoapService serv = new SoapService();
 											serv = (SoapService) service;
@@ -363,7 +363,7 @@ public class EnvironmentService {
 			{
 				for (Server server : serverList)
 				{
-					if (server.getID().equals(serverUID)) 
+					if (server.getId().equals(serverUID)) 
 						{
 							server.setName(srv.getName());
 							server.setIp(srv.getIp());
@@ -376,7 +376,7 @@ public class EnvironmentService {
 	
 	public void setEnvNameByUID(String name,String envUID) {
 		for (Map.Entry<String, Environment> entry : environments.entrySet()) {
-			if (entry.getValue().getID() == envUID) 
+			if (entry.getValue().getId() == envUID) 
 						{
 							entry.getValue().setName(name);
 							
@@ -392,11 +392,11 @@ public class EnvironmentService {
 					.getServers();
 			if (serverList != null && !serverList.isEmpty()) {
 				for (Server server : serverList)
-					if (server.getID() == srvUID) {
+					if (server.getId() == srvUID) {
 						List<Service> serviceList = server.getServices();
 						if (serviceList != null && !serviceList.isEmpty()) {
 							for (Service service : serviceList) {
-								if (service.getID().equals(srcUID)) {
+								if (service.getId().equals(srcUID)) {
 									server.getServices().remove(service);
 									break;
 								}

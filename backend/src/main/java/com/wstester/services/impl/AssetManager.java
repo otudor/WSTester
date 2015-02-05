@@ -49,7 +49,7 @@ public class AssetManager implements IAssetManager {
 	        ObjectMessage message = session.createObjectMessage(asset);
 	        
 	        // Tell the producer to send the message
-	        log.info(asset.getID(), "Sent asset to asset queue");	
+	        log.info(asset.getId(), "Sent asset to asset queue");	
 	        producer.send(message);
 	        
 	        session.close();

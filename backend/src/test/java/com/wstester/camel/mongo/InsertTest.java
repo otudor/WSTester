@@ -23,10 +23,10 @@ public class InsertTest extends TestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		Response selectBeforeResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response selectBeforeResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		int rowsBefore = new JSONArray(selectBeforeResponse.getContent()).length();
 		
-		Response selectAfterResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(2).getID(), 25000L);
+		Response selectAfterResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(2).getId(), 25000L);
 		JSONArray after = new JSONArray(selectAfterResponse.getContent());
 
 		assertTrue(selectAfterResponse.getStatus().equals(ExecutionStatus.PASSED));

@@ -22,10 +22,14 @@ public class TestCase implements Serializable {
 		variableList = new ArrayList<Variable>();
 	}
 
-	public String getID() {
+	public String getId() {
 		return this.uuid;
 	}
 
+	public void setId(String id) {
+		this.uuid = id;
+	}
+	
 	public List<Step> getStepList() {
 		return stepList;
 	}
@@ -99,6 +103,7 @@ public class TestCase implements Serializable {
 		int result = 1;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((stepList == null) ? 0 : stepList.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		result = prime * result + ((variableList == null) ? 0 : variableList.hashCode());
 		return result;
 	}
@@ -121,6 +126,11 @@ public class TestCase implements Serializable {
 			if (other.stepList != null)
 				return false;
 		} else if (!stepList.equals(other.stepList))
+			return false;
+		if (uuid == null) {
+			if (other.uuid != null)
+				return false;
+		} else if (!uuid.equals(other.uuid))
 			return false;
 		if (variableList == null) {
 			if (other.variableList != null)

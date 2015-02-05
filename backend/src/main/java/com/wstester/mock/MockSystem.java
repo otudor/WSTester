@@ -26,12 +26,12 @@ public class MockSystem implements Processor{
 		addRules(step.getService().getRuleList());
 
 		
-		log.info(step.getID(), "running mockSystem to return result");
+		log.info(step.getId(), "running mockSystem to return result");
 		String responseContent = runRules(step);
 		
 		Response response = new Response();
 		response.setRunDate(new Date());
-		response.setStepId(step.getID());
+		response.setStepId(step.getId());
 		response.setContent(responseContent);
 		response.setStatus(ExecutionStatus.PASSED);
 
@@ -53,13 +53,13 @@ public class MockSystem implements Processor{
 	
 	private String runRules(Step step){
 		
-		log.info(step.getID(), "Running mock rules");
+		log.info(step.getId(), "Running mock rules");
 		String response = null;
 		
 		for(Rule rule : this.ruleList){
 			response = rule.run(step);
 			if(response != null){
-				log.info(step.getID(), "Found rule: " + rule);
+				log.info(step.getId(), "Found rule: " + rule);
 				break;
 			}
 		}
@@ -67,11 +67,11 @@ public class MockSystem implements Processor{
 		if(response == null) {
 			if(ruleList.size() == 0){
 				response = "No rules were defined for the service although the status of the service is MOCKED!";
-				log.info(step.getID(), "No rules were defined for the service although the status of the service is MOCKED!");
+				log.info(step.getId(), "No rules were defined for the service although the status of the service is MOCKED!");
 			}
 			else{
 				response = "No rule was found to match this request";
-				log.info(step.getID(), "No rule was found to match this request");
+				log.info(step.getId(), "No rule was found to match this request");
 			}
 		}
 		

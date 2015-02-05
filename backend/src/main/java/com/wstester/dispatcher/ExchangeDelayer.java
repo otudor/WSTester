@@ -21,7 +21,7 @@ public class ExchangeDelayer {
 		
 		if(step.getDependsOn() != null){
 			while(!hasStepFinished(step.getDependsOn()) && timeout > 0){
-				log.info(step.getID(),"Waiting to finish: " + step.getDependsOn());
+				log.info(step.getId(),"Waiting to finish: " + step.getDependsOn());
 				timeout-=1000;
 				Thread.sleep(1000);
 			}

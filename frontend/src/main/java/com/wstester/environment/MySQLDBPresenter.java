@@ -70,7 +70,7 @@ public class MySQLDBPresenter {
 		gridpane.getChildren().add(labelport);
 		Server server = envService.getServerByUID(serverUID);
 		Service service = envService
-				.getServiceByUID(server.getID(), serviceUID);
+				.getServiceByUID(server.getId(), serviceUID);
 		MySQLService srv = (MySQLService) service;
 		uid = serviceUID;
 		labelport.setText(srv.getPort());

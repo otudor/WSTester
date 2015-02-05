@@ -27,7 +27,7 @@ public class ResponseCallbackBugs extends TestBaseClass {
 		
 		List<Step> stepList = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList();
 		for (Step step : stepList) {
-			Response response = testRunner.getResponse(step.getID(), 25000L);
+			Response response = testRunner.getResponse(step.getId(), 25000L);
 			assertEquals(ExecutionStatus.ERROR, response.getStatus());
 		}
 	}

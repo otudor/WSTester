@@ -26,10 +26,14 @@ public class Environment implements Serializable{
 		this.name = name;
 	}
 
-	public String getID() {
+	public String getId() {
 		return this.uuid;
 	}
-
+	
+	public void setId(String id){
+		this.uuid = id;
+	}
+	
 	public String getName() {
 		if (this.name == null) {
 			this.name = "";
@@ -89,6 +93,7 @@ public class Environment implements Serializable{
 		int result = 1;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((serverList == null) ? 0 : serverList.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		return result;
 	}
 
@@ -110,6 +115,11 @@ public class Environment implements Serializable{
 			if (other.serverList != null)
 				return false;
 		} else if (!serverList.equals(other.serverList))
+			return false;
+		if (uuid == null) {
+			if (other.uuid != null)
+				return false;
+		} else if (!uuid.equals(other.uuid))
 			return false;
 		return true;
 	}

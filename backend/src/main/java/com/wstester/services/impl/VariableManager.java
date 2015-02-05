@@ -20,7 +20,7 @@ public class VariableManager implements IVariableManager {
 	
 	@Override
 	public void addVariable(Variable variable) {
-		log.info(variable.getID(), "Adding variable to the variableList: " + variable.toString());
+		log.info(variable.getId(), "Adding variable to the variableList: " + variable.toString());
 		variableList.add(variable);
 	}
 	
@@ -48,7 +48,7 @@ public class VariableManager implements IVariableManager {
 			Thread.sleep(1000l);
 		}
 		for(Variable variable : variableList) {
-			if(variable.getID().equals(variableId)) {
+			if(variable.getId().equals(variableId)) {
 				return variable;
 			}
 		}

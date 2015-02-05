@@ -267,7 +267,7 @@ public class TestRunner implements ITestRunner {
 						ObjectMessage message = session.createObjectMessage(testStep);
 
 						// Tell the producer to send the message
-						log.info(testStep.getID(), "Sent message to startQueue");
+						log.info(testStep.getId(), "Sent message to startQueue");
 						producer.send(message);
 					}
 				}
@@ -281,7 +281,7 @@ public class TestRunner implements ITestRunner {
 					ObjectMessage message = session.createObjectMessage(testStep);
 
 					// Tell the producer to send the message
-					log.info(testStep.getID(), "Sent message to startQueue");
+					log.info(testStep.getId(), "Sent message to startQueue");
 					producer.send(message);
 				}
 			}
@@ -292,7 +292,7 @@ public class TestRunner implements ITestRunner {
 				ObjectMessage message = session.createObjectMessage(testStep);
 
 				// Tell the producer to send the message
-				log.info(testStep.getID(), "Sent message to startQueue");
+				log.info(testStep.getId(), "Sent message to startQueue");
 				producer.send(message);
 			}
 		} else if (entityToRun instanceof Step) {
@@ -302,7 +302,7 @@ public class TestRunner implements ITestRunner {
 			ObjectMessage message = session.createObjectMessage(testStep);
 
 			// Tell the producer to send the message
-			log.info(testStep.getID(), "Sent message to startQueue");
+			log.info(testStep.getId(), "Sent message to startQueue");
 			producer.send(message);
 		} else {
 			throw new WsException("Can't run object: " + entityToRun + "! Please run only instances of TestProject, TestSuite, TestCase or Step", null);

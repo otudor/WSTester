@@ -31,16 +31,16 @@ public class VariableTest extends TestBaseClass{
 		
 		IVariableManager manager = ServiceLocator.getInstance().lookup(IVariableManager.class);
 		
-		Variable projectVariableAfter = manager.getVariable(projectVariable.getID());
+		Variable projectVariableAfter = manager.getVariable(projectVariable.getId());
 		assertEquals(projectVariable, projectVariableAfter);
-		Variable suiteVariableAfter = manager.getVariable(suiteVariable.getID());
+		Variable suiteVariableAfter = manager.getVariable(suiteVariable.getId());
 		assertEquals(suiteVariable, suiteVariableAfter);
-		Variable caseVariableAfter = manager.getVariable(caseVariable.getID());
+		Variable caseVariableAfter = manager.getVariable(caseVariable.getId());
 		assertEquals(caseVariable, caseVariableAfter);
-		Variable stepVariableAfter = manager.getVariable(stepVariable.getID());
+		Variable stepVariableAfter = manager.getVariable(stepVariable.getId());
 		assertEquals(stepVariable, stepVariableAfter);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 10000l);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
 		assertEquals(response.getStatus(), ExecutionStatus.PASSED);
 	}
 }

@@ -63,7 +63,7 @@ public class AssertProcessor {
 		if(!azzert.getExpected().equals(response.getContent())) {
 			
 			AssertResponse assertResponse = new AssertResponse();
-			assertResponse.setAssertId(azzert.getID());
+			assertResponse.setAssertId(azzert.getId());
 			assertResponse.setStatus(AssertStatus.FAILED);
 			assertResponse.setMessage("Expected: " + azzert.getExpected() + " but was: " + response.getContent());
 			
@@ -74,7 +74,7 @@ public class AssertProcessor {
 		else {
 			
 			AssertResponse assertResponse = new AssertResponse();
-			assertResponse.setAssertId(azzert.getID());
+			assertResponse.setAssertId(azzert.getId());
 			assertResponse.setStatus(AssertStatus.PASSED);
 			
 			response.addAssertResponse(assertResponse);

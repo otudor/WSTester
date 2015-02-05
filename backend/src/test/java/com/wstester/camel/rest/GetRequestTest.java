@@ -25,7 +25,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		String entry =  response.getContent();
 		List<Header> headers = response.getHeaderList();
 		
@@ -54,7 +54,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		String entry =  response.getContent();
 		List<Header> headers = response.getHeaderList();
 		
@@ -83,7 +83,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		String entry =  response.getContent();
 		List<Header> headers = response.getHeaderList();
 		
@@ -112,7 +112,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		String entry =  response.getContent();
 		List<Header> headers = response.getHeaderList();
 		
@@ -148,7 +148,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		String entry =  response.getContent();
 		List<Header> headers = response.getHeaderList();
 		
