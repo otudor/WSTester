@@ -12,14 +12,13 @@ public class TestSuite implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String name;
-	private Environment environment;
+	private String environmentId;
 	private List<TestCase> testCaseList;
 	private List<Variable> variableList;
 	private String uuid;
 
 	public TestSuite() {
 		uuid = UUID.randomUUID().toString();
-		environment = new Environment();
 		testCaseList = new ArrayList<TestCase>();
 		variableList = new ArrayList<Variable>();
 	}
@@ -40,12 +39,12 @@ public class TestSuite implements Serializable {
 		this.name = name;
 	}
 
-	public Environment getEnvironment() {
-		return environment;
+	public String getEnvironment() {
+		return environmentId;
 	}
 
-	public void setEnvironment(Environment environment) {
-		this.environment = environment;
+	public void setEnvironment(String environmentId) {
+		this.environmentId = environmentId;
 	}
 
 	public List<TestCase> getTestCaseList() {
@@ -78,7 +77,7 @@ public class TestSuite implements Serializable {
 	}
 	
 	public String detailedToString() {
-		return "TestSuite [name=" + name + ", environment=" + environment.detailedToString() + ", testCaseList=" + toString(testCaseList) + ", variableList=" + variableList + ", uuid=" + uuid + "]";
+		return "TestSuite [name=" + name + ", environmentId=" + environmentId + ", testCaseList=" + toString(testCaseList) + ", variableList=" + variableList + ", uuid=" + uuid + "]";
 	}
 
 	private String toString(List<TestCase> testCaseList) {
@@ -104,7 +103,7 @@ public class TestSuite implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((environment == null) ? 0 : environment.hashCode());
+		result = prime * result + ((environmentId == null) ? 0 : environmentId.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((testCaseList == null) ? 0 : testCaseList.hashCode());
 		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
@@ -121,10 +120,10 @@ public class TestSuite implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		TestSuite other = (TestSuite) obj;
-		if (environment == null) {
-			if (other.environment != null)
+		if (environmentId == null) {
+			if (other.environmentId != null)
 				return false;
-		} else if (!environment.equals(other.environment))
+		} else if (!environmentId.equals(other.environmentId))
 			return false;
 		if (name == null) {
 			if (other.name != null)
