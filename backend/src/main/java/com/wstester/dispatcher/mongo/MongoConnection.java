@@ -1,7 +1,5 @@
 package com.wstester.dispatcher.mongo;
 
-import java.net.UnknownHostException;
-
 import org.apache.camel.Exchange;
 import org.apache.camel.Header;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,8 @@ import com.mongodb.MongoClientURI;
 import com.wstester.model.MongoService;
 import com.wstester.model.MongoStep;
 import com.wstester.model.Server;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 
 public class MongoConnection {
 
@@ -26,16 +26,17 @@ public class MongoConnection {
 			return null;
 	}
 	
-	public void setConnectionBean(MongoStep step) throws UnknownHostException{
+	public void setConnectionBean(MongoStep step) throws Exception{
 		
 		MongoClientURI uri = new MongoClientURI(getURI(step));
 		mongo = new MongoClient(uri);
 	}
 
-	private String getURI(MongoStep step) {
+	private String getURI(MongoStep step) throws Exception {
 		
 		MongoService service = (MongoService) step.getService();
-		Server server = step.getServer();
+		IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		Server server = projectFinder.getServerById(step.getServerId());
 		
 		return "mongodb://" + service.getUser() + ":" + service.getPassword() + "@" + server.getIp() + ":" + service.getPort() + "/" + service.getDbName();
 	}

@@ -39,6 +39,7 @@ public class RunStepWithAssetTest extends RestTestBaseClass{
 		HashMap<Asset, AssetType> assetMap = new HashMap<Asset, AssetType>();
 		assetMap.put(asset, AssetType.BODY);
 		step.setAssetMap(assetMap);
+		setTestProject(testProject);
 		
 		testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);

@@ -158,7 +158,7 @@ public class TestUtils {
 		List<Step> stepList1 = new ArrayList<Step>();
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
-		restStep.setServer(server11);
+		restStep.setServerId(server11.getId());
 		restStep.setService(restService);
 		List<Assert> assertList = new ArrayList<Assert>();
 		Assert oneAssert = new Assert();
@@ -171,7 +171,7 @@ public class TestUtils {
 		// test 2
 		MongoStep step2 = new MongoStep();
 		step2.setName("Step 2");
-		step2.setServer(server12);
+		step2.setServerId(server12.getId());
 		step2.setService(mongoService);
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
@@ -187,14 +187,14 @@ public class TestUtils {
 		List<Step> stepList2 = new ArrayList<Step>();
 		MySQLStep step3 = new MySQLStep();
 		step3.setName("Step 3");
-		step3.setServer(server21);
+		step3.setServerId(server21.getId());
 		step3.setService(mysqlService);
 		step3.setOperation("SELECT * FROM angajati");
 		stepList2.add(step3);
 		// test 4
 		SoapStep step4 = new SoapStep();
 		step4.setName("Step 4");
-		step4.setServer(server22);
+		step4.setServerId(server22.getId());
 		step4.setService(soapService);
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
@@ -219,12 +219,12 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 		TestSuite testSuite2 = new TestSuite();
 		testSuite2.setName("Test Suite 2");
-		testSuite2.setEnvironment(env2);
+		testSuite2.setEnvironmentId(env2.getId());
 		testSuite2.setTestCaseList(testCaseList2);
 		testSuiteList.add(testSuite2);
 		
@@ -282,7 +282,7 @@ public class TestUtils {
 		List<Step> stepList1 = new ArrayList<Step>();
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
-		restStep.setServer(server11);
+		restStep.setServerId(server11.getId());
 		restStep.setService(restService);
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
@@ -300,7 +300,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 	
@@ -363,7 +363,7 @@ public class TestUtils {
 		// test 2
 		MongoStep step2 = new MongoStep();
 		step2.setName("Step 2");
-		step2.setServer(server12);
+		step2.setServerId(server12.getId());
 		step2.setService(service2);
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
@@ -385,7 +385,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 		
@@ -448,7 +448,7 @@ public class TestUtils {
 		// select before
 		MongoStep step1 = new MongoStep();
 		step1.setName("Step 1");
-		step1.setServer(server12);
+		step1.setServerId(server12.getId());
 		step1.setService(service2);
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
@@ -463,7 +463,7 @@ public class TestUtils {
 		// insert
 		MongoStep step2 = new MongoStep();
 		step2.setName("Step 2");
-		step2.setServer(server12);
+		step2.setServerId(server12.getId());
 		step2.setService(service2);
 		HashMap<String, String> insertQuery = new HashMap<String, String>();
 		String id = "100";
@@ -479,7 +479,7 @@ public class TestUtils {
 		// select after
 		MongoStep step3 = new MongoStep();
 		step3.setName("Step 3");
-		step3.setServer(server12);
+		step3.setServerId(server12.getId());
 		step3.setService(service2);
 		step3.setAction(Action.SELECT);
 		step3.setCollection(collection);
@@ -499,7 +499,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 
@@ -566,7 +566,7 @@ public class TestUtils {
 		List<Step> stepList2 = new ArrayList<Step>();
 		MySQLStep step3 = new MySQLStep();
 		step3.setName("Step 3");
-		step3.setServer(server21);
+		step3.setServerId(server21.getId());
 		step3.setService(service4);
 		stepList2.add(step3);
 		
@@ -584,7 +584,7 @@ public class TestUtils {
 
 		TestSuite testSuite2 = new TestSuite();
 		testSuite2.setName("Test Suite 2");
-		testSuite2.setEnvironment(env2);
+		testSuite2.setEnvironmentId(env2.getId());
 		testSuite2.setTestCaseList(testCaseList2);
 		testSuiteList.add(testSuite2);
 		
@@ -661,7 +661,7 @@ public class TestUtils {
 		// test 4
 		SoapStep step4 = new SoapStep();
 		step4.setName("Step 4");
-		step4.setServer(server22);
+		step4.setServerId(server22.getId());
 		step4.setService(service3);
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
@@ -685,7 +685,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite2 = new TestSuite();
 		testSuite2.setName("Test Suite 2");
-		testSuite2.setEnvironment(env2);
+		testSuite2.setEnvironmentId(env2.getId());
 		testSuite2.setTestCaseList(testCaseList2);
 		Variable suiteVariable = new Variable("suiteVar", VariableType.INTEGER, "content");
 		List<Variable> suiteVariableList = new ArrayList<Variable>();
@@ -753,7 +753,7 @@ public class TestUtils {
 		List<Step> stepList1 = new ArrayList<Step>();
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
-		restStep.setServer(server11);
+		restStep.setServerId(server11.getId());
 		restStep.setService(restService);
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
@@ -761,7 +761,7 @@ public class TestUtils {
 		// test 2
 		MongoStep mongoStep = new MongoStep();
 		mongoStep.setName("Step 2");
-		mongoStep.setServer(server12);
+		mongoStep.setServerId(server12.getId());
 		mongoStep.setService(service2);
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
@@ -784,7 +784,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 		
@@ -848,7 +848,7 @@ public class TestUtils {
 		List<Step> stepList1 = new ArrayList<Step>();
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
-		restStep.setServer(server11);
+		restStep.setServerId(server11.getId());
 		restStep.setService(restService);
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
@@ -856,7 +856,7 @@ public class TestUtils {
 		// test 2
 		MongoStep mongoStep = new MongoStep();
 		mongoStep.setName("Step 2");
-		mongoStep.setServer(server12);
+		mongoStep.setServerId(server12.getId());
 		mongoStep.setService(service2);
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
@@ -869,7 +869,7 @@ public class TestUtils {
 		//test3
 		MongoStep mongoStep2 = new MongoStep();
 		mongoStep2.setName("Mongo Step 2");
-		mongoStep2.setServer(server12);
+		mongoStep2.setServerId(server12.getId());
 		mongoStep2.setService(service2);
 		mongoStep2.setCollection(collection);
 		mongoStep2.setAction(Action.SELECT);
@@ -888,7 +888,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 		
@@ -957,7 +957,7 @@ public class TestUtils {
 		// test 4
 		SoapStep step4 = new SoapStep();
 		step4.setName("Step 4");
-		step4.setServer(server22);
+		step4.setServerId(server22.getId());
 		step4.setService(service3);
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
@@ -981,7 +981,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite2 = new TestSuite();
 		testSuite2.setName("Test Suite 2");
-		testSuite2.setEnvironment(env2);
+		testSuite2.setEnvironmentId(env2.getId());
 		testSuite2.setTestCaseList(testCaseList2);
 		Variable suiteVariable = new Variable("suiteVar", VariableType.INTEGER, "content");
 		List<Variable> suiteVariableList = new ArrayList<Variable>();
@@ -1051,7 +1051,7 @@ public class TestUtils {
 		List<Step> stepList1 = new ArrayList<Step>();
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
-		restStep.setServer(server11);
+		restStep.setServerId(server11.getId());
 		restStep.setService(restService);
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
@@ -1069,7 +1069,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 	
@@ -1154,7 +1154,7 @@ public class TestUtils {
 		List<Step> stepList1 = new ArrayList<Step>();
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
-		restStep.setServer(server11);
+		restStep.setServerId(server11.getId());
 		restStep.setService(restService);
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
@@ -1162,7 +1162,7 @@ public class TestUtils {
 		// test 4
 		SoapStep step4 = new SoapStep();
 		step4.setName("Step 4");
-		step4.setServer(server22);
+		step4.setServerId(server22.getId());
 		step4.setService(service3);
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
@@ -1184,7 +1184,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 	
@@ -1257,7 +1257,7 @@ public class TestUtils {
 		// test 4
 		SoapStep step4 = new SoapStep();
 		step4.setName("Step 4");
-		step4.setServer(server22);
+		step4.setServerId(server22.getId());
 		step4.setService(service3);
 		step4.setAssetMap(assetMap);
 		
@@ -1281,7 +1281,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite2 = new TestSuite();
 		testSuite2.setName("Test Suite 2");
-		testSuite2.setEnvironment(env2);
+		testSuite2.setEnvironmentId(env2.getId());
 		testSuite2.setTestCaseList(testCaseList2);
 		Variable suiteVariable = new Variable("suiteVar", VariableType.INTEGER, "content");
 		List<Variable> suiteVariableList = new ArrayList<Variable>();
@@ -1337,7 +1337,7 @@ public class TestUtils {
 		// test 2
 		MongoStep step2 = new MongoStep();
 		step2.setName("Step 2");
-		step2.setServer(server12);
+		step2.setServerId(server12.getId());
 		step2.setService(service2);
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
@@ -1359,7 +1359,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 		
@@ -1417,7 +1417,7 @@ public class TestUtils {
 		List<Step> stepList2 = new ArrayList<Step>();
 		MySQLStep step3 = new MySQLStep();
 		step3.setName("Step 3");
-		step3.setServer(server21);
+		step3.setServerId(server21.getId());
 		step3.setService(mysqlService);
 		stepList2.add(step3);
 		
@@ -1435,7 +1435,7 @@ public class TestUtils {
 
 		TestSuite testSuite2 = new TestSuite();
 		testSuite2.setName("Test Suite 2");
-		testSuite2.setEnvironment(env2);
+		testSuite2.setEnvironmentId(env2.getId());
 		testSuite2.setTestCaseList(testCaseList2);
 		testSuiteList.add(testSuite2);
 		
@@ -1485,7 +1485,7 @@ public class TestUtils {
 		List<Step> stepList = new ArrayList<Step>();
 		MySQLStep mysqlStep = new MySQLStep();
 		mysqlStep.setName("Step");
-		mysqlStep.setServer(server);
+		mysqlStep.setServerId(server.getId());
 		mysqlStep.setService(mysqlService);
 		mysqlStep.setOperation("SELECT detalii from angajati where detalii = 'popescu'");
 		Assert azzert = new Assert();
@@ -1509,7 +1509,7 @@ public class TestUtils {
 
 		TestSuite testSuite2 = new TestSuite();
 		testSuite2.setName("Test Suite 2");
-		testSuite2.setEnvironment(env);
+		testSuite2.setEnvironmentId(env.getId());
 		testSuite2.setTestCaseList(testCaseList2);
 		testSuiteList.add(testSuite2);
 		

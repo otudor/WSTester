@@ -25,6 +25,7 @@ public class AssertTest extends TestBaseClass{
 	public void assertPasses() throws Exception{
 		
 		TestProject testProject = TestUtils.getAssertTestProject();
+		setTestProject(testProject);
 		
 		testRunner = new TestRunner(testProject);
 		
@@ -46,6 +47,7 @@ public class AssertTest extends TestBaseClass{
 		
 		TestProject testProject = TestUtils.getAssertTestProject();
 		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().get(0).setExpected("[{detalii=ion}]");
+		setTestProject(testProject);
 		
 		testRunner = new TestRunner(testProject);
 		
@@ -69,6 +71,7 @@ public class AssertTest extends TestBaseClass{
 		Assert azzert = new Assert();
 		azzert.setExpected("[{detalii=ion}]");
 		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().add(azzert);
+		setTestProject(testProject);
 		
 		testRunner = new TestRunner(testProject);
 		
@@ -103,6 +106,7 @@ public class AssertTest extends TestBaseClass{
 		
 		TestProject testProject = TestUtils.getAssertTestProject();
 		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().get(0).setExpected(expectedOutput);
+		setTestProject(testProject);
 		
 		testRunner = new TestRunner(testProject);
 		

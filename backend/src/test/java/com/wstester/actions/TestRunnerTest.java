@@ -22,6 +22,7 @@ public class TestRunnerTest extends RestTestBaseClass{
 	public void runTestProject() throws Exception{
 		
 		TestProject testProject = TestUtils.getTestPlan();
+		setTestProject(testProject);
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
@@ -63,6 +64,7 @@ public class TestRunnerTest extends RestTestBaseClass{
 	public void runTestSuite() throws Exception{
 		
 		TestProject testProject = TestUtils.getTestPlan();
+		setTestProject(testProject);
 		testRunner = new TestRunner(testProject);
 		
 		TestSuite testSuite = testProject.getTestSuiteList().get(0);
@@ -89,6 +91,7 @@ public class TestRunnerTest extends RestTestBaseClass{
 	public void runTestCase() throws Exception{
 		
 		TestProject testProject = TestUtils.getTestPlan();
+		setTestProject(testProject);
 		testRunner = new TestRunner(testProject);
 		
 		TestCase testCase = testProject.getTestSuiteList().get(0).getTestCaseList().get(0);
@@ -115,6 +118,7 @@ public class TestRunnerTest extends RestTestBaseClass{
 	public void runTestStep() throws Exception{
 		
 		TestProject testProject = TestUtils.getTestPlan();
+		setTestProject(testProject);
 		testRunner = new TestRunner(testProject);
 		
 		Step testStep = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);

@@ -137,7 +137,6 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		this.createVarWindow(); //v
 		this.saveProject();
 		
-		stage.initOwner(WsTesterMain.stage);
 		stage.initOwner(MainLauncher.stage);
 
 		//pane.setRightAnchor(bar, 10d);
@@ -422,7 +421,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 						Scene second = new Scene(root);
 
-						second.getStylesheets().add(WsTesterMain.class.getResource(MainConstants.APPLICATION_STYLE_CSS.toString()).toExternalForm());					
+//						second.getStylesheets().add(WsTesterMain.class.getResource(MainConstants.APPLICATION_STYLE_CSS.toString()).toExternalForm());					
 						root.getStyleClass().add("mainWind");
 
 						soapWindowIcon = (VBox)CreateIcon(MainConstants.SOAP_WINDOW_ICON.toString(),"Soap");	

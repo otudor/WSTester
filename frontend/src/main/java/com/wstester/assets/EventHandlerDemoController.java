@@ -28,7 +28,6 @@ import javafx.stage.Stage;
 import org.apache.commons.io.FileUtils;
 import org.controlsfx.dialog.Dialogs;
 
-import com.wstester.main.WsTesterMain;
 import com.wstester.model.Asset;
 import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
@@ -182,7 +181,7 @@ public class EventHandlerDemoController {
 				try {
 					root = FXMLLoader.load(getClass().getResource("/fxml/assets/editor.fxml"));
 					Scene second = new Scene(root);
-					second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
+//					second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
 					stageEditor.setScene(second);
 					stageEditor.setTitle("editor");
 					stageEditor.show();
@@ -212,7 +211,7 @@ public class EventHandlerDemoController {
 				try {
 					root = FXMLLoader.load(getClass().getResource("/fxml/assets/path.fxml"));
 					Scene seconda = new Scene(root);
-					seconda.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
+//					seconda.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
 					stagePath.setScene(seconda);
 					stagePath.setTitle("path");
 					stagePath.show();
@@ -391,7 +390,7 @@ public class EventHandlerDemoController {
 				try {
 					root = FXMLLoader.load(getClass().getResource("/fxml/assets/editor.fxml"));
 					Scene second = new Scene(root);
-					second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
+//					second.getStylesheets().add(WsTesterMain.class.getResource("/styles/application.css").toExternalForm());
 					stageEditor.setScene(second);
 					stageEditor.setTitle("editor");
 					stageEditor.show();

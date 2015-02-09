@@ -15,7 +15,7 @@ public abstract class Step implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String uuid;
 	private String name;
-	private Server server;
+	private String serverId;
 	private Service service;
 	private List<Assert> assertList;
 	private Map<Asset, AssetType> assetMap;
@@ -30,12 +30,12 @@ public abstract class Step implements Serializable {
 		this.uuid = id;
 	}
 	
-	public Server getServer() {
-		return server;
+	public String getServerId() {
+		return serverId;
 	}
 
-	public void setServer(Server server) {
-		this.server = server;
+	public void setServerId(String serverId) {
+		this.serverId = serverId;
 	}
 
 	public List<Assert> getAssertList() {
@@ -108,7 +108,7 @@ public abstract class Step implements Serializable {
 		setAssetMap(source.getAssetMap());
 		setDependsOn(source.getDependsOn());
 		setName(source.getName());
-		setServer(source.getServer());
+		setServerId(source.getServerId());
 		setService(source.getService());
 		setVariableList(source.getVariableList());
 	}
@@ -119,7 +119,7 @@ public abstract class Step implements Serializable {
 	}
 	
 	public abstract String detailedToString();
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -128,13 +128,13 @@ public abstract class Step implements Serializable {
 		result = prime * result + ((assetMap == null) ? 0 : assetMap.hashCode());
 		result = prime * result + ((dependsOn == null) ? 0 : dependsOn.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((server == null) ? 0 : server.hashCode());
+		result = prime * result + ((serverId == null) ? 0 : serverId.hashCode());
 		result = prime * result + ((service == null) ? 0 : service.hashCode());
 		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		result = prime * result + ((variableList == null) ? 0 : variableList.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -164,10 +164,10 @@ public abstract class Step implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (server == null) {
-			if (other.server != null)
+		if (serverId == null) {
+			if (other.serverId != null)
 				return false;
-		} else if (!server.equals(other.server))
+		} else if (!serverId.equals(other.serverId))
 			return false;
 		if (service == null) {
 			if (other.service != null)

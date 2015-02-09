@@ -19,6 +19,7 @@ public class InsertTest extends TestBaseClass{
 	public void insertOneRow() throws Exception{
 		
 		TestProject testProject = TestUtils.getMongoTestPlanInsert();
+		setTestProject(testProject);
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);

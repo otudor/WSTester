@@ -23,6 +23,7 @@ public class SelectTest extends TestBaseClass{
 		MySQLStep step = (MySQLStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
 		step.setOperation("SELECT * FROM angajati");
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
 		
 		testRunner.run(testProject);
 
@@ -41,6 +42,7 @@ public class SelectTest extends TestBaseClass{
 		MySQLStep step = (MySQLStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
 		step.setOperation("SELECT detalii from angajati where detalii = 'popescu'");
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
 		
 		testRunner.run(testProject);
 

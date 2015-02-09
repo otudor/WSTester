@@ -32,6 +32,8 @@ public class MongoMockTest extends TestBaseClass {
 		testProject.getEnvironmentList().get(0).getServers().get(0).getServices().get(0).setRuleList(ruleList);
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);
@@ -53,6 +55,8 @@ public class MongoMockTest extends TestBaseClass {
 		testProject.getEnvironmentList().get(0).getServers().get(0).getServices().get(0).setRuleList(ruleList);
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);

@@ -6,6 +6,8 @@ import org.apache.camel.Processor;
 import com.wstester.model.RestService;
 import com.wstester.model.RestStep;
 import com.wstester.model.Server;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 
 public class RestPreProcessor implements Processor {
 
@@ -40,9 +42,11 @@ public class RestPreProcessor implements Processor {
 		}
 	}
 
-	private Object getURI(RestStep step) {
+	private Object getURI(RestStep step) throws Exception {
 
-		Server server = step.getServer();
+		IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		
+		Server server = projectFinder.getServerById(step.getServerId());
 		RestService service = (RestService) step.getService();
 
 		return "http://" + server.getIp() + ":" + service.getPort();

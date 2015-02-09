@@ -253,7 +253,7 @@ public class TestProject implements Serializable {
 			if (testSuite.getId().equals(testSuiteId)) {
 				
 				testSuite.setName(sourceTestSuite.getName());
-				testSuite.setEnvironment(sourceTestSuite.getEnvironment());
+				testSuite.setEnvironmentId(sourceTestSuite.getEnvironmentId());
 			}
 		}
 	}

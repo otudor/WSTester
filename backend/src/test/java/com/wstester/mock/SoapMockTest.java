@@ -37,6 +37,8 @@ public class SoapMockTest extends TestBaseClass{
 		((SoapStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setRequest("inputRequest");
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500L);
@@ -60,6 +62,8 @@ public class SoapMockTest extends TestBaseClass{
 		TestProject testProject = TestUtils.getMockedSoapProject();
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500L);

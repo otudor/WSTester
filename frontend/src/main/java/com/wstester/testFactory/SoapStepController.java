@@ -61,37 +61,37 @@ public class SoapStepController
         
         TestProjectService tsService = new TestProjectService();
         step = (SoapStep) tsService.getStep( stepUID);
-        Environment environment = tsService.getTestSuiteByStepUID(stepUID).getEnvironment();
-        if(environment != null) {        	
-        	serverBox.getItems().clear();
-        	serverBox.getItems().addAll(environment.getServers());
-        	if(step.getServer() != null) {
-        		serverBox.setValue(step.getServer());
-        		serviceBox.getItems().clear();
-        		serviceBox.getItems().addAll(step.getServer().getServices());
-        	}
-        	serverBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Server>() {
-					public void changed(ObservableValue ov, Server value, Server new_value) {
-						if(new_value !=null) {
-							step.setServer(new_value);
-							step.setServer(new_value);
-							serviceBox.getItems().clear();
-							serviceBox.getItems().addAll(step.getServer().getServices());
-							if(step.getService() != null) {
-								serviceBox.setValue(step.getService());
-							}
-							serviceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Service>() {
-									public void changed(ObservableValue ov, Service value,Service new_value) {
-										step.setService(new_value);
-									}
-								});
-							step.setServer(new_value);
-							tsService.setStepByUID(step, step.getId());
-						}
-					}
-        	});
-        }
-        lblName.setText(step.getName());
+//        Environment environment = tsService.getTestSuiteByStepUID(stepUID).getEnvironment();
+//        if(environment != null) {        	
+//        	serverBox.getItems().clear();
+//        	serverBox.getItems().addAll(environment.getServers());
+//        	if(step.getServer() != null) {
+//        		serverBox.setValue(step.getServer());
+//        		serviceBox.getItems().clear();
+//        		serviceBox.getItems().addAll(step.getServer().getServices());
+//        	}
+//        	serverBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Server>() {
+//					public void changed(ObservableValue ov, Server value, Server new_value) {
+//						if(new_value !=null) {
+//							step.setServer(new_value);
+//							step.setServer(new_value);
+//							serviceBox.getItems().clear();
+//							serviceBox.getItems().addAll(step.getServer().getServices());
+//							if(step.getService() != null) {
+//								serviceBox.setValue(step.getService());
+//							}
+//							serviceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Service>() {
+//									public void changed(ObservableValue ov, Service value,Service new_value) {
+//										step.setService(new_value);
+//									}
+//								});
+//							step.setServer(new_value);
+//							tsService.setStepByUID(step, step.getId());
+//						}
+//					}
+//        	});
+//        }
+//        lblName.setText(step.getName());
 //        Execution execution = step.getLastExecution();
 //        uid = stepUID;
 //        if( execution != null)
@@ -165,7 +165,7 @@ public class SoapStepController
 //		soap.setExecutionList(step.getExecutionList());
 		soap.setName(step.getName());
 		soap.setRequest(step.getRequest());
-		soap.setServer(step.getServer());
+//		soap.setServer(step.getServerId());
 		soap.setService(step.getService());
 		soap.setVariableList(step.getVariableList());
 		

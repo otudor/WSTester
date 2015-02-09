@@ -9,15 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.wstester.model.Server;
 import com.wstester.model.SoapService;
 import com.wstester.model.SoapStep;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 
 public class SoapConnection {
 
 	@Autowired
 	public CxfEndpoint endpoint;
 	
-	public void setConnection(SoapStep step){
+	public void setConnection(SoapStep step) throws Exception{
 		
-		Server server = step.getServer();
+		IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		
+		Server server = projectFinder.getServerById(step.getServerId());
 		SoapService service = (SoapService) step.getService();
 		
 		endpoint.setAddress(server.getIp() + ":" + service.getPort() + service.getPath());

@@ -11,10 +11,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+import com.wstester.elements.Dialog;
+import com.wstester.main.MainLauncher;
 import com.wstester.model.Environment;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.Step;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 import com.wstester.util.TestProjectService;
 
 /**
@@ -82,14 +86,22 @@ public class StepController implements Initializable{
 		testProjectService = new TestProjectService();
 		
     	Step step = testProjectService.getStep(stepId);
-		Environment environment = testProjectService.getTestSuiteByStepUID(stepId).getEnvironment();
+		String environmentId = testProjectService.getTestSuiteByStepUID(stepId).getEnvironmentId();
 		
+		IProjectFinder projectFinder = null;
+		try {
+			projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		} catch (Exception e) {
+			Dialog.errorDialog("Could not get the TestSuite environement!", MainLauncher.stage);
+		}
+		
+		Environment environment = projectFinder.getEnvironmentById(environmentId);;
 		if (environment != null) {
 			// clear the server list and populate it with the servers from the current environment
 			serverBox.getItems().addAll(environment.getServers());
 			
 			// set the current server
-			Server server = step.getServer();
+			Server server = projectFinder.getServerById(step.getServerId());
 			if (server != null) {
 				
 				// clear the service list and add the services from the current server

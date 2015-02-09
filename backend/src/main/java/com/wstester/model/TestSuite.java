@@ -39,11 +39,11 @@ public class TestSuite implements Serializable {
 		this.name = name;
 	}
 
-	public String getEnvironment() {
+	public String getEnvironmentId() {
 		return environmentId;
 	}
 
-	public void setEnvironment(String environmentId) {
+	public void setEnvironmentId(String environmentId) {
 		this.environmentId = environmentId;
 	}
 

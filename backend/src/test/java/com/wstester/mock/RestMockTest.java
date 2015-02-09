@@ -30,6 +30,7 @@ public class RestMockTest extends TestBaseClass{
 	public void pathMockTest() throws Exception{
 		
 		TestProject testProject = TestUtils.getMockedRestProject();
+		setTestProject(testProject);
 		
 		testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);
@@ -48,6 +49,8 @@ public class RestMockTest extends TestBaseClass{
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setPath("pets");
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);
@@ -67,6 +70,8 @@ public class RestMockTest extends TestBaseClass{
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setRequest("inputBody");
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);
@@ -96,6 +101,8 @@ public class RestMockTest extends TestBaseClass{
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setAssetMap(assetMap);
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);

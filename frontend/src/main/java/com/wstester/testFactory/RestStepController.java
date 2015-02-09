@@ -257,7 +257,7 @@ public class RestStepController implements Initializable {
     	TestProjectService testProjectService = new TestProjectService();
     	RestStep step = new RestStep();
     	
-    	step.setServer(stepController.getServer());
+    	step.setServerId(stepController.getServer().getId());
     	step.setService(stepController.getService());
     	step.setName(stepController.getName());
     	step.setMethod(restMethod.getValue());

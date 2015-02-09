@@ -23,6 +23,8 @@ public class ResponseCallbackBugs extends TestBaseClass {
 		TestProject testProject = testProjectActions.open("src/test/resources/bugs/responseCallbackUnprocessedResponse.step");
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
 		List<Step> stepList = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList();

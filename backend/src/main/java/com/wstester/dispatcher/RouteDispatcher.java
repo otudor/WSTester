@@ -32,21 +32,20 @@ public class RouteDispatcher extends RouteBuilder{
 					}
 				}
 			})
-				.log("[${body.getID}] Sent message to mock queue")
+				.log("[${body.getId}] Sent message to mock queue")
 				.to("jms:mockQueue")
 			.when(body().isInstanceOf(RestStep.class))
-				.log("[${body.getID}] Sent message to rest queue")
+				.log("[${body.getId}] Sent message to rest queue")
 				.to("jms:restQueue")
 			.when(body().isInstanceOf(MongoStep.class))
-				.log("[${body.getID}] Sent message to mongo queue")
+				.log("[${body.getId}] Sent message to mongo queue")
 				.to("jms:mongoQueue")
 			.when(body().isInstanceOf(MySQLStep.class))
-				.log("[${body.getID}] Sent message to mysql queue")
+				.log("[${body.getId}] Sent message to mysql queue")
 				.to("jms:mySQLQueue")
 			.when(body().isInstanceOf(SoapStep.class))
-				.log("[${body.getID}] Sent message to soap queue")
+				.log("[${body.getId}] Sent message to soap queue")
 				.to("jms:soapQueue")
 		.endChoice();
 	}
 }
-

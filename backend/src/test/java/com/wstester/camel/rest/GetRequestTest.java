@@ -21,6 +21,7 @@ public class GetRequestTest extends RestTestBaseClass{
 	public void simplePath() throws Exception{
 			
 		TestProject testProject = TestUtils.getRestTestPlan();
+		setTestProject(testProject);
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
@@ -51,6 +52,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		step.setQuery(map);
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
 		
 		testRunner.run(testProject);
 		
@@ -80,6 +82,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		step.setCookie(map);
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
 		
 		testRunner.run(testProject);
 		
@@ -109,6 +112,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		step.setHeader(map);
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
 		
 		testRunner.run(testProject);
 		
@@ -145,6 +149,7 @@ public class GetRequestTest extends RestTestBaseClass{
 		step.setQuery(mapQuery);
 		step.setCookie(mapCookie);
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
 		
 		testRunner.run(testProject);
 		

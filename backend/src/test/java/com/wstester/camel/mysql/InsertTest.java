@@ -20,6 +20,8 @@ public class InsertTest extends TestBaseClass {
 		TestProject testProject = TestUtils.getMySQLTestPlan();
 		MySQLStep step = (MySQLStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
 		step.setOperation("INSERT INTO angajati(detalii) VALUES('STEP')");
+		setTestProject(testProject);
+		
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);

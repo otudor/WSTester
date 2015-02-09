@@ -8,8 +8,10 @@ import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
 import com.wstester.log.CustomLogger;
+import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ICamelContextManager;
+import com.wstester.services.definition.IProjectFinder;
 import com.wstester.services.definition.ITestRunner;
 
 /*
@@ -86,4 +88,10 @@ public class TestBaseClass {
 	        log.info("********************************************************************************");
 	   }
 	};
+	
+	protected void setTestProject(TestProject testProject) throws Exception {
+		
+		IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		projectFinder.setProject(testProject);
+	}
 }

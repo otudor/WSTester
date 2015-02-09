@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.junit.Test;
 
@@ -27,9 +26,10 @@ import com.wstester.services.impl.TestRunner;
 public class MockTest extends TestBaseClass{
 
 	@Test
-	public void getContentFromMock() {
+	public void getContentFromMock() throws Exception {
 		
 		TestProject testProject = TestUtils.getMockedRestProject();
+		setTestProject(testProject);
 		String output = "mockedPath";
 		
 		testRunner = new TestRunner(testProject);
@@ -42,12 +42,12 @@ public class MockTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void runTwoConsecutiveMockSteps() {
+	public void runTwoConsecutiveMockSteps() throws Exception {
 		
 		TestProject testProject = TestUtils.getMockedRestProject();
 		TestCase testCase = testProject.getTestSuiteList().get(0).getTestCaseList().get(0);
 		RestStep restStep = new RestStep();
-		restStep.setServer(testCase.getStepList().get(0).getServer());
+		restStep.setServerId(testCase.getStepList().get(0).getServerId());
 		restStep.setService(testCase.getStepList().get(0).getService());
 		restStep.setMethod(RestMethod.PUT);
 		restStep.setPath("/customer/isAlive");
@@ -58,6 +58,8 @@ public class MockTest extends TestBaseClass{
 		String output2 = "mockedMethod";
 
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testCase);
 		
 		Response firstResponse = testRunner.getResponse(testCase.getStepList().get(0).getId(), 112500l);
@@ -72,9 +74,10 @@ public class MockTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void runDifferentTypesOfMockSteps() throws IOException {
+	public void runDifferentTypesOfMockSteps() throws Exception {
 		
 		TestProject testProject = TestUtils.getMockedRestSoapProject();
+		setTestProject(testProject);
 		
 		testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);
@@ -91,13 +94,15 @@ public class MockTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void noRulesFoundToMatchTheRequest() {
+	public void noRulesFoundToMatchTheRequest() throws Exception {
 		
 		TestProject testProject = TestUtils.getMockedRestProject();
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setPath("findByCookie");
 		String output = "No rule was found to match this request";
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500l);
@@ -107,13 +112,15 @@ public class MockTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void noRulesWereDefinedForTheService() {
+	public void noRulesWereDefinedForTheService() throws Exception {
 		
 		TestProject testProject = TestUtils.getRestTestPlan();
 		testProject.getEnvironmentList().get(0).getServers().get(0).getServices().get(0).setStatus(ServiceStatus.MOCKED);
 		String output = "No rules were defined for the service although the status of the service is MOCKED!";
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500l);
@@ -123,7 +130,7 @@ public class MockTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void ruleWithAssetStepWithoutAsset() {
+	public void ruleWithAssetStepWithoutAsset() throws Exception {
 		
 		Asset asset = new Asset();
 		asset.setName("AssetFile.txt");
@@ -141,6 +148,8 @@ public class MockTest extends TestBaseClass{
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setRequest("Harap Alb");
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);

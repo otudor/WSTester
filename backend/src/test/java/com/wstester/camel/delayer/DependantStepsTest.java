@@ -3,7 +3,6 @@ package com.wstester.camel.delayer;
 import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -19,8 +18,10 @@ import com.wstester.util.ProjectProperties;
 public class DependantStepsTest extends RestTestBaseClass {
 
 	@Test
-	public void twoDependantStepsTest() throws InterruptedException, ExecutionException{
+	public void twoDependantStepsTest() throws Exception{
 		TestProject testProject = TestUtils.getDependantStepsPlan();
+		setTestProject(testProject);
+		
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
@@ -49,9 +50,11 @@ public class DependantStepsTest extends RestTestBaseClass {
 	}
 	
 	@Test
-	public void messagesInTheSameQueueDontWait() throws InterruptedException, ExecutionException{
+	public void messagesInTheSameQueueDontWait() throws Exception{
 	
 		TestProject testProject = TestUtils.getDependantStepsNotBlockedPlan();
+		setTestProject(testProject);
+		
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);

@@ -27,6 +27,8 @@ public class VariableTest extends TestBaseClass{
 		Variable stepVariable = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getVariableList().get(0);
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
 		IVariableManager manager = ServiceLocator.getInstance().lookup(IVariableManager.class);

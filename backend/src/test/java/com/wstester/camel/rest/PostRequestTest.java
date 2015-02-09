@@ -28,6 +28,7 @@ public class PostRequestTest extends RestTestBaseClass {
 		step.setMethod(RestMethod.POST);
 		step.setRequest("Inovation");
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
 		
 		testRunner.run(testProject);
 		
@@ -59,6 +60,7 @@ public class PostRequestTest extends RestTestBaseClass {
 		
 		step.setRequest(name.toString());
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
 		
 		testRunner.run(testProject);
 		
@@ -92,6 +94,7 @@ public class PostRequestTest extends RestTestBaseClass {
 		
 		step.setRequest(name.toString());
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
 		
 		testRunner.run(testProject);
 		

@@ -17,6 +17,7 @@ public class SoapTest extends TestBaseClass{
 	public void test() throws Exception{
 
 		TestProject testProject = TestUtils.getSOAPTestPlan();
+		setTestProject(testProject);
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
