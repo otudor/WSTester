@@ -10,6 +10,8 @@ import com.wstester.model.RestStep;
 import com.wstester.model.ServiceStatus;
 import com.wstester.model.SoapStep;
 import com.wstester.model.Step;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 import com.wstester.services.impl.StepManager;
 
 public class RouteDispatcher extends RouteBuilder{
@@ -23,11 +25,19 @@ public class RouteDispatcher extends RouteBuilder{
 			.when(new Predicate() {				
 				@Override
 				public boolean matches(Exchange exchange) {
-					ServiceStatus status = exchange.getIn().getBody(Step.class).getService().getStatus();
-					if(status != null && status.equals(ServiceStatus.MOCKED)){
-						return true;
-					}
-					else {
+					try {
+						String serviceId = exchange.getIn().getBody(Step.class).getServiceId();
+						IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+						ServiceStatus status = projectFinder.getServiceById(serviceId).getStatus();
+						if(status != null && status.equals(ServiceStatus.MOCKED)){
+							return true;
+						}
+						else {
+							return false;
+						}
+					} catch(Exception e) {
+						sendTo(uri)
+						
 						return false;
 					}
 				}

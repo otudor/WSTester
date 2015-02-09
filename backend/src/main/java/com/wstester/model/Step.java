@@ -16,7 +16,7 @@ public abstract class Step implements Serializable {
 	protected String uuid;
 	private String name;
 	private String serverId;
-	private Service service;
+	private String serviceId;
 	private List<Assert> assertList;
 	private Map<Asset, AssetType> assetMap;
 	private List<Variable> variableList;
@@ -46,12 +46,12 @@ public abstract class Step implements Serializable {
 		this.assertList = asserts;
 	}
 
-	public Service getService() {
-		return service;
+	public String getServiceId() {
+		return serviceId;
 	}
 
-	public void setService(Service service) {
-		this.service = service;
+	public void setServiceId(String service) {
+		this.serviceId = service;
 	}
 
 	public Map<Asset, AssetType> getAssetMap() {
@@ -109,7 +109,7 @@ public abstract class Step implements Serializable {
 		setDependsOn(source.getDependsOn());
 		setName(source.getName());
 		setServerId(source.getServerId());
-		setService(source.getService());
+		setServiceId(source.getServiceId());
 		setVariableList(source.getVariableList());
 	}
 	
@@ -129,7 +129,7 @@ public abstract class Step implements Serializable {
 		result = prime * result + ((dependsOn == null) ? 0 : dependsOn.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((serverId == null) ? 0 : serverId.hashCode());
-		result = prime * result + ((service == null) ? 0 : service.hashCode());
+		result = prime * result + ((serviceId == null) ? 0 : serviceId.hashCode());
 		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		result = prime * result + ((variableList == null) ? 0 : variableList.hashCode());
 		return result;
@@ -169,10 +169,10 @@ public abstract class Step implements Serializable {
 				return false;
 		} else if (!serverId.equals(other.serverId))
 			return false;
-		if (service == null) {
-			if (other.service != null)
+		if (serviceId == null) {
+			if (other.serviceId != null)
 				return false;
-		} else if (!service.equals(other.service))
+		} else if (!serviceId.equals(other.serviceId))
 			return false;
 		if (uuid == null) {
 			if (other.uuid != null)

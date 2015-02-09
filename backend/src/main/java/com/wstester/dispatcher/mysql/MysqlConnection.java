@@ -16,7 +16,7 @@ public class MysqlConnection {
 	
 	public void setConnection(MySQLStep step) throws Exception{
 		
-		MySQLService service =(MySQLService) step.getService();
+		MySQLService service =(MySQLService) step.getServiceId();
 		IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
 		Server server = projectFinder.getServerById(step.getServerId());
 		int port = Integer.parseInt(service.getPort());

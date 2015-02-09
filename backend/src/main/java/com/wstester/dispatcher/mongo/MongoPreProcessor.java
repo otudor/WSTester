@@ -6,16 +6,19 @@ import org.apache.camel.component.mongodb.MongoDbConstants;
 
 import com.wstester.model.MongoService;
 import com.wstester.model.MongoStep;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 
 public class MongoPreProcessor implements Processor {
 
 	@Override
-	public void process(Exchange exchange) {
+	public void process(Exchange exchange) throws Exception {
 		
 		MongoStep step = exchange.getIn().getBody(MongoStep.class);
 		exchange.setProperty("step", step);
 		
-		MongoService service = (MongoService) step.getService();
+		IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		MongoService service = (MongoService) projectFinder.getServiceById(step.getServiceId());
 		
 		String operation = "";
 		switch (step.getAction()) {

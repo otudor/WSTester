@@ -48,7 +48,7 @@ public class MockTest extends TestBaseClass{
 		TestCase testCase = testProject.getTestSuiteList().get(0).getTestCaseList().get(0);
 		RestStep restStep = new RestStep();
 		restStep.setServerId(testCase.getStepList().get(0).getServerId());
-		restStep.setService(testCase.getStepList().get(0).getService());
+		restStep.setServiceId(testCase.getStepList().get(0).getServiceId());
 		restStep.setMethod(RestMethod.PUT);
 		restStep.setPath("/customer/isAlive");
 		testCase.addStep(restStep);
@@ -142,7 +142,7 @@ public class MockTest extends TestBaseClass{
 		
 		TestProject testProject = TestUtils.getMockedRestProject();
 		Rule rule = new RestRule(InputType.BODY, asset, "mockedBodyFromAsset");
-		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getService().getRuleList().add(rule);
+		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getServiceId().getRuleList().add(rule);
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setMethod(RestMethod.POST);
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setPath("pets");
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setRequest("Harap Alb");

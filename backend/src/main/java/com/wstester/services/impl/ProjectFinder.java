@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Environment;
 import com.wstester.model.Server;
+import com.wstester.model.Service;
 import com.wstester.model.TestProject;
 import com.wstester.services.definition.IProjectFinder;
 
@@ -50,6 +51,32 @@ public class ProjectFinder implements IProjectFinder {
 				filtered.forEach(server -> log.info("Found: " + server.detailedToString()));
 				if(filtered.size() == 1) {
 					return filtered.get(0);
+				}
+			}
+			return null;
+		}
+	}
+
+	@Override
+	public Service getServiceById(String id) {
+		
+		log.info("Searching for Service with id: " + id);
+		if(id == null) {
+			return null;
+		}
+		else {
+			List<Environment> environmentList = testProject.getEnvironmentList();
+			for(Environment environment : environmentList) {
+				
+				List<Server> serverList = environment.getServers();
+				for(Server server : serverList) {
+					
+					List<Service> serviceList = server.getServices();
+					List<Service> filtered = serviceList.parallelStream().filter(service -> service.getId().equals(id)).collect(Collectors.toList());
+					filtered.forEach(service -> log.info("Found: " + service.detailedToString()));
+					if(filtered.size() == 1) {
+						return filtered.get(0);
+					}
 				}
 			}
 			return null;

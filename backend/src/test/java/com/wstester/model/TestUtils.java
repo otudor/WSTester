@@ -159,7 +159,7 @@ public class TestUtils {
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
 		restStep.setServerId(server11.getId());
-		restStep.setService(restService);
+		restStep.setServiceId(restService.getId());
 		List<Assert> assertList = new ArrayList<Assert>();
 		Assert oneAssert = new Assert();
 		oneAssert.setExpected("All customers");
@@ -172,7 +172,7 @@ public class TestUtils {
 		MongoStep step2 = new MongoStep();
 		step2.setName("Step 2");
 		step2.setServerId(server12.getId());
-		step2.setService(mongoService);
+		step2.setServiceId(mongoService.getId());
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		query.put("name", "HAC");
@@ -188,14 +188,14 @@ public class TestUtils {
 		MySQLStep step3 = new MySQLStep();
 		step3.setName("Step 3");
 		step3.setServerId(server21.getId());
-		step3.setService(mysqlService);
+		step3.setServiceId(mysqlService.getId());
 		step3.setOperation("SELECT * FROM angajati");
 		stepList2.add(step3);
 		// test 4
 		SoapStep step4 = new SoapStep();
 		step4.setName("Step 4");
 		step4.setServerId(server22.getId());
-		step4.setService(soapService);
+		step4.setServiceId(soapService.getId());
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
 		stepList2.add(step4);
@@ -283,7 +283,7 @@ public class TestUtils {
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
 		restStep.setServerId(server11.getId());
-		restStep.setService(restService);
+		restStep.setServiceId(restService.getId());
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
 		stepList1.add(restStep);
@@ -364,7 +364,7 @@ public class TestUtils {
 		MongoStep step2 = new MongoStep();
 		step2.setName("Step 2");
 		step2.setServerId(server12.getId());
-		step2.setService(service2);
+		step2.setServiceId(service2.getId());
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		query.put("name", "HAC");
@@ -449,7 +449,7 @@ public class TestUtils {
 		MongoStep step1 = new MongoStep();
 		step1.setName("Step 1");
 		step1.setServerId(server12.getId());
-		step1.setService(service2);
+		step1.setServiceId(service2.getId());
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		String name = "Ana";
@@ -464,7 +464,7 @@ public class TestUtils {
 		MongoStep step2 = new MongoStep();
 		step2.setName("Step 2");
 		step2.setServerId(server12.getId());
-		step2.setService(service2);
+		step2.setServiceId(service2.getId());
 		HashMap<String, String> insertQuery = new HashMap<String, String>();
 		String id = "100";
 		String keyId = "id";
@@ -480,7 +480,7 @@ public class TestUtils {
 		MongoStep step3 = new MongoStep();
 		step3.setName("Step 3");
 		step3.setServerId(server12.getId());
-		step3.setService(service2);
+		step3.setServiceId(service2.getId());
 		step3.setAction(Action.SELECT);
 		step3.setCollection(collection);
 		step3.setQuery(query);
@@ -567,7 +567,7 @@ public class TestUtils {
 		MySQLStep step3 = new MySQLStep();
 		step3.setName("Step 3");
 		step3.setServerId(server21.getId());
-		step3.setService(service4);
+		step3.setServiceId(service4.getId());
 		stepList2.add(step3);
 		
 		
@@ -662,7 +662,7 @@ public class TestUtils {
 		SoapStep step4 = new SoapStep();
 		step4.setName("Step 4");
 		step4.setServerId(server22.getId());
-		step4.setService(service3);
+		step4.setServiceId(service3.getId());
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
 		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
@@ -754,7 +754,7 @@ public class TestUtils {
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
 		restStep.setServerId(server11.getId());
-		restStep.setService(restService);
+		restStep.setServiceId(restService.getId());
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
 		stepList1.add(restStep);
@@ -762,7 +762,7 @@ public class TestUtils {
 		MongoStep mongoStep = new MongoStep();
 		mongoStep.setName("Step 2");
 		mongoStep.setServerId(server12.getId());
-		mongoStep.setService(service2);
+		mongoStep.setServiceId(service2.getId());
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		query.put("name", "HAC");
@@ -849,7 +849,7 @@ public class TestUtils {
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
 		restStep.setServerId(server11.getId());
-		restStep.setService(restService);
+		restStep.setServiceId(restService.getId());
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
 		stepList1.add(restStep);
@@ -857,7 +857,7 @@ public class TestUtils {
 		MongoStep mongoStep = new MongoStep();
 		mongoStep.setName("Step 2");
 		mongoStep.setServerId(server12.getId());
-		mongoStep.setService(service2);
+		mongoStep.setServiceId(service2.getId());
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		query.put("name", "HAC");
@@ -870,7 +870,7 @@ public class TestUtils {
 		MongoStep mongoStep2 = new MongoStep();
 		mongoStep2.setName("Mongo Step 2");
 		mongoStep2.setServerId(server12.getId());
-		mongoStep2.setService(service2);
+		mongoStep2.setServiceId(service2.getId());
 		mongoStep2.setCollection(collection);
 		mongoStep2.setAction(Action.SELECT);
 		mongoStep2.setQuery(query);
@@ -958,7 +958,7 @@ public class TestUtils {
 		SoapStep step4 = new SoapStep();
 		step4.setName("Step 4");
 		step4.setServerId(server22.getId());
-		step4.setService(service3);
+		step4.setServiceId(service3.getId());
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
 		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
@@ -1052,7 +1052,7 @@ public class TestUtils {
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
 		restStep.setServerId(server11.getId());
-		restStep.setService(restService);
+		restStep.setServiceId(restService.getId());
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
 		stepList1.add(restStep);
@@ -1155,7 +1155,7 @@ public class TestUtils {
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
 		restStep.setServerId(server11.getId());
-		restStep.setService(restService);
+		restStep.setServiceId(restService.getId());
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
 		stepList1.add(restStep);
@@ -1163,7 +1163,7 @@ public class TestUtils {
 		SoapStep step4 = new SoapStep();
 		step4.setName("Step 4");
 		step4.setServerId(server22.getId());
-		step4.setService(service3);
+		step4.setServiceId(service3.getId());
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
 		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
@@ -1258,7 +1258,7 @@ public class TestUtils {
 		SoapStep step4 = new SoapStep();
 		step4.setName("Step 4");
 		step4.setServerId(server22.getId());
-		step4.setService(service3);
+		step4.setServiceId(service3.getId());
 		step4.setAssetMap(assetMap);
 		
 		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
@@ -1338,7 +1338,7 @@ public class TestUtils {
 		MongoStep step2 = new MongoStep();
 		step2.setName("Step 2");
 		step2.setServerId(server12.getId());
-		step2.setService(service2);
+		step2.setServiceId(service2.getId());
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		query.put("name", "HAC");
@@ -1418,7 +1418,7 @@ public class TestUtils {
 		MySQLStep step3 = new MySQLStep();
 		step3.setName("Step 3");
 		step3.setServerId(server21.getId());
-		step3.setService(mysqlService);
+		step3.setServiceId(mysqlService.getId());
 		stepList2.add(step3);
 		
 		
@@ -1486,7 +1486,7 @@ public class TestUtils {
 		MySQLStep mysqlStep = new MySQLStep();
 		mysqlStep.setName("Step");
 		mysqlStep.setServerId(server.getId());
-		mysqlStep.setService(mysqlService);
+		mysqlStep.setServiceId(mysqlService.getId());
 		mysqlStep.setOperation("SELECT detalii from angajati where detalii = 'popescu'");
 		Assert azzert = new Assert();
 		azzert.setExpected("[{detalii=popescu}]");

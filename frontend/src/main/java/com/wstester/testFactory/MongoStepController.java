@@ -175,7 +175,7 @@ public class MongoStepController {
 		mongo.setName(step.getName());
 		mongo.setQuery(step.getQuery());
 //		mongo.setServer(step.getServerId());
-		mongo.setService(step.getService());
+		mongo.setServiceId(step.getServiceId());
 		mongo.setVariableList(step.getVariableList());
 		
 		TestProjectService tsService = new TestProjectService();

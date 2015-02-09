@@ -34,8 +34,9 @@ public class MongoConnection {
 
 	private String getURI(MongoStep step) throws Exception {
 		
-		MongoService service = (MongoService) step.getService();
 		IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		
+		MongoService service = (MongoService) projectFinder.getServiceById(step.getServiceId());
 		Server server = projectFinder.getServerById(step.getServerId());
 		
 		return "mongodb://" + service.getUser() + ":" + service.getPassword() + "@" + server.getIp() + ":" + service.getPort() + "/" + service.getDbName();

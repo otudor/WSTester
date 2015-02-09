@@ -11,7 +11,10 @@ import com.wstester.log.CustomLogger;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
 import com.wstester.model.Rule;
+import com.wstester.model.Service;
 import com.wstester.model.Step;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 
 public class MockSystem implements Processor{
 
@@ -23,7 +26,9 @@ public class MockSystem implements Processor{
 		
 		ruleList = new ArrayList<Rule>();
 		Step step = exchange.getProperty("step", Step.class);
-		addRules(step.getService().getRuleList());
+		IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		Service service = projectFinder.getServiceById(step.getServiceId());
+		addRules(service.getRuleList());
 
 		
 		log.info(step.getId(), "running mockSystem to return result");

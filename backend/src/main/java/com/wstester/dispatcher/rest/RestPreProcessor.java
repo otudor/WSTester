@@ -47,7 +47,7 @@ public class RestPreProcessor implements Processor {
 		IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
 		
 		Server server = projectFinder.getServerById(step.getServerId());
-		RestService service = (RestService) step.getService();
+		RestService service = (RestService) projectFinder.getServiceById(step.getServiceId());
 
 		return "http://" + server.getIp() + ":" + service.getPort();
 	}

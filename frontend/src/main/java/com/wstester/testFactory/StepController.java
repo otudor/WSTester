@@ -106,7 +106,7 @@ public class StepController implements Initializable{
 				
 				// clear the service list and add the services from the current server
 				serviceBox.getItems().addAll(server.getServices());
-				Service service = step.getService();
+				Service service = step.getServiceId();
 				if(service != null){
 					serverBox.setValue(server);
 					serviceBox.setValue(service);

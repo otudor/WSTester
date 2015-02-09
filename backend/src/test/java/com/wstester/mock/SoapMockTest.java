@@ -29,11 +29,11 @@ public class SoapMockTest extends TestBaseClass{
 	public void requestMockTest() throws Exception{
 		
 		TestProject testProject = TestUtils.getSOAPTestPlan();
-		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getService().setStatus(ServiceStatus.MOCKED);
+		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getServiceId().setStatus(ServiceStatus.MOCKED);
 		List<Rule> ruleList = new ArrayList<Rule>();
 		Rule rule = new SoapRule(InputType.REQUEST, "inputRequest", "mockedRequest");
 		ruleList.add(rule );
-		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getService().setRuleList(ruleList);
+		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getServiceId().setRuleList(ruleList);
 		((SoapStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setRequest("inputRequest");
 		
 		testRunner = new TestRunner(testProject);

@@ -166,7 +166,7 @@ public class SoapStepController
 		soap.setName(step.getName());
 		soap.setRequest(step.getRequest());
 //		soap.setServer(step.getServerId());
-		soap.setService(step.getService());
+		soap.setServiceId(step.getServiceId());
 		soap.setVariableList(step.getVariableList());
 		
 		TestProjectService tsService = new TestProjectService();
