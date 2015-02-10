@@ -7,6 +7,7 @@ import com.wstester.model.Step;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
+import com.wstester.model.Variable;
 import com.wstester.services.common.Stateful;
 
 @Stateful
@@ -32,4 +33,6 @@ public interface IProjectFinder extends IService{
 	public void removeTestSuiteById(String id);
 	public void removeTestCaseById(String id);
 	public void removeStepById(String id);
+	
+	public Variable getVariableById(String id);
 }

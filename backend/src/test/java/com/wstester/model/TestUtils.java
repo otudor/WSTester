@@ -180,7 +180,6 @@ public class TestUtils {
 		step2.setCollection(collection);
 		step2.setQuery(query);
 		step2.setDependsOn(restStep.getId());
-		step2.setVariableList(variableList);
 		stepList1.add(step2);
 		
 		// test 3
@@ -665,10 +664,6 @@ public class TestUtils {
 		step4.setServiceId(service3.getId());
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
-		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
-		List<Variable> stepVariableList = new ArrayList<Variable>();
-		stepVariableList.add(stepVariable);
-		step4.addVariableList(stepVariableList);
 		stepList2.add(step4);
 		
 		// construct test case list
@@ -677,8 +672,6 @@ public class TestUtils {
 		TestCase testCase2 = new TestCase();
 		testCase2.setName("TC 1");
 		testCase2.setStepList(stepList2);
-		Variable caseVariable = new Variable("caseVar", VariableType.STRING, "selector");
-		testCase2.addVariable(caseVariable );
 		testCaseList2.add(testCase2);
 		
 		// construct test suite list
@@ -687,10 +680,6 @@ public class TestUtils {
 		testSuite2.setName("Test Suite 2");
 		testSuite2.setEnvironmentId(env2.getId());
 		testSuite2.setTestCaseList(testCaseList2);
-		Variable suiteVariable = new Variable("suiteVar", VariableType.INTEGER, "content");
-		List<Variable> suiteVariableList = new ArrayList<Variable>();
-		suiteVariableList.add(suiteVariable);
-		testSuite2.setVariableList(suiteVariableList);
 		testSuiteList.add(testSuite2);
 		
 		testProject.setTestSuiteList(testSuiteList);
@@ -961,10 +950,6 @@ public class TestUtils {
 		step4.setServiceId(service3.getId());
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
-		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
-		List<Variable> stepVariableList = new ArrayList<Variable>();
-		stepVariableList.add(stepVariable);
-		step4.addVariableList(stepVariableList);
 		stepList2.add(step4);
 		
 		// construct test case list
@@ -973,8 +958,6 @@ public class TestUtils {
 		TestCase testCase2 = new TestCase();
 		testCase2.setName("TC 1");
 		testCase2.setStepList(stepList2);
-		Variable caseVariable = new Variable("caseVar", VariableType.STRING, "selector");
-		testCase2.addVariable(caseVariable );
 		testCaseList2.add(testCase2);
 		
 		// construct test suite list
@@ -983,10 +966,6 @@ public class TestUtils {
 		testSuite2.setName("Test Suite 2");
 		testSuite2.setEnvironmentId(env2.getId());
 		testSuite2.setTestCaseList(testCaseList2);
-		Variable suiteVariable = new Variable("suiteVar", VariableType.INTEGER, "content");
-		List<Variable> suiteVariableList = new ArrayList<Variable>();
-		suiteVariableList.add(suiteVariable);
-		testSuite2.setVariableList(suiteVariableList);
 		testSuiteList.add(testSuite2);
 		
 		testProject.setTestSuiteList(testSuiteList);
@@ -1166,10 +1145,6 @@ public class TestUtils {
 		step4.setServiceId(service3.getId());
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
-		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
-		List<Variable> stepVariableList = new ArrayList<Variable>();
-		stepVariableList.add(stepVariable);
-		step4.addVariableList(stepVariableList);
 		stepList1.add(step4);
 		
 		// construct test case list
@@ -1260,11 +1235,6 @@ public class TestUtils {
 		step4.setServerId(server22.getId());
 		step4.setServiceId(service3.getId());
 		step4.setAssetMap(assetMap);
-		
-		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
-		List<Variable> stepVariableList = new ArrayList<Variable>();
-		stepVariableList.add(stepVariable);
-		step4.addVariableList(stepVariableList);
 		stepList2.add(step4);
 		
 		// construct test case list
@@ -1273,8 +1243,6 @@ public class TestUtils {
 		TestCase testCase2 = new TestCase();
 		testCase2.setName("TC 1");
 		testCase2.setStepList(stepList2);
-		Variable caseVariable = new Variable("caseVar", VariableType.STRING, "selector");
-		testCase2.addVariable(caseVariable );
 		testCaseList2.add(testCase2);
 		
 		// construct test suite list
@@ -1283,10 +1251,6 @@ public class TestUtils {
 		testSuite2.setName("Test Suite 2");
 		testSuite2.setEnvironmentId(env2.getId());
 		testSuite2.setTestCaseList(testCaseList2);
-		Variable suiteVariable = new Variable("suiteVar", VariableType.INTEGER, "content");
-		List<Variable> suiteVariableList = new ArrayList<Variable>();
-		suiteVariableList.add(suiteVariable);
-		testSuite2.setVariableList(suiteVariableList);
 		testSuiteList.add(testSuite2);
 		
 		testProject.setTestSuiteList(testSuiteList);

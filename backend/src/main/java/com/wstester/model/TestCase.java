@@ -13,13 +13,11 @@ public class TestCase implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private List<Step> stepList;
-	private List<Variable> variableList;
 	private String uuid;
 
 	public TestCase() {
 		uuid = UUID.randomUUID().toString();
 		stepList = new ArrayList<Step>();
-		variableList = new ArrayList<Variable>();
 	}
 
 	public String getId() {
@@ -54,29 +52,13 @@ public class TestCase implements Serializable {
 		this.name = name;
 	}
 
-	public List<Variable> getVariableList() {
-		return variableList;
-	}
-
-	public void setVariableList(List<Variable> variableList) {
-		this.variableList = variableList;
-	}
-
-	public void addVariable(Variable variable) {
-		if(this.variableList == null){
-			this.variableList = new ArrayList<Variable>();
-		}
-		
-		variableList.add(variable);
-	}
-
 	@Override
 	public String toString() {
 		return this.name;
 	}
 
 	public String detailedToString() {
-		return "TestCase [name=" + name + ", stepList=" + toString(stepList) + ", variableList=" + variableList + ", uuid=" + uuid + "]";
+		return "TestCase [name=" + name + ", stepList=" + toString(stepList) + ", uuid=" + uuid + "]";
 	}
 
 	private String toString(List<Step> stepList) {
@@ -104,7 +86,6 @@ public class TestCase implements Serializable {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((stepList == null) ? 0 : stepList.hashCode());
 		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
-		result = prime * result + ((variableList == null) ? 0 : variableList.hashCode());
 		return result;
 	}
 
@@ -131,11 +112,6 @@ public class TestCase implements Serializable {
 			if (other.uuid != null)
 				return false;
 		} else if (!uuid.equals(other.uuid))
-			return false;
-		if (variableList == null) {
-			if (other.variableList != null)
-				return false;
-		} else if (!variableList.equals(other.variableList))
 			return false;
 		return true;
 	}

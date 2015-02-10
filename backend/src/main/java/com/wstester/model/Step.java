@@ -19,7 +19,7 @@ public abstract class Step implements Serializable {
 	private String serviceId;
 	private List<Assert> assertList;
 	private Map<Asset, AssetType> assetMap;
-	private List<Variable> variableList;
+	private List<String> variableList;
 	private String dependsOn;
 
 	public String getId() {
@@ -70,28 +70,20 @@ public abstract class Step implements Serializable {
 		this.name = name;
 	}
 
-	public List<Variable> getVariableList() {
+	public List<String> getVariableList() {
 		return variableList;
 	}
 
-	public void setVariableList(List<Variable> variableList) {
+	public void setVariableList(List<String> variableList) {
 		this.variableList = variableList;
 	}
 	
-	public void addVariableList(List<Variable> variableList) {
+	public void addVariable(String variableId) {
 		if(this.variableList == null) {
-			this.variableList = new ArrayList<Variable>();
+			this.variableList = new ArrayList<String>();
 		}
 		
-		this.variableList.addAll(variableList);
-	}
-	
-	public void addVariable(Variable variable) {
-		if(this.variableList == null) {
-			this.variableList = new ArrayList<Variable>();
-		}
-		
-		this.variableList.add(variable);
+		this.variableList.add(variableId);
 	}
 	
 	public String getDependsOn() {

@@ -11,6 +11,7 @@ import com.wstester.model.Step;
 import com.wstester.model.TestCase;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
+import com.wstester.model.Variable;
 import com.wstester.services.definition.IProjectFinder;
 
 public class ProjectFinder implements IProjectFinder {
@@ -293,5 +294,23 @@ public class ProjectFinder implements IProjectFinder {
 				steplist.removeIf(step -> step.getId().equals(id));
 			});
 		});
+	}
+
+	@Override
+	public Variable getVariableById(String id) {
+		
+		log.info("Searching for Variable with id: " + id);
+		if(id == null) {
+			return null;
+		}
+		else {
+			List<Variable> variableList = testProject.getVariableList();
+			List<Variable> filtered = variableList.parallelStream().filter(variable -> variable.getId().equals(id)).collect(Collectors.toList());
+			filtered.forEach(variable -> log.info("Found:" + variable.toString()));
+			if(filtered.size() == 1) {
+				return filtered.get(0);
+			}
+		}
+		return null;
 	}
 }

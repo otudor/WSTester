@@ -14,13 +14,11 @@ public class TestSuite implements Serializable {
 	private String name;
 	private String environmentId;
 	private List<TestCase> testCaseList;
-	private List<Variable> variableList;
 	private String uuid;
 
 	public TestSuite() {
 		uuid = UUID.randomUUID().toString();
 		testCaseList = new ArrayList<TestCase>();
-		variableList = new ArrayList<Variable>();
 	}
 
 	public String getId() {
@@ -62,14 +60,6 @@ public class TestSuite implements Serializable {
 		
 		this.testCaseList.add(testCase);
 	}
-	
-	public List<Variable> getVariableList() {
-		return variableList;
-	}
-
-	public void setVariableList(List<Variable> variableList) {
-		this.variableList = variableList;
-	}
 
 	@Override
 	public String toString() {
@@ -77,7 +67,7 @@ public class TestSuite implements Serializable {
 	}
 	
 	public String detailedToString() {
-		return "TestSuite [name=" + name + ", environmentId=" + environmentId + ", testCaseList=" + toString(testCaseList) + ", variableList=" + variableList + ", uuid=" + uuid + "]";
+		return "TestSuite [name=" + name + ", environmentId=" + environmentId + ", testCaseList=" + toString(testCaseList) + ", uuid=" + uuid + "]";
 	}
 
 	private String toString(List<TestCase> testCaseList) {
@@ -107,7 +97,6 @@ public class TestSuite implements Serializable {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((testCaseList == null) ? 0 : testCaseList.hashCode());
 		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
-		result = prime * result + ((variableList == null) ? 0 : variableList.hashCode());
 		return result;
 	}
 
@@ -139,11 +128,6 @@ public class TestSuite implements Serializable {
 			if (other.uuid != null)
 				return false;
 		} else if (!uuid.equals(other.uuid))
-			return false;
-		if (variableList == null) {
-			if (other.variableList != null)
-				return false;
-		} else if (!variableList.equals(other.variableList))
 			return false;
 		return true;
 	}

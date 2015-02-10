@@ -3,6 +3,7 @@ package com.wstester.variables;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -53,8 +54,10 @@ public class StepVariablesController implements Initializable{
 			Dialog.errorDialog("Could not find the environmentList. Please try again!", null);
 		}
 		Step step = projectFinder.getStepById(stepId);
-		List<Variable> variableList = step.getVariableList();
-		if(variableList != null) {
+		List<String> stepVariableListId = step.getVariableList();
+		List<Variable> variableList = projectFinder.getTestProject().getVariableList();
+		List<Variable> stepVariableList = variableList.parallelStream().filter(variable -> stepVariableListId.contains(variable.getId())).collect(Collectors.toList());
+		if(stepVariableList != null) {
 			ObservableList<Variable> observableVariableList = FXCollections.observableArrayList(variableList);
 			variablesTable.setItems(observableVariableList);
 			log.info("List of the variables assigned on the step: " + variableList);

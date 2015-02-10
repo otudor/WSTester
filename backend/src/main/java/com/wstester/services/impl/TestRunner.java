@@ -203,8 +203,7 @@ public class TestRunner implements ITestRunner {
 
 		IVariableManager variableManager = ServiceLocator.getInstance().lookup(IVariableManager.class);
 		
-		// TODO: we don't have to add all variables, only the ones we use in the
-		// current run
+
 		if (testProject.getVariableList() != null) {
 			for (Variable variable : testProject.getVariableList()) {
 				
@@ -213,35 +212,6 @@ public class TestRunner implements ITestRunner {
 			}
 		}
 
-		for (TestSuite testSuite : testProject.getTestSuiteList()) {
-			if (testSuite.getVariableList() != null) {
-				for (Variable variable : testSuite.getVariableList()) {
-					
-					variableManager.addVariable(variable);
-					log.info("Added suite variable: " + variable);
-				}
-			}
-
-			for (TestCase testCase : testSuite.getTestCaseList()) {
-				if (testCase.getVariableList() != null) {
-					for (Variable variable : testCase.getVariableList()) {
-
-						variableManager.addVariable(variable);
-						log.info("Added case variable: " + variable);
-					}
-				}
-
-				for (Step testStep : testCase.getStepList()) {
-					if (testStep.getVariableList() != null) {
-						for (Variable variable : testStep.getVariableList()) {
-
-							variableManager.addVariable(variable);
-							log.info("Added step variable: " + variable);
-						}
-					}
-				}
-			}
-		}
 		// notify the variableManager that all variables were sent
 		variableManager.allVariablesSent();
 	}

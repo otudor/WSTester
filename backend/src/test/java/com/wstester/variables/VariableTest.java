@@ -22,9 +22,6 @@ public class VariableTest extends TestBaseClass{
 		TestProject testProject = TestUtils.getSOAPTestPlan();
 		
 		Variable projectVariable = testProject.getVariableList().get(0);
-		Variable suiteVariable = testProject.getTestSuiteList().get(0).getVariableList().get(0);
-		Variable caseVariable = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getVariableList().get(0);
-		Variable stepVariable = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getVariableList().get(0);
 		
 		testRunner = new TestRunner(testProject);
 		setTestProject(testProject);
@@ -35,12 +32,6 @@ public class VariableTest extends TestBaseClass{
 		
 		Variable projectVariableAfter = manager.getVariable(projectVariable.getId());
 		assertEquals(projectVariable, projectVariableAfter);
-		Variable suiteVariableAfter = manager.getVariable(suiteVariable.getId());
-		assertEquals(suiteVariable, suiteVariableAfter);
-		Variable caseVariableAfter = manager.getVariable(caseVariable.getId());
-		assertEquals(caseVariable, caseVariableAfter);
-		Variable stepVariableAfter = manager.getVariable(stepVariable.getId());
-		assertEquals(stepVariable, stepVariableAfter);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
 		assertEquals(response.getStatus(), ExecutionStatus.PASSED);
