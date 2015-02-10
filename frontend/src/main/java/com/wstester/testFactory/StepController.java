@@ -19,7 +19,6 @@ import com.wstester.model.Service;
 import com.wstester.model.Step;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IProjectFinder;
-import com.wstester.util.TestProjectService;
 
 public class StepController implements Initializable{
 	
@@ -33,7 +32,6 @@ public class StepController implements Initializable{
 	private Button saveBtn; 
 	
 	private String stepId;
-	private TestProjectService testProjectService;
 	
 	public void setStep(String stepID) {
 		this.stepId = stepID;
@@ -75,11 +73,6 @@ public class StepController implements Initializable{
 	
 	private void populateFields() {
 		
-		testProjectService = new TestProjectService();
-		
-    	Step step = testProjectService.getStep(stepId);
-		String environmentId = testProjectService.getTestSuiteByStepUID(stepId).getEnvironmentId();
-		
 		IProjectFinder projectFinder = null;
 		try {
 			projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
@@ -87,7 +80,10 @@ public class StepController implements Initializable{
 			Dialog.errorDialog("Could not get the TestSuite environement!", MainLauncher.stage);
 		}
 		
-		Environment environment = projectFinder.getEnvironmentById(environmentId);;
+		Step step = projectFinder.getStepById(stepId);
+		String environmentId = projectFinder.getTestSuiteByStepId(stepId).getEnvironmentId();
+		Environment environment = projectFinder.getEnvironmentById(environmentId);
+		
 		if (environment != null) {
 			// clear the server list and populate it with the servers from the current environment
 			serverBox.getItems().addAll(environment.getServers());

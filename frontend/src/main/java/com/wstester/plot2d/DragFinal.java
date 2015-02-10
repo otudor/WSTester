@@ -38,11 +38,13 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 
+import com.wstester.elements.Dialog;
 import com.wstester.main.ControlledScreen;
 import com.wstester.main.ScreensController;
 import com.wstester.model.Environment;
 import com.wstester.model.Service;
-import com.wstester.util.TestProjectService;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 
 import eu.mihosoft.vrl.workflow.Connector;
 import eu.mihosoft.vrl.workflow.FlowFactory;
@@ -157,8 +159,14 @@ public class DragFinal implements Initializable{
 	
 	private void showEnvirorments() {
 		
-		TestProjectService testProjectService = new TestProjectService();
-		List<Environment> environmentList = testProjectService.getEnvironmentList();
+    	IProjectFinder projectFinder = null;
+		try {
+			projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Could not find the environmentList. Please try again!", null);
+		}
+    	List<Environment> environmentList = projectFinder.getTestProject().getEnvironmentList();
 		envirormentBox.getItems().addAll(environmentList);
 	}
 	

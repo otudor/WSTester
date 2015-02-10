@@ -3,10 +3,10 @@ package com.wstester.testFactory;
 import com.wstester.elements.Dialog;
 import com.wstester.main.MainLauncher;
 import com.wstester.model.Environment;
+import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IProjectFinder;
-import com.wstester.util.TestProjectService;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,31 +26,40 @@ public class TestSuiteController {
 		
 		this.testSuiteId = testSuiteId;
 		
-		TestProjectService testProjectService = new TestProjectService();
-		TestSuite testSuite = testProjectService.getTestSuite(testSuiteId);
-		Environment environment = null;
+		IProjectFinder projectFinder = null;
 		try {
-			IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
-			environment = projectFinder.getEnvironmentById(testSuite.getEnvironmentId());
+			projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
 		} catch (Exception e) {
-			Dialog.errorDialog("Could not get the TestSuite environment!", MainLauncher.stage);
+			e.printStackTrace();
+			Dialog.errorDialog("Could not get the TestSuite!", MainLauncher.stage);
 		}
+		
+		TestSuite testSuite = projectFinder.getTestSuiteById(testSuiteId);
+		Environment environment = projectFinder.getEnvironmentById(testSuite.getEnvironmentId());
+		TestProject testProject = projectFinder.getTestProject();
 		
 		name.clear();
 		name.setText(testSuite.getName());
 		
 		environmentBox.getItems().clear();
-		environmentBox.getItems().addAll(testProjectService.getEnvironmentList());
+		environmentBox.getItems().addAll(testProject.getEnvironmentList());
 		environmentBox.getSelectionModel().select(environment);
 	}
 	
-    public void saveTestSuite(ActionEvent e) {
+    public void saveTestSuite(ActionEvent actionEvent) {
     	
     	TestSuite testSuite = new TestSuite();
     	testSuite.setName(name.getText());
     	testSuite.setEnvironmentId(environmentBox.getValue().getId());
     	
-    	TestProjectService testProjectService = new TestProjectService();
-    	testProjectService.setTestSuiteById(testSuite, testSuiteId);
+		IProjectFinder projectFinder = null;
+		try {
+			projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Could not get the TestSuite!", MainLauncher.stage);
+		}
+		
+		projectFinder.setTestSuiteById(testSuite, testSuiteId);
 	}
 }

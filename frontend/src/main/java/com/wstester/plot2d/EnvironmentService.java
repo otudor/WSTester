@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.wstester.elements.Dialog;
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
 import com.wstester.model.MySQLService;
@@ -14,6 +15,8 @@ import com.wstester.model.Service;
 import com.wstester.model.ServiceStatus;
 import com.wstester.model.SoapService;
 import com.wstester.model.TestProject;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 import com.wstester.util.*;
 
 public class EnvironmentService {
@@ -23,7 +26,14 @@ public class EnvironmentService {
 
 	public EnvironmentService() {
 		this.environments = new HashMap<String, Environment>();
-		testProject = (TestProject) UtilityTool.getEntity(MainConstants.TEST_PROJECT);
+    	IProjectFinder projectFinder = null;
+		try {
+			projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Could not find the environmentList. Please try again!", null);
+		}
+    	testProject = projectFinder.getTestProject();
 		System.out.println(testProject);
 		if(testProject.getEnvironmentList()!=null)
 		{
@@ -405,14 +415,5 @@ public class EnvironmentService {
 					}
 			}
 		}
-	}
-	public void saveEnv()
-	{	
-		List<Environment> list = new ArrayList<>();
-		for(Environment entry : environments.values() )
-		{
-			list.add(entry);
-		}
-		((TestProject)UtilityTool.getEntity(MainConstants.TEST_PROJECT)).setEnvironmentList(list);
 	}
 }

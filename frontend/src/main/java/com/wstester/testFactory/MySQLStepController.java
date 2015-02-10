@@ -4,9 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
+import com.wstester.elements.Dialog;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.Step;
-import com.wstester.util.TestProjectService;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 
 public class MySQLStepController{
 	
@@ -21,8 +23,14 @@ public class MySQLStepController{
 		this.stepId = stepId;
 		
     	clearFields();
-		TestProjectService testProjectService = new TestProjectService();
-		Step step = testProjectService.getStep(stepId);
+    	Step step = null;
+		try {
+			IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+			step = projectFinder.getStepById(stepId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Could not find the environmentList. Please try again!", null);
+		}
 		
         stepController.setStep(stepId);
         stepController.setCommonFields();
@@ -39,16 +47,26 @@ public class MySQLStepController{
 	}	
     
     // called when the save button is clicked
-	public void saveMysql(ActionEvent e) {
+	public void saveMysql(ActionEvent actionEvent) {
     	
-    	TestProjectService testProjectService = new TestProjectService();
-    	MySQLStep step = new MySQLStep();
-    	
-    	step.setServerId(stepController.getServer().getId());
-    	step.setServiceId(stepController.getService().getId());
-    	step.setName(stepController.getName());
-    	step.setOperation(mysqlOperation.getText());
+		// get the step before the save
+		IProjectFinder projectFinder = null;
+		try {
+			projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Could not find the environmentList. Please try again!", null);
+		}
 		
-    	testProjectService.setStepByUID(step, stepId);
+		// construct the step after save
+    	MySQLStep newStep = new MySQLStep();
+    	
+    	newStep.setServerId(stepController.getServer().getId());
+    	newStep.setServiceId(stepController.getService().getId());
+    	newStep.setName(stepController.getName());
+    	newStep.setOperation(mysqlOperation.getText());
+		
+    	//TODO: save the new step 
+    	projectFinder.getStepById(stepId).copyFrom(newStep);
 	}
 }

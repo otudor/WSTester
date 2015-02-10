@@ -4,13 +4,15 @@
  */
 package com.wstester.plot2d;
 
+import com.wstester.elements.Dialog;
 import com.wstester.math.MathUtil;
 import com.wstester.model.Environment;
 import com.wstester.model.MySQLService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.SoapService;
-import com.wstester.util.TestProjectService;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 
 import eu.mihosoft.vrl.workflow.ConnectionEvent;
 import eu.mihosoft.vrl.workflow.Connector;
@@ -178,8 +180,14 @@ public class SoapUI2Controller implements Initializable {
     	TextField pathField = new TextField();
     	dataGrid.add(pathField, 1, 2);
     	
-    	TestProjectService testProjectService = new TestProjectService();
-    	List<Environment> environmentList = testProjectService.getEnvironmentList();
+    	IProjectFinder projectFinder = null;
+		try {
+			projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Could not find the environmentList. Please try again!", null);
+		}
+    	List<Environment> environmentList = projectFinder.getTestProject().getEnvironmentList();
     	
     	Environment environment = environmentList.get(1);
     	List<Server> serverList = environment.getServers();

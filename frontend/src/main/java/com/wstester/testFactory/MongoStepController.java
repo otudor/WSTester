@@ -20,7 +20,6 @@ import com.wstester.model.MongoStep;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
-import com.wstester.util.TestProjectService;
 
 public class MongoStepController {
     @FXML 
@@ -60,8 +59,8 @@ public class MongoStepController {
 	}
 
     public void setStep(final String stepId) {     
-    	TestProjectService tsService = new TestProjectService();
-        step = (MongoStep) tsService.getStep(stepId);
+//    	TestProjectService tsService = new TestProjectService();
+//        step = (MongoStep) tsService.getStep(stepId);
         lblName.setText(step.getName());
     	mongoQuery.setText("");
         mongoAction.setText("");
@@ -178,8 +177,8 @@ public class MongoStepController {
 		mongo.setServiceId(step.getServiceId());
 		mongo.setVariableList(step.getVariableList());
 		
-		TestProjectService tsService = new TestProjectService();
-		tsService.setStepByUID(mongo, mongo.getId());
+//		TestProjectService tsService = new TestProjectService();
+//		tsService.setStepByUID(mongo, mongo.getId());
 	} 
 }
 	

@@ -4,36 +4,29 @@
  */
 package com.wstester.plot2d;
 
-import com.wstester.math.MathUtil;
+import com.wstester.elements.Dialog;
 import com.wstester.model.Environment;
 import com.wstester.model.MongoService;
-import com.wstester.model.MySQLService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
-import com.wstester.util.TestProjectService;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 
 import eu.mihosoft.vrl.workflow.ConnectionEvent;
 import eu.mihosoft.vrl.workflow.Connector;
 import eu.mihosoft.vrl.workflow.VNode;
-import eu.mihosoft.vrl.workflow.io.WorkflowIO;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -185,8 +178,14 @@ public class PlotterUIController implements Initializable {
     	dataGrid.add(passwordField, 1, 3);
     	dataGrid.setDisable(false);
     	
-    	TestProjectService testProjectService = new TestProjectService();
-    	List<Environment> environmentList = testProjectService.getEnvironmentList();
+    	IProjectFinder projectFinder = null;
+		try {
+			projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Could not find the environmentList. Please try again!", null);
+		}
+    	List<Environment> environmentList = projectFinder.getTestProject().getEnvironmentList();
     	
     	Environment environment = environmentList.get(0);
     	List<Server> serverList = environment.getServers();

@@ -7,7 +7,10 @@ import com.wstester.log.CustomLogger;
 import com.wstester.model.Environment;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
+import com.wstester.model.Step;
+import com.wstester.model.TestCase;
 import com.wstester.model.TestProject;
+import com.wstester.model.TestSuite;
 import com.wstester.services.definition.IProjectFinder;
 
 public class ProjectFinder implements IProjectFinder {
@@ -20,6 +23,12 @@ public class ProjectFinder implements IProjectFinder {
 		this.testProject = testProject;
 	}
 
+
+	@Override
+	public TestProject getTestProject() {
+		return this.testProject;
+	}
+	
 	@Override
 	public Environment getEnvironmentById(String id) {
 		
@@ -31,8 +40,12 @@ public class ProjectFinder implements IProjectFinder {
 			List<Environment> environmentList = testProject.getEnvironmentList();
 			List<Environment> filtered = environmentList.parallelStream().filter(environment -> environment.getId().equals(id)).collect(Collectors.toList());
 			filtered.forEach(environment -> log.info("Found: " + environment.detailedToString()));
-			return filtered.get(0);
+			if(filtered.size() == 1) {
+				return filtered.get(0);
+			}
 		}
+		log.info("Environment not found with id: " + id);
+		return null;
 	}
 
 	@Override
@@ -53,6 +66,7 @@ public class ProjectFinder implements IProjectFinder {
 					return filtered.get(0);
 				}
 			}
+			log.info("Server not found with id: " + id);
 			return null;
 		}
 	}
@@ -79,7 +93,205 @@ public class ProjectFinder implements IProjectFinder {
 					}
 				}
 			}
+			log.info("Service not found with id: " + id);
 			return null;
 		}
+	}
+
+	@Override
+	public TestSuite getTestSuiteById(String id) {
+		
+		log.info("Searching for TestSuite with id: " + id);
+		if(id == null) {
+			return null;
+		}
+		else {
+			List<TestSuite> testSuiteList = testProject.getTestSuiteList();
+			List<TestSuite> filtered = testSuiteList.parallelStream().filter(testSuite -> testSuite.getId().equals(id)).collect(Collectors.toList());
+			filtered.forEach(testSuite -> log.info("Found: " + testSuite.detailedToString()));
+			if(filtered.size() == 1) {
+				return filtered.get(0);
+			}
+			
+			log.info("TestSuite not found with id: " + id);
+			return null;
+		}
+	}
+	
+	@Override
+	public TestSuite getTestSuiteByStepId(String id) {
+		
+		log.info("Searching for TestSuite for stepId: " + id);
+		if(id == null) {
+			return null;
+		} else {
+			List<TestSuite> testSuiteList = testProject.getTestSuiteList();
+			for(TestSuite testSuite : testSuiteList) {
+				
+				List<TestCase> testCaseList = testSuite.getTestCaseList();
+				for(TestCase testCase : testCaseList) {
+					
+					List<Step> stepList = testCase.getStepList();
+					List<Step> filtered = stepList.parallelStream().filter(step -> step.getId().equals(id)).collect(Collectors.toList());
+					filtered.forEach(step -> log.info("Found: " + step.detailedToString()));
+					if(filtered.size() == 1) {
+						return testSuite;
+					}
+				}
+			}
+			log.info("TestSuite not found for stepId: " + id);
+			return null;
+		}
+	}
+
+	@Override
+	public TestCase getTestCaseById(String id) {
+
+		log.info("Searching for TestCase with id: " + id);
+		if(id == null) {
+			return null;
+		} else {
+			List<TestSuite> testSuiteList = testProject.getTestSuiteList();
+			for(TestSuite testSuite : testSuiteList) {
+				
+				List<TestCase> testCaseList = testSuite.getTestCaseList();
+				List<TestCase> filtered = testCaseList.parallelStream().filter(testCase -> testCase.getId().equals(id)).collect(Collectors.toList());
+				filtered.forEach(testCase -> log.info("Found: " + testCase.detailedToString()));
+				if(filtered.size() == 1) {
+					return filtered.get(0);
+				}
+			}
+		}
+		log.info("TestCase not found with id: " + id);
+		return null;
+	}
+	
+	@Override
+	public Step getStepById(String id) {
+		
+		log.info("Searching for Step with id: " + id);
+		if(id == null) {
+			return null;
+		}
+		else {
+			List<TestSuite> testSuiteList = testProject.getTestSuiteList();
+			for(TestSuite testSuite : testSuiteList) {
+				
+				List<TestCase> testCaseList = testSuite.getTestCaseList();
+				for(TestCase testCase : testCaseList) {
+					
+					List<Step> stepList = testCase.getStepList();
+					List<Step> filtered = stepList.parallelStream().filter(step -> step.getId().equals(id)).collect(Collectors.toList());
+					filtered.forEach(step -> log.info("Found: " + step.detailedToString()));
+					if(filtered.size() == 1) {
+						return filtered.get(0);
+					}
+				}
+			}
+			log.info("Step not found with id: " + id);
+			return null;
+		}
+	}
+
+
+	@Override
+	public void setTestSuiteById(TestSuite testSuite, String id) {
+		
+		log.info("Set TestSuite for id: " + id + "; " + testSuite.detailedToString());
+		List<TestSuite> testSuiteList = testProject.getTestSuiteList();
+		testSuiteList.forEach(loopTestSuite -> {
+			
+			if(loopTestSuite.getId().equals(id)) {
+				loopTestSuite.setName(testSuite.getName());
+				loopTestSuite.setEnvironmentId(testSuite.getEnvironmentId());
+			}
+		});
+	}
+	
+	@Override
+	public void setTestCaseById(TestCase testCase, String id) {
+
+		log.info("Set TestCase for id: " + id + "; " + testCase.detailedToString());
+		List<TestSuite> testSuiteList = testProject.getTestSuiteList();
+		testSuiteList.forEach(testSuite -> {
+			
+			List<TestCase> testCaseList = testSuite.getTestCaseList();
+			testCaseList.forEach(loopTestCase -> {
+				
+				if(loopTestCase.getId().equals(id))
+					loopTestCase.setName(testCase.getName());								
+				});
+		});
+	}
+
+	@Override
+	public void addTestSuite(TestSuite testSuite) {
+		
+		log.info("Adding TestSuite: " + testSuite);
+		testProject.getTestSuiteList().add(testSuite);
+	}
+
+	@Override
+	public void addTestCaseForSuite(TestCase testCase, String suiteId) {
+		
+		log.info("Adding TestCase for suiteId: " + suiteId + "; " + testCase);
+		List<TestSuite> testSuiteList = testProject.getTestSuiteList();
+		testSuiteList.forEach(testSuite -> {
+			
+			if(testSuite.getId().equals(suiteId))
+				testSuite.addTestCase(testCase);
+		});
+	}
+
+	@Override
+	public void addStepForTestCase(Step step, String testCaseId) {
+		
+		log.info("Adding Step for testCaseId: " + testCaseId + "; " + step);
+		List<TestSuite> testSuiteList = testProject.getTestSuiteList();
+		testSuiteList.forEach(testSuite -> {
+			
+			List<TestCase> testCaseList = testSuite.getTestCaseList();
+			testCaseList.forEach(testCase -> {
+				
+				if(testCase.getId().equals(testCaseId)) {
+					testCase.getStepList().add(step);
+				}
+			});
+		});
+	}
+	
+	@Override
+	public void removeTestSuiteById(String id) {
+
+		log.info("Removing TestSuite: " + id);
+		testProject.getTestSuiteList().removeIf(testSuite -> testSuite.getId().equals(id));
+	}
+
+	@Override
+	public void removeTestCaseById(String id) {
+		
+		log.info("Removing TestCase: " + id);
+		List<TestSuite> testSuiteList = testProject.getTestSuiteList();
+		testSuiteList.forEach(testSuite -> {
+			
+			List<TestCase> testCaseList = testSuite.getTestCaseList();
+			testCaseList.removeIf(testCase -> testCase.getId().equals(id));
+		});
+	}
+	
+	@Override
+	public void removeStepById(String id) {
+
+		log.info("Removing Step: " + id);
+		List<TestSuite> testSuiteList = testProject.getTestSuiteList();
+		testSuiteList.forEach(testSuite -> {
+			
+			List<TestCase> testCaseList = testSuite.getTestCaseList();
+			testCaseList.forEach(testCase -> {
+			
+				List<Step> steplist = testCase.getStepList();
+				steplist.removeIf(step -> step.getId().equals(id));
+			});
+		});
 	}
 }

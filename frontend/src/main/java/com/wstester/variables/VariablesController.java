@@ -28,7 +28,8 @@ import com.wstester.log.CustomLogger;
 import com.wstester.model.TestProject;
 import com.wstester.model.Variable;
 import com.wstester.model.VariableType;
-import com.wstester.util.TestProjectService;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 
 public class VariablesController {
 
@@ -56,9 +57,12 @@ public class VariablesController {
 	@FXML
 	private Button addButton;
 	
+	private IProjectFinder projectFinder;
+	
 	@FXML
-	public void initialize(){
+	public void initialize() throws Exception{
 		
+		projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
 		initializeTable();
 		loadVariables("");
 		initializeSearch();
@@ -132,8 +136,7 @@ public class VariablesController {
 					 public void handle(ActionEvent event) {
 						 
 						 log.info(row.getItem().getId(), "Removing variable from variable list: " + row.getItem());
-						 TestProjectService testProjectService = new TestProjectService();
-						 TestProject testProject = testProjectService.getTestProject();
+						 TestProject testProject = projectFinder.getTestProject();
 			        	 testProject.getVariableList().remove(row.getItem());
 			        	 loadVariables(searchBox.getText());
 					 }
@@ -149,8 +152,7 @@ public class VariablesController {
 
 	private void loadVariables(String textToSearch) {
 
-		TestProjectService testProjectService = new TestProjectService();
-		TestProject testProject = testProjectService.getTestProject();
+		TestProject testProject = projectFinder.getTestProject();
 		
 		List<Variable> variableList = testProject.getVariableList();
 		if(variableList != null) {
@@ -209,8 +211,7 @@ public class VariablesController {
             	variable.setContent(addContent.getText());
             	
             	log.info(variable.getId(), "Adding variable to variable list: " + variable);
-            	TestProjectService testProjectService = new TestProjectService();
-        		TestProject testProject = testProjectService.getTestProject();
+        		TestProject testProject = projectFinder.getTestProject();
         		testProject.getVariableList().add(variable);
         		loadVariables(searchBox.getText());
 				

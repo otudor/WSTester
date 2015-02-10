@@ -12,7 +12,8 @@ import com.wstester.main.MainLauncher;
 import com.wstester.model.RestMethod;
 import com.wstester.model.RestStep;
 import com.wstester.model.Step;
-import com.wstester.util.TestProjectService;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
@@ -108,8 +109,14 @@ public class RestStepController implements Initializable {
 		this.stepId = stepId;
 		
     	clearFields();
-		TestProjectService testProjectService = new TestProjectService();
-		Step step = testProjectService.getStep(stepId);
+    	Step step = null;
+		try {
+			IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+			step = projectFinder.getStepById(stepId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Could not find the environmentList. Please try again!", null);
+		}
 		
         stepController.setStep(stepId);
         stepController.setCommonFields();
@@ -252,43 +259,53 @@ public class RestStepController implements Initializable {
 	}
 
     // called when the save button is clicked
-	public void saveRest(ActionEvent e) {
+	public void saveRest(ActionEvent actionEvent) {
     	
-    	TestProjectService testProjectService = new TestProjectService();
-    	RestStep step = new RestStep();
+		// get the step before the save
+		IProjectFinder projectFinder = null;
+		try {
+			projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Could not find the environmentList. Please try again!", null);
+		}
+		
+		// construct the step after the save
+    	RestStep newStep = new RestStep();
     	
-    	step.setServerId(stepController.getServer().getId());
-    	step.setServiceId(stepController.getService().getId());
-    	step.setName(stepController.getName());
-    	step.setMethod(restMethod.getValue());
-    	step.setContentType(contentType.getText());
+    	newStep.setServerId(stepController.getServer().getId());
+    	newStep.setServiceId(stepController.getService().getId());
+    	newStep.setName(stepController.getName());
+    	newStep.setMethod(restMethod.getValue());
+    	newStep.setContentType(contentType.getText());
     	
     	StringBuilder pathBuilder = new StringBuilder(restPath.getText());
     	for (Pair pair: pathTable.getItems()) {
     		pathBuilder.append("/" + pair.getKey() + "/" + pair.getValue());
     	}
-    	step.setPath(pathBuilder.toString());
+    	newStep.setPath(pathBuilder.toString());
     	
     	Map<String, String> queryMap = new HashMap<String, String>();
     	for (Pair pair : queryTable.getItems()) {
     		queryMap.put(pair.getKey(), pair.getValue());
     	}
-		step.setQuery(queryMap);
+		newStep.setQuery(queryMap);
 		
 		Map<String, String> headerMap = new HashMap<String, String>();
 		for (Pair pair : headerTable.getItems()) {
 			headerMap.put(pair.getKey(), pair.getValue());
 		}
-		step.setHeader(headerMap);
+		newStep.setHeader(headerMap);
 		
 		Map<String, String> cookieMap = new HashMap<String, String>();
 		for (Pair pair : cookieTable.getItems()) {
 			cookieMap.put(pair.getKey(), pair.getValue());
 		}
-		step.setCookie(cookieMap);
+		newStep.setCookie(cookieMap);
 		
-		step.setRequest(request.getText());
+		newStep.setRequest(request.getText());
 		
-    	testProjectService.setStepByUID(step, stepId);
+    	//TODO: save the new step 
+    	projectFinder.getStepById(stepId).copyFrom(newStep);
 	}
 }

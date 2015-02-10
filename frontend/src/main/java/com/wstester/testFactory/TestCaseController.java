@@ -1,7 +1,10 @@
 package com.wstester.testFactory;
 
+import com.wstester.elements.Dialog;
+import com.wstester.main.MainLauncher;
 import com.wstester.model.TestCase;
-import com.wstester.util.TestProjectService;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,17 +22,30 @@ public class TestCaseController {
     public void setTestCaseId(String id) {
     
     	this.testCaseId = id;
-    	TestProjectService service = new TestProjectService();
-    	TestCase testCase = service.getTestCase(id);
+    	IProjectFinder projectFinder = null;
+    	try {
+    		projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		Dialog.errorDialog("Could not find the TestCase. Please try again!", MainLauncher.stage);
+    	}
+    	TestCase testCase = projectFinder.getTestCaseById(id);
     	name.setText(testCase.getName());
     }
     
-    public void saveTestCase(ActionEvent e) {
+    public void saveTestCase(ActionEvent actionEvent) {
     	
     	TestCase testCase = new TestCase();
     	testCase.setName(name.getText());
     	
-    	TestProjectService service = new TestProjectService();
-    	service.setTestCaseById(testCase, testCaseId);
+    	// save the testCase
+    	IProjectFinder projectFinder = null;
+    	try {
+    		projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		Dialog.errorDialog("Could not find the TestCase. Please try again!", MainLauncher.stage);
+    	}
+    	projectFinder.setTestCaseById(testCase, testCaseId);
     }
 }

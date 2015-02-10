@@ -1,36 +1,25 @@
 package com.wstester.main;
 
-import javafx.scene.control.Button;
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadow;
-
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import com.wstester.elements.Progress;
 import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ICamelContextManager;
 import com.wstester.services.definition.IProjectFinder;
 import com.wstester.services.definition.ITestProjectActions;
-import com.wstester.util.MainConstants;
-import com.wstester.util.UtilityTool;
 
 /**
  * 
@@ -41,7 +30,6 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 	
 	ITestProjectActions actions;
     ScreensController myController;
-    public TestProject testproject;
     public static boolean loadState = false;
     
     @FXML
@@ -55,16 +43,6 @@ public class ProjectDashbordController implements Initializable, ControlledScree
     
     @FXML
     private Stage Load;
-    
-    
-    
-    public TestProject getTestproject() {
-		return testproject;
-	}
-
-	public void setTestproject(TestProject testproject) {
-		this.testproject = testproject;
-	}
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -143,14 +121,13 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 				@Override
 				public void handle(MouseEvent event) {
 					
-			    	TestProject t = new TestProject();
-			    	UtilityTool.addEntity(MainConstants.TEST_PROJECT, t);
+			    	TestProject testProject = new TestProject();
 			    	
 			    	ICamelContextManager manager = null;
 					try {
 						manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
 						IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
-						projectFinder.setProject(t);
+						projectFinder.setProject(testProject);
 					} catch (Exception e) {
 						// TODO Make an exception window that informs the user we could not open a new project
 						// he should retry again the same operation
@@ -191,8 +168,7 @@ public class ProjectDashbordController implements Initializable, ControlledScree
 			    		if(file != null){
 			    			
 			    			actions = ServiceLocator.getInstance().lookup(ITestProjectActions.class);
-			    			testproject = actions.open(file.getCanonicalPath());
-			    			UtilityTool.addEntity(MainConstants.TEST_PROJECT, testproject);
+			    			TestProject testproject = actions.open(file.getCanonicalPath());
 			    			
 				    		ICamelContextManager manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
 							IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);

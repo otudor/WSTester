@@ -11,7 +11,6 @@ import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.SoapStep;
 import com.wstester.model.ExecutionStatus;
-import com.wstester.util.TestProjectService;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -59,8 +58,8 @@ public class SoapStepController
         lblStatus.setText("Not run");
         lblResponse.setText("Not run");
         
-        TestProjectService tsService = new TestProjectService();
-        step = (SoapStep) tsService.getStep( stepUID);
+//        TestProjectService tsService = new TestProjectService();
+//        step = (SoapStep) tsService.getStep( stepUID);
 //        Environment environment = tsService.getTestSuiteByStepUID(stepUID).getEnvironment();
 //        if(environment != null) {        	
 //        	serverBox.getItems().clear();
@@ -169,8 +168,8 @@ public class SoapStepController
 		soap.setServiceId(step.getServiceId());
 		soap.setVariableList(step.getVariableList());
 		
-		TestProjectService tsService = new TestProjectService();
-		tsService.setStepByUID(soap, soap.getId());
+//		TestProjectService tsService = new TestProjectService();
+//		tsService.setStepByUID(soap, soap.getId());
 	} 
     
     
