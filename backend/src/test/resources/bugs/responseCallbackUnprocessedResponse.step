@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <testProject>
+    <id>ed55c47a-19fb-4ec8-a729-3ba4a0bb6702</id>
     <environmentList>
+        <id>bb84d1ef-656c-4afa-9ff5-c7125e7ac912</id>
         <name>Env 1</name>
         <servers>
+            <id>86212d85-c150-4867-8bcc-8c699d73c626</id>
             <description>This is the first server of the first env</description>
             <ip>localhost</ip>
             <name>Server 11</name>
             <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="restService">
+                <id>d63ad288-f426-41d3-a1ed-d81fb3a580ca</id>
                 <name>Service Rest</name>
                 <port>9997</port>
             </services>
@@ -14,20 +18,11 @@
     </environmentList>
     <name>Rest Test Plan</name>
     <testSuiteList>
-        <environment>
-            <name>Env 1</name>
-            <servers>
-                <description>This is the first server of the first env</description>
-                <ip>localhost</ip>
-                <name>Server 11</name>
-                <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="restService">
-                    <name>Service Rest</name>
-                    <port>9997</port>
-                </services>
-            </servers>
-        </environment>
+        <id>35be762a-1f09-4990-bd19-fb4ecb85e00d</id>
+        <environmentId>bb84d1ef-656c-4afa-9ff5-c7125e7ac912</environmentId>
         <name>Test Suite 1</name>
         <testCaseList>
+            <id>b668ad23-f314-481b-9685-d15006dd01dd</id>
             <name>Test Case 1</name>
             <stepList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="restStep">
                 <contentType>text/plain</contentType>
@@ -52,19 +47,8 @@
                         <value>Goku</value>
                     </entry>
                 </query>
-                <server>
-                    <description>This is the first server of the first env</description>
-                    <ip>localhost</ip>
-                    <name>Server 11</name>
-                    <services xsi:type="restService">
-                        <name>Service Rest</name>
-                        <port>9997</port>
-                    </services>
-                </server>
-                <service xsi:type="restService">
-                    <name>Service Rest</name>
-                    <port>9997</port>
-                </service>
+                <serverId>86212d85-c150-4867-8bcc-8c699d73c626</serverId>
+                <serviceId>d63ad288-f426-41d3-a1ed-d81fb3a580ca</serviceId>
             </stepList>
             <stepList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="restStep">
                 <contentType>text/plain</contentType>
@@ -77,19 +61,8 @@
                         <value>Goku</value>
                     </entry>
                 </query>
-                <server>
-                    <description>This is the first server of the first env</description>
-                    <ip>localhost</ip>
-                    <name>Server 11</name>
-                    <services xsi:type="restService">
-                        <name>Service Rest</name>
-                        <port>9997</port>
-                    </services>
-                </server>
-                <service xsi:type="restService">
-                    <name>Service Rest</name>
-                    <port>9997</port>
-                </service>
+                <serverId>86212d85-c150-4867-8bcc-8c699d73c626</serverId>
+                <serviceId>d63ad288-f426-41d3-a1ed-d81fb3a580ca</serviceId>
             </stepList>
             <stepList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="restStep">
                 <contentType>text/plain</contentType>
@@ -102,19 +75,8 @@
                 <method>GET</method>
                 <name>Rest Step 3</name>
                 <path>/customer/searchWithCookie</path>
-                <server>
-                    <description>This is the first server of the first env</description>
-                    <ip>localhost</ip>
-                    <name>Server 11</name>
-                    <services xsi:type="restService">
-                        <name>Service Rest</name>
-                        <port>9997</port>
-                    </services>
-                </server>
-                <service xsi:type="restService">
-                    <name>Service Rest</name>
-                    <port>9997</port>
-                </service>
+                <serverId>86212d85-c150-4867-8bcc-8c699d73c626</serverId>
+                <serviceId>d63ad288-f426-41d3-a1ed-d81fb3a580ca</serviceId>
             </stepList>
             <stepList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="restStep">
                 <contentType>text/plain</contentType>
@@ -127,19 +89,8 @@
                 <method>GET</method>
                 <name>Rest Step 4</name>
                 <path>/customer/searchWithHeader</path>
-                <server>
-                    <description>This is the first server of the first env</description>
-                    <ip>localhost</ip>
-                    <name>Server 11</name>
-                    <services xsi:type="restService">
-                        <name>Service Rest</name>
-                        <port>9997</port>
-                    </services>
-                </server>
-                <service xsi:type="restService">
-                    <name>Service Rest</name>
-                    <port>9997</port>
-                </service>
+                <serverId>86212d85-c150-4867-8bcc-8c699d73c626</serverId>
+                <serviceId>d63ad288-f426-41d3-a1ed-d81fb3a580ca</serviceId>
             </stepList>
         </testCaseList>
     </testSuiteList>

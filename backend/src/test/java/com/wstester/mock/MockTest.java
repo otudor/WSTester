@@ -142,7 +142,7 @@ public class MockTest extends TestBaseClass{
 		
 		TestProject testProject = TestUtils.getMockedRestProject();
 		Rule rule = new RestRule(InputType.BODY, asset, "mockedBodyFromAsset");
-		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getServiceId().getRuleList().add(rule);
+		testProject.getEnvironmentList().get(0).getServers().get(0).getServices().get(0).getRuleList().add(rule);
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setMethod(RestMethod.POST);
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setPath("pets");
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setRequest("Harap Alb");

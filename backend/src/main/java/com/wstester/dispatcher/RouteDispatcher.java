@@ -4,6 +4,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Predicate;
 import org.apache.camel.builder.RouteBuilder;
 
+import com.wstester.exceptions.ExceptionProcessor;
 import com.wstester.model.MongoStep;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.RestStep;
@@ -25,21 +26,7 @@ public class RouteDispatcher extends RouteBuilder{
 			.when(new Predicate() {				
 				@Override
 				public boolean matches(Exchange exchange) {
-					try {
-						String serviceId = exchange.getIn().getBody(Step.class).getServiceId();
-						IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
-						ServiceStatus status = projectFinder.getServiceById(serviceId).getStatus();
-						if(status != null && status.equals(ServiceStatus.MOCKED)){
-							return true;
-						}
-						else {
-							return false;
-						}
-					} catch(Exception e) {
-						sendTo(uri)
-						
-						return false;
-					}
+					return isMocked(exchange);
 				}
 			})
 				.log("[${body.getId}] Sent message to mock queue")
@@ -57,5 +44,26 @@ public class RouteDispatcher extends RouteBuilder{
 				.log("[${body.getId}] Sent message to soap queue")
 				.to("jms:soapQueue")
 		.endChoice();
+	}
+
+	protected boolean isMocked(Exchange exchange) {
+		try {
+			String serviceId = exchange.getIn().getBody(Step.class).getServiceId();
+			IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+			ServiceStatus status = projectFinder.getServiceById(serviceId).getStatus();
+			if(status != null && status.equals(ServiceStatus.MOCKED)){
+				return true;
+			}
+			else {
+				return false;
+			}
+		} catch(Exception e) {
+			onException(Exception.class)
+			.logHandled(true)
+			.handled(true)
+			.process(new ExceptionProcessor())
+			.to("jms:topic:responseTopic");
+			return false;
+		}
 	}
 }

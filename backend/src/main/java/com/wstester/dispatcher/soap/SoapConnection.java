@@ -22,7 +22,7 @@ public class SoapConnection {
 		IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
 		
 		Server server = projectFinder.getServerById(step.getServerId());
-		SoapService service = (SoapService) step.getServiceId();
+		SoapService service = (SoapService) projectFinder.getServiceById(step.getServiceId());
 		
 		endpoint.setAddress(server.getIp() + ":" + service.getPort() + service.getPath());
 		endpoint.setWsdlURL(service.getWsdlURL());

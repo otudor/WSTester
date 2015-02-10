@@ -258,7 +258,7 @@ public class RestStepController implements Initializable {
     	RestStep step = new RestStep();
     	
     	step.setServerId(stepController.getServer().getId());
-    	step.setServiceId(stepController.getService());
+    	step.setServiceId(stepController.getService().getId());
     	step.setName(stepController.getName());
     	step.setMethod(restMethod.getValue());
     	step.setContentType(contentType.getText());

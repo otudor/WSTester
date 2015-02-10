@@ -45,7 +45,7 @@ public class MySQLStepController{
     	MySQLStep step = new MySQLStep();
     	
     	step.setServerId(stepController.getServer().getId());
-    	step.setServiceId(stepController.getService());
+    	step.setServiceId(stepController.getService().getId());
     	step.setName(stepController.getName());
     	step.setOperation(mysqlOperation.getText());
 		

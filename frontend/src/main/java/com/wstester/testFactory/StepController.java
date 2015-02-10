@@ -21,14 +21,6 @@ import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IProjectFinder;
 import com.wstester.util.TestProjectService;
 
-/**
- * Template class which supports fx inclusion in different views
- * <br>
- * Do not modify it without consider affecting sensitive views of the application
- * 
- * @author lvasile
- * @since 2014/10/10
- */
 public class StepController implements Initializable{
 	
 	@FXML
@@ -106,7 +98,7 @@ public class StepController implements Initializable{
 				
 				// clear the service list and add the services from the current server
 				serviceBox.getItems().addAll(server.getServices());
-				Service service = step.getServiceId();
+				Service service = projectFinder.getServiceById(step.getServiceId());
 				if(service != null){
 					serverBox.setValue(server);
 					serviceBox.setValue(service);
