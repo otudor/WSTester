@@ -273,8 +273,8 @@ public class RestStepController implements Initializable {
 		// construct the step after the save
     	RestStep newStep = new RestStep();
     	
-    	newStep.setServerId(stepController.getServer().getId());
-    	newStep.setServiceId(stepController.getService().getId());
+    	newStep.setServerId(stepController.getServer() == null ? null : stepController.getServer().getId());
+    	newStep.setServiceId(stepController.getService() == null ? null : stepController.getService().getId());
     	newStep.setName(stepController.getName());
     	newStep.setMethod(restMethod.getValue());
     	newStep.setContentType(contentType.getText());
@@ -305,7 +305,7 @@ public class RestStepController implements Initializable {
 		
 		newStep.setRequest(request.getText());
 		
-    	//TODO: save the new step 
+		//TODO: add in projectFinder an operation setStepById 
     	projectFinder.getStepById(stepId).copyFrom(newStep);
 	}
 }

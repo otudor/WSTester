@@ -9,14 +9,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Variable implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String uuid;
+	private String id;
 	private String name;
 	private VariableType type;
 	private String content;
 	private String selector;
 	
 	public Variable(){
-		uuid = UUID.randomUUID().toString();
+		id = UUID.randomUUID().toString();
 	}
 	
 	/**
@@ -26,9 +26,9 @@ public class Variable implements Serializable {
 	 * @param selector How the content will be populated
 	 */
 	
-	public Variable(String content, String name) {
-		uuid = UUID.randomUUID().toString();
-		this.content = content;
+	public Variable(String selector, String name) {
+		id = UUID.randomUUID().toString();
+		this.selector = selector;
 		this.name = name;
 	}
 
@@ -39,18 +39,18 @@ public class Variable implements Serializable {
 	 * @param content The content of the variable(this content should not change between tests)
 	 */
 	public Variable(String name, VariableType type, String content){
-		uuid = UUID.randomUUID().toString();
+		id = UUID.randomUUID().toString();
 		setName(name);
 		setType(type);
 		setContent(content);
 	}
 	
 	public String getId() {
-		return this.uuid;
+		return this.id;
 	}
 
 	public void setId(String id) {
-		this.uuid = id;
+		this.id = id;
 	}
 	
 	public String getName() {
@@ -87,7 +87,7 @@ public class Variable implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Variable [uuid=" + uuid + ", name=" + name + ", type=" + type + ", content=" + content + ", selector=" + selector + "]";
+		return "Variable [uuid=" + id + ", name=" + name + ", type=" + type + ", content=" + content + ", selector=" + selector + "]";
 	}
 	
 	@Override
@@ -98,7 +98,7 @@ public class Variable implements Serializable {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((selector == null) ? 0 : selector.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -128,10 +128,10 @@ public class Variable implements Serializable {
 			return false;
 		if (type != other.type)
 			return false;
-		if (uuid == null) {
-			if (other.uuid != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!uuid.equals(other.uuid))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

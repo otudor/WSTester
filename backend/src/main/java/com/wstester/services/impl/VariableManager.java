@@ -2,6 +2,7 @@ package com.wstester.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Variable;
@@ -25,15 +26,26 @@ public class VariableManager implements IVariableManager {
 	}
 	
 	@Override
-	public void setVariableContent(Variable variable, String content) {
-		// TODO Auto-generated method stub
-
+	public void setVariableContent(String variableId, String content) {
+		
+		variableList.forEach(variable -> {
+			if(variable.getId().equals(variableId)) {
+				
+				log.info(variableId, "Set content: " + content);
+				variable.setContent(content);
+			}
+		});
 	}
 
 	@Override
-	public String getVariableContent(Variable variable) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getVariableContent(String variableId) {
+		
+		List<Variable> filtered = variableList.stream().filter(variable -> variable.getId().equals(variableId)).collect(Collectors.toList());
+		if(filtered.size() == 1) {
+			return filtered.get(0).getContent();
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -47,12 +59,13 @@ public class VariableManager implements IVariableManager {
 		while(!allStepsReceived){
 			Thread.sleep(1000l);
 		}
-		for(Variable variable : variableList) {
-			if(variable.getId().equals(variableId)) {
-				return variable;
-			}
+		List<Variable> filtered = variableList.stream().filter(variable -> variable.getId().equals(variableId)).collect(Collectors.toList());
+		if(filtered.size() == 1) {
+			return filtered.get(0);
+		} else {
+			return null;
 		}
-		return null;
+		
 	}
 
 	@Override

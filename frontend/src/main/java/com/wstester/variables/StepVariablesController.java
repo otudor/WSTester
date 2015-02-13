@@ -46,6 +46,7 @@ public class StepVariablesController implements Initializable{
 
 	public void setVariables(String stepId) {
 
+		variablesTable.setItems(null);
 		IProjectFinder projectFinder = null;
 		try {
 			projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
@@ -55,12 +56,16 @@ public class StepVariablesController implements Initializable{
 		}
 		Step step = projectFinder.getStepById(stepId);
 		List<String> stepVariableListId = step.getVariableList();
-		List<Variable> variableList = projectFinder.getTestProject().getVariableList();
-		List<Variable> stepVariableList = variableList.parallelStream().filter(variable -> stepVariableListId.contains(variable.getId())).collect(Collectors.toList());
-		if(stepVariableList != null) {
-			ObservableList<Variable> observableVariableList = FXCollections.observableArrayList(variableList);
-			variablesTable.setItems(observableVariableList);
-			log.info("List of the variables assigned on the step: " + variableList);
+		
+		if(stepVariableListId != null) {
+			
+			List<Variable> variableList = projectFinder.getTestProject().getVariableList();
+			List<Variable> stepVariableList = variableList.parallelStream().filter(variable -> stepVariableListId.contains(variable.getId())).collect(Collectors.toList());
+			if(stepVariableList != null) {
+				ObservableList<Variable> observableVariableList = FXCollections.observableArrayList(stepVariableList);
+				variablesTable.setItems(observableVariableList);
+				log.info("List of the variables assigned on the step: " + variableList);
+			}
 		}
 	}
 }

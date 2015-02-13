@@ -4,7 +4,6 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Predicate;
 import org.apache.camel.builder.RouteBuilder;
 
-import com.wstester.exceptions.ExceptionProcessor;
 import com.wstester.model.MongoStep;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.RestStep;
@@ -58,11 +57,7 @@ public class RouteDispatcher extends RouteBuilder{
 				return false;
 			}
 		} catch(Exception e) {
-			onException(Exception.class)
-			.logHandled(true)
-			.handled(true)
-			.process(new ExceptionProcessor())
-			.to("jms:topic:responseTopic");
+			e.printStackTrace();
 			return false;
 		}
 	}
