@@ -26,6 +26,7 @@
 		<spring-framework.version>4.1.4.RELEASE</spring-framework.version>
 		<hibernate.version>4.3.7.Final</hibernate.version>
 		<h2.version>1.4.184</h2.version>
+		<jsonPath.version>1.2.0</jsonPath.version>
 	</properties>
 
 	<dependencies>
@@ -174,6 +175,11 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql.version}</version><!--$NO-MVN-MAN-VER$ -->
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>${jsonPath.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

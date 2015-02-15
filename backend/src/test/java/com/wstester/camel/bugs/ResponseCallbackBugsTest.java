@@ -14,7 +14,7 @@ import com.wstester.model.TestProject;
 import com.wstester.services.impl.TestProjectActions;
 import com.wstester.services.impl.TestRunner;
 
-public class ResponseCallbackBugs extends TestBaseClass {
+public class ResponseCallbackBugsTest extends TestBaseClass {
 
 	@Test
 	public void incorrectEqualsForResponse() throws Exception {

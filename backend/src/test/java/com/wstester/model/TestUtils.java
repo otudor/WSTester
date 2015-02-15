@@ -251,12 +251,10 @@ public class TestUtils {
 
 		// construct the variable list
 		List<Variable> variableList = new ArrayList<Variable>();
-		Variable variable1 = new Variable("age", VariableType.INTEGER, "content");
 		Variable variable2 = new Variable();
 		variable2.setName("name");
 		variable2.setType(VariableType.STRING);
 		variable2.setSelector("response:");
-		variableList.add(variable1);
 		variableList.add(variable2);
 		testPlan.setVariableList(variableList);
 		
@@ -524,21 +522,13 @@ public class TestUtils {
 		TestProject testProject = new TestProject();
 		testProject.setName("Test Project");
 		
-		// construct asset list
-		List<Asset> assetList = new ArrayList<Asset>();
-		Asset asset1 = new Asset();
-		Asset asset2 = new Asset();
-		Asset asset3 = new Asset();
-		Asset asset4 = new Asset();
-		assetList.add(asset1);
-		assetList.add(asset2);
-		assetList.add(asset3);
-		assetList.add(asset4);
-		testProject.setAssetList(assetList);
-
+		// variables
+		Variable variable = new Variable("response:$.[0].detalii", "name");
+		List<Variable> variableList = new ArrayList<Variable>();
+		variableList.add(variable);
+		testProject.setVariableList(variableList);
+		
 		// construct service list
-		
-		
 		// Service 4
 		List<Service> serviceList4 = new ArrayList<Service>();
 		MySQLService service4 = new MySQLService();
@@ -550,8 +540,6 @@ public class TestUtils {
 		serviceList4.add(service4);
 		
 		// construct server list
-		
-
 		// Server 3
 		List<Server> serverList2 = new ArrayList<Server>();
 		Server server21 = new Server();
@@ -579,6 +567,7 @@ public class TestUtils {
 		step3.setName("Step 3");
 		step3.setServerId(server21.getId());
 		step3.setServiceId(service4.getId());
+		step3.addVariable(variable.getId());
 		stepList2.add(step3);
 		
 		
@@ -625,7 +614,7 @@ public class TestUtils {
 		Variable variable = new Variable();
 		variable.setName("name");
 		variable.setType(VariableType.STRING);
-		variable.setSelector("//string[1]");
+		variable.setSelector("response://string[1]");
 		List<Variable> projectVariableList = new ArrayList<Variable>();
 		projectVariableList.add(variable);
 		testProject.setVariableList(projectVariableList );

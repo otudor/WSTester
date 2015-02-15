@@ -1,6 +1,7 @@
 package com.wstester.variable;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,8 +17,12 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import com.jayway.jsonpath.Configuration;
+import com.jayway.jsonpath.InvalidJsonException;
+import com.jayway.jsonpath.JsonPath;
 import com.wstester.log.CustomLogger;
 import com.wstester.model.ExecutionStatus;
+import com.wstester.model.Header;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 import com.wstester.model.Variable;
@@ -28,12 +33,13 @@ import com.wstester.services.definition.IVariableManager;
 public class VariableProcessor implements Processor{
 
 	CustomLogger log = new CustomLogger(VariableProcessor.class);
+	IVariableManager variableManager;
 	
 	@Override
 	public void process(Exchange exchange) throws Exception {
 		
 		IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
-		IVariableManager variableManager = ServiceLocator.getInstance().lookup(IVariableManager.class);
+		variableManager = ServiceLocator.getInstance().lookup(IVariableManager.class);
 		
 		Response response = exchange.getIn().getBody(Response.class);
 		if(response.getStatus() != ExecutionStatus.ERROR) {
@@ -48,43 +54,86 @@ public class VariableProcessor implements Processor{
 					if(variable.getSelector() != null) {
 						
 						String content = evaluateSelector(variable, response);
-						try {
-							String selected = getContentFromXML(response.getContent(), variable);
-							variableManager.setVariableContent(variableId, selected);
-							log.info(variable.getId(), "Variable was set from XML to: " + selected);
-						} catch(SAXException xmlException) {
-							
-							log.info(variable.getId(), "Variable was set from String to: " + response.getContent());
-							variableManager.setVariableContent(variableId, response.getContent());
-						}
+						variableManager.setVariableContent(variableId, content);
 					}
 				}
 			}
 		}
 	}
 	
-	private String evaluateSelector(Variable variable, Response response) {
+	private String evaluateSelector(Variable variable, Response response) throws Exception {
 
 		String selector = variable.getSelector();
-		String type = selector.substring(0, selector.indexOf(":"));
-		switch (type) {
-			case "response" : evaluateResponseSelector();
-			case "header" : evaluateHeaderSelector();
-		}
+		try{
+			String type = selector.substring(0, selector.indexOf(":"));
+			log.info(variable.getId(), "Selector is of type: " + type);
 			
-		return null;
+			String selectorPath = selector.substring(selector.indexOf(":") + 1);
+			switch (type) {
+				case "response" : return evaluateResponseSelector(variable.getId(), selectorPath, response);
+				case "header" : return evaluateHeaderSelector(variable.getId(), selectorPath, response);
+				default : return "The type of the variable was not set correctly. Variable selector should be: response:selector or heder:selector";
+			}
+		} catch(IndexOutOfBoundsException e) {
+			e.printStackTrace();
+			return "The variable selector should be: response:selector or heder:selector";
+		}
 	}
 
-	private String getContentFromXML(String content, Variable variable) throws Exception {
+	private String evaluateResponseSelector(String variableId, String selector, Response response) throws Exception {
 		
-		log.info(variable.getId(), "Applying the selector: " + variable.getSelector());
+		log.info(variableId, "Applying the selector: " + selector);
+		try {
+			String selected = getContentFromXML(response.getContent(), variableId, selector);
+			log.info(variableId, "Variable was set from XML to: " + selected);
+			return selected;
+		} catch(SAXException xmlException) {
+			
+			try {
+				String selected = getContentFromJson(response.getContent(), variableId, selector);
+				log.info(variableId, "Variable was set from Json to: " + selected);
+				return selected;
+			} catch (InvalidJsonException e) {
+			
+				log.info(variableId, "Variable was set from String to: " + response.getContent());
+				return response.getContent();
+			}
+		}
+	}
+
+	private String evaluateHeaderSelector(String string, String selector, Response response) {
+		
+		List<Header> headerList = response.getHeaderList();
+		try {
+			Header foundHeader = headerList.stream().filter(header -> header.getKeyField().equals(selector)).findFirst().get();
+			return foundHeader.getValueField();
+		} catch (NoSuchElementException e) {
+			
+			e.printStackTrace();
+			return "Header " + selector + " not found in the headerList";
+		} catch (NullPointerException e) {
+			
+			e.printStackTrace();
+			return "Header List of the response is null";
+		}
+	}
+	
+	private String getContentFromXML(String content, String variableId, String selector) throws Exception {
+		
 		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		InputSource is = new InputSource(new ByteArrayInputStream(content.getBytes("utf-8")));
 
 		Document xmlDocument = db.parse(is);
 		XPath xPath = XPathFactory.newInstance().newXPath();
 
-		Node value = (Node)xPath.compile(variable.getSelector()).evaluate(xmlDocument, XPathConstants.NODE);
+		Node value = (Node)xPath.compile(selector).evaluate(xmlDocument, XPathConstants.NODE);
 		return value.getFirstChild().getNodeValue();
+	}
+	
+	private String getContentFromJson(String content, String variableId, String selector) {
+
+		Object document = Configuration.defaultConfiguration().jsonProvider().parse(content);
+		String selectedValue = JsonPath.read(document, selector);
+		return selectedValue;
 	}
 }
