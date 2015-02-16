@@ -17,7 +17,6 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.InvalidJsonException;
 import com.jayway.jsonpath.JsonPath;
 import com.wstester.log.CustomLogger;
@@ -93,8 +92,9 @@ public class VariableProcessor implements Processor{
 				String selected = getContentFromJson(response.getContent(), variableId, selector);
 				log.info(variableId, "Variable was set from Json to: " + selected);
 				return selected;
-			} catch (InvalidJsonException e) {
+			} catch (InvalidJsonException|IllegalArgumentException e) {
 			
+				e.printStackTrace();
 				log.info(variableId, "Variable was set from String to: " + response.getContent());
 				return response.getContent();
 			}
@@ -132,8 +132,8 @@ public class VariableProcessor implements Processor{
 	
 	private String getContentFromJson(String content, String variableId, String selector) {
 
-		Object document = Configuration.defaultConfiguration().jsonProvider().parse(content);
-		String selectedValue = JsonPath.read(document, selector);
+		content = content.replaceAll("=", ":");
+		String selectedValue = JsonPath.read(content, selector);
 		return selectedValue;
 	}
 }

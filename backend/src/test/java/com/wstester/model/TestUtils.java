@@ -323,18 +323,15 @@ public class TestUtils {
 		TestProject testProject = new TestProject();
 		testProject.setName("Test Project");
 		
-		// construct asset list
-		List<Asset> assetList = new ArrayList<Asset>();
-		Asset asset1 = new Asset();
-		Asset asset2 = new Asset();
-		Asset asset3 = new Asset();
-		Asset asset4 = new Asset();
-		assetList.add(asset1);
-		assetList.add(asset2);
-		assetList.add(asset3);
-		assetList.add(asset4);
-		testProject.setAssetList(assetList);
-
+		// construct the variable list
+		List<Variable> variableList = new ArrayList<Variable>();
+		Variable variable = new Variable();
+		variable.setName("name");
+		variable.setType(VariableType.STRING);
+		variable.setSelector("response:$.[0].name");
+		variableList.add(variable);
+		testProject.setVariableList(variableList);
+		
 		// construct service list		
 		// Service 2
 		List<Service> serviceList2 = new ArrayList<Service>();
@@ -380,6 +377,7 @@ public class TestUtils {
 		step2.setAction(Action.SELECT);
 		step2.setCollection(collection);
 		step2.setQuery(query);
+		step2.addVariable(variable.getId());
 		stepList1.add(step2);
 		
 		// construct test case list
