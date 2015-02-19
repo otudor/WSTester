@@ -260,6 +260,13 @@ public class ProjectFinder implements IProjectFinder {
 			});
 		});
 	}
+
+	@Override
+	public void addVariableForStep(String stepId, String variableId) {
+		
+		log.info(stepId, "Adding variable: " + variableId);
+		getStepById(stepId).addVariable(variableId);
+	}
 	
 	@Override
 	public void removeTestSuiteById(String id) {
@@ -297,6 +304,13 @@ public class ProjectFinder implements IProjectFinder {
 	}
 
 	@Override
+	public void removeVariableFromStep(String stepId, String variableId) {
+		
+		log.info(stepId, "Removing variable from step: " + variableId);
+		getStepById(stepId).getVariableList().remove(variableId);
+	}
+	
+	@Override
 	public Variable getVariableById(String id) {
 		
 		log.info("Searching for Variable with id: " + id);
@@ -306,6 +320,24 @@ public class ProjectFinder implements IProjectFinder {
 		else {
 			List<Variable> variableList = testProject.getVariableList();
 			List<Variable> filtered = variableList.parallelStream().filter(variable -> variable.getId().equals(id)).collect(Collectors.toList());
+			filtered.forEach(variable -> log.info("Found:" + variable.toString()));
+			if(filtered.size() == 1) {
+				return filtered.get(0);
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Variable getVariableByName(String name) {
+		
+		log.info("Searching for Variable with name: " + name);
+		if(name == null) {
+			return null;
+		}
+		else {
+			List<Variable> variableList = testProject.getVariableList();
+			List<Variable> filtered = variableList.parallelStream().filter(variable -> variable.getName().equals(name)).collect(Collectors.toList());
 			filtered.forEach(variable -> log.info("Found:" + variable.toString()));
 			if(filtered.size() == 1) {
 				return filtered.get(0);

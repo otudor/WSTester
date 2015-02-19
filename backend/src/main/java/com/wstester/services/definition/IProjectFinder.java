@@ -29,10 +29,13 @@ public interface IProjectFinder extends IService{
 	public void addTestSuite(TestSuite testSuite);
 	public void addTestCaseForSuite(TestCase testCase, String suiteId);
 	public void addStepForTestCase(Step step, String testCaseId);
+	public void addVariableForStep(String stepId, String variableId);
 	
 	public void removeTestSuiteById(String id);
 	public void removeTestCaseById(String id);
 	public void removeStepById(String id);
+	public void removeVariableFromStep(String stepId, String variableId);
 	
 	public Variable getVariableById(String id);
+	public Variable getVariableByName(String name);
 }
