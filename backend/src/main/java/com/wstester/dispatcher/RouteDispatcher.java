@@ -2,7 +2,6 @@ package com.wstester.dispatcher;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Predicate;
-import org.apache.camel.builder.RouteBuilder;
 
 import com.wstester.model.MongoStep;
 import com.wstester.model.MySQLStep;
@@ -13,14 +12,19 @@ import com.wstester.model.Step;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IProjectFinder;
 import com.wstester.services.impl.StepManager;
+import com.wstester.variable.VariableUsageProcessor;
 
-public class RouteDispatcher extends RouteBuilder{
+public class RouteDispatcher extends GeneralExceptionRoute{
 	
 	@Override
 	public void configure() throws Exception {
 	    
+		super.configure();
+		
 		from("jms:startQueue?concurrentConsumers=20&asyncConsumer=true")
 		.bean(StepManager.class, "addStep")
+		.bean(ExchangeDelayer.class, "delay")
+		.process(new VariableUsageProcessor())
 		.choice()
 			.when(new Predicate() {				
 				@Override

@@ -1,0 +1,8 @@
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:foot="http://footballpool.dataaccess.eu">
+   <soap:Header/>
+   <soap:Body>
+      <foot:AllDefenders>
+         <foot:sCountryName>${name}</foot:sCountryName>
+      </foot:AllDefenders>
+   </soap:Body>
+</soap:Envelope>

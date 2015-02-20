@@ -1,7 +1,9 @@
 package com.wstester.asserts;
 
 import java.util.List;
+
 import org.apache.camel.Exchange;
+
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Assert;
 import com.wstester.model.AssertResponse;
@@ -11,7 +13,7 @@ import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
 import com.wstester.services.common.ServiceLocator;
-import com.wstester.services.definition.IStepManager;
+import com.wstester.services.definition.IProjectFinder;
 import com.wstester.services.impl.AssetManager;
 
 public class AssertProcessor {
@@ -97,8 +99,8 @@ public class AssertProcessor {
 	
 	private Step getStep(String id) throws Exception{
 		
-		IStepManager stepManger = ServiceLocator.getInstance().lookup(IStepManager.class);
-		Step step = stepManger.getStep(id);
+		IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		Step step = projectFinder.getStepById(id);
 		return step;
 	}
 }

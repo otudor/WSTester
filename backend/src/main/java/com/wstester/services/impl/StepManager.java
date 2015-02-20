@@ -39,6 +39,11 @@ public class StepManager implements IStepManager {
 		for(StepExecution stepExecution : stepExecutionList) {
 			if(stepExecution.getStep().getId().equals(step.getId())) {
 				log.info(step.getId(), "StepList already contains the step");
+				
+				if(!stepExecution.getStep().equals(step)){
+					log.info(step.getId(), "Step has modified since the last run");
+					stepExecution.setStep(step);
+				}
 				return stepExecution;
 			}
 		}

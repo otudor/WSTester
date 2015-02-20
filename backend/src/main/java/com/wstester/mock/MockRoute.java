@@ -9,12 +9,8 @@ public class MockRoute extends RouteBuilder {
 	public void configure() throws Exception {
 
 		from("jms:mockQueue")
-		
 		.bean(ExchangeDelayer.class, "delay")
-		.setProperty("step", body())
 		.process(new MockSystem())
-		.removeProperty("step")
-		
 		.to("jms:topic:responseTopic");
 	}
 }

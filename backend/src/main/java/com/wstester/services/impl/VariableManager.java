@@ -49,11 +49,6 @@ public class VariableManager implements IVariableManager {
 	}
 
 	@Override
-	public List<Variable> getAllVariables() {
-		return variableList;
-	}
-
-	@Override
 	public Variable getVariable(String variableId) throws InterruptedException {
 		
 		while(!allStepsReceived){
@@ -71,5 +66,27 @@ public class VariableManager implements IVariableManager {
 	@Override
 	public void allVariablesSent() {
 		this.allStepsReceived = true;
+	}
+
+	@Override
+	public Variable getVariableByName(String name) {
+		
+		log.info("Searching for Variable with name: " + name);
+		if(name == null) {
+			return null;
+		}
+		else {
+			List<Variable> filtered = variableList.parallelStream().filter(variable -> variable.getName().equals(name)).collect(Collectors.toList());
+			filtered.forEach(variable -> log.info("Found:" + variable.toString()));
+			if(filtered.size() == 1) {
+				return filtered.get(0);
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public void resetVariableList() {
+		this.variableList = new ArrayList<Variable>();
 	}
 }

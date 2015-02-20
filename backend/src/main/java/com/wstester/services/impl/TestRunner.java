@@ -202,7 +202,7 @@ public class TestRunner implements ITestRunner {
 	private void manageVariable() throws Exception {
 
 		IVariableManager variableManager = ServiceLocator.getInstance().lookup(IVariableManager.class);
-		
+		variableManager.resetVariableList();
 
 		if (testProject.getVariableList() != null) {
 			for (Variable variable : testProject.getVariableList()) {

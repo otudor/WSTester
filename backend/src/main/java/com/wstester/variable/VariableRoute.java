@@ -6,10 +6,9 @@ public class VariableRoute extends RouteBuilder{
 
 	@Override
 	public void configure() throws Exception {
-
+		
 		from("jms:topic:responseTopic")
 		.log("[${body.getStepId}] VariableRoute received response: ${body}")
-		.process(new VariableProcessor());
+		.process(new VariableAssignmentProcessor());
 	}
-
 }

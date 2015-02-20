@@ -29,9 +29,9 @@ import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IProjectFinder;
 import com.wstester.services.definition.IVariableManager;
 
-public class VariableProcessor implements Processor{
+public class VariableAssignmentProcessor implements Processor{
 
-	CustomLogger log = new CustomLogger(VariableProcessor.class);
+	CustomLogger log = new CustomLogger(VariableAssignmentProcessor.class);
 	IVariableManager variableManager;
 	
 	@Override
@@ -88,13 +88,14 @@ public class VariableProcessor implements Processor{
 			return selected;
 		} catch(SAXException xmlException) {
 			
+			log.error(variableId, "Variable couldn't be set from XML: " + xmlException.getMessage());
 			try {
 				String selected = getContentFromJson(response.getContent(), variableId, selector);
 				log.info(variableId, "Variable was set from Json to: " + selected);
 				return selected;
 			} catch (InvalidJsonException|IllegalArgumentException e) {
 			
-				e.printStackTrace();
+				log.error(variableId, "Variable couldn't be set from JSon: " + e.getLocalizedMessage());
 				log.info(variableId, "Variable was set from String to: " + response.getContent());
 				return response.getContent();
 			}

@@ -255,6 +255,7 @@ public class TestUtils {
 		variable2.setName("name");
 		variable2.setType(VariableType.STRING);
 		variable2.setSelector("response:");
+		variable2.setContent("Millhouse");
 		variableList.add(variable2);
 		testPlan.setVariableList(variableList);
 		
@@ -329,6 +330,7 @@ public class TestUtils {
 		variable.setName("name");
 		variable.setType(VariableType.STRING);
 		variable.setSelector("response:$.[0].name");
+		variable.setContent("HAC");
 		variableList.add(variable);
 		testProject.setVariableList(variableList);
 		
@@ -522,6 +524,7 @@ public class TestUtils {
 		
 		// variables
 		Variable variable = new Variable("response:$.[0].detalii", "name");
+		variable.setContent("popescu");
 		List<Variable> variableList = new ArrayList<Variable>();
 		variableList.add(variable);
 		testProject.setVariableList(variableList);
@@ -690,6 +693,93 @@ public class TestUtils {
 		return testProject;
 	}
 
+	public static TestProject getSOAPwithVariabelsTestProject() throws IOException{
+		
+		TestProject testProject = new TestProject();
+		testProject.setName("Test Project");
+		
+		// set the variable list
+		Variable variable = new Variable();
+		variable.setName("name");
+		variable.setType(VariableType.STRING);
+		variable.setContent("Brazil");
+		List<Variable> projectVariableList = new ArrayList<Variable>();
+		projectVariableList.add(variable);
+		testProject.setVariableList(projectVariableList );
+
+		// construct service list
+		
+		// Service 3
+		List<Service> serviceList3 = new ArrayList<Service>();
+		SoapService service3 = new SoapService();
+		List<Authentication> authenticationList = new ArrayList<Authentication>();  
+		Authentication auth = new Authentication();
+		auth.setUsername("test");
+		auth.setPassword("test");
+		auth.setRole("test");
+		authenticationList.add(auth);
+		service3.setName("Service SOAP");
+		service3.setPort("80");
+		service3.setPath("/data/info.wso");
+		service3.setWsdlURL("http://footballpool.dataaccess.eu/data/info.wso?wsdl");
+		service3.setAuthenticationList(authenticationList);
+		serviceList3.add(service3);
+		
+		// construct server list
+		List<Server> serverList2 = new ArrayList<Server>();
+
+		// Server 4
+		Server server22 = new Server();
+		server22.setDescription("This is the second server of the second env");
+		server22.setIp("http://footballpool.dataaccess.eu");
+		server22.setName("Server 22");
+		server22.setServices(serviceList3);
+		serverList2.add(server22);
+		
+		// construct environment list
+		List<Environment> environmentList = new ArrayList<Environment>();
+
+		// Environment 2
+		Environment env2 = new Environment();
+		env2.setName("Env 2");
+		env2.setServers(serverList2);
+		environmentList.add(env2);
+		testProject.setEnvironmentList(environmentList);
+
+		// construct test steps
+		List<Step> stepList2 = new ArrayList<Step>();
+
+		// test 4
+		SoapStep step4 = new SoapStep();
+		step4.setName("Step 4");
+		step4.setServerId(server22.getId());
+		step4.setServiceId(service3.getId());
+		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequestWithVariable.xml")));
+		step4.setRequest(request);
+		step4.addVariable(variable.getId());
+		stepList2.add(step4);
+		
+		// construct test case list
+		// test case 2		
+		List<TestCase> testCaseList2 = new ArrayList<TestCase>();
+		TestCase testCase2 = new TestCase();
+		testCase2.setName("TC 1");
+		testCase2.setStepList(stepList2);
+		testCaseList2.add(testCase2);
+		
+		// construct test suite list
+		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
+		TestSuite testSuite2 = new TestSuite();
+		testSuite2.setName("Test Suite 2");
+		testSuite2.setEnvironmentId(env2.getId());
+		testSuite2.setTestCaseList(testCaseList2);
+		testSuiteList.add(testSuite2);
+		
+		testProject.setTestSuiteList(testSuiteList);
+	
+		return testProject;
+	}
+	
 	public static TestProject getDependantStepsPlan() {
 		
 		TestProject testProject = new TestProject();

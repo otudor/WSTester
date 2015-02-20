@@ -1,7 +1,5 @@
 package com.wstester.services.definition;
 
-import java.util.List;
-
 import com.wstester.model.Variable;
 import com.wstester.services.common.Stateful;
 
@@ -12,6 +10,7 @@ public interface IVariableManager extends IService{
 	void setVariableContent(String variableId, String content);
 	String getVariableContent(String variableId);
 	Variable getVariable(String variableId) throws InterruptedException;
-	List<Variable> getAllVariables();
+	Variable getVariableByName(String name);
 	void allVariablesSent();
+	void resetVariableList();
 }

@@ -1,7 +1,6 @@
 package com.wstester.dispatcher.soap;
 
 import com.wstester.asset.AssetProcessor;
-import com.wstester.dispatcher.ExchangeDelayer;
 
 public class SoapRoute extends SoapExceptionRoute {
 
@@ -12,7 +11,6 @@ public class SoapRoute extends SoapExceptionRoute {
 		
 		from("jms:soapQueue?concurrentConsumers=20&asyncConsumer=true")
 		
-		.bean(ExchangeDelayer.class, "delay")
 		.bean(SoapConnection.class)
 		.process(new SoapPreProcessor())
 		.process(new AssetProcessor())

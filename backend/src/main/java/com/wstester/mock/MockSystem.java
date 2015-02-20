@@ -25,8 +25,13 @@ public class MockSystem implements Processor{
 	public void process(Exchange exchange) throws Exception {
 		
 		ruleList = new ArrayList<Rule>();
-		Step step = exchange.getProperty("step", Step.class);
+		Step step = exchange.getIn().getBody(Step.class);
+		log.info(step.getId(), "Received step on mock queue: " + step.detailedToString());
+		
 		IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		// this is done because the step is modified when the marshaling and unmarshaling was done in the variable processor
+		// if the step has the request in the form of an xml then the xml is changed(some spaces and line feeds are missing)
+		step = projectFinder.getStepById(step.getId());
 		Service service = projectFinder.getServiceById(step.getServiceId());
 		addRules(service.getRuleList());
 

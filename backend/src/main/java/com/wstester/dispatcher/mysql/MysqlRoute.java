@@ -1,7 +1,6 @@
 package com.wstester.dispatcher.mysql;
 
 import com.wstester.asset.AssetProcessor;
-import com.wstester.dispatcher.ExchangeDelayer;
 
 public class MysqlRoute extends MysqlExceptionRoute {
 
@@ -12,7 +11,6 @@ public class MysqlRoute extends MysqlExceptionRoute {
 		
 		from("jms:mySQLQueue?concurrentConsumers=20&asyncConsumer=true")
 		
-		.bean(ExchangeDelayer.class, "delay")
 		.bean(MysqlConnection.class)
 		.process(new MysqlPreProcessor())
 		.process(new AssetProcessor())

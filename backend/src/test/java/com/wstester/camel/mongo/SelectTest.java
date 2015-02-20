@@ -39,7 +39,6 @@ public class SelectTest extends TestBaseClass{
 	public void selectMoreRows() throws Exception{
 		
 		TestProject testProject = TestUtils.getMongoTestPlan();
-		setTestProject(testProject);
 		
 		MongoStep step = (MongoStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
 		HashMap<String, String> query = new HashMap<String, String>();
@@ -47,6 +46,8 @@ public class SelectTest extends TestBaseClass{
 		String key = "name";
 		query.put(key, name);
 		step.setQuery(query);
+		
+		setTestProject(testProject);
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);

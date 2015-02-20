@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<testProject>
+    <environmentList>
+        <id>bb84d1ef-656c-4afa-9ff5-c7125e7ac912</id>
+        <name>Env 1</name>
+        <servers>
+            <description>This is the first server of the first env</description>
+            <id>86212d85-c150-4867-8bcc-8c699d73c626</id>
+            <ip>localhost</ip>
+            <name>Server 11</name>
+            <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="restService">
+                <id>d63ad288-f426-41d3-a1ed-d81fb3a580ca</id>
+                <name>Service Rest</name>
+                <port>9997</port>
+            </services>
+            <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="mySQLService">
+                <name>Service Mysql</name>
+                <dbName>test</dbName>
+                <id>223aac9e-81b9-4bcb-96e2-eddd43915643</id>
+                <password>apppass</password>
+                <port>3306</port>
+                <user>appuser</user>
+            </services>
+        </servers>
+    </environmentList>
+    <id>ed55c47a-19fb-4ec8-a729-3ba4a0bb6702</id>
+    <name>Rest Test Plan</name>
+    <testSuiteList>
+        <environmentId>bb84d1ef-656c-4afa-9ff5-c7125e7ac912</environmentId>
+        <id>35be762a-1f09-4990-bd19-fb4ecb85e00d</id>
+        <name>Test Suite 1</name>
+        <testCaseList>
+            <id>b668ad23-f314-481b-9685-d15006dd01dd</id>
+            <name>Test Case 1</name>
+            <stepList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="restStep">
+                <contentType>text/plain</contentType>
+                <id>af5efa91-d8df-4371-b266-b6c40a0b272c</id>
+                <method>GET</method>
+                <name>Rest Step 2</name>
+                <path>/customer/searchCustomer</path>
+                <query>
+                    <entry>
+                        <key>name</key>
+                        <value>Goku</value>
+                    </entry>
+                </query>
+                <serverId>86212d85-c150-4867-8bcc-8c699d73c626</serverId>
+                <serviceId>d63ad288-f426-41d3-a1ed-d81fb3a580ca</serviceId>
+                <variableList>f630a9ed-5897-4348-beb0-f7a12b496a2d</variableList>
+            </stepList>
+            <stepList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="restStep">
+                <contentType>text/plain</contentType>
+                <cookie>
+                    <entry>
+                        <key>name</key>
+                        <value>${name}</value>
+                    </entry>
+                </cookie>
+                <id>8ca66795-31b1-46b3-8d89-e0426d0542ec</id>
+                <method>GET</method>
+                <name>Rest Step 3</name>
+                <path>/customer/searchWithCookie</path>
+                <serverId>86212d85-c150-4867-8bcc-8c699d73c626</serverId>
+                <serviceId>d63ad288-f426-41d3-a1ed-d81fb3a580ca</serviceId>
+                <dependsOn>af5efa91-d8df-4371-b266-b6c40a0b272c</dependsOn>
+            </stepList>
+        </testCaseList>
+    </testSuiteList>
+    <variableList>
+        <content>Popa</content>
+        <id>05eeff37-9757-4882-9903-b39df32f15fb</id>
+        <name>Variable 1</name>
+        <selector>id/1</selector>
+        <type>STRING</type>
+    </variableList>
+    <variableList>
+        <id>f630a9ed-5897-4348-beb0-f7a12b496a2d</id>
+        <name>name</name>
+        <selector>response:</selector>
+        <type>STRING</type>
+    </variableList>
+</testProject>

@@ -34,10 +34,14 @@ public class MockSystemTest extends CamelTestSupport{
     protected RouteBuilder[] createRouteBuilders() throws Exception {
     	
     	RouteDispatcher routeDispatcher = new RouteDispatcher();
-    	routeDispatcher.from("jms:restQueue").to("mock:rest");
-    	routeDispatcher.from("jms:mockQueue").to("mock:mocking");
-    	
-    	return new RouteBuilder[] {routeDispatcher};
+    	RouteBuilder mockRoute = new RouteBuilder() {
+			@Override
+			public void configure() throws Exception {
+				from("jms:restQueue").to("mock:rest");
+				from("jms:mockQueue").to("mock:mocking");
+			}
+		};
+    	return new RouteBuilder[] {routeDispatcher, mockRoute};
     }
     
     @Test
