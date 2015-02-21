@@ -54,9 +54,9 @@ import com.wstester.environment.MainPresenter;
 import com.wstester.model.TestProject;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ICamelContextManager;
+import com.wstester.services.definition.IProjectFinder;
 import com.wstester.services.definition.ITestProjectActions;
 import com.wstester.util.MainConstants;
-import com.wstester.util.TestProjectService;
 
 public class WsTesterMainController implements Initializable, ControlledScreen {
 
@@ -137,7 +137,6 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		this.createVarWindow(); //v
 		this.saveProject();
 		
-		stage.initOwner(WsTesterMain.stage);
 		stage.initOwner(MainLauncher.stage);
 
 		//pane.setRightAnchor(bar, 10d);
@@ -422,7 +421,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 
 						Scene second = new Scene(root);
 
-						second.getStylesheets().add(WsTesterMain.class.getResource(MainConstants.APPLICATION_STYLE_CSS.toString()).toExternalForm());					
+//						second.getStylesheets().add(WsTesterMain.class.getResource(MainConstants.APPLICATION_STYLE_CSS.toString()).toExternalForm());					
 						root.getStyleClass().add("mainWind");
 
 						soapWindowIcon = (VBox)CreateIcon(MainConstants.SOAP_WINDOW_ICON.toString(),"Soap");	
@@ -1310,10 +1309,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 				
 				@Override
 				public void handle(ActionEvent arg0) {
-					
-					TestProjectService service = new TestProjectService();
-					TestProject testProject = service.getTestProject();
-					
+									
 		            FileChooser fileChooser = new FileChooser();
 		            fileChooser.setTitle("Save Test Project");
 		    		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("STEP project files (*.step)", "*.step");
@@ -1322,8 +1318,12 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		            if(file != null){
 						try {
 							ITestProjectActions testProjectActions = ServiceLocator.getInstance().lookup(ITestProjectActions.class);
+							IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+							
+							TestProject testProject = projectFinder.getTestProject();
 							testProjectActions.save(file.getPath(), testProject);
 						} catch (Exception e) {
+							e.printStackTrace();
 							Dialog.errorDialog("The project could not be saved. Please try again!", stage);
 						}
 		            }

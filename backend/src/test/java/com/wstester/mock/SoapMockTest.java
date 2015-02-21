@@ -29,17 +29,19 @@ public class SoapMockTest extends TestBaseClass{
 	public void requestMockTest() throws Exception{
 		
 		TestProject testProject = TestUtils.getSOAPTestPlan();
-		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getService().setStatus(ServiceStatus.MOCKED);
+		testProject.getEnvironmentList().get(0).getServers().get(0).getServices().get(0).setStatus(ServiceStatus.MOCKED);
 		List<Rule> ruleList = new ArrayList<Rule>();
 		Rule rule = new SoapRule(InputType.REQUEST, "inputRequest", "mockedRequest");
 		ruleList.add(rule );
-		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getService().setRuleList(ruleList);
+		testProject.getEnvironmentList().get(0).getServers().get(0).getServices().get(0).setRuleList(ruleList);
 		((SoapStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setRequest("inputRequest");
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 112500L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500L);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("mockedRequest", response.getContent());
@@ -60,9 +62,11 @@ public class SoapMockTest extends TestBaseClass{
 		TestProject testProject = TestUtils.getMockedSoapProject();
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 112500L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500L);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("Mocked Asset", response.getContent());

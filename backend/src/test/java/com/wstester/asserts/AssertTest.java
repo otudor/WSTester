@@ -25,12 +25,13 @@ public class AssertTest extends TestBaseClass{
 	public void assertPasses() throws Exception{
 		
 		TestProject testProject = TestUtils.getAssertTestProject();
+		setTestProject(testProject);
 		
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		
 		JSONArray result = new JSONArray(response.getContent());
 
@@ -46,12 +47,13 @@ public class AssertTest extends TestBaseClass{
 		
 		TestProject testProject = TestUtils.getAssertTestProject();
 		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().get(0).setExpected("[{detalii=ion}]");
+		setTestProject(testProject);
 		
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		
 		JSONArray result = new JSONArray(response.getContent());
 
@@ -69,12 +71,13 @@ public class AssertTest extends TestBaseClass{
 		Assert azzert = new Assert();
 		azzert.setExpected("[{detalii=ion}]");
 		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().add(azzert);
+		setTestProject(testProject);
 		
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		
 		JSONArray result = new JSONArray(response.getContent());
 
@@ -103,12 +106,13 @@ public class AssertTest extends TestBaseClass{
 		
 		TestProject testProject = TestUtils.getAssertTestProject();
 		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().get(0).setExpected(expectedOutput);
+		setTestProject(testProject);
 		
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		
 		JSONArray result = new JSONArray(response.getContent());
 

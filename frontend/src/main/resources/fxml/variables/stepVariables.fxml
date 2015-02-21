@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.variables.StepVariablesController">
+   <children>
+      <TableView fx:id="variablesTable" editable="true" layoutX="16.0" layoutY="89.0" prefHeight="316.0" prefWidth="649.0">
+         <columns>
+            <TableColumn fx:id="name" prefWidth="126.0" text="Name" />
+            <TableColumn fx:id="type" prefWidth="96.0" text="Type" />
+            <TableColumn fx:id="selector" minWidth="1.0" prefWidth="285.0" text="Selector" />
+            <TableColumn fx:id="content" minWidth="0.0" prefWidth="141.0" text="Content" />
+         </columns>
+      </TableView>
+      <Label layoutX="16.0" layoutY="14.0" text="Assigned Variables" />
+      <ComboBox fx:id="addType" disable="true" layoutX="141.0" layoutY="45.0" prefHeight="25.0" prefWidth="100.0" promptText="Type" />
+      <Button fx:id="addButton" layoutX="674.0" layoutY="45.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="39.0" text="Add" />
+      <TextField fx:id="addContent" disable="true" layoutX="525.0" layoutY="45.0" prefHeight="25.0" prefWidth="141.0" promptText="Content" />
+      <TextField fx:id="addSelector" disable="true" layoutX="241.0" layoutY="45.0" prefHeight="25.0" prefWidth="284.0" promptText="Selector" />
+      <TextField fx:id="addName" layoutX="16.0" layoutY="45.0" prefHeight="25.0" prefWidth="125.0" promptText="Name" />
+   </children>
+</AnchorPane>

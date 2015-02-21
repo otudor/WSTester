@@ -14,7 +14,7 @@ import com.wstester.model.TestProject;
 import com.wstester.services.impl.TestProjectActions;
 import com.wstester.services.impl.TestRunner;
 
-public class ResponseCallbackBugs extends TestBaseClass {
+public class ResponseCallbackBugsTest extends TestBaseClass {
 
 	@Test
 	public void incorrectEqualsForResponse() throws Exception {
@@ -23,11 +23,13 @@ public class ResponseCallbackBugs extends TestBaseClass {
 		TestProject testProject = testProjectActions.open("src/test/resources/bugs/responseCallbackUnprocessedResponse.step");
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
 		List<Step> stepList = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList();
 		for (Step step : stepList) {
-			Response response = testRunner.getResponse(step.getID(), 25000L);
+			Response response = testRunner.getResponse(step.getId(), 25000L);
 			assertEquals(ExecutionStatus.ERROR, response.getStatus());
 		}
 	}

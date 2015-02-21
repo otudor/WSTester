@@ -39,11 +39,12 @@ public class RunStepWithAssetTest extends RestTestBaseClass{
 		HashMap<Asset, AssetType> assetMap = new HashMap<Asset, AssetType>();
 		assetMap.put(asset, AssetType.BODY);
 		step.setAssetMap(assetMap);
+		setTestProject(testProject);
 		
 		testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		String entry =  response.getContent();
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));

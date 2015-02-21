@@ -20,7 +20,7 @@ public class SoapPostProcessor implements Processor {
 
 		Response response = new Response();
 		response.setRunDate(new Date());
-		response.setStepId(step.getID());
+		response.setStepId(step.getId());
 		response.setContent(in.getBody(String.class));
 		response.setStatus(ExecutionStatus.PASSED);
 		

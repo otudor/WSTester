@@ -21,11 +21,12 @@ public class GetRequestTest extends RestTestBaseClass{
 	public void simplePath() throws Exception{
 			
 		TestProject testProject = TestUtils.getRestTestPlan();
+		setTestProject(testProject);
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		String entry =  response.getContent();
 		List<Header> headers = response.getHeaderList();
 		
@@ -51,10 +52,11 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		step.setQuery(map);
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		String entry =  response.getContent();
 		List<Header> headers = response.getHeaderList();
 		
@@ -80,10 +82,11 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		step.setCookie(map);
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		String entry =  response.getContent();
 		List<Header> headers = response.getHeaderList();
 		
@@ -109,10 +112,11 @@ public class GetRequestTest extends RestTestBaseClass{
 		
 		step.setHeader(map);
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		String entry =  response.getContent();
 		List<Header> headers = response.getHeaderList();
 		
@@ -145,10 +149,11 @@ public class GetRequestTest extends RestTestBaseClass{
 		step.setQuery(mapQuery);
 		step.setCookie(mapCookie);
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		String entry =  response.getContent();
 		List<Header> headers = response.getHeaderList();
 		

@@ -71,7 +71,7 @@ public class MongoDBPresenter {
     	gridpane.getChildren().add(labelport);
                      
     	Server server = envService.getServerByUID( serverUID);
-		Service service = envService.getServiceByUID( server.getID(), serviceUID );
+		Service service = envService.getServiceByUID( server.getId(), serviceUID );
 		uid = serviceUID;
 		MongoService mng = (MongoService) service;
 		labelport.setText( mng.getPort());

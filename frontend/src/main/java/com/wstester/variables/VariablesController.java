@@ -28,7 +28,8 @@ import com.wstester.log.CustomLogger;
 import com.wstester.model.TestProject;
 import com.wstester.model.Variable;
 import com.wstester.model.VariableType;
-import com.wstester.util.TestProjectService;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 
 public class VariablesController {
 
@@ -56,9 +57,12 @@ public class VariablesController {
 	@FXML
 	private Button addButton;
 	
+	private IProjectFinder projectFinder;
+	
 	@FXML
-	public void initialize(){
+	public void initialize() throws Exception{
 		
+		projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
 		initializeTable();
 		loadVariables("");
 		initializeSearch();
@@ -73,7 +77,7 @@ public class VariablesController {
 					
 					@Override
 					public void handle(CellEditEvent<Variable, String> newName) {
-						log.info(((Variable) newName.getTableView().getItems().get(newName.getTablePosition().getRow())).getID(), "Changed name from " + newName.getOldValue() + " to " + newName.getNewValue());
+						log.info(((Variable) newName.getTableView().getItems().get(newName.getTablePosition().getRow())).getId(), "Changed name from " + newName.getOldValue() + " to " + newName.getNewValue());
 						((Variable) newName.getTableView().getItems().get(newName.getTablePosition().getRow())).setName(newName.getNewValue());
 					}
 				}
@@ -86,7 +90,7 @@ public class VariablesController {
 					
 					@Override
 					public void handle(CellEditEvent<Variable, VariableType> newType) {
-						log.info(((Variable) newType.getTableView().getItems().get(newType.getTablePosition().getRow())).getID(), "Changed type from " + newType.getOldValue() + " to " + newType.getNewValue());
+						log.info(((Variable) newType.getTableView().getItems().get(newType.getTablePosition().getRow())).getId(), "Changed type from " + newType.getOldValue() + " to " + newType.getNewValue());
 						((Variable) newType.getTableView().getItems().get(newType.getTablePosition().getRow())).setType(newType.getNewValue());
 					}
 				}
@@ -99,7 +103,7 @@ public class VariablesController {
 					
 					@Override
 					public void handle(CellEditEvent<Variable, String> newSelector) {
-						log.info(((Variable) newSelector.getTableView().getItems().get(newSelector.getTablePosition().getRow())).getID(), "Changed selector from " + newSelector.getOldValue() + " to " + newSelector.getNewValue());
+						log.info(((Variable) newSelector.getTableView().getItems().get(newSelector.getTablePosition().getRow())).getId(), "Changed selector from " + newSelector.getOldValue() + " to " + newSelector.getNewValue());
 						((Variable) newSelector.getTableView().getItems().get(newSelector.getTablePosition().getRow())).setSelector(newSelector.getNewValue());
 					}
 				}
@@ -112,7 +116,7 @@ public class VariablesController {
 					
 					@Override
 					public void handle(CellEditEvent<Variable, String> newContent) {
-						log.info(((Variable) newContent.getTableView().getItems().get(newContent.getTablePosition().getRow())).getID(), "Changed content from " + newContent.getOldValue() + " to " + newContent.getNewValue());
+						log.info(((Variable) newContent.getTableView().getItems().get(newContent.getTablePosition().getRow())).getId(), "Changed content from " + newContent.getOldValue() + " to " + newContent.getNewValue());
 						((Variable) newContent.getTableView().getItems().get(newContent.getTablePosition().getRow())).setContent(newContent.getNewValue());
 					}
 				}
@@ -131,9 +135,8 @@ public class VariablesController {
 					 @Override
 					 public void handle(ActionEvent event) {
 						 
-						 log.info(row.getItem().getID(), "Removing variable from variable list: " + row.getItem());
-						 TestProjectService testProjectService = new TestProjectService();
-						 TestProject testProject = testProjectService.getTestProject();
+						 log.info(row.getItem().getId(), "Removing variable from variable list: " + row.getItem());
+						 TestProject testProject = projectFinder.getTestProject();
 			        	 testProject.getVariableList().remove(row.getItem());
 			        	 loadVariables(searchBox.getText());
 					 }
@@ -149,8 +152,7 @@ public class VariablesController {
 
 	private void loadVariables(String textToSearch) {
 
-		TestProjectService testProjectService = new TestProjectService();
-		TestProject testProject = testProjectService.getTestProject();
+		TestProject testProject = projectFinder.getTestProject();
 		
 		List<Variable> variableList = testProject.getVariableList();
 		if(variableList != null) {
@@ -208,9 +210,8 @@ public class VariablesController {
             	variable.setSelector(addSelector.getText());
             	variable.setContent(addContent.getText());
             	
-            	log.info(variable.getID(), "Adding variable to variable list: " + variable);
-            	TestProjectService testProjectService = new TestProjectService();
-        		TestProject testProject = testProjectService.getTestProject();
+            	log.info(variable.getId(), "Adding variable to variable list: " + variable);
+        		TestProject testProject = projectFinder.getTestProject();
         		testProject.getVariableList().add(variable);
         		loadVariables(searchBox.getText());
 				

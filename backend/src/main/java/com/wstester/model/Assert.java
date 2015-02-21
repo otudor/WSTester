@@ -24,8 +24,12 @@ public class Assert implements Serializable {
 		this.expected = expected;
 	}
 
-	public String getID(){
+	public String getId(){
 		return this.uuid;
+	}
+	
+	public void setId(String id){
+		this.uuid = id;
 	}
 
 	@Override
@@ -38,6 +42,7 @@ public class Assert implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((expected == null) ? 0 : expected.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		return result;
 	}
 
@@ -54,6 +59,11 @@ public class Assert implements Serializable {
 			if (other.expected != null)
 				return false;
 		} else if (!expected.equals(other.expected))
+			return false;
+		if (uuid == null) {
+			if (other.uuid != null)
+				return false;
+		} else if (!uuid.equals(other.uuid))
 			return false;
 		return true;
 	}

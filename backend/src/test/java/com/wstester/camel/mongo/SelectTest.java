@@ -22,11 +22,12 @@ public class SelectTest extends TestBaseClass{
 	public void selectOneRow() throws Exception{
 		
 		TestProject testProject = TestUtils.getMongoTestPlan();
+		setTestProject(testProject);
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		JSONArray result = new JSONArray(response.getContent());
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
@@ -38,17 +39,20 @@ public class SelectTest extends TestBaseClass{
 	public void selectMoreRows() throws Exception{
 		
 		TestProject testProject = TestUtils.getMongoTestPlan();
+		
 		MongoStep step = (MongoStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
 		HashMap<String, String> query = new HashMap<String, String>();
 		String name = "ROFLMAO";
 		String key = "name";
 		query.put(key, name);
 		step.setQuery(query);
+		
+		setTestProject(testProject);
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		JSONArray result = new JSONArray(response.getContent());
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));

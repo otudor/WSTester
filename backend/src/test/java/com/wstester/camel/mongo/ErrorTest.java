@@ -19,12 +19,14 @@ import org.junit.Test;
 import com.mongodb.Mongo;
 import com.wstester.dispatcher.mongo.MongoRoute;
 import com.wstester.model.ExecutionStatus;
-import com.wstester.model.MongoStep;
 import com.wstester.model.Response;
-import com.wstester.model.UnitTestUtils;
+import com.wstester.model.TestProject;
+import com.wstester.model.TestUtils;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 
 public class ErrorTest extends CamelTestSupport{
-
+	
     @Override
     protected CamelContext createCamelContext() throws Exception {
         CamelContext camelContext = super.createCamelContext();
@@ -69,14 +71,16 @@ public class ErrorTest extends CamelTestSupport{
 				interceptSendToEndpoint("mongodb://*")
 					.skipSendToOriginalEndpoint()
 					.throwException(new ConnectException(exceptionMessage));
-				
 			}
 		});
 		
 		MockEndpoint resultEndpoint = getMockEndpoint("mock:response");
 		resultEndpoint.expectedMessageCount(1);
 		
-		template.sendBody("jms:mongoQueue", UnitTestUtils.getMongoStep());
+		TestProject testProject = TestUtils.getMongoTestPlan();
+		setTestProject(testProject);
+		
+		template.sendBody("jms:mongoQueue", testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0));
 		
 		resultEndpoint.await(5, TimeUnit.SECONDS);
 		Response response = resultEndpoint.getReceivedExchanges().get(0).getIn().getBody(Response.class);
@@ -85,18 +89,27 @@ public class ErrorTest extends CamelTestSupport{
 	}
 	
 	@Test
-	public void unknownHostError() throws InterruptedException{
+	public void unknownHostError() throws Exception{
 		
 		MockEndpoint resultEndpoint = getMockEndpoint("mock:response");
 		resultEndpoint.expectedMessageCount(1);
-		MongoStep step = UnitTestUtils.getMongoStep();
-		step.getServer().setIp("andrei.test");
-		template.sendBody("jms:mongoQueue", step);
+
+		TestProject testProject = TestUtils.getMongoTestPlan();
+		testProject.getEnvironmentList().get(0).getServers().get(0).setIp("andrei.test");
+		setTestProject(testProject);
+		
+		template.sendBody("jms:mongoQueue", testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0));
 		
 		resultEndpoint.await(5, TimeUnit.SECONDS);
 		Response response = resultEndpoint.getReceivedExchanges().get(0).getIn().getBody(Response.class);
 		assertEquals(ExecutionStatus.ERROR, response.getStatus());
 		assertTrue("expected: " + "UnknownHostException:andrei.test" + " but was: " + response.getErrorMessage(), 
 				response.getErrorMessage().contains("UnknownHostException:andrei.test"));
+	}
+	
+	protected void setTestProject(TestProject testProject) throws Exception {
+		
+		IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		projectFinder.setProject(testProject);
 	}
 }

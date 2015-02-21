@@ -1,7 +1,6 @@
 package com.wstester.dispatcher.rest;
 
 import com.wstester.asset.AssetProcessor;
-import com.wstester.dispatcher.ExchangeDelayer;
 
 public class RestRoute extends RestExceptionRoute{
 
@@ -12,7 +11,6 @@ public class RestRoute extends RestExceptionRoute{
 		
 		from("jms:restQueue?concurrentConsumers=20&asyncConsumer=true")
 		
-		.bean(ExchangeDelayer.class, "delay")
 		.process(new RestPreProcessor())
 		.process(new AssetProcessor())
 		

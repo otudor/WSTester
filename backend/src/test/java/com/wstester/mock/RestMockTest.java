@@ -30,11 +30,12 @@ public class RestMockTest extends TestBaseClass{
 	public void pathMockTest() throws Exception{
 		
 		TestProject testProject = TestUtils.getMockedRestProject();
+		setTestProject(testProject);
 		
 		testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 2500l);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("mockedPath", response.getContent());
@@ -48,9 +49,11 @@ public class RestMockTest extends TestBaseClass{
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setPath("pets");
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 2500l);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("mockedMethod", response.getContent());
@@ -61,15 +64,17 @@ public class RestMockTest extends TestBaseClass{
 		
 		TestProject testProject = TestUtils.getMockedRestProject();
 		Rule rule = new RestRule(InputType.BODY, "inputBody", "mockedBody");
-		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getService().getRuleList().add(rule);
+		testProject.getEnvironmentList().get(0).getServers().get(0).getServices().get(0).getRuleList().add(rule);
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setMethod(RestMethod.POST);
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setPath("pets");
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setRequest("inputBody");
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 2500l);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("mockedBody", response.getContent());
@@ -88,7 +93,7 @@ public class RestMockTest extends TestBaseClass{
 		
 		TestProject testProject = TestUtils.getMockedRestProject();
 		Rule rule = new RestRule(InputType.BODY, asset, "mockedBodyFromAsset");
-		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getService().getRuleList().add(rule);
+		testProject.getEnvironmentList().get(0).getServers().get(0).getServices().get(0).getRuleList().add(rule);
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setMethod(RestMethod.POST);
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setPath("pets");
 		Map<Asset, AssetType> assetMap = new HashMap<Asset, AssetType>();
@@ -96,9 +101,11 @@ public class RestMockTest extends TestBaseClass{
 		((RestStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setAssetMap(assetMap);
 		
 		testRunner = new TestRunner(testProject);
+		setTestProject(testProject);
+		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 2500l);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("mockedBodyFromAsset", response.getContent());

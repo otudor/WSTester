@@ -62,7 +62,7 @@ public class SoapPresenter {
     	gridpane.getChildren().add(labelport);
     	gridpane.getChildren().add(labelpath);
     	Server server = envService.getServerByUID( serverUID);
-		Service service = envService.getServiceByUID( server.getID(), serviceUID );    	
+		Service service = envService.getServiceByUID( server.getId(), serviceUID );    	
 		uid = serviceUID;
 		SoapService soap = (SoapService) service;
 		SoapPath.setText( soap.getPath());

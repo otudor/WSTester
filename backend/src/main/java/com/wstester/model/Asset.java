@@ -20,10 +20,14 @@ public class Asset implements Serializable {
 		uuid = UUID.randomUUID().toString();
 	}
 
-	public String getID() {
+	public String getId() {
 		return this.uuid;
 	}
 
+	public void setId(String id) {
+		this.uuid = id;
+	}
+	
 	public long getLastmodified() {
 		return lastmodified;
 	}
@@ -73,6 +77,7 @@ public class Asset implements Serializable {
 		result = prime * result + ((path == null) ? 0 : path.hashCode());
 		result = prime * result + (int) (size ^ (size >>> 32));
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		return result;
 	}
 
@@ -103,6 +108,11 @@ public class Asset implements Serializable {
 			if (other.type != null)
 				return false;
 		} else if (!type.equals(other.type))
+			return false;
+		if (uuid == null) {
+			if (other.uuid != null)
+				return false;
+		} else if (!uuid.equals(other.uuid))
 			return false;
 		return true;
 	}

@@ -202,9 +202,8 @@ public class TestRunner implements ITestRunner {
 	private void manageVariable() throws Exception {
 
 		IVariableManager variableManager = ServiceLocator.getInstance().lookup(IVariableManager.class);
-		
-		// TODO: we don't have to add all variables, only the ones we use in the
-		// current run
+		variableManager.resetVariableList();
+
 		if (testProject.getVariableList() != null) {
 			for (Variable variable : testProject.getVariableList()) {
 				
@@ -213,35 +212,6 @@ public class TestRunner implements ITestRunner {
 			}
 		}
 
-		for (TestSuite testSuite : testProject.getTestSuiteList()) {
-			if (testSuite.getVariableList() != null) {
-				for (Variable variable : testSuite.getVariableList()) {
-					
-					variableManager.addVariable(variable);
-					log.info("Added suite variable: " + variable);
-				}
-			}
-
-			for (TestCase testCase : testSuite.getTestCaseList()) {
-				if (testCase.getVariableList() != null) {
-					for (Variable variable : testCase.getVariableList()) {
-
-						variableManager.addVariable(variable);
-						log.info("Added case variable: " + variable);
-					}
-				}
-
-				for (Step testStep : testCase.getStepList()) {
-					if (testStep.getVariableList() != null) {
-						for (Variable variable : testStep.getVariableList()) {
-
-							variableManager.addVariable(variable);
-							log.info("Added step variable: " + variable);
-						}
-					}
-				}
-			}
-		}
 		// notify the variableManager that all variables were sent
 		variableManager.allVariablesSent();
 	}
@@ -267,7 +237,7 @@ public class TestRunner implements ITestRunner {
 						ObjectMessage message = session.createObjectMessage(testStep);
 
 						// Tell the producer to send the message
-						log.info(testStep.getID(), "Sent message to startQueue");
+						log.info(testStep.getId(), "Sent message to startQueue");
 						producer.send(message);
 					}
 				}
@@ -281,7 +251,7 @@ public class TestRunner implements ITestRunner {
 					ObjectMessage message = session.createObjectMessage(testStep);
 
 					// Tell the producer to send the message
-					log.info(testStep.getID(), "Sent message to startQueue");
+					log.info(testStep.getId(), "Sent message to startQueue");
 					producer.send(message);
 				}
 			}
@@ -292,7 +262,7 @@ public class TestRunner implements ITestRunner {
 				ObjectMessage message = session.createObjectMessage(testStep);
 
 				// Tell the producer to send the message
-				log.info(testStep.getID(), "Sent message to startQueue");
+				log.info(testStep.getId(), "Sent message to startQueue");
 				producer.send(message);
 			}
 		} else if (entityToRun instanceof Step) {
@@ -302,7 +272,7 @@ public class TestRunner implements ITestRunner {
 			ObjectMessage message = session.createObjectMessage(testStep);
 
 			// Tell the producer to send the message
-			log.info(testStep.getID(), "Sent message to startQueue");
+			log.info(testStep.getId(), "Sent message to startQueue");
 			producer.send(message);
 		} else {
 			throw new WsException("Can't run object: " + entityToRun + "! Please run only instances of TestProject, TestSuite, TestCase or Step", null);

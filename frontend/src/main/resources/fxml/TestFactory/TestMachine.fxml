@@ -40,11 +40,16 @@
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                   </content>
                 </Tab>
-                  <Tab fx:id="responseTab" closable="false" disable="true" onSelectionChanged="#setResponse" text="Response">
-                     <content>
-                        <fx:include fx:id="response" source="Response.fxml" />
-                     </content>
-                  </Tab>
+                <Tab fx:id="responseTab" closable="false" disable="true" onSelectionChanged="#setResponse" text="Response">
+                   <content>
+                      <fx:include fx:id="response" source="Response.fxml" />
+                   </content>
+                </Tab>
+                <Tab fx:id="variableTab" closable="false" disable="true" onSelectionChanged="#setVariables" text="Variables" >
+                	<content>
+                      <fx:include fx:id="stepVariables" source="../variables/stepVariables.fxml" />
+                   </content>
+                </Tab>
               </tabs>
             </TabPane>
          </center>

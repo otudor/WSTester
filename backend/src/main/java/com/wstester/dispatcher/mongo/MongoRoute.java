@@ -1,7 +1,6 @@
 package com.wstester.dispatcher.mongo;
 
 import com.wstester.asset.AssetProcessor;
-import com.wstester.dispatcher.ExchangeDelayer;
 
 public class MongoRoute extends MongoExceptionRoute {
 
@@ -12,7 +11,6 @@ public class MongoRoute extends MongoExceptionRoute {
 		
 		from("jms:mongoQueue?concurrentConsumers=20&asyncConsumer=true")
 		
-		.bean(ExchangeDelayer.class, "delay")
 		.bean(MongoConnection.class, "setConnectionBean")
 		.process(new MongoPreProcessor())
 		.process(new AssetProcessor())

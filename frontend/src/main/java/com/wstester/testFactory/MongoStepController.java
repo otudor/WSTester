@@ -20,7 +20,6 @@ import com.wstester.model.MongoStep;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
-import com.wstester.util.TestProjectService;
 
 public class MongoStepController {
     @FXML 
@@ -60,43 +59,43 @@ public class MongoStepController {
 	}
 
     public void setStep(final String stepId) {     
-    	TestProjectService tsService = new TestProjectService();
-        step = (MongoStep) tsService.getStep(stepId);
+//    	TestProjectService tsService = new TestProjectService();
+//        step = (MongoStep) tsService.getStep(stepId);
         lblName.setText(step.getName());
     	mongoQuery.setText("");
         mongoAction.setText("");
         mongoCollection.setText("");
         lblStatus.setText("Not run");
         lblResponse.setText("Not run");
-        Environment environment = tsService.getTestSuiteByStepUID(stepId).getEnvironment();
-        if(environment != null) {        	
-        	serverBox.getItems().clear();
-        	serverBox.getItems().addAll(environment.getServers());
-        	if(step.getServer() != null) {
-        		serverBox.setValue(step.getServer());
-        		serviceBox.getItems().clear();
-        		serviceBox.getItems().addAll(step.getServer().getServices());
-        	}
-        	serverBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Server>() {
-					public void changed(ObservableValue<? extends Server> ov, Server oldServer, Server newServer) {
-						if(newServer !=null) {
-							step.setServer(newServer);
-							serviceBox.getItems().clear();
-							serviceBox.getItems().addAll(step.getServer().getServices());
-							if(step.getService() != null) {
-								serviceBox.setValue(step.getService());
-							}
-							serviceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Service>() {
-									public void changed(ObservableValue<? extends Service> ov, Service oldServer,Service newServer) {
-										step.setService(newServer);
-									}
-								});
-							step.setServer(newServer);
-							tsService.setStepByUID(step, step.getID());
-						}
-					}
-        	});
-        }
+//        Environment environment = tsService.getTestSuiteByStepUID(stepId).getEnvironment();
+//        if(environment != null) {        	
+//        	serverBox.getItems().clear();
+//        	serverBox.getItems().addAll(environment.getServers());
+//        	if(step.getServer() != null) {
+//        		serverBox.setValue(step.getServer());
+//        		serviceBox.getItems().clear();
+//        		serviceBox.getItems().addAll(step.getServer().getServices());
+//        	}
+//        	serverBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Server>() {
+//					public void changed(ObservableValue<? extends Server> ov, Server oldServer, Server newServer) {
+//						if(newServer !=null) {
+//							step.setServer(newServer);
+//							serviceBox.getItems().clear();
+//							serviceBox.getItems().addAll(step.getServer().getServices());
+//							if(step.getService() != null) {
+//								serviceBox.setValue(step.getService());
+//							}
+//							serviceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Service>() {
+//									public void changed(ObservableValue<? extends Service> ov, Service oldServer,Service newServer) {
+//										step.setService(newServer);
+//									}
+//								});
+//							step.setServer(newServer);
+//							tsService.setStepByUID(step, step.getId());
+//						}
+//					}
+//        	});
+//        }
         lblName.setText(step.getName());
         if(step.getAction()!=null){
         	mongoAction.setText(step.getAction().toString());
@@ -174,12 +173,12 @@ public class MongoStepController {
 //		mongo.setExecutionList(step.getExecutionList());
 		mongo.setName(step.getName());
 		mongo.setQuery(step.getQuery());
-		mongo.setServer(step.getServer());
-		mongo.setService(step.getService());
+//		mongo.setServer(step.getServerId());
+		mongo.setServiceId(step.getServiceId());
 		mongo.setVariableList(step.getVariableList());
 		
-		TestProjectService tsService = new TestProjectService();
-		tsService.setStepByUID(mongo, mongo.getID());
+//		TestProjectService tsService = new TestProjectService();
+//		tsService.setStepByUID(mongo, mongo.getId());
 	} 
 }
 	

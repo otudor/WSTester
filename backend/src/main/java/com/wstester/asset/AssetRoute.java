@@ -35,7 +35,7 @@ public class AssetRoute extends RouteBuilder {
 				PollingConsumer consumer = fileEndpoint.createPollingConsumer();
 				consumer.start();
 				
-				log.info(asset.getID(), "Copy asset content");
+				log.info(asset.getId(), "Copy asset content");
 				ProjectProperties properties = new ProjectProperties();
 				Long timeout = properties.getLongProperty("assetCopyTimeout");
 				Exchange fileExchange = consumer.receive(timeout);

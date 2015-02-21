@@ -40,9 +40,10 @@ import com.wstester.model.TestCase;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestSuite;
 import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 import com.wstester.services.definition.ITestRunner;
 import com.wstester.util.MainConstants;
-import com.wstester.util.TestProjectService;
+import com.wstester.variables.StepVariablesController;
 
 public class TestMachineController {
 
@@ -54,19 +55,24 @@ public class TestMachineController {
 	@FXML
 	private Tab responseTab;
 	@FXML
+	private Tab variableTab;
+	@FXML
 	private ResponseController responseController;
+	@FXML
+	private StepVariablesController stepVariablesController;
 	private Boolean hasRun;
+	private IProjectFinder projectFinder;
 	
-	public void initialize() {
+	public void initialize() throws Exception {
 
+		projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
 		hasRun = false;
 		loadTreeItems();
 	}
 	
 	private void loadTreeItems() {
 
-		TestProjectService testProjectService = new TestProjectService();
-		List<TestSuite> testSuiteList = testProjectService.getTestSuites();
+		List<TestSuite> testSuiteList = projectFinder.getTestProject().getTestSuiteList();
 		
 		TreeItem<Object> rootItem = new TreeItem<Object>("treeRoot");
 		rootItem.setExpanded(true);
@@ -85,12 +91,7 @@ public class TestMachineController {
 
 						if (testCase.getStepList() != null) {
 							for (Step step : testCase.getStepList()) {
-								
-								// put the graphic of the treeItem in a HBox
-								HBox hbox = new HBox();
-								hbox.setPadding(new Insets(0, 0, 0, 0));
-								hbox.setSpacing(5);
-								
+																
 								Label lblNodeName = new Label(step == null ? "" : step.toString());
 								Node stepIcon = null;
 								if (step instanceof MySQLStep) {
@@ -106,9 +107,7 @@ public class TestMachineController {
 									stepIcon = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.REST_STEP_ICON.toString())));
 								}
 								// Construct the HBox
-								hbox.getChildren().add(0, stepIcon);
-								hbox.getChildren().add(1, lblNodeName);
-								
+								HBox hbox = getStepHBox(stepIcon, lblNodeName);
 								TreeItem<Object> stepItem = new TreeItem<Object>(step, hbox);
 								testCaseItem.getChildren().add(stepItem);
 							}
@@ -146,7 +145,7 @@ public class TestMachineController {
 		testSuiteController.setTestSuite(testSuiteId);
 		definitionTab.setContent(loader.getRoot());
 		disableResponseTab();
-		
+		disableVariablesTab();
 	}
 
 	private void selectTestCase(String testCaseId) {
@@ -162,6 +161,7 @@ public class TestMachineController {
 
 		testCaseController.setTestCaseId(testCaseId);
 		disableResponseTab();
+		disableVariablesTab();
 		definitionTab.setContent(loader.getRoot());
 	}
 
@@ -170,10 +170,11 @@ public class TestMachineController {
 		// when switching between steps and the response tab is selected
 		if (responseTab.isSelected()) {
 			setResponse();
+		} else if(variableTab.isSelected()) {
+			setVariables();
 		}
 		
-		TestProjectService testProjectService = new TestProjectService();
-		Step step = testProjectService.getStep(stepId);
+		Step step = projectFinder.getStepById(stepId);
 
 		if (step instanceof MongoStep) {
 			setMongoStep(stepId);
@@ -200,6 +201,7 @@ public class TestMachineController {
 		mongoStepController.setStep(stepId);
 		definitionTab.setContent(loader.getRoot());
 		responseTab.setDisable(false);
+		variableTab.setDisable(false);
 	}
 
 	private void setRestStep(String stepId) {
@@ -216,6 +218,7 @@ public class TestMachineController {
 		restStepController.setStep(stepId);
 		definitionTab.setContent(loader.getRoot());
 		responseTab.setDisable(false);
+		variableTab.setDisable(false);
 	}
 
 	private void setMysqlStep(String stepId) {
@@ -232,6 +235,7 @@ public class TestMachineController {
 		mysqlStepController.setStep(stepId);
 		definitionTab.setContent(loader.getRoot());
 		responseTab.setDisable(false);
+		variableTab.setDisable(false);
 	}
 	
 	private void setSoapStep(String stepId) {
@@ -248,6 +252,7 @@ public class TestMachineController {
 		soapStepController.setStep(stepId);
 		definitionTab.setContent(loader.getRoot());
 		responseTab.setDisable(false);
+		variableTab.setDisable(false);
 	}
 	
 	@FXML
@@ -255,8 +260,7 @@ public class TestMachineController {
 
 		TestSuite testSuite = new TestSuite();
 		testSuite.setName("New TestSuite");
-		TestProjectService testProjectService = new TestProjectService();
-		testProjectService.addTestSuite(testSuite);
+		projectFinder.addTestSuite(testSuite);
 
 		Node icon = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.TEST_SUITE_ICON.toString())));
 		TreeItem<Object> node = new TreeItem<Object>(testSuite, icon);
@@ -265,14 +269,13 @@ public class TestMachineController {
 		treeView.getSelectionModel().select(node);
 		treeView.getFocusModel().focusNext();
 		treeView.edit(node);
-		selectTestSuite(testSuite.getID());
+		selectTestSuite(testSuite.getId());
 	}
 	
 	@FXML
 	public void runTests(ActionEvent event){
 		
-    	TestProjectService testProjectService = new TestProjectService();
-    	TestProject testProject = testProjectService.getTestProject();
+    	TestProject testProject = projectFinder.getTestProject();
 		
 		run(testProject);
 		
@@ -292,9 +295,7 @@ public class TestMachineController {
 	
 	private void run(Object toRun) {
 	
-	
-    	TestProjectService testProjectService = new TestProjectService();
-    	TestProject testProject = testProjectService.getTestProject();
+    	TestProject testProject = projectFinder.getTestProject();
     	
 		try {
 			ITestRunner testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class, testProject);
@@ -354,17 +355,17 @@ public class TestMachineController {
 			e.printStackTrace();
 			Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
 		}
-		Response response = testRunner.getResponse(step.getID(), 10000L);
+		Response response = testRunner.getResponse(step.getId(), 10000L);
 
 		// add a image to indicate the result of the step 
 		if (response != null) {
 			ImageView image = null;
 			if (response.getStatus() == ExecutionStatus.PASSED) {
 				image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_PASSED_ICON.toString())));
-				logger.info(step.getID(), "Set passed icon");
+				logger.info(step.getId(), "Set passed icon");
 			} else if (response.getStatus() == ExecutionStatus.ERROR) {
 				image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_ERROR_ICON.toString())));
-				logger.info(step.getID(), "Set failed icon");
+				logger.info(step.getId(), "Set failed icon");
 			}
 			
 			// remove the previous set icon if exists
@@ -390,11 +391,11 @@ public class TestMachineController {
 						if (getItem() != null) {
 							
 							if (getItem() instanceof TestSuite) {
-								selectTestSuite(((TestSuite) getItem()).getID());
+								selectTestSuite(((TestSuite) getItem()).getId());
 							} else if (getItem() instanceof TestCase) {
-								selectTestCase(((TestCase) getItem()).getID());
+								selectTestCase(((TestCase) getItem()).getId());
 							} else if (getItem() instanceof Step) {
-								selectStep(((Step) getItem()).getID());
+								selectStep(((Step) getItem()).getId());
 							}
 						}
 					}
@@ -426,15 +427,15 @@ public class TestMachineController {
 				if (getItem() != null)
 					if (getItem() instanceof TestSuite) {
 						TestSuite testSuite = (TestSuite) getItem();
-						this.setContextMenu(createTestSuiteContextMenu(testSuite.getID()));
+						this.setContextMenu(createTestSuiteContextMenu(testSuite.getId()));
 					} 
 					else if (getItem() instanceof TestCase) {
 						TestCase testCase = (TestCase) getItem();
-						this.setContextMenu(createTestCaseContextMenu(testCase.getID()));
+						this.setContextMenu(createTestCaseContextMenu(testCase.getId()));
 					} 
 					else if (getItem() instanceof Step) {
 						Step step = (Step) getItem();
-						this.setContextMenu(createTestStepContextMenu(step.getID()));
+						this.setContextMenu(createTestStepContextMenu(step.getId()));
 					}
 			}
 		}
@@ -452,20 +453,19 @@ public class TestMachineController {
 					
 					TreeView<Object> treeView = getTreeView();
 					TreeItem<Object> item = (TreeItem<Object>) treeView.getSelectionModel().getSelectedItem();
-					if (item == null){
+					if (item == null) {
 						return;
 					}
 
 					TestCase testCase = new TestCase();
 					testCase.setName("New Test Case");
-					TestProjectService testProjectService = new TestProjectService();
-					testProjectService.addTestCaseForTestSuite(testCase, testSuiteId);
+					projectFinder.addTestCaseForSuite(testCase, testSuiteId);
 
 					Node icon = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.TEST_CASE_ICON.toString())));
 					TreeItem<Object> tcNode = new TreeItem<>(testCase, icon);
 					item.getChildren().add(tcNode);
 					treeView.getSelectionModel().select(tcNode);
-					selectTestCase(testCase.getID());
+					selectTestCase(testCase.getId());
 				}
 			});
 
@@ -475,11 +475,11 @@ public class TestMachineController {
 					
 					TreeView<Object> treeView = getTreeView();
 					TreeItem<Object> selectedItem = (TreeItem<Object>) treeView.getSelectionModel().getSelectedItem();
-					if (selectedItem == null)
+					if (selectedItem == null) {
 						return;
+					}
 
-					TestProjectService testProjectService = new TestProjectService();
-					testProjectService.removeTestSuite(testSuiteId);
+					projectFinder.removeTestSuiteById(testSuiteId);
 					
 					selectedItem.getParent().getChildren().remove(selectedItem);
 					definitionTab.setContent(null);
@@ -503,8 +503,8 @@ public class TestMachineController {
 					if (selectedItem == null) {
 						return;
 					}
-					TestProjectService testProjectService = new TestProjectService();
-					testProjectService.removeTestStep(stepId);
+					
+					projectFinder.removeStepById(stepId);
 					
 					selectedItem.getParent().getChildren().remove(selectedItem);
 					definitionTab.setContent(null);
@@ -528,11 +528,11 @@ public class TestMachineController {
 				public void handle(ActionEvent event) {
 					TreeView<Object> treeView = getTreeView();
 					TreeItem<Object> selectedItem = (TreeItem<Object>) treeView.getSelectionModel().getSelectedItem();
-					if (selectedItem == null)
+					if (selectedItem == null) {
 						return;
+					}
 
-					TestProjectService testProjectService = new TestProjectService();
-					testProjectService.removeTestCase(testCaseId);
+					projectFinder.removeTestCaseById(testCaseId);
 					selectedItem.getParent().getChildren().remove(selectedItem);
 
 					definitionTab.setContent(null);
@@ -551,14 +551,17 @@ public class TestMachineController {
 
 					MySQLStep mySQLStep = new MySQLStep();
 					mySQLStep.setName("New MySQL Step");
-					TestProjectService testProjectService = new TestProjectService();
-					testProjectService.addStepForTestCase(mySQLStep, testCaseId);
+					projectFinder.addStepForTestCase(mySQLStep, testCaseId);
 
 					Node icon = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.MYSQL_STEP_ICON.toString())));
-					TreeItem<Object> stepNode = new TreeItem<>(mySQLStep, icon);
+					Label label = new Label(mySQLStep.getName());
+					HBox hbox = getStepHBox(icon, label);
+					
+					TreeItem<Object> stepNode = new TreeItem<Object>(mySQLStep, hbox);
 					item.getChildren().add(stepNode);
 					treeView.getSelectionModel().select(stepNode);
-					selectStep(mySQLStep.getID());
+					selectStep(mySQLStep.getId());
+					
 				}
 			});
 
@@ -567,19 +570,22 @@ public class TestMachineController {
 				public void handle(ActionEvent event) {
 					TreeView<Object> treeView = getTreeView();
 					TreeItem<Object> item = (TreeItem<Object>) treeView.getSelectionModel().getSelectedItem();
-					if (item == null)
+					if (item == null) {
 						return;
+					}
 
 					MongoStep mongoStep = new MongoStep();
 					mongoStep.setName("New Mongo Step");
-					TestProjectService testProjectService = new TestProjectService();
-					testProjectService.addStepForTestCase(mongoStep, testCaseId);
+					projectFinder.addStepForTestCase(mongoStep, testCaseId);
 
 					Node icon = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.MONGO_STEP_ICON.toString())));
-					TreeItem<Object> stepNode = new TreeItem<>(mongoStep, icon);
+					Label label = new Label(mongoStep.getName());
+					HBox hbox = getStepHBox(icon, label);
+					
+					TreeItem<Object> stepNode = new TreeItem<>(mongoStep, hbox);
 					item.getChildren().add(stepNode);
 					treeView.getSelectionModel().select(stepNode);
-					selectStep(mongoStep.getID());
+					selectStep(mongoStep.getId());
 
 				}
 			});
@@ -588,19 +594,22 @@ public class TestMachineController {
 				public void handle(ActionEvent event) {
 					TreeView<Object> treeView = getTreeView();
 					TreeItem<Object> item = (TreeItem<Object>) treeView.getSelectionModel().getSelectedItem();
-					if (item == null)
+					if (item == null) {
 						return;
+					}
 
 					SoapStep soapStep = new SoapStep();
 					soapStep.setName("New Soap Step");
-					TestProjectService testProjectService = new TestProjectService();
-					testProjectService.addStepForTestCase(soapStep, testCaseId);
+					projectFinder.addStepForTestCase(soapStep, testCaseId);
 
 					Node icon = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.SOAP_STEP_ICON.toString())));
-					TreeItem<Object> stepNode = new TreeItem<>(soapStep, icon);
+					Label label = new Label(soapStep.getName());
+					HBox hbox = getStepHBox(icon, label);
+					
+					TreeItem<Object> stepNode = new TreeItem<>(soapStep, hbox);
 					item.getChildren().add(stepNode);
 					treeView.getSelectionModel().select(stepNode);
-					selectStep(soapStep.getID());
+					selectStep(soapStep.getId());
 				}
 			});
 
@@ -616,14 +625,16 @@ public class TestMachineController {
 
 					RestStep restStep = new RestStep();
 					restStep.setName("New Rest Step");
-					TestProjectService testProjectService = new TestProjectService();
-					testProjectService.addStepForTestCase(restStep, testCaseId);
+					projectFinder.addStepForTestCase(restStep, testCaseId);
 
 					Node icon = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.REST_STEP_ICON.toString())));
-					TreeItem<Object> stepNode = new TreeItem<>(restStep, icon);
+					Label label = new Label(restStep.getName());
+					HBox hbox = getStepHBox(icon, label);
+					
+					TreeItem<Object> stepNode = new TreeItem<>(restStep, hbox);
 					item.getChildren().add(stepNode);
 					treeView.getSelectionModel().select(stepNode);
-					selectStep(restStep.getID());
+					selectStep(restStep.getId());
 				}
 			});
 
@@ -631,17 +642,38 @@ public class TestMachineController {
 		}
 	}
 	
-	@FXML
-	public void setResponse(){
+	protected HBox getStepHBox(Node icon, Label label) {
 		
-		if (responseTab.isSelected() && hasRun) {
+		HBox hbox = new HBox();
+		hbox.setPadding(new Insets(0, 0, 0, 0));
+		hbox.setSpacing(5);
+		hbox.getChildren().add(0, icon);
+		hbox.getChildren().add(1, label);
+		return hbox;
+	}
+	
+	@FXML
+	public void setResponse() {
+		if(responseTab.isSelected() && hasRun) {
 			responseController.setResponse((Step) treeView.getSelectionModel().getSelectedItem().getValue());
 		}
 	}
 	
+	@FXML
+	public void setVariables() {
+		if(variableTab.isSelected()) {
+			String stepId = ((Step) treeView.getSelectionModel().getSelectedItem().getValue()).getId();
+			stepVariablesController.setVariables(stepId);
+		}
+	}
+	
 	private void disableResponseTab() {
-		
 		definitionTab.getTabPane().getSelectionModel().select(definitionTab);
 		responseTab.setDisable(true);
+	}
+	
+	private void disableVariablesTab() {
+		definitionTab.getTabPane().getSelectionModel().select(definitionTab);
+		variableTab.setDisable(true);
 	}
 }

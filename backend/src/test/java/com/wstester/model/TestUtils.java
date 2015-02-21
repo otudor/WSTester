@@ -158,8 +158,8 @@ public class TestUtils {
 		List<Step> stepList1 = new ArrayList<Step>();
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
-		restStep.setServer(server11);
-		restStep.setService(restService);
+		restStep.setServerId(server11.getId());
+		restStep.setServiceId(restService.getId());
 		List<Assert> assertList = new ArrayList<Assert>();
 		Assert oneAssert = new Assert();
 		oneAssert.setExpected("All customers");
@@ -171,31 +171,30 @@ public class TestUtils {
 		// test 2
 		MongoStep step2 = new MongoStep();
 		step2.setName("Step 2");
-		step2.setServer(server12);
-		step2.setService(mongoService);
+		step2.setServerId(server12.getId());
+		step2.setServiceId(mongoService.getId());
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		query.put("name", "HAC");
 		step2.setAction(Action.SELECT);
 		step2.setCollection(collection);
 		step2.setQuery(query);
-		step2.setDependsOn(restStep.getID());
-		step2.setVariableList(variableList);
+		step2.setDependsOn(restStep.getId());
 		stepList1.add(step2);
 		
 		// test 3
 		List<Step> stepList2 = new ArrayList<Step>();
 		MySQLStep step3 = new MySQLStep();
 		step3.setName("Step 3");
-		step3.setServer(server21);
-		step3.setService(mysqlService);
+		step3.setServerId(server21.getId());
+		step3.setServiceId(mysqlService.getId());
 		step3.setOperation("SELECT * FROM angajati");
 		stepList2.add(step3);
 		// test 4
 		SoapStep step4 = new SoapStep();
 		step4.setName("Step 4");
-		step4.setServer(server22);
-		step4.setService(soapService);
+		step4.setServerId(server22.getId());
+		step4.setServiceId(soapService.getId());
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
 		stepList2.add(step4);
@@ -219,12 +218,12 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 		TestSuite testSuite2 = new TestSuite();
 		testSuite2.setName("Test Suite 2");
-		testSuite2.setEnvironment(env2);
+		testSuite2.setEnvironmentId(env2.getId());
 		testSuite2.setTestCaseList(testCaseList2);
 		testSuiteList.add(testSuite2);
 		
@@ -250,6 +249,16 @@ public class TestUtils {
 		assetList.add(asset4);
 		testPlan.setAssetList(assetList);
 
+		// construct the variable list
+		List<Variable> variableList = new ArrayList<Variable>();
+		Variable variable2 = new Variable();
+		variable2.setName("name");
+		variable2.setType(VariableType.STRING);
+		variable2.setSelector("response:");
+		variable2.setContent("Millhouse");
+		variableList.add(variable2);
+		testPlan.setVariableList(variableList);
+		
 		// construct service list
 		// Service 1
 		List<Service> serviceList1 = new ArrayList<Service>();
@@ -282,10 +291,11 @@ public class TestUtils {
 		List<Step> stepList1 = new ArrayList<Step>();
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
-		restStep.setServer(server11);
-		restStep.setService(restService);
+		restStep.setServerId(server11.getId());
+		restStep.setServiceId(restService.getId());
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
+		restStep.addVariable(variable2.getId());
 		stepList1.add(restStep);
 		
 		// construct test case list
@@ -300,7 +310,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 	
@@ -314,18 +324,16 @@ public class TestUtils {
 		TestProject testProject = new TestProject();
 		testProject.setName("Test Project");
 		
-		// construct asset list
-		List<Asset> assetList = new ArrayList<Asset>();
-		Asset asset1 = new Asset();
-		Asset asset2 = new Asset();
-		Asset asset3 = new Asset();
-		Asset asset4 = new Asset();
-		assetList.add(asset1);
-		assetList.add(asset2);
-		assetList.add(asset3);
-		assetList.add(asset4);
-		testProject.setAssetList(assetList);
-
+		// construct the variable list
+		List<Variable> variableList = new ArrayList<Variable>();
+		Variable variable = new Variable();
+		variable.setName("name");
+		variable.setType(VariableType.STRING);
+		variable.setSelector("response:$.[0].name");
+		variable.setContent("HAC");
+		variableList.add(variable);
+		testProject.setVariableList(variableList);
+		
 		// construct service list		
 		// Service 2
 		List<Service> serviceList2 = new ArrayList<Service>();
@@ -363,14 +371,15 @@ public class TestUtils {
 		// test 2
 		MongoStep step2 = new MongoStep();
 		step2.setName("Step 2");
-		step2.setServer(server12);
-		step2.setService(service2);
+		step2.setServerId(server12.getId());
+		step2.setServiceId(service2.getId());
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		query.put("name", "HAC");
 		step2.setAction(Action.SELECT);
 		step2.setCollection(collection);
 		step2.setQuery(query);
+		step2.addVariable(variable.getId());
 		stepList1.add(step2);
 		
 		// construct test case list
@@ -385,7 +394,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 		
@@ -448,8 +457,8 @@ public class TestUtils {
 		// select before
 		MongoStep step1 = new MongoStep();
 		step1.setName("Step 1");
-		step1.setServer(server12);
-		step1.setService(service2);
+		step1.setServerId(server12.getId());
+		step1.setServiceId(service2.getId());
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		String name = "Ana";
@@ -463,8 +472,8 @@ public class TestUtils {
 		// insert
 		MongoStep step2 = new MongoStep();
 		step2.setName("Step 2");
-		step2.setServer(server12);
-		step2.setService(service2);
+		step2.setServerId(server12.getId());
+		step2.setServiceId(service2.getId());
 		HashMap<String, String> insertQuery = new HashMap<String, String>();
 		String id = "100";
 		String keyId = "id";
@@ -473,18 +482,18 @@ public class TestUtils {
 		step2.setAction(Action.INSERT);
 		step2.setCollection(collection);
 		step2.setQuery(insertQuery);
-		step2.setDependsOn(step1.getID());
+		step2.setDependsOn(step1.getId());
 		stepList1.add(step2);
 		
 		// select after
 		MongoStep step3 = new MongoStep();
 		step3.setName("Step 3");
-		step3.setServer(server12);
-		step3.setService(service2);
+		step3.setServerId(server12.getId());
+		step3.setServiceId(service2.getId());
 		step3.setAction(Action.SELECT);
 		step3.setCollection(collection);
 		step3.setQuery(query);
-		step3.setDependsOn(step2.getID());
+		step3.setDependsOn(step2.getId());
 		stepList1.add(step3);
 		
 		// construct test case list
@@ -499,7 +508,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 
@@ -513,21 +522,14 @@ public class TestUtils {
 		TestProject testProject = new TestProject();
 		testProject.setName("Test Project");
 		
-		// construct asset list
-		List<Asset> assetList = new ArrayList<Asset>();
-		Asset asset1 = new Asset();
-		Asset asset2 = new Asset();
-		Asset asset3 = new Asset();
-		Asset asset4 = new Asset();
-		assetList.add(asset1);
-		assetList.add(asset2);
-		assetList.add(asset3);
-		assetList.add(asset4);
-		testProject.setAssetList(assetList);
-
+		// variables
+		Variable variable = new Variable("response:$.[0].detalii", "name");
+		variable.setContent("popescu");
+		List<Variable> variableList = new ArrayList<Variable>();
+		variableList.add(variable);
+		testProject.setVariableList(variableList);
+		
 		// construct service list
-		
-		
 		// Service 4
 		List<Service> serviceList4 = new ArrayList<Service>();
 		MySQLService service4 = new MySQLService();
@@ -539,8 +541,6 @@ public class TestUtils {
 		serviceList4.add(service4);
 		
 		// construct server list
-		
-
 		// Server 3
 		List<Server> serverList2 = new ArrayList<Server>();
 		Server server21 = new Server();
@@ -566,8 +566,9 @@ public class TestUtils {
 		List<Step> stepList2 = new ArrayList<Step>();
 		MySQLStep step3 = new MySQLStep();
 		step3.setName("Step 3");
-		step3.setServer(server21);
-		step3.setService(service4);
+		step3.setServerId(server21.getId());
+		step3.setServiceId(service4.getId());
+		step3.addVariable(variable.getId());
 		stepList2.add(step3);
 		
 		
@@ -584,7 +585,7 @@ public class TestUtils {
 
 		TestSuite testSuite2 = new TestSuite();
 		testSuite2.setName("Test Suite 2");
-		testSuite2.setEnvironment(env2);
+		testSuite2.setEnvironmentId(env2.getId());
 		testSuite2.setTestCaseList(testCaseList2);
 		testSuiteList.add(testSuite2);
 		
@@ -611,7 +612,10 @@ public class TestUtils {
 		testProject.setAssetList(assetList);
 		
 		// set the variable list
-		Variable variable = new Variable("projectVar", VariableType.STRING, "selector");
+		Variable variable = new Variable();
+		variable.setName("name");
+		variable.setType(VariableType.STRING);
+		variable.setSelector("response://string[1]");
 		List<Variable> projectVariableList = new ArrayList<Variable>();
 		projectVariableList.add(variable);
 		testProject.setVariableList(projectVariableList );
@@ -661,14 +665,11 @@ public class TestUtils {
 		// test 4
 		SoapStep step4 = new SoapStep();
 		step4.setName("Step 4");
-		step4.setServer(server22);
-		step4.setService(service3);
+		step4.setServerId(server22.getId());
+		step4.setServiceId(service3.getId());
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
-		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
-		List<Variable> stepVariableList = new ArrayList<Variable>();
-		stepVariableList.add(stepVariable);
-		step4.addVariableList(stepVariableList);
+		step4.addVariable(variable.getId());
 		stepList2.add(step4);
 		
 		// construct test case list
@@ -677,20 +678,14 @@ public class TestUtils {
 		TestCase testCase2 = new TestCase();
 		testCase2.setName("TC 1");
 		testCase2.setStepList(stepList2);
-		Variable caseVariable = new Variable("caseVar", VariableType.STRING, "selector");
-		testCase2.addVariable(caseVariable );
 		testCaseList2.add(testCase2);
 		
 		// construct test suite list
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite2 = new TestSuite();
 		testSuite2.setName("Test Suite 2");
-		testSuite2.setEnvironment(env2);
+		testSuite2.setEnvironmentId(env2.getId());
 		testSuite2.setTestCaseList(testCaseList2);
-		Variable suiteVariable = new Variable("suiteVar", VariableType.INTEGER, "content");
-		List<Variable> suiteVariableList = new ArrayList<Variable>();
-		suiteVariableList.add(suiteVariable);
-		testSuite2.setVariableList(suiteVariableList);
 		testSuiteList.add(testSuite2);
 		
 		testProject.setTestSuiteList(testSuiteList);
@@ -698,6 +693,93 @@ public class TestUtils {
 		return testProject;
 	}
 
+	public static TestProject getSOAPwithVariabelsTestProject() throws IOException{
+		
+		TestProject testProject = new TestProject();
+		testProject.setName("Test Project");
+		
+		// set the variable list
+		Variable variable = new Variable();
+		variable.setName("name");
+		variable.setType(VariableType.STRING);
+		variable.setContent("Brazil");
+		List<Variable> projectVariableList = new ArrayList<Variable>();
+		projectVariableList.add(variable);
+		testProject.setVariableList(projectVariableList );
+
+		// construct service list
+		
+		// Service 3
+		List<Service> serviceList3 = new ArrayList<Service>();
+		SoapService service3 = new SoapService();
+		List<Authentication> authenticationList = new ArrayList<Authentication>();  
+		Authentication auth = new Authentication();
+		auth.setUsername("test");
+		auth.setPassword("test");
+		auth.setRole("test");
+		authenticationList.add(auth);
+		service3.setName("Service SOAP");
+		service3.setPort("80");
+		service3.setPath("/data/info.wso");
+		service3.setWsdlURL("http://footballpool.dataaccess.eu/data/info.wso?wsdl");
+		service3.setAuthenticationList(authenticationList);
+		serviceList3.add(service3);
+		
+		// construct server list
+		List<Server> serverList2 = new ArrayList<Server>();
+
+		// Server 4
+		Server server22 = new Server();
+		server22.setDescription("This is the second server of the second env");
+		server22.setIp("http://footballpool.dataaccess.eu");
+		server22.setName("Server 22");
+		server22.setServices(serviceList3);
+		serverList2.add(server22);
+		
+		// construct environment list
+		List<Environment> environmentList = new ArrayList<Environment>();
+
+		// Environment 2
+		Environment env2 = new Environment();
+		env2.setName("Env 2");
+		env2.setServers(serverList2);
+		environmentList.add(env2);
+		testProject.setEnvironmentList(environmentList);
+
+		// construct test steps
+		List<Step> stepList2 = new ArrayList<Step>();
+
+		// test 4
+		SoapStep step4 = new SoapStep();
+		step4.setName("Step 4");
+		step4.setServerId(server22.getId());
+		step4.setServiceId(service3.getId());
+		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequestWithVariable.xml")));
+		step4.setRequest(request);
+		step4.addVariable(variable.getId());
+		stepList2.add(step4);
+		
+		// construct test case list
+		// test case 2		
+		List<TestCase> testCaseList2 = new ArrayList<TestCase>();
+		TestCase testCase2 = new TestCase();
+		testCase2.setName("TC 1");
+		testCase2.setStepList(stepList2);
+		testCaseList2.add(testCase2);
+		
+		// construct test suite list
+		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
+		TestSuite testSuite2 = new TestSuite();
+		testSuite2.setName("Test Suite 2");
+		testSuite2.setEnvironmentId(env2.getId());
+		testSuite2.setTestCaseList(testCaseList2);
+		testSuiteList.add(testSuite2);
+		
+		testProject.setTestSuiteList(testSuiteList);
+	
+		return testProject;
+	}
+	
 	public static TestProject getDependantStepsPlan() {
 		
 		TestProject testProject = new TestProject();
@@ -753,23 +835,23 @@ public class TestUtils {
 		List<Step> stepList1 = new ArrayList<Step>();
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
-		restStep.setServer(server11);
-		restStep.setService(restService);
+		restStep.setServerId(server11.getId());
+		restStep.setServiceId(restService.getId());
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
 		stepList1.add(restStep);
 		// test 2
 		MongoStep mongoStep = new MongoStep();
 		mongoStep.setName("Step 2");
-		mongoStep.setServer(server12);
-		mongoStep.setService(service2);
+		mongoStep.setServerId(server12.getId());
+		mongoStep.setServiceId(service2.getId());
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		query.put("name", "HAC");
 		mongoStep.setAction(Action.SELECT);
 		mongoStep.setCollection(collection);
 		mongoStep.setQuery(query);
-		mongoStep.setDependsOn(restStep.getID());
+		mongoStep.setDependsOn(restStep.getId());
 		stepList1.add(mongoStep);
 		
 		// construct test case list
@@ -784,7 +866,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 		
@@ -848,29 +930,29 @@ public class TestUtils {
 		List<Step> stepList1 = new ArrayList<Step>();
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
-		restStep.setServer(server11);
-		restStep.setService(restService);
+		restStep.setServerId(server11.getId());
+		restStep.setServiceId(restService.getId());
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
 		stepList1.add(restStep);
 		// test 2
 		MongoStep mongoStep = new MongoStep();
 		mongoStep.setName("Step 2");
-		mongoStep.setServer(server12);
-		mongoStep.setService(service2);
+		mongoStep.setServerId(server12.getId());
+		mongoStep.setServiceId(service2.getId());
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		query.put("name", "HAC");
 		mongoStep.setAction(Action.SELECT);
 		mongoStep.setCollection(collection);
 		mongoStep.setQuery(query);
-		mongoStep.setDependsOn(restStep.getID());
+		mongoStep.setDependsOn(restStep.getId());
 		stepList1.add(mongoStep);
 		//test3
 		MongoStep mongoStep2 = new MongoStep();
 		mongoStep2.setName("Mongo Step 2");
-		mongoStep2.setServer(server12);
-		mongoStep2.setService(service2);
+		mongoStep2.setServerId(server12.getId());
+		mongoStep2.setServiceId(service2.getId());
 		mongoStep2.setCollection(collection);
 		mongoStep2.setAction(Action.SELECT);
 		mongoStep2.setQuery(query);
@@ -888,7 +970,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 		
@@ -896,104 +978,7 @@ public class TestUtils {
 		
 		return testProject;
 	}
-	public static TestProject variableTestPlan() throws IOException{
-		
-		TestProject testProject = new TestProject();
-		testProject.setName("Test Project");
-		
-		// construct asset list
-		List<Asset> assetList = new ArrayList<Asset>();
-		Asset asset1 = new Asset();
-		Asset asset2 = new Asset();
-		Asset asset3 = new Asset();
-		Asset asset4 = new Asset();
-		assetList.add(asset1);
-		assetList.add(asset2);
-		assetList.add(asset3);
-		assetList.add(asset4);
-		testProject.setAssetList(assetList);
-		
-		// set the variable list
-		Variable variable = new Variable("projectVar", VariableType.STRING, "selector");
-		List<Variable> projectVariableList = new ArrayList<Variable>();
-		projectVariableList.add(variable);
-		testProject.setVariableList(projectVariableList );
 
-		// construct service list
-		
-		// Service 3
-		List<Service> serviceList3 = new ArrayList<Service>();
-		SoapService service3 = new SoapService();
-		service3.setName("Service SOAP");
-		service3.setPort("80");
-		service3.setPath("/data/info.wso");
-		service3.setWsdlURL("http://footballpool.dataaccess.eu/data/info.wso?wsdl");
-		serviceList3.add(service3);
-		
-		// construct server list
-		List<Server> serverList2 = new ArrayList<Server>();
-
-		// Server 4
-		Server server22 = new Server();
-		server22.setDescription("This is the second server of the second env");
-		server22.setIp("http://footballpool.dataaccess.eu");
-		server22.setName("Server 22");
-		server22.setServices(serviceList3);
-		serverList2.add(server22);
-		
-		// construct environment list
-		List<Environment> environmentList = new ArrayList<Environment>();
-
-		// Environment 2
-		Environment env2 = new Environment();
-		env2.setName("Env 2");
-		env2.setServers(serverList2);
-		environmentList.add(env2);
-		testProject.setEnvironmentList(environmentList);
-
-		// construct test steps
-		List<Step> stepList2 = new ArrayList<Step>();
-
-		// test 4
-		SoapStep step4 = new SoapStep();
-		step4.setName("Step 4");
-		step4.setServer(server22);
-		step4.setService(service3);
-		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
-		step4.setRequest(request);
-		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
-		List<Variable> stepVariableList = new ArrayList<Variable>();
-		stepVariableList.add(stepVariable);
-		step4.addVariableList(stepVariableList);
-		stepList2.add(step4);
-		
-		// construct test case list
-		// test case 2		
-		List<TestCase> testCaseList2 = new ArrayList<TestCase>();
-		TestCase testCase2 = new TestCase();
-		testCase2.setName("TC 1");
-		testCase2.setStepList(stepList2);
-		Variable caseVariable = new Variable("caseVar", VariableType.STRING, "selector");
-		testCase2.addVariable(caseVariable );
-		testCaseList2.add(testCase2);
-		
-		// construct test suite list
-		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
-		TestSuite testSuite2 = new TestSuite();
-		testSuite2.setName("Test Suite 2");
-		testSuite2.setEnvironment(env2);
-		testSuite2.setTestCaseList(testCaseList2);
-		Variable suiteVariable = new Variable("suiteVar", VariableType.INTEGER, "content");
-		List<Variable> suiteVariableList = new ArrayList<Variable>();
-		suiteVariableList.add(suiteVariable);
-		testSuite2.setVariableList(suiteVariableList);
-		testSuiteList.add(testSuite2);
-		
-		testProject.setTestSuiteList(testSuiteList);
-	
-		return testProject;
-	}
-	
 	public static TestProject getMockedRestProject() {
 		
 		TestProject testPlan = new TestProject();
@@ -1051,8 +1036,8 @@ public class TestUtils {
 		List<Step> stepList1 = new ArrayList<Step>();
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
-		restStep.setServer(server11);
-		restStep.setService(restService);
+		restStep.setServerId(server11.getId());
+		restStep.setServiceId(restService.getId());
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
 		stepList1.add(restStep);
@@ -1069,7 +1054,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 	
@@ -1154,22 +1139,18 @@ public class TestUtils {
 		List<Step> stepList1 = new ArrayList<Step>();
 		RestStep restStep = new RestStep();
 		restStep.setName("Step 1");
-		restStep.setServer(server11);
-		restStep.setService(restService);
+		restStep.setServerId(server11.getId());
+		restStep.setServiceId(restService.getId());
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
 		stepList1.add(restStep);
 		// test 4
 		SoapStep step4 = new SoapStep();
 		step4.setName("Step 4");
-		step4.setServer(server22);
-		step4.setService(service3);
+		step4.setServerId(server22.getId());
+		step4.setServiceId(service3.getId());
 		String request = new String(Files.readAllBytes(Paths.get("src/test/resources/SOAPRequest.xml")));
 		step4.setRequest(request);
-		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
-		List<Variable> stepVariableList = new ArrayList<Variable>();
-		stepVariableList.add(stepVariable);
-		step4.addVariableList(stepVariableList);
 		stepList1.add(step4);
 		
 		// construct test case list
@@ -1184,7 +1165,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 	
@@ -1257,14 +1238,9 @@ public class TestUtils {
 		// test 4
 		SoapStep step4 = new SoapStep();
 		step4.setName("Step 4");
-		step4.setServer(server22);
-		step4.setService(service3);
+		step4.setServerId(server22.getId());
+		step4.setServiceId(service3.getId());
 		step4.setAssetMap(assetMap);
-		
-		Variable stepVariable = new Variable("stepVar", VariableType.STRING, "selector");
-		List<Variable> stepVariableList = new ArrayList<Variable>();
-		stepVariableList.add(stepVariable);
-		step4.addVariableList(stepVariableList);
 		stepList2.add(step4);
 		
 		// construct test case list
@@ -1273,20 +1249,14 @@ public class TestUtils {
 		TestCase testCase2 = new TestCase();
 		testCase2.setName("TC 1");
 		testCase2.setStepList(stepList2);
-		Variable caseVariable = new Variable("caseVar", VariableType.STRING, "selector");
-		testCase2.addVariable(caseVariable );
 		testCaseList2.add(testCase2);
 		
 		// construct test suite list
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite2 = new TestSuite();
 		testSuite2.setName("Test Suite 2");
-		testSuite2.setEnvironment(env2);
+		testSuite2.setEnvironmentId(env2.getId());
 		testSuite2.setTestCaseList(testCaseList2);
-		Variable suiteVariable = new Variable("suiteVar", VariableType.INTEGER, "content");
-		List<Variable> suiteVariableList = new ArrayList<Variable>();
-		suiteVariableList.add(suiteVariable);
-		testSuite2.setVariableList(suiteVariableList);
 		testSuiteList.add(testSuite2);
 		
 		testProject.setTestSuiteList(testSuiteList);
@@ -1337,8 +1307,8 @@ public class TestUtils {
 		// test 2
 		MongoStep step2 = new MongoStep();
 		step2.setName("Step 2");
-		step2.setServer(server12);
-		step2.setService(service2);
+		step2.setServerId(server12.getId());
+		step2.setServiceId(service2.getId());
 		String collection = "customer";
 		HashMap<String, String> query = new HashMap<String, String>();
 		query.put("name", "HAC");
@@ -1359,7 +1329,7 @@ public class TestUtils {
 		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
 		TestSuite testSuite1 = new TestSuite();
 		testSuite1.setName("Test Suite 1");
-		testSuite1.setEnvironment(env1);
+		testSuite1.setEnvironmentId(env1.getId());
 		testSuite1.setTestCaseList(testCaseList1);
 		testSuiteList.add(testSuite1);
 		
@@ -1417,8 +1387,8 @@ public class TestUtils {
 		List<Step> stepList2 = new ArrayList<Step>();
 		MySQLStep step3 = new MySQLStep();
 		step3.setName("Step 3");
-		step3.setServer(server21);
-		step3.setService(mysqlService);
+		step3.setServerId(server21.getId());
+		step3.setServiceId(mysqlService.getId());
 		stepList2.add(step3);
 		
 		
@@ -1435,7 +1405,7 @@ public class TestUtils {
 
 		TestSuite testSuite2 = new TestSuite();
 		testSuite2.setName("Test Suite 2");
-		testSuite2.setEnvironment(env2);
+		testSuite2.setEnvironmentId(env2.getId());
 		testSuite2.setTestCaseList(testCaseList2);
 		testSuiteList.add(testSuite2);
 		
@@ -1485,8 +1455,8 @@ public class TestUtils {
 		List<Step> stepList = new ArrayList<Step>();
 		MySQLStep mysqlStep = new MySQLStep();
 		mysqlStep.setName("Step");
-		mysqlStep.setServer(server);
-		mysqlStep.setService(mysqlService);
+		mysqlStep.setServerId(server.getId());
+		mysqlStep.setServiceId(mysqlService.getId());
 		mysqlStep.setOperation("SELECT detalii from angajati where detalii = 'popescu'");
 		Assert azzert = new Assert();
 		azzert.setExpected("[{detalii=popescu}]");
@@ -1509,7 +1479,7 @@ public class TestUtils {
 
 		TestSuite testSuite2 = new TestSuite();
 		testSuite2.setName("Test Suite 2");
-		testSuite2.setEnvironment(env);
+		testSuite2.setEnvironmentId(env.getId());
 		testSuite2.setTestCaseList(testCaseList2);
 		testSuiteList.add(testSuite2);
 		

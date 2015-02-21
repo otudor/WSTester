@@ -91,7 +91,7 @@ public class EnvironmentSearchPresenter implements Initializable {
 	}
 
 	public String getFirstEnv() {
-		return environmentService.getFirstEnv().getID();
+		return environmentService.getFirstEnv().getId();
 	}
 
 	public void loadTreeItems() {
@@ -180,25 +180,25 @@ public class EnvironmentSearchPresenter implements Initializable {
 						if (getItem() != null) {
 							if (getItem().getClass() == Environment.class) {
 								selectEnvironment(((Environment) getItem())
-										.getID());
+										.getId());
 							} else if (getItem().getClass() == Server.class) {
-								selectServer(((Server) getItem()).getID());
+								selectServer(((Server) getItem()).getId());
 							} else if (getItem().getClass() == MongoService.class) {
 								selectMongoService(((Server) getTreeItem()
-										.getParent().getValue()).getID(),
-										((MongoService) getItem()).getID());
+										.getParent().getValue()).getId(),
+										((MongoService) getItem()).getId());
 							} else if (getItem().getClass() == MySQLService.class) {
 								selectMySQLService(((Server) getTreeItem()
-										.getParent().getValue()).getID(),
-										((MySQLService) getItem()).getID());
+										.getParent().getValue()).getId(),
+										((MySQLService) getItem()).getId());
 							} else if (getItem().getClass() == SoapService.class) {
 								selectSoapService(((Server) getTreeItem()
-										.getParent().getValue()).getID(),
-										((SoapService) getItem()).getID());
+										.getParent().getValue()).getId(),
+										((SoapService) getItem()).getId());
 							} else if (getItem().getClass() == RestService.class) {
 								selectRestService(((Server) getTreeItem()
-										.getParent().getValue()).getID(),
-										((RestService) getItem()).getID());
+										.getParent().getValue()).getId(),
+										((RestService) getItem()).getId());
 							}
 						}
 					}
@@ -300,7 +300,7 @@ public class EnvironmentSearchPresenter implements Initializable {
 					return;
 
 				Environment e = (Environment) (item.getValue());
-				Server server = environmentService.addServerForEnv(e.getID());
+				Server server = environmentService.addServerForEnv(e.getId());
 				if (server != null) {
 					Node icon = new ImageView(
 							new Image(getClass().getResourceAsStream(
@@ -309,7 +309,7 @@ public class EnvironmentSearchPresenter implements Initializable {
 					item.getChildren().add(serverNode);
 					treeView.getSelectionModel().select(serverNode);
 					// show details in right pane
-					selectServer(server.getID());
+					selectServer(server.getId());
 				}
 				// treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
 			}
@@ -363,7 +363,7 @@ public class EnvironmentSearchPresenter implements Initializable {
 
 				Server s = (Server) (item.getValue());
 				Service service = environmentService.addMySQLServiceforServ(s
-						.getID());
+						.getId());
 
 				if (service != null) {
 					Node icon = new ImageView(new Image(getClass()
@@ -373,7 +373,7 @@ public class EnvironmentSearchPresenter implements Initializable {
 					item.getChildren().add(serviceNode);
 					treeView.getSelectionModel().select(serviceNode);
 					// show details in right pane
-					selectMySQLService(s.getID(), service.getID());
+					selectMySQLService(s.getId(), service.getId());
 				}
 				// treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
 			}
@@ -388,7 +388,7 @@ public class EnvironmentSearchPresenter implements Initializable {
 
 				Server s = (Server) (item.getValue());
 				Service service = environmentService.addMongoServiceforServ(s
-						.getID());
+						.getId());
 
 				if (service != null) {
 					Node icon = new ImageView(new Image(getClass()
@@ -397,7 +397,7 @@ public class EnvironmentSearchPresenter implements Initializable {
 					TreeItem<Object> serviceNode = new TreeItem<>(service, icon);
 					item.getChildren().add(serviceNode);
 					treeView.getSelectionModel().select(serviceNode);
-					selectMongoService(s.getID(), service.getID());
+					selectMongoService(s.getId(), service.getId());
 				}
 				// treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
 			}
@@ -412,7 +412,7 @@ public class EnvironmentSearchPresenter implements Initializable {
 
 				Server s = (Server) (item.getValue());
 				Service service = environmentService.addSoapServiceforServ(s
-						.getID());
+						.getId());
 
 				if (service != null) {
 					Node icon = new ImageView(new Image(getClass()
@@ -422,7 +422,7 @@ public class EnvironmentSearchPresenter implements Initializable {
 					item.getChildren().add(serviceNode);
 					treeView.getSelectionModel().select(serviceNode);
 					// show details in right pane
-					selectSoapService(s.getID(), service.getID());
+					selectSoapService(s.getId(), service.getId());
 				}
 				// treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
 			}
@@ -437,7 +437,7 @@ public class EnvironmentSearchPresenter implements Initializable {
 
 				Server s = (Server) (item.getValue());
 				Service service = environmentService.addRestServiceforServ(s
-						.getID());
+						.getId());
 
 				if (service != null) {
 					Node icon = new ImageView(new Image(getClass()
@@ -446,7 +446,7 @@ public class EnvironmentSearchPresenter implements Initializable {
 					item.getChildren().add(serviceNode);
 					treeView.getSelectionModel().select(serviceNode);
 					// show details in right pane
-					selectRestService(s.getID(), service.getID());
+					selectRestService(s.getId(), service.getId());
 				}
 				// treeView.getSelectionModel().select( idx > 0 ? idx-1 : 0);
 			}
@@ -455,15 +455,15 @@ public class EnvironmentSearchPresenter implements Initializable {
 	}
 
 	public void removeServer(Environment e, Server ftp) {
-		environmentService.removeServer(e.getID(), ftp.getID());
+		environmentService.removeServer(e.getId(), ftp.getId());
 	}
 
 	public void removeEnvironment(Environment e) {
-		environmentService.removeEnvironmentById(e.getID());
+		environmentService.removeEnvironmentById(e.getId());
 	}
 
 	public void removeService(Server srv, Service src) {
-		environmentService.removeService(srv.getID(), src.getID());
+		environmentService.removeService(srv.getId(), src.getId());
 	}
 
 	public void addEnvAction(ActionEvent event) {
@@ -478,7 +478,7 @@ public class EnvironmentSearchPresenter implements Initializable {
 		treeView.getSelectionModel().select(node);
 		treeView.getFocusModel().focusNext();
 		treeView.edit(node);
-		selectEnvironment(env.getID());
+		selectEnvironment(env.getId());
 	}
 
 	public ContextMenu createServiceContextMenu(Server srv, Service src) {

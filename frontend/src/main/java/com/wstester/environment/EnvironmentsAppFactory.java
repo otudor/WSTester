@@ -173,7 +173,7 @@ public class EnvironmentsAppFactory
                 rstPresenter.setEnvironmentService(getEnvironmentService());
                 rstPresenter.setMainPresenter(getMainPresenter());
             }
-            catch (IOException e)
+            catch (Exception e)
             {
                 throw new RuntimeException("Unable to load EnvRest.fxml", e);
             }

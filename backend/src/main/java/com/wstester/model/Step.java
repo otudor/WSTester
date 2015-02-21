@@ -15,22 +15,27 @@ public abstract class Step implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String uuid;
 	private String name;
-	private Server server;
-	private Service service;
+	private String serverId;
+	private String serviceId;
 	private List<Assert> assertList;
 	private Map<Asset, AssetType> assetMap;
-	private List<Variable> variableList;
+	private List<String> variableList;
 	private String dependsOn;
 
-	public String getID() {
+	public String getId() {
 		return this.uuid;
 	}
-	public Server getServer() {
-		return server;
+	
+	public void setId(String id) {
+		this.uuid = id;
+	}
+	
+	public String getServerId() {
+		return serverId;
 	}
 
-	public void setServer(Server server) {
-		this.server = server;
+	public void setServerId(String serverId) {
+		this.serverId = serverId;
 	}
 
 	public List<Assert> getAssertList() {
@@ -41,12 +46,12 @@ public abstract class Step implements Serializable {
 		this.assertList = asserts;
 	}
 
-	public Service getService() {
-		return service;
+	public String getServiceId() {
+		return serviceId;
 	}
 
-	public void setService(Service service) {
-		this.service = service;
+	public void setServiceId(String service) {
+		this.serviceId = service;
 	}
 
 	public Map<Asset, AssetType> getAssetMap() {
@@ -65,28 +70,20 @@ public abstract class Step implements Serializable {
 		this.name = name;
 	}
 
-	public List<Variable> getVariableList() {
+	public List<String> getVariableList() {
 		return variableList;
 	}
 
-	public void setVariableList(List<Variable> variableList) {
+	public void setVariableList(List<String> variableList) {
 		this.variableList = variableList;
 	}
 	
-	public void addVariableList(List<Variable> variableList) {
+	public void addVariable(String variableId) {
 		if(this.variableList == null) {
-			this.variableList = new ArrayList<Variable>();
+			this.variableList = new ArrayList<String>();
 		}
 		
-		this.variableList.addAll(variableList);
-	}
-	
-	public void addVariable(Variable variable) {
-		if(this.variableList == null) {
-			this.variableList = new ArrayList<Variable>();
-		}
-		
-		this.variableList.add(variable);
+		this.variableList.add(variableId);
 	}
 	
 	public String getDependsOn() {
@@ -103,8 +100,8 @@ public abstract class Step implements Serializable {
 		setAssetMap(source.getAssetMap());
 		setDependsOn(source.getDependsOn());
 		setName(source.getName());
-		setServer(source.getServer());
-		setService(source.getService());
+		setServerId(source.getServerId());
+		setServiceId(source.getServiceId());
 		setVariableList(source.getVariableList());
 	}
 	
@@ -114,25 +111,22 @@ public abstract class Step implements Serializable {
 	}
 	
 	public abstract String detailedToString();
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((assertList == null) ? 0 : assertList.hashCode());
-		result = prime * result
-				+ ((assetMap == null) ? 0 : assetMap.hashCode());
-		result = prime * result
-				+ ((dependsOn == null) ? 0 : dependsOn.hashCode());
+		result = prime * result + ((assertList == null) ? 0 : assertList.hashCode());
+		result = prime * result + ((assetMap == null) ? 0 : assetMap.hashCode());
+		result = prime * result + ((dependsOn == null) ? 0 : dependsOn.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((server == null) ? 0 : server.hashCode());
-		result = prime * result + ((service == null) ? 0 : service.hashCode());
-		result = prime * result
-				+ ((variableList == null) ? 0 : variableList.hashCode());
+		result = prime * result + ((serverId == null) ? 0 : serverId.hashCode());
+		result = prime * result + ((serviceId == null) ? 0 : serviceId.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
+		result = prime * result + ((variableList == null) ? 0 : variableList.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -162,15 +156,20 @@ public abstract class Step implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (server == null) {
-			if (other.server != null)
+		if (serverId == null) {
+			if (other.serverId != null)
 				return false;
-		} else if (!server.equals(other.server))
+		} else if (!serverId.equals(other.serverId))
 			return false;
-		if (service == null) {
-			if (other.service != null)
+		if (serviceId == null) {
+			if (other.serviceId != null)
 				return false;
-		} else if (!service.equals(other.service))
+		} else if (!serviceId.equals(other.serviceId))
+			return false;
+		if (uuid == null) {
+			if (other.uuid != null)
+				return false;
+		} else if (!uuid.equals(other.uuid))
 			return false;
 		if (variableList == null) {
 			if (other.variableList != null)

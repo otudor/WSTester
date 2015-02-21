@@ -3,7 +3,6 @@ package com.wstester.camel.delayer;
 import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -19,15 +18,17 @@ import com.wstester.util.ProjectProperties;
 public class DependantStepsTest extends RestTestBaseClass {
 
 	@Test
-	public void twoDependantStepsTest() throws InterruptedException, ExecutionException{
+	public void twoDependantStepsTest() throws Exception{
 		TestProject testProject = TestUtils.getDependantStepsPlan();
+		setTestProject(testProject);
+		
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 		long startTime = System.currentTimeMillis();
 		
-		String independantStepId = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID();
-		String dependantStepId = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(1).getID();
+		String independantStepId = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId();
+		String dependantStepId = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(1).getId();
 		
 		ExecutorService service = Executors.newFixedThreadPool(1);
 		
@@ -49,16 +50,18 @@ public class DependantStepsTest extends RestTestBaseClass {
 	}
 	
 	@Test
-	public void messagesInTheSameQueueDontWait() throws InterruptedException, ExecutionException{
+	public void messagesInTheSameQueueDontWait() throws Exception{
 	
 		TestProject testProject = TestUtils.getDependantStepsNotBlockedPlan();
+		setTestProject(testProject);
+		
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 		long startTime = System.currentTimeMillis();
 		
-		String dependantMongoStepId = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(1).getID();
-		String independantMongoStepId = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(2).getID();
+		String dependantMongoStepId = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(1).getId();
+		String independantMongoStepId = testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(2).getId();
 		
 		ExecutorService service = Executors.newFixedThreadPool(1);
 		

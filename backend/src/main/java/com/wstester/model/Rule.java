@@ -69,7 +69,7 @@ public abstract class Rule implements Serializable{
 	protected String match(Object stepInput, Object ruleInput){
 		
 		if(stepInput instanceof String && ruleInput instanceof String && 
-				((String) stepInput).contains((String)ruleInput)){
+				((String) stepInput).trim().contains(((String)ruleInput).trim())){
 			return output;
 		}
 		else if(stepInput instanceof Map && ruleInput instanceof Map &&

@@ -11,20 +11,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+import com.wstester.elements.Dialog;
+import com.wstester.main.MainLauncher;
 import com.wstester.model.Environment;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
 import com.wstester.model.Step;
-import com.wstester.util.TestProjectService;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 
-/**
- * Template class which supports fx inclusion in different views
- * <br>
- * Do not modify it without consider affecting sensitive views of the application
- * 
- * @author lvasile
- * @since 2014/10/10
- */
 public class StepController implements Initializable{
 	
 	@FXML
@@ -37,7 +32,6 @@ public class StepController implements Initializable{
 	private Button saveBtn; 
 	
 	private String stepId;
-	private TestProjectService testProjectService;
 	
 	public void setStep(String stepID) {
 		this.stepId = stepID;
@@ -79,22 +73,28 @@ public class StepController implements Initializable{
 	
 	private void populateFields() {
 		
-		testProjectService = new TestProjectService();
+		IProjectFinder projectFinder = null;
+		try {
+			projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		} catch (Exception e) {
+			Dialog.errorDialog("Could not get the TestSuite environement!", MainLauncher.stage);
+		}
 		
-    	Step step = testProjectService.getStep(stepId);
-		Environment environment = testProjectService.getTestSuiteByStepUID(stepId).getEnvironment();
+		Step step = projectFinder.getStepById(stepId);
+		String environmentId = projectFinder.getTestSuiteByStepId(stepId).getEnvironmentId();
+		Environment environment = projectFinder.getEnvironmentById(environmentId);
 		
 		if (environment != null) {
 			// clear the server list and populate it with the servers from the current environment
 			serverBox.getItems().addAll(environment.getServers());
 			
 			// set the current server
-			Server server = step.getServer();
+			Server server = projectFinder.getServerById(step.getServerId());
 			if (server != null) {
 				
 				// clear the service list and add the services from the current server
 				serviceBox.getItems().addAll(server.getServices());
-				Service service = step.getService();
+				Service service = projectFinder.getServiceById(step.getServiceId());
 				if(service != null){
 					serverBox.setValue(server);
 					serviceBox.setValue(service);

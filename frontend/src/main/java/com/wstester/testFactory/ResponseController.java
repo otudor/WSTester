@@ -61,7 +61,7 @@ public class ResponseController implements Initializable{
 			e.printStackTrace();
 			Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
 		}
-		Response response = testRunner.getResponse(step.getID(), 1000L);
+		Response response = testRunner.getResponse(step.getId(), 1000L);
 		
 		if (response != null) {
 			

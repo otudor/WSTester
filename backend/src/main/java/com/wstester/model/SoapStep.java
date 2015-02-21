@@ -33,8 +33,8 @@ public class SoapStep extends Step{
 	
 	@Override
 	public String detailedToString() {
-		return "SoapStep [request=" + request + ", getID()=" + getID() + ", getServer()=" + (getServer()==null ? "null" : getServer().detailedToString()) + ", getAssertList()=" + getAssertList() 
-				+ ", getService()=" + (getService() == null ? "null" : getService().detailedToString()) + ", getAssetMap()=" + getAssetMap() + ", getName()=" + getName() + ", getVariableList()=" 
+		return "SoapStep [request=" + request + ", getID()=" + getId() + ", getServer()=" + getServerId() + ", getAssertList()=" + getAssertList() 
+				+ ", getService()=" + getServiceId() + ", getAssetMap()=" + getAssetMap() + ", getName()=" + getName() + ", getVariableList()=" 
 				+ getVariableList() + ", getDependsOn()=" + getDependsOn() + "]";
 	}
 	

@@ -12,22 +12,23 @@ public class TestSuite implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String name;
-	private Environment environment;
+	private String environmentId;
 	private List<TestCase> testCaseList;
-	private List<Variable> variableList;
 	private String uuid;
 
 	public TestSuite() {
 		uuid = UUID.randomUUID().toString();
-		environment = new Environment();
 		testCaseList = new ArrayList<TestCase>();
-		variableList = new ArrayList<Variable>();
 	}
 
-	public String getID() {
+	public String getId() {
 		return this.uuid;
 	}
 
+	public void setId(String id) {
+		this.uuid = id;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -36,12 +37,12 @@ public class TestSuite implements Serializable {
 		this.name = name;
 	}
 
-	public Environment getEnvironment() {
-		return environment;
+	public String getEnvironmentId() {
+		return environmentId;
 	}
 
-	public void setEnvironment(Environment environment) {
-		this.environment = environment;
+	public void setEnvironmentId(String environmentId) {
+		this.environmentId = environmentId;
 	}
 
 	public List<TestCase> getTestCaseList() {
@@ -59,14 +60,6 @@ public class TestSuite implements Serializable {
 		
 		this.testCaseList.add(testCase);
 	}
-	
-	public List<Variable> getVariableList() {
-		return variableList;
-	}
-
-	public void setVariableList(List<Variable> variableList) {
-		this.variableList = variableList;
-	}
 
 	@Override
 	public String toString() {
@@ -74,7 +67,7 @@ public class TestSuite implements Serializable {
 	}
 	
 	public String detailedToString() {
-		return "TestSuite [name=" + name + ", environment=" + environment.detailedToString() + ", testCaseList=" + toString(testCaseList) + ", variableList=" + variableList + ", uuid=" + uuid + "]";
+		return "TestSuite [name=" + name + ", environmentId=" + environmentId + ", testCaseList=" + toString(testCaseList) + ", uuid=" + uuid + "]";
 	}
 
 	private String toString(List<TestCase> testCaseList) {
@@ -100,10 +93,10 @@ public class TestSuite implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((environment == null) ? 0 : environment.hashCode());
+		result = prime * result + ((environmentId == null) ? 0 : environmentId.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((testCaseList == null) ? 0 : testCaseList.hashCode());
-		result = prime * result + ((variableList == null) ? 0 : variableList.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		return result;
 	}
 
@@ -116,10 +109,10 @@ public class TestSuite implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		TestSuite other = (TestSuite) obj;
-		if (environment == null) {
-			if (other.environment != null)
+		if (environmentId == null) {
+			if (other.environmentId != null)
 				return false;
-		} else if (!environment.equals(other.environment))
+		} else if (!environmentId.equals(other.environmentId))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -131,10 +124,10 @@ public class TestSuite implements Serializable {
 				return false;
 		} else if (!testCaseList.equals(other.testCaseList))
 			return false;
-		if (variableList == null) {
-			if (other.variableList != null)
+		if (uuid == null) {
+			if (other.uuid != null)
 				return false;
-		} else if (!variableList.equals(other.variableList))
+		} else if (!uuid.equals(other.uuid))
 			return false;
 		return true;
 	}

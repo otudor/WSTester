@@ -17,11 +17,12 @@ public class SoapTest extends TestBaseClass{
 	public void test() throws Exception{
 
 		TestProject testProject = TestUtils.getSOAPTestPlan();
+		setTestProject(testProject);
 		testRunner = new TestRunner(testProject);
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getID(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		String entry =  response.getContent();
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
