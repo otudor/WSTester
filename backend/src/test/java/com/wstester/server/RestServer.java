@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 @Path("customer")
 public class RestServer {
 
+	static Customer customer;
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("getCustomers")
@@ -79,5 +80,26 @@ public class RestServer {
 	public Customer insertCustomerByJSON(Customer customer){
 		
 		return new Customer(customer.getName());
+	}
+	
+	@POST
+	@Consumes(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("addCustomer")
+	public String insertCustomerReturnId(String name){
+		
+		customer = new Customer(name);
+		return customer.getId();
+	}
+	
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("searchById/id/{id}")
+	public String searchById(@PathParam("id") String id){
+		
+		if (customer.getId().equals(id)) {
+			return customer.getName();
+		} 
+		return "Customer with id: " + id + "was not found";
 	}
 }
