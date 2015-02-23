@@ -26,7 +26,7 @@ public enum MainConstants {
 	HOMEPAGE_ICON("/images/home.png"),
 	START_ICON("/images/VLC.png"),
 	ASSETS_ICON("/images/Applications-Folder.png"),
-	ASSETS_FXML("/fxml/assets/Assets.fxml"),
+	ASSETS_FXML("/fxml/assets/2.fxml"),
 	ASSET_MENU_ICON("/images/asset2.png"),
 	TEST_FACTORY_ICON("/images/Smart-Folder.png"),
 	TEST_FACTORY_STYLE("/styles/testFactory.css"),
