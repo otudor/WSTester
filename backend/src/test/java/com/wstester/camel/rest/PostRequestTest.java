@@ -65,7 +65,7 @@ public class PostRequestTest extends RestTestBaseClass {
 		testRunner.run(testProject);
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
-		String entry =  response.getContent();
+		JSONObject entry =  new JSONObject(response.getContent());
 		List<Header> headers = response.getHeaderList();
 		
 		assertEquals(3, headers.size());
@@ -78,7 +78,7 @@ public class PostRequestTest extends RestTestBaseClass {
 				assertEquals("application/json", header.getValueField());
 			}
 		}
-		assertEquals(name.toString(), entry);
+		assertEquals(name.get("name"), entry.get("name"));
 	}
 	
 	@Test

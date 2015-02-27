@@ -16,6 +16,7 @@ import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IProjectFinder;
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -53,16 +54,6 @@ public class RestStepController implements Initializable {
 	@FXML 
 	private TableColumn<Pair, String> queryValue;
 
-	// path
-    @FXML 
-    private Button addPathButton;
-	@FXML
-	private TableView<Pair> pathTable;
-	@FXML
-	private TableColumn<Pair, String> pathKey;
-	@FXML
-	private TableColumn<Pair, String> pathValue;
-
 	// header
     @FXML 
     private Button addHeaderButton;
@@ -87,21 +78,23 @@ public class RestStepController implements Initializable {
     
 	@FXML
 	public void initialize(URL url, ResourceBundle resource) {
-		
-		this.pathKey.setCellValueFactory(new PropertyValueFactory<Pair, String>("key"));
-		this.pathValue.setCellValueFactory(new PropertyValueFactory<Pair, String>("value"));
-		this.addPathMethod();
-		
+				
 		this.queryKey.setCellValueFactory(new PropertyValueFactory<Pair, String>("key"));
+		this.queryKey.setCellFactory(TextFieldTableCell.forTableColumn());
 		this.queryValue.setCellValueFactory(new PropertyValueFactory<Pair, String>("value"));
+		this.queryValue.setCellFactory(TextFieldTableCell.forTableColumn());
 		this.addQueryMethod();
 		
 		this.headerKey.setCellValueFactory(new PropertyValueFactory<Pair, String>("key"));
+		this.headerKey.setCellFactory(TextFieldTableCell.forTableColumn());
 		this.headerValue.setCellValueFactory(new PropertyValueFactory<Pair, String>("value"));
+		this.headerValue.setCellFactory(TextFieldTableCell.forTableColumn());
 		this.addHeaderMethod();
 		
 		this.cookieKey.setCellValueFactory(new PropertyValueFactory<Pair, String>("key"));
+		this.cookieKey.setCellFactory(TextFieldTableCell.forTableColumn());
 		this.cookieValue.setCellValueFactory(new PropertyValueFactory<Pair, String>("value"));
+		this.cookieValue.setCellFactory(TextFieldTableCell.forTableColumn());
 		this.addCookieMethod();
 	}
 	
@@ -206,25 +199,6 @@ public class RestStepController implements Initializable {
 		});
 	}
 
-	private void addPathMethod() {
-		addPathButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				if(event.getClickCount() == 1) {
-					
-					Pair pair = Dialog.twoTextBoxDialog("Key", "Value", MainLauncher.stage);
-					if (pair != null){
-						ObservableList<Pair> pathData = FXCollections.observableArrayList();
-						pathData.addAll(pathTable.getItems());
-						pathData.add(pair);
-						pathTable.setItems(pathData);
-					}
-				} 
-			}
-		});
-	}
-
 	private void addQueryMethod() {
 		addQueryButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -252,7 +226,6 @@ public class RestStepController implements Initializable {
 		contentType.clear();
 		restPath.setText("");
 		request.setText("");
-		pathTable.getItems().clear();
 		queryTable.getItems().clear();
 		headerTable.getItems().clear();
 		cookieTable.getItems().clear();
@@ -279,11 +252,7 @@ public class RestStepController implements Initializable {
     	newStep.setMethod(restMethod.getValue());
     	newStep.setContentType(contentType.getText());
     	
-    	StringBuilder pathBuilder = new StringBuilder(restPath.getText());
-    	for (Pair pair: pathTable.getItems()) {
-    		pathBuilder.append("/" + pair.getKey() + "/" + pair.getValue());
-    	}
-    	newStep.setPath(pathBuilder.toString());
+    	newStep.setPath(restPath.getText());
     	
     	Map<String, String> queryMap = new HashMap<String, String>();
     	for (Pair pair : queryTable.getItems()) {

@@ -32,39 +32,13 @@
       </GridPane>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="410.0" AnchorPane.topAnchor="220.0">
         <tabs>
-          <Tab text="Path">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="300.0">
-                     <children>
-                        <GridPane hgap="10.0" prefHeight="198.0" prefWidth="529.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="30.0" minHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <TableView fx:id="pathTable" prefHeight="200.0" prefWidth="200.0" style="-fx-selection-bar-text: black; -fx-selection-bar: -fx-box-border;">
-                                <columns>
-                                  <TableColumn fx:id="pathKey" prefWidth="320.0" text="Name" />
-                                  <TableColumn fx:id="pathValue" prefWidth="320.0" text="Value" />
-                                </columns>
-                              </TableView>
-                              <Button fx:id="addPathButton" mnemonicParsing="false" text="Add Path" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                           </children>
-                        </GridPane>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
           <Tab text="Query">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="210.0">
                      <children>
                         <GridPane hgap="10.0" prefHeight="210.0" prefWidth="529.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <TableView fx:id="queryTable" prefHeight="200.0" prefWidth="200.0" style="-fx-selection-bar-text: black; -fx-selection-bar: -fx-box-border;">
+                              <TableView fx:id="queryTable" editable="true" prefHeight="200.0" prefWidth="200.0" style="-fx-selection-bar-text: black; -fx-selection-bar: -fx-box-border;">
                                  <columns>
                                     <TableColumn fx:id="queryKey" prefWidth="320.0" text="Name" />
                                     <TableColumn fx:id="queryValue" prefWidth="320.0" text="Value" />
