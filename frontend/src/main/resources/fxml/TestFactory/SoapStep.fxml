@@ -4,73 +4,17 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<TabPane fx:id="rootSoapStep" prefHeight="400.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.SoapStepController">
-   <tabs>
-      <Tab text="Soap Definition">
-         <content>
-            <AnchorPane>
-               <children>
-                  <GridPane hgap="10" vgap="10" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
-                            
-                            <children>
-                          <Label text="Step Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                          <Label text="Request" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                          
-                                <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                          <Label fx:id="lblStatus" prefWidth="50" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                          
-                                <Label text="Response:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                          <Label fx:id="lblResponse" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#saveSoap" prefWidth="50.0" text="Save" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
-                           <GridPane.margin>
-                              <Insets right="20.0" />
-                           </GridPane.margin>
-                        </Button>
-                        <TextField fx:id="lblName" prefHeight="25.0" prefWidth="570.0" GridPane.columnIndex="1" />
-                        <TextField fx:id="soapRequest" prefHeight="25.0" prefWidth="570.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                      </children>
-                     <columnConstraints>
-                        <ColumnConstraints maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
-                        <ColumnConstraints maxWidth="570.0" minWidth="570.0" prefWidth="570.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" />
-                        <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" />
-                        <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" />
-                        <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" />
-                        <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" />
-                        <RowConstraints />
-                     </rowConstraints>
-                  </GridPane>
-                  <ComboBox fx:id="serverBox" layoutX="47.0" layoutY="290.0" prefWidth="150.0" promptText="Server..." AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="290.0" />
-                  <ComboBox fx:id="serviceBox" layoutX="304.0" layoutY="290.0" prefWidth="150.0" promptText="Service..." AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="290.0" />
-               </children>
-            </AnchorPane>
-         </content>
-      </Tab>
-      <Tab text="Past Executions">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                    <TableView fx:id="tblExecutions">
-            		     <columns>
-            		          <TableColumn fx:id="columnDate" text="Date">
-		          </TableColumn>
-            		          <TableColumn fx:id="columnStatus" text="Status">
-		          </TableColumn>
-            		          <TableColumn fx:id="columnResponse" text="Response">
-		          </TableColumn>
-            		     </columns>
-            		</TableView>
-               </children>
-            </AnchorPane>
-        </content>
-      </Tab>
-      <Tab text="Variable">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-        </content>
-      </Tab>
-   </tabs>
-</TabPane>
+<AnchorPane fx:id="rootSoapStep" prefHeight="400.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.SoapStepController">
+	<children>
+								<fx:include fx:id="step" source="rootStep.fxml" />
+        <Label layoutX="8.0" layoutY="125.0" text="Soap Definition:" />
+        <Button layoutX="100.0" layoutY="456.0" mnemonicParsing="false" onAction="#saveSoap" text="Save" />
+        <TextArea fx:id="soapRequest" layoutX="100.0" layoutY="125.0" prefHeight="319.0" prefWidth="427.0" />
+
+								
+	</children>
+</AnchorPane>

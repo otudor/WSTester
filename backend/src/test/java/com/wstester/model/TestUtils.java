@@ -7,11 +7,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
 import com.wstester.model.RestRule.InputType;
 
 public class TestUtils {
 
-	public static TestProject getTestPlan() throws IOException{
+	public static TestProject getTestPlan() throws IOException, JSONException{
 		
 		TestProject testProject = new TestProject();
 		testProject.setName("Test Project");
@@ -174,11 +177,16 @@ public class TestUtils {
 		step2.setServerId(server12.getId());
 		step2.setServiceId(mongoService.getId());
 		String collection = "customer";
-		HashMap<String, String> query = new HashMap<String, String>();
-		query.put("name", "HAC");
+		
+		String name = "HAC";
+		String key = "name";
+		
+		JSONObject query = new JSONObject();
+		query.put(key,name);
+
 		step2.setAction(Action.SELECT);
 		step2.setCollection(collection);
-		step2.setQuery(query);
+		step2.setQuery(query.toString());
 		step2.setDependsOn(restStep.getId());
 		stepList1.add(step2);
 		
@@ -319,7 +327,7 @@ public class TestUtils {
 		return testPlan;
 	}
 	
-	public static TestProject getMongoTestPlan(){
+	public static TestProject getMongoTestPlan() throws JSONException{
 		
 		TestProject testProject = new TestProject();
 		testProject.setName("Test Project");
@@ -374,11 +382,11 @@ public class TestUtils {
 		step2.setServerId(server12.getId());
 		step2.setServiceId(service2.getId());
 		String collection = "customer";
-		HashMap<String, String> query = new HashMap<String, String>();
+		JSONObject query = new JSONObject();
 		query.put("name", "HAC");
 		step2.setAction(Action.SELECT);
 		step2.setCollection(collection);
-		step2.setQuery(query);
+		step2.setQuery(query.toString());
 		step2.addVariable(variable.getId());
 		stepList1.add(step2);
 		
@@ -403,7 +411,7 @@ public class TestUtils {
 		return testProject;
 	}
 	
-	public static TestProject getMongoTestPlanInsert(){
+	public static TestProject getMongoTestPlanInsert() throws JSONException{
 		
 		TestProject testProject = new TestProject();
 		testProject.setName("Test Project");
@@ -460,13 +468,13 @@ public class TestUtils {
 		step1.setServerId(server12.getId());
 		step1.setServiceId(service2.getId());
 		String collection = "customer";
-		HashMap<String, String> query = new HashMap<String, String>();
+		JSONObject query = new JSONObject();
 		String name = "Ana";
 		String keyName = "name";
 		query.put(keyName, name);
 		step1.setAction(Action.SELECT);
 		step1.setCollection(collection);
-		step1.setQuery(query);
+		step1.setQuery(query.toString());
 		stepList1.add(step1);
 
 		// insert
@@ -474,14 +482,14 @@ public class TestUtils {
 		step2.setName("Step 2");
 		step2.setServerId(server12.getId());
 		step2.setServiceId(service2.getId());
-		HashMap<String, String> insertQuery = new HashMap<String, String>();
+		JSONObject insertQuery = new JSONObject();
 		String id = "100";
 		String keyId = "id";
 		insertQuery.put(keyName, name);
 		insertQuery.put(keyId, id);
 		step2.setAction(Action.INSERT);
 		step2.setCollection(collection);
-		step2.setQuery(insertQuery);
+		step2.setQuery(insertQuery.toString());
 		step2.setDependsOn(step1.getId());
 		stepList1.add(step2);
 		
@@ -491,8 +499,11 @@ public class TestUtils {
 		step3.setServerId(server12.getId());
 		step3.setServiceId(service2.getId());
 		step3.setAction(Action.SELECT);
+		
+		
+		
 		step3.setCollection(collection);
-		step3.setQuery(query);
+		step3.setQuery(query.toString());;
 		step3.setDependsOn(step2.getId());
 		stepList1.add(step3);
 		
@@ -780,7 +791,7 @@ public class TestUtils {
 		return testProject;
 	}
 	
-	public static TestProject getDependantStepsPlan() {
+	public static TestProject getDependantStepsPlan() throws JSONException {
 		
 		TestProject testProject = new TestProject();
 		testProject.setName("Test Project");
@@ -846,11 +857,11 @@ public class TestUtils {
 		mongoStep.setServerId(server12.getId());
 		mongoStep.setServiceId(service2.getId());
 		String collection = "customer";
-		HashMap<String, String> query = new HashMap<String, String>();
+		JSONObject query = new JSONObject();
 		query.put("name", "HAC");
 		mongoStep.setAction(Action.SELECT);
 		mongoStep.setCollection(collection);
-		mongoStep.setQuery(query);
+		mongoStep.setQuery(query.toString());
 		mongoStep.setDependsOn(restStep.getId());
 		stepList1.add(mongoStep);
 		
@@ -945,7 +956,7 @@ public class TestUtils {
 		query.put("name", "HAC");
 		mongoStep.setAction(Action.SELECT);
 		mongoStep.setCollection(collection);
-		mongoStep.setQuery(query);
+		mongoStep.setQuery(query.toString());
 		mongoStep.setDependsOn(restStep.getId());
 		stepList1.add(mongoStep);
 		//test3
@@ -955,7 +966,7 @@ public class TestUtils {
 		mongoStep2.setServiceId(service2.getId());
 		mongoStep2.setCollection(collection);
 		mongoStep2.setAction(Action.SELECT);
-		mongoStep2.setQuery(query);
+		mongoStep2.setQuery(query.toString());;
 		stepList1.add(mongoStep2);
 		
 		// construct test case list
@@ -1264,7 +1275,7 @@ public class TestUtils {
 		return testProject;
 	}
 
-	public static TestProject getMockedMongoProject(){
+	public static TestProject getMockedMongoProject() throws JSONException{
 		
 		TestProject testProject = new TestProject();
 		testProject.setName("Test Project");
@@ -1310,11 +1321,11 @@ public class TestUtils {
 		step2.setServerId(server12.getId());
 		step2.setServiceId(service2.getId());
 		String collection = "customer";
-		HashMap<String, String> query = new HashMap<String, String>();
+		JSONObject query = new JSONObject();
 		query.put("name", "HAC");
 		step2.setAction(Action.SELECT);
 		step2.setCollection(collection);
-		step2.setQuery(query);
+		step2.setQuery(query.toString());;
 		stepList1.add(step2);
 		
 		// construct test case list

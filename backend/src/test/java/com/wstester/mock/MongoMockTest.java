@@ -4,8 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+
+import net.minidev.json.JSONObject;
 
 import org.junit.Test;
 
@@ -48,9 +49,9 @@ public class MongoMockTest extends TestBaseClass {
 		TestProject testProject = TestUtils.getMockedMongoProject();
 		List<Rule> ruleList = new ArrayList<Rule>();
 		String output = "Mocked Mongo Query";
-		HashMap<String, String> query = new HashMap<String, String>();
+		JSONObject query = new JSONObject();
 		query.put("name", "HAC");
-		MongoRule rule = new MongoRule(InputType.QUERY, query, output);
+		MongoRule rule = new MongoRule(InputType.QUERY, query.toString(), output);
 		ruleList.add(rule);
 		testProject.getEnvironmentList().get(0).getServers().get(0).getServices().get(0).setRuleList(ruleList);
 		

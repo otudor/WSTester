@@ -3,9 +3,8 @@ package com.wstester.variables;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashMap;
-
 import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONObject;
 import org.junit.Test;
 
 import com.wstester.camel.TestBaseClass;
@@ -24,11 +23,12 @@ public class MongoVariableUsageTest extends TestBaseClass{
 		TestProject testProject = TestUtils.getMongoTestPlan();
 		
 		MongoStep step = (MongoStep) testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0);
-		HashMap<String, String> query = new HashMap<String, String>();
+		
 		String name = "${name}";
 		String key = "name";
+		JSONObject query = new JSONObject();
 		query.put(key, name);
-		step.setQuery(query);
+		step.setQuery(query.toString());
 		
 		setTestProject(testProject);
 		testRunner = new TestRunner(testProject);

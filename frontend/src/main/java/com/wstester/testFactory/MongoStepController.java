@@ -1,184 +1,91 @@
 package com.wstester.testFactory;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 
-import com.wstester.model.Environment;
+import com.wstester.elements.Dialog;
+import com.wstester.model.Action;
 import com.wstester.model.MongoStep;
-import com.wstester.model.ExecutionStatus;
-import com.wstester.model.Server;
-import com.wstester.model.Service;
+import com.wstester.model.Step;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IProjectFinder;
 
 public class MongoStepController {
-    @FXML 
-    private Node rootMongoStep;
-    @FXML 
-    private TextField lblName;
+	
     @FXML 
     private TextField mongoCollection;
     @FXML 
-    private TextField mongoAction;
+    private ComboBox<Action> mongoAction;
     @FXML 
-    private TextField mongoQuery;
-    @FXML 
-    private Label lblStatus;
-    @FXML 
-    private Label lblResponse;
-    @FXML 
-    private TableView<Execut> tblExecutions;
-    @FXML 
-    private TableColumn<Execut, String> columnDate;
-    @FXML 
-    private TableColumn<Execut, String> columnStatus;
-    @FXML 
-    private TableColumn<Execut, String> columnResponse;
-    @FXML 
-    private ComboBox<Server> serverBox;
-    @FXML 
-    private ComboBox<Service> serviceBox;
+    private TextArea mongoQuery;
+    @FXML
+	private StepController stepController;
     
-    private MongoStep step;    
-    final ObservableList<Execut> lista = FXCollections.observableArrayList();
-    private String uid = null;
-    
-	@FXML
-	private void initialize() {
+    private String mongoId = null;            
+
+    public void setStep(String mongoId){
+		this.mongoId = mongoId;
 		
+    	clearFields();
+    	Step step = null;
+		try {
+			IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+			step = projectFinder.getStepById(mongoId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Could not find the environmentList. Please try again!", null);
+		}
+		
+        stepController.setStep(mongoId);
+        stepController.setCommonFields();  
+        
+        
+        if (step instanceof MongoStep) {
+    		if(((MongoStep) step).getCollection() != null){
+    			mongoCollection.setText((String)((MongoStep) step).getCollection());
+    		}
+    		
+    		if (((MongoStep) step).getQuery() != null){
+    			mongoQuery.setText(((MongoStep) step).getQuery());
+	    	}
+        
+    		mongoAction.getItems().addAll(Action.values());
+    		if (((MongoStep) step).getAction() != null){      	
+    			mongoAction.setValue(((MongoStep) step).getAction());
+    		}									
+        }
+    }
+
+	private void clearFields() {
+		
+		mongoCollection.setText("");
+		mongoQuery.setText("");	
+		mongoAction.getItems().clear();
+		mongoAction.setValue(null);
 	}
-
-    public void setStep(final String stepId) {     
-//    	TestProjectService tsService = new TestProjectService();
-//        step = (MongoStep) tsService.getStep(stepId);
-        lblName.setText(step.getName());
-    	mongoQuery.setText("");
-        mongoAction.setText("");
-        mongoCollection.setText("");
-        lblStatus.setText("Not run");
-        lblResponse.setText("Not run");
-//        Environment environment = tsService.getTestSuiteByStepUID(stepId).getEnvironment();
-//        if(environment != null) {        	
-//        	serverBox.getItems().clear();
-//        	serverBox.getItems().addAll(environment.getServers());
-//        	if(step.getServer() != null) {
-//        		serverBox.setValue(step.getServer());
-//        		serviceBox.getItems().clear();
-//        		serviceBox.getItems().addAll(step.getServer().getServices());
-//        	}
-//        	serverBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Server>() {
-//					public void changed(ObservableValue<? extends Server> ov, Server oldServer, Server newServer) {
-//						if(newServer !=null) {
-//							step.setServer(newServer);
-//							serviceBox.getItems().clear();
-//							serviceBox.getItems().addAll(step.getServer().getServices());
-//							if(step.getService() != null) {
-//								serviceBox.setValue(step.getService());
-//							}
-//							serviceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Service>() {
-//									public void changed(ObservableValue<? extends Service> ov, Service oldServer,Service newServer) {
-//										step.setService(newServer);
-//									}
-//								});
-//							step.setServer(newServer);
-//							tsService.setStepByUID(step, step.getId());
-//						}
-//					}
-//        	});
-//        }
-        lblName.setText(step.getName());
-        if(step.getAction()!=null){
-        	mongoAction.setText(step.getAction().toString());
-        }
-        //mongoQuery.setText(step.getQuery().toString());
-        mongoCollection.setText(step.getCollection());
-//        Execution execution = step.getLastExecution();
-        uid = stepId;
-//        if( execution != null)
-        {
-//        	if (execution.getResponse().getStatus() == ExecutionStatus.PASSED)
-//        		lblStatus.setText("PASSED");
-        	//else ....
-        		//FAILED
-//        	lblResponse.setText(execution.getResponse().getContent());
-//        	Execut exemplu = new Execut(execution.getRunDate().toString(),execution.getResponse().getStatus().toString(),execution.getResponse().getContent());
-//            lista.add(exemplu);
-            tblExecutions.setItems(lista);
-            columnDate.setCellValueFactory(
-            		new PropertyValueFactory<Execut,String>("Date")
-            		);
-            
-            columnStatus.setCellValueFactory(
-            		new PropertyValueFactory<Execut,String>("Status")
-            		);
-            columnResponse.setCellValueFactory(
-            		new PropertyValueFactory<Execut,String>("Response")
-            		);
-           
-        }
-          
-        
-        
-    }
-    public static class Execut{
-    	private final SimpleStringProperty date;
-    	private final SimpleStringProperty status;
-    	private final SimpleStringProperty response;
-		
-    	private Execut(String Date, String Status, String Response){
-    		this.date = new SimpleStringProperty(Date);
-    		this.status = new SimpleStringProperty(Status);
-    		this.response = new SimpleStringProperty(Response);
-     	}
-    	
-    	public String getDate(){
-    		return date.get();
-    	}
-    	public String getStatus(){
-    		return status.get();
-    	}
-    	public String getResponse(){
-    		return response.get();
-    	}
-    	public void setDate(String Date){
-    		date.set(Date);
-    	}
-    	public void setStatus(String Status){
-    		status.set(Status);
-    	}
-    	public void setResponse(String Response){
-    		response.set(Response);
-    	}
-    }
-    
-    public void saveMongo(ActionEvent e) {
-
-		MongoStep mongo = new MongoStep();
-
-		mongo.setAction(step.getAction());
-		mongo.setAssertList(step.getAssertList());
-		mongo.setAssetMap(step.getAssetMap());
-		mongo.setCollection(step.getCollection());
-		mongo.setDependsOn(step.getDependsOn());
-//		mongo.setExecutionList(step.getExecutionList());
-		mongo.setName(step.getName());
-		mongo.setQuery(step.getQuery());
-//		mongo.setServer(step.getServerId());
-		mongo.setServiceId(step.getServiceId());
-		mongo.setVariableList(step.getVariableList());
-		
-//		TestProjectService tsService = new TestProjectService();
-//		tsService.setStepByUID(mongo, mongo.getId());
-	} 
-}
 	
+	public void saveMongo(ActionEvent actionEvent) {
+		
+		IProjectFinder projectFinder = null;
+		try {
+			projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Dialog.errorDialog("Could not find the environmentList. Please try again!", null);
+		}
+				
+    	MongoStep newStep = new MongoStep();    	
+    	newStep.setServerId(stepController.getServer().getId());
+    	newStep.setServiceId(stepController.getService().getId());
+    	newStep.setName(stepController.getName());
+    	newStep.setCollection(mongoCollection.getText());
+    	newStep.setAction(mongoAction.getValue());
+    	newStep.setQuery(mongoQuery.getText());
+    	
+    	//TODO: make a method in the project finder to save the step 
+    	projectFinder.getStepById(mongoId).copyFrom(newStep);
+	}
+}

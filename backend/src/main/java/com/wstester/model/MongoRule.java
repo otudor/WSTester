@@ -1,6 +1,5 @@
 package com.wstester.model;
 
-import java.util.Map;
 import javax.xml.bind.annotation.XmlType;
 
 public class MongoRule extends Rule {
@@ -9,7 +8,7 @@ public class MongoRule extends Rule {
 	@XmlType(name="mongoInputType")
 	public enum InputType {QUERY, COLLECTION};
 	private InputType inputType;
-	private Map<String, String> inputQuery;
+	private String inputQuery;
 	
 	public MongoRule(){
 	}
@@ -21,13 +20,6 @@ public class MongoRule extends Rule {
 		this.output = output;
 	}
 	
-	public MongoRule(InputType inputType, Map<String, String> input, String output){
-		
-		this.inputType = inputType;
-		this.inputQuery = input;
-		this.output = output;
-	}
-	
 	public InputType getInputType() {
 		return inputType;
 	}
@@ -36,11 +28,11 @@ public class MongoRule extends Rule {
 		this.inputType = inputType;
 	}
 
-	public Map<String, String> getInputQuery() {
+	public String getInputQuery() {
 		return inputQuery;
 	}
 
-	public void setInputQuery(Map<String, String> inputQuery) {
+	public void setInputQuery(String inputQuery) {
 		this.inputQuery = inputQuery;
 	}
 

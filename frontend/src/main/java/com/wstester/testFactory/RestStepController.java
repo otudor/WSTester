@@ -1,10 +1,8 @@
 package com.wstester.testFactory;
 
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.ResourceBundle;
 
 import com.wstester.elements.Dialog;
 import com.wstester.elements.Pair;
@@ -29,9 +27,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TextArea;
-import javafx.fxml.Initializable;
 
-public class RestStepController implements Initializable {
+public class RestStepController {
 
 	@FXML
 	private StepController stepController;
@@ -77,7 +74,7 @@ public class RestStepController implements Initializable {
     private String stepId;
     
 	@FXML
-	public void initialize(URL url, ResourceBundle resource) {
+	public void initialize() {
 				
 		this.queryKey.setCellValueFactory(new PropertyValueFactory<Pair, String>("key"));
 		this.queryKey.setCellFactory(TextFieldTableCell.forTableColumn());
