@@ -2,34 +2,30 @@ package com.wstester.testFactory;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import com.wstester.elements.Dialog;
+import com.wstester.model.Action;
 import com.wstester.model.MongoStep;
 import com.wstester.model.Step;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IProjectFinder;
 
 public class MongoStepController {
-    @FXML 
-    private Node rootMongoStep;
+	
     @FXML 
     private TextField mongoCollection;
     @FXML 
-    private ComboBox <String> mongoAction;
+    private ComboBox<Action> mongoAction;
     @FXML 
-    private TextField mongoQuery;
-
+    private TextArea mongoQuery;
     @FXML
 	private StepController stepController;
-    private String mongoId = null;  
-          
-    @FXML
-    private void initialize() {   	 
-    }
     
+    private String mongoId = null;            
+
     public void setStep(String mongoId){
 		this.mongoId = mongoId;
 		
@@ -44,15 +40,35 @@ public class MongoStepController {
 		}
 		
         stepController.setStep(mongoId);
-        stepController.setCommonFields();  	
-	}
+        stepController.setCommonFields();  
+        
+        
+        if (step instanceof MongoStep) {
+    		if(((MongoStep) step).getCollection() != null){
+    			mongoCollection.setText((String)((MongoStep) step).getCollection());
+    		}
+    		
+    		if (((MongoStep) step).getQuery() != null){
+    			mongoQuery.setText(((MongoStep) step).getQuery());
+	    	}
+        
+    		mongoAction.getItems().addAll(Action.values());
+    		if (((MongoStep) step).getAction() != null){      	
+    			mongoAction.setValue(((MongoStep) step).getAction());
+    		}									
+        }
+    }
 
 	private void clearFields() {
+		
 		mongoCollection.setText("");
 		mongoQuery.setText("");	
+		mongoAction.getItems().clear();
+		mongoAction.setValue(null);
 	}
-	     
-public void saveMongo(ActionEvent actionEvent) {
+	
+	public void saveMongo(ActionEvent actionEvent) {
+		
 		IProjectFinder projectFinder = null;
 		try {
 			projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
@@ -66,17 +82,10 @@ public void saveMongo(ActionEvent actionEvent) {
     	newStep.setServiceId(stepController.getService().getId());
     	newStep.setName(stepController.getName());
     	newStep.setCollection(mongoCollection.getText());
+    	newStep.setAction(mongoAction.getValue());
+    	newStep.setQuery(mongoQuery.getText());
+    	
+    	//TODO: make a method in the project finder to save the step 
     	projectFinder.getStepById(mongoId).copyFrom(newStep);
 	}
 }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    

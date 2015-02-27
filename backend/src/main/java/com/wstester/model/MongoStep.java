@@ -1,16 +1,18 @@
 package com.wstester.model;
 
-import java.util.Map;
 import java.util.UUID;
+
 import javax.xml.bind.annotation.XmlRootElement;
+import com.wstester.model.Action;
 
 @XmlRootElement
 public class MongoStep extends Step{
 
 	private static final long serialVersionUID = 1L;
-	private Action action;
+
 	private String collection;
-	private Map<String, String> query;
+	private String query;
+	private Action action;
 	
 	public MongoStep() {
 		uuid = UUID.randomUUID().toString();
@@ -24,36 +26,37 @@ public class MongoStep extends Step{
 		this.collection = collection;
 	}
 
-	public Map<String, String> getQuery() {
+	public String getQuery() {
 		return query;
 	}
 
-	public void setQuery(Map<String, String> query) {
+	public void setQuery(String query) {
 		this.query = query;
 	}
-
+		
 	public Action getAction() {
 		return action;
 	}
-	
-	public void setAction(Action action) {
-		this.action = action;
+
+	public void setAction(Action method) {
+		this.action = method;
 	}
-	
+		
 	@Override
 	public void copyFrom(Step source) {
 		
 		super.copyFrom(source);
 		if(source instanceof MongoStep){
-			setAction(((MongoStep) source).getAction());
+			
 			setCollection(((MongoStep) source).getCollection());
 			setQuery(((MongoStep) source).getQuery());
+			setAction(((MongoStep) source).getAction());
 		}
 	}
 	
 	@Override
 	public String detailedToString() {
-		return "MongoStep [action=" + action + ", collection=" + collection + ", query=" + query + ", getID()=" + getId() + ", getServer()=" 
+		return "MongoStep [action=" + action+  ", collection=" + collection + ", query=" + query + ", getID()=" + getId() + ", getServer()=" 
 				+ getServerId() + ", getAssertList()=" + getAssertList() + ", getService()=" + getServiceId() + ", getAssetMap()=" + getAssetMap() 
 				+ ", getName()=" + getName() + ", getVariableList()=" + getVariableList() + ", getDependsOn()=" + getDependsOn() + "]";
 	}

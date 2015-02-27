@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.io.IOException;
 
+import org.codehaus.jettison.json.JSONException;
 import org.junit.AfterClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -21,7 +22,7 @@ public class SerializationTest {
 	private static TestProject testPlanAfter;
 	
 	@Test
-	public void firstTestToXML() throws IOException{
+	public void firstTestToXML() throws IOException, JSONException{
 		
 		// construct test plan
 		testPlanBefore = TestUtils.getTestPlan();

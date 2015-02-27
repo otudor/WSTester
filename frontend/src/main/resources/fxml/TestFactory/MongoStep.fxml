@@ -20,20 +20,15 @@
 								<Label layoutX="11.0" layoutY="153.0" text="Action:" />
 								 
 								  <ComboBox fx:id="mongoAction" layoutX="95.0" layoutY="149.0" prefWidth="150.0">
-								      <items>
-      										  <FXCollections fx:factory="observableArrayList">
-        								        <String fx:value="1" />
-                                                <String fx:value="2" />
-                                              </FXCollections>
-                                              
-                                      </items>                                                                            
-								  </ComboBox>
+										 
+                                  </ComboBox> 
 								
 								  
 								 <Label layoutX="10.0" layoutY="195.0" text="Querry:" />
-								 <TextArea fx:id="mongoQuery" layoutX="95.0" layoutY="195.0" prefHeight="200.0" prefWidth="312.0" />
+								 <TextArea fx:id="mongoQuery" layoutX="95.0" layoutY="195.0" prefHeight="200.0" prefWidth="572.0" />
 								  
-     						     <Button layoutX="105.0" layoutY="458.0" mnemonicParsing="false" onAction="#saveMongo" text="Save" AnchorPane.rightAnchor="854.0" AnchorPane.topAnchor="458.0" />
+     						     <Button layoutX="95.0" layoutY="406.0" mnemonicParsing="false" onAction="#saveMongo" text="Save" AnchorPane.rightAnchor="901.0" AnchorPane.topAnchor="406.0" />
+      
      
                     
      

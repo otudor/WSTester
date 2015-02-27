@@ -18,8 +18,7 @@ public class MongoPreProcessor implements Processor {
 		exchange.setProperty("step", step);
 		
 		IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
-		MongoService service = (MongoService) projectFinder.getServiceById(step.getServiceId());
-		
+		MongoService service = (MongoService) projectFinder.getServiceById(step.getServiceId());		
 		String operation = "";
 		switch (step.getAction()) {
 			case SELECT:{
