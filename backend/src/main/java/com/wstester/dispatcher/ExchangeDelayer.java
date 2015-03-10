@@ -1,20 +1,39 @@
 package com.wstester.dispatcher;
 
-import org.springframework.context.support.AbstractXmlApplicationContext;
-
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Step;
 import com.wstester.persistance.ResponseService;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ICamelContextManager;
 import com.wstester.services.definition.IStepManager;
+import com.wstester.services.definition.IVariableManager;
 import com.wstester.util.ProjectProperties;
 
 public class ExchangeDelayer {
 
 	private CustomLogger log = new CustomLogger(ExchangeDelayer.class);
 	
-	public void delay(Step step) throws Exception{
+	public boolean delayByVariable(String variableId) throws Exception{
+		
+		log.info(variableId, "Waiting for variable to be assigned");
+		ProjectProperties properties = new ProjectProperties();
+		Long timeout = properties.getLongProperty("stepFinishTimeout");
+		IVariableManager variableManager = ServiceLocator.getInstance().lookup(IVariableManager.class);
+		
+		while((variableManager.getVariableContent(variableId)==null || variableManager.getVariableContent(variableId).isEmpty()) && timeout >= 0) {
+			log.info(variableId,"Variable not assigned");
+			timeout-=1000;
+			Thread.sleep(1000);
+		}
+		
+		if(variableManager.getVariableContent(variableId)==null || variableManager.getVariableContent(variableId).isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public void delayByStep(Step step) throws Exception{
 		
 		ProjectProperties properties = new ProjectProperties();
 		Long timeout = properties.getLongProperty("stepFinishTimeout");
@@ -32,8 +51,7 @@ public class ExchangeDelayer {
 		
 		// get a instance of ResponseService to get the result from the H2 DB
 		ICamelContextManager camelContextManager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
-		AbstractXmlApplicationContext camelContext = camelContextManager.getCamelContext();
-		ResponseService responseService = camelContext.getBean("responseServiceImpl", ResponseService.class);
+		ResponseService responseService = camelContextManager.getCamelContext().getBean("responseServiceImpl", ResponseService.class);;
 		
 		// Get a instance of IStepManager to check the lastRunDate of the step
 		IStepManager stepManager = ServiceLocator.getInstance().lookup(IStepManager.class);

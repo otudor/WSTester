@@ -1,5 +1,7 @@
 package com.wstester.testFactory;
 
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -19,7 +21,7 @@ public class SoapStepController {
     @FXML
     private String stepId = null;  
     
-    public void setStep(String stepId) {
+    public void setStep(String stepId, List<String> higherTestList) {
 		this.stepId = stepId;
 		
     	clearFields();
@@ -33,7 +35,7 @@ public class SoapStepController {
 		}
 		
         stepController.setStep(stepId);
-        stepController.setCommonFields();  	
+        stepController.setCommonFields(higherTestList);  	
         
         if(step instanceof SoapStep) {
     		if(((SoapStep) step).getRequest() != null) {
@@ -59,7 +61,8 @@ public class SoapStepController {
     	SoapStep newStep = new SoapStep();    	
     	newStep.setServerId(stepController.getServer().getId());
     	newStep.setServiceId(stepController.getService().getId());
-    	newStep.setName(stepController.getName());   
+    	newStep.setName(stepController.getName());
+    	newStep.setDependsOn(stepController.getDependsOn());
     	newStep.setRequest(soapRequest.getText());
     	
     	//TODO: replace this method to one from projectFinder

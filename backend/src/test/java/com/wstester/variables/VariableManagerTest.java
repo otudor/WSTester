@@ -31,7 +31,7 @@ public class VariableManagerTest extends TestBaseClass{
 		IVariableManager manager = ServiceLocator.getInstance().lookup(IVariableManager.class);
 		
 		Variable projectVariableAfter = manager.getVariable(projectVariable.getId());
-		assertEquals(projectVariable, projectVariableAfter);
+		assertEquals(projectVariable.getId(), projectVariableAfter.getId());
 		
 		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
 		assertEquals(response.getStatus(), ExecutionStatus.PASSED);

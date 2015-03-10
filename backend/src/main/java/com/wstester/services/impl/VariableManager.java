@@ -22,7 +22,8 @@ public class VariableManager implements IVariableManager {
 	@Override
 	public void addVariable(Variable variable) {
 		log.info(variable.getId(), "Adding variable to the variableList: " + variable.toString());
-		variableList.add(variable);
+		Variable copyVariable = new Variable(variable);
+		variableList.add(copyVariable);
 	}
 	
 	@Override

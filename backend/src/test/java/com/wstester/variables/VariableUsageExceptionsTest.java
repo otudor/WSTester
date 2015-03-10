@@ -13,7 +13,7 @@ import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
 import com.wstester.services.impl.TestRunner;
 
-public class VariableUsageExceptions extends TestBaseClass {
+public class VariableUsageExceptionsTest extends TestBaseClass {
 
 	@Test
 	public void variableNotFound() throws Exception {
@@ -44,7 +44,7 @@ public class VariableUsageExceptions extends TestBaseClass {
 		
 		testRunner.run(testProject);
 
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 50000L);
 				
 		assertTrue(response.getStatus().equals(ExecutionStatus.ERROR));
 		assertEquals("NotFoundException:Variable with name: name has empty content!", response.getErrorMessage());
@@ -62,7 +62,7 @@ public class VariableUsageExceptions extends TestBaseClass {
 		
 		testRunner.run(testProject);
 
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 50000L);
 				
 		assertTrue(response.getStatus().equals(ExecutionStatus.ERROR));
 		assertEquals("NotFoundException:Variable with name: name has empty content!", response.getErrorMessage());

@@ -23,7 +23,7 @@ public class RouteDispatcher extends GeneralExceptionRoute{
 		
 		from("jms:startQueue?concurrentConsumers=20&asyncConsumer=true")
 		.bean(StepManager.class, "addStep")
-		.bean(ExchangeDelayer.class, "delay")
+		.bean(ExchangeDelayer.class, "delayByStep")
 		.process(new VariableUsageProcessor())
 		.choice()
 			.when(new Predicate() {				

@@ -96,13 +96,11 @@ public abstract class Step implements Serializable {
 	
 	public void copyFrom(Step source){
 		
-		setAssertList(source.getAssertList());
 		setAssetMap(source.getAssetMap());
 		setDependsOn(source.getDependsOn());
 		setName(source.getName());
 		setServerId(source.getServerId());
 		setServiceId(source.getServiceId());
-		setVariableList(source.getVariableList());
 	}
 	
 	@Override

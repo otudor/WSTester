@@ -21,6 +21,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import com.wstester.dispatcher.ExchangeDelayer;
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Step;
 import com.wstester.model.Variable;
@@ -54,12 +55,20 @@ public class VariableUsageProcessor implements Processor {
 				if(variable != null) {
 					if(variable.getContent() == null || variable.getContent().trim().isEmpty()) {
 						
-						throw new NotFoundException("Variable with name: " + variableName + " has empty content!");
-					} else {
-						log.info(step.getId(), "Replacing variable " + variableName + " with " + variable.getContent());
-						stepXML = stepXML.replace("${" + variableName + "}", variable.getContent());
+						log.info(step.getId(), "Waiting for variable: " + variable.getId());
+						boolean succeeded = new ExchangeDelayer().delayByVariable(variable.getId());
+						
+						if(!succeeded) {
+							log.error(step.getId(), "Variable with name: " + variableName + " has empty content!");
+							throw new NotFoundException("Variable with name: " + variableName + " has empty content!");
+						}
 					}
+					
+					log.info(step.getId(), "Replacing variable " + variableName + " with " + variable.getContent());
+					stepXML = stepXML.replace("${" + variableName + "}", variable.getContent());
+					
 				} else {
+					log.error(step.getId(), "Variable with name: " + variableName + " was not found!");
 					throw new NotFoundException("Variable with name: " + variableName + " was not found!");
 				}
 				

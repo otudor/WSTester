@@ -1,6 +1,7 @@
 package com.wstester.testFactory;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -95,7 +96,7 @@ public class RestStepController {
 		this.addCookieMethod();
 	}
 	
-	public void setStep(String stepId){
+	public void setStep(String stepId, List<String> higherTestList){
 		this.stepId = stepId;
 		
     	clearFields();
@@ -109,7 +110,7 @@ public class RestStepController {
 		}
 		
         stepController.setStep(stepId);
-        stepController.setCommonFields();
+        stepController.setCommonFields(higherTestList);
         
     	if(step instanceof RestStep){
 
@@ -246,6 +247,7 @@ public class RestStepController {
     	newStep.setServerId(stepController.getServer() == null ? null : stepController.getServer().getId());
     	newStep.setServiceId(stepController.getService() == null ? null : stepController.getService().getId());
     	newStep.setName(stepController.getName());
+    	newStep.setDependsOn(stepController.getDependsOn());
     	newStep.setMethod(restMethod.getValue());
     	newStep.setContentType(contentType.getText());
     	

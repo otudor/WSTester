@@ -1,6 +1,7 @@
 package com.wstester.testFactory;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -29,7 +30,9 @@ public class StepController implements Initializable{
 	@FXML
 	private TextField stepName;
 	@FXML
-	private Button saveBtn; 
+	private Button saveBtn;
+	@FXML
+	private ComboBox<Step> dependsOn;
 	
 	private String stepId;
 	
@@ -51,15 +54,19 @@ public class StepController implements Initializable{
 		return serviceBox.getValue();
 	}
 	
-	public String getName(){
+	public String getName() {
 		return stepName.getText();
 	}
 	
-	public void setCommonFields() {
+	public String getDependsOn() {
+		return (String) dependsOn.getValue().getId();
+	}
+	
+	public void setCommonFields(List<String> higherTestList) {
 		
 		clearFields();
 		
-		populateFields();
+		populateFields(higherTestList);
 	}
 
 	private void clearFields() {
@@ -69,9 +76,11 @@ public class StepController implements Initializable{
 		serviceBox.getItems().clear();
 		serviceBox.setValue(null);
 		stepName.setText("");
+		dependsOn.getItems().clear();
+		dependsOn.setValue(null);
 	}
 	
-	private void populateFields() {
+	private void populateFields(List<String> higherTestList) {
 		
 		IProjectFinder projectFinder = null;
 		try {
@@ -104,7 +113,18 @@ public class StepController implements Initializable{
 		}
 		
 		// set the step name
-		stepName.setText(step.getName());		
+		stepName.setText(step.getName());	
+		
+		// set the dependsOn
+		for(String stepId : higherTestList) {
+			
+			Step higherStep= projectFinder.getStepById(stepId);
+			dependsOn.getItems().add(higherStep);
+			
+			if(step.getDependsOn() != null && step.getDependsOn().equals(stepId)) {
+				dependsOn.setValue(higherStep);
+			}
+		}
 	}
 
 	public void serverChangedEvent(){

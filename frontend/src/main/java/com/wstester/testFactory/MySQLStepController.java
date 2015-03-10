@@ -1,5 +1,7 @@
 package com.wstester.testFactory;
 
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -19,7 +21,7 @@ public class MySQLStepController{
 	
 	private String stepId;
 		
-	public void setStep(String stepId){
+	public void setStep(String stepId, List<String> higherTestList){
 		this.stepId = stepId;
 		
     	clearFields();
@@ -33,7 +35,7 @@ public class MySQLStepController{
 		}
 		
         stepController.setStep(stepId);
-        stepController.setCommonFields();
+        stepController.setCommonFields(higherTestList);
         
         if(step instanceof MySQLStep){
     		if(((MySQLStep) step).getOperation() != null){
@@ -64,6 +66,7 @@ public class MySQLStepController{
     	newStep.setServerId(stepController.getServer() == null ? null : stepController.getServer().getId());
     	newStep.setServiceId(stepController.getService() == null ? null : stepController.getService().getId());
     	newStep.setName(stepController.getName());
+    	newStep.setDependsOn(stepController.getDependsOn());
     	newStep.setOperation(mysqlOperation.getText());
 		
     	//TODO: add in projectFinder an operation setStepById

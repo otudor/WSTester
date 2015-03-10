@@ -45,6 +45,15 @@ public class Variable implements Serializable {
 		setContent(content);
 	}
 	
+	public Variable(Variable variable) {
+		
+		this.id = variable.getId();
+		this.name = variable.getName();
+		this.type = variable.getType();
+		this.selector = variable.getSelector();
+		this.content = variable.getContent();
+	}
+
 	public String getId() {
 		return this.id;
 	}

@@ -24,6 +24,7 @@ import javafx.concurrent.Task;
 import javafx.application.Platform;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.wstester.elements.Dialog;
@@ -198,7 +199,10 @@ public class TestMachineController {
 		}
 		MongoStepController mongoStepController = loader.<MongoStepController> getController();
 
-		mongoStepController.setStep(stepId);
+		TreeItem<Object> selected = treeView.getSelectionModel().getSelectedItem();
+		List<String> higherTestList = getHigherTests(selected);
+		mongoStepController.setStep(stepId, higherTestList);
+		
 		definitionTab.setContent(loader.getRoot());
 		responseTab.setDisable(false);
 		variableTab.setDisable(false);
@@ -215,7 +219,10 @@ public class TestMachineController {
 		}
 		RestStepController restStepController = loader.<RestStepController> getController();
 
-		restStepController.setStep(stepId);
+		TreeItem<Object> selected = treeView.getSelectionModel().getSelectedItem();
+		List<String> higherTestList = getHigherTests(selected);
+		restStepController.setStep(stepId, higherTestList);
+		
 		definitionTab.setContent(loader.getRoot());
 		responseTab.setDisable(false);
 		variableTab.setDisable(false);
@@ -232,7 +239,10 @@ public class TestMachineController {
 		}
 		MySQLStepController mysqlStepController = loader.<MySQLStepController>getController();
 		
-		mysqlStepController.setStep(stepId);
+		TreeItem<Object> selected = treeView.getSelectionModel().getSelectedItem();
+		List<String> higherTestList = getHigherTests(selected);
+		mysqlStepController.setStep(stepId, higherTestList);
+		
 		definitionTab.setContent(loader.getRoot());
 		responseTab.setDisable(false);
 		variableTab.setDisable(false);
@@ -249,7 +259,10 @@ public class TestMachineController {
 		}
 		SoapStepController soapStepController = loader.<SoapStepController>getController();
 		
-		soapStepController.setStep(stepId);
+		TreeItem<Object> selected = treeView.getSelectionModel().getSelectedItem();
+		List<String> higherTestList = getHigherTests(selected);
+		soapStepController.setStep(stepId, higherTestList);
+		
 		definitionTab.setContent(loader.getRoot());
 		responseTab.setDisable(false);
 		variableTab.setDisable(false);
@@ -675,5 +688,21 @@ public class TestMachineController {
 	private void disableVariablesTab() {
 		definitionTab.getTabPane().getSelectionModel().select(definitionTab);
 		variableTab.setDisable(true);
+	}
+	
+	private List<String> getHigherTests(TreeItem<Object> treeItem) {
+		
+		List<String> higherTests = new ArrayList<String>();
+		
+		if(treeItem.previousSibling() != null) {
+			higherTests = getHigherTests(treeItem.previousSibling());
+		}
+		
+		if(!treeView.getSelectionModel().getSelectedItem().equals(treeItem)) {
+			Step currentStep = (Step) treeItem.getValue();
+			higherTests.add(currentStep.getId());
+		}
+		
+		return higherTests;
 	}
 }

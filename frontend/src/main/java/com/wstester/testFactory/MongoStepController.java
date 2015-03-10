@@ -1,5 +1,7 @@
 package com.wstester.testFactory;
 
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -26,7 +28,7 @@ public class MongoStepController {
     
     private String mongoId = null;            
 
-    public void setStep(String mongoId){
+    public void setStep(String mongoId, List<String> higherTestList){
 		this.mongoId = mongoId;
 		
     	clearFields();
@@ -40,7 +42,7 @@ public class MongoStepController {
 		}
 		
         stepController.setStep(mongoId);
-        stepController.setCommonFields();  
+        stepController.setCommonFields(higherTestList);  
         
         
         if (step instanceof MongoStep) {
@@ -76,11 +78,12 @@ public class MongoStepController {
 			e.printStackTrace();
 			Dialog.errorDialog("Could not find the environmentList. Please try again!", null);
 		}
-				
+		
     	MongoStep newStep = new MongoStep();    	
     	newStep.setServerId(stepController.getServer().getId());
     	newStep.setServiceId(stepController.getService().getId());
     	newStep.setName(stepController.getName());
+    	newStep.setDependsOn(stepController.getDependsOn());
     	newStep.setCollection(mongoCollection.getText());
     	newStep.setAction(mongoAction.getValue());
     	newStep.setQuery(mongoQuery.getText());
