@@ -1,29 +1,20 @@
 package com.wstester.main;
 
-import com.wstester.RightClickMenu.RadialGlobalMenu;
+import com.wstester.elements.Dialog;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.ICamelContextManager;
+import com.wstester.util.MainConstants;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class MainLauncher extends Application {
 	
 	public static Stage stage; 
-    public static String screen1ID = "screen1";
-    public static String screen1File = "/fxml/main/screen1.fxml";
-    public static String screen2ID = "maineaa";
-    public static String screen2File = "/fxml/main/WsTesterMain.fxml";
-    public static String screen3ID = "loadingScreen";
-    public static String screen3File = "/fxml/main/La.fxml";
-    public static String screen4ID = "rigthClickMenu";
-    public static String screen4File = "/fxml/main/RightClickMenu.fxml";
-    public RadialGlobalMenu radialMenu;
     
     @Override
     public void start(Stage primaryStage) {
@@ -31,22 +22,17 @@ public class MainLauncher extends Application {
     	MainLauncher.stage=primaryStage;
     
         ScreensController mainContainer = new ScreensController();
-        mainContainer.loadScreen(MainLauncher.screen1ID, MainLauncher.screen1File);
-        mainContainer.loadScreen(MainLauncher.screen2ID, MainLauncher.screen2File);
-        mainContainer.loadScreen(MainLauncher.screen3ID, MainLauncher.screen3File);
-        mainContainer.loadScreen(MainLauncher.screen4ID, MainLauncher.screen4File);
+        // loads all the screens that are used in the application
+        mainContainer.loadScreen(MainConstants.HOME_PAGE_FXML, MainConstants.HOME_PAGE_FXML.toString());
+        mainContainer.loadScreen(MainConstants.DESKTOP_FXML, MainConstants.DESKTOP_FXML.toString());
+        mainContainer.loadScreen(MainConstants.WELCOME_FXML, MainConstants.WELCOME_FXML.toString());
         
+        // sets the Welcome screen
+        mainContainer.setScreen(MainConstants.WELCOME_FXML);
         
+        // sets the Homepage screen
+        mainContainer.setScreen(MainConstants.HOME_PAGE_FXML);
         
-        mainContainer.setScreen(MainLauncher.screen3ID);
-//        mainContainer.unloadScreen(ScreensFramework.screen3ID);
-       
-        
-        
-        mainContainer.setScreen(MainLauncher.screen1ID);
-        
-
-       
         AnchorPane ancor = new AnchorPane();
         
         ancor.setMaxHeight(600);
@@ -60,33 +46,25 @@ public class MainLauncher extends Application {
         primaryStage.setMinHeight(825);
         primaryStage.setMinWidth(825);
 //        primaryStage.setFullScreen(true);
-        
-        
-        if (screen2ID.contains("maineaa")){
-        	scene.getStylesheets().add(getClass().getResource("/styles/application.css").toExternalForm()); 
-        }
-       
-        
+               
         primaryStage.setScene(scene);
-//        primaryStage.setFullScreen(true);
-        if (mainContainer.getScreen(screen2ID)!=null) {
-        	primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-    			public void handle(WindowEvent event) {
+
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+    		public void handle(WindowEvent event) {
     				
-    	    		ICamelContextManager manager = null;
-					try {
-						manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
-					} catch (Exception e) {
-						// TODO Make an exception screen to the user when he is notified that we can't close the camel context
-						e.printStackTrace();
-					}
+    	   		ICamelContextManager manager = null;
+				try {
+					manager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
+				} catch (Exception e) {
+					e.printStackTrace();
+					Dialog.errorDialog("The application couldn't be closed. Please try again!", MainLauncher.stage);
+				}
 					
-    	    		manager.closeCamelContext();
-    	    		System.exit(0); //NOPMD
-    			}
-    		});  
-        
-        } 
+   	    		manager.closeCamelContext();
+   	    		System.exit(0); //NOPMD
+   			}
+   		});  
+
         primaryStage.show();
     }
 

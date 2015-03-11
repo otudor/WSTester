@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="ancor" prefHeight="825.0" prefWidth="825.0" style="-fx-background-color: #dcf3f7;" styleClass="tronetry.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.main.HomePageController">
+   <children>
+      <Label layoutX="43.0" layoutY="38.0" styleClass="insidelabel" stylesheets="@../../styles/tronetry.css" text="Project Manager" textFill="#00CCFF">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="newProject" fitHeight="150.0" fitWidth="200.0" layoutX="131.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="loadProject" fitHeight="150.0" fitWidth="200.0" layoutX="505.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>

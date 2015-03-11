@@ -58,8 +58,7 @@ import com.wstester.services.definition.IProjectFinder;
 import com.wstester.services.definition.ITestProjectActions;
 import com.wstester.util.MainConstants;
 
-public class WsTesterMainController implements Initializable, ControlledScreen {
-
+public class DesktopController implements Initializable, ControlledScreen {
 
 	@FXML
 	private AnchorPane pane;
@@ -117,7 +116,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	ScreensController myController;
 	public static Stage stageEnvironment;
 
-	public void setScreenParent(ScreensController screenParent){
+	public void setScreenParent(ScreensController screenParent) {
 		myController = screenParent;
 	}
 
@@ -125,6 +124,11 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
+		topPane.getStylesheets().add(getClass().getResource("/styles/application.css").toExternalForm());
+		bar.getStylesheets().add(getClass().getResource("/styles/application.css").toExternalForm());
+        topPane.getStyleClass().add("mainWindow");
+        bar.getStyleClass().add("bar");
+        
 		initializeCornerMenu();
 		this.createIcons();
 		this.createAssetsWindow();
@@ -967,7 +971,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 					isDisplayed2 = true;
 					try {
 						 
-						WsTesterMainController.stageEnvironment=stageEnv;
+						DesktopController.stageEnvironment=stageEnv;
 						root = FXMLLoader.load(getClass().getResource(MainConstants.ENVIRONMENT_MANAGER_FXML.toString()));
 						EnvironmentsAppFactory factory = new EnvironmentsAppFactory();
 						MainPresenter mainPresenter = factory.getMainPresenter();
@@ -1058,7 +1062,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		vbox2.setPadding(new Insets(2)); // Set all sides to 10
 		vbox2.setSpacing(2);
 		ImageView imageComp = new ImageView(new Image(
-				WsTesterMainController.class.getResourceAsStream(iconPath)));
+				DesktopController.class.getResourceAsStream(iconPath)));
 		imageComp
 		.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
 
@@ -1210,7 +1214,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 		vbox3.setPadding(new Insets(2)); // Set all sides to 10
 		vbox3.setSpacing(2);
 		ImageView imageComp = new ImageView(new Image(
-				WsTesterMainController.class.getResourceAsStream(iconPath)));
+				DesktopController.class.getResourceAsStream(iconPath)));
 		imageComp
 		.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
 
@@ -1380,7 +1384,7 @@ public class WsTesterMainController implements Initializable, ControlledScreen {
 						Dialog.errorDialog("Could't go back to the home page. Please try again!", stage);
 					}
 					
-					myController.setScreen(MainLauncher.screen1ID);
+					myController.setScreen(MainConstants.HOME_PAGE_FXML);
 				}
 	    	 
 	     });

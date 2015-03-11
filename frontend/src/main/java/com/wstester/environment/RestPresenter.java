@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 
 import org.controlsfx.control.PopOver;
 
-import com.wstester.main.WsTesterMainController;
+import com.wstester.main.DesktopController;
 import com.wstester.model.RestService;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
@@ -331,7 +331,7 @@ public void setRest( final String serverUID, final String serviceUID)
 				        pop.setId("Asset Input");
 				        pop.setAutoFix(true);
 				        
-				        pop.show(WsTesterMainController.stageEnvironment);
+				        pop.show(DesktopController.stageEnvironment);
 //				        if (WsTesterMainController.stageEnvironment == null && pop.isShowing()) {
 //				        	pop.hide();
 //				        }

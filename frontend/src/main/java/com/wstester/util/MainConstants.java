@@ -36,7 +36,12 @@ public enum MainConstants {
 	REST_WINDOW("/fxml/REST/DragFinalUI.fxml"),
 	REST_WINDOW_ICON("/images/Downloads-Folder.png"),
 	ENVIRONMENTS_ICON("/images/Globe-Folder.png"),
-	ENVIRONMENT_MANAGER_FXML("/fxml/environment/EnvironmentManager.fxml")
+	ENVIRONMENT_MANAGER_FXML("/fxml/environment/EnvironmentManager.fxml"),
+	HOME_PAGE_FXML("/fxml/main/homePage.fxml"),
+	DESKTOP_FXML("/fxml/main/Desktop.fxml"),
+	WELCOME_FXML("/fxml/main/Welcome.fxml"),
+	NEW_PROJECT_IMAGE("/images/newProject.png"),
+	LOAD_PROJECT_IMAGE("/images/loadProject.png")
 	;
 	
 	private String value;

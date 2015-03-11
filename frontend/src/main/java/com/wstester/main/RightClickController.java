@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import com.wstester.RightClickMenu.DemoUtil;
 import com.wstester.RightClickMenu.RadialGlobalMenu;
+import com.wstester.util.MainConstants;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,7 +17,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 /**
  * 
@@ -25,7 +25,6 @@ import javafx.stage.Stage;
  */
 public class RightClickController implements Initializable, ControlledScreen {
 	
-	private Stage stageSoap = new Stage();
     ScreensController myController;
     private Group container;
     private RadialGlobalMenu radialMenu;
@@ -58,7 +57,7 @@ public class RightClickController implements Initializable, ControlledScreen {
 
      @FXML
     private void goToScreen2(ActionEvent event){
-       myController.setScreen(MainLauncher.screen2ID);
+       myController.setScreen(MainConstants.DESKTOP_FXML);
     
         
        

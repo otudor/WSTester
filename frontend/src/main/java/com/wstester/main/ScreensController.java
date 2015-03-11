@@ -2,6 +2,8 @@ package com.wstester.main;
 
 import java.util.HashMap;
 
+import com.wstester.util.MainConstants;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -15,40 +17,25 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 public class ScreensController  extends StackPane {
+	
     //Holds the screens to be displayed
-
-    private HashMap<String, Node> screens = new HashMap<>();
-    
-    public ScreensController() {
-        super();
-    }
+    private static HashMap<MainConstants, Node> screens = new HashMap<>();
 
     //Add the screen to the collection
-    public void addScreen(String name, Node screen) {
+    public void addScreen(MainConstants name, Node screen) {
         screens.put(name, screen);
-    }
-
-    //Returns the Node with the appropriate name
-    
-    
-    public Node getScreen(String name) {
-        return screens.get(name);
     }
 
     //Loads the fxml file, add the screen to the screens collection and
     //finally injects the screenPane to the controller.
-    public boolean loadScreen(String name, String resource) {
+    public boolean loadScreen(MainConstants name, String fxml) {
         try {
-            FXMLLoader myLoader = new FXMLLoader(getClass().getResource(resource));
+            FXMLLoader myLoader = new FXMLLoader(getClass().getResource(fxml));
             Parent loadScreen = (Parent) myLoader.load();
             ControlledScreen myScreenControler = ((ControlledScreen) myLoader.getController());
             
-            myScreenControler.setScreenParent(this);
-            if (name.contains("mainea"))
-            {
-           	
-            loadScreen.getChildrenUnmodifiable().get(0).getStyleClass().add("mainWindow");
-            loadScreen.getChildrenUnmodifiable().get(1).getStyleClass().add("bar");
+            if(myScreenControler != null) {
+            	myScreenControler.setScreenParent(this);
             }
             
             addScreen(name, loadScreen);
@@ -63,7 +50,7 @@ public class ScreensController  extends StackPane {
     //First it makes sure the screen has been already loaded.  Then if there is more than
     //one screen the new screen is been added second, and then the current screen is removed.
     // If there isn't any screen being displayed, the new screen is just added to the root.
-    public boolean setScreen(final String name) {
+    public boolean setScreen(final MainConstants name) {
   
         if (screens.get(name) != null) {   //screen loaded
             final DoubleProperty opacity = opacityProperty();
@@ -97,47 +84,5 @@ public class ScreensController  extends StackPane {
             System.out.println("screen hasn't been loaded!!!");
             return false;
         }
-    }
-        
-   
-    public boolean setScreen1(final String name) {
-    	  
-        if (screens.get(name) != null) {   //screen loaded
-        	getChildren().remove(0);
-        	getChildren().add(0, screens.get(name));
-           
-            return true;
-        } else {
-            System.out.println("screen hasn't been loaded!!!");
-            return false;
-        }
-    }
-        
-
-
-        /*Node screenToRemove;
-         if(screens.get(name) != null){   //screen loaded
-         if(!getChildren().isEmpty()){    //if there is more than one screen
-         getChildren().add(0, screens.get(name));     //add the screen
-         screenToRemove = getChildren().get(1);
-         getChildren().remove(1);                    //remove the displayed screen
-         }else{
-         getChildren().add(screens.get(name));       //no one else been displayed, then just show
-         }
-         return true;
-         }else {
-         System.out.println("screen hasn't been loaded!!! \n");
-         return false;
-         }*/
-    
-
-    //This method will remove the screen with the given name from the collection of screens
-    public boolean unloadScreen(String name) {
-        if (screens.remove(name) == null) {
-            System.out.println("Screen didn't exist");
-            return false;
-        } else {
-            return true;
-        }
-    }
+    }  
 }

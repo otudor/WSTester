@@ -30,7 +30,6 @@ public class Progress  {
 	@FXML
 	private AnchorPane pane;
 	
-	
 	public void start(Stage stage , ICamelContextManager camelContextManager  )  {
 
 		Task<Void> task1 = new Task<Void>() {

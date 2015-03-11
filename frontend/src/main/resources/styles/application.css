@@ -1,4 +1,4 @@
-#mainWindow{
+.mainWindow{
     -fx-background-image: url("../images/backgroundbluelight.jpg");
     -fx-background-repeat: stretch;  
     -fx-background-size: stretch;
