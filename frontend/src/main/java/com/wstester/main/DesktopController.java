@@ -1,7 +1,5 @@
 package com.wstester.main;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -33,7 +31,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -58,6 +55,7 @@ import com.wstester.services.definition.IProjectFinder;
 import com.wstester.services.definition.ITestProjectActions;
 import com.wstester.util.MainConstants;
 
+//TODO: refactor this class
 public class DesktopController implements Initializable, ControlledScreen {
 
 	@FXML
@@ -81,7 +79,6 @@ public class DesktopController implements Initializable, ControlledScreen {
 	private VBox testFactoryIcon= new VBox(); 
 	private VBox variablesIcon = new VBox();  //v
 	private VBox startButton= new VBox();
-	private VBox soapIcon= new VBox(); //SOAP
 	private VBox restWindowIcon= new VBox(); //REST
 	private VBox environmentIcon= new VBox(); //ENV
 	private VBox varWindowIcon= new VBox(); //v
@@ -107,7 +104,6 @@ public class DesktopController implements Initializable, ControlledScreen {
 	public boolean visible2 = false;
 	MenuBar menuBar ;
 	Menu menu;
-	private Menu menuRnd = new Menu("CreateRnd");
 	Parent root;
 	final Delta dragDelta2 = new Delta();
 	List<VBox> lista = new ArrayList<VBox>();
@@ -124,9 +120,9 @@ public class DesktopController implements Initializable, ControlledScreen {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		topPane.getStylesheets().add(getClass().getResource("/styles/application.css").toExternalForm());
+		pane.getStylesheets().add(getClass().getResource("/styles/application.css").toExternalForm());
 		bar.getStylesheets().add(getClass().getResource("/styles/application.css").toExternalForm());
-        topPane.getStyleClass().add("mainWindow");
+		pane.getStyleClass().add("mainWindow");
         bar.getStyleClass().add("bar");
         
 		initializeCornerMenu();
@@ -327,8 +323,6 @@ public class DesktopController implements Initializable, ControlledScreen {
 				stageRightClickMenu.setResizable(false);
 				stageRightClickMenu.setScene(scene);
 				stageRightClickMenu.centerOnScreen();
-				final Dimension screenSize = Toolkit.getDefaultToolkit()
-					.getScreenSize();
 				stageRightClickMenu.setWidth(MainLauncher.stage.getWidth());
 				stageRightClickMenu.setHeight(MainLauncher.stage.getHeight());
 				stageRightClickMenu.setX(MainLauncher.stage.getX());;
@@ -399,10 +393,6 @@ public class DesktopController implements Initializable, ControlledScreen {
 				
 				stageRightClickMenu.show();
 				}
-				
-			}
-			private void setRadialMenuVisible( boolean b) {
-				radialMenu.transitionVisible(visible);
 				
 			}
 			
@@ -1072,7 +1062,6 @@ public class DesktopController implements Initializable, ControlledScreen {
 		imageComp.setEffect(reflection);
 		Timeline bouncer=new Timeline();
 		//boolean mouseIn = false;
-		boolean mouseIn = false;  
 //		imageComp.setOnMouseEntered(new EventHandler<MouseEvent>() {
 //			@Override public void handle(MouseEvent mouseEvent) {
 //				// mouseIn = true;
@@ -1159,46 +1148,6 @@ public class DesktopController implements Initializable, ControlledScreen {
 		//t2.setFont(Font.font(null, FontWeight.BOLD, 10));
 		return t2;
 	}
-	/*
-	private HBox downBox() {
-		HBox box = new HBox();
-		MenuBar menuBar = new MenuBar();
-		Menu menu = new Menu("Start");
-		menuBar.getMenus().add(menu);
-		box.getChildren().add(menuBar);
-		return box;
-
-	}
-	 */
-	//to delete
-	//@FXML
-	private void handleButtonAction(ActionEvent event) {
-		System.out.println("Minimize!");
-		Menu menu = new Menu("Start");
-		Button btn = new Button("Test");
-		HBox container = new HBox();
-		container.setSpacing(5);
-		container.getChildren().add(btn);
-		bar.getChildren().add(btn);
-		//menuBar.getMenus().add(menu);
-		//menuBar.applyCss();
-		//AnchorPane.setTopAnchor(menuBar, 15.0);
-		//bar.getChildren().add(menuBar);
-	}
-
-	//minimize the assets window
-	/*stage.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
-		  @Override public void changed(ObservableValue<? extends Boolean> prop, Boolean oldValue, Boolean newValue) {
-		    System.out.println("Iconified? " + newValue);
-		    if(isDisplayed)
-		    	stage.hide();
-			System.out.println("Minimize!");
-			//bar.getChildren().add(menuBar);
-		  }
-		});
-	 */
-	//maximize the assets window
-	//menuBar
 
 	private void arrangeIcons(int i){
 
@@ -1224,7 +1173,7 @@ public class DesktopController implements Initializable, ControlledScreen {
 		imageComp.setEffect(reflection);
 		Timeline bouncer=new Timeline();
 		//boolean mouseIn = false;
-		boolean mouseIn = false;  
+
 //		imageComp.setOnMouseEntered(new EventHandler<MouseEvent>() {
 //			@Override public void handle(MouseEvent mouseEvent) {
 //				// mouseIn = true;
