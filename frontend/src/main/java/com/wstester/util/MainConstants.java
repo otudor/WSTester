@@ -36,8 +36,7 @@ public enum MainConstants {
 	REST_WINDOW("/fxml/REST/DragFinalUI.fxml"),
 	REST_WINDOW_ICON("/images/Downloads-Folder.png"),
 	ENVIRONMENTS_ICON("/images/Globe-Folder.png"),
-	ENVIRONMENT_MANAGER_FXML("/fxml/environment/EnvironmentManager.fxml")
-	;
+	ENVIRONMENT_MANAGER_FXML("/fxml/environment/EnvironmentManager.fxml");
 	
 	private String value;
 	

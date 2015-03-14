@@ -18,6 +18,6 @@ public class MysqlRoute extends MysqlExceptionRoute {
 		.recipientList(simple("jdbc:mySqlConnection"))
 		
 		.process(new MysqlPostProcessor())
-		.to("jms:topic:responseTopic");
+		.to("jms:variableQueue");
 	}
 }

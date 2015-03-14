@@ -3,26 +3,24 @@ package com.wstester.asserts;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
-
 import org.codehaus.jettison.json.JSONArray;
 import org.junit.Test;
 
 import com.wstester.camel.TestBaseClass;
 import com.wstester.model.Assert;
+import com.wstester.model.AssertOperation;
 import com.wstester.model.AssertStatus;
-import com.wstester.model.Asset;
 import com.wstester.model.ExecutionStatus;
+import com.wstester.model.MySQLStep;
 import com.wstester.model.Response;
 import com.wstester.model.TestProject;
 import com.wstester.model.TestUtils;
-import com.wstester.services.impl.AssetManager;
 import com.wstester.services.impl.TestRunner;
 
 public class AssertTest extends TestBaseClass{
 
 	@Test
-	public void assertPasses() throws Exception{
+	public void assertPassesWithEquals() throws Exception{
 		
 		TestProject testProject = TestUtils.getAssertTestProject();
 		setTestProject(testProject);
@@ -43,7 +41,7 @@ public class AssertTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void assertFailed() throws Exception{
+	public void assertFailedWithEquals() throws Exception{
 		
 		TestProject testProject = TestUtils.getAssertTestProject();
 		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().get(0).setExpected("[{detalii=ion}]");
@@ -65,10 +63,12 @@ public class AssertTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void onePassesOneFails() throws Exception{
+	public void onePassesOneFailsWithEquals() throws Exception{
 		
 		TestProject testProject = TestUtils.getAssertTestProject();
 		Assert azzert = new Assert();
+		azzert.setActual(testProject.getVariableList().get(0).getName());
+		azzert.setOperation(AssertOperation.EQUALS);
 		azzert.setExpected("[{detalii=ion}]");
 		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().add(azzert);
 		setTestProject(testProject);
@@ -94,18 +94,13 @@ public class AssertTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void expectedFromAsset() throws Exception{
-		
-		Asset expectedOutput = new Asset();
-		expectedOutput.setPath("src/test/resources");
-		expectedOutput.setName("ExpectedOutput.txt");
-
-		AssetManager manager = new AssetManager();
-		manager.addAsset(expectedOutput);
-		manager.waitUntilFileCopied(expectedOutput);
+	public void assertPassedWithSmaller() throws Exception{
 		
 		TestProject testProject = TestUtils.getAssertTestProject();
-		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().get(0).setExpected(expectedOutput);
+		testProject.getVariableList().get(0).setSelector("response:$.[0].count(*)");
+		((MySQLStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setOperation("SELECT count(*) from angajati where detalii = 'popescu'");
+		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().get(0).setExpected("2");
+		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().get(0).setOperation(AssertOperation.SMALLER);
 		setTestProject(testProject);
 		
 		testRunner = new TestRunner(testProject);
@@ -120,11 +115,56 @@ public class AssertTest extends TestBaseClass{
 		assertEquals(1, response.getAssertResponseList().size());
 		assertEquals(response.getAssertResponseList().get(0).getStatus(), AssertStatus.PASSED);
 		assertEquals(response.getAssertResponseList().get(0).getMessage(), null);
-		assertEquals("popescu", result.getJSONObject(0).get("detalii"));
+		assertEquals(1, result.getJSONObject(0).get("count(*)"));
+	}
+	
+	@Test
+	public void assertFailedWithSmaller() throws Exception{
 		
-		File file = new File("assets/ExpectedOutput.txt");
-		file.delete();
+		TestProject testProject = TestUtils.getAssertTestProject();
+		testProject.getVariableList().get(0).setSelector("response:$.[0].count(*)");
+		((MySQLStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setOperation("SELECT count(*) from angajati where detalii = 'popescu'");
+		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().get(0).setExpected("0");
+		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().get(0).setOperation(AssertOperation.SMALLER);
+		setTestProject(testProject);
+		
+		testRunner = new TestRunner(testProject);
+		
+		testRunner.run(testProject);
+
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
+		
+		JSONArray result = new JSONArray(response.getContent());
+
+		assertTrue(response.getStatus().equals(ExecutionStatus.FAILED));
+		assertEquals(1, response.getAssertResponseList().size());
+		assertEquals(response.getAssertResponseList().get(0).getStatus(), AssertStatus.FAILED);
+		assertEquals(response.getAssertResponseList().get(0).getMessage(), "Expected: 0 but was: 1");
+		assertEquals(1, result.getJSONObject(0).get("count(*)"));
+	}
+	
+	@Test
+	public void assertPassedWithGreater() throws Exception{
+		
+		TestProject testProject = TestUtils.getAssertTestProject();
+		testProject.getVariableList().get(0).setSelector("response:$.[0].count(*)");
+		((MySQLStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setOperation("SELECT count(*) from angajati where detalii = 'popescu'");
+		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().get(0).setExpected("0");
+		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().get(0).setOperation(AssertOperation.GREATER);
+		setTestProject(testProject);
+		
+		testRunner = new TestRunner(testProject);
+		
+		testRunner.run(testProject);
+
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
+		
+		JSONArray result = new JSONArray(response.getContent());
+
+		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
+		assertEquals(1, response.getAssertResponseList().size());
+		assertEquals(response.getAssertResponseList().get(0).getStatus(), AssertStatus.PASSED);
+		assertEquals(response.getAssertResponseList().get(0).getMessage(), null);
+		assertEquals(1, result.getJSONObject(0).get("count(*)"));
 	}
 }
-
-

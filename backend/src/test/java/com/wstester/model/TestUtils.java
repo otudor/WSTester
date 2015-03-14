@@ -1429,7 +1429,8 @@ public class TestUtils {
 		
 		TestProject testProject = new TestProject();
 		testProject.setName("Test Project");
-		
+		Variable variable = new Variable("response:", "variable");
+		testProject.getVariableList().add(variable );
 		// construct service list
 		// Service 4
 		List<Service> serviceList = new ArrayList<Service>();
@@ -1469,11 +1470,12 @@ public class TestUtils {
 		mysqlStep.setServerId(server.getId());
 		mysqlStep.setServiceId(mysqlService.getId());
 		mysqlStep.setOperation("SELECT detalii from angajati where detalii = 'popescu'");
+		mysqlStep.addVariable(variable.getId());
 		Assert azzert = new Assert();
+		azzert.setActual(variable.getName());
+		azzert.setOperation(AssertOperation.EQUALS);
 		azzert.setExpected("[{detalii=popescu}]");
-		List<Assert> assertList = new ArrayList<Assert>();
-		assertList.add(azzert);
-		mysqlStep.setAssertList(assertList);
+		mysqlStep.addAssert(azzert);
 		stepList.add(mysqlStep);
 		
 		

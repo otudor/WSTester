@@ -11,6 +11,7 @@ import javax.xml.xpath.XPathFactory;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
+import org.codehaus.jettison.json.JSONException;
 import org.fusesource.hawtbuf.ByteArrayInputStream;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -131,10 +132,10 @@ public class VariableAssignmentProcessor implements Processor{
 		return value.getFirstChild().getNodeValue();
 	}
 	
-	private String getContentFromJson(String content, String variableId, String selector) {
+	private String getContentFromJson(String content, String variableId, String selector) throws JSONException {
 
 		content = content.replaceAll("=", ":");
-		String selectedValue = JsonPath.read(content, selector);
+		String selectedValue = JsonPath.read(content, selector).toString();
 		return selectedValue;
 	}
 }

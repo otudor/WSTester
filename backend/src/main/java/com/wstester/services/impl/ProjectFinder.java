@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.wstester.log.CustomLogger;
+import com.wstester.model.Assert;
 import com.wstester.model.Environment;
 import com.wstester.model.Server;
 import com.wstester.model.Service;
@@ -267,6 +268,13 @@ public class ProjectFinder implements IProjectFinder {
 		log.info(stepId, "Adding variable: " + variableId);
 		getStepById(stepId).addVariable(variableId);
 	}
+
+	@Override
+	public void addAssertForStep(String stepId, Assert asert) {
+		
+		log.info(stepId, "Adding assert: " + asert);
+		getStepById(stepId).addAssert(asert);
+	}
 	
 	@Override
 	public void removeTestSuiteById(String id) {
@@ -306,8 +314,15 @@ public class ProjectFinder implements IProjectFinder {
 	@Override
 	public void removeVariableFromStep(String stepId, String variableId) {
 		
-		log.info(stepId, "Removing variable from step: " + variableId);
+		log.info(stepId, "Removing from step the variable: " + variableId);
 		getStepById(stepId).getVariableList().remove(variableId);
+	}
+	
+	@Override
+	public void removeAssertFromStep(String stepId, Assert asert) {
+
+		log.info(stepId, "Removing from step the assert: " + asert.getId());
+		getStepById(stepId).getAssertList().remove(asert);
 	}
 	
 	@Override

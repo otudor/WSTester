@@ -4,6 +4,7 @@ public class WsException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 	private WsErrorCode werrorCode;
+	private String message;
 
 	public WsException(WsErrorCode errorCode) {
 		super();
@@ -24,7 +25,12 @@ public class WsException extends Exception {
 		super(cause);
 		this.werrorCode = errorCode;
 	}
-
+	
+	public WsException(Throwable cause, String message) {
+		super(cause);
+		this.message = message;
+	}
+	
 	public WsErrorCode getErrorCode() {
 		return werrorCode;
 	}
@@ -32,5 +38,8 @@ public class WsException extends Exception {
 	public void setErrorCode(WsErrorCode errorCode) {
 		this.werrorCode = errorCode;
 	}
-
+	
+	public String getMessage() {
+		return this.message;
+	}
 }
