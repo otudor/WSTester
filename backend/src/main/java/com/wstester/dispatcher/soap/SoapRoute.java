@@ -18,6 +18,6 @@ public class SoapRoute extends SoapExceptionRoute {
 		.recipientList(simple("cxf:bean:soapConnection"))
 		
 		.process(new SoapPostProcessor())
-		.to("jms:topic:responseTopic");
+		.to("jms:variableQueue");
 	}
 }

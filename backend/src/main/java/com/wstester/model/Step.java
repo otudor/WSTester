@@ -45,7 +45,15 @@ public abstract class Step implements Serializable {
 	public void setAssertList(List<Assert> asserts) {
 		this.assertList = asserts;
 	}
-
+	
+	public void addAssert(Assert asert) {
+		if(this.assertList == null) {
+			this.assertList = new ArrayList<Assert>();
+		}
+		
+		this.assertList.add(asert);
+	}
+	
 	public String getServiceId() {
 		return serviceId;
 	}

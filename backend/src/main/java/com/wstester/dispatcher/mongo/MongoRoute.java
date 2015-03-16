@@ -18,6 +18,6 @@ public class MongoRoute extends MongoExceptionRoute {
 		.dynamicRouter(method(MongoConnection.class, "getConnection"))
 		
 		.process(new MongoPostProcessor())
-		.to("jms:topic:responseTopic");
+		.to("jms:variableQueue");
 	}
 }

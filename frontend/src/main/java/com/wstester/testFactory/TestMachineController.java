@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wstester.asserts.AssertsController;
 import com.wstester.elements.Dialog;
 import com.wstester.log.CustomLogger;
 import com.wstester.main.MainLauncher;
@@ -58,9 +59,13 @@ public class TestMachineController {
 	@FXML
 	private Tab variableTab;
 	@FXML
+	private Tab assertsTab;
+	@FXML
 	private ResponseController responseController;
 	@FXML
 	private StepVariablesController stepVariablesController;
+	@FXML
+	private AssertsController assertController;
 	private Boolean hasRun;
 	private IProjectFinder projectFinder;
 	
@@ -147,6 +152,7 @@ public class TestMachineController {
 		definitionTab.setContent(loader.getRoot());
 		disableResponseTab();
 		disableVariablesTab();
+		disableAssertTab();
 	}
 
 	private void selectTestCase(String testCaseId) {
@@ -163,6 +169,7 @@ public class TestMachineController {
 		testCaseController.setTestCaseId(testCaseId);
 		disableResponseTab();
 		disableVariablesTab();
+		disableAssertTab();
 		definitionTab.setContent(loader.getRoot());
 	}
 
@@ -173,6 +180,8 @@ public class TestMachineController {
 			setResponse();
 		} else if(variableTab.isSelected()) {
 			setVariables();
+		} else if(assertsTab.isSelected()) {
+			setAsserts();
 		}
 		
 		Step step = projectFinder.getStepById(stepId);
@@ -206,6 +215,7 @@ public class TestMachineController {
 		definitionTab.setContent(loader.getRoot());
 		responseTab.setDisable(false);
 		variableTab.setDisable(false);
+		assertsTab.setDisable(false);
 	}
 
 	private void setRestStep(String stepId) {
@@ -226,6 +236,7 @@ public class TestMachineController {
 		definitionTab.setContent(loader.getRoot());
 		responseTab.setDisable(false);
 		variableTab.setDisable(false);
+		assertsTab.setDisable(false);
 	}
 
 	private void setMysqlStep(String stepId) {
@@ -246,6 +257,7 @@ public class TestMachineController {
 		definitionTab.setContent(loader.getRoot());
 		responseTab.setDisable(false);
 		variableTab.setDisable(false);
+		assertsTab.setDisable(false);
 	}
 	
 	private void setSoapStep(String stepId) {
@@ -266,6 +278,7 @@ public class TestMachineController {
 		definitionTab.setContent(loader.getRoot());
 		responseTab.setDisable(false);
 		variableTab.setDisable(false);
+		assertsTab.setDisable(false);
 	}
 	
 	@FXML
@@ -680,6 +693,14 @@ public class TestMachineController {
 		}
 	}
 	
+	@FXML
+	public void setAsserts() {
+		if(assertsTab.isSelected()) {
+			String stepId = ((Step) treeView.getSelectionModel().getSelectedItem().getValue()).getId();
+			assertController.setAssert(stepId);
+		}
+	}
+	
 	private void disableResponseTab() {
 		definitionTab.getTabPane().getSelectionModel().select(definitionTab);
 		responseTab.setDisable(true);
@@ -704,5 +725,10 @@ public class TestMachineController {
 		}
 		
 		return higherTests;
+	}
+	
+	private void disableAssertTab() {
+		definitionTab.getTabPane().getSelectionModel().select(definitionTab);
+		assertsTab.setDisable(true);
 	}
 }

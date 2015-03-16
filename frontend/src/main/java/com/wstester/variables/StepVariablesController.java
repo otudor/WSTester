@@ -72,9 +72,9 @@ public class StepVariablesController {
 		// set the context menu to remove variables for non empty rows
 		variablesTable.setRowFactory(new Callback<TableView<Variable>, TableRow<Variable>>() {
 			@Override
-			public TableRow<Variable> call(TableView<Variable> arg0) {
+			public TableRow<Variable> call(TableView<Variable> table) {
 				
-				 final TableRow<Variable> row = new TableRow<>();
+				 final TableRow<Variable> row = new TableRow<Variable>();
 				 final ContextMenu contextMenu = new ContextMenu();
 				 
 				 final MenuItem removeMenuItem = new MenuItem("Remove");

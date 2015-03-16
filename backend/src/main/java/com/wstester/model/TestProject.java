@@ -32,6 +32,9 @@ public class TestProject implements Serializable {
 	}
 	
 	public List<TestSuite> getTestSuiteList() {
+		if(this.testSuiteList == null) {
+			this.testSuiteList = new ArrayList<TestSuite>();
+		}
 		return testSuiteList;
 	}
 
@@ -72,6 +75,9 @@ public class TestProject implements Serializable {
 	}
 
 	public List<Variable> getVariableList() {
+		if(this.variableList == null) {
+			this.variableList = new ArrayList<Variable>();
+		}
 		return variableList;
 	}
 

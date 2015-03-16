@@ -17,6 +17,6 @@ public class RestRoute extends RestExceptionRoute{
 		.recipientList(simple("http://none.none?throwExceptionOnFailure=false"))
 		
 		.process(new RestPostProcessor())
-		.to("jms:topic:responseTopic");
+		.to("jms:variableQueue");
 	}
 }
