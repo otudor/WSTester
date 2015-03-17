@@ -41,7 +41,7 @@ public class AssertTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void assertFailedWithEquals() throws Exception{
+	public void assertFailsdWithEquals() throws Exception{
 		
 		TestProject testProject = TestUtils.getAssertTestProject();
 		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().get(0).setExpected("[{detalii=ion}]");
@@ -94,7 +94,7 @@ public class AssertTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void assertPassedWithSmaller() throws Exception{
+	public void assertPassesWithSmaller() throws Exception{
 		
 		TestProject testProject = TestUtils.getAssertTestProject();
 		testProject.getVariableList().get(0).setSelector("response:$.[0].count(*)");
@@ -119,7 +119,7 @@ public class AssertTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void assertFailedWithSmaller() throws Exception{
+	public void assertFailesWithSmaller() throws Exception{
 		
 		TestProject testProject = TestUtils.getAssertTestProject();
 		testProject.getVariableList().get(0).setSelector("response:$.[0].count(*)");
@@ -139,12 +139,12 @@ public class AssertTest extends TestBaseClass{
 		assertTrue(response.getStatus().equals(ExecutionStatus.FAILED));
 		assertEquals(1, response.getAssertResponseList().size());
 		assertEquals(response.getAssertResponseList().get(0).getStatus(), AssertStatus.FAILED);
-		assertEquals(response.getAssertResponseList().get(0).getMessage(), "Expected: 0 but was: 1");
+		assertEquals(response.getAssertResponseList().get(0).getMessage(), "Expected smaller than: 0 but was: 1");
 		assertEquals(1, result.getJSONObject(0).get("count(*)"));
 	}
 	
 	@Test
-	public void assertPassedWithGreater() throws Exception{
+	public void assertPassesWithGreater() throws Exception{
 		
 		TestProject testProject = TestUtils.getAssertTestProject();
 		testProject.getVariableList().get(0).setSelector("response:$.[0].count(*)");
@@ -165,6 +165,31 @@ public class AssertTest extends TestBaseClass{
 		assertEquals(1, response.getAssertResponseList().size());
 		assertEquals(response.getAssertResponseList().get(0).getStatus(), AssertStatus.PASSED);
 		assertEquals(response.getAssertResponseList().get(0).getMessage(), null);
+		assertEquals(1, result.getJSONObject(0).get("count(*)"));
+	}
+	
+	@Test
+	public void assertFailsWithGreater() throws Exception{
+		
+		TestProject testProject = TestUtils.getAssertTestProject();
+		testProject.getVariableList().get(0).setSelector("response:$.[0].count(*)");
+		((MySQLStep)testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0)).setOperation("SELECT count(*) from angajati where detalii = 'popescu'");
+		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().get(0).setExpected("2");
+		testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getAssertList().get(0).setOperation(AssertOperation.GREATER);
+		setTestProject(testProject);
+		
+		testRunner = new TestRunner(testProject);
+		
+		testRunner.run(testProject);
+
+		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
+		
+		JSONArray result = new JSONArray(response.getContent());
+
+		assertTrue(response.getStatus().equals(ExecutionStatus.FAILED));
+		assertEquals(1, response.getAssertResponseList().size());
+		assertEquals(response.getAssertResponseList().get(0).getStatus(), AssertStatus.FAILED);
+		assertEquals(response.getAssertResponseList().get(0).getMessage(), "Expected greater than: 2 but was: 1");
 		assertEquals(1, result.getJSONObject(0).get("count(*)"));
 	}
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -93,7 +94,24 @@ public class Response implements Serializable{
 	public List<AssertResponse> getAssertResponseList() {
 		return assertResponseList;
 	}
-
+	
+	public AssertResponse getResponseForAssertId(String assertId) {
+		List<AssertResponse> filtered = assertResponseList.parallelStream().filter(assertResponse -> assertResponse.getAssertId().equals(assertId)).collect(Collectors.toList());
+		if(filtered.size() == 1) {
+			return filtered.get(0);
+		}
+		else {
+			AssertResponse assertResponse = new AssertResponse(assertId, "Response for assert was not found", AssertStatus.FAILED);
+			return assertResponse;
+		}
+	}
+	
+	public long getNumberOfFailedAsserts() {
+		
+		long numberOfFailedAsserts = assertResponseList.parallelStream().filter(assertResponse -> assertResponse.getStatus() == AssertStatus.FAILED).count();
+		return numberOfFailedAsserts;
+	}
+	
 	public void setAssertResponseList(List<AssertResponse> assertResponseList) {
 		this.assertResponseList = assertResponseList;
 	}

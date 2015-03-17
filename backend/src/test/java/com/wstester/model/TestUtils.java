@@ -1572,7 +1572,7 @@ public class TestUtils {
 		mysqlStep.setOperation("SELECT detalii from angajati where detalii = 'popescu'");
 		mysqlStep.addVariable(variable.getId());
 		Assert azzert = new Assert();
-		azzert.setActual(variable.getName());
+		azzert.setActual("${" + variable.getName() + "}");
 		azzert.setOperation(AssertOperation.EQUALS);
 		azzert.setExpected("[{detalii=popescu}]");
 		mysqlStep.addAssert(azzert);

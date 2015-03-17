@@ -87,7 +87,7 @@ public class VariableUsageProcessor implements Processor {
 		Document xmlDocument = db.parse(is);
 		XPath xPath = XPathFactory.newInstance().newXPath();
 
-		return (NodeList)xPath.compile("//*[contains(.,'${')]").evaluate(xmlDocument, XPathConstants.NODESET);
+		return (NodeList)xPath.compile("//*[name() != 'assertList']/*[contains(.,'${')]").evaluate(xmlDocument, XPathConstants.NODESET);
 	}
 
 	private String convertToXML(Step step) throws JAXBException {

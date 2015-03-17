@@ -64,7 +64,7 @@ public class ResponseController implements Initializable{
 		Response response = testRunner.getResponse(step.getId(), 1000L);
 		
 		if (response != null) {
-			
+
 			if (response.getStatus() == ExecutionStatus.PASSED) {
 				status.setText(response.getStatus().toString());
 				status.setStyle("-fx-text-fill: green");
@@ -79,7 +79,7 @@ public class ResponseController implements Initializable{
 			else if (response.getStatus() == ExecutionStatus.FAILED) {
 				status.setText(response.getStatus().toString());
 				status.setStyle("-fx-text-fill: blue");
-				setResponseContent(response.getAssertResponseList().toString());
+				setResponseContent(response.getContent());
 			}
 		}
 	}

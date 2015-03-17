@@ -39,6 +39,7 @@ public class WsException extends Exception {
 		this.werrorCode = errorCode;
 	}
 	
+	@Override
 	public String getMessage() {
 		return this.message;
 	}

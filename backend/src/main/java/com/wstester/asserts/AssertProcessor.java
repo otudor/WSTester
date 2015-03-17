@@ -12,10 +12,8 @@ import com.wstester.model.AssertStatus;
 import com.wstester.model.ExecutionStatus;
 import com.wstester.model.Response;
 import com.wstester.model.Step;
-import com.wstester.model.Variable;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IProjectFinder;
-import com.wstester.services.definition.IVariableManager;
 
 public class AssertProcessor {
 
@@ -30,16 +28,16 @@ public class AssertProcessor {
 			
 			if(step.getAssertList() != null && !step.getAssertList().isEmpty()){
 				List<Assert> assertList = step.getAssertList();
-				boolean passed = true;
 				
 				for(Assert azzert : assertList) {
 					
-					passed = evaluateAssert(azzert, response);
+					evaluateAssert(azzert, response);
 				}
 				
-				if(!passed){
+				long numberOfFailedAsserts = response.getNumberOfFailedAsserts();
+				if( numberOfFailedAsserts != 0){
 					response.setStatus(ExecutionStatus.FAILED);
-					log.info(response.getStepId(), "Failing the whole step because one assert failed");
+					log.info(response.getStepId(), "Failing the whole step because " + numberOfFailedAsserts + " assert(s) failed");
 				}
 			}
 			else {
@@ -53,29 +51,39 @@ public class AssertProcessor {
 		exchange.getIn().setBody(response);
 	}
 
-	private boolean evaluateAssert(Assert azzert, Response response) throws Exception {
+	private void evaluateAssert(Assert azzert, Response response) throws Exception {
 		
-		String actual = "";
-		boolean passed = false;
+		if(azzert.getOperation() == null) {
+			AssertResponse assertResponse = new AssertResponse();
+			assertResponse.setAssertId(azzert.getId());
+			assertResponse.setStatus(AssertStatus.FAILED);
+			assertResponse.setMessage("No operation was set on the assert. Please select an operation and try again!");
+			
+			response.addAssertResponse(assertResponse);
+			log.info(response.getStepId(), "Assert failed due to error: " + assertResponse);
+		}
+		
 		try {
-			String variableName = azzert.getActual().replaceAll("[${}]", "");
-			actual = getVariableContent(variableName);
-			String expected = azzert.getExpected();
-		
+
+			AssertResponse assertResponse = null;
+			
 			switch(azzert.getOperation()) {
 				case EQUALS: {
-					passed = shouldBeEquals(actual, expected, response.getStepId());
+					assertResponse = AssertEvaluator.shouldBeEquals(azzert, response.getStepId());
 					break;
 				}
 				case GREATER: {
-					passed = shouldBeGreater(actual, expected, response.getStepId());
+					assertResponse = AssertEvaluator.shouldBeGreater(azzert, response.getStepId());
 					break;
 				}
 				case SMALLER: {
-					passed = shouldBeSmaller(actual, expected, response.getStepId());
+					assertResponse = AssertEvaluator.shouldBeSmaller(azzert, response.getStepId());
 					break;
 				}
 			}
+			log.info(azzert.getId(), "Assert response is: " + assertResponse);
+			response.addAssertResponse(assertResponse);
+			
 		} catch (WsException wse) {
 			AssertResponse assertResponse = new AssertResponse();
 			assertResponse.setAssertId(azzert.getId());
@@ -84,79 +92,7 @@ public class AssertProcessor {
 			
 			response.addAssertResponse(assertResponse);
 			log.info(response.getStepId(), "Assert failed due to error: " + assertResponse);
-			return false;
 		}
-		
-		if(passed) {
-			
-			AssertResponse assertResponse = new AssertResponse();
-			assertResponse.setAssertId(azzert.getId());
-			assertResponse.setStatus(AssertStatus.PASSED);
-			
-			response.addAssertResponse(assertResponse);
-			log.info(response.getStepId(), "Assert passed: " + azzert);
-			return true;
-		} 
-		else if(!passed) {
-			
-			AssertResponse assertResponse = new AssertResponse();
-			assertResponse.setAssertId(azzert.getId());
-			assertResponse.setStatus(AssertStatus.FAILED);
-			assertResponse.setMessage("Expected: " + azzert.getExpected() + " but was: " + actual);
-			
-			response.addAssertResponse(assertResponse);
-			log.info(response.getStepId(), "Assert failed: " + assertResponse);
-			return false;
-		}
-		return passed;
-	}
-
-	private boolean shouldBeSmaller(String actual, String expected, String stepId) throws WsException {
-		
-		log.info(stepId, "Assert operator is SMALLER");
-		Double actualDouble = null;
-		Double expectedDouble = null;
-		try {
-			actualDouble = Double.parseDouble(actual);
-		} catch (NumberFormatException nfe) {
-			nfe.printStackTrace();
-			throw new WsException(nfe, "Actual value : " + actual + " couldn't be converted to a number!");
-		}
-		try {
-			expectedDouble = Double.parseDouble(expected);
-		} catch (NumberFormatException nfe) {
-			nfe.printStackTrace();
-			throw new WsException(nfe, "Actual value : " + actual + " couldn't be converted to a number!");
-		}
-		
-		return actualDouble < expectedDouble;
-	}
-
-	private boolean shouldBeGreater(String actual, String expected, String stepId) throws WsException {
-		
-		log.info(stepId, "Assert operator is GREATER");
-		Double actualDouble = null;
-		Double expectedDouble = null;
-		try {
-			actualDouble = Double.parseDouble(actual);
-		} catch (NumberFormatException nfe) {
-			nfe.printStackTrace();
-			throw new WsException(nfe, "Actual value : " + actual + " couldn't be converted to a number!");
-		}
-		try {
-			expectedDouble = Double.parseDouble(expected);
-		} catch (NumberFormatException nfe) {
-			nfe.printStackTrace();
-			throw new WsException(nfe, "Actual value : " + actual + " couldn't be converted to a number!");
-		}
-		
-		return actualDouble > expectedDouble;
-	}
-	
-	private boolean shouldBeEquals(String actual, String expected, String stepId) {
-		
-		log.info(stepId, "Assert operator is EQUALS");
-		return actual.equals(expected);
 	}
 
 	private Step getStep(String id) throws Exception{
@@ -164,15 +100,5 @@ public class AssertProcessor {
 		IProjectFinder projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
 		Step step = projectFinder.getStepById(id);
 		return step;
-	}
-	
-	private String getVariableContent(String variableName) throws Exception {
-		
-		IVariableManager variableManager = ServiceLocator.getInstance().lookup(IVariableManager.class);
-		Variable variable = variableManager.getVariableByName(variableName);
-		if(variable == null) {
-			throw new WsException(new NullPointerException(), "Variable with name: " + variableName + " was not found in the Test Project!");
-		}
-		return variable.getContent();
 	}
 }

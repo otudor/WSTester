@@ -20,16 +20,23 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
 
+import com.wstester.log.CustomLogger;
 import com.wstester.model.Assert;
 import com.wstester.model.AssertOperation;
+import com.wstester.model.Response;
 import com.wstester.model.Step;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IProjectFinder;
+import com.wstester.services.definition.ITestRunner;
 
 public class AssertsController {
 
+	CustomLogger log = new CustomLogger(AssertsController.class);
 	@FXML
 	private TableView<AssertModel> assertTable;
 	@FXML
@@ -38,6 +45,10 @@ public class AssertsController {
 	private TableColumn<AssertModel, AssertOperation> operation;
 	@FXML
 	private TableColumn<AssertModel, String> expected;
+	@FXML
+	private TableColumn<AssertModel, String> status;
+	@FXML
+	private TableColumn<AssertModel, String> message;
 	@FXML
 	private TextField addActual;
 	@FXML
@@ -49,28 +60,39 @@ public class AssertsController {
 	
 	private String stepId;
 	private IProjectFinder projectFinder;
+	private ITestRunner testRunner;
 	
 	@FXML
 	public void initialize() throws Exception {
 		
 		projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
+		testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class);
 		initializeTable();
 		initializeAddAssert();
 	}
 
-	public void setAssert(String stepId) {
+	public void setAssert(String stepId, boolean hasRun) {
 		
 		assertTable.setItems(null);
 		this.stepId = stepId;
 		Step step = projectFinder.getStepById(stepId);
 		List<Assert> assertList = step.getAssertList();
 		
+		Response response = null;
+		if(hasRun) {
+			response = testRunner.getResponse(stepId, 1000L);
+		}
+		
 		if(assertList != null) {
 			
+			log.info(stepId, "Assert list for the step is: " + assertList);
 			ObservableList<AssertModel> observableAssertList = FXCollections.observableArrayList();
 			for(Assert asert : assertList) {
 				AssertModel assertModel = new AssertModel();
 				assertModel.setAsert(asert);
+				if(hasRun) {
+					assertModel.setAssertResponse(response.getResponseForAssertId(asert.getId()));
+				}
 				observableAssertList.add(assertModel);
 			}
 			assertTable.setItems(observableAssertList);
@@ -87,6 +109,17 @@ public class AssertsController {
 				return new SimpleStringProperty(asert.getValue().getAsert().getActual());
 			}
 		});
+		actual.setCellFactory(TextFieldTableCell.forTableColumn());
+		actual.setOnEditCommit(
+				new EventHandler<TableColumn.CellEditEvent<AssertModel, String>>() {
+			
+					@Override
+					public void handle(CellEditEvent<AssertModel, String> newActual) {
+						log.info(((AssertModel) newActual.getTableView().getItems().get(newActual.getTablePosition().getRow())).getAsert().getId(), "Changed actual from " + newActual.getOldValue() + " to " + newActual.getNewValue());
+						((AssertModel) newActual.getTableView().getItems().get(newActual.getTablePosition().getRow())).getAsert().setActual(newActual.getNewValue());
+					}
+		});
+		
 		operation.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AssertModel, AssertOperation>, ObservableValue<AssertOperation>>() {
 
 			@Override
@@ -94,6 +127,18 @@ public class AssertsController {
 				return new SimpleObjectProperty<AssertOperation>(asert.getValue().getAsert().getOperation());
 			}
 		});
+		operation.setCellFactory(ComboBoxTableCell.forTableColumn(FXCollections.observableArrayList(AssertOperation.values())));
+		operation.setOnEditCommit(
+				new EventHandler<TableColumn.CellEditEvent<AssertModel,AssertOperation>>() {
+					
+					@Override
+					public void handle(CellEditEvent<AssertModel, AssertOperation> newOperation) {
+						log.info(((AssertModel) newOperation.getTableView().getItems().get(newOperation.getTablePosition().getRow())).getAsert().getId(), "Changed operation from " + newOperation.getOldValue() + " to " + newOperation.getNewValue());
+						((AssertModel) newOperation.getTableView().getItems().get(newOperation.getTablePosition().getRow())).getAsert().setOperation(newOperation.getNewValue());
+					}
+				}
+		);
+		
 		expected.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AssertModel, String>, ObservableValue<String>>() {
 			
 			@Override
@@ -101,6 +146,42 @@ public class AssertsController {
 				return new SimpleStringProperty(asert.getValue().getAsert().getExpected());
 			}
 		});
+		expected.setCellFactory(TextFieldTableCell.forTableColumn());
+		expected.setOnEditCommit(
+				new EventHandler<TableColumn.CellEditEvent<AssertModel, String>>() {
+			
+					@Override
+					public void handle(CellEditEvent<AssertModel, String> newExpected) {
+						log.info(((AssertModel) newExpected.getTableView().getItems().get(newExpected.getTablePosition().getRow())).getAsert().getId(), "Changed expected from " + newExpected.getOldValue() + " to " + newExpected.getNewValue());
+						((AssertModel) newExpected.getTableView().getItems().get(newExpected.getTablePosition().getRow())).getAsert().setExpected(newExpected.getNewValue());
+					}
+		});
+		
+		status.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AssertModel, String>, ObservableValue<String>>() {
+			
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<AssertModel, String> asert) {
+				if(asert.getValue().getAssertResponse() != null) {
+					return new SimpleStringProperty(asert.getValue().getAssertResponse().getStatus().toString());
+				} else {
+					return null;
+				}
+			}
+		});
+		
+		message.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AssertModel, String>, ObservableValue<String>>() {
+			
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<AssertModel, String> asert) {
+				if(asert.getValue().getAssertResponse() != null) {
+					return new SimpleStringProperty(asert.getValue().getAssertResponse().getMessage());
+				} else {
+					return null;
+				}
+			}
+		});
+				
+		// set the context menu to remove asserts on non empty rows
 		assertTable.setRowFactory(new Callback<TableView<AssertModel>, TableRow<AssertModel>>() {
 			@Override
 			public TableRow<AssertModel> call(TableView<AssertModel> table) {

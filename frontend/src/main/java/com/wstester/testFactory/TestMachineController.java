@@ -681,7 +681,8 @@ public class TestMachineController {
 	@FXML
 	public void setResponse() {
 		if(responseTab.isSelected() && hasRun) {
-			responseController.setResponse((Step) treeView.getSelectionModel().getSelectedItem().getValue());
+			Step step = (Step) treeView.getSelectionModel().getSelectedItem().getValue();
+			responseController.setResponse(step);
 		}
 	}
 	
@@ -697,7 +698,7 @@ public class TestMachineController {
 	public void setAsserts() {
 		if(assertsTab.isSelected()) {
 			String stepId = ((Step) treeView.getSelectionModel().getSelectedItem().getValue()).getId();
-			assertController.setAssert(stepId);
+			assertController.setAssert(stepId, hasRun);
 		}
 	}
 	

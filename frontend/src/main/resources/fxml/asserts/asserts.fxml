@@ -6,16 +6,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.asserts.AssertsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.asserts.AssertsController">
    <children>
       <Label layoutX="16.0" layoutY="14.0" text="Asserts" />
-      <TableView fx:id="assertTable" layoutX="14.0" layoutY="89.0" prefHeight="204.0" prefWidth="694.0">
+      <TableView fx:id="assertTable" editable="true" layoutX="14.0" layoutY="89.0" prefHeight="204.0" prefWidth="694.0">
         <columns>
           <TableColumn fx:id="actual" prefWidth="119.0" resizable="false" text="Actual" />
             <TableColumn fx:id="operation" prefWidth="100.0" resizable="false" text="Operation" />
           <TableColumn fx:id="expected" prefWidth="157.0" text="Expected" />
-            <TableColumn prefWidth="50.0" text="Status" />
-            <TableColumn prefWidth="267.0" text="Message" />
+            <TableColumn fx:id="status" prefWidth="50.0" text="Status" />
+            <TableColumn fx:id="message" prefWidth="267.0" text="Message" />
         </columns>
       </TableView>
       <TextField fx:id="addActual" layoutX="14.0" layoutY="51.0" prefHeight="25.0" prefWidth="119.0" promptText="Actual" />
