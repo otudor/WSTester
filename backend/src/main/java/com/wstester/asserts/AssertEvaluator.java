@@ -46,7 +46,7 @@ public class AssertEvaluator {
 			expectedDouble = Double.parseDouble(expected);
 		} catch (NumberFormatException nfe) {
 			nfe.printStackTrace();
-			throw new WsException(nfe, "Actual value : " + actual + " couldn't be converted to a number!");
+			throw new WsException(nfe, "Expected value : " + expected + " couldn't be converted to a number!");
 		}
 		
 		if(actualDouble > expectedDouble) {
@@ -75,7 +75,7 @@ public class AssertEvaluator {
 			expectedDouble = Double.parseDouble(expected);
 		} catch (NumberFormatException nfe) {
 			nfe.printStackTrace();
-			throw new WsException(nfe, "Actual value : " + actual + " couldn't be converted to a number!");
+			throw new WsException(nfe, "Expected value : " + expected + " couldn't be converted to a number!");
 		}
 		
 		if(actualDouble < expectedDouble) {
@@ -89,6 +89,9 @@ public class AssertEvaluator {
 		
 		String variableName = asert.getActual().replaceAll("[${}]", "");
 		String actual = getVariableContent(variableName);
+		if(actual == null || actual.isEmpty()) {
+			throw new WsException(new NullPointerException(), "Content of the variable " + variableName + " is either null or empty! Make sure the variable was assigned previously!");
+		}
 		return actual;
 	}
 	

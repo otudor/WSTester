@@ -39,7 +39,7 @@ public class TestUtils {
 
 		// construct the variable list
 		List<Variable> variableList = new ArrayList<Variable>();
-		Variable globalVariable = new Variable("content", "name");
+		Variable globalVariable = new Variable("response:", "expected");
 		Variable localVariable = new Variable("name", VariableType.INTEGER, "2");
 		variableList.add(globalVariable);
 		variableList.add(localVariable);
@@ -166,8 +166,11 @@ public class TestUtils {
 		List<Assert> assertList = new ArrayList<Assert>();
 		Assert oneAssert = new Assert();
 		oneAssert.setExpected("All customers");
+		oneAssert.setOperation(AssertOperation.EQUALS);
+		oneAssert.setActual("${expected}");
 		assertList.add(oneAssert);
 		restStep.setAssertList(assertList);
+		restStep.addVariable(globalVariable.getId());
 		restStep.setPath("/customer/getCustomers");
 		restStep.setMethod(RestMethod.GET);
 		stepList1.add(restStep);

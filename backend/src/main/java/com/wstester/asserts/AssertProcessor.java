@@ -53,18 +53,8 @@ public class AssertProcessor {
 
 	private void evaluateAssert(Assert azzert, Response response) throws Exception {
 		
-		if(azzert.getOperation() == null) {
-			AssertResponse assertResponse = new AssertResponse();
-			assertResponse.setAssertId(azzert.getId());
-			assertResponse.setStatus(AssertStatus.FAILED);
-			assertResponse.setMessage("No operation was set on the assert. Please select an operation and try again!");
-			
-			response.addAssertResponse(assertResponse);
-			log.info(response.getStepId(), "Assert failed due to error: " + assertResponse);
-		}
-		
 		try {
-
+			validateAssert(azzert);
 			AssertResponse assertResponse = null;
 			
 			switch(azzert.getOperation()) {
@@ -93,6 +83,20 @@ public class AssertProcessor {
 			response.addAssertResponse(assertResponse);
 			log.info(response.getStepId(), "Assert failed due to error: " + assertResponse);
 		}
+	}
+
+	private void validateAssert(Assert azzert) throws WsException {
+		
+		if(azzert.getOperation() == null) {
+			throw new WsException(new NullPointerException(), "No operation was set on the assert. Please select an operation and try again!");
+		}
+		if(azzert.getExpected() == null) {
+			throw new WsException(new NullPointerException(), "Expected was not set on the assert. Please modify the assert and try again!");
+		}
+		if(azzert.getActual() == null) {
+			throw new WsException(new NullPointerException(), "Actual was not set on the assert. Please modify the assert and tru again!");
+		}
+		
 	}
 
 	private Step getStep(String id) throws Exception{
