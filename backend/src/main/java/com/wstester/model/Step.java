@@ -21,6 +21,7 @@ public abstract class Step implements Serializable {
 	private Map<Asset, AssetType> assetMap;
 	private List<String> variableList;
 	private String dependsOn;
+	private Boolean dataProvider;
 
 	public String getId() {
 		return this.uuid;
@@ -102,6 +103,14 @@ public abstract class Step implements Serializable {
 		this.dependsOn = dependsOn;
 	}
 	
+	public Boolean hasDataProvider() {
+		return dataProvider;
+	}
+
+	public void setDataProvider(Boolean hasDataProvider) {
+		this.dataProvider = hasDataProvider;
+	}
+
 	public void copyFrom(Step source){
 		
 		setAssetMap(source.getAssetMap());
@@ -109,6 +118,7 @@ public abstract class Step implements Serializable {
 		setName(source.getName());
 		setServerId(source.getServerId());
 		setServiceId(source.getServiceId());
+		setDataProvider(source.hasDataProvider());
 	}
 	
 	@Override
@@ -125,6 +135,7 @@ public abstract class Step implements Serializable {
 		result = prime * result + ((assertList == null) ? 0 : assertList.hashCode());
 		result = prime * result + ((assetMap == null) ? 0 : assetMap.hashCode());
 		result = prime * result + ((dependsOn == null) ? 0 : dependsOn.hashCode());
+		result = prime * result + ((dataProvider == null) ? 0 : dataProvider.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((serverId == null) ? 0 : serverId.hashCode());
 		result = prime * result + ((serviceId == null) ? 0 : serviceId.hashCode());
@@ -156,6 +167,11 @@ public abstract class Step implements Serializable {
 			if (other.dependsOn != null)
 				return false;
 		} else if (!dependsOn.equals(other.dependsOn))
+			return false;
+		if (dataProvider == null) {
+			if (other.dataProvider != null)
+				return false;
+		} else if (!dataProvider.equals(other.dataProvider))
 			return false;
 		if (name == null) {
 			if (other.name != null)

@@ -27,6 +27,7 @@
 		<hibernate.version>4.3.7.Final</hibernate.version>
 		<h2.version>1.4.184</h2.version>
 		<jsonPath.version>1.2.0</jsonPath.version>
+		<apache.csv.version>1.1</apache.csv.version>
 	</properties>
 
 	<dependencies>
@@ -166,6 +167,11 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- end of dependencies for camel -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>${apache.csv.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.reflections</groupId>
 			<artifactId>reflections</artifactId>

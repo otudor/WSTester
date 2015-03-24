@@ -1,9 +1,13 @@
 package com.wstester.services.impl;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.jms.Connection;
 import javax.jms.DeliveryMode;
 import javax.jms.Destination;
@@ -12,6 +16,9 @@ import javax.jms.ObjectMessage;
 import javax.jms.Session;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Asset;
@@ -82,6 +89,23 @@ public class AssetManager implements IAssetManager {
 		}
 
 		return content;
+	}
+	
+
+	@Override
+	public List<String> getCSVrow(String fileName, int column) throws IOException {
+		
+		List<String> columnRecords = new ArrayList<String>();
+		
+		File csvData = new File("assets/" + fileName);
+		CSVParser parser = CSVParser.parse(csvData, StandardCharsets.UTF_8, CSVFormat.RFC4180);
+		
+		List<CSVRecord> records = parser.getRecords();
+		for(CSVRecord record : records) {
+			columnRecords.add(record.get(column - 1));
+		}
+		
+		return columnRecords;
 	}
 	
 	@Override

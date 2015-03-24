@@ -29,11 +29,26 @@ public class ResponseDaoImpl implements ResponseDao {
     		response = entityManager.createNamedQuery("getLastByStepId", Response.class).setParameter("stepId", stepId).setParameter("runDate", runDate).getSingleResult();
     	} catch (NoResultException e) {
     		// Do nothing and return null
+    		log.info(stepId, "No response wes found for step");
     		return null;
     	}
 		return response;
 	}
 
+	@Override
+	public List<Response> getLastResponseListForStepId(String stepId, Date runDate) {
+		
+    	List<Response> responseList = null;
+    	try {
+    		responseList = entityManager.createNamedQuery("getLastByStepId", Response.class).setParameter("stepId", stepId).setParameter("runDate", runDate).getResultList();
+    	} catch (NoResultException e) {
+    		// Do nothing and return null
+    		log.info(stepId, "No response wes found for step");
+    		return null;
+    	}
+		return responseList;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Response> getAllResponsesForStepId(String stepId) {

@@ -12,6 +12,7 @@ import com.wstester.model.Step;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IProjectFinder;
 import com.wstester.services.impl.StepManager;
+import com.wstester.variable.DataProvider;
 import com.wstester.variable.VariableUsageProcessor;
 
 public class RouteDispatcher extends GeneralExceptionRoute{
@@ -24,6 +25,7 @@ public class RouteDispatcher extends GeneralExceptionRoute{
 		from("jms:startQueue?concurrentConsumers=20&asyncConsumer=true")
 		.bean(StepManager.class, "addStep")
 		.bean(ExchangeDelayer.class, "delayByStep")
+		.split().method(DataProvider.class, "getDataProvider")
 		.process(new VariableUsageProcessor())
 		.choice()
 			.when(new Predicate() {				

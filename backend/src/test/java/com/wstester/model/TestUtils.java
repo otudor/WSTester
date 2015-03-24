@@ -1603,4 +1603,80 @@ public class TestUtils {
 		
 		return testProject;
 	}
+	
+	public static TestProject getDataProviderTestProject() {
+		
+		TestProject testPlan = new TestProject();
+		testPlan.setName("Rest Test Plan");
+
+		// construct the variable list
+		List<Variable> variableList = new ArrayList<Variable>();
+		Variable variable2 = new Variable();
+		variable2.setName("name");
+		variable2.setType(VariableType.STRING);
+		variable2.setSelector("file:name.csv");
+		variableList.add(variable2);
+		testPlan.setVariableList(variableList);
+		
+		// construct service list
+		// Service 1
+		List<Service> serviceList1 = new ArrayList<Service>();
+		RestService restService = new RestService();
+		restService.setName("Service Rest");
+		restService.setPort("9997");
+		serviceList1.add(restService);
+		
+		// construct server list
+		List<Server> serverList1 = new ArrayList<Server>();
+		// Server 1
+		Server server11 = new Server();
+		server11.setDescription("This is the first server of the first env");
+		server11.setIp("localhost");
+		server11.setName("Server 11");
+		server11.setServices(serviceList1);
+		serverList1.add(server11);
+		
+		// construct environment list
+		List<Environment> environmentList = new ArrayList<Environment>();
+		// Environment 1
+		Environment env1 = new Environment();
+		env1.setName("Env 1");
+		env1.setServers(serverList1);
+		environmentList.add(env1);
+		testPlan.setEnvironmentList(environmentList);
+
+		// construct test steps
+		// test 1
+		List<Step> stepList1 = new ArrayList<Step>();
+		RestStep restStep = new RestStep();
+		restStep.setName("Step 1");
+		restStep.setServerId(server11.getId());
+		restStep.setServiceId(restService.getId());
+		restStep.setPath("/customer/searchCustomer");
+		HashMap<String,String> map = new HashMap<String,String>();	
+		map.put("name","${name}");
+		restStep.setQuery(map);
+		restStep.setMethod(RestMethod.GET);
+		stepList1.add(restStep);
+		
+		// construct test case list
+		// test case 1
+		List<TestCase> testCaseList1 = new ArrayList<TestCase>();
+		TestCase testCase = new TestCase();
+		testCase.setName("TC 1");
+		testCase.setStepList(stepList1);
+		testCaseList1.add(testCase);
+		
+		// construct test suite list
+		List<TestSuite> testSuiteList = new ArrayList<TestSuite>();
+		TestSuite testSuite1 = new TestSuite();
+		testSuite1.setName("Test Suite 1");
+		testSuite1.setEnvironmentId(env1.getId());
+		testSuite1.setTestCaseList(testCaseList1);
+		testSuiteList.add(testSuite1);
+	
+		testPlan.setTestSuiteList(testSuiteList);
+		
+		return testPlan;
+	}
 }

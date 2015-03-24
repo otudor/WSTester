@@ -2,18 +2,22 @@ package com.wstester.asset;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 import java.io.File;
+
 import org.junit.Test;
+
 import com.wstester.camel.TestBaseClass;
 import com.wstester.model.Asset;
-import com.wstester.services.impl.AssetManager;
+import com.wstester.services.common.ServiceLocator;
+import com.wstester.services.definition.IAssetManager;
 
 public class AssetManagerTest extends TestBaseClass{
 
 	@Test
-	public void addAsset() throws InterruptedException{
+	public void addAsset() throws Exception{
 		
-		AssetManager assetManager = new AssetManager();
+		IAssetManager assetManager = ServiceLocator.getInstance().lookup(IAssetManager.class);
 		
 		Asset asset = new Asset();
 		asset.setName("SOAPRequest.xml");
@@ -29,9 +33,9 @@ public class AssetManagerTest extends TestBaseClass{
 	}
 	
 	@Test
-	public void saveAsset() throws InterruptedException{
+	public void saveAsset() throws Exception{
 		
-		AssetManager assetManager = new AssetManager();
+		IAssetManager assetManager = ServiceLocator.getInstance().lookup(IAssetManager.class);
 		
 		Asset asset = new Asset();
 		asset.setName("info.wsdl");
@@ -54,7 +58,7 @@ public class AssetManagerTest extends TestBaseClass{
 	@Test
 	public void verifyContentAsset() throws Exception{
 		
-		AssetManager assetManager = new AssetManager();
+		IAssetManager assetManager = ServiceLocator.getInstance().lookup(IAssetManager.class);
 		
 		Asset asset = new Asset();
 		asset.setName("AssetFile.txt");

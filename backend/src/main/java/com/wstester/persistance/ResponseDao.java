@@ -7,7 +7,9 @@ import com.wstester.model.Response;
 
 public interface ResponseDao {
 
+	@Deprecated
 	public Response getLastResponseForStepId(String stepId, Date runDate);
+	public List<Response> getLastResponseListForStepId(String stepId, Date runDate);
 	public List<Response> getAllResponsesForStepId(String stepId);
 	public void persistResponse(Response response);
 	public Boolean hasStepFinished(String stepId, Date runDate);

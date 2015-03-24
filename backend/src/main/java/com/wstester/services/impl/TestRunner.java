@@ -1,6 +1,8 @@
 package com.wstester.services.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -64,31 +66,7 @@ public class TestRunner implements ITestRunner {
 
 		log.info(stepId, "Waiting response");
 
-		// check if all the steps have been send to the camel queues
-		log.info(stepId, "Waiting for all steps to be sent to the camel queues");
-		waitForSteps(stepId);
-		
-		Date runDate = null;
-		try {
-			IStepManager stepManager = ServiceLocator.getInstance().lookup(IStepManager.class);
-			ProjectProperties properties = new ProjectProperties();
-			Long camelStepProcessingTimeout = properties.getLongProperty("camelStepProcessingTimeout");
-			// the steps can have a delay until they are received by the StepManager
-			while(runDate == null && camelStepProcessingTimeout > 0) {
-				runDate = stepManager.getLastRun(stepId);
-				camelStepProcessingTimeout -= 1000;
-				Thread.sleep(1000);
-			}
-			
-		} catch (Exception e) {
-			exceptionCaught = e;
-			e.printStackTrace();
-		}
-		
-		if (runDate == null) {
-			log.info(stepId, "The step did not previously run");
-			return null;
-		}
+		Date runDate = getLastRunDate(stepId);
 		
 		Response response = ResponseCallback.getResponse(stepId, runDate);
 		while (response == null && timeout >= 0) {
@@ -128,6 +106,85 @@ public class TestRunner implements ITestRunner {
 		return response;
 	}
 
+	@Override
+	public List<Response> getDataProviderResponse(String stepId, Long timeout) {
+
+		log.info(stepId, "Waiting response");
+
+		Date runDate = getLastRunDate(stepId);
+		
+		List<Response> responseList = ResponseCallback.getResponseList(stepId, runDate);
+		while (responseList == null && timeout >= 0) {
+			if (exceptionCaught != null) {
+				timeout = 0L;
+				break;
+			}
+			try {
+				Thread.sleep(1000L);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			responseList = ResponseCallback.getResponseList(stepId, runDate);
+			timeout -= 1000;
+		}
+
+		if (timeout <= 0) {
+			log.info(stepId, "The timeout expired!");
+			if(exceptionCaught !=null && responseList == null) {
+				log.info(stepId, "Exception was thrown in the TestRunner");
+				
+				// construct new Response to deliver the message in the UI
+				Response response = new Response();
+				response.setStepId(stepId);
+				response.setStatus(ExecutionStatus.ERROR);
+				response.setRunDate(new Date());
+				response.setErrorMessage(exceptionCaught.getMessage());
+				
+				responseList = new ArrayList<Response>();
+				responseList.add(response);
+			}
+		}
+
+		if (responseList != null) {
+			log.info(stepId, responseList.toString());
+		} else {
+			log.info(stepId, "Response is null");
+		}
+
+		return responseList;
+	}
+	
+	private Date getLastRunDate(String stepId) {
+
+		// check if all the steps have been send to the camel queues
+		log.info(stepId, "Waiting for all steps to be sent to the camel queues");
+		waitForSteps(stepId);
+		
+		Date runDate = null;
+		try {
+			IStepManager stepManager = ServiceLocator.getInstance().lookup(IStepManager.class);
+			ProjectProperties properties = new ProjectProperties();
+			Long camelStepProcessingTimeout = properties.getLongProperty("camelStepProcessingTimeout");
+			// the steps can have a delay until they are received by the StepManager
+			while(runDate == null && camelStepProcessingTimeout > 0) {
+				runDate = stepManager.getLastRun(stepId);
+				camelStepProcessingTimeout -= 1000;
+				Thread.sleep(1000);
+			}
+			
+		} catch (Exception e) {
+			exceptionCaught = e;
+			e.printStackTrace();
+		}
+		
+		if (runDate == null) {
+			log.info(stepId, "The step did not previously run");
+			return null;
+		}
+		
+		return runDate;
+	}
+	
 	private void waitForSteps(String stepId) {
 
 		ProjectProperties properties = new ProjectProperties();
@@ -203,7 +260,8 @@ public class TestRunner implements ITestRunner {
 
 		IVariableManager variableManager = ServiceLocator.getInstance().lookup(IVariableManager.class);
 		variableManager.resetVariableList();
-
+		
+		//TODO: take the testProject from the projectFinder service
 		if (testProject.getVariableList() != null) {
 			for (Variable variable : testProject.getVariableList()) {
 				
