@@ -68,7 +68,8 @@ public class MySQLStepController{
     	newStep.setName(stepController.getName());
     	newStep.setDependsOn(stepController.getDependsOn());
     	newStep.setOperation(mysqlOperation.getText());
-		
+    	newStep.setDataProvider(stepController.hasDataProvider());
+    	
     	//TODO: add in projectFinder an operation setStepById
     	projectFinder.getStepById(stepId).copyFrom(newStep);
 	}

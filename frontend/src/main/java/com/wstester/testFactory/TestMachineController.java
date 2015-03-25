@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeCell;
@@ -53,6 +54,8 @@ public class TestMachineController {
 	@FXML
 	private TreeView<Object> treeView;
 	@FXML
+	private TabPane tabPane;
+	@FXML
 	private Tab definitionTab;
 	@FXML
 	private Tab responseTab;
@@ -61,7 +64,7 @@ public class TestMachineController {
 	@FXML
 	private Tab assertsTab;
 	@FXML
-	private ResponseController responseController;
+	private ResponseTabController responseTabsController;
 	@FXML
 	private StepVariablesController stepVariablesController;
 	@FXML
@@ -682,7 +685,7 @@ public class TestMachineController {
 	public void setResponse() {
 		if(responseTab.isSelected() && hasRun) {
 			Step step = (Step) treeView.getSelectionModel().getSelectedItem().getValue();
-			responseController.setResponse(step);
+			responseTabsController.setResponse(step);
 		}
 	}
 	
@@ -698,7 +701,11 @@ public class TestMachineController {
 	public void setAsserts() {
 		if(assertsTab.isSelected()) {
 			String stepId = ((Step) treeView.getSelectionModel().getSelectedItem().getValue()).getId();
-			assertController.setAssert(stepId, hasRun);
+			assertController.setAssert(stepId);
+		}
+		if(assertsTab.getUserData() != null) {
+			Response response = (Response) assertsTab.getUserData();
+			assertController.setAssertResponse(response);
 		}
 	}
 	

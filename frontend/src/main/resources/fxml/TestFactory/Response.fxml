@@ -7,22 +7,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="rootPane" prefHeight="691.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.ResponseController">
+<Pane fx:id="rootPane" prefHeight="691.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.ResponseController">
    <children>
-      <Pane prefHeight="691.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label layoutX="39.0" layoutY="33.0" text="Status" />
-            <Label fx:id="status" layoutX="117.0" layoutY="33.0" text="Not Runned" />
-            <Label layoutX="39.0" layoutY="67.0" text="Response" />
-            <Pane fx:id="responsePane" layoutX="39.0" layoutY="104.0" prefHeight="300.0" prefWidth="900.0" />
-            <Label fx:id="headerLabel" layoutX="39.0" layoutY="419.0" text="Headers" />
-            <TableView fx:id="headerTable" layoutX="39.0" layoutY="442.0" prefHeight="200.0" prefWidth="399.0">
-              <columns>
-                <TableColumn fx:id="key" editable="false" prefWidth="200.0" resizable="false" sortable="false" />
-                <TableColumn fx:id="value" editable="false" prefWidth="200.0" resizable="false" sortable="false" />
-              </columns>
-            </TableView>
-         </children>
-      </Pane>
+      <Label layoutX="39.0" layoutY="33.0" text="Status" />
+      <Label fx:id="status" layoutX="117.0" layoutY="33.0" text="Not Runned" />
+      <Label layoutX="39.0" layoutY="67.0" text="Response" />
+      <Pane fx:id="responsePane" layoutX="39.0" layoutY="94.0" prefHeight="297.0" prefWidth="771.0" />
+      <Label fx:id="headerLabel" layoutX="39.0" layoutY="419.0" text="Headers" />
+      <TableView fx:id="headerTable" layoutX="39.0" layoutY="442.0" prefHeight="200.0" prefWidth="399.0">
+         <columns>
+            <TableColumn fx:id="key" editable="false" prefWidth="200.0" resizable="false" sortable="false" />
+            <TableColumn fx:id="value" editable="false" prefWidth="200.0" resizable="false" sortable="false" />
+         </columns>
+      </TableView>
+      <Button fx:id="goToAssertButton" layoutX="438.0" layoutY="29.0" mnemonicParsing="false" text="Go to Assert" />
    </children>
-</AnchorPane>
+</Pane>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="rootPane" prefHeight="691.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.ResponseTabController">
+   <children>
+      <TabPane fx:id="responseListTabPane" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxWidth="15.0" tabMinHeight="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Response">
+               <graphic>
+                  <Label alignment="CENTER" contentDisplay="CENTER" minHeight="10.0" minWidth="100.0" prefWidth="100.0" rotate="90.0" text="Response" translateX="-43.0" />
+               </graphic>
+             <content>
+                  <fx:include fx:id="singleResponse" source="Response.fxml" />
+             </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

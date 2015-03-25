@@ -32,7 +32,6 @@ import com.wstester.model.Response;
 import com.wstester.model.Step;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IProjectFinder;
-import com.wstester.services.definition.ITestRunner;
 
 public class AssertsController {
 
@@ -60,28 +59,21 @@ public class AssertsController {
 	
 	private String stepId;
 	private IProjectFinder projectFinder;
-	private ITestRunner testRunner;
 	
 	@FXML
 	public void initialize() throws Exception {
 		
 		projectFinder = ServiceLocator.getInstance().lookup(IProjectFinder.class);
-		testRunner = ServiceLocator.getInstance().lookup(ITestRunner.class);
 		initializeTable();
 		initializeAddAssert();
 	}
 
-	public void setAssert(String stepId, boolean hasRun) {
+	public void setAssert(String stepId) {
 		
 		assertTable.setItems(null);
 		this.stepId = stepId;
 		Step step = projectFinder.getStepById(stepId);
 		List<Assert> assertList = step.getAssertList();
-		
-		Response response = null;
-		if(hasRun) {
-			response = testRunner.getResponse(stepId, 1000L);
-		}
 		
 		if(assertList != null) {
 			
@@ -90,14 +82,20 @@ public class AssertsController {
 			for(Assert asert : assertList) {
 				AssertModel assertModel = new AssertModel();
 				assertModel.setAsert(asert);
-				if(hasRun) {
-					assertModel.setAssertResponse(response.getResponseForAssertId(asert.getId()));
-				}
 				observableAssertList.add(assertModel);
 			}
 			assertTable.setItems(observableAssertList);
 		} else {
 			assertTable.setItems(FXCollections.observableArrayList());
+		}
+	}
+	
+	public void setAssertResponse(Response response) {
+		
+		ObservableList<AssertModel> assertsInTable = assertTable.getItems();
+		for(AssertModel assertModel : assertsInTable) {
+			String assertId = assertModel.getAsert().getId();
+			assertModel.setAssertResponse(response.getResponseForAssertId(assertId));
 		}
 	}
 	

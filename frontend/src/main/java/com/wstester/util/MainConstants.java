@@ -4,6 +4,7 @@ public enum MainConstants {
 	
 	TEST_PROJECT,
 	TEST_MACHINE("/fxml/TestFactory/TestMachine.fxml"),
+	RESPONSETAB("/fxml/TestFactory/ResponseTab.fxml"),
 	RESPONSE("/fxml/TestFactory/Response.fxml"),
 	TEST_SUITE("/fxml/TestFactory/TestSuite.fxml"),
 	TEST_SUITE_ICON("/images/treeIcon_TestSuite.png"),

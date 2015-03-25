@@ -11,7 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-
+import javafx.scene.control.CheckBox;
 import com.wstester.elements.Dialog;
 import com.wstester.main.MainLauncher;
 import com.wstester.model.Environment;
@@ -33,6 +33,8 @@ public class StepController implements Initializable{
 	private Button saveBtn;
 	@FXML
 	private ComboBox<Step> dependsOn;
+	@FXML
+	private CheckBox dataProvider;
 	
 	private String stepId;
 	
@@ -59,7 +61,15 @@ public class StepController implements Initializable{
 	}
 	
 	public String getDependsOn() {
-		return (String) dependsOn.getValue().getId();
+		if(dependsOn.getValue() != null) {
+			return (String) dependsOn.getValue().getId();
+		} else {
+			return null;
+		}
+	}
+	
+	public Boolean hasDataProvider() {
+		return dataProvider.isSelected();
 	}
 	
 	public void setCommonFields(List<String> higherTestList) {
@@ -78,6 +88,7 @@ public class StepController implements Initializable{
 		stepName.setText("");
 		dependsOn.getItems().clear();
 		dependsOn.setValue(null);
+		dataProvider.setSelected(false);
 	}
 	
 	private void populateFields(List<String> higherTestList) {
@@ -124,6 +135,11 @@ public class StepController implements Initializable{
 			if(step.getDependsOn() != null && step.getDependsOn().equals(stepId)) {
 				dependsOn.setValue(higherStep);
 			}
+		}
+		
+		// set the dataProvider checkbox
+		if(step.hasDataProvider() != null && step.hasDataProvider()) {
+			dataProvider.setSelected(true);
 		}
 	}
 

@@ -63,6 +63,7 @@ public class SoapStepController {
     	newStep.setServiceId(stepController.getService().getId());
     	newStep.setName(stepController.getName());
     	newStep.setDependsOn(stepController.getDependsOn());
+    	newStep.setDataProvider(stepController.hasDataProvider());
     	newStep.setRequest(soapRequest.getText());
     	
     	//TODO: replace this method to one from projectFinder

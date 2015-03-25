@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="root" prefHeight="200.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.TestMachineController">
+<AnchorPane fx:id="root" prefHeight="200.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.wstester.testFactory.TestMachineController">
    <children>
       <BorderPane prefHeight="720.0" prefWidth="1000.0">
          <left>
@@ -33,7 +33,7 @@
             </VBox>
          </left>
          <center>
-            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <TabPane fx:id="tabPane" cache="true" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
                 <Tab fx:id="definitionTab" closable="false" text="Definiton">
                   <content>
@@ -50,11 +50,11 @@
                       <fx:include fx:id="assert" source="../asserts/asserts.fxml" />
                     </content>
                   </Tab>
-                <Tab fx:id="responseTab" closable="false" disable="true" onSelectionChanged="#setResponse" text="Response">
-                   <content>
-                      <fx:include fx:id="response" source="Response.fxml" />
-                   </content>
-                </Tab>
+                  <Tab fx:id="responseTab" closable="false" disable="true" onSelectionChanged="#setResponse" text="Response">
+                     <content>
+                      <fx:include fx:id="responseTabs" source="ResponseTab.fxml" />
+                     </content>
+                  </Tab>
               </tabs>
             </TabPane>
          </center>
