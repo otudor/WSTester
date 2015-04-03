@@ -3,6 +3,7 @@ package com.wstester.camel.mongo;
 import static org.apache.camel.component.jms.JmsComponent.jmsComponentClientAcknowledge;
 
 import java.net.ConnectException;
+import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
 
 import javax.jms.ConnectionFactory;
@@ -83,6 +84,7 @@ public class ErrorTest extends CamelTestSupport{
 		template.sendBody("jms:mongoQueue", testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0));
 		
 		resultEndpoint.await(5, TimeUnit.SECONDS);
+		resultEndpoint.assertIsSatisfied();
 		Response response = resultEndpoint.getReceivedExchanges().get(0).getIn().getBody(Response.class);
 		assertEquals(ExecutionStatus.ERROR, response.getStatus());		
 		assertEquals("ConnectException:" + exceptionMessage, response.getErrorMessage());
@@ -90,21 +92,31 @@ public class ErrorTest extends CamelTestSupport{
 	
 	@Test
 	public void unknownHostError() throws Exception{
+		String exceptionMessage = "java.net.UnknownHostException: Host is unkown";
+		
+		RouteDefinition route = context.getRouteDefinitions().get(0);
+		route.adviceWith(context, new RouteBuilder() {
+			@Override
+			public void configure() throws Exception {
+				interceptSendToEndpoint("mongodb://*")
+					.skipSendToOriginalEndpoint()
+					.throwException(new UnknownHostException(exceptionMessage));
+			}
+		});
 		
 		MockEndpoint resultEndpoint = getMockEndpoint("mock:response");
 		resultEndpoint.expectedMessageCount(1);
 
 		TestProject testProject = TestUtils.getMongoTestPlan();
-		testProject.getEnvironmentList().get(0).getServers().get(0).setIp("andrei.test");
 		setTestProject(testProject);
 		
 		template.sendBody("jms:mongoQueue", testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0));
 		
 		resultEndpoint.await(5, TimeUnit.SECONDS);
+		resultEndpoint.assertIsSatisfied();
 		Response response = resultEndpoint.getReceivedExchanges().get(0).getIn().getBody(Response.class);
 		assertEquals(ExecutionStatus.ERROR, response.getStatus());
-		assertTrue("expected: " + "UnknownHostException:andrei.test" + " but was: " + response.getErrorMessage(), 
-				response.getErrorMessage().contains("UnknownHostException:andrei.test"));
+		assertEquals("UnknownHostException:" + exceptionMessage, response.getErrorMessage());
 	}
 	
 	protected void setTestProject(TestProject testProject) throws Exception {

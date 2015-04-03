@@ -14,7 +14,7 @@ public class ExceptionProcessor implements Processor {
 	@Override
 	public void process(Exchange exchange) throws Exception {
 
-		Step step;
+		Step step = null;
 		
 		if(exchange.getProperty("step", Step.class) != null ){
 			step = exchange.getProperty("step", Step.class);

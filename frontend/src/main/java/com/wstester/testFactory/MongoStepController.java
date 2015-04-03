@@ -87,7 +87,6 @@ public class MongoStepController {
     	newStep.setCollection(mongoCollection.getText());
     	newStep.setAction(mongoAction.getValue());
     	newStep.setQuery(mongoQuery.getText());
-    	newStep.setDataProvider(stepController.hasDataProvider());
     	
     	//TODO: make a method in the project finder to save the step 
     	projectFinder.getStepById(mongoId).copyFrom(newStep);

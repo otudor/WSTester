@@ -39,6 +39,9 @@ public class CustomLogger extends Logger {
 		logger.info("[" + stepId + "] " + logMessage);
 	}
 	
+	public void info(String stepId, String id, String logMessage){
+		logger.info("[" + stepId + "] " + " [" + id + "] " +logMessage);
+	}
 	@Override
 	public void warn(Object message){
 		logger.warn(message);

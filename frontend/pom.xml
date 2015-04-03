@@ -98,6 +98,12 @@
 			<groupId>com.wstester</groupId>
 			<artifactId>backend</artifactId>
 			<version>${project.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>jaxb-core</artifactId>
+					<groupId>com.sun.xml.bind</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.javafxdata</groupId>

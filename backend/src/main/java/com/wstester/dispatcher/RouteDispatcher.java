@@ -3,6 +3,7 @@ package com.wstester.dispatcher;
 import org.apache.camel.Exchange;
 import org.apache.camel.Predicate;
 
+import com.wstester.dataProvider.DataProvider;
 import com.wstester.model.MongoStep;
 import com.wstester.model.MySQLStep;
 import com.wstester.model.RestStep;
@@ -12,7 +13,6 @@ import com.wstester.model.Step;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IProjectFinder;
 import com.wstester.services.impl.StepManager;
-import com.wstester.variable.DataProvider;
 import com.wstester.variable.VariableUsageProcessor;
 
 public class RouteDispatcher extends GeneralExceptionRoute{

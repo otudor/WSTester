@@ -35,7 +35,7 @@ public class SoapStep extends Step{
 	public String detailedToString() {
 		return "SoapStep [request=" + request + ", getID()=" + getId() + ", getServer()=" + getServerId() + ", getAssertList()=" + getAssertList() 
 				+ ", getService()=" + getServiceId() + ", getAssetMap()=" + getAssetMap() + ", getName()=" + getName() + ", getVariableList()=" 
-				+ getVariableList() + ", getDependsOn()=" + getDependsOn() + ", hasDataProvider()=" + hasDataProvider() + "]";
+				+ getVariableList() + ", getDependsOn()=" + getDependsOn() + "]";
 	}
 	
 	@Override

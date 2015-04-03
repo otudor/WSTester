@@ -64,7 +64,7 @@ public class ResponseTabController {
 		newTab.setOnSelectionChanged(new EventHandler<Event>() {
 			
 			@Override
-			public void handle(Event arg0) {
+			public void handle(Event event) {
 				responseController.initializeGoToAssertButton(response);
 			}
 		});

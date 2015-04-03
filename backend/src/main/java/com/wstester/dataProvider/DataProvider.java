@@ -1,4 +1,4 @@
-package com.wstester.variable;
+package com.wstester.dataProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +14,7 @@ import com.wstester.model.Variable;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IAssetManager;
 import com.wstester.services.definition.IVariableManager;
+import com.wstester.variable.VariableUtil;
 
 public class DataProvider {
 

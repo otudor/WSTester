@@ -101,7 +101,7 @@ public class RestStep extends Step {
 	public String detailedToString() {
 		return "RestStep [path=" + path + ", query=" + query + ", cookie=" + cookie + ", header=" + header + ", contentType=" + contentType + ", method=" + method + ", request=" + request
 				+ ", getID()=" + getId() + ", getServer()=" + getServerId() + ", getAssertList()=" + getAssertList() + ", getService()=" + getServiceId() + ", getAssetMap()=" 
-				+ getAssetMap() + ", getName()=" + getName() + ", getVariableList()=" + getVariableList() + ", getDependsOn()=" + getDependsOn() + ", hasDataProvider()=" + hasDataProvider() +"]";
+				+ getAssetMap() + ", getName()=" + getName() + ", getVariableList()=" + getVariableList() + ", getDependsOn()=" + getDependsOn() + "]";
 	}
 
 	@Override

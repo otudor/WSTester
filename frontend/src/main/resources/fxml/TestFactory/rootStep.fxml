@@ -31,9 +31,7 @@
       										<TextField fx:id="stepName" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
 								</GridPane>
-      <ComboBox fx:id="dependsOn" layoutX="425.0" layoutY="37.0" prefWidth="150.0" />
-      <Label layoutX="340.0" layoutY="41.0" text="Depends on:" />
-      <Label layoutX="340.0" layoutY="14.0" text="Data Provider:" />
-      <CheckBox fx:id="dataProvider" layoutX="425.0" layoutY="14.0" mnemonicParsing="false" />
+      <ComboBox fx:id="dependsOn" layoutX="425.0" layoutY="10.0" prefWidth="150.0" />
+      <Label layoutX="339.0" layoutY="14.0" text="Depends on:" />
 	</children>
 </AnchorPane>

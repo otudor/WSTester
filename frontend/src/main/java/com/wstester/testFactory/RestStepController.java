@@ -248,7 +248,6 @@ public class RestStepController {
     	newStep.setServiceId(stepController.getService() == null ? null : stepController.getService().getId());
     	newStep.setName(stepController.getName());
     	newStep.setDependsOn(stepController.getDependsOn());
-    	newStep.setDataProvider(stepController.hasDataProvider());
     	newStep.setMethod(restMethod.getValue());
     	newStep.setContentType(contentType.getText());
     	
