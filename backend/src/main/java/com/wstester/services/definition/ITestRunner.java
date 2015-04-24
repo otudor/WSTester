@@ -10,7 +10,5 @@ public interface ITestRunner extends IService{
 
 	void run(Object testToRun);
 	
-	@Deprecated
-	Response getResponse(String stepId, Long timeout);
-	List<Response> getDataProviderResponse(String stepId, Long timeout);
+	List<Response> getResponseList(String stepId, Long timeout);
 }

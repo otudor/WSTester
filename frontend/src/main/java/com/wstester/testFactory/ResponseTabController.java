@@ -37,7 +37,7 @@ public class ResponseTabController {
 			e.printStackTrace();
 			Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
 		}
-		List<Response> responseList = testRunner.getDataProviderResponse(step.getId(), 1000L);
+		List<Response> responseList = testRunner.getResponseList(step.getId(), 1000L);
 		
 		responseListTabPane.getTabs().clear();
 		if (responseList != null) {

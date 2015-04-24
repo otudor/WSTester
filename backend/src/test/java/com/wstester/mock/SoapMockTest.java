@@ -41,7 +41,7 @@ public class SoapMockTest extends TestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500L);
+		Response response = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500L).get(0);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("mockedRequest", response.getContent());
@@ -66,7 +66,7 @@ public class SoapMockTest extends TestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500L);
+		Response response = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500L).get(0);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("Mocked Asset", response.getContent());

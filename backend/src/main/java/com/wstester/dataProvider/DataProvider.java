@@ -13,6 +13,7 @@ import com.wstester.model.Step;
 import com.wstester.model.Variable;
 import com.wstester.services.common.ServiceLocator;
 import com.wstester.services.definition.IAssetManager;
+import com.wstester.services.definition.IStepManager;
 import com.wstester.services.definition.IVariableManager;
 import com.wstester.variable.VariableUtil;
 
@@ -20,11 +21,13 @@ public class DataProvider {
 
 	CustomLogger log = new CustomLogger(DataProvider.class);
 	IVariableManager variableManager;
+	IStepManager stepManager;
 	
 	public List<Step> getDataProvider(Step step) throws Exception {
 		
 		variableManager = ServiceLocator.getInstance().lookup(IVariableManager.class);
-		
+		stepManager = ServiceLocator.getInstance().lookup(IStepManager.class);
+				
 		log.info(step.getId(), "Data provider processor");
 		
 		String stepXML = VariableUtil.convertToXML(step);
@@ -60,6 +63,7 @@ public class DataProvider {
 			stepList.add(step);
 		}
 		
+		stepManager.setNumberOfResponses(step.getId(), stepList.size());
 		return stepList;
 	}
 

@@ -62,52 +62,7 @@ public class TestRunner implements ITestRunner {
 	}
 
 	@Override
-	public Response getResponse(String stepId, Long timeout) {
-
-		log.info(stepId, "Waiting response");
-
-		Date runDate = getLastRunDate(stepId);
-		
-		Response response = ResponseCallback.getResponse(stepId, runDate);
-		while (response == null && timeout >= 0) {
-			if (exceptionCaught != null) {
-				timeout = 0L;
-				break;
-			}
-			try {
-				Thread.sleep(1000L);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			response = ResponseCallback.getResponse(stepId, runDate);
-			timeout -= 1000;
-		}
-
-		if (timeout <= 0) {
-			log.info(stepId, "The timeout expired!");
-			if(exceptionCaught !=null && response == null) {
-				log.info(stepId, "Exception was thrown in the TestRunner");
-				
-				// construct new Response to deliver the message in the UI
-				response = new Response();
-				response.setStepId(stepId);
-				response.setStatus(ExecutionStatus.ERROR);
-				response.setRunDate(new Date());
-				response.setErrorMessage(exceptionCaught.getMessage());
-			}
-		}
-
-		if (response != null) {
-			log.info(stepId, response.toString());
-		} else {
-			log.info(stepId, "Response is null");
-		}
-
-		return response;
-	}
-
-	@Override
-	public List<Response> getDataProviderResponse(String stepId, Long timeout) {
+	public List<Response> getResponseList(String stepId, Long timeout) {
 
 		log.info(stepId, "Waiting response");
 

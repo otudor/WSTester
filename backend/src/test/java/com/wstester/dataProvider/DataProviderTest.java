@@ -55,7 +55,7 @@ public class DataProviderTest extends RestTestBaseClass {
 		testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);
 		
-		List<Response> responseList = testRunner.getDataProviderResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
+		List<Response> responseList = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		assertNotEquals(null, responseList);
 		assertEquals(4, responseList.size());
 		
@@ -111,7 +111,7 @@ public class DataProviderTest extends RestTestBaseClass {
 		int responseSize = 0;
 		List<Response> responseList = null;
 		while(responseSize != 4) {
-			responseList = testRunner.getDataProviderResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
+			responseList = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 			if(responseList != null) {
 				responseSize = responseList.size();
 			}

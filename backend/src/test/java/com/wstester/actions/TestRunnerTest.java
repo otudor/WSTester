@@ -28,14 +28,14 @@ public class TestRunnerTest extends RestTestBaseClass{
 		testRunner.run(testProject);
 		
 		// rest check
-		Response restResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
+		Response restResponse = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L).get(0);
 		String restContent =  restResponse.getContent();
 		
 		assertTrue(restResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("All customers", restContent);
 		
 		// mongo check
-		Response mongoResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(1).getId(), 25000L);
+		Response mongoResponse = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(1).getId(), 25000L).get(0);
 		JSONArray entry =  new JSONArray(mongoResponse.getContent());
 		
 		assertTrue(mongoResponse.getStatus().equals(ExecutionStatus.PASSED));
@@ -44,7 +44,7 @@ public class TestRunnerTest extends RestTestBaseClass{
 		assertEquals(entry.getJSONObject(0).getString("name"), "HAC");
 		
 		// mysql check
-		Response mysqlResponse = testRunner.getResponse(testProject.getTestSuiteList().get(1).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
+		Response mysqlResponse = testRunner.getResponseList(testProject.getTestSuiteList().get(1).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L).get(0);
 		
 		JSONArray result = new JSONArray(mysqlResponse.getContent());
 
@@ -53,7 +53,7 @@ public class TestRunnerTest extends RestTestBaseClass{
 		assertEquals("ion", result.getJSONObject(1).get("detalii"));
 		
 		// soap
-		Response soapResponse = testRunner.getResponse(testProject.getTestSuiteList().get(1).getTestCaseList().get(0).getStepList().get(1).getId(), 25000L);
+		Response soapResponse = testRunner.getResponseList(testProject.getTestSuiteList().get(1).getTestCaseList().get(0).getStepList().get(1).getId(), 25000L).get(0);
 		String soapContent =  soapResponse.getContent();
 		
 		assertTrue(soapResponse.getStatus().equals(ExecutionStatus.PASSED));
@@ -71,14 +71,14 @@ public class TestRunnerTest extends RestTestBaseClass{
 		testRunner.run(testSuite);
 		
 		// rest check
-		Response restResponse = testRunner.getResponse(testSuite.getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
+		Response restResponse = testRunner.getResponseList(testSuite.getTestCaseList().get(0).getStepList().get(0).getId(), 25000L).get(0);
 		String restContent =  restResponse.getContent();
 		
 		assertTrue(restResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("All customers", restContent);
 		
 		// mongo check
-		Response mongoResponse = testRunner.getResponse(testSuite.getTestCaseList().get(0).getStepList().get(1).getId(), 25000L);
+		Response mongoResponse = testRunner.getResponseList(testSuite.getTestCaseList().get(0).getStepList().get(1).getId(), 25000L).get(0);
 		JSONArray entry =  new JSONArray(mongoResponse.getContent());
 		
 		assertTrue(mongoResponse.getStatus().equals(ExecutionStatus.PASSED));
@@ -98,14 +98,14 @@ public class TestRunnerTest extends RestTestBaseClass{
 		testRunner.run(testCase);
 		
 		// rest check
-		Response restResponse = testRunner.getResponse(testCase.getStepList().get(0).getId(), 25000L);
+		Response restResponse = testRunner.getResponseList(testCase.getStepList().get(0).getId(), 25000L).get(0);
 		String restContent =  restResponse.getContent();
 		
 		assertTrue(restResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("All customers", restContent);
 		
 		// mongo check
-		Response mongoResponse = testRunner.getResponse(testCase.getStepList().get(1).getId(), 25000L);
+		Response mongoResponse = testRunner.getResponseList(testCase.getStepList().get(1).getId(), 25000L).get(0);
 		JSONArray entry =  new JSONArray(mongoResponse.getContent());
 		
 		assertTrue(mongoResponse.getStatus().equals(ExecutionStatus.PASSED));
@@ -125,7 +125,7 @@ public class TestRunnerTest extends RestTestBaseClass{
 		testRunner.run(testStep);
 		
 		// rest check
-		Response restResponse = testRunner.getResponse(testStep.getId(), 25000L);
+		Response restResponse = testRunner.getResponseList(testStep.getId(), 25000L).get(0);
 		String restContent =  restResponse.getContent();
 		
 		assertTrue(restResponse.getStatus().equals(ExecutionStatus.PASSED));

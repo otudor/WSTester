@@ -51,12 +51,20 @@ public class ExchangeDelayer {
 		
 		// get a instance of ResponseService to get the result from the H2 DB
 		ICamelContextManager camelContextManager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
-		ResponseService responseService = camelContextManager.getCamelContext().getBean("responseServiceImpl", ResponseService.class);;
+		ResponseService responseService = camelContextManager.getCamelContext().getBean("responseServiceImpl", ResponseService.class);
 		
 		// Get a instance of IStepManager to check the lastRunDate of the step
 		IStepManager stepManager = ServiceLocator.getInstance().lookup(IStepManager.class);
 		
 		// verify if the step finished for the current run
-		return responseService.hasStepFinished(stepId, stepManager.getLastRun(stepId));
+		int expectedNumberOfResponses = stepManager.getNumberOfResponses(stepId);
+		int finishedResponses = responseService.getNumberOfReceivedResponses(stepId, stepManager.getLastRun(stepId));
+		
+		if(expectedNumberOfResponses == finishedResponses) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }

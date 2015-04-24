@@ -33,7 +33,7 @@ public class VariableManagerTest extends TestBaseClass{
 		Variable projectVariableAfter = manager.getVariable(projectVariable.getId());
 		assertEquals(projectVariable.getId(), projectVariableAfter.getId());
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
+		Response response = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l).get(0);
 		assertEquals(response.getStatus(), ExecutionStatus.PASSED);
 	}
 }

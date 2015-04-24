@@ -35,21 +35,6 @@ public class ResponseCallback extends RouteBuilder {
 		});
 	}
 	
-	@Deprecated
-	public static Response getResponse(String stepId, Date runDate){
-		
-		ICamelContextManager camelContextManager = null;
-		try {
-			camelContextManager = ServiceLocator.getInstance().lookup(ICamelContextManager.class);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		AbstractXmlApplicationContext camelContext = camelContextManager.getCamelContext();
-		
-		ResponseService responseService = camelContext.getBean("responseServiceImpl", ResponseService.class);
-		return responseService.getLastResponseForStepId(stepId, runDate);
-	}
-	
 	public static List<Response> getResponseList(String stepId, Date runDate){
 		
 		ICamelContextManager camelContextManager = null;

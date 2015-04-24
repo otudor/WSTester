@@ -20,28 +20,11 @@ public class ResponseDaoImpl implements ResponseDao {
 	@PersistenceContext
 	private EntityManager entityManager;
     
-    @SuppressWarnings("unchecked")
-	@Override
-	public Response getLastResponseForStepId(String stepId, Date runDate) {
-    	
-    	Response response = null;
-    	try {
-    		response = entityManager.createNamedQuery("getLastByStepId", Response.class).setParameter("stepId", stepId).setParameter("runDate", runDate).getSingleResult();
-    	} catch (NoResultException e) {
-    		// Do nothing and return null
-    		log.info(stepId, "No response wes found for step");
-    		return null;
-    	}
-		return response;
-	}
-
 	@Override
 	public List<Response> getLastResponseListForStepId(String stepId, Date runDate) {
 		
-    	List<Response> responseList = null;
-    	try {
-    		responseList = entityManager.createNamedQuery("getLastByStepId", Response.class).setParameter("stepId", stepId).setParameter("runDate", runDate).getResultList();
-    	} catch (NoResultException e) {
+    	List<Response> responseList = entityManager.createNamedQuery("getLastByStepId", Response.class).setParameter("stepId", stepId).setParameter("runDate", runDate).getResultList();
+    	if (responseList.size() == 0) {
     		// Do nothing and return null
     		log.info(stepId, "No response wes found for step");
     		return null;
@@ -65,16 +48,16 @@ public class ResponseDaoImpl implements ResponseDao {
 	}
 
 	@Override
-	public Boolean hasStepFinished(String stepId, Date runDate) {
+	public int getNumberOfReceivedResponses(String stepId, Date runDate) {
     	try {
-    		Response response = entityManager.createNamedQuery("getLastByStepId", Response.class).setParameter("stepId", stepId).setParameter("runDate", runDate).getSingleResult();
-    		if(response != null) {
-    			return true;
+    		List<Response> responseList = entityManager.createNamedQuery("getLastByStepId", Response.class).setParameter("stepId", stepId).setParameter("runDate", runDate).getResultList();
+    		if(responseList != null) {
+    			return responseList.size();
     		}
     	} catch (NoResultException e) {
     		// Do nothing and return null
-    		return false;
+    		return 0;
     	}
-    	return false;
+    	return 0;
 	}
 }

@@ -17,12 +17,6 @@ public class ResponseServiceImpl implements ResponseService {
 	
 	@Override
 	@Transactional
-	public Response getLastResponseForStepId(String stepId, Date runDate) {
-		return responseDao.getLastResponseForStepId(stepId, runDate);
-	}
-
-	@Override
-	@Transactional
 	public List<Response> getLastResponseListForStepId(String stepId, Date runDate) {
 		return responseDao.getLastResponseListForStepId(stepId, runDate);
 	}
@@ -40,7 +34,7 @@ public class ResponseServiceImpl implements ResponseService {
 	}
 
 	@Override
-	public Boolean hasStepFinished(String stepId, Date runDate) {
-		return responseDao.hasStepFinished(stepId, runDate);
+	public int getNumberOfReceivedResponses(String stepId, Date runDate) {
+		return responseDao.getNumberOfReceivedResponses(stepId, runDate);
 	}
 }

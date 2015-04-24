@@ -124,7 +124,7 @@ public class DependantStepsTest extends RestTestBaseClass {
 
 		@Override
 		public Long call() throws Exception {
-			testRunner.getResponse(stepId , 25000l);
+			testRunner.getResponseList(stepId , 25000l);
 			long finishTime = System.currentTimeMillis();
 			
 			return finishTime;

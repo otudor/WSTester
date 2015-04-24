@@ -12,4 +12,6 @@ public interface IStepManager extends IService{
 	public Step getStep(String stepId);
 	public Boolean hasDependant(String stepId);
 	public Date getLastRun(String stepId);
+	public void setNumberOfResponses(String stepId, int numberOfResponses);
+	public int getNumberOfResponses(String stepId);
 }

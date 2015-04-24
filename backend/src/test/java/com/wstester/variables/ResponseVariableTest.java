@@ -31,7 +31,7 @@ public class ResponseVariableTest extends RestTestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
+		Response response = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l).get(0);
 		
 		IVariableManager manager = ServiceLocator.getInstance().lookup(IVariableManager.class);
 		String content = manager.getVariableContent(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getVariableList().get(0));
@@ -49,7 +49,7 @@ public class ResponseVariableTest extends RestTestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
+		testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
 		
 		IVariableManager manager = ServiceLocator.getInstance().lookup(IVariableManager.class);
 		String content = manager.getVariableContent(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getVariableList().get(0));
@@ -66,7 +66,7 @@ public class ResponseVariableTest extends RestTestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
+		Response response = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L).get(0);
 		JSONArray result = new JSONArray(response.getContent());
 		
 		IVariableManager manager = ServiceLocator.getInstance().lookup(IVariableManager.class);
@@ -87,7 +87,7 @@ public class ResponseVariableTest extends RestTestBaseClass{
 		
 		testRunner.run(testProject);
 
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
+		Response response = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L).get(0);
 		JSONArray result = new JSONArray(response.getContent());
 		
 		IVariableManager manager = ServiceLocator.getInstance().lookup(IVariableManager.class);
@@ -116,7 +116,7 @@ public class ResponseVariableTest extends RestTestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
+		testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
 		
 		IVariableManager manager = ServiceLocator.getInstance().lookup(IVariableManager.class);
 		String content = manager.getVariableContent(testProject.getVariableList().get(0).getId());
@@ -135,7 +135,7 @@ public class ResponseVariableTest extends RestTestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
+		testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
 		
 		IVariableManager manager = ServiceLocator.getInstance().lookup(IVariableManager.class);
 		String content = manager.getVariableContent(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getVariableList().get(0));
@@ -154,7 +154,7 @@ public class ResponseVariableTest extends RestTestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
+		testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
 		
 		IVariableManager manager = ServiceLocator.getInstance().lookup(IVariableManager.class);
 		String content = manager.getVariableContent(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getVariableList().get(0));

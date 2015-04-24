@@ -27,7 +27,7 @@ public class InsertTest extends TestBaseClass {
 		
 		testRunner.run(testProject);
 
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
+		Response response = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L).get(0);
 
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 	}

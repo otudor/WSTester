@@ -35,7 +35,7 @@ public class MockTest extends TestBaseClass{
 		testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500l);
+		Response response = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500l).get(0);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals(output, response.getContent());
@@ -62,12 +62,12 @@ public class MockTest extends TestBaseClass{
 		
 		testRunner.run(testCase);
 		
-		Response firstResponse = testRunner.getResponse(testCase.getStepList().get(0).getId(), 112500l);
+		Response firstResponse = testRunner.getResponseList(testCase.getStepList().get(0).getId(), 112500l).get(0);
 		
 		assertTrue(firstResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals(output, firstResponse.getContent());
 		
-		Response secondResponse = testRunner.getResponse(testCase.getStepList().get(1).getId(), 112500l);
+		Response secondResponse = testRunner.getResponseList(testCase.getStepList().get(1).getId(), 112500l).get(0);
 		
 		assertTrue(secondResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals(output2, secondResponse.getContent());
@@ -82,12 +82,12 @@ public class MockTest extends TestBaseClass{
 		testRunner = new TestRunner(testProject);
 		testRunner.run(testProject);
 		
-		Response firstResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500L);
+		Response firstResponse = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500L).get(0);
 		
 		assertTrue(firstResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("mockedOutput", firstResponse.getContent());
 		
-		Response secondResponse = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(1).getId(), 112500L);
+		Response secondResponse = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(1).getId(), 112500L).get(0);
 		
 		assertTrue(secondResponse.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("Mocked response", secondResponse.getContent());
@@ -105,7 +105,7 @@ public class MockTest extends TestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500l);
+		Response response = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500l).get(0);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals(output, response.getContent());
@@ -123,7 +123,7 @@ public class MockTest extends TestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500l);
+		Response response = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 112500l).get(0);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals(output, response.getContent());
@@ -152,7 +152,7 @@ public class MockTest extends TestBaseClass{
 		
 		testRunner.run(testProject);
 		
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l);
+		Response response = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 2500l).get(0);
 		
 		assertTrue(response.getStatus().equals(ExecutionStatus.PASSED));
 		assertEquals("mockedBodyFromAsset", response.getContent());

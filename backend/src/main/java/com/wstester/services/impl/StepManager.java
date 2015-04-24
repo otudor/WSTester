@@ -3,6 +3,7 @@ package com.wstester.services.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 import com.wstester.log.CustomLogger;
 import com.wstester.model.Step;
@@ -91,5 +92,26 @@ public class StepManager implements IStepManager {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void setNumberOfResponses(String stepId, int numberOfResponses) {
+		
+		stepExecutionList.forEach(stepExecution -> {
+			if(stepExecution.getStep().getId().equals(stepId)) {
+				log.info(stepId, "Setting number of responses to " + numberOfResponses);
+				stepExecution.setNumberOfResponses(numberOfResponses);
+			}
+		});
+	}
+
+	@Override
+	public int getNumberOfResponses(String stepId) {
+		
+		Stream<StepExecution> step = stepExecutionList.stream().filter(stepExecution -> stepExecution.getStep().getId().equals(stepId));
+		int numberOfResponses = step.findFirst().get().getNumberOfResponses();
+		
+		log.info(stepId, "Number of responses found is: " + numberOfResponses);
+		return numberOfResponses;
 	}
 }

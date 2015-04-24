@@ -384,17 +384,20 @@ public class TestMachineController {
 			e.printStackTrace();
 			Dialog.errorDialog("The test couldn't be run. Please try again!", MainLauncher.stage);
 		}
-		Response response = testRunner.getResponse(step.getId(), 10000L);
+		List<Response> responseList = testRunner.getResponseList(step.getId(), 10000L);
 
 		// add a image to indicate the result of the step 
-		if (response != null) {
+		if (responseList != null) {
 			ImageView image = null;
-			if (response.getStatus() == ExecutionStatus.PASSED) {
+			if (responseList.parallelStream().filter(response -> response.getStatus().equals(ExecutionStatus.ERROR)).count() > 0) {
+				image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_ERROR_ICON.toString())));
+				logger.info(step.getId(), "Set error icon");
+			} else if (responseList.parallelStream().filter(response -> response.getStatus().equals(ExecutionStatus.FAILED)).count() > 0) {
+				image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_FAIL_ICON.toString())));
+				logger.info(step.getId(), "Set failed icon");
+			} else {
 				image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_PASSED_ICON.toString())));
 				logger.info(step.getId(), "Set passed icon");
-			} else if (response.getStatus() == ExecutionStatus.ERROR) {
-				image = new ImageView(new Image(getClass().getResourceAsStream(MainConstants.STEP_ERROR_ICON.toString())));
-				logger.info(step.getId(), "Set failed icon");
 			}
 			
 			// remove the previous set icon if exists

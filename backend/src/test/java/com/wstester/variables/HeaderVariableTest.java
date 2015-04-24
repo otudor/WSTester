@@ -24,7 +24,7 @@ public class HeaderVariableTest extends RestTestBaseClass {
 		
 		testRunner.run(testProject);
 		
-		testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
+		testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
 		
 		IVariableManager manager = ServiceLocator.getInstance().lookup(IVariableManager.class);
 		String content = manager.getVariableContent(testProject.getVariableList().get(0).getId());
@@ -42,7 +42,7 @@ public class HeaderVariableTest extends RestTestBaseClass {
 		
 		testRunner.run(testProject);
 		
-		testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
+		testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
 		
 		IVariableManager manager = ServiceLocator.getInstance().lookup(IVariableManager.class);
 		String content = manager.getVariableContent(testProject.getVariableList().get(0).getId());
@@ -61,7 +61,7 @@ public class HeaderVariableTest extends RestTestBaseClass {
 		
 		testRunner.run(testProject);
 		
-		testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
+		testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 10000l);
 		
 		IVariableManager manager = ServiceLocator.getInstance().lookup(IVariableManager.class);
 		String content = manager.getVariableContent(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getVariableList().get(0));

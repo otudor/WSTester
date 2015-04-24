@@ -26,7 +26,7 @@ public class VariableUsageExceptionsTest extends TestBaseClass {
 		
 		testRunner.run(testProject);
 
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L);
+		Response response = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 25000L).get(0);
 				
 		assertTrue(response.getStatus().equals(ExecutionStatus.ERROR));
 		assertEquals("NotFoundException:Variable with name: notFound was not found!", response.getErrorMessage());
@@ -44,7 +44,7 @@ public class VariableUsageExceptionsTest extends TestBaseClass {
 		
 		testRunner.run(testProject);
 
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 50000L);
+		Response response = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 50000L).get(0);
 				
 		assertTrue(response.getStatus().equals(ExecutionStatus.ERROR));
 		assertEquals("NotFoundException:Variable with name: name has empty content!", response.getErrorMessage());
@@ -62,7 +62,7 @@ public class VariableUsageExceptionsTest extends TestBaseClass {
 		
 		testRunner.run(testProject);
 
-		Response response = testRunner.getResponse(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 50000L);
+		Response response = testRunner.getResponseList(testProject.getTestSuiteList().get(0).getTestCaseList().get(0).getStepList().get(0).getId(), 50000L).get(0);
 				
 		assertTrue(response.getStatus().equals(ExecutionStatus.ERROR));
 		assertEquals("NotFoundException:Variable with name: name has empty content!", response.getErrorMessage());

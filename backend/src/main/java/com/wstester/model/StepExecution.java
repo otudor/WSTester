@@ -7,6 +7,7 @@ public class StepExecution {
 
 	private Step step;
 	private Date lastRun;
+	private int numberOfResponses;
 	
 	public StepExecution(Step step, Date date) {
 		this.step = step;
@@ -16,13 +17,24 @@ public class StepExecution {
 	public Step getStep() {
 		return step;
 	}
+	
 	public void setStep(Step step) {
 		this.step = step;
 	}
+	
 	public Date getLastRun() {
 		return lastRun;
 	}
+	
 	public void setLastRun(Date lastRun) {
 		this.lastRun = lastRun;
+	}
+	
+	public int getNumberOfResponses() {
+		return numberOfResponses;
+	}
+
+	public void setNumberOfResponses(int numberOfResponses) {
+		this.numberOfResponses = numberOfResponses;
 	}
 }
